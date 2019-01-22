@@ -1,6 +1,6 @@
 import "./main.scss"
-
 import "./boostrap/boostrap"
+
 
 // console.log("i'm main.js")
 

@@ -1,6 +1,7 @@
 .icon {
     background-repeat: no-repeat;
-    background-position: 50% 50%;
+    background-position: 0 50%;
+    background-size: contain;
     display: inline-block;
 
     // Icon sizes
@@ -9,11 +10,22 @@
         height: 14px;
     }
 
+    &-18 {
+        width: 18px;
+        height: 18px;
+    }
+
     // Icon types
     &-callback-white {
         background-image: url('images/icons/icon-callback-white.svg');
     }
     &-callback-green {
         background-image: url('images/icons/icon-callback-green.svg');
+    }
+    &-heart-solid {
+        background-image: url('images/icons/icon-heart-solid-green.svg');
+    }
+    &-search {
+        background-image: url('images/icons/icon-search.svg');
     }
 }
