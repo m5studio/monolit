@@ -22,8 +22,25 @@ $main_nav: ".main-nav";
     #{$main_nav} {
         ul.main-nav__list {
             li.main-nav__item {
-                border-left: 1px solid #ececec;
+                // border-left: 1px solid #ececec;
+
+                // border-left-width: 1px;
+                // border-left-style: solid;
+                // border-image: linear-gradient(to bottom, #ececec, transparent);
+
                 position: relative;
+
+                &::before {
+                    background-image: linear-gradient(to bottom, red 20%, transparent);
+                    content: "";
+                    display: block;
+                    width: 1px;
+                    height: 100%;
+
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                }
 
                 &:last-of-type {
                     border-right: 1px solid #ececec;
