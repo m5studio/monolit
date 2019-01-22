@@ -87,7 +87,7 @@ body {
 
         &--inner {
             display: grid;
-            grid-template-columns: 250px auto auto;
+            grid-template-columns: 250px auto 340px;
             grid-template-rows: 70px;
 
             a {
@@ -110,7 +110,65 @@ body {
                 }
             }
 
-            #hb-aside {}
+            #hb-aside {
+                display: grid;
+                grid-template-columns: repeat(2, 50%);
+                align-items: center;
+
+                #favories,
+                #search-by-id {
+                    display: grid;
+                    grid-template-columns: 44px 1fr;
+                    align-items: center;
+
+                    // .icon {}
+                    // span {}
+                }
+
+                #favories {}
+
+                #search-by-id {
+                    // Search apartment by ID form
+                    .sbi-form {
+                        &__input {
+                            background-color: transparent;
+                            border: none;
+                            border-bottom: 1px solid #c6c6c6;
+                            font-size: .9rem;
+                            padding: 0 0 3px 0;
+                            margin: 0;
+                            outline: none;
+                            width: 100%;
+
+                            &:focus {
+                                border-bottom: 1px solid black;
+                            }
+                        }
+                    }
+                }
+
+                .hb-aside-text {
+                    cursor: default;
+                    font-size: .85rem;
+                    line-height: 1.2;
+                }
+
+                .icon {
+                    // margin-right: 10px;
+
+                    &.rounded-34 {
+                        background-size: 18px 18px;
+                        background-position: 50% 50%;
+
+                        border: 1px solid #00998f;
+                        border-radius: 100%;
+
+                        display: block;
+                        width: 34px;
+                        height: 34px;
+                    }
+                }
+            }
         }
     }
 }
