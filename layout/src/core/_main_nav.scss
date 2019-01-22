@@ -1,0 +1,163 @@
+// https://css-tricks.com/snippets/sass/use-sass-variable-selector/
+$main_nav: ".main-nav";
+
+// #main-navigation {}
+
+// Common styles
+#{$main_nav} {
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+    }
+}
+
+// Desktop
+@include media-breakpoint-only(xl) {
+    #{$main_nav} {
+        ul.main-nav__list {
+            li.main-nav__item {
+                border-left: 1px solid #ececec;
+
+                &:last-of-type {
+                    border-right: 1px solid #ececec;
+                }
+
+                a.main-nav__link {
+                    color: #000;
+                    height: 70px;
+                    padding: 0 15px;
+                    transition: all ease .1s;
+                    display: flex;
+                    align-items: center;
+
+                    &:focus,
+                    &:hover {
+                        background-color: #00998f;
+                        color: white;
+                    }
+                }
+
+                &.has-dropdown {
+                    &::after {
+                        background-color: #00998f;
+                        content: "";
+                        position: relative;
+                        bottom: 0;
+                        display: block;
+                        height: 0;
+                        width: 100%;
+                        opacity: 0;
+                    }
+
+                    .dropdown {
+                        box-shadow: inset 0 4px 4px rgba(0, 0, 0, .1);
+                        display: none;
+                        justify-content: center;
+                        align-items: center;
+                        background-color: #00998f;
+                        padding: 0 15px;
+                        position: absolute;
+                        left: 0;
+                        width: 100%;
+
+                        ul.main-nav-submenu__list {
+                            li.main-nav-submenu__item {
+                                &:not(:last-child) {
+                                    margin-right: 30px;
+                                }
+
+                                a.main-nav-submenu__link {
+                                    color: white;
+                                    font-size: .9rem;
+
+                                    display: inline-block;
+                                    position: relative;
+
+                                    &::before,
+                                    &::after {
+                                        content: "";
+                                        position: absolute;
+                                        width: 0;
+                                        height: 1.7px;
+                                        bottom: -4px;
+                                        background: rgba(255, 255, 255, .7);
+                                    }
+
+                                    &::before {
+                                        left: 0;
+                                    }
+
+                                    &::after {
+                                        right: 0;
+                                        transition: width .8s cubic-bezier(.22, .61, .36, 1);
+                                    }
+
+                                    span {}
+
+                                    &:hover {
+                                        &::before {
+                                            width: 100%;
+                                            transition: width .5s cubic-bezier(.22, .61, .36, 1);
+                                            left: 0;
+                                        }
+
+                                        &::after {
+                                            right: 0;
+                                            transition: width .8s cubic-bezier(.22, .61, .36, 1);
+                                            background: transparent;
+                                            width: 100%;
+                                            transition: 0s;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                &:hover {
+                    a.main-nav__link {
+                        background-color: #00998f;
+                        color: white;
+                    }
+
+                    &::after {
+                        height: 6px;
+                        opacity: 1;
+                    }
+
+                    &.has-dropdown {
+                        @keyframes mainNavSlideDown {
+                            0% {
+                                height: 0;
+                                opacity: 0;
+                            }
+                            100% {
+                                height: 45px;
+                                opacity: 1;
+                            }
+                        }
+
+                        .dropdown {
+                            animation-name: mainNavSlideDown;
+                            animation-duration: .6s;
+                            height: 45px;
+                            display: flex;
+                        }
+                    }
+                }
+
+                &.active {
+                    a {}
+                }
+            }
+        }
+    }
+}
+
+// Mobile
+@include media-breakpoint-down(lg) {
+    #{$main_nav} {}
+}

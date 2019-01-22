@@ -1,0 +1,19 @@
+.icon {
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    display: inline-block;
+
+    // Icon sizes
+    &-14 {
+        width: 14px;
+        height: 14px;
+    }
+
+    // Icon types
+    &-callback-white {
+        background-image: url('images/icons/icon-callback-white.svg');
+    }
+    &-callback-green {
+        background-image: url('images/icons/icon-callback-green.svg');
+    }
+}
