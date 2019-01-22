@@ -1,4 +1,4 @@
-@import "main_nav";
+@import "./main_nav/main_nav";
 
 body {
     display: grid;
@@ -174,7 +174,11 @@ body {
 }
 
 #content {
-    background-color: #EEE;
+    #slider {
+        background-color: #EEE;
+        height: 450px;
+        margin-bottom: 30px;
+    }
 
     #main {
         background-color: pink;

@@ -17,6 +17,14 @@ $main_nav: ".main-nav";
     }
 }
 
+.sticky-main-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
 // Desktop
 @include media-breakpoint-only(xl) {
     #{$main_nav} {

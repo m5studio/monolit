@@ -1,9 +1,14 @@
 import "./main.scss"
+
 import "./boostrap/boostrap"
+import {stickyMainNav} from "./core/main_nav/main_nav"
 
 
-// console.log("i'm main.js")
+$(document).ready(function() {
+    // console.log("document ready function")
+})
 
-// $(document).ready(function() {
-//     // $('div.class-name').css({"background-color": "red"})
-// })
+
+$(window).scroll(function() {
+    stickyMainNav()
+})
