@@ -1,9 +1,3 @@
-######################################################################################################################### My Stuff
-# !layout/
-# !layout/dist/
-# !layout/dist/*
-
-
 ######################################################################################################################### Node
 # Logs
 logs
@@ -96,7 +90,7 @@ __pycache__/
 .Python
 build/
 develop-eggs/
-# dist/
+dist/
 downloads/
 eggs/
 .eggs/
@@ -367,3 +361,9 @@ DocProject/Help/*.hhk
 DocProject/Help/*.hhp
 DocProject/Help/Html2
 DocProject/Help/html
+
+
+######################################################################################################################### My Stuff
+!layout/
+!layout/dist/
+!layout/dist/*
