@@ -182,8 +182,20 @@ body {
 
 #footer {
     background-color: #001312;
-    color: white;
+    color: #83877d;
+    line-height: 1.2;
     padding: 100px 0 80px;
+
+    a {
+        color: white;
+        transition: color ease-in-out .2s;
+
+        &:focus,
+        &:hover {
+            color: #18a29b;
+            text-decoration: none;
+        }
+    }
 
     &__inner {
         display: grid;
@@ -192,21 +204,11 @@ body {
     }
 
     .footer-block {
-        a {
-            color: white;
-            transition: color ease-in-out .2s;
-
-            &:focus,
-            &:hover {
-                color: #18a29b;
-                text-decoration: none;
-            }
-        }
-
         &__title {
-            font-size: 1.7rem;
+            font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 40px;
+            text-transform: uppercase;
         }
 
         &__menu-list {
@@ -217,14 +219,14 @@ body {
 
         &__menu-item {
             &:not(:last-child) {
-                margin-bottom: 20px;
+                margin-bottom: 15px;
             }
         }
     }
 
-    #footer_projects {}
+    // #footer_projects {}
 
-    #footer_commercial {
+    #footer-commercial {
         .footer-block__menu-item {
             &:not(:last-child) {
                 margin-bottom: 30px;
@@ -232,11 +234,43 @@ body {
 
             a {
                 font-size: 1.4rem;
-                font-weight: 600;
+                font-weight: 700;
             }
         }
     }
 
-    #footer_about {}
-    #footer_contacts {}
+    // #footer-about {}
+
+    #footer-contacts {
+        &__phones {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-column-gap: 15px;
+            grid-row-gap: 20px;
+            margin-bottom: 30px;
+
+            a {
+                font-size: 1.4rem;
+                font-weight: 700;
+            }
+        }
+
+        #footer-info-wrap {
+            font-size: .9rem;
+        }
+
+        &__social {
+            margin-bottom: 50px;
+        }
+
+        &__copyrights {
+            margin-bottom: 15px;
+        }
+
+        &__developed-in-m5 {
+            margin-bottom: 15px;
+        }
+
+        &__disclamer {}
+    }
 }
