@@ -5,6 +5,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
+
 module.exports = {
     entry: './layout/src/main.js',
     output: {
@@ -72,7 +73,8 @@ module.exports = {
             $: 'jquery',
             jQuery: 'jquery',
             'window.jQuery': 'jquery',
-            Popper: ['popper.js', 'default']
+            Popper: ['popper.js', 'default'],
+            noUiSlider: 'nouislider'
         }),
 
         new MiniCssExtractPlugin({

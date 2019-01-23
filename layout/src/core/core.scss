@@ -1,3 +1,5 @@
+@import "buttons";
+@import "homepage";
 @import "./main_nav/main_nav";
 @import "slider";
 
@@ -6,6 +8,11 @@ body {
     display: grid;
     grid-template-rows: auto 1fr auto;
     min-height: 100vh;
+}
+
+::selection {
+    background-color: rgba(0, 153, 143, .5);
+    color: black;
 }
 
 #header {

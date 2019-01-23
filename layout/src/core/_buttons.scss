@@ -1,0 +1,36 @@
+.circle-button {
+    background-color: white;
+    border: 1px solid #00998f;
+    border-radius: 100%;
+    color: #00998f;
+    font-weight: 700;
+    font-size: 1.2rem;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    text-align: center;
+    transition: background-color .3s ease, color .2s ease;
+
+    &:hover {
+        background-color: rgba(0, 255, 239, .15);
+        cursor: pointer;
+    }
+}
+
+.green-button {
+    background: linear-gradient(180deg,rgba(255, 255, 255, 0.2),rgba(255, 255, 255, 0)),#00998f;
+    box-shadow: 0 4px 4px rgba(0,0,0,.25);
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    color: white;
+    padding: 10px 40px;
+    transition: box-shadow .3s ease, opacity .3s ease;
+
+    &:focus,
+    &:hover {
+        background: linear-gradient(180deg,rgba(255, 255, 255, 0.2),rgba(255, 255, 255, 0)),#00998f;
+        box-shadow: 0 4px 22px rgba(0,0,0,.45);
+        outline: none;
+    }
+}

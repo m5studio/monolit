@@ -1,0 +1,46 @@
+.homepage {
+    #realty-filters {
+        cursor: default;
+        margin-bottom: 30px;
+
+        &__inner {
+            border-radius: 5px;
+            background-color: #f6f6f6;
+            box-shadow: 0 5px 5px rgba(0,0,0,.1);
+
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        &__submit-block {
+            background-color: #515151;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .rf-block {
+            border: 1px solid red;
+
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-row-gap: 10px;
+
+            height: 120px;
+            padding: 19px 24px;
+
+            &__title {
+                text-align: center;
+            }
+
+            &__content {
+                display: flex;
+                justify-content: space-between;
+            }
+        }
+
+        // TODO:
+        // #square-slider {
+        // }
+    }
+}
