@@ -177,9 +177,7 @@ body {
 }
 
 #content {
-    #main {
-        background-color: pink;
-    }
+    #main {}
 }
 
 #footer {
@@ -194,11 +192,51 @@ body {
     }
 
     .footer-block {
-        border: 1px solid #CCC;
+        a {
+            color: white;
+            transition: color ease-in-out .2s;
+
+            &:focus,
+            &:hover {
+                color: #18a29b;
+                text-decoration: none;
+            }
+        }
+
+        &__title {
+            font-size: 1.7rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+        }
+
+        &__menu-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        &__menu-item {
+            &:not(:last-child) {
+                margin-bottom: 20px;
+            }
+        }
     }
 
     #footer_projects {}
-    #footer_commercial {}
+
+    #footer_commercial {
+        .footer-block__menu-item {
+            &:not(:last-child) {
+                margin-bottom: 30px;
+            }
+
+            a {
+                font-size: 1.4rem;
+                font-weight: 600;
+            }
+        }
+    }
+
     #footer_about {}
     #footer_contacts {}
 }
