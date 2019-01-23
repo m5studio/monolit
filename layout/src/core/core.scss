@@ -1,4 +1,6 @@
 @import "./main_nav/main_nav";
+@import "slider";
+
 
 body {
     display: grid;
@@ -10,6 +12,7 @@ body {
     position: relative;
     height: 110px;
     width: 100%;
+    z-index: 2;
 
     &__top {
         background: linear-gradient(180deg, rgba(0, 0, 0, .2), transparent), #545454;
@@ -174,17 +177,28 @@ body {
 }
 
 #content {
-    #slider {
-        background-color: #EEE;
-        height: 450px;
-        margin-bottom: 30px;
-    }
-
     #main {
         background-color: pink;
     }
 }
 
 #footer {
-    background-color: olivedrab;
+    background-color: #001312;
+    color: white;
+    padding: 100px 0 80px;
+
+    &__inner {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr) 1.5fr;
+        grid-column-gap: 30px;
+    }
+
+    .footer-block {
+        border: 1px solid #CCC;
+    }
+
+    #footer_projects {}
+    #footer_commercial {}
+    #footer_about {}
+    #footer_contacts {}
 }
