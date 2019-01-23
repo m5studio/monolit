@@ -3,6 +3,7 @@
     background-position: 0 50%;
     background-size: contain;
     display: inline-block;
+    text-indent: -9999px;
 
     // Icon sizes
     &-14 {
@@ -15,7 +16,7 @@
         height: 18px;
     }
 
-    // Icon types
+    // Icons
     &-callback-white {
         background-image: url('images/icons/icon-callback-white.svg');
     }
@@ -27,5 +28,17 @@
     }
     &-search-green {
         background-image: url('images/icons/icon-search.svg');
+    }
+    &-instagram {
+        background-image: url('images/icons/icon-instagram.svg');
+    }
+    &-facebook {
+        background-image: url('images/icons/icon-facebook.svg');
+    }
+    &-vk {
+        background-image: url('images/icons/icon-vk.svg');
+    }
+    &-telegram {
+        background-image: url('images/icons/icon-telegram.svg');
     }
 }
