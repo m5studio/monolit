@@ -3,14 +3,13 @@ import "./main.scss"
 import "./boostrap/boostrap"
 import {stickyMainNav} from "./core/main_nav/main_nav"
 
-import 'nouislider'
-
 
 $(document).ready(function() {
     // console.log("document ready function")
 
     // Init test noUiSlider
     const realtySquareSlider = document.getElementById('realty-filter__square-slider');
+
     noUiSlider.create(realtySquareSlider, {
         start: [35, 245],
         connect: true,
@@ -18,6 +17,27 @@ $(document).ready(function() {
             'min': 35,
             'max': 245
         }
+    });
+
+
+    const inputNumberMin = document.getElementById('min-val');
+    const inputNumberMax = document.getElementById('max-val');
+
+    realtySquareSlider.noUiSlider.on('update', function (values, handle) {
+        let value = values[handle];
+
+        if (handle) {
+            inputNumberMax.value = Math.round(value)
+        } else {
+            inputNumberMin.value = Math.round(value)
+        }
+    });
+
+    inputNumberMin.addEventListener('change', function () {
+        realtySquareSlider.noUiSlider.set([this.value, null]);
+    });
+    inputNumberMax.addEventListener('change', function () {
+        realtySquareSlider.noUiSlider.set([null, this.value]);
     });
 })
 
