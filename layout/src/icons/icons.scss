@@ -29,9 +29,6 @@
     &-search-green {
         background-image: url('images/icons/icon-search.svg');
     }
-    &-arrow-left-green {
-        background-image: url('images/icons/arrow-left-green.svg');
-    }
     &-search-green {
         background-image: url('images/icons/icon-search.svg');
     }
@@ -46,5 +43,13 @@
     }
     &-telegram {
         background-image: url('images/icons/icon-telegram.svg');
+    }
+
+    // Arrows
+    &-arrow-left-green {
+        background-image: url('images/icons/arrow-left-green.svg');
+    }
+    &-arrow-right-green {
+        background-image: url('images/icons/arrow-right-green.svg');
     }
 }

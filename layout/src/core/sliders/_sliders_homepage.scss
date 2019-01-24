@@ -74,13 +74,24 @@ $slider_height: 450px;
                     display: block;
                     min-width: 31px;
                     height: 31px;
+
+                    transition: transform .3s ease;
+                    transform: translateZ(0);
                 }
 
-                .control-left {}
+                .control-left {
+                    // background-position: 100% 0;
+
+                    &:hover {
+                        transform: translate3d(-3px, 0, 0);
+                    }
+                }
 
                 .control-right {
-                    &.icon-arrow-left-green {
-                        transform: scaleX(-1);
+                    background-position: 100% 0;
+
+                    &:hover {
+                        transform: translate3d(3px, 0, 0);
                     }
                 }
             }
