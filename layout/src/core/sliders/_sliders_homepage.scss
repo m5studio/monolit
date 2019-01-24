@@ -59,11 +59,16 @@ $slider_height: 450px;
             }
         }
 
-        #controlsDesktop {
-            position: absolute;
-            right: 40px;
-            bottom: 47px;
+        #controls-desktop-wrap {
+            position: relative;
             z-index: 2;
+        }
+
+        #controls-desktop {
+            position: absolute;
+            right: 15px;
+            bottom: 47px;
+            // z-index: 2;
 
             display: flex;
             align-items: center;
