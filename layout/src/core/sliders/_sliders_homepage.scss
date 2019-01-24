@@ -70,7 +70,8 @@ $slider_height: 450px;
             .controls-prev-next {}
 
             .carousel-indicators {
-                position: relative;
+                position: static;
+                margin: 0;
             }
 
             .carousel-indicators--desktop {
