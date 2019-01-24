@@ -66,8 +66,24 @@ $slider_height: 450px;
             z-index: 2;
 
             display: flex;
+            align-items: center;
 
-            .controls-prev-next {}
+            .controls-prev-next {
+                .control-left,
+                .control-right {
+                    display: block;
+                    min-width: 31px;
+                    height: 31px;
+                }
+
+                .control-left {}
+
+                .control-right {
+                    &.icon-arrow-left-green {
+                        transform: scaleX(-1);
+                    }
+                }
+            }
 
             .carousel-indicators {
                 position: static;
