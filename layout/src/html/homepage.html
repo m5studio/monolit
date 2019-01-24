@@ -201,7 +201,7 @@
 
         <div id="realty-filters" class="container">
             <div id="realty-filters__inner">
-                <div class="rf-block">
+                <div id="realty-filters__rooms-block" class="rf-block">
                     <div class="rf-block__title">Комнат</div>
                     <div class="rf-block__content">
                         <button type="button" name="" class="circle-button">Ст</button>
@@ -211,20 +211,17 @@
                         <button type="button" name="" class="circle-button">4+</button>
                     </div>
                 </div>
-                <div class="rf-block">
+                <div id="realty-filters__square-block" class="rf-block">
                     <div class="rf-block__title">Площадь</div>
                     <div class="rf-block__content">
-                        <div id="realty-filter__square-slider"></div>
-
-                        <div>
-                            <br><br>
-                            <input id="min-val" type="number" min="35" max="500" name="" value="35">
-                            <input id="max-val" type="number" min="35" max="500" name="" value="245">
+                        <div id="realty-filters__square-slider"></div>
+                        <div id="realty-filters__square-slider--inputs">
+                            <input id="square-slider--input-min" type="number" min="35" max="245"  step="1" name="" value="35">
+                            <input id="square-slider--input-max" type="number" min="35" max="245"  step="1" name="" value="245">
                         </div>
-
                     </div>
                 </div>
-                <div class="rf-block">
+                <div id="realty-filters__rooms-price" class="rf-block">
                     <div class="rf-block__title">Стоимость</div>
                     <div class="rf-block__content"></div>
                 </div>
@@ -352,7 +349,7 @@
                     </div>
 
                     <div id="footer-contacts__developed-in-m5">
-                        <a href="https://m5-web.com" target="_blank">Программирование &ndash; m5</a>, <a href="http://idaproject.com" target="_blank">Дизайн &ndash; idaproject</a>
+                        <a href="https://m5-web.com" target="_blank">Программирование &ndash; m5</a>, <a href="http://idaproject.com" target="_blank">дизайн &ndash; idaproject</a>
                     </div>
 
                     <div id="footer-contacts__disclamer">
