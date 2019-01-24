@@ -1,6 +1,8 @@
+$slider_height: 450px;
+
 #slider {
     background-color: #EEE;
-    height: 450px;
+    height: $slider_height;
     position: relative;
     margin-bottom: 30px;
 
@@ -19,9 +21,9 @@
 
     .slide {
         background-repeat: no-repeat;
-        background-position: 50% 0;
+        background-position: 50% 60%;
         background-size: cover;
         width: 100%;
-        height: 450px;
+        height: $slider_height;
     }
 }
