@@ -1,4 +1,5 @@
 // noUiSlider for realty square filter in homepage
+// https://refreshless.com/nouislider/examples/#section-html5
 function realtySquareSlider() {
     const realtySquareSlider = document.getElementById('realty-filters__square-slider');
 

@@ -6,7 +6,7 @@ import {stickyMainNav} from "./core/main_nav/main_nav"
 
 
 $(document).ready(function() {
-    realtySquareSlider();
+    realtySquareSlider()
 })
 
 

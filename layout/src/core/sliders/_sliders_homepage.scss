@@ -1,0 +1,119 @@
+$slider_height: 450px;
+
+#main-slider {
+    background-color: #EEE;
+    height: $slider_height;
+    position: relative;
+    margin-bottom: 30px;
+
+    &::before {
+        background: linear-gradient(1turn, #000, transparent);
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 164px;
+        opacity: .8;
+        z-index: 1;
+    }
+
+    .slide {
+        background-repeat: no-repeat;
+        background-position: 50% 60%;
+        background-size: cover;
+        width: 100%;
+        height: $slider_height;
+    }
+
+    @include media-breakpoint-only(xl) {
+        .carousel-indicators {}
+
+        // .carousel-control-next,
+        // .carousel-control-prev {
+        //     position: absolute;
+        //     top: 0;
+        //     bottom: 0;
+        //     z-index: 1;
+        //     display: flex;
+        //     align-items: center;
+        //     justify-content: center;
+        //     width: 15%;
+        //     color: white;
+        //     text-align: center;
+        //     opacity: .5;
+        //     transition: opacity .15s ease;
+        // }
+
+        .carousel-control-prev {
+            .carousel-control-prev-icon {}
+        }
+        .carousel-control-next {
+            .carousel-control-next-icon {}
+        }
+
+        .carousel-inner {
+            .carousel-item {
+                .carousel-caption {}
+            }
+        }
+
+        #controlsDesktop {
+            position: absolute;
+            right: 40px;
+            bottom: 47px;
+            z-index: 2;
+
+            display: flex;
+
+            .controls-prev-next {}
+
+            .carousel-indicators {
+                position: relative;
+            }
+
+            .carousel-indicators--desktop {
+                display: flex;
+
+                .slider-indicator {
+                    position: relative;
+                    cursor: pointer;
+                    height: 21px;
+                    width: 2px;
+                    padding: 0 9px;
+                    transition: transform .4s ease;
+                    transform: scaleY(1);
+
+                    &::after {
+                        background-color: white;
+                        content: "";
+                        display: block;
+                        width: 2px;
+                        height: 100%;
+
+                        position: absolute;
+                        top: 0;
+                        bottom: 0;
+                        left: 50%;
+
+                        transform: translateX(-50%);
+                        transition: background-color .4s ease;
+                    }
+
+                    &.active {
+                        transform: scaleY(1.52);
+
+                        &::after {
+                            background-color: #00998f;
+                        }
+                    }
+
+                    &:hover {
+                        transform: scaleY(1.2);
+                    }
+                }
+            }
+        }
+    }
+}

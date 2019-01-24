@@ -157,46 +157,65 @@
     </header>
 
     <div id="content">
-        <div id="slider">
-            <!-- <div class="slide" style="background-image: url('http://monolit.site/media/CACHE/images/realty/complex/rose_banner2/4c7692ef88ad42431e06d1fbf2caf052.jpg');"></div> -->
-
-            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
-                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                </ol>
+        <div id="main-slider">
+            <div id="mainSliderIndicators" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <div class="slide" style="background-image: url('http://monolit.site/media/CACHE/images/realty/complex/rose_banner2/4c7692ef88ad42431e06d1fbf2caf052.jpg');"></div>
-                        <div class="carousel-caption d-none d-md-block">
+                        <div class="carousel-caption">
                             <div class="h5">Lorem ipsum dolor sit amet</div>
                             <div>Ducimus rem error doloremque alias dolorem facere incidunt quibusdam deleniti necessitatibus.</div>
                         </div>
                     </div>
                     <div class="carousel-item">
                         <div class="slide" style="background-image: url('http://monolit.site/media/CACHE/images/2018/01/31/tavricheskaya_panorama_05_1wawx2w/75b83615f5f10421d9e93f04ce4ad290.jpg');"></div>
-                        <div class="carousel-caption d-none d-md-block">
+                        <div class="carousel-caption">
                             <div class="h5">Lorem ipsum dolor sit amet</div>
                             <div>Ducimus rem error doloremque alias dolorem facere incidunt quibusdam deleniti necessitatibus.</div>
                         </div>
                     </div>
                     <div class="carousel-item">
                         <div class="slide" style="background-image: url('http://monolit.site/media/CACHE/images/2018/02/26/monolit_evpatoria/af4d85f135491a8d6027ba832ce5d34e.jpg');"></div>
-                        <div class="carousel-caption d-none d-md-block">
+                        <div class="carousel-caption">
                             <div class="h5">Lorem ipsum dolor sit amet</div>
                             <div>Ducimus rem error doloremque alias dolorem facere incidunt quibusdam deleniti necessitatibus.</div>
                         </div>
                     </div>
                 </div>
-                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <!-- <ol class="carousel-indicators">
+                    <li data-target="#mainSliderIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#mainSliderIndicators" data-slide-to="1"></li>
+                    <li data-target="#mainSliderIndicators" data-slide-to="2"></li>
+                </ol> -->
+                <!-- <a class="carousel-control-prev" href="#mainSliderIndicators" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 </a>
-                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <a class="carousel-control-next" href="#mainSliderIndicators" role="button" data-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                </a>
-            </div>
+                </a> -->
 
+                <div id="controlsDesktop">
+                    <div class="controls-prev-next">
+                        <a href="#mainSliderIndicators" role="button" data-slide="prev">prev</a>
+                    </div>
+
+                    <div class="carousel-indicators carousel-indicators--desktop">
+                        <div class="slider-indicator active" data-target="#mainSliderIndicators" data-slide-to="0"></div>
+                        <div class="slider-indicator" data-target="#mainSliderIndicators" data-slide-to="1"></div>
+                        <div class="slider-indicator" data-target="#mainSliderIndicators" data-slide-to="2"></div>
+                    </div>
+
+                    <div class="controls-prev-next">
+                        <a href="#mainSliderIndicators" role="button" data-slide="next">next</a>
+                    </div>
+
+                    <!-- <ol class="carousel-indicators--desktop">
+                        <li class="slider-indicator active" data-target="#mainSliderIndicators" data-slide-to="0"></li>
+                        <li class="slider-indicator" data-target="#mainSliderIndicators" data-slide-to="1"></li>
+                        <li class="slider-indicator" data-target="#mainSliderIndicators" data-slide-to="2"></li>
+                    </ol> -->
+                </div>
+            </div>
         </div>
 
         <div id="realty-filters" class="container">
