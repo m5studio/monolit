@@ -60,6 +60,9 @@
 
     // Homepage Sections
     .homepage-section {
+        padding-top: 30px;
+        padding-bottom: 30px;
+
         &__title {
             display: flex;
             align-items: center;
@@ -85,6 +88,17 @@
                     text-decoration: none;
                 }
             }
+        }
+
+        &__inner {}
+    }
+
+    #complex-list-section {
+        .homepage-section__inner {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-column-gap: 30px;
+            grid-row-gap: 30px;
         }
     }
 }
