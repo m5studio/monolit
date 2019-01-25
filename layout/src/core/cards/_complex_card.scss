@@ -11,14 +11,10 @@
         }
     }
 
+    // Header
     &__header {
-        height: 240px;
         position: relative;
     }
-
-    &__main {}
-
-    &__footer {}
 
     &__img {
         background-repeat: no-repeat;
@@ -26,8 +22,11 @@
         background-size: cover;
 
         width: 100%;
-        height: 100%;
+        height: 256px;
     }
+
+    // Main
+    &__main {}
 
     &__info {
         height: 94px;
@@ -42,7 +41,6 @@
 
         a {
             color: black;
-
             // &:hover {}
         }
     }
@@ -122,4 +120,40 @@
     }
 
     &__features--value {}
+
+    // Footer
+    &__footer {
+        display: grid;
+        grid-template-columns: repeat(2, 50%);
+        height: 60px;
+    }
+
+    &__footer-btn {
+        display: flex;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+
+        color: white;
+        font-size: .9rem;
+        transition: background-color ease-in-out .3s;
+
+        &--green {
+            background-color: #0baca2;
+
+            &:hover {
+                background-color: #00998f;
+                color: white;
+            }
+        }
+
+        &--dark {
+            background-color: #545454;
+
+            &:hover {
+                background-color: #434343;
+                color: white;
+            }
+        }
+    }
 }
