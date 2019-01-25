@@ -28,21 +28,6 @@ $slider_height: 450px;
     }
 
     @include media-breakpoint-only(xl) {
-        // .carousel-indicators {}
-
-        // .carousel-control-prev {
-        //     .carousel-control-prev-icon {}
-        // }
-        // .carousel-control-next {
-        //     .carousel-control-next-icon {}
-        // }
-        //
-        // .carousel-inner {
-        //     .carousel-item {
-        //         .carousel-caption {}
-        //     }
-        // }
-
         #controls-desktop-wrap {
             position: relative;
         }
@@ -125,6 +110,57 @@ $slider_height: 450px;
 
                     &:hover {
                         transform: scaleY(1.2);
+                    }
+                }
+            }
+        }
+
+        .carousel-inner {
+            .carousel-item {
+                .carousel-caption {
+                    left: 0;
+                    bottom: 0;
+                    padding: 0;
+                    text-align: left;
+
+                    display: flex;
+
+                    .caption-legend-big {
+                        background-color: #00998f;
+                        display: block;
+                        padding: 30px;
+                        position: relative;
+                        min-height: 170px;
+
+                        &::after {
+                            content: "";
+                            position: absolute;
+                            left: calc(100% - 1px);
+                            top: 0;
+                            width: 0;
+                            height: 0;
+                            border-style: solid;
+                            border-width: 201px 78px 0 0;
+                            border-color: #00998f transparent transparent;
+                            pointer-events: all;
+                        }
+
+                        &__type {
+                            font-size: 1.2rem;
+                        }
+
+                        &__title {
+                            font-size: 3.5rem;
+                            font-weight: 900;
+                            line-height: 1.2;
+                        }
+                    }
+
+                    .caption-info {
+                        display: flex;
+
+                        &__tiny-title {}
+                        &__value {}
                     }
                 }
             }

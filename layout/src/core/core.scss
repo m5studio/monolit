@@ -19,7 +19,6 @@ body {
     position: relative;
     height: 110px;
     width: 100%;
-    z-index: 2;
 
     &__top {
         background: linear-gradient(180deg, rgba(0, 0, 0, .2), transparent), #545454;
@@ -184,7 +183,28 @@ body {
 }
 
 #content {
-    #main {}
+    #main {
+        #page-title-h1 {
+            h1 {
+                font-size: 2.7rem;
+                font-weight: 700;
+                margin-bottom: 30px;
+
+                &::after {
+                    background-color: #00998f;
+                    content: "";
+                    display: block;
+                    width: 64px;
+                    height: 3px;
+                    margin-top: 10px;
+                }
+
+                abbr {
+                    text-decoration: none;
+                }
+            }
+        }
+    }
 }
 
 #footer {
