@@ -1,4 +1,62 @@
-.complex_card {
-    border: 1px solid grey;
+.complex-card {
+    background-color: white;
+    // width: 384px;
     height: 450px;
+    box-shadow: 0 4px 4px rgba(0,0,0,.15);
+
+    a {
+        &:focus,
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    &__header {
+        height: 240px;
+        position: relative;
+    }
+
+    &__main {}
+
+    &__footer {}
+
+    &__img {
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        background-size: cover;
+
+        width: 100%;
+        height: 100%;
+    }
+
+    &__info {
+        height: 94px;
+        padding-top: 10px;
+        padding-left: 15px;
+    }
+
+    &__title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+
+        a {
+            color: black;
+
+            &:hover {
+                color: rgba(0, 0, 0, .7);
+            }
+        }
+    }
+
+    &__flat {}
+
+    &__flat--count {
+        color: #0baca2;
+        font-weight: 900;
+
+        &:hover {
+            color: black;
+        }
+    }
 }
