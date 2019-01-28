@@ -1,8 +1,8 @@
-$slider_height: 450px;
+$main_slider_height: 450px;
 
 #main-slider {
     background-color: #EEE;
-    height: $slider_height;
+    height: $main_slider_height;
     position: relative;
     margin-bottom: 30px;
 
@@ -11,7 +11,7 @@ $slider_height: 450px;
         background-position: 50% 60%;
         background-size: cover;
         width: 100%;
-        height: $slider_height;
+        height: $main_slider_height;
     }
 
     @include media-breakpoint-only(xl) {
