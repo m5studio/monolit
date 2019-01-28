@@ -1,5 +1,6 @@
 $main_slider_height: 450px;
 
+// Main slider
 #main-slider {
     background-color: #EEE;
     height: $main_slider_height;
@@ -180,7 +181,9 @@ $main_slider_height: 450px;
         }
     }
 }
+// END Main slider
 
+// Flat Types Slider
 #flats-types-slider {
     .slide-box {
         align-items: center;
@@ -207,6 +210,7 @@ $main_slider_height: 450px;
         .flat-card {
             display: grid;
             grid-template-columns: 96px 1fr;
+            grid-column-gap: 10px;
 
             &__icon {
                 background-repeat: no-repeat;
@@ -226,7 +230,7 @@ $main_slider_height: 450px;
                 a {
                     color: black;
                     font-size: 1.6rem;
-                    font-weight: 900;
+                    font-weight: 800;
                     line-height: 1.2;
 
                     &:hover {
@@ -238,10 +242,10 @@ $main_slider_height: 450px;
             &__info {
                 display: grid;
                 grid-template-columns: repeat(2, 1fr);
-                grid-column-gap: 10px;
+                grid-column-gap: 5px;
 
                 &--block {
-                    font-size: .84rem;
+                    font-size: .8rem;
                 }
 
                 &--title {
@@ -269,7 +273,6 @@ $main_slider_height: 450px;
         right: -15px;
     }
 }
-
 // .carousel {
 //     width: 100%;
 // }
@@ -305,4 +308,4 @@ $main_slider_height: 450px;
 //     padding: 20px;
 //     border-radius: .5rem;
 // }
-// END
+// END Flat Types Slider
