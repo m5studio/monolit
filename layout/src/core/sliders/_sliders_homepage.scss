@@ -182,8 +182,18 @@ $main_slider_height: 450px;
 }
 
 #flats-types-slider {
+    // overflow: hidden;
+
     .slide-box {
+        align-items: center;
         justify-content: space-between;
+        height: 150px;
+
+        &__item {
+            background-repeat: no-repeat;
+            background-position: 50%;
+            background-size: cover;
+        }
 
         @include media-breakpoint-up(lg) {
             &__lg {
@@ -195,6 +205,19 @@ $main_slider_height: 450px;
                 max-width: 25%;
             }
         }
+    }
+
+    .control-next {
+        background-image: linear-gradient(to left, white, transparent);
+        background-repeat: no-repeat;
+        background-position: 0 0;
+
+        width: 65px;
+        height: 100%;
+
+        position: absolute;
+        top: 0;
+        right: 0;
     }
 }
 
