@@ -203,6 +203,53 @@ $main_slider_height: 450px;
                 max-width: 25%;
             }
         }
+
+        .flat-card {
+            display: grid;
+            grid-template-columns: 96px 1fr;
+
+            &__icon {
+                background-repeat: no-repeat;
+                background-position: 50%;
+                background-size: contain;
+
+                display: block;
+                width: 96px;
+                height: 96px;
+            }
+
+            &__content {}
+
+            &__title {
+                margin-bottom: 10px;
+
+                a {
+                    color: black;
+                    font-size: 1.6rem;
+                    font-weight: 900;
+                    line-height: 1.2;
+
+                    &:hover {
+                        color: #0baca2;
+                    }
+                }
+            }
+
+            &__info {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                grid-column-gap: 10px;
+
+                &--block {
+                    font-size: .84rem;
+                }
+
+                &--title {
+                    color: #a6a6a6;
+                    margin-bottom: 5px;
+                }
+            }
+        }
     }
 
     .control-next {
