@@ -267,7 +267,7 @@
 
             &__mortgage-request {
                 background-color: #00998f;
-                height: 76px;
+                height: 80px;
 
                 position: absolute;
                 bottom: 0;
@@ -281,7 +281,6 @@
                 padding-right: 15px;
                 text-align: right;
 
-                // transform: translateZ(0);
                 transform: translateX(100%);
                 transition: transform .5s ease;
 
@@ -292,7 +291,7 @@
                     top: 0;
                     display: block;
                     border-style: solid;
-                    border-width: 0 0 76px 35px;
+                    border-width: 0 0 80px 35px;
                     border-color: transparent transparent #00998f;
                 }
 
