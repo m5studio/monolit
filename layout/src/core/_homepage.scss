@@ -310,8 +310,26 @@
         }
     }
 
-    // TODO
-    #section-news {}
+    #section-news {
+        .homepage-section__inner {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            grid-column-gap: 30px;
+            grid-row-gap: 30px;
+        }
+
+        .news-card {
+            box-shadow: 0 4px 10px rgba(0,0,0,.1);
+            border-radius: 5px;
+            min-height: 256px;
+
+            &__fixed {
+                grid-column-start: 1;
+                grid-row-start: 1;
+                grid-row-end: 3;
+            }
+        }
+    }
 
     // TODO
     #section-about {}
