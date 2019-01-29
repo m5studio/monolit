@@ -315,7 +315,7 @@
 
         .homepage-section__inner {
             display: grid;
-            grid-template-columns: 1.5fr 1fr 1fr;
+            grid-template-columns: 1.3fr 1fr 1fr;
             grid-column-gap: 30px;
             grid-row-gap: 30px;
         }
@@ -323,7 +323,7 @@
         .news-card {
             box-shadow: 0 4px 10px rgba(0,0,0,.1);
             border-radius: 5px;
-            min-height: 200px;
+            min-height: 190px;
             position: relative;
             overflow: hidden;
 
@@ -389,11 +389,11 @@
                 flex-direction: column;
                 justify-content: center;
 
-                padding: 0 20px;
+                padding: 0 90px 0 20px;
 
                 width: 100%;
                 height: 100%;
-                z-index: 1;
+                z-index: 2;
 
                 transition: background-color ease-in-out .3s;
             }
@@ -409,6 +409,39 @@
                 margin-bottom: 0;
             }
 
+            &__green-arr {
+                background-color: #0baca2;
+
+                position: absolute;
+                bottom: 30px;
+                right: 0;
+
+                width: 73px;
+                height: 73px;
+
+                z-index: 2;
+
+                transition: transform .35s ease;
+                transform: translate3d(110px,0,0);
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    right: 100%;
+                    top: 0;
+                    display: block;
+                    border-color: transparent transparent #0baca2;
+                    border-style: solid;
+                    border-width: 0 0 73px 35px;
+                }
+
+                &.icon-arrow-right-white {
+                    background-repeat: no-repeat;
+                    background-position: 50%;
+                    background-size: 15px;
+                }
+            }
+
             &:hover {
                 a {
                     color: white;
@@ -417,6 +450,11 @@
 
                 .news-card__inner {
                     background-color: rgba(0, 0, 0, .6);
+                }
+
+                .news-card__green-arr {
+                    transform: translateX(0);
+                    transition: transform .5s ease .1s;
                 }
             }
         }
