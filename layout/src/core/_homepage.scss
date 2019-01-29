@@ -313,7 +313,7 @@
     #section-news {
         .homepage-section__inner {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
+            grid-template-columns: 1.5fr 1fr 1fr;
             grid-column-gap: 30px;
             grid-row-gap: 30px;
         }
@@ -321,12 +321,73 @@
         .news-card {
             box-shadow: 0 4px 10px rgba(0,0,0,.1);
             border-radius: 5px;
-            min-height: 256px;
+            min-height: 200px;
+            position: relative;
+            overflow: hidden;
+
+            a {
+                color: #0baca2;
+                display: block;
+
+                &:hover {
+                    text-decoration: none;
+                }
+            }
 
             &__fixed {
                 grid-column-start: 1;
                 grid-row-start: 1;
                 grid-row-end: 3;
+            }
+
+            &__image {
+                background-repeat: no-repeat;
+                background-position: 50%;
+                background-size: cover;
+
+                display: block;
+                width: 100%;
+                height: 100%;
+
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 0;
+            }
+
+            &__inner {
+                background-color: white;
+                position: absolute;
+                top: 0;
+                left: 0;
+
+                display: block;
+                width: 100%;
+                height: 100%;
+                z-index: 1;
+
+                transition: background-color ease-in-out .3s;
+            }
+
+            &__datetime {
+                font-size: .9rem;
+                margin-bottom: 20px;
+            }
+
+            &__title {
+                font-size: 1.3rem;
+                font-weight: 400;
+                margin-bottom: 0;
+            }
+
+            &:hover {
+                a {
+                    color: white;
+                }
+
+                .news-card__inner {
+                    background-color: rgba(0, 0, 0, .6);
+                }
             }
         }
     }
