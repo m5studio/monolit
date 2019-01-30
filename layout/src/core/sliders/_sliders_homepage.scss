@@ -1,7 +1,94 @@
+.custom-controls-wrap {
+    position: relative;
+
+    .custom-controls {
+        position: absolute;
+        // right: 15px;
+        // bottom: 47px;
+        z-index: 11;
+
+        display: flex;
+        align-items: center;
+
+        .controls-prev-next {
+            .control-left,
+            .control-right {
+                display: block;
+                min-width: 31px;
+                height: 31px;
+
+                transition: transform .3s ease;
+                transform: translateZ(0);
+            }
+
+            .control-left {
+                &:hover {
+                    transform: translate3d(-3px, 0, 0);
+                }
+            }
+
+            .control-right {
+                background-position: 100% 0;
+
+                &:hover {
+                    transform: translate3d(3px, 0, 0);
+                }
+            }
+        }
+
+        .carousel-indicators {
+            position: static;
+            margin: 0;
+        }
+
+        .custom-carousel-indicators {
+            display: flex;
+
+            .slider-indicator {
+                position: relative;
+                cursor: pointer;
+                height: 21px;
+                width: 2px;
+                padding: 0 9px;
+                transition: transform .4s ease;
+                transform: scaleY(1);
+
+                &::after {
+                    background-color: white;
+                    content: "";
+                    display: block;
+                    width: 2px;
+                    height: 100%;
+
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left: 50%;
+
+                    transform: translateX(-50%);
+                    transition: background-color .4s ease;
+                }
+
+                &.active {
+                    transform: scaleY(1.52);
+
+                    &::after {
+                        background-color: #00998f !important;
+                    }
+                }
+
+                &:hover {
+                    transform: scaleY(1.2);
+                }
+            }
+        }
+    }
+}
+
 $main_slider_height: 450px;
 
 // Main Slider
-#main-slider {
+#main-slider-wrap {
     background-color: #EEE;
     height: $main_slider_height;
     position: relative;
@@ -16,90 +103,12 @@ $main_slider_height: 450px;
     }
 
     @include media-breakpoint-only(xl) {
-        #controls-desktop-wrap {
+        .custom-controls-wrap {
             position: relative;
-        }
 
-        #controls-desktop {
-            position: absolute;
-            right: 15px;
-            bottom: 47px;
-            z-index: 11;
-
-            display: flex;
-            align-items: center;
-
-            .controls-prev-next {
-                .control-left,
-                .control-right {
-                    display: block;
-                    min-width: 31px;
-                    height: 31px;
-
-                    transition: transform .3s ease;
-                    transform: translateZ(0);
-                }
-
-                .control-left {
-                    &:hover {
-                        transform: translate3d(-3px, 0, 0);
-                    }
-                }
-
-                .control-right {
-                    background-position: 100% 0;
-
-                    &:hover {
-                        transform: translate3d(3px, 0, 0);
-                    }
-                }
-            }
-
-            .carousel-indicators {
-                position: static;
-                margin: 0;
-            }
-
-            .carousel-indicators--desktop {
-                display: flex;
-
-                .slider-indicator {
-                    position: relative;
-                    cursor: pointer;
-                    height: 21px;
-                    width: 2px;
-                    padding: 0 9px;
-                    transition: transform .4s ease;
-                    transform: scaleY(1);
-
-                    &::after {
-                        background-color: white;
-                        content: "";
-                        display: block;
-                        width: 2px;
-                        height: 100%;
-
-                        position: absolute;
-                        top: 0;
-                        bottom: 0;
-                        left: 50%;
-
-                        transform: translateX(-50%);
-                        transition: background-color .4s ease;
-                    }
-
-                    &.active {
-                        transform: scaleY(1.52);
-
-                        &::after {
-                            background-color: #00998f;
-                        }
-                    }
-
-                    &:hover {
-                        transform: scaleY(1.2);
-                    }
-                }
+            .custom-controls {
+                right: 15px;
+                bottom: 47px;
             }
         }
 
@@ -279,6 +288,40 @@ $main_slider_height: 450px;
 
 // Compleated Projects Slider
 #compleated-projects-slider {
+    .custom-controls-wrap {
+        position: relative;
+
+        .custom-controls {
+            left: 15px;
+            bottom: 30px;
+
+            .custom-carousel-indicators {
+                .slider-indicator {
+                    &::after {
+                        background-color: black;
+                    }
+                }
+            }
+        }
+    }
+
+    .carousel-inner {
+        width: 70%;
+    }
+
+    &__map {
+        background-color: #CCC;
+
+        display: block;
+        min-width: 386px;
+        width: 30%;
+        height: 100%;
+
+        position: absolute;
+        right: -15px;
+        top: 0;
+    }
+
     .carousel-item {
         &::before {
             background-image: url('images/trapezium-green-big.svg');
@@ -309,14 +352,14 @@ $main_slider_height: 450px;
             height: 76px;
 
             position: absolute;
-            right: 250px;
+            right: 300px;
             bottom: 30px;
             z-index: -1;
         }
 
         .slide {
             background-repeat: no-repeat;
-            background-position: 91% 100%;
+            background-position: 83% 100%;
             background-size: 350px auto;
 
             height: 384px;
