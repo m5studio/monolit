@@ -1,3 +1,10 @@
+button {
+    &:focus,
+    &:hover {
+        outline: none;
+    }
+}
+
 .circle-button {
     background-color: white;
     border: 1px solid #00998f;

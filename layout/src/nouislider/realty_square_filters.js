@@ -1,7 +1,8 @@
 // noUiSlider for realty square filter in homepage
 // https://refreshless.com/nouislider/examples/#section-html5
-function realtySquareSlider() {
-    const realtySquareSlider = document.getElementById('realty-filters__square-slider');
+
+function realtySquareFilters() {
+    const realtySquareSlider = document.getElementById('realty-filter__square-slider');
 
     noUiSlider.create(realtySquareSlider, {
         start: [35, 245],
@@ -12,8 +13,8 @@ function realtySquareSlider() {
         }
     });
 
-    const inputNumberMin = document.getElementById('square__input-min');
-    const inputNumberMax = document.getElementById('square__input-max');
+    const inputNumberMin = document.getElementById('realty-filter__square--input-min');
+    const inputNumberMax = document.getElementById('realty-filter__square--input-max');
 
     realtySquareSlider.noUiSlider.on('update', function (values, handle) {
         let value = values[handle];
@@ -34,4 +35,4 @@ function realtySquareSlider() {
 }
 
 
-export {realtySquareSlider};
+export {realtySquareFilters};

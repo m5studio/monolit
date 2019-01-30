@@ -1,12 +1,16 @@
 import "./main.scss"
 
 import "./boostrap/boostrap"
-import {realtySquareSlider} from "./nouislider/nouislider"
+
+import {realtySquareFilters} from "./nouislider/realty_square_filters"
+import {realtyPriceFilters} from "./nouislider/realty_price_filters"
+
 import {stickyMainNav} from "./core/main_nav/main_nav"
 
 
 $(document).ready(function() {
-    realtySquareSlider()
+    realtySquareFilters()
+    realtyPriceFilters()
 })
 
 
