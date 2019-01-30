@@ -12,8 +12,8 @@ function realtySquareSlider() {
         }
     });
 
-    const inputNumberMin = document.getElementById('square-slider--input-min');
-    const inputNumberMax = document.getElementById('square-slider--input-max');
+    const inputNumberMin = document.getElementById('square__input-min');
+    const inputNumberMax = document.getElementById('square__input-max');
 
     realtySquareSlider.noUiSlider.on('update', function (values, handle) {
         let value = values[handle];

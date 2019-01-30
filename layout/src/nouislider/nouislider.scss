@@ -1,2 +1,81 @@
 // FIXME: user this styles as an example for own styling
-@import "~nouislider/distribute/nouislider.css"
+@import "~nouislider/distribute/nouislider.css";
+
+
+.noUi-target {
+    background: white;
+    width: 100%;
+    height: 7px;
+
+    &.noUi-horizontal {
+        .noUi-handle {
+            width: 12px;
+            height: 12px;
+
+            top: -4px !important;
+            right: -5px !important;
+        }
+    }
+
+    .noUi-base {
+        .noUi-connects {
+            .noUi-connect {
+                background: #00998f;
+            }
+        }
+
+        .noUi-origin {
+            .noUi-handle {
+                background: #020202;
+                border: none;
+                border-radius: 100%;
+                box-shadow: none;
+                cursor: default;
+
+                &::after, &::before {
+                    display: none;
+                }
+
+                // &.noUi-handle-lower {}
+                // &.noUi-handle-upper {}
+
+                &:focus,
+                &:hover {
+                    cursor: pointer;
+                    outline: none;
+                }
+            }
+        }
+    }
+}
+
+
+// Realty filters styles
+.filter-input {
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.3);
+    border: none;
+    border-radius: 40px;
+    padding: 3px 0 3px 13px;
+    text-align: center;
+    transition: box-shadow .25s ease;
+
+    &:focus {
+        box-shadow: inset 0 1px 4px rgba(0,0,0,.4);
+        outline: none;
+    }
+}
+
+.realty-filters {
+    &__inputs {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 15px;
+
+        span {
+            color: #a6a6a6;
+            font-size: .9rem;
+        }
+    }
+}
+// END Realty filters styles
