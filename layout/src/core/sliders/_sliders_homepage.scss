@@ -1,6 +1,6 @@
 $main_slider_height: 450px;
 
-// Main slider
+// Main Slider
 #main-slider {
     background-color: #EEE;
     height: $main_slider_height;
@@ -183,6 +183,7 @@ $main_slider_height: 450px;
 }
 // END Main slider
 
+
 // Flat Types Slider
 #flats-types-slider {
     .slide-box {
@@ -273,39 +274,54 @@ $main_slider_height: 450px;
         right: -15px;
     }
 }
-// .carousel {
-//     width: 100%;
-// }
-
-// .slide-box {
-//     display: flex;
-//     justify-content: space-between;
-// }
-
-// @media (min-width: 576px) and (max-width: 767.98px) {
-//     .slide-box img {
-//         flex: 0 0 50%;
-//         max-width: 50%;
-//     }
-// }
-//
-// @media (min-width: 768px) and (max-width: 991.98px) {
-//     .slide-box img {
-//         flex: 0 0 33.3333%;
-//         max-width: 33.3333%;
-//     }
-// }
-//
-// @media (min-width: 992px) {
-//     .slide-box img {
-//         flex: 0 0 25%;
-//         max-width: 25%;
-//     }
-// }
-//
-// .carousel-caption {
-//     background-color: rgba(0, 0, 0, 0.5);
-//     padding: 20px;
-//     border-radius: .5rem;
-// }
 // END Flat Types Slider
+
+
+// Compleated Projects Slider
+#compleated-projects-slider {
+    .carousel-item {
+        &::before {
+            background-image: url('images/trapezium-green-big.svg');
+            background-repeat: no-repeat;
+            background-position: 0 0;
+            background-size: contain;
+
+            content: "";
+            display: block;
+            width: 290px;
+            height: 97px;
+
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            z-index: -1;
+        }
+
+        &::after {
+            background-image: url('images/trapezium-dark-big.svg');
+            background-repeat: no-repeat;
+            background-position: 0 0;
+            background-size: contain;
+
+            content: "";
+            display: block;
+            width: 230px;
+            height: 76px;
+
+            position: absolute;
+            right: 250px;
+            bottom: 30px;
+            z-index: -1;
+        }
+
+        .slide {
+            background-repeat: no-repeat;
+            background-position: 91% 100%;
+            background-size: 350px auto;
+
+            height: 384px;
+            z-index: 1;
+        }
+    }
+}
+// END Compleated Projects Slider

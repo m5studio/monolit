@@ -470,9 +470,6 @@
         color: white;
         text-shadow: 0 0 1px black;
 
-        // padding-top: 50px;
-        // padding-bottom: 80px;
-
         padding-top: 180px;
         padding-bottom: 180px;
 
@@ -508,10 +505,9 @@
             grid-row-gap: 45px;
 
             .stat-group {
-                background-image: url('images/trapezia-green.svg');
+                background-image: url('images/trapezia-green-small.svg');
                 background-repeat: no-repeat;
                 background-position: 0 50%;
-                // background-size: contain;
 
                 display: flex;
                 align-items: center;
@@ -531,6 +527,34 @@
                     width: 30%;
                 }
             }
+        }
+    }
+
+    #section-compleated-projects {
+        cursor: default;
+        height: 256px;
+        position: relative;
+
+        &__inner {
+            background-color: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,.4);
+            height: 384px;
+            position: relative;
+            top: -64px;
+            z-index: 2;
+        }
+
+        &__title {
+            font-size: 1.9rem;
+            font-weight: 700;
+            line-height: 1.2;
+            width: 300px;
+
+            position: absolute;
+            top: 40px;
+            left: 40px;
+
+            z-index: 2;
         }
     }
 }
