@@ -260,7 +260,7 @@ $main_nav_toggle: "#main-navigationToggle";
             background-color: rgba(0, 0, 0, .9);
 
             display: block;
-            width: 35%;
+            width: 35vw;
             height: 100vh;
 
             position: fixed;
@@ -273,6 +273,16 @@ $main_nav_toggle: "#main-navigationToggle";
             ul.main-nav__list,
             ul.main-nav-submenu__list {
                 flex-direction: column;
+
+                a {
+                    color: white;
+                    transition: color ease-in-out .3s;
+
+                    &:focus,
+                    &:hover {
+                        color: #00998f;
+                    }
+                }
             }
 
             ul.main-nav__list {
@@ -281,6 +291,7 @@ $main_nav_toggle: "#main-navigationToggle";
 
                     a.main-nav__link {
                         font-size: 1.7rem;
+                        font-weight: 600;
                     }
 
                     ul.main-nav-submenu__list {
@@ -288,10 +299,16 @@ $main_nav_toggle: "#main-navigationToggle";
                         margin-left: 30px;
 
                         li.main-nav-submenu__item {
-                            margin-bottom: 7px;
+                            margin-bottom: 10px;
 
                             a.main-nav-submenu__link {
+                                color: rgba(255, 255, 255, .75);
                                 font-size: 1.3rem;
+
+                                &:focus,
+                                &:hover {
+                                    color: rgba(0, 153, 143, .75);
+                                }
                             }
                         }
                     }
