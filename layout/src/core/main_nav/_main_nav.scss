@@ -28,9 +28,9 @@ $main_nav_toggle: "#main-navigationToggle";
 
 // TODO
 .body-overflow-hidden {
-    overflow: hidden;
-
-    @include media-breakpoint-down(lg) {}
+    @include media-breakpoint-down(lg) {
+        overflow: hidden;
+    }
 }
 
 #main-navigation-wrap {
