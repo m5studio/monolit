@@ -26,7 +26,6 @@ $main_nav_toggle: "#main-navigationToggle";
     z-index: 1000;
 }
 
-// TODO
 .body-overflow-hidden {
     @include media-breakpoint-down(lg) {
         overflow: hidden;
@@ -48,8 +47,8 @@ $main_nav_toggle: "#main-navigationToggle";
         background-position: 50% 50%;
         background-size: 90%;
 
-        width: 60px;
-        height: 60px;
+        width: 55px;
+        height: 55px;
 
         position: absolute;
         right: 0;
@@ -256,5 +255,48 @@ $main_nav_toggle: "#main-navigationToggle";
 
     #{$main_nav} {
         display: none;
+
+        &.opened {
+            background-color: rgba(0, 0, 0, .9);
+
+            display: block;
+            width: 35%;
+            height: 100vh;
+
+            position: fixed;
+            top: 0;
+            left: 0;
+
+            padding: 10vh 0 0 5vh;
+            z-index: 200;
+
+            ul.main-nav__list,
+            ul.main-nav-submenu__list {
+                flex-direction: column;
+            }
+
+            ul.main-nav__list {
+                li.main-nav__item {
+                    margin-bottom: 15px;
+
+                    a.main-nav__link {
+                        font-size: 1.7rem;
+                    }
+
+                    ul.main-nav-submenu__list {
+                        margin-top: 15px;
+                        margin-left: 30px;
+
+                        li.main-nav-submenu__item {
+                            margin-bottom: 7px;
+
+                            a.main-nav-submenu__link {
+                                font-size: 1.3rem;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

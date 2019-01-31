@@ -16,17 +16,20 @@ function toggleMainNav() {
     const mainNav = $('#main-navigation')
     const menuToggle = $('#main-navigationToggle')
 
+    const opened_class = 'opened'
+    const body_overflow_class = 'body-overflow-hidden'
+
     menuToggle.click(function() {
-        if (mainNav.hasClass('opened')) {
-            $('body').removeClass('body-overflow-hidden')
-            $(this).removeClass('opened')
-            mainNav.removeClass('opened')
-            menuToggle.removeClass('opened')
+        if (mainNav.hasClass(opened_class)) {
+            $('body').removeClass(body_overflow_class)
+            $(this).removeClass(opened_class)
+            mainNav.removeClass(opened_class)
+            menuToggle.removeClass(opened_class)
         } else {
-            $('body').addClass('body-overflow-hidden') // prevent background scroll
-            $(this).addClass('opened')
-            mainNav.addClass('opened')
-            menuToggle.addClass('opened')
+            $('body').addClass(body_overflow_class) // prevent background scroll
+            $(this).addClass(opened_class)
+            mainNav.addClass(opened_class)
+            menuToggle.addClass(opened_class)
         }
     })
 }
