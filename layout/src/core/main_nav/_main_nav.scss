@@ -52,6 +52,7 @@ $main_nav_toggle: "#main-navigationToggle";
 
         position: absolute;
         right: 0;
+        // z-index: 201;
 
         &.opened {
             background-image: url('images/menu-close.svg');
@@ -260,7 +261,7 @@ $main_nav_toggle: "#main-navigationToggle";
             background-color: rgba(0, 0, 0, .9);
 
             display: block;
-            width: 35vw;
+            width: 40vw;
             height: 100vh;
 
             position: fixed;
@@ -309,6 +310,52 @@ $main_nav_toggle: "#main-navigationToggle";
                                 &:hover {
                                     color: rgba(0, 153, 143, .75);
                                 }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@include media-breakpoint-only(md) {
+    #{$main_nav} {
+        &.opened {
+            width: 60vw;
+        }
+    }
+}
+
+@include media-breakpoint-down(sm) {
+    #{$main_nav_toggle} {
+        z-index: 201;
+    }
+
+    #{$main_nav} {
+        &.opened {
+            width: 100vw;
+            height: 100vh;
+            padding: 10vh 0 0 10vh;
+        }
+    }
+}
+
+@include media-breakpoint-down(xs) {
+    #{$main_nav} {
+        &.opened {
+            padding: 10vh 0 0 5vh;
+
+            ul.main-nav__list {
+                li.main-nav__item {
+                    a.main-nav__link {
+                        font-size: 7vw;
+                    }
+
+                    ul.main-nav-submenu__list {
+                        li.main-nav-submenu__item {
+                            a.main-nav-submenu__link {
+                                font-size: 5vw;
                             }
                         }
                     }
