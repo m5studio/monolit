@@ -31,7 +31,7 @@ body {
         &--inner {
             height: 40px;
             display: grid;
-            grid-template-columns: 250px auto 170px 170px;
+            grid-template-columns: 250px 1fr 340px;
 
             a {
                 color: white;
@@ -50,41 +50,46 @@ body {
 
             a#ht-commercial {}
 
-            a#ht-phone {
-                padding-right: 25px;
+            #ht-contacts {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
 
-                .icon {
-                    margin-right: 7px;
+                a#ht-phone {
+                    padding-right: 25px;
 
-                    &.icon-callback-white {
-                        @keyframes iconCallBackAnimation {
-                            0%   {transform: rotate(0)}
-                            50%  {transform: rotate(30deg)}
-                            100% {transform: rotate(0)}
+                    .icon {
+                        margin-right: 7px;
+
+                        &.icon-callback-white {
+                            @keyframes iconCallBackAnimation {
+                                0%   {transform: rotate(0)}
+                                50%  {transform: rotate(30deg)}
+                                100% {transform: rotate(0)}
+                            }
+
+                            animation: iconCallBackAnimation 1.5s linear infinite;
+                            animation-fill-mode: forwards;
+                            animation-play-state: paused;
                         }
+                    }
 
-                        animation: iconCallBackAnimation 1.5s linear infinite;
-                        animation-fill-mode: forwards;
-                        animation-play-state: paused;
+                    .phone-digits {
+                        font-weight: 700;
+                    }
+
+                    &:focus,
+                    &:hover {
+                        color: #0baca2;
+
+                        .icon-callback-white {
+                            background-image: url('images/icons/icon-callback-green.svg');
+                            animation-play-state: running;
+                        }
                     }
                 }
 
-                .phone-digits {
-                    font-weight: 700;
-                }
-
-                &:focus,
-                &:hover {
-                    color: #0baca2;
-
-                    .icon-callback-white {
-                        background-image: url('images/icons/icon-callback-green.svg');
-                        animation-play-state: running;
-                    }
-                }
+                a#ht-callback {}
             }
-
-            a#ht-callback {}
 
             .btn-green {
                 background: linear-gradient(180deg, rgba(0, 0, 0, .4), transparent), #0baca2;
@@ -100,8 +105,14 @@ body {
 
         &--inner {
             display: grid;
-            grid-template-columns: 250px auto 340px;
             grid-template-rows: 70px;
+
+            @include media-breakpoint-only(xl) {
+                grid-template-columns: 250px 1fr 1fr;
+            }
+            @include media-breakpoint-down(lg) {
+                grid-template-columns: 250px 1.5fr 1fr;
+            }
 
             a {
                 &:focus,
@@ -123,15 +134,35 @@ body {
                 }
             }
 
+            #main-navigation-wrap {
+                @include media-breakpoint-down(lg) {
+                    order: 3;
+                }
+            }
+
             #hb-aside {
                 display: grid;
-                grid-template-columns: repeat(2, 50%);
+                grid-template-columns: repeat(2, 1fr);
+                grid-column-gap: 15px;
                 align-items: center;
+
+                @include media-breakpoint-only(xl) {
+                    margin-left: 15px;
+                }
+                @include media-breakpoint-down(lg) {
+                    order: 2;
+                }
+
+                // Fix for large resolution menu
+                @media (min-width: 1199px) and (max-width: 1360px) {
+                    display: none;
+                }
 
                 #favories,
                 #search-by-id {
                     display: grid;
-                    grid-template-columns: 44px 1fr;
+                    grid-template-columns: 34px 1fr;
+                    grid-column-gap: 10px;
                     align-items: center;
 
                     // .icon {}
@@ -167,8 +198,6 @@ body {
                 }
 
                 .icon {
-                    // margin-right: 10px;
-
                     &.rounded-34 {
                         background-size: 18px 18px;
                         background-position: 50% 50%;

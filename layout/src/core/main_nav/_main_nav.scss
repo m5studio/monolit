@@ -1,5 +1,6 @@
 // https://css-tricks.com/snippets/sass/use-sass-variable-selector/
 $main_nav: ".main-nav";
+$main_nav_toggle: "#main-navigationToggle";
 
 // #main-navigation {}
 
@@ -25,8 +26,50 @@ $main_nav: ".main-nav";
     z-index: 1000;
 }
 
+// TODO
+.body-overflow-hidden {
+    overflow: hidden;
+
+    @include media-breakpoint-down(lg) {}
+}
+
+#main-navigation-wrap {
+    @include media-breakpoint-down(lg) {
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+
+    // Menu hamburger
+    #{$main_nav_toggle} {
+        background-color: #00998f;
+        background-image: url('images/menu-hamburger.svg');
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        background-size: 90%;
+
+        width: 60px;
+        height: 60px;
+
+        position: absolute;
+        right: 0;
+
+        &.opened {
+            background-image: url('images/menu-close.svg');
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
 // Desktop
 @include media-breakpoint-only(xl) {
+    #{$main_nav_toggle} {
+        display: none;
+    }
+
     #{$main_nav} {
         ul.main-nav__list {
             li.main-nav__item {
@@ -207,5 +250,11 @@ $main_nav: ".main-nav";
 
 // Mobile
 @include media-breakpoint-down(lg) {
-    #{$main_nav} {}
+    #{$main_nav_toggle} {
+        display: block;
+    }
+
+    #{$main_nav} {
+        display: none;
+    }
 }

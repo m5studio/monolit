@@ -6,6 +6,7 @@ function realtyPriceFilters() {
 
     noUiSlider.create(realtyPriceSlider, {
         start: [2919000, 18360000],
+        step: 1000,
         connect: true,
         range: {
             'min': 2919000,
