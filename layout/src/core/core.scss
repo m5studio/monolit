@@ -31,7 +31,13 @@ body {
         &--inner {
             height: 40px;
             display: grid;
-            grid-template-columns: 250px 1fr 340px;
+
+            @include media-breakpoint-up(md) {
+                grid-template-columns: 250px 1fr 340px;
+            }
+            @include media-breakpoint-down(sm) {
+                grid-template-columns: repeat(2, 1fr);
+            }
 
             a {
                 color: white;
@@ -50,12 +56,26 @@ body {
 
             a#ht-commercial {}
 
+            #ht-empty {
+                @include media-breakpoint-down(sm) {
+                    display: none;
+                }
+            }
+
             #ht-contacts {
                 display: grid;
-                grid-template-columns: repeat(2, 1fr);
+
+                @include media-breakpoint-up(md) {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+                @include media-breakpoint-down(sm) {
+                    grid-template-columns: 1fr;
+                }
 
                 a#ht-phone {
-                    padding-right: 25px;
+                    @include media-breakpoint-up(md) {
+                        padding-right: 25px;
+                    }
 
                     .icon {
                         margin-right: 7px;
@@ -88,7 +108,11 @@ body {
                     }
                 }
 
-                a#ht-callback {}
+                a#ht-callback {
+                    @include media-breakpoint-down(sm) {
+                        display: none;
+                    }
+                }
             }
 
             .btn-green {
@@ -165,6 +189,10 @@ body {
                     grid-column-gap: 10px;
                     align-items: center;
 
+                    @include media-breakpoint-down(sm) {
+                        display: none;
+                    }
+
                     // .icon {}
                     // span {}
                 }
@@ -193,8 +221,14 @@ body {
 
                 .hb-aside-text {
                     cursor: default;
-                    font-size: .85rem;
                     line-height: 1.2;
+
+                    @include media-breakpoint-up(lg) {
+                        font-size: .85rem;
+                    }
+                    @include media-breakpoint-down(md) {
+                        font-size: .75rem;
+                    }
                 }
 
                 .icon {
