@@ -93,11 +93,15 @@
         }
 
         &__title--right {
-            font-weight: 400;
+            @include media-breakpoint-down(md) {
+                display: none;
+            }
 
             a {
                 color: #00998f;
                 font-size: 1.2rem;
+                font-weight: 400;
+                line-height: 1.2;
 
                 &:focus,
                 &:hover {
@@ -289,6 +293,11 @@
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             grid-column-gap: 30px;
+            grid-row-gap: 30px;
+
+            @include media-breakpoint-down(md) {
+                grid-template-columns: 1fr;
+            }
         }
 
         &__title {
@@ -328,6 +337,10 @@
                     font-size: 4.1rem;
                     font-weight: 700;
                     margin-right: 15px;
+
+                    @include media-breakpoint-down(lg) {
+                        font-size: 3.2rem;
+                    }
                 }
 
                 &__muted {
