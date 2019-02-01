@@ -322,7 +322,7 @@ $main_nav_toggle: "#main-navigationToggle";
 @include media-breakpoint-only(md) {
     #{$main_nav} {
         &.opened {
-            width: 60vw;
+            width: 55vw;
         }
     }
 }

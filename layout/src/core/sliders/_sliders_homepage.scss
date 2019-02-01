@@ -3,16 +3,17 @@
 
     .custom-controls {
         position: absolute;
-        // right: 15px;
-        // bottom: 47px;
-        z-index: 11;
 
         display: flex;
         align-items: center;
 
+        z-index: 11;
+
         .controls-prev-next {
             .control-left,
             .control-right {
+                background-position: 50% 0;
+
                 display: block;
                 min-width: 31px;
                 height: 31px;
@@ -28,8 +29,6 @@
             }
 
             .control-right {
-                background-position: 100% 0;
-
                 &:hover {
                     transform: translate3d(3px, 0, 0);
                 }
@@ -42,8 +41,6 @@
         }
 
         .custom-carousel-indicators {
-            display: flex;
-
             .slider-indicator {
                 position: relative;
                 cursor: pointer;
@@ -102,10 +99,8 @@ $main_slider_height: 450px;
         height: $main_slider_height;
     }
 
-    @include media-breakpoint-only(xl) {
+    @include media-breakpoint-up(lg) {
         .custom-controls-wrap {
-            position: relative;
-
             .custom-controls {
                 right: 15px;
                 bottom: 47px;
@@ -115,7 +110,7 @@ $main_slider_height: 450px;
         .carousel-inner {
             .carousel-item {
                 &::before {
-                    background: linear-gradient(1turn, #000, transparent);
+                    background: linear-gradient(1turn, black, transparent);
                     content: "";
                     position: absolute;
                     bottom: 0;
@@ -185,6 +180,67 @@ $main_slider_height: 450px;
                         &__value {
                             font-size: 1.4rem;
                         }
+                    }
+                }
+            }
+        }
+    }
+
+    @include media-breakpoint-down(md) {
+        .custom-controls-wrap {
+            .custom-controls {
+                left: 0;
+                bottom: 15px;
+
+                width: 100%;
+                justify-content: center;
+
+                .controls-prev-next {
+                    .control-left, .control-right {
+                        position: absolute;
+                        bottom: 200px;
+                    }
+
+                    .control-left {
+                        left: 15px;
+
+                        &.icon-arrow-left-green {
+                            background-image: url('images/icons/arrow-left-white.svg');
+                        }
+                    }
+
+                    .control-right {
+                        right: 15px;
+
+                        &.icon-arrow-right-green {
+                            background-image: url('images/icons/arrow-right-white.svg');
+                        }
+                    }
+                }
+            }
+        }
+
+        .carousel-inner {
+            .carousel-item {
+                .carousel-caption {
+                    bottom: 70px;
+
+                    .caption-legend-big {
+                        text-shadow: 0 0 20px black;
+
+                        &__type {
+                            font-size: 1.1rem;
+                            font-weight: 500;
+                        }
+
+                        &__title {
+                            font-size: 2.5rem;
+                            font-weight: 800;
+                        }
+                    }
+
+                    .caption-info {
+                        display: none;
                     }
                 }
             }
