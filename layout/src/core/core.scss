@@ -5,6 +5,8 @@
 @import "main_nav/main_nav";
 @import "sliders/sliders_homepage";
 @import "cards/complex_card";
+@import "cards/mortgage_card";
+@import "cards/news_card";
 
 
 body {
@@ -257,13 +259,23 @@ body {
                 font-weight: 700;
                 margin-bottom: 30px;
 
+                @include media-breakpoint-down(md) {
+                    text-align: center;
+                }
+
                 &::after {
                     background-color: #00998f;
                     content: "";
                     display: block;
                     width: 64px;
                     height: 3px;
-                    margin-top: 10px;
+
+                    @include media-breakpoint-up(lg) {
+                        margin-top: 10px;
+                    }
+                    @include media-breakpoint-down(md) {
+                        margin: 15px auto 0;
+                    }
                 }
 
                 abbr {

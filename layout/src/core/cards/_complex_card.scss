@@ -1,6 +1,5 @@
 .complex-card {
     background-color: white;
-    // width: 384px;
     min-height: 450px;
     box-shadow: 0 4px 4px rgba(0,0,0,.15);
 
@@ -29,7 +28,7 @@
     &__main {}
 
     &__info {
-        height: 94px;
+        height: 115px;
         padding-top: 10px;
         padding-left: 15px;
     }
@@ -37,7 +36,12 @@
     &__title {
         font-size: 1.3rem;
         font-weight: 700;
-        margin-bottom: 10px;
+        line-height: 1.2;
+        margin-bottom: 15px;
+
+        @include media-breakpoint-only(lg) {
+            font-size: 1.2rem;
+        }
 
         a {
             color: black;

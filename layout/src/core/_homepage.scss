@@ -40,7 +40,7 @@
 
             .rf-block__content {
                 display: flex;
-                justify-content: space-between;
+                justify-content: space-around;
             }
         }
 
@@ -116,9 +116,14 @@
             display: grid;
             grid-column-gap: 30px;
             grid-row-gap: 30px;
-            grid-template-columns: repeat(4, 1fr);
 
-            @include media-breakpoint-down(lg) {
+            @include media-breakpoint-only(xl) {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            @include media-breakpoint-only(lg) {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            @include media-breakpoint-only(md) {
                 grid-template-columns: repeat(2, 1fr);
             }
             @include media-breakpoint-down(sm) {
@@ -220,110 +225,7 @@
             grid-column-gap: 30px;
         }
 
-        .mortgage-card {
-            background-color: white;
-            box-shadow: 0 4px 8px rgba(0,0,0,.15);
-            border-radius: 5px;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-
-            &__logo {
-                height: 80px;
-            }
-
-            &__percent {
-                text-align: center;
-                margin-bottom: 20px;
-
-                span {
-                    color: #00998f;
-                    font-size: 2.4rem;
-                    font-weight: 700;
-                }
-            }
-
-            &__descr {
-                color: #00998f;
-                font-size: .9rem;
-                font-weight: 700;
-                line-height: 1.1rem;
-                text-align: center;
-                height: 30px;
-                margin-bottom: 40px;
-            }
-
-            &__info-blocks {
-                border-top: 1px solid #e4e4e4;
-
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                align-items: center;
-
-                &--block {
-                    &:not(:last-child) {
-                        border-right: 1px solid #e4e4e4;
-                    }
-
-                    padding: 10px 0;
-                    text-align: center;
-                }
-
-                &--small-title {
-                    color: #a6a6a6;
-                    font-size: .85rem;
-                }
-
-                &--value {
-                    span {
-                        font-size: 1.2rem;
-                    }
-                }
-            }
-
-            &__mortgage-request {
-                background-color: #00998f;
-                height: 80px;
-
-                position: absolute;
-                bottom: 0;
-                right: 0;
-
-                display: flex;
-                align-items: center;
-                justify-content: flex-end;
-
-                width: 75%;
-                padding-right: 15px;
-                text-align: right;
-
-                transform: translateX(100%);
-                transition: transform .5s ease;
-
-                &::before {
-                    content: "";
-                    position: absolute;
-                    right: 100%;
-                    top: 0;
-                    display: block;
-                    border-style: solid;
-                    border-width: 0 0 80px 35px;
-                    border-color: transparent transparent #00998f;
-                }
-
-                &--inner {
-                    color: white;
-                    font-size: 1.1rem;
-                    line-height: 1.2;
-                }
-            }
-
-            &:hover {
-                .mortgage-card__mortgage-request {
-                    transform: translateZ(0);
-                }
-            }
-        }
+        // SEE: cards/_mortgage_card.scss
     }
 
     #section-news {
@@ -331,149 +233,29 @@
 
         .homepage-section__inner {
             display: grid;
-            grid-template-columns: 1.3fr 1fr 1fr;
             grid-column-gap: 30px;
             grid-row-gap: 30px;
-        }
 
-        .news-card {
-            box-shadow: 0 4px 10px rgba(0,0,0,.1);
-            border-radius: 5px;
-            min-height: 190px;
-            position: relative;
-            overflow: hidden;
-
-            a {
-                color: #0baca2;
-                display: block;
-
-                &:hover {
-                    text-decoration: none;
-                }
+            @include media-breakpoint-only(xl) {
+                grid-template-columns: 1.3fr 1fr 1fr;
+            }
+            @include media-breakpoint-down(lg) {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            @include media-breakpoint-down(sm) {
+                grid-template-columns: 1fr;
             }
 
-            &__fixed {
-                grid-column-start: 1;
-                grid-row-start: 1;
-                grid-row-end: 3;
-
-                .news-card__inner {
-                    background-color: transparent;
-                    justify-content: flex-end;
-                    padding-bottom: 30px;
-                }
-
-                .news-card__datetime {
-                    display: none;
-                }
-
-                .news-card__title {
-                    font-size: 1.6rem;
-                    color: white;
-                    text-shadow: 0 0 1px black;
-                }
-
-                &:hover {
-                    .news-card__title {
-                        color: #0baca2;
+            .news-card {
+                &:last-child {
+                    @include media-breakpoint-down(lg) {
+                        display: none;
                     }
                 }
             }
-
-            &__image {
-                background-repeat: no-repeat;
-                background-position: 50%;
-                background-size: cover;
-
-                display: block;
-                width: 100%;
-                height: 100%;
-
-                position: absolute;
-                top: 0;
-                left: 0;
-                z-index: 0;
-            }
-
-            &__inner {
-                background-color: white;
-                position: absolute;
-                top: 0;
-                left: 0;
-
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-
-                padding: 0 90px 0 20px;
-
-                width: 100%;
-                height: 100%;
-                z-index: 2;
-
-                transition: background-color ease-in-out .3s;
-            }
-
-            &__datetime {
-                font-size: .85rem;
-                margin-bottom: 20px;
-            }
-
-            &__title {
-                font-size: 1.2rem;
-                font-weight: 400;
-                margin-bottom: 0;
-            }
-
-            &__green-arr {
-                background-color: #0baca2;
-
-                position: absolute;
-                bottom: 30px;
-                right: 0;
-
-                width: 73px;
-                height: 73px;
-
-                z-index: 2;
-
-                transition: transform .35s ease;
-                transform: translate3d(110px,0,0);
-
-                &::before {
-                    content: "";
-                    position: absolute;
-                    right: 100%;
-                    top: 0;
-                    display: block;
-                    border-color: transparent transparent #0baca2;
-                    border-style: solid;
-                    border-width: 0 0 73px 35px;
-                }
-
-                &.icon-arrow-right-white {
-                    background-repeat: no-repeat;
-                    background-position: 50%;
-                    background-size: 15px;
-                }
-            }
-
-            &:hover {
-                a {
-                    color: white;
-                    text-shadow: 0 0 1px black;
-                }
-
-                .news-card__inner {
-                    background-color: rgba(0, 0, 0, .6);
-                }
-
-                .news-card__green-arr {
-                    transform: translateX(0);
-                    transition: transform .5s ease .1s;
-                }
-            }
         }
+
+        // SEE: cards/_news_card.scss
     }
 
     #section-about {
