@@ -9,7 +9,13 @@
             box-shadow: 0 5px 5px rgba(0,0,0,.1);
 
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+
+            @include media-breakpoint-only(xl) {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            @include media-breakpoint-only(lg) {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         .rf-block {
@@ -28,22 +34,42 @@
         }
 
         &__rooms-block {
+            @include media-breakpoint-only(lg) {
+                order: 3;
+            }
+
             .rf-block__content {
                 display: flex;
                 justify-content: space-between;
             }
         }
 
-        // #realty-filters__square-slider {
-        // }
+        &__square-block {
+            @include media-breakpoint-only(lg) {
+                order: 1;
+            }
+        }
 
-        // &__rooms-price {}
+        &__price-block {
+            @include media-breakpoint-only(lg) {
+                order: 2;
+            }
+        }
 
         &__submit-block {
+            @include media-breakpoint-only(lg) {
+                order: 4;
+            }
             background-color: #515151;
             display: flex;
             align-items: center;
             justify-content: center;
+
+            padding: 15px;
+
+            button {
+                line-height: 1.2;
+            }
         }
 
     }
