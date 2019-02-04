@@ -101,6 +101,9 @@ $main_slider_height: 450px;
 
     @include media-breakpoint-up(lg) {
         .custom-controls-wrap {
+            max-width: 1440px;
+            @include make-container();
+
             .custom-controls {
                 right: 15px;
                 bottom: 47px;
