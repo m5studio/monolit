@@ -138,11 +138,20 @@
 
     #section-flats-types {
         background: linear-gradient(rgba(0,0,0,.2), transparent), #545454;
-        margin-bottom: 100px;
+
+        @include media-breakpoint-only(xl) {
+            margin-bottom: 100px;
+        }
 
         &__inner {
-            padding: 0 15px;
             position: relative;
+
+            @include media-breakpoint-only(xl) {
+                padding: 0 15px;
+            }
+            @include media-breakpoint-down(lg) {
+                padding: 0 15px 30px;
+            }
 
             a {
                 transition: all ease-in-out .3s;
@@ -155,7 +164,13 @@
 
         &__top {
             color: white;
-            height: 150px;
+
+            @include media-breakpoint-only(xl) {
+                height: 150px;
+            }
+            @include media-breakpoint-down(lg) {
+                grid-template-columns: repeat(3, 1fr);
+            }
 
             a {
                 font-size: 1.1rem;
@@ -163,6 +178,10 @@
 
                 display: flex;
                 align-items: center;
+
+                @include media-breakpoint-down(sm) {
+                    font-size: .9rem;
+                }
 
                 span.big {
                     font-size: 2.7rem;
@@ -211,14 +230,79 @@
             background-color: white;
             border-radius: 5px;
             box-shadow: 0 8px 8px rgba(0,0,0,.1);
-            height: 150px;
-            padding: 0 15px;
-            overflow: hidden;
+            min-height: 150px;
+            padding: 15px;
 
-            position: absolute;
             left: 15px;
             right: 15px;
-            bottom: -75px;
+
+            display: grid;
+            grid-row-gap: 15px;
+            align-items: center;
+
+            @include media-breakpoint-only(xl) {
+                grid-template-columns: repeat(5, 1fr);
+
+                position: absolute;
+                bottom: -75px;
+            }
+            @include media-breakpoint-only(lg) {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            @include media-breakpoint-only(md) {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            @include media-breakpoint-down(sm) {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .flat-card {
+            display: grid;
+            grid-template-columns: 96px 1fr;
+            grid-column-gap: 10px;
+
+            &__icon {
+                background-repeat: no-repeat;
+                background-position: 50%;
+                background-size: contain;
+
+                display: block;
+                width: 96px;
+                height: 96px;
+            }
+
+            &__content {}
+
+            &__title {
+                margin-bottom: 10px;
+
+                a {
+                    color: black;
+                    font-size: 1.6rem;
+                    font-weight: 700;
+                    line-height: 1.2;
+
+                    &:hover {
+                        color: #0baca2;
+                    }
+                }
+            }
+
+            &__info {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                grid-column-gap: 5px;
+
+                &--block {
+                    font-size: .8rem;
+                }
+
+                &--title {
+                    color: #a6a6a6;
+                    margin-bottom: 5px;
+                }
+            }
         }
     }
 
@@ -357,16 +441,27 @@
 
     #section-compleated-projects {
         cursor: default;
-        height: 256px;
         position: relative;
+
+        @include media-breakpoint-up(lg) {
+            min-height: 256px;
+            height: 256px;
+        }
 
         &__inner {
             background-color: white;
-            box-shadow: 0 4px 10px rgba(0,0,0,.4);
-            height: 384px;
             position: relative;
-            top: -64px;
+            overflow: hidden;
             z-index: 2;
+
+            @include media-breakpoint-up(lg) {
+                box-shadow: 0 4px 10px rgba(0,0,0,.4);
+                height: 384px;
+                top: -64px;
+
+                max-width: 1440px;
+                @include make-container();
+            }
         }
 
         &__title {
