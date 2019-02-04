@@ -283,6 +283,10 @@
                     font-weight: 700;
                     line-height: 1.2;
 
+                    @media (min-width: 1200px) and (max-width: 1420px) {
+                        font-size: 1.1rem;
+                    }
+
                     &:hover {
                         color: #0baca2;
                     }
