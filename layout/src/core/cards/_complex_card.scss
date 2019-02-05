@@ -1,7 +1,8 @@
 .complex-card {
     background-color: white;
-    min-height: 450px;
     box-shadow: 0 4px 4px rgba(0,0,0,.15);
+    min-height: 450px;
+    // overflow: hidden;
 
     a {
         &:focus,
@@ -20,8 +21,83 @@
         background-position: 50% 0;
         background-size: cover;
 
+        background-blend-mode: multiply;
+        transition: background-color .8s ease;
+
         width: 100%;
         height: 256px;
+    }
+
+    &__emerge {
+        overflow: hidden;
+
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+
+        width: 100%;
+        height: 100%;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__emerge-object {
+        font-size: .9rem;
+        transform: translate3d(120%, 0, 0);
+        transition: transform .5s ease;
+        width: 85%;
+
+        &:not(:last-child) {
+            margin-bottom: 10px;
+        }
+    }
+
+    &__emerge-link {
+        color: white;
+
+        display: grid;
+        grid-template-columns: 25px 1fr 1fr 25px;
+        grid-column-gap: 10px;
+
+        &:hover {
+            color: #CCC;
+
+             .complex-card__emerge-arrow {
+                 background-color: rgba(191,255,252,.3);
+                 transform: translate3d(3px,0,0);
+             }
+        }
+    }
+
+    &__emerge-arrow {
+        background-image: url('images/icons/arrow-right-white.svg');
+        background-repeat: no-repeat;
+        background-position: 50%;
+        background-size: auto;
+
+        border: 1px solid white;
+        border-radius: 100%;
+
+        display: flex;
+        width: 25px;
+        height: 25px;
+
+        // margin-left: 10px;
+        transform: translateZ(0);
+        transition: background-color .3s ease,transform .3s ease;
+    }
+
+    &__emerge-title,
+    &__emerge-area-space {
+        text-shadow: 0 0 1px black;
+    }
+
+    &__emerge-area-space {
+        text-align: right;
     }
 
     // Main
@@ -45,7 +121,6 @@
 
         a {
             color: black;
-            // &:hover {}
         }
     }
 
@@ -67,23 +142,26 @@
         display: flex;
         align-items: center;
         justify-content: center;
+
+        .complex-card__flat-types-item {
+            &:not(:last-child) {
+                margin-right: 3px;
+            }
+        }
     }
 
     &__flat-types-item {
+        background-color: white;
         border-radius: 100%;
-        color: #545454;
         border: 1px solid #eaeaea;
+        color: #00998f;
 
         display: flex;
         align-items: center;
         justify-content: center;
 
         font-weight: 700;
-        font-size: 10px;
-
-        padding-bottom: 1px;
-        padding-right: 1px;
-        margin-right: 4px;
+        font-size: .7rem;
 
         width: 25px;
         height: 25px;
@@ -158,6 +236,17 @@
                 background-color: #434343;
                 color: white;
             }
+        }
+    }
+
+    &:hover {
+        .complex-card__img {
+            background-color: #0baca2;
+        }
+
+        .complex-card__emerge-object {
+            transform: translateZ(0);
+            transition: transform .6s ease;
         }
     }
 }
