@@ -46,7 +46,7 @@
     }
 
     &__emerge-object {
-        font-size: .9rem;
+        font-size: .75rem;
         transform: translate3d(120%, 0, 0);
         transition: transform .5s ease;
         width: 85%;
@@ -62,6 +62,7 @@
         display: grid;
         grid-template-columns: 25px 1fr 1fr 25px;
         grid-column-gap: 10px;
+        align-items: center;
 
         transition: color ease-in-out .3s;
 
