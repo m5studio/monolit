@@ -336,7 +336,7 @@ $main_nav_toggle: "#main-navigationToggle";
         &.opened {
             width: 100vw;
             height: 100vh;
-            padding: 10vh 0 0 10vh;
+            padding: 7vh 0 0 10vh;
         }
     }
 }
@@ -344,18 +344,18 @@ $main_nav_toggle: "#main-navigationToggle";
 @include media-breakpoint-down(xs) {
     #{$main_nav} {
         &.opened {
-            padding: 10vh 0 0 5vh;
+            // padding: 7vh 0 0 5vh;
 
             ul.main-nav__list {
                 li.main-nav__item {
                     a.main-nav__link {
-                        font-size: 7vw;
+                        font-size: 6vw;
                     }
 
                     ul.main-nav-submenu__list {
                         li.main-nav-submenu__item {
                             a.main-nav-submenu__link {
-                                font-size: 5vw;
+                                font-size: 4vw;
                             }
                         }
                     }

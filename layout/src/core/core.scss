@@ -58,7 +58,8 @@ body {
 
             a#ht-commercial {
                 @include media-breakpoint-down(xs) {
-                    font-size: .75rem;
+                    font-size: .65rem;
+                    padding: 10px;
                 }
             }
 

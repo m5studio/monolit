@@ -258,6 +258,10 @@ $main_slider_height: 450px;
     .custom-controls-wrap {
         position: relative;
 
+        @include media-breakpoint-down(md) {
+            transform: scale(.8);
+        }
+
         .custom-controls {
             left: 15px;
             bottom: 30px;
@@ -298,7 +302,6 @@ $main_slider_height: 450px;
         @include media-breakpoint-down(md) {
             width: 100%;
             height: 256px;
-
             position: relative;
         }
     }
@@ -336,6 +339,10 @@ $main_slider_height: 450px;
             right: 300px;
             bottom: 30px;
             z-index: -1;
+
+            @include media-breakpoint-down(md) {
+                right: 150px;
+            }
         }
 
         .slide {
