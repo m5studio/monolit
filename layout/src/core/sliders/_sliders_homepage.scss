@@ -258,13 +258,14 @@ $main_slider_height: 450px;
     .custom-controls-wrap {
         position: relative;
 
-        @include media-breakpoint-down(md) {
-            transform: scale(.8);
-        }
-
         .custom-controls {
             left: 15px;
             bottom: 30px;
+
+            @include media-breakpoint-down(md) {
+                transform: scale(.8);
+                left: 0;
+            }
 
             .custom-carousel-indicators {
                 .slider-indicator {
