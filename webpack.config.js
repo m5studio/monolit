@@ -59,6 +59,11 @@ module.exports = {
             }
         ]
     },
+    optimization: {
+        splitChunks: {
+            chunks: 'all'
+        }
+    },
     plugins: [
         new CleanWebpackPlugin([
             './layout/dist/*.*',
