@@ -63,13 +63,19 @@
         grid-template-columns: 25px 1fr 1fr 25px;
         grid-column-gap: 10px;
 
+        transition: color ease-in-out .3s;
+
         &:hover {
             color: #CCC;
 
-             .complex-card__emerge-arrow {
-                 background-color: rgba(191,255,252,.3);
-                 transform: translate3d(3px,0,0);
-             }
+            .complex-card__emerge-arrow {
+                background-color: rgba(191,255,252,.3);
+                transform: translate3d(3px,0,0);
+            }
+
+            .complex-card__flat-types-item {
+                background-color: #bffffc;
+            }
         }
     }
 
@@ -86,7 +92,6 @@
         width: 25px;
         height: 25px;
 
-        // margin-left: 10px;
         transform: translateZ(0);
         transition: background-color .3s ease,transform .3s ease;
     }
@@ -247,6 +252,19 @@
         .complex-card__emerge-object {
             transform: translateZ(0);
             transition: transform .6s ease;
+
+            &:nth-child(2) {
+                transition-delay: .05s;
+            }
+            &:nth-child(3) {
+                transition-delay: .10s;
+            }
+            &:nth-child(4) {
+                transition-delay: .15s;
+            }
+            &:nth-child(5) {
+                transition-delay: .20s;
+            }
         }
     }
 }
