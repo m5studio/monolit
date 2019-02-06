@@ -2,7 +2,7 @@ import "./main.scss"
 
 import "./boostrap/boostrap"
 
-import {stickyMainNav, toggleMainNav} from "./core/main_nav/main_nav"
+import {stickyMainNav, toggleMainNav} from "./menu/main-nav"
 
 import {realtySquareFilters} from "./nouislider/realty_square_filters"
 import {realtyPriceFilters} from "./nouislider/realty_price_filters"
@@ -11,8 +11,10 @@ import {realtyPriceFilters} from "./nouislider/realty_price_filters"
 $(document).ready(function() {
     toggleMainNav()
 
-    realtySquareFilters()
-    realtyPriceFilters()
+    if ( $('#section-realty-filters').length ) {
+        realtySquareFilters()
+        realtyPriceFilters()
+    }
 })
 
 

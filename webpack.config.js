@@ -7,6 +7,7 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
 
 module.exports = {
+    mode: 'production',
     entry: './layout/src/main.js',
     output: {
         filename: 'js/[name].js',
@@ -104,9 +105,9 @@ module.exports = {
             filename: 'html/homepage.html',
             template: './layout/src/html/homepage.html'
         }),
-        // new HtmlWebpackPlugin({
-        //     filename: 'html/about.html',
-        //     template: './layout/src/html/about.html'
-        // }),
+        new HtmlWebpackPlugin({
+            filename: 'html/complex.html',
+            template: './layout/src/html/complex.html'
+        }),
     ]
 }

@@ -1,4 +1,23 @@
+// Bootstrap 4
 @import "./boostrap/bootstrap";
-@import "./icons/icons";
+
 @import "./core/core";
 @import "./nouislider/nouislider";
+
+// Menus
+@import "./menu/main-nav";
+
+// Sections
+@import "./sections/common-section";
+@import "./sections/section-about";
+@import "./sections/section-compleated-projects";
+@import "./sections/section-complex-list";
+@import "./sections/section-flats-types";
+@import "./sections/section-mortgage";
+@import "./sections/section-news";
+@import "./sections/section-realty-filters";
+
+// Cards
+@import "./cards/complex_card";
+@import "./cards/mortgage_card";
+@import "./cards/news_card";

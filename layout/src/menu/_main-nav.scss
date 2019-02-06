@@ -73,7 +73,6 @@ $main_nav_toggle: "#main-navigationToggle";
     #{$main_nav} {
         ul.main-nav__list {
             li.main-nav__item {
-                // border-left: 1px solid #ececec;
                 position: relative;
 
                 &::before {
@@ -132,7 +131,6 @@ $main_nav_toggle: "#main-navigationToggle";
                         display: none;
                         justify-content: center;
                         align-items: center;
-                        // padding: 0 15px;
                         position: absolute;
                         left: 0;
                         width: 100%;
@@ -241,7 +239,10 @@ $main_nav_toggle: "#main-navigationToggle";
                 }
 
                 &.active {
-                    a {}
+                    a.main-nav__link {
+                        background-color: #00998f;
+                        color: white;
+                    }
                 }
             }
         }
