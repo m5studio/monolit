@@ -7,6 +7,8 @@ import {stickyMainNav, toggleMainNav} from "./menu/main-nav"
 import {realtySquareFilters} from "./nouislider/realty_square_filters"
 import {realtyPriceFilters} from "./nouislider/realty_price_filters"
 
+import {familyFiltersToggle} from "./core/family-filters-toggle"
+
 
 $(document).ready(function() {
     toggleMainNav()
@@ -15,6 +17,9 @@ $(document).ready(function() {
         realtySquareFilters()
         realtyPriceFilters()
     }
+
+    familyFiltersToggle()
+
 })
 
 
