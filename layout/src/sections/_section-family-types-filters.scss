@@ -13,11 +13,12 @@
     }
 
     &__top {
-        background-color: #00998f;
+        // background-color: #00998f;
+        background-image: linear-gradient(to bottom, #00998f, rgba(0, 153, 143, .9));
         border-radius: 40px 7px 0 0;
         cursor: pointer;
         padding: 6px 50px 10px 6px;
-        margin-bottom: -6px;
+        margin-bottom: -1px;
         position: relative;
 
         display: inline-flex;
@@ -66,17 +67,14 @@
     &__inner {
         display: none;
 
-        background-color: rgba(0, 153, 143, .9);
+        background-image: linear-gradient(to top, #00998f, rgba(0, 153, 143, .9));
         border-radius: 0 7px 7px 7px;
         box-shadow: 0 5px 5px rgba(0,0,0,.1);
         color: white;
         padding: 40px 15px;
-
         // display: grid;
         grid-column-gap: 30px;
         grid-row-gap: 30px;
-
-        transition: background-color ease-in-out .3s;
 
         @include media-breakpoint-only(xl) {
             grid-template-columns: repeat(8, 1fr);
@@ -86,10 +84,6 @@
         }
         @include media-breakpoint-down(sm) {
             grid-template-columns: repeat(2, 1fr);
-        }
-
-        &:hover {
-            background-color: #00998f;
         }
 
         .filter_family {
