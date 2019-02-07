@@ -12,6 +12,9 @@
 @import "./menu/main-nav";
 
 // Pages
+@import "./pages/homepage";
+@import "./pages/not-homepage";
+@import "./pages/flats";
 @import "./pages/objects";
 
 // Sections
@@ -19,6 +22,8 @@
 @import "./sections/section-about";
 @import "./sections/section-compleated-projects";
 @import "./sections/section-complex-list";
+@import "./sections/section-family-types-filters";
+@import "./sections/section-flats-list";
 @import "./sections/section-flats-types";
 @import "./sections/section-mortgage";
 @import "./sections/section-news";

@@ -1,0 +1,75 @@
+#section-family-types-filters {
+    color: #EEE;
+    margin-bottom: 30px;
+
+    &__top {
+        background-color: #00998f;
+        border-radius: 40px 7px 0 0;
+        padding: 6px 30px 10px 6px;
+        margin-bottom: -6px;
+
+        display: inline-flex;
+        align-items: center;
+
+        &::before {
+            background-color: white;
+            background-image: url('images/family-types-filters/family-portrait.png');
+            background-repeat: no-repeat;
+            background-position: 50% 100%;
+            background-size: 125%;
+            border-radius: 100%;
+            // border-top: 1px solid;
+
+            content: "";
+            display: block;
+            height: 70px;
+            width: 70px;
+
+            margin-right: 15px;
+        }
+
+        span {
+            cursor: default;
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+    }
+
+    &__inner {
+        background-color: #00998f;
+        border-radius: 0 7px 7px 7px;
+        box-shadow: 0 5px 5px rgba(0,0,0,.1);
+        padding: 40px 15px;
+
+        display: grid;
+        grid-column-gap: 30px;
+        grid-row-gap: 30px;
+
+        @include media-breakpoint-only(xl) {
+            grid-template-columns: repeat(8, 1fr);
+        }
+        @include media-breakpoint-down(lg) {
+            grid-template-columns: repeat(4, 1fr);
+        }
+        @include media-breakpoint-down(sm) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        a {
+            color: white;
+
+            &:focus,
+            &:hover {
+                text-decoration: none;
+            }
+        }
+
+        .filter_family {
+            background-color: white;
+            border-radius: 100%;
+            width: 92px;
+            height: 92px;
+            margin: 0 auto;
+        }
+    }
+}

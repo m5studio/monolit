@@ -74,7 +74,7 @@ module.exports = {
             './layout/dist/js/**/*.*'
         ]),
 
-        // add jQuery to Webpack
+        // Add jQuery to Webpack
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery',
@@ -108,6 +108,10 @@ module.exports = {
         new HtmlWebpackPlugin({
             filename: 'html/objects.html',
             template: './layout/src/html/objects.html'
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'html/flats.html',
+            template: './layout/src/html/flats.html'
         }),
     ]
 }
