@@ -54,7 +54,7 @@
                             </li> -->
                             <li class="main-nav__item active">
                                 <a href="" class="main-nav__link">
-                                    Проекты
+                                    Объекты
                                 </a>
                             </li>
                             <li class="main-nav__item">
@@ -162,11 +162,18 @@
     </header>
 
     <div id="content">
-        <div id="breadcrumbs">
+        <nav id="breadcrumbs">
             <div class="container">
-                <a href="">Главная</a> / <a href="">Объекты в продаже</a>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="">Главная</a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        Объекты в продаже
+                    </li>
+                </ol>
             </div>
-        </div>
+        </nav>
 
         <main id="main">
             <div id="page-title-h1" class="container">
@@ -1498,9 +1505,9 @@
         </main>
 
         <div id="section-compleated-projects">
-            <div id="section-compleated-projects__inner">
+            <!-- <div id="section-compleated-projects__inner"> -->
+            <div id="section-compleated-projects__inner" class="container">
                 <div id="section-compleated-projects__title">14 завершенных проектов</div>
-
                 <div id="compleated-projects-slider" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">

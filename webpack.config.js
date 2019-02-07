@@ -106,8 +106,8 @@ module.exports = {
             template: './layout/src/html/homepage.html'
         }),
         new HtmlWebpackPlugin({
-            filename: 'html/complex.html',
-            template: './layout/src/html/complex.html'
+            filename: 'html/objects.html',
+            template: './layout/src/html/objects.html'
         }),
     ]
 }

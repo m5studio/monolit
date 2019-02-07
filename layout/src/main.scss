@@ -2,10 +2,17 @@
 @import "./boostrap/bootstrap";
 
 @import "./core/core";
-@import "./nouislider/nouislider";
+
+// Cards
+@import "./cards/complex_card";
+@import "./cards/mortgage_card";
+@import "./cards/news_card";
 
 // Menus
 @import "./menu/main-nav";
+
+// Pages
+@import "./pages/objects";
 
 // Sections
 @import "./sections/common-section";
@@ -17,7 +24,8 @@
 @import "./sections/section-news";
 @import "./sections/section-realty-filters";
 
-// Cards
-@import "./cards/complex_card";
-@import "./cards/mortgage_card";
-@import "./cards/news_card";
+// Sliders
+// @import "./sliders/";
+
+// Modules
+@import "./nouislider/nouislider";
