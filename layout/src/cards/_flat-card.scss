@@ -1,1 +1,30 @@
-.flat-card {}
+.flat-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,.1);
+
+    position: relative;
+
+    display: block;
+    width: 322px;
+    height: 404px;
+
+    // transition: box-shadow .3s ease,transform .3s ease;
+
+    // opacity: 1;
+    transform: translateZ(0);
+    transition: opacity .4s ease .1s,
+                transform .6s cubic-bezier(.25,.46,.45,.94) .1s,
+                box-shadow .3s ease;
+
+    &__header {}
+
+    &__img {}
+    
+    &__footer {}
+
+    &:hover {
+        box-shadow: 0 5px 20px rgba(0,0,0,.09);
+        transform: translate3d(0,-4px,0);
+    }
+}
