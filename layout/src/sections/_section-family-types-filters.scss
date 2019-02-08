@@ -99,6 +99,7 @@
                 border-radius: 100%;
                 width: 92px;
                 height: 92px;
+                position: relative;
             }
 
             &__name {
@@ -114,5 +115,43 @@
                 transform: scale(1.1);
             }
         }
+    }
+}
+
+.family-type {
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-size: auto;
+
+    display: block;
+    height: 92px;
+    width: 92px;
+
+    position: absolute;
+    bottom: 13px;
+
+    &.family-young-alone {
+        background-image: url('images/family-types-filters/family-young-alone.svg');
+    }
+    &.family-adult-alone {
+        background-image: url('images/family-types-filters/family-adult-alone.svg');
+    }
+    &.family-young-couple {
+        background-image: url('images/family-types-filters/family-young-couple.svg');
+    }
+    &.family-adult-couple {
+        background-image: url('images/family-types-filters/family-adult-couple.svg');
+    }
+    &.family-parents-with-child {
+        background-image: url('images/family-types-filters/family-parents-with-child.svg');
+    }
+    &.family-with-children {
+        background-image: url('images/family-types-filters/family-with-children.svg');
+    }
+    &.family-with-three-children {
+        background-image: url('images/family-types-filters/family-with-three-children.svg');
+    }
+    &.family-with-children-and-elder {
+        background-image: url('images/family-types-filters/family-with-children-and-elder.svg');
     }
 }
