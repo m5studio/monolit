@@ -27,13 +27,21 @@
         @include media-breakpoint-only(xl) {
             grid-template-columns: repeat(4, 1fr) 320px;
         }
-
+        @include media-breakpoint-only(lg) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        @include media-breakpoint-down(md) {
+            grid-template-columns: repeat(2, 1fr);
+        }
     }
 
     .rf-block {
         display: grid;
         grid-template-columns: 1fr;
+        grid-template-rows: 25px 1fr;
         grid-row-gap: 10px;
+        align-items: center;
+
         padding: 20px 25px;
 
         &__title {
@@ -82,5 +90,4 @@
             line-height: 1.2;
         }
     }
-
 }

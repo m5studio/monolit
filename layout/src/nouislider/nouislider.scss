@@ -76,5 +76,26 @@
             }
         }
     }
+
+    &__select {
+        background: linear-gradient(180deg, rgba(255, 255, 255, .2), rgba(255, 255, 255, 0)), #00998f;
+        border: none;
+        border-radius: 20px;
+        color: white;
+        padding: 10px 20px;
+        margin: 0;
+
+        option {
+            &:disabled {
+                color: black;
+                font-weight: 700;
+            }
+        }
+
+        &:focus {
+            border-radius: 20px 20px 0 0;
+            outline: none;
+        }
+    }
 }
 // END Realty filters styles
