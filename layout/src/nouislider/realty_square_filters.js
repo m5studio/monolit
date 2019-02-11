@@ -34,5 +34,4 @@ function realtySquareFilters() {
     })
 }
 
-
-export {realtySquareFilters};
+export {realtySquareFilters}

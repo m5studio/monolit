@@ -259,11 +259,11 @@
                 <h1><abbr title="Группа Компаний">ГК</abbr> &laquo;Монолит&raquo; &ndash; Мы строим Крым</h1>
             </div>
 
-            <div id="section-realty-filters" class="container">
-                <div id="section-realty-filters__inner-top">
-                    <div id="section-realty-filters__rooms-block" class="rf-block">
-                        <div class="rf-block__title">Комнат</div>
-                        <div class="rf-block__content">
+            <div id="section-realty-homepage-filters" class="container">
+                <div id="section-realty-homepage-filters__inner">
+                    <div id="section-realty-homepage-filters__rooms-block" class="realty-filters-block">
+                        <div class="realty-filters-block__title">Комнат</div>
+                        <div class="realty-filters-block__content">
                             <button type="button" name="" class="circle-button">Ст</button>
                             <button type="button" name="" class="circle-button">1</button>
                             <button type="button" name="" class="circle-button">2</button>
@@ -271,37 +271,33 @@
                             <button type="button" name="" class="circle-button">4+</button>
                         </div>
                     </div>
-                    <div id="section-realty-filters__square-block" class="rf-block realty-filters">
-                        <div class="rf-block__title">Площадь</div>
-                        <div class="rf-block__content">
+                    <div id="section-realty-homepage-filters__square-block" class="realty-filters-block">
+                        <div class="realty-filters-block__title">Площадь</div>
+                        <div class="realty-filters-block__content">
                             <div id="realty-filter__square-slider"></div>
-                            <div class="realty-filters__inputs">
+                            <div class="realty-filters-block__inputs">
                                 <span>от</span>
                                 <input id="realty-filter__square--input-min" class="filter-input" type="number" min="35" max="245" step="1" name="" value="35">
-                                <!-- <input id="realty-filter__square--input-min" class="filter-input" type="text" name="" value="35"> -->
                                 <span>до</span>
                                 <input id="realty-filter__square--input-max" class="filter-input" type="number" min="35" max="245" step="1" name="" value="245">
-                                <!-- <input id="realty-filter__square--input-max" class="filter-input" type="text" name="" value="245"> -->
                                 <span>м<sup>2</sup></span>
                             </div>
                         </div>
                     </div>
-                    <div id="section-realty-filters__price-block" class="rf-block realty-filters">
-                        <div class="rf-block__title">Стоимость</div>
-                        <div class="rf-block__content">
+                    <div id="section-realty-homepage-filters__price-block" class="realty-filters-block">
+                        <div class="realty-filters-block__title">Стоимость</div>
+                        <div class="realty-filters-block__content">
                             <div id="realty-filter__price-slider"></div>
-                            <div class="realty-filters__inputs">
+                            <div class="realty-filters-block__inputs">
                                 <span>от</span>
                                 <input id="realty-filter__price--input-min" class="filter-input" type="number" min="2919000" max="18360000" step="1000" name="" value="">
-                                <!-- <input id="realty-filter__price--input-min" class="filter-input" type="text" name="" value=""> -->
                                 <span>до</span>
                                 <input id="realty-filter__price--input-max" class="filter-input" type="number" min="2919000" max="18360000" step="1000" name="" value="">
-                                <!-- <input id="realty-filter__price--input-max" class="filter-input" type="text" name="" value=""> -->
                                 <span>м<sup>2</sup></span>
                             </div>
                         </div>
                     </div>
-                    <div id="section-realty-filters__submit-block">
+                    <div id="section-realty-homepage-filters__submit-block">
                         <button type="button" name="" class="green-button">
                             Показать <span class="realty-qty">103 квартиры</span>
                         </button>
@@ -1651,21 +1647,21 @@
                         </div>
                     </div>
                     <div id="section-flats-types__bottom">
-                        <div class="flat-card">
-                            <div class="flat-card__icon" style="background-image: url('http://monolit.site/static/images/studio.6031014a5ce2.png');"></div>
-                            <div class="flat-card__content">
-                                <div class="flat-card__title">
+                        <div class="flat-type-card">
+                            <div class="flat-type-card__icon" style="background-image: url('http://monolit.site/static/images/studio.6031014a5ce2.png');"></div>
+                            <div class="flat-type-card__content">
+                                <div class="flat-type-card__title">
                                     <a href="">Студии</a>
                                 </div>
-                                <div class="flat-card__info">
-                                    <div class="flat-card__info--block">
-                                        <div class="flat-card__info--title">Площадь</div>
+                                <div class="flat-type-card__info">
+                                    <div class="flat-type-card__info--block">
+                                        <div class="flat-type-card__info--title">Площадь</div>
                                         <div class="">
                                             от 44.7 до 44.7 м<sup>2</sup>
                                         </div>
                                     </div>
-                                    <div class="flat-card__info--block">
-                                        <div class="flat-card__info--title">Стоимость</div>
+                                    <div class="flat-type-card__info--block">
+                                        <div class="flat-type-card__info--title">Стоимость</div>
                                         <div class="">
                                             от 5.4 млн руб.
                                         </div>
@@ -1673,21 +1669,21 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="flat-card">
-                            <div class="flat-card__icon" style="background-image: url('http://monolit.site/static/images/1room.f3fd59d167cd.png');"></div>
-                            <div class="flat-card__content">
-                                <div class="flat-card__title">
+                        <div class="flat-type-card">
+                            <div class="flat-type-card__icon" style="background-image: url('http://monolit.site/static/images/1room.f3fd59d167cd.png');"></div>
+                            <div class="flat-type-card__content">
+                                <div class="flat-type-card__title">
                                     <a href="">1 комнатные</a>
                                 </div>
-                                <div class="flat-card__info">
-                                    <div class="flat-card__info--block">
-                                        <div class="flat-card__info--title">Площадь</div>
+                                <div class="flat-type-card__info">
+                                    <div class="flat-type-card__info--block">
+                                        <div class="flat-type-card__info--title">Площадь</div>
                                         <div class="">
                                             от 44.7 до 44.7 м<sup>2</sup>
                                         </div>
                                     </div>
-                                    <div class="flat-card__info--block">
-                                        <div class="flat-card__info--title">Стоимость</div>
+                                    <div class="flat-type-card__info--block">
+                                        <div class="flat-type-card__info--title">Стоимость</div>
                                         <div class="">
                                             от 5.4 млн руб.
                                         </div>
@@ -1695,21 +1691,21 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="flat-card">
-                            <div class="flat-card__icon" style="background-image: url('http://monolit.site/static/images/2room.eda257dede73.png');"></div>
-                            <div class="flat-card__content">
-                                <div class="flat-card__title">
+                        <div class="flat-type-card">
+                            <div class="flat-type-card__icon" style="background-image: url('http://monolit.site/static/images/2room.eda257dede73.png');"></div>
+                            <div class="flat-type-card__content">
+                                <div class="flat-type-card__title">
                                     <a href="">2 комнатные</a>
                                 </div>
-                                <div class="flat-card__info">
-                                    <div class="flat-card__info--block">
-                                        <div class="flat-card__info--title">Площадь</div>
+                                <div class="flat-type-card__info">
+                                    <div class="flat-type-card__info--block">
+                                        <div class="flat-type-card__info--title">Площадь</div>
                                         <div class="">
                                             от 44.7 до 44.7 м<sup>2</sup>
                                         </div>
                                     </div>
-                                    <div class="flat-card__info--block">
-                                        <div class="flat-card__info--title">Стоимость</div>
+                                    <div class="flat-type-card__info--block">
+                                        <div class="flat-type-card__info--title">Стоимость</div>
                                         <div class="">
                                             от 5.4 млн руб.
                                         </div>
@@ -1717,21 +1713,21 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="flat-card">
-                            <div class="flat-card__icon" style="background-image: url('http://monolit.site/static/images/3room.1f4982964531.png');"></div>
-                            <div class="flat-card__content">
-                                <div class="flat-card__title">
+                        <div class="flat-type-card">
+                            <div class="flat-type-card__icon" style="background-image: url('http://monolit.site/static/images/3room.1f4982964531.png');"></div>
+                            <div class="flat-type-card__content">
+                                <div class="flat-type-card__title">
                                     <a href="">3 комнатные</a>
                                 </div>
-                                <div class="flat-card__info">
-                                    <div class="flat-card__info--block">
-                                        <div class="flat-card__info--title">Площадь</div>
+                                <div class="flat-type-card__info">
+                                    <div class="flat-type-card__info--block">
+                                        <div class="flat-type-card__info--title">Площадь</div>
                                         <div class="">
                                             от 44.7 до 44.7 м<sup>2</sup>
                                         </div>
                                     </div>
-                                    <div class="flat-card__info--block">
-                                        <div class="flat-card__info--title">Стоимость</div>
+                                    <div class="flat-type-card__info--block">
+                                        <div class="flat-type-card__info--title">Стоимость</div>
                                         <div class="">
                                             от 5.4 млн руб.
                                         </div>
@@ -1739,21 +1735,21 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="flat-card">
-                            <div class="flat-card__icon" style="background-image: url('http://monolit.site/static/images/4room.6dbbe76812db.png');"></div>
-                            <div class="flat-card__content">
-                                <div class="flat-card__title">
+                        <div class="flat-type-card">
+                            <div class="flat-type-card__icon" style="background-image: url('http://monolit.site/static/images/4room.6dbbe76812db.png');"></div>
+                            <div class="flat-type-card__content">
+                                <div class="flat-type-card__title">
                                     <a href="">4 комнатные</a>
                                 </div>
-                                <div class="flat-card__info">
-                                    <div class="flat-card__info--block">
-                                        <div class="flat-card__info--title">Площадь</div>
+                                <div class="flat-type-card__info">
+                                    <div class="flat-type-card__info--block">
+                                        <div class="flat-type-card__info--title">Площадь</div>
                                         <div class="">
                                             от 44.7 до 44.7 м<sup>2</sup>
                                         </div>
                                     </div>
-                                    <div class="flat-card__info--block">
-                                        <div class="flat-card__info--title">Стоимость</div>
+                                    <div class="flat-type-card__info--block">
+                                        <div class="flat-type-card__info--title">Стоимость</div>
                                         <div class="">
                                             от 5.4 млн руб.
                                         </div>

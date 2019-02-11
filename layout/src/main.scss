@@ -6,8 +6,12 @@
 // Cards
 @import "./cards/complex-card";
 @import "./cards/flat-card";
+@import "./cards/flat-type-card";
 @import "./cards/mortgage-card";
 @import "./cards/news-card";
+
+// Filters
+@import "./filters/realty-filters-block";
 
 // Menus
 @import "./menu/main-nav";
@@ -23,12 +27,16 @@
 @import "./sections/section-about";
 @import "./sections/section-compleated-projects";
 @import "./sections/section-complex-list";
-@import "./sections/section-family-types-filters";
 @import "./sections/section-flats-list";
 @import "./sections/section-flats-types";
 @import "./sections/section-mortgage";
 @import "./sections/section-news";
-@import "./sections/section-realty-filters";
+
+// Sections Realty Filters
+@import "./sections/realty-filters/section-family-types-filters";
+// @import "./sections/realty-filters/section-realty-filters";
+@import "./sections/realty-filters/section-realty-flats-filters";
+@import "./sections/realty-filters/section-realty-homepage-filters";
 
 // Sliders
 @import "./sliders/custom-controls";

@@ -250,12 +250,12 @@
                 </div>
             </div>
 
-            <div id="section-realty-filters" class="container">
-                <div id="section-realty-filters__inner">
-                    <div id="section-realty-filters__inner-top">
-                        <div id="section-realty-filters__rooms-block" class="rf-block">
-                            <div class="rf-block__title">Комнат</div>
-                            <div class="rf-block__content">
+            <div id="section-realty-flats-filters" class="container">
+                <div id="section-realty-flats-filters__inner">
+                    <div id="section-realty-flats-filters__inner-top">
+                        <div id="section-realty-flats-filters__rooms-block" class="realty-filters-block">
+                            <div class="realty-filters-block__title">Комнат</div>
+                            <div class="realty-filters-block__content">
                                 <button type="button" name="" class="circle-button">Ст</button>
                                 <button type="button" name="" class="circle-button">1</button>
                                 <button type="button" name="" class="circle-button">2</button>
@@ -263,47 +263,38 @@
                                 <button type="button" name="" class="circle-button">4+</button>
                             </div>
                         </div>
-                        <div id="section-realty-filters__square-block" class="rf-block realty-filters">
-                            <div class="rf-block__title">Площадь</div>
-                            <div class="rf-block__content">
+                        <div id="section-realty-flats-filters__square-block" class="realty-filters-block">
+                            <div class="realty-filters-block__title">Площадь</div>
+                            <div class="realty-filters-block__content">
                                 <div id="realty-filter__square-slider"></div>
-                                <div class="realty-filters__inputs">
+                                <div class="realty-filters-block__inputs">
                                     <span>от</span>
                                     <input id="realty-filter__square--input-min" class="filter-input" type="number" min="35" max="245" step="1" name="" value="35">
-                                    <!-- <input id="realty-filter__square--input-min" class="filter-input" type="text" name="" value="35"> -->
                                     <span>до</span>
                                     <input id="realty-filter__square--input-max" class="filter-input" type="number" min="35" max="245" step="1" name="" value="245">
-                                    <!-- <input id="realty-filter__square--input-max" class="filter-input" type="text" name="" value="245"> -->
                                     <span>м<sup>2</sup></span>
                                 </div>
                             </div>
                         </div>
-                        <div id="section-realty-filters__price-block" class="rf-block realty-filters">
-                            <div class="rf-block__title">Стоимость</div>
-                            <div class="rf-block__content">
+                        <div id="section-realty-flats-filters__price-block" class="realty-filters-block">
+                            <div class="realty-filters-block__title">Стоимость</div>
+                            <div class="realty-filters-block__content">
                                 <div id="realty-filter__price-slider"></div>
-                                <div class="realty-filters__inputs">
+                                <div class="realty-filters-block__inputs">
                                     <span>от</span>
                                     <input id="realty-filter__price--input-min" class="filter-input" type="number" min="2919000" max="18360000" step="1000" name="" value="">
-                                    <!-- <input id="realty-filter__price--input-min" class="filter-input" type="text" name="" value=""> -->
                                     <span>до</span>
                                     <input id="realty-filter__price--input-max" class="filter-input" type="number" min="2919000" max="18360000" step="1000" name="" value="">
-                                    <!-- <input id="realty-filter__price--input-max" class="filter-input" type="text" name="" value=""> -->
                                     <span>м<sup>2</sup></span>
                                 </div>
                             </div>
                         </div>
-                        <div id="section-realty-filters__submit-block">
-                            <button type="button" name="" class="green-button">
-                                Показать <span class="realty-qty">103 квартиры</span>
-                            </button>
-                        </div>
                     </div>
-                    <div id="section-realty-filters__inner-bottom">
-                        <div class="rf-block">
-                            <div class="rf-block__title">Комплекс</div>
-                            <div class="rf-block__content">
-                                <select class="realty-filters__select">
+                    <div id="section-realty-flats-filters__inner-bottom">
+                        <div class="realty-filters-block">
+                            <div class="realty-filters-block__title">Комплекс</div>
+                            <div class="realty-filters-block__content">
+                                <select class="realty-filters-block__select">
                                     <option selected>Все комплексы</option>
                                     <option>Лаванда</option>
                                     <option>Таврический</option>
@@ -316,10 +307,17 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="rf-block">
-                            <div class="rf-block__title">Секция</div>
-                            <div class="rf-block__content">
-                                <select class="realty-filters__select">
+                        <div class="realty-filters-block">
+                            <div class="realty-filters-block__title">Секция</div>
+                            <div class="realty-filters-block__content">
+                                <select class="realty-filters-block__select">
+                                    <option selected>Все секции</option>
+                                    <option disabled>Лаванда</option>
+                                    <option>Секция 1</option>
+                                    <option>Секция 2</option>
+                                    <option>Секция 3</option>
+                                </select>
+                                <!-- <select class="realty-filters-block__select">
                                     <option selected>Все секции</option>
                                     <option disabled>Лаванда</option>
                                     <option>Секция 1</option>
@@ -353,13 +351,13 @@
                                     <option>Секция 1</option>
                                     <option>Секция 2</option>
                                     <option>Секция 3</option>
-                                </select>
+                                </select> -->
                             </div>
                         </div>
-                        <div class="rf-block">
-                            <div class="rf-block__title">Город</div>
-                            <div class="rf-block__content">
-                                <select class="realty-filters__select">
+                        <div class="realty-filters-block">
+                            <div class="realty-filters-block__title">Город</div>
+                            <div class="realty-filters-block__content">
+                                <select class="realty-filters-block__select">
                                     <option selected>Все города</option>
                                     <option>Симферополь</option>
                                     <option>Ялта</option>
@@ -368,10 +366,10 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="rf-block">
-                            <div class="rf-block__title">Год сдачи</div>
-                            <div class="rf-block__content">
-                                <select class="realty-filters__select">
+                        <div class="realty-filters-block">
+                            <div class="realty-filters-block__title">Год сдачи</div>
+                            <div class="realty-filters-block__content">
+                                <select class="realty-filters-block__select">
                                     <option selected>Все года</option>
                                     <option>Сдан</option>
                                     <option>2019</option>
@@ -380,11 +378,11 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="rf-block realty-filters">
-                            <div class="rf-block__title">Этаж</div>
-                            <div class="rf-block__content">
+                        <div class="realty-filters-block">
+                            <div class="realty-filters-block__title">Этаж</div>
+                            <div class="realty-filters-block__content">
                                 <div id="realty-filter__floor-slider"></div>
-                                <div class="realty-filters__inputs">
+                                <div class="realty-filters-block__inputs">
                                     <span>от</span>
                                     <input id="realty-filter__floor--input-min" class="filter-input" type="number" min="2" max="17" step="1" name="" value="2">
                                     <span>до</span>
@@ -393,6 +391,11 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div id="section-realty-flats-filters__bottom">
+                    <button type="button" name="" class="green-button">
+                        Показать <span class="realty-qty">103 квартиры</span>
+                    </button>
                 </div>
             </div>
 
