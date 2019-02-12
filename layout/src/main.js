@@ -11,6 +11,8 @@ import {realtyFloorFilters} from "./nouislider/realty_floor_filters"
 
 import {familyFiltersToggle} from "./filters/family-filters-toggle"
 
+// Scroll to Top
+import {scrollToTop} from "./scroll-to-top/scroll-to-top"
 
 $(document).ready(function() {
     toggleMainNav()
@@ -26,9 +28,9 @@ $(document).ready(function() {
         realtyPriceFilters()
         realtyFloorFilters()
     }
-
+    
     familyFiltersToggle()
-
+    scrollToTop()
 })
 
 

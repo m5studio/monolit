@@ -1,0 +1,21 @@
+#scroll-to-top {
+    background-image: url('images/scroll-top-arrow-green.svg');
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: contain;
+
+    background-color: #1F1;
+    display: block;
+    width: 128px;
+    height: 128px;
+
+    position: fixed;
+    left: 15px;
+    bottom: 15px;
+
+    text-indent: -9999px;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
