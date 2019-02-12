@@ -1,14 +1,22 @@
 function scrollToTop() {
-    $('#footer').append('<div id="scroll-to-top">Наверх страницы</div>')
+    const scrollToTopName = 'scroll-to-top'
+    const scrollToTopId = '#'+scrollToTopName
 
-    $('#scroll-to-top').click(() => {
-        $('html, body').animate({scrollTop: 0}, 800)
+    const pxFromTop = 500
+
+    $('#footer').append('<div id="'+scrollToTopName+'">Наверх страницы</div>')
+    $(scrollToTopId).hide()
+
+    $(scrollToTopId).click(() => {
+        $('html, body').animate({scrollTop: 0}, 600)
     })
 
     $(window).scroll(function() {
-    // $(window).scroll(() => {
-        console.log( $(window).scrollTop() )
-        // console.log( $(this).scrollTop() )
+        if ( $(this).scrollTop() > pxFromTop ) {
+            $(scrollToTopId).fadeIn()
+        } else {
+            $(scrollToTopId).fadeOut()
+        }
     })
 }
 

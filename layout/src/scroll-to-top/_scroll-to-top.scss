@@ -15,6 +15,10 @@
 
     text-indent: -9999px;
 
+    @include media-breakpoint-down(md) {
+        display: none;
+    }
+
     &:hover {
         cursor: pointer;
     }
