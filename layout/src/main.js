@@ -28,9 +28,22 @@ $(document).ready(function() {
         realtyPriceFilters()
         realtyFloorFilters()
     }
-    
+
     familyFiltersToggle()
     scrollToTop()
+
+    // TODO: reset filter btn
+    if ( $('#section-realty-flats-filters').length ) {
+        $('#section-realty-flats-filters').prepend('<div id="filter-reset-button"><button type="button" name="" class="green-button">Сбросить фильтры</button></div>')
+        $('#filter-reset-button').hide()
+    }
+
+    $('#section-realty-flats-filters').on('click', () => {
+        // if ( $('#filter-reset-button').length === 0 ) {
+        if ( $('#filter-reset-button').length ) {
+            $('#filter-reset-button').fadeIn('slow')
+        }
+    })
 })
 
 
