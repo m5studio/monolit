@@ -1,6 +1,6 @@
 #section-realty-flats-filters {
     cursor: default;
-    margin-bottom: 30px;
+    margin-bottom: 60px;
 
     &__inner {
         border-radius: 5px;
@@ -36,7 +36,11 @@
 
     &__bottom {
         text-align: center;
-        margin-top: 50px;
+        margin-top: 30px;
+
+        .green-button {
+            font-size: 1.2rem;
+        }
     }
 
     &__rooms-block {

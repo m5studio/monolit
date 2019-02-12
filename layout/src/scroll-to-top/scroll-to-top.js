@@ -8,7 +8,7 @@ function scrollToTop() {
     $(scrollToTopId).hide()
 
     $(scrollToTopId).click(() => {
-        $('html, body').animate({scrollTop: 0}, 600)
+        $('html, body').animate({scrollTop: 0}, 500)
     })
 
     $(window).scroll(function() {

@@ -2,18 +2,20 @@
     background-image: url('images/scroll-top-arrow-green.svg');
     background-repeat: no-repeat;
     background-position: 50% 50%;
-    background-size: contain;
+    background-size: 70%;
 
-    background-color: #1F1;
     display: block;
-    width: 128px;
-    height: 128px;
+    width: 64px;
+    height: 64px;
 
     position: fixed;
-    left: 15px;
-    bottom: 15px;
+    left: 0;
+    bottom: 30%;
 
     text-indent: -9999px;
+    opacity: .4;
+    z-index: 100;
+    transition: opacity ease-in-out .3s;
 
     @include media-breakpoint-down(md) {
         display: none;
@@ -21,5 +23,6 @@
 
     &:hover {
         cursor: pointer;
+        opacity: .9;
     }
 }
