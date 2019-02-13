@@ -15,6 +15,7 @@ import {familyFiltersReset} from "./filters/family-filters-reset"
 // Scroll to Top
 import {scrollToTop} from "./scroll-to-top/scroll-to-top"
 
+
 $(document).ready(function() {
     toggleMainNav()
 

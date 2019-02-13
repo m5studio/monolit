@@ -113,5 +113,9 @@ module.exports = {
             filename: 'html/flats.html',
             template: './layout/src/html/flats.html'
         }),
+        new HtmlWebpackPlugin({
+            filename: 'html/flats_id.html',
+            template: './layout/src/html/flats_id.html'
+        }),
     ]
 }
