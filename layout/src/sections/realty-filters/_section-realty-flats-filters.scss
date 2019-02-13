@@ -1,6 +1,7 @@
 #section-realty-flats-filters {
     cursor: default;
     margin-bottom: 60px;
+    position: relative;
 
     &__inner {
         border-radius: 5px;
@@ -63,6 +64,34 @@
     &__price-block {
         @include media-breakpoint-only(lg) {
             order: 2;
+        }
+    }
+}
+
+// Filters reset button
+#filter-realty-flats-reset {
+    position: absolute;
+    top: 5px;
+    right: 30px;
+
+    a {
+        display: flex;
+        align-items: center;
+
+        color: black;
+        font-size: .85rem;
+
+        opacity: .65;
+        transition: all ease-in-out .3s;
+
+        .icon {
+            margin-right: 5px;
+        }
+
+        &:hover {
+            color: #0baca2;
+            text-decoration: none;
+            opacity: 1;
         }
     }
 }

@@ -10,12 +10,10 @@
         width: 14px;
         height: 14px;
     }
-
     &-18 {
         width: 18px;
         height: 18px;
     }
-
     &-32 {
         width: 32px;
         height: 32px;
@@ -33,7 +31,7 @@
     }
     &-heart-contour-green {
         background-image: url('images/icons/icon-heart-contour-green.svg');
-    }    
+    }
     &-search-green {
         background-image: url('images/icons/icon-search.svg');
     }
@@ -65,5 +63,9 @@
     }
     &-arrow-left-white {
         background-image: url('images/icons/arrow-left-white.svg');
+    }
+
+    &-cross-green {
+        background-image: url('images/icons/cross-green.svg');
     }
 }
