@@ -190,71 +190,36 @@
         <main id="main">
             <div id="section-flat-page-content" class="container">
                 <div id="section-flat-page-content__left">
-                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                        <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Планировка</a>
-                        <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Этаж</a>
-                        <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-111" role="tab" aria-controls="v-pills-settings" aria-selected="false">Секция</a>
-                        <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Дом</a>
-                        <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Генплан</a>
-                    </div>
-                    <div class="tab-content" id="v-pills-tabContent">
-                        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">1</div>
-                        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">2</div>
-                        <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">3</div>
-                        <div class="tab-pane fade" id="v-pills-111" role="tabpanel" aria-labelledby="v-pills-settings-tab">4</div>
-                        <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">5</div>
-                    </div>
 
-                    <img src="http://monolit.site/media/realty/flat/layout/121_Ke6j0kH.jpg" alt="">
+                    <div class="nav nav-pills" id="flat-pills-tabs" role="tablist">
+                        <a class="nav-link active" id="flat-pills-layout-tab" data-toggle="pill" href="#flat-pills-layout" role="tab" aria-controls="flat-pills-layout" aria-selected="true">Планировка</a>
+                        <a class="nav-link" id="flat-pills-floor-tab" data-toggle="pill" href="#flat-pills-floor" role="tab" aria-controls="flat-pills-floor" aria-selected="false">Этаж</a>
+                        <a class="nav-link" id="flat-pills-section-tab" data-toggle="pill" href="#flat-pills-section" role="tab" aria-controls="flat-pills-section" aria-selected="false">Секция</a>
+                        <a class="nav-link" id="flat-pills-house-tab" data-toggle="pill" href="#flat-pills-house" role="tab" aria-controls="flat-pills-house" aria-selected="false">Дом</a>
+                        <a class="nav-link" id="flat-pills-genplan-tab" data-toggle="pill" href="#flat-pills-genplan" role="tab" aria-controls="flat-pills-genplan" aria-selected="false">Генплан</a>
+                    </div>
+                    <div class="tab-content" id="flat-pills-tabs-content">
+                        <div class="tab-pane fade show active" id="flat-pills-layout" role="tabpanel" aria-labelledby="flat-pills-layout-tab">
+                            <img src="http://monolit.site/media/realty/flat/layout/121_Ke6j0kH.jpg" alt="">
+                        </div>
+                        <div class="tab-pane fade" id="flat-pills-floor" role="tabpanel" aria-labelledby="flat-pills-floor-tab">
+                            Этаж
+                        </div>
+                        <div class="tab-pane fade" id="flat-pills-section" role="tabpanel" aria-labelledby="flat-pills-section-tab">
+                            Секция
+                        </div>
+                        <div class="tab-pane fade" id="flat-pills-house" role="tabpanel" aria-labelledby="flat-pills-house-tab">
+                            Дом
+                        </div>
+                        <div class="tab-pane fade" id="flat-pills-genplan" role="tabpanel" aria-labelledby="flat-pills-genplan-tab">
+                            Генплан
+                        </div>
+                    </div>
                 </div>
 
                 <div id="section-flat-page-content__right">
                     <div id="page-title-h1">
                         <h1>2-комнатная квартира №121 в Семейном квартале "Лаванда"</h1>
-                    </div>
-                </div>
-            </div>
-
-            <div class="container">
-                <div>
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="messages-tab" data-toggle="tab" href="#messages" role="tab" aria-controls="messages" aria-selected="false">Messages</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="false">Settings</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">1</div>
-                        <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">2</div>
-                        <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">3</div>
-                        <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">4</div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-3">
-                        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                            <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
-                            <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</a>
-                            <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
-                            <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
-                        </div>
-                    </div>
-                    <div class="col-9">
-                        <div class="tab-content" id="v-pills-tabContent">
-                            <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">1</div>
-                            <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">2</div>
-                            <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">3</div>
-                            <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">4</div>
-                        </div>
                     </div>
                 </div>
             </div>

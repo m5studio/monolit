@@ -14,4 +14,23 @@
         border-left: 1px solid #EEE;
         padding-left: 30px;
     }
+
+    #flat-pills-tabs {
+        .nav-link {
+            border-radius: 0;
+            color: #333;
+            font-weight: 500;
+
+            &.active {
+                background-color: #0baca2;
+                color: white;
+            }
+        }
+    }
+
+    #flat-pills-tabs-content {
+        .tab-pane {
+            padding-top: 15px;
+        }
+    }
 }

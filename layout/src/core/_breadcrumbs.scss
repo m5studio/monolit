@@ -1,16 +1,7 @@
 #breadcrumbs {
     cursor: default;
-    font-size: .9rem;
+    font-size: .94rem;
     margin-bottom: 30px;
-
-    filter: grayscale(100%);
-    opacity: .6;
-    transition: all ease-in-out .3s;
-
-    &:hover {
-        filter: grayscale(0);
-        opacity: 1;
-    }
 
     ol.breadcrumb {
         list-style: none;
@@ -29,10 +20,15 @@
             }
 
             a {
-                color: #00998f;
+                opacity: .6;
+                filter: grayscale(100%);
+                transition: all ease-in-out .3s;
 
                 &:focus,
                 &:hover {
+                    color: #00998f;
+                    filter: grayscale(0);
+                    opacity: 1;
                     text-decoration: none;
                 }
             }
