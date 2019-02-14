@@ -1,1 +1,17 @@
-#section-flat-page-content {}
+#section-flat-page-content {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+
+    &__left {
+        padding-right: 30px;
+
+        img {
+            max-width: 100%;
+        }
+    }
+
+    &__right {
+        border-left: 1px solid #EEE;
+        padding-left: 30px;
+    }
+}

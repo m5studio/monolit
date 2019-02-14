@@ -1,1 +1,11 @@
-.flat-page {}
+.flat-page {
+    #content {
+        #main {
+            #page-title-h1 {
+                h1 {
+                    font-size: 2.1rem;
+                }
+            }
+        }
+    }
+}
