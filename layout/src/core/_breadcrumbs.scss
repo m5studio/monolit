@@ -3,6 +3,10 @@
     font-size: .94rem;
     margin-bottom: 30px;
 
+    @include media-breakpoint-down(sm) {
+        display: none;
+    }
+
     ol.breadcrumb {
         list-style: none;
         padding: 0;

@@ -1,36 +1,137 @@
 #section-flat-page-content {
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
+
+    @include media-breakpoint-only(xl) {
+        grid-template-columns: 1.5fr 1fr;
+    }
+    @include media-breakpoint-down(lg) {
+        grid-template-columns: 1fr;
+    }
 
     &__left {
-        padding-right: 30px;
-
-        img {
-            max-width: 100%;
+        @include media-breakpoint-only(xl) {
+            padding-right: 30px;
+        }
+        @include media-breakpoint-down(lg) {
+            order: 2;
         }
     }
 
-    &__right {
-        border-left: 1px solid #EEE;
-        padding-left: 30px;
-    }
+    &__tabs {
+        #flat-pills-tabs {
+            &.nav {
+                @include media-breakpoint-down(lg) {
+                    border-bottom: 1px solid #0baca2;
+                    display: grid;
+                    grid-template-columns: repeat(5, 1fr);
+                    text-align: center;
+                }
+            }
 
-    #flat-pills-tabs {
-        .nav-link {
-            border-radius: 0;
-            color: #333;
-            font-weight: 500;
+            .nav-link {
+                border-radius: 0;
+                color: #333;
+                font-weight: 500;
 
-            &.active {
-                background-color: #0baca2;
-                color: white;
+                @include media-breakpoint-only(xl) {
+                    border-right: 1px solid #EEE;
+                }
+                @include media-breakpoint-up(lg) {
+                    font-size: 1.1rem;
+                }
+
+                &:first-child {
+                    @include media-breakpoint-only(xl) {
+                        border-left: 1px solid #EEE;
+                    }
+
+                    &.active {
+                        @include media-breakpoint-only(xl) {
+                            border-left: none;
+                        }
+                    }
+                }
+
+                &.active {
+                    background-color: #0baca2;
+                    color: white;
+
+                    @include media-breakpoint-only(xl) {
+                        border-right: none;
+                    }
+                }
+            }
+        }
+
+        #flat-pills-tabs-content {
+            .tab-pane {
+                padding-top: 15px;
+
+                @include media-breakpoint-only(xl) {
+                    height: 70vh;
+                }
+                @include media-breakpoint-only(lg) {
+                    height: 80vh;
+                }
+                @include media-breakpoint-only(md) {
+                    height: 60vh;
+                }
+                @include media-breakpoint-down(sm) {
+                    height: 45vh;
+                }
+
+                &__img {
+                    background-repeat: no-repeat;
+                    background-position: 50% 50%;
+                    background-size: 85%;
+
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                }
             }
         }
     }
 
-    #flat-pills-tabs-content {
-        .tab-pane {
-            padding-top: 15px;
+    &__right {
+        @include media-breakpoint-only(xl) {
+            border-left: 1px solid #EEE;
+            padding-left: 30px;
+        }
+        @include media-breakpoint-down(lg) {
+            order: 1;
+            margin-bottom: 30px;
+        }
+
+        #flat-id {
+            color: grey;
+            margin-bottom: 10px;
+        }
+
+        #flat-params {
+            border-top: 1px solid #EEE;
+            border-bottom: 1px solid #EEE;
+
+            margin-top: 60px;
+            padding: 25px 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+
+            .flat-params-block {
+                text-align: center;
+
+                &__name {
+                    color: #a6a6a6;
+                    margin-bottom: 7px;
+                }
+
+                &__val {
+                    font-size: 1.3rem;
+                    font-weight: 500;
+                }
+            }
         }
     }
 }
