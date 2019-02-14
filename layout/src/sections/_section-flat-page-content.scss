@@ -34,7 +34,7 @@
                 font-weight: 500;
 
                 @include media-breakpoint-only(xl) {
-                    border-right: 1px solid #EEE;
+                    border-right: 1px solid #e1e1e1;
                 }
                 @include media-breakpoint-up(lg) {
                     font-size: 1.1rem;
@@ -42,7 +42,7 @@
 
                 &:first-child {
                     @include media-breakpoint-only(xl) {
-                        border-left: 1px solid #EEE;
+                        border-left: 1px solid #e1e1e1;
                     }
 
                     &.active {
@@ -83,7 +83,7 @@
                 &__img {
                     background-repeat: no-repeat;
                     background-position: 50% 50%;
-                    background-size: 85%;
+                    background-size: 80%;
 
                     display: block;
                     width: 100%;
@@ -95,7 +95,7 @@
 
     &__right {
         @include media-breakpoint-only(xl) {
-            border-left: 1px solid #EEE;
+            border-left: 1px solid #e1e1e1;
             padding-left: 30px;
         }
         @include media-breakpoint-down(lg) {
@@ -104,20 +104,20 @@
         }
 
         #flat-id {
-            color: grey;
+            color: #a6a6a6;
             margin-bottom: 10px;
         }
 
         #flat-params {
-            border-top: 1px solid #EEE;
-            border-bottom: 1px solid #EEE;
+            border-top: 1px solid #e1e1e1;
+            border-bottom: 1px solid #e1e1e1;
 
             margin-top: 60px;
             padding: 25px 0;
 
             display: flex;
             align-items: center;
-            justify-content: space-around;
+            justify-content: space-between;
 
             .flat-params-block {
                 text-align: center;
@@ -130,6 +130,39 @@
                 &__val {
                     font-size: 1.3rem;
                     font-weight: 500;
+                }
+            }
+        }
+
+        #flat-price {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 25px 0;
+            // margin-top: 30px;
+
+            .flat-price-block {
+                &__name {
+                    color: #a6a6a6;
+                    margin-bottom: 7px;
+                }
+
+                &__val {
+                    font-weight: 700;
+                }
+            }
+
+            &__per-meter {
+                .flat-price-block__val {
+                    font-size: 1.6rem;
+                }
+            }
+
+            &__total {
+                .flat-price-block__val {
+                    color: #0baca2;
+                    font-size: 2rem;
                 }
             }
         }
