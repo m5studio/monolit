@@ -26,6 +26,9 @@
                     grid-template-columns: repeat(5, 1fr);
                     text-align: center;
                 }
+                @include media-breakpoint-down(xs) {
+                    grid-template-columns: repeat(2, 1fr);
+                }
             }
 
             .nav-link {
@@ -128,9 +131,21 @@
                 @extend .flat-content-block;
 
                 display: grid;
-                grid-template-columns: repeat(2, 1fr);
                 grid-row-gap: 15px;
                 align-items: center;
+
+                grid-template-columns: repeat(2, 1fr);
+
+                @include media-breakpoint-down(xs) {
+                    grid-row-gap: 25px;
+                    grid-template-columns: 1fr;
+                }
+            }
+
+            &--empty {
+                @include media-breakpoint-down(xs) {
+                    display: none;
+                }
             }
         }
 
@@ -166,6 +181,15 @@
 
         #flat-price {
             .flat-price-block {
+                @include media-breakpoint-down(xs) {
+                    flex: 0 0 100%;
+                    text-align: center;
+
+                    &:not(:last-child) {
+                        margin-bottom: 30px;
+                    }
+                }
+
                 &__name {
                     color: #a6a6a6;
                     margin-bottom: 7px;
@@ -200,15 +224,22 @@
                 margin: 0 auto;
                 width: 70%;
             }
+            @include media-breakpoint-down(xs) {
+                margin-top: 0;
+            }
 
             .flat-actions-block {
                 display: flex;
 
+                @include media-breakpoint-down(xs) {
+                    justify-content: center;
+                }
+
                 a {
+                    color: black;
+
                     display: flex;
                     align-items: center;
-
-                    color: black;
 
                     &:hover {
                         text-decoration: none;
@@ -218,7 +249,9 @@
                 &--flex-end {
                     @extend .flat-actions-block;
 
-                    justify-content: flex-end;
+                    @include media-breakpoint-up(sm) {
+                        justify-content: flex-end;
+                    }
                 }
 
                 .icon {
