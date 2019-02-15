@@ -220,12 +220,10 @@
 
                 <div id="section-flat-page-content__right">
                     <div id="flat-id">ID: 000007647</div>
-
                     <div id="page-title-h1">
                         <h1>2-комнатная квартира №121 в Семейном квартале "Лаванда"</h1>
                     </div>
-
-                    <div id="flat-params" class="flat-content-block">
+                    <div id="flat-params" class="flat-content-block--flex">
                         <div class="flat-params-block">
                             <div class="flat-params-block__name">Комнат</div>
                             <div class="flat-params-block__val">2</div>
@@ -244,7 +242,7 @@
                         </div>
                     </div>
 
-                    <div id="flat-price" class="flat-content-block">
+                    <div id="flat-price" class="flat-content-block--flex">
                         <div id="flat-price__per-meter" class="flat-price-block">
                             <div class="flat-price-block__name">Стоимость метра</div>
                             <div class="flat-price-block__val">54 900 руб/м<sup>2</sup></div>
@@ -255,8 +253,23 @@
                         </div>
                     </div>
 
-                    <div id="flat-actions">
-                        <a href="" class="green-button">Забронировать квартиру</a>
+                    <div id="flat-actions" class="flat-content-block--grid">
+                        <div id="flat-actions__book-flat">
+                            <button class="green-button">Забронировать квартиру</button>
+                        </div>
+                        <div id="flat-actions__add-to-favorites" class="flat-actions-block--flex-end">
+                            <a href="">
+                                <span class="icon icon-32 icon-heart-contour-green"></span>
+                                Добавить в избранное
+                            </a>
+                        </div>
+                        <div></div>
+                        <div id="flat-actions__print-pdf" class="flat-actions-block--flex-end">
+                            <a href="" target="_blank" title="Откроется в новой вкладке">
+                                <span class="icon icon-32 icon-print-solid-green"></span>
+                                Распечатать в PDF
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
