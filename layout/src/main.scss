@@ -32,11 +32,18 @@
 @import "./sections/section-about";
 @import "./sections/section-compleated-projects";
 @import "./sections/section-complex-list";
-@import "./sections/section-flat-page-content";
 @import "./sections/section-flats-list";
 @import "./sections/section-flats-types";
 @import "./sections/section-mortgage";
 @import "./sections/section-news";
+
+// Sections [flat-page]
+@import "./sections/flat-page/flat-page-section";
+@import "./sections/flat-page/section-flat-page-content";
+@import "./sections/flat-page/section-flat-page-map";
+@import "./sections/flat-page/section-flat-page-mortgage";
+@import "./sections/flat-page/section-flat-page-simular-flats";
+
 
 // Sections Realty Filters
 @import "./sections/realty-filters/section-family-types-filters";
