@@ -122,6 +122,9 @@
                     justify-content: space-around;
                 }
                 @include media-breakpoint-down(xs) {
+                    background-color: #fafafa;
+                    border-top: none !important;
+
                     flex-flow: wrap;
                     justify-content: space-between;
                 }
@@ -169,6 +172,10 @@
                 &__val {
                     font-size: 1.3rem;
                     font-weight: 500;
+
+                    @include media-breakpoint-down(xs) {
+                        font-size: 1.5rem;
+                    }
                 }
             }
         }
@@ -209,7 +216,7 @@
         }
 
         #flat-actions {
-            margin-top: 50px;
+            margin-top: 30px;
 
             @include media-breakpoint-only(xl) {
                 font-size: 1.1rem;
@@ -247,13 +254,6 @@
                         justify-content: flex-end;
                     }
                 }
-
-                &--empty {
-                    @include media-breakpoint-down(xs) {
-                        display: none;
-                    }
-                }
-
                 .icon {
                     margin-right: 10px;
                 }
@@ -262,12 +262,26 @@
             &__book-flat {
                 .green-button {
                     padding: 16px 30px;
+
+                    @media (min-width: 1199px) and (max-width: 1330px) {
+                        padding: 16px;
+                    }
                 }
             }
 
-            &__add-to-favorites {}
+            &__actions-panel {
+                ul {
+                    list-style: none;
+                    margin: 0;
+                    padding: 0;
 
-            &__print-pdf {}
+                    li {
+                        &:not(:last-child) {
+                            margin-bottom: 15px;
+                        }
+                    }
+                }
+            }
         }
     }
 }
