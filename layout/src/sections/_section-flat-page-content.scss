@@ -141,12 +141,6 @@
                     grid-template-columns: 1fr;
                 }
             }
-
-            &--empty {
-                @include media-breakpoint-down(xs) {
-                    display: none;
-                }
-            }
         }
 
         #flat-id {
@@ -251,6 +245,12 @@
 
                     @include media-breakpoint-up(sm) {
                         justify-content: flex-end;
+                    }
+                }
+
+                &--empty {
+                    @include media-breakpoint-down(xs) {
+                        display: none;
                     }
                 }
 
