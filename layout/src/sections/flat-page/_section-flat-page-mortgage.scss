@@ -1,1 +1,91 @@
-#section-flat-page-mortgage {}
+#section-flat-page-mortgage {
+    &__offers {
+        overflow: hidden;
+
+        .mortgage-offer {
+            display: grid;
+            grid-column-gap: 10px;
+            grid-row-gap: 10px;
+
+            align-items: center;
+            text-align: center;
+
+            padding: 15px 0;
+            opacity: .75;
+            transition: all ease-in-out .3s;
+
+            @include media-breakpoint-up(lg) {
+                grid-template-columns: 256px repeat(5, 1fr);
+            }
+            @include media-breakpoint-down(md) {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            @include media-breakpoint-down(xs) {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            &:not(:last-child) {
+                border-bottom: 1px solid #e1e1e1;
+            }
+
+            &__title {
+                color: #a6a6a6;
+                font-size: .8rem;
+            }
+
+            &__val {
+                font-size: 1.1rem;
+            }
+
+            &__bank-logo {
+                .bank-logo {
+                    display: block;
+                    width: 256px;
+                    height: 64px;
+
+                    @include media-breakpoint-down(xs) {
+                        background-size: contain;
+                        width: 100%;
+                        height: 32px;
+                    }
+                }
+            }
+
+            &__descr {
+                color: #00998f;
+                font-size: .9rem;
+                font-weight: 700;
+                line-height: 1.1;
+            }
+
+            &__loan-rate {
+                .mortgage-offer__val {
+                    color: #00998f;
+                    font-size: 1.4rem;
+                    font-weight: 700;
+                }
+            }
+
+            &__first-payment {}
+
+            &__pay-off {}
+
+            &__monthly-payment {
+                .mortgage-offer__val {
+                    color: #00998f;
+                    font-weight: 700;
+                }
+            }
+
+            &:hover {
+                background-color: #EEE;
+                opacity: 1;
+
+                @include media-breakpoint-up(sm) {
+                    transform: scale(1.03);
+                }
+            }
+        }
+    }
+
+}

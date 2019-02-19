@@ -1,15 +1,12 @@
 .bank-logo {
     background-repeat: no-repeat;
     background-position: 50%;
-
-    display: block;
-    min-width: 128px;
+    
     min-height: 32px;
 
     &__rossiya {
         background-image: url('images/bank_logos/bank-rossiya.png');
     }
-
     &__rnkb {
         background-image: url('images/bank_logos/bank-rnkb.png');
     }
