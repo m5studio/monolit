@@ -80,10 +80,6 @@
             &:hover {
                 background-color: #EEE;
                 opacity: 1;
-
-                @include media-breakpoint-up(sm) {
-                    transform: scale(1.03);
-                }
             }
         }
     }
