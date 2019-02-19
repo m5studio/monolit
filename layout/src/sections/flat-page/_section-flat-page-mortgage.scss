@@ -1,7 +1,5 @@
 #section-flat-page-mortgage {
     &__offers {
-        overflow: hidden;
-
         .mortgage-offer {
             display: grid;
             grid-column-gap: 10px;
@@ -37,7 +35,27 @@
                 font-size: 1.1rem;
             }
 
+            &__best-offer {
+                background-color: #00998f;
+                color: white;
+                cursor: default;
+                font-size: .8rem;
+                padding: 1px 6px;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                position: absolute;
+                top: -15px;
+                left: 0;
+
+                transform: rotate(-6deg);
+            }
+
             &__bank-logo {
+                position: relative;
+
                 .bank-logo {
                     display: block;
                     width: 256px;
