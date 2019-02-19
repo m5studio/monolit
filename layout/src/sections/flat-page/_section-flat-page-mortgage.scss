@@ -1,5 +1,9 @@
 #section-flat-page-mortgage {
     &__offers {
+        * {
+            transition: all ease-in-out .3s;
+        }
+
         .mortgage-offer {
             display: grid;
             grid-column-gap: 10px;
@@ -10,7 +14,6 @@
 
             padding: 15px 0;
             opacity: .75;
-            transition: all ease-in-out .3s;
 
             @include media-breakpoint-up(lg) {
                 grid-template-columns: 256px repeat(5, 1fr);
@@ -28,6 +31,7 @@
 
             &__title {
                 color: #a6a6a6;
+                cursor: default;
                 font-size: .8rem;
             }
 
@@ -98,6 +102,10 @@
             &:hover {
                 background-color: #EEE;
                 opacity: 1;
+
+                .mortgage-offer__best-offer {
+                    transform: scale(1.1) rotate(-6deg);
+                }
             }
         }
     }
