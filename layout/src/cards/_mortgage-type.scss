@@ -1,0 +1,30 @@
+.mortgage-type {
+    background-color: #18a29b;
+    box-shadow: 0 4px 8px rgba(0,0,0,.15);
+    border-radius: 5px;
+
+    display: flex;
+    align-items: center;
+
+    transition: all ease .3s;
+
+    a {
+        display: block;
+        color: white;
+        font-size: 2.3rem;
+        font-weight: 700;
+        line-height: 1.2;
+        
+        padding: 40px 20px;
+
+        &:focus,
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    &:hover {
+        box-shadow: 0 5px 20px rgba(0,0,0,.09);
+        transform: translate3d(0,-4px,0);
+    }
+}

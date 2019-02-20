@@ -8,6 +8,7 @@
 @import "./cards/flat-card";
 @import "./cards/flat-type-card";
 @import "./cards/mortgage-card";
+@import "./cards/mortgage-type";
 @import "./cards/news-card";
 
 // Filters
@@ -35,7 +36,6 @@
 @import "./sections/section-complex-list";
 @import "./sections/section-flats-list";
 @import "./sections/section-flats-types";
-@import "./sections/section-mortgage";
 @import "./sections/section-news";
 
 // Sections [flat-page]
@@ -44,6 +44,10 @@
 @import "./sections/flat-page/section-flat-page-map";
 @import "./sections/flat-page/section-flat-page-mortgage";
 @import "./sections/flat-page/section-flat-page-simular-flats";
+
+// Sections [mortgage]
+@import "./sections/mortgage/section-mortgage-types";
+@import "./sections/mortgage/section-mortgage";
 
 
 // Sections Realty Filters
