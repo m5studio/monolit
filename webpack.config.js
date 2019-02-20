@@ -105,10 +105,19 @@ module.exports = {
             filename: 'html/homepage.html',
             template: './layout/src/html/homepage.html'
         }),
+
+        // Objects
         new HtmlWebpackPlugin({
             filename: 'html/objects.html',
             template: './layout/src/html/objects.html'
         }),
+        // TODO:
+        // new HtmlWebpackPlugin({
+        //     filename: 'html/objects_name.html',
+        //     template: './layout/src/html/objects_name.html'
+        // }),
+
+        // Flats
         new HtmlWebpackPlugin({
             filename: 'html/flats.html',
             template: './layout/src/html/flats.html'
@@ -116,6 +125,12 @@ module.exports = {
         new HtmlWebpackPlugin({
             filename: 'html/flats_id.html',
             template: './layout/src/html/flats_id.html'
+        }),
+
+        // Mortgage
+        new HtmlWebpackPlugin({
+            filename: 'html/mortgage.html',
+            template: './layout/src/html/mortgage.html'
         }),
     ]
 }

@@ -53,9 +53,8 @@
                 justify-content: center;
 
                 position: absolute;
-                top: -15px;
+                top: -20px;
                 left: 0;
-                transform: rotate(-6deg);
 
                 @include media-breakpoint-down(md) {
                     font-size: .75rem;
@@ -116,4 +115,9 @@
         }
     }
 
+    &__request {
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+    }
 }
