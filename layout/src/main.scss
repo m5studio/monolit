@@ -31,13 +31,13 @@
 @import "./scroll-to-top/scroll-to-top";
 
 // Sections
-@import "./sections/common-section";
 @import "./sections/section-about";
 @import "./sections/section-compleated-projects";
-@import "./sections/section-complex-list";
 @import "./sections/section-flats-list";
 @import "./sections/section-flats-types";
 @import "./sections/section-news";
+@import "./sections/section-objects-list";
+@import "./sections/common-section";
 
 // Sections [flat-page]
 @import "./sections/flat-page/flat-page-section";
@@ -47,8 +47,7 @@
 @import "./sections/flat-page/section-flat-page-simular-flats";
 
 // Sections [mortgage]
-@import "./sections/mortgage/section-mortgage-military-banks";
-@import "./sections/mortgage/section-mortgage-military-objects";
+// @import "./sections/mortgage/section-mortgage-military-banks";
 @import "./sections/mortgage/section-mortgage-military";
 @import "./sections/mortgage/section-mortgage-types";
 @import "./sections/mortgage/section-mortgage";
