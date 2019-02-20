@@ -1,0 +1,12 @@
+.mortgage-military {
+    #content {
+        background-image: url('images/mortgage/mortgage-bg-military.png');
+        background-repeat: no-repeat;
+        background-position: 90% 0;
+        background-size: auto 30vh;
+
+        @include media-breakpoint-down(sm) {
+            background-size: contain;
+        }
+    }
+}
