@@ -1,0 +1,52 @@
+#section-mortgage-mother-cases {
+    &__inner {
+        display: grid;
+        grid-column-gap: 50px;
+        grid-row-gap: 50px;
+
+        @include media-breakpoint-up(lg) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        @include media-breakpoint-down(lg) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        @include media-breakpoint-down(sm) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__important {
+        font-size: 1.7rem;
+        margin: 60px auto 50px;
+        width: 50%;
+        text-transform: uppercase;
+
+        display: grid;
+        grid-template-columns: 128px 1fr;
+        grid-column-gap: 30px;
+        align-items: center;
+
+        @include media-breakpoint-down(md) {
+            width: 70%;
+        }
+
+        &--icon {
+            border: 1px solid #f74d4d;
+            border-radius: 50%;
+            color: #f74d4d;
+            cursor: default;
+            font-weight: 700;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 128px;
+            height: 128px;
+        }
+
+        &--text {
+            font-size: 1.4rem;
+        }
+    }
+}

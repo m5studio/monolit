@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 
 module.exports = {
@@ -67,11 +68,20 @@ module.exports = {
     },
     plugins: [
         new CleanWebpackPlugin([
-            './layout/dist/*.*',
+            // instead clenning inner folders, delete entire dist
+            // './layout/dist/',
+
+            './layout/dist/**/*.*',
             './layout/dist/css/**/*.*',
             './layout/dist/html/**/*.*',
             './layout/dist/images/*.*',
             './layout/dist/js/**/*.*'
+        // ], { 'watch': true }),
+        ]),
+
+        // Copy favicons
+        new CopyWebpackPlugin([
+            {from:'./layout/src/images/favicons', to:'images/favicons'}
         ]),
 
         // Add jQuery to Webpack
