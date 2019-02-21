@@ -4,12 +4,15 @@
     min-height: 450px;
 
     @include media-breakpoint-down(sm) {
-        width: 386px;
-        margin: 0 auto;
+        width: 85%;
+        justify-self: center;
 
         .object-card__city {
             width: 45%;
         }
+    }
+    @include media-breakpoint-down(xs) {
+        width: 100%;
     }
 
     a {

@@ -268,6 +268,9 @@ body {
                 @include media-breakpoint-down(md) {
                     text-align: center;
                 }
+                @include media-breakpoint-down(sm) {
+                    font-size: 5vh;
+                }
 
                 &::after {
                     background-color: #00998f;

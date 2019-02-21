@@ -4,11 +4,11 @@
     max-width: 320px;
     width: 100%;
     min-height: 450px;
-    margin: 0 auto;
     padding: 40px 20px;
     text-align: center;
 
     transition: transform ease .3s;
+    justify-self: center;
 
     .icon {
         height: 64px;
