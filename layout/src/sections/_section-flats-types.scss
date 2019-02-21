@@ -63,6 +63,13 @@
         align-items: center;
         height: 75px;
 
+        .sft-params-request,
+        .sft-see-all {
+            @include media-breakpoint-down(xs) {
+                display: none;
+            }
+        }
+
         .icon {
             background-position: 50%;
             background-size: 7px auto;
