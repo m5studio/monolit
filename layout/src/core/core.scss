@@ -22,7 +22,6 @@ body {
         font-size: .9rem;
 
         &--inner {
-            height: 40px;
             display: grid;
 
             @include media-breakpoint-up(md) {
@@ -30,6 +29,13 @@ body {
             }
             @include media-breakpoint-down(sm) {
                 grid-template-columns: repeat(2, 1fr);
+            }
+            @include media-breakpoint-up(sm) {
+                height: 40px;
+            }
+            @include media-breakpoint-down(xs) {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(2, 40px);
             }
 
             a {
@@ -49,8 +55,8 @@ body {
 
             a#ht-commercial {
                 @include media-breakpoint-down(xs) {
-                    font-size: .65rem;
-                    padding: 10px;
+                    padding: 15px;
+                    justify-self: center;
                 }
             }
 
@@ -135,6 +141,9 @@ body {
             @include media-breakpoint-down(lg) {
                 grid-template-columns: 250px 1fr 70px;
             }
+            @include media-breakpoint-down(sm) {
+                grid-template-columns: 210px 1fr 70px;
+            }
 
             a {
                 &:focus,
@@ -149,6 +158,10 @@ body {
                 background-position: 0 50%;
                 background-size: 204px 40px;
                 text-indent: -9999px;
+
+                @include media-breakpoint-down(xs) {
+                    background-size: 100% 40px;
+                }
 
                 &:focus,
                 &:hover {
