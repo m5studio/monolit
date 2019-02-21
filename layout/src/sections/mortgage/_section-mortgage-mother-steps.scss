@@ -1,0 +1,11 @@
+#section-mortgage-mother-steps{
+    &__inner {
+        display: grid;
+        grid-column-gap: 30px;
+        grid-row-gap: 30px;
+
+        @include media-breakpoint-up(lg) {
+            grid-template-columns: repeat(5, 1fr);
+        }
+    }
+}

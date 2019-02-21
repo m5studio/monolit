@@ -1,4 +1,7 @@
 #section-mortgage-mother-cases {
+    background-image: linear-gradient(to top, transparent, #EEE, transparent);
+    background-repeat: no-repeat;
+
     &__inner {
         display: grid;
         grid-column-gap: 50px;
@@ -17,7 +20,7 @@
 
     &__important {
         font-size: 1.7rem;
-        margin: 60px auto 50px;
+        margin: 60px auto 0;
         width: 50%;
         text-transform: uppercase;
 
