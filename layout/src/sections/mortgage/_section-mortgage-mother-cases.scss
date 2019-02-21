@@ -32,6 +32,9 @@
         @include media-breakpoint-down(md) {
             width: 70%;
         }
+        @include media-breakpoint-down(sm) {
+            grid-template-columns: 1fr;
+        }
 
         &--icon {
             border: 1px solid #f74d4d;
@@ -46,10 +49,20 @@
 
             width: 128px;
             height: 128px;
+
+            @include media-breakpoint-down(sm) {
+                justify-self: center;
+                margin-bottom: 30px;
+            }
         }
 
         &--text {
             font-size: 1.4rem;
+
+            @include media-breakpoint-down(sm) {
+                font-size: 1.3rem;
+                text-align: center;
+            }
         }
     }
 }
