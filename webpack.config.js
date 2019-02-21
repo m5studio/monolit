@@ -136,5 +136,13 @@ module.exports = {
             filename: 'html/mortgage_military.html',
             template: './layout/src/html/mortgage_military.html'
         }),
+        new HtmlWebpackPlugin({
+            filename: 'html/mortgage_mother.html',
+            template: './layout/src/html/mortgage_mother.html'
+        }),
+        // new HtmlWebpackPlugin({
+        //     filename: 'html/mortgage_corporactive.html',
+        //     template: './layout/src/html/mortgage_corporactive.html'
+        // }),
     ]
 }
