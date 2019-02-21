@@ -52,8 +52,16 @@
             background-repeat: no-repeat;
             background-position: 0 50%;
 
-            display: flex;
+            display: grid;
             align-items: center;
+
+            @include media-breakpoint-up(lg) {
+                grid-template-columns: 1fr 30%;
+            }
+            @include media-breakpoint-down(md) {
+                grid-template-columns: 1fr;
+                grid-row-gap: 10px;
+            }
 
             &__big {
                 font-size: 4.1rem;
@@ -70,8 +78,6 @@
                 font-weight: 500;
                 font-size: 1.2rem;
                 line-height: 1.1;
-                display: block;
-                width: 30%;
             }
         }
     }
