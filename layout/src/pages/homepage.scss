@@ -1,1 +1,13 @@
-.homepage {}
+.homepage {
+    #section-realty-homepage-filters {
+        @include media-breakpoint-down(xs) {
+            display: none;
+        }
+    }
+
+    #section-compleated-projects {
+        @include media-breakpoint-down(xs) {
+            display: none;
+        }
+    }
+}
