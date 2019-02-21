@@ -3,6 +3,11 @@
     line-height: 1.2;
     padding: 30px;
 
+    @include media-breakpoint-down(xs) {
+        max-width: 350px;
+        justify-self: center;
+    }
+
     &__number {
         background-color: white;
         border-radius: 50%;
