@@ -69,14 +69,14 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin([
             // instead clenning inner folders, delete entire dist
+            'layout/dist'
             // './layout/dist/',
 
-            './layout/dist/**/*.*',
-            './layout/dist/css/**/*.*',
-            './layout/dist/html/**/*.*',
-            './layout/dist/images/*.*',
-            './layout/dist/js/**/*.*'
-        // ], { 'watch': true }),
+            // './layout/dist/**/*.*',
+            // './layout/dist/css/**/*.*',
+            // './layout/dist/html/**/*.*',
+            // './layout/dist/images/*.*',
+            // './layout/dist/js/**/*.*'
         ]),
 
         // Copy favicons
@@ -150,9 +150,21 @@ module.exports = {
             filename: 'html/mortgage_mother.html',
             template: './layout/src/html/mortgage_mother.html'
         }),
-        // new HtmlWebpackPlugin({
-        //     filename: 'html/mortgage_corporactive.html',
-        //     template: './layout/src/html/mortgage_corporactive.html'
-        // }),
+        new HtmlWebpackPlugin({
+            filename: 'html/mortgage_corporactive.html',
+            template: './layout/src/html/mortgage_corporactive.html'
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'html/mortgage_corporactive.html',
+            template: './layout/src/html/mortgage_corporactive.html'
+        }),
+
+        // TODO: Company
+
+        // TODO: News
+
+        // TODO: Company->Partners
+
+        // TODO: Contacts
     ]
 }
