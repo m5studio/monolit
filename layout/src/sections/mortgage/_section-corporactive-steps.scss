@@ -1,0 +1,32 @@
+#section-corporactive-steps {
+    background-image: url('images/mortgage/wave.svg');
+    background-repeat: repeat-x;
+    background-position: 50% 70%;
+
+    @include media-breakpoint-up(md) {
+        margin-top: 10vh;
+    }
+
+    &__inner {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+
+        @include media-breakpoint-down(md) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .corporactive-step-item {
+            display: flex;
+            justify-content: center;
+
+            &__circle {
+                background-color: #00998f;
+                border: 10px solid #0baca2;
+                border-radius: 50%;
+                display: block;
+                width: 140px;
+                height: 140px;
+            }
+        }
+    }
+}
