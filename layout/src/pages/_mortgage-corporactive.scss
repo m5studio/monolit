@@ -1,1 +1,45 @@
-.mortgage-corporactive {}
+.mortgage-corporactive {
+    #content {
+        background-image: url('images/mortgage/clouds-and-sun.svg'), url('images/mortgage/green-wave-bg.svg');
+        background-repeat: no-repeat, repeat-x;
+        background-size: 40vh auto, 100% 50vh;
+        background-position: 95% 10%, 0 0;
+
+        min-height: 70vh;
+
+        @include media-breakpoint-down(md) {
+            overflow: hidden;
+        }
+
+        #breadcrumbs {
+            ol.breadcrumb {
+                li.breadcrumb-item {
+                    color: white;
+
+                    a {
+                        color: white;
+                        filter: grayscale(0);
+                    }
+                }
+            }
+        }
+
+        #main {
+            #page-title-h1 {
+                color: white;
+
+                @include media-breakpoint-down(sm) {
+                    margin-top: 5vh;
+                }
+
+                h1 {
+                    text-shadow: 1px 1px 1px black;
+
+                    &::after {
+                        background-color: rgba(255, 255, 255, .4);
+                    }
+                }
+            }
+        }
+    }
+}

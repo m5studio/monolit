@@ -304,6 +304,15 @@ body {
                     text-decoration: none;
                 }
             }
+
+            &__descr {
+                font-size: 1.1rem;
+                margin-top: 15px;
+
+                @include media-breakpoint-down(md) {
+                    text-align: center;
+                }
+            }
         }
     }
 }
