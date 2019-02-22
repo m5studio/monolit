@@ -6,6 +6,9 @@
     @include media-breakpoint-up(lg) {
         margin-top: 10vh;
     }
+    @include media-breakpoint-down(xs) {
+        background-image: none;
+    }
 
     &__inner {
         display: grid;
@@ -48,6 +51,10 @@
 
                 margin: -35px auto 0;
                 width: 62%;
+
+                @include media-breakpoint-down(sm) {
+                    font-size: 1rem;
+                }
             }
         }
     }

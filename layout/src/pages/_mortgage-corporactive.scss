@@ -1,42 +1,48 @@
 .mortgage-corporactive {
     #content {
-        background-image: url('images/mortgage/clouds-and-sun.svg'), url('images/mortgage/green-wave-bg.svg');
-        background-repeat: no-repeat, repeat-x;
-        background-size: 40vh auto, 100% 50vh;
-        background-position: 95% 10%, 0 0;
+        #green-wave-bg {
+            background-image: url('images/mortgage/clouds-and-sun.svg'), url('images/mortgage/green-wave-bg.svg');
+            background-repeat: no-repeat, repeat-x;
+            background-size: 40vh auto, 100% 50vh;
+            background-position: 95% 10%, 0 0;
 
-        min-height: 70vh;
+            padding-top: 30px;
+            margin-top: -30px;
 
-        @include media-breakpoint-down(md) {
-            overflow: hidden;
-        }
+            min-height: 60vh;
 
-        #breadcrumbs {
-            ol.breadcrumb {
-                li.breadcrumb-item {
-                    color: white;
+            @include media-breakpoint-down(md) {
+                background-size: 40vh auto, 100% 60vh;
+                overflow: hidden;
+            }
 
-                    a {
+            #breadcrumbs {
+                ol.breadcrumb {
+                    li.breadcrumb-item {
                         color: white;
-                        filter: grayscale(0);
+
+                        a {
+                            color: white;
+                            filter: grayscale(0);
+                        }
                     }
                 }
             }
-        }
 
-        #main {
-            #page-title-h1 {
-                color: white;
+            #main {
+                #page-title-h1 {
+                    color: white;
 
-                @include media-breakpoint-down(sm) {
-                    margin-top: 5vh;
-                }
+                    @include media-breakpoint-down(sm) {
+                        margin-top: 5vh;
+                    }
 
-                h1 {
-                    text-shadow: 1px 1px 1px black;
+                    h1 {
+                        text-shadow: 1px 1px 1px black;
 
-                    &::after {
-                        background-color: rgba(255, 255, 255, .4);
+                        &::after {
+                            background-color: rgba(255, 255, 255, .4);
+                        }
                     }
                 }
             }

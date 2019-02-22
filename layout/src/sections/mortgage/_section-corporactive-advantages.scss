@@ -1,0 +1,52 @@
+#section-corporactive-advantages {
+    background-color: #ebf5f4;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    margin-bottom: 100px; // !!!
+    text-align: center;
+
+    position: relative;
+
+    &::before {
+        background-image: url('images/mortgage/wave-top.svg');
+        background-repeat: repeat-x;
+        background-size: cover;
+        content: "";
+
+        position: absolute;
+        top: -10px;
+        left: 0;
+
+        width: 100%;
+        height: 30px;
+    }
+
+    &::after {
+        background-image: url('images/mortgage/wave-top.svg');
+        background-repeat: repeat-x;
+        background-size: cover;
+        content: "";
+
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+
+        width: 100%;
+        height: 30px;
+
+        transform: scaleY(-1);
+        filter: FlipV;
+    }
+
+    &__title {
+        h2 {
+            font-weight: 800;
+
+            span {
+                color: #0baca2;
+            }
+        }
+    }
+
+    &__inner {}
+}
