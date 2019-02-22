@@ -1,9 +1,9 @@
 #section-corporactive-steps {
     background-image: url('images/mortgage/wave.svg');
     background-repeat: repeat-x;
-    background-position: 50% 70%;
+    background-position: 50% 57%;
 
-    @include media-breakpoint-up(md) {
+    @include media-breakpoint-up(lg) {
         margin-top: 10vh;
     }
 
@@ -15,17 +15,41 @@
             grid-template-columns: repeat(2, 1fr);
         }
 
+        $circle-size: 150px;
+
         .corporactive-step-item {
-            display: flex;
+            color: white;
+
+            display: grid;
+            grid-template-columns: $circle-size;
+            grid-template-rows: $circle-size 1fr;
             justify-content: center;
 
             &__circle {
                 background-color: #00998f;
                 border: 10px solid #0baca2;
                 border-radius: 50%;
-                display: block;
-                width: 140px;
-                height: 140px;
+
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                width: $circle-size;
+                height: $circle-size;
+            }
+
+            &__number {
+                font-size: 3.6rem;
+                font-weight: 600;
+            }
+
+            &__descr {
+                font-size: 1.1rem;
+                line-height: 1.2;
+
+                margin-top: -30px;
+                text-align: center;
             }
         }
     }
