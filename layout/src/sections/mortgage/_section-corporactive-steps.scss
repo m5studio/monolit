@@ -20,36 +20,34 @@
         .corporactive-step-item {
             color: white;
 
-            display: grid;
-            grid-template-columns: $circle-size;
-            grid-template-rows: $circle-size 1fr;
-            justify-content: center;
-
             &__circle {
                 background-color: #00998f;
                 border: 10px solid #0baca2;
                 border-radius: 50%;
 
                 display: flex;
-                flex-direction: column;
                 justify-content: center;
                 align-items: center;
 
                 width: $circle-size;
                 height: $circle-size;
+
+                margin: 0 auto;
             }
 
             &__number {
                 font-size: 3.6rem;
                 font-weight: 600;
+                text-shadow: 0 0 50px
             }
 
             &__descr {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
                 line-height: 1.2;
-
-                margin-top: -30px;
                 text-align: center;
+
+                margin: -35px auto 0;
+                width: 62%;
             }
         }
     }
