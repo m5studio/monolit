@@ -3,10 +3,10 @@
     padding-bottom: 100px;
 
     .solutions-title {
-        font-size: 1.8rem;
+        font-size: 1.9rem;
         font-weight: 700;
         text-align: center;
-        margin-bottom: 50px;
+        margin-bottom: 60px;
     }
 
     &__solutions {
@@ -40,7 +40,7 @@
                 background-size: auto;
 
                 display: block;
-                width: 256px;
+                width: 100%;
                 height: 256px;
 
                 margin: 0 auto;
@@ -60,7 +60,7 @@
                 font-size: 2.7rem;
                 font-weight: 800;
                 text-transform: uppercase;
-                margin-bottom: 15px;
+                margin-bottom: 10px;
             }
             &__descr {
                 font-size: 1.1rem;
@@ -70,5 +70,44 @@
         }
     }
 
-    &__an-additions {}
+    &__an-additions {
+        display: grid;
+        grid-column-gap: 30px;
+        grid-row-gap: 30px;
+
+        @include media-breakpoint-up(lg) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        @include media-breakpoint-down(lg) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        @include media-breakpoint-down(sm) {
+            grid-template-columns: 1fr;
+        }
+
+        .addition {
+            background-color: #EEE;
+            font-size: 1.3rem;
+            font-weight: 600;
+            line-height: 1.2;
+
+            display: flex;
+            align-items: center;
+            justify-self: center;
+
+            width: 320px;
+            min-height: 200px;
+            padding: 30px;
+
+            text-align: center;
+        }
+    }
+
+    &__callback {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        margin-top: 90px;
+    }
 }
