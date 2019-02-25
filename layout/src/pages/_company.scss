@@ -2,4 +2,10 @@
     background-image: url('images/bg-lightgrey-line.svg');
     background-repeat: no-repeat;
     background-attachment: fixed;
+
+    #section-compleated-projects {
+        @include media-breakpoint-down(md) {
+            display: none;
+        }
+    }
 }

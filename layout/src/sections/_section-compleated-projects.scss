@@ -2,11 +2,6 @@
     cursor: default;
     position: relative;
 
-    @include media-breakpoint-up(lg) {
-        min-height: 256px;
-        height: 256px;
-    }
-
     &__inner {
         background-color: white;
         position: relative;
@@ -15,11 +10,6 @@
 
         @include media-breakpoint-up(lg) {
             box-shadow: 0 4px 10px rgba(0,0,0,.4);
-            height: 384px;
-            top: -64px;
-
-            // max-width: 1440px;
-            // @include make-container();
         }
     }
 

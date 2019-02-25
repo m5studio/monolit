@@ -1,17 +1,20 @@
 .company-section {
+    @include media-breakpoint-down(lg) {
+        margin-bottom: 60px;
+    }
+
     &__title {
         font-size: 2rem;
         font-weight: 700;
     }
 
     &__inner {
-        min-height: 386px;
-
         display: grid;
         grid-column-gap: 70px;
         align-items: center;
 
         @include media-breakpoint-up(lg) {
+            min-height: 386px;
             grid-template-columns: repeat(2, 1fr);
         }
         @include media-breakpoint-down(lg) {
@@ -22,6 +25,10 @@
     &__left {
         font-size: 1.1rem;
 
+        @include media-breakpoint-down(lg) {
+            order: 2;
+        }
+
         p {
             &:last-child {
                 margin-bottom: 0;
@@ -29,7 +36,12 @@
         }
     }
 
-    &__right {}
+    &__right {
+        @include media-breakpoint-down(lg) {
+            margin-bottom: 30px;
+            order: 1;
+        }
+    }
 
     &__img {
         background-repeat: no-repeat;
@@ -38,17 +50,19 @@
 
         display: block;
         width: 100%;
-        height: 100%;
+        // height: 100%;
         min-height: 386px;
     }
 
     &:nth-child(3n) {
-        .company-section__left {
-            order: 2;
-        }
+        @include media-breakpoint-up(lg) {
+            .company-section__left {
+                order: 2;
+            }
 
-        .company-section__right {
-            order: 1;
+            .company-section__right {
+                order: 1;
+            }
         }
     }
 }
