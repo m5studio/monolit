@@ -119,47 +119,75 @@ module.exports = {
         // Objects
         new HtmlWebpackPlugin({
             filename: 'html/objects.html',
-            template: './layout/src/html/objects.html'
+            template: './layout/src/html/objects/objects.html'
         }),
         // TODO:
         // new HtmlWebpackPlugin({
-        //     filename: 'html/objects_name.html',
+        //     filename: 'html/objects/objects_name.html',
         //     template: './layout/src/html/objects_name.html'
         // }),
 
         // Flats
         new HtmlWebpackPlugin({
             filename: 'html/flats.html',
-            template: './layout/src/html/flats.html'
+            template: './layout/src/html/flats/flats.html'
         }),
         new HtmlWebpackPlugin({
             filename: 'html/flats_id.html',
-            template: './layout/src/html/flats_id.html'
+            template: './layout/src/html/flats/flats_id.html'
         }),
 
         // Mortgage
         new HtmlWebpackPlugin({
             filename: 'html/mortgage.html',
-            template: './layout/src/html/mortgage.html'
+            template: './layout/src/html/mortgage/mortgage.html'
         }),
         new HtmlWebpackPlugin({
             filename: 'html/mortgage_military.html',
-            template: './layout/src/html/mortgage_military.html'
+            template: './layout/src/html/mortgage/mortgage_military.html'
         }),
         new HtmlWebpackPlugin({
             filename: 'html/mortgage_mother.html',
-            template: './layout/src/html/mortgage_mother.html'
+            template: './layout/src/html/mortgage/mortgage_mother.html'
         }),
         new HtmlWebpackPlugin({
             filename: 'html/mortgage_corporactive.html',
-            template: './layout/src/html/mortgage_corporactive.html'
+            template: './layout/src/html/mortgage/mortgage_corporactive.html'
         }),
         new HtmlWebpackPlugin({
             filename: 'html/mortgage_corporactive.html',
-            template: './layout/src/html/mortgage_corporactive.html'
+            template: './layout/src/html/mortgage/mortgage_corporactive.html'
         }),
 
-        // TODO: Company
+        // Company
+        new HtmlWebpackPlugin({
+            filename: 'html/company.html',
+            template: './layout/src/html/company/company.html'
+        }),
+        // new HtmlWebpackPlugin({
+        //     filename: 'html/company_mission.html',
+        //     template: './layout/src/html/company/company_mission.html'
+        // }),
+        // new HtmlWebpackPlugin({
+        //     filename: 'html/company_management.html',
+        //     template: './layout/src/html/company/company_management.html'
+        // }),
+        // new HtmlWebpackPlugin({
+        //     filename: 'html/company_structure.html',
+        //     template: './layout/src/html/company/company_structure.html'
+        // }),
+        // new HtmlWebpackPlugin({
+        //     filename: 'html/company_vacancy.html',
+        //     template: './layout/src/html/company/company_vacancy.html'
+        // }),
+        // new HtmlWebpackPlugin({
+        //     filename: 'html/company_responsibility.html',
+        //     template: './layout/src/html/company/company_responsibility.html'
+        // }),
+        // new HtmlWebpackPlugin({
+        //     filename: 'html/company_history.html',
+        //     template: './layout/src/html/company/company_history.html'
+        // }),
 
         // TODO: News
 
