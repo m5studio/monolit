@@ -20,15 +20,19 @@
 // Menus
 @import "./menu/main-nav";
 
+// Pages [company]
+@import "./pages/company/company-mission";
+@import "./pages/company/company";
+
+// Pages [mortgage]
+@import "./pages/mortgage/mortgage-corporactive";
+@import "./pages/mortgage/mortgage-military";
+@import "./pages/mortgage/mortgage-mother";
+@import "./pages/mortgage/mortgage";
+
 // Pages
-@import "./pages/company-mission";
-@import "./pages/company";
 @import "./pages/flat-page";
 @import "./pages/flats";
-@import "./pages/mortgage-corporactive";
-@import "./pages/mortgage-military";
-@import "./pages/mortgage-mother";
-@import "./pages/mortgage";
 @import "./pages/objects";
 @import "./pages/homepage";
 @import "./pages/not-homepage";
@@ -66,8 +70,9 @@
 @import "./sections/mortgage/section-mortgage";
 
 // Sections [company]
-@import "./sections/company/company-section";
 @import "./sections/company/section-company-about";
+@import "./sections/company/section-company-management";
+@import "./sections/company/company-section";
 
 
 // Sections Realty Filters

@@ -168,10 +168,10 @@ module.exports = {
             filename: 'html/company_mission.html',
             template: './layout/src/html/company/company_mission.html'
         }),
-        // new HtmlWebpackPlugin({
-        //     filename: 'html/company_management.html',
-        //     template: './layout/src/html/company/company_management.html'
-        // }),
+        new HtmlWebpackPlugin({
+            filename: 'html/company_management.html',
+            template: './layout/src/html/company/company_management.html'
+        }),
         // new HtmlWebpackPlugin({
         //     filename: 'html/company_structure.html',
         //     template: './layout/src/html/company/company_structure.html'
