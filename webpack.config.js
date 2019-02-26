@@ -172,10 +172,10 @@ module.exports = {
             filename: 'html/company_management.html',
             template: './layout/src/html/company/company_management.html'
         }),
-        // new HtmlWebpackPlugin({
-        //     filename: 'html/company_structure.html',
-        //     template: './layout/src/html/company/company_structure.html'
-        // }),
+        new HtmlWebpackPlugin({
+            filename: 'html/company_structure.html',
+            template: './layout/src/html/company/company_structure.html'
+        }),
         // new HtmlWebpackPlugin({
         //     filename: 'html/company_vacancy.html',
         //     template: './layout/src/html/company/company_vacancy.html'
