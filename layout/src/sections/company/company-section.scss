@@ -28,8 +28,10 @@
 
     &__left {
         font-size: 1.1rem;
-        padding-right: 70px;
 
+        @include media-breakpoint-only(xl) {
+            padding-right: 70px;
+        }
         @include media-breakpoint-down(lg) {
             order: 2;
         }
@@ -60,7 +62,7 @@
     }
 
     &:nth-child(2n+1) {
-        @include media-breakpoint-up(lg) {
+        @include media-breakpoint-only(xl) {
             .company-section__left {
                 order: 2;
                 padding-left: 70px;
