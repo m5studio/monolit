@@ -1,0 +1,9 @@
+#section-vacancies-list {
+    &__inner {
+        .vacancy-card {
+            @include media-breakpoint-up(lg) {
+                width: 60%;
+            }
+        }
+    }
+}

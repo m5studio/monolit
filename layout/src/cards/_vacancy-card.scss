@@ -1,0 +1,40 @@
+.vacancy-card {
+    opacity: .7;
+    transition: opacity ease-in-out .3s;
+
+    &:not(:last-child) {
+        margin-bottom: 15px;
+    }
+
+    &__title-wrap {
+        border-bottom: 1px solid #CCC;
+        padding-bottom: 15px;
+    }
+
+    .collapse-block__link {
+        color: black;
+    }
+
+    &__title {
+        display: block;
+        font-size: 1.4rem;
+        font-weight: 700;
+    }
+
+    &__experience {
+        display: block;
+        margin-top: 10px;
+    }
+
+    &__descr {
+        border-bottom: 1px solid #CCC;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+
+    &:hover {
+        .vacancy-card__title {
+            color: #00998f;
+        }
+    }
+}
