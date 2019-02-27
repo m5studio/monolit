@@ -184,10 +184,10 @@ module.exports = {
             filename: 'html/company_responsibility.html',
             template: './layout/src/html/company/company_responsibility.html'
         }),
-        // new HtmlWebpackPlugin({
-        //     filename: 'html/company_history.html',
-        //     template: './layout/src/html/company/company_history.html'
-        // }),
+        new HtmlWebpackPlugin({
+            filename: 'html/company_history.html',
+            template: './layout/src/html/company/company_history.html'
+        }),
 
         // TODO: News
 
