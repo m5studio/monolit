@@ -270,15 +270,6 @@ body {
 }
 
 #content {
-    a {
-        color: #00998f;
-
-        &:focus,
-        &:hover {
-            color: #005852;
-        }
-    }
-
     #main {
         #page-title-h1 {
             margin-bottom: 30px;
