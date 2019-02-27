@@ -1,9 +1,17 @@
 #section-vacancies-list {
     background-color: #EEE;
 
+    .common-section__title {
+        flex-direction: column;
+        align-items: normal;
+
+        h2 {
+            margin-bottom: 10px;
+        }
+    }
+
     &__inner {
         .vacancy-card {
-            // background-color: white;
             @include media-breakpoint-up(lg) {
                 width: 60%;
             }
