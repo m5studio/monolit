@@ -273,6 +273,7 @@ body {
     a {
         color: #00998f;
 
+        &:focus,
         &:hover {
             color: #005852;
         }
