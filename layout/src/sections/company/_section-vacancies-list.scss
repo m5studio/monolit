@@ -1,6 +1,9 @@
 #section-vacancies-list {
+    background-color: #EEE;
+
     &__inner {
         .vacancy-card {
+            // background-color: white;
             @include media-breakpoint-up(lg) {
                 width: 60%;
             }
