@@ -1,1 +1,26 @@
-.company-vacancy {}
+.company-vacancy {
+    #vacancy-sign-up {
+        margin-top: 40px;
+
+        .green-button {
+            @include media-breakpoint-down(md) {
+                display: block;
+                width: 60%;
+                text-align: center;
+                margin: 0 auto 30px;
+            }
+            @include media-breakpoint-only(sm) {
+                width: 80%;
+            }
+            @include media-breakpoint-down(xs) {
+                width: 90%;
+            }
+
+            &:first-child {
+                @include media-breakpoint-up(lg) {
+                    margin-right: 30px;
+                }
+            }
+        }
+    }
+}
