@@ -3,6 +3,12 @@ $line-color: #AAA;
 .history-card {
     border-left: 1px solid $line-color;
 
+    @include media-breakpoint-up(lg) {
+        display: grid;
+        grid-template-columns: 1fr 3.5fr;
+        align-items: baseline;
+    }
+
     &:not(:last-child) {
         @include media-breakpoint-down(lg) {
             padding-bottom: 30px;
@@ -10,7 +16,20 @@ $line-color: #AAA;
     }
 
     &:last-child {
-        border-bottom: 15px solid $line-color;
+        border-left: none;
+        position: relative;
+
+        &::before {
+            background-image: linear-gradient(to bottom, $line-color, transparent);
+            content: "";
+
+            display: block;
+            width: 1px;
+            height: 100%;
+
+            position: absolute;
+            left: 0;
+        }
     }
 
     &__year {
@@ -18,6 +37,8 @@ $line-color: #AAA;
         font-weight: 300;
         text-align: center;
         position: relative;
+
+        transition: all ease-in-out .3s;
 
         &::before {
             background-image: linear-gradient(to right, $line-color, transparent);
@@ -47,9 +68,16 @@ $line-color: #AAA;
     }
 
     &__wrap {
-        margin-top: 30px;
-        margin-left: 30px;
         margin-bottom: 50px;
+
+        @include media-breakpoint-up(lg) {
+            margin-top: 30px;
+            margin-left: 30px;
+        }
+        @include media-breakpoint-down(lg) {
+            margin-top: 15px;
+            margin-left: 15px;
+        }
     }
 
     &__img {
@@ -67,6 +95,14 @@ $line-color: #AAA;
         p {
             &:last-child {
                 margin-bottom: 0;
+            }
+        }
+    }
+
+    &:hover {
+        .history-card__year {
+            @include media-breakpoint-up(lg) {
+                font-size: 5rem;
             }
         }
     }
