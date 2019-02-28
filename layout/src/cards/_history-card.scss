@@ -1,0 +1,42 @@
+.history-card {
+    &:nth-child(2n) {
+        border-left: 1px solid black;
+        margin-left: -1px;
+
+        .history-card__wrap {
+            margin-left: 15px;
+        }
+    }
+    &:nth-child(2n+1) {
+        border-right: 1px solid black;
+
+        .history-card__wrap {
+            margin-right: 15px;
+        }
+    }
+
+    &__year {
+        border-bottom: 1px solid black;
+        font-size: 4rem;
+        font-weight: 300;
+        text-align: center;
+    }
+
+    &__wrap {
+        margin-top: 15px;
+    }
+
+    &__img {
+        background-repeat: no-repeat;
+        background-position: 0 0;
+        background-size: cover;
+
+        min-height: 386px;
+        margin-bottom: 20px;
+    }
+
+    &__descr {
+        font-weight: 1.1rem;
+        line-height: 1.3;
+    }
+}
