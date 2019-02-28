@@ -5,8 +5,11 @@
         display: grid;
 
         @include media-breakpoint-up(lg) {
-            grid-template-columns: repeat(2, 1fr);
-            width: 65%;
+            // grid-template-columns: repeat(2, 1fr);
+            // width: 65%;
+
+            grid-template-columns: 1fr;
+            width: 50%;
         }
 
         @include media-breakpoint-down(lg) {
