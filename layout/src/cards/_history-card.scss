@@ -1,11 +1,12 @@
+$line-color: #555;
+
 .history-card {
     @include media-breakpoint-down(lg) {
         margin-bottom: 30px;
     }
 
     &:nth-child(2n) {
-        // border-left: 1px solid black;
-        border-left: 1px solid #CCC;
+        border-left: 1px solid $line-color;
         margin-left: -1px;
 
         .history-card__wrap {
@@ -14,7 +15,7 @@
 
         .history-card__year {
             &::before {
-                background-image: linear-gradient(to right, #CCC, transparent);
+                background-image: linear-gradient(to right, $line-color, transparent);
             }
 
             &::after {
@@ -23,8 +24,7 @@
         }
     }
     &:nth-child(2n+1) {
-        // border-right: 1px solid black;
-        border-right: 1px solid #CCC;
+        border-right: 1px solid $line-color;
 
         .history-card__wrap {
             margin-right: 15px;
@@ -32,7 +32,7 @@
 
         .history-card__year {
             &::before {
-                background-image: linear-gradient(to left, #CCC, transparent);
+                background-image: linear-gradient(to left, $line-color, transparent);
             }
 
             &::after {
@@ -42,7 +42,6 @@
     }
 
     &__year {
-        // border-bottom: 1px solid black;
         font-size: 4rem;
         font-weight: 300;
         text-align: center;
