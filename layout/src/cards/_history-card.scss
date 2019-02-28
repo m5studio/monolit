@@ -1,10 +1,20 @@
 .history-card {
+    @include media-breakpoint-down(lg) {
+        margin-bottom: 30px;
+    }
+
     &:nth-child(2n) {
         border-left: 1px solid black;
         margin-left: -1px;
 
         .history-card__wrap {
             margin-left: 15px;
+        }
+
+        .history-card__year {
+            &::after {
+                left: -16px;
+            }
         }
     }
     &:nth-child(2n+1) {
@@ -13,6 +23,12 @@
         .history-card__wrap {
             margin-right: 15px;
         }
+
+        .history-card__year {
+            &::after {
+                right: -16px;
+            }
+        }
     }
 
     &__year {
@@ -20,6 +36,20 @@
         font-size: 4rem;
         font-weight: 300;
         text-align: center;
+
+        position: relative;
+
+        &::after {
+            background-image: linear-gradient(45deg, #18a29b, #25d9d0);
+            border-radius: 100%;
+            box-shadow: -2px 5px 25px rgba(0, 0, 0, .25);
+            content: "";
+            display: block;
+            width: 32px;
+            height: 32px;
+            position: absolute;
+            bottom: -16px;
+        }
     }
 
     &__wrap {

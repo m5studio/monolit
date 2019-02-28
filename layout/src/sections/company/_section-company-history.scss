@@ -3,7 +3,20 @@
 
     &__inner {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        width: 65%;
+
+        @include media-breakpoint-up(lg) {
+            grid-template-columns: repeat(2, 1fr);
+            width: 65%;
+        }
+
+        @include media-breakpoint-down(lg) {
+            grid-template-columns: 1fr;
+        }
+
+        .history-separator {
+            @include media-breakpoint-down(lg) {
+                display: none;
+            }
+        }
     }
 }
