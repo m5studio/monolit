@@ -4,7 +4,7 @@ $line-color: #AAA;
     border-left: 1px solid $line-color;
 
     @include media-breakpoint-down(lg) {
-        margin-bottom: 30px;
+        padding-bottom: 30px;
     }
 
     /*
@@ -87,7 +87,7 @@ $line-color: #AAA;
 
     &__img {
         background-repeat: no-repeat;
-        background-position: 0 0;
+        background-position: 50% 0;
         background-size: cover;
 
         // min-height: 386px;
