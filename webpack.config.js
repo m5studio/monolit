@@ -24,7 +24,6 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                // test: /\.(scss|css)$/,
                 use: [
                     MiniCssExtractPlugin.loader,
                     'css-loader',
@@ -91,10 +90,6 @@ module.exports = {
             'window.jQuery': 'jquery',
             Popper: ['popper.js', 'default'],
             noUiSlider: 'nouislider',
-
-            // fancybox: require("@fancyapps/fancybox")
-            // fancybox: 'fancybox'
-            // fancybox: 'fancybox'
         }),
 
         new MiniCssExtractPlugin({
@@ -192,6 +187,16 @@ module.exports = {
             filename: 'html/company_history.html',
             template: './layout/src/html/company/company_history.html'
         }),
+        // TODO: Tenders
+        // new HtmlWebpackPlugin({
+        //     filename: 'html/company_tenders.html',
+        //     template: './layout/src/html/company/company_tenders.html'
+        // }),
+        // TODO: Partnership
+        // new HtmlWebpackPlugin({
+        //     filename: 'html/company_partnership.html',
+        //     template: './layout/src/html/company/company_partnership.html'
+        // }),
 
         // News
         new HtmlWebpackPlugin({
@@ -203,8 +208,10 @@ module.exports = {
             template: './layout/src/html/news/news_page.html'
         }),
 
-        // TODO: Company->Partners
-
         // TODO: Contacts
+        // new HtmlWebpackPlugin({
+        //     filename: 'html/contacts.html',
+        //     template: './layout/src/html/company/contacts.html'
+        // }),
     ]
 }

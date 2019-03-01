@@ -41,6 +41,8 @@
     }
 
     &:hover {
+        opacity: 1;
+
         .vacancy-card__title {
             color: #00998f;
         }
