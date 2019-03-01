@@ -24,6 +24,7 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
+                // test: /\.(scss|css)$/,
                 use: [
                     MiniCssExtractPlugin.loader,
                     'css-loader',
@@ -70,7 +71,6 @@ module.exports = {
         new CleanWebpackPlugin([
             // instead clenning inner folders, delete entire dist
             'layout/dist'
-            // './layout/dist/',
 
             // './layout/dist/**/*.*',
             // './layout/dist/css/**/*.*',
@@ -90,7 +90,11 @@ module.exports = {
             jQuery: 'jquery',
             'window.jQuery': 'jquery',
             Popper: ['popper.js', 'default'],
-            noUiSlider: 'nouislider'
+            noUiSlider: 'nouislider',
+
+            // fancybox: require("@fancyapps/fancybox")
+            // fancybox: 'fancybox'
+            // fancybox: 'fancybox'
         }),
 
         new MiniCssExtractPlugin({

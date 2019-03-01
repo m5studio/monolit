@@ -16,6 +16,11 @@ import {familyFiltersReset} from "./filters/family-filters-reset"
 import {scrollToTop} from "./scroll-to-top/scroll-to-top"
 
 
+// Fancybox https://fancyapps.com/fancybox/3/
+import "./fancybox/fancybox.scss"
+import '@fancyapps/fancybox'
+
+
 $(document).ready(function() {
     toggleMainNav()
 
