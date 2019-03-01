@@ -13,6 +13,12 @@
 
     .collapse-block__link {
         color: black;
+
+        &[aria-expanded="true"] {
+            .vacancy-card__title {
+                color: #00998f;
+            }
+        }
     }
 
     &__title {
