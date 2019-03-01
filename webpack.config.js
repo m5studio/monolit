@@ -189,15 +189,15 @@ module.exports = {
             template: './layout/src/html/company/company_history.html'
         }),
 
-        // TODO: News
+        // News
         new HtmlWebpackPlugin({
             filename: 'html/news.html',
             template: './layout/src/html/news/news.html'
         }),
-        // new HtmlWebpackPlugin({
-        //     filename: 'html/news.html',
-        //     template: './layout/src/html/news/news_id.html'
-        // }),
+        new HtmlWebpackPlugin({
+            filename: 'html/news_page.html',
+            template: './layout/src/html/news/news_page.html'
+        }),
 
         // TODO: Company->Partners
 

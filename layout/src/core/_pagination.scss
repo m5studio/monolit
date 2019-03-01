@@ -12,6 +12,10 @@
                 color: #00998f;
             }
 
+            &.disabled {
+                opacity: .4;
+            }
+
             &.active {
                 a.page-link {
                     background-color: #00998f;

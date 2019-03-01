@@ -46,6 +46,7 @@
 @import "./pages/mortgage/mortgage";
 
 // Pages [news]
+@import "./pages/news/news-page";
 @import "./pages/news/news";
 
 // Pages [objects]
@@ -83,6 +84,9 @@
 @import "./sections/mortgage/section-mortgage-mother";
 @import "./sections/mortgage/section-mortgage-types";
 @import "./sections/mortgage/section-mortgage";
+
+// Sections [news]
+@import "./sections/news/section-other-news";
 
 // Sections [company]
 @import "./sections/company/section-company-about";
