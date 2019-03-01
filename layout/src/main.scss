@@ -22,6 +22,14 @@
 // Menus
 @import "./menu/main-nav";
 
+// Pages
+@import "./pages/homepage";
+@import "./pages/not-homepage";
+
+// Pages [flats]
+@import "./pages/flats/flat-page";
+@import "./pages/flats/flats";
+
 // Pages [company]
 @import "./pages/company/company-history";
 @import "./pages/company/company-management";
@@ -37,12 +45,12 @@
 @import "./pages/mortgage/mortgage-mother";
 @import "./pages/mortgage/mortgage";
 
-// Pages
-@import "./pages/flat-page";
-@import "./pages/flats";
-@import "./pages/objects";
-@import "./pages/homepage";
-@import "./pages/not-homepage";
+// Pages [news]
+@import "./pages/news/news";
+
+// Pages [objects]
+@import "./pages/objects/objects";
+
 
 // Scroll to top
 @import "./scroll-to-top/scroll-to-top";

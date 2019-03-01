@@ -5,6 +5,10 @@
         }
     }
 
+    #section-news {
+        background-color: #fafafa;
+    }
+
     #section-compleated-projects {
         @include media-breakpoint-down(xs) {
             display: none;

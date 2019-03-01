@@ -190,6 +190,14 @@ module.exports = {
         }),
 
         // TODO: News
+        new HtmlWebpackPlugin({
+            filename: 'html/news.html',
+            template: './layout/src/html/news/news.html'
+        }),
+        // new HtmlWebpackPlugin({
+        //     filename: 'html/news.html',
+        //     template: './layout/src/html/news/news_id.html'
+        // }),
 
         // TODO: Company->Partners
 
