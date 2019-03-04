@@ -30,12 +30,15 @@
 
         padding-top: 15px;
         padding-bottom: 15px;
-        margin-bottom: 15px;
 
         display: grid;
         grid-column-gap: 15px;
         grid-row-gap: 15px;
         grid-template-columns: repeat(2, 1fr);
+
+        @include media-breakpoint-down(md) {
+            grid-template-columns: 1fr;
+        }
     }
 
     &__item {
