@@ -208,10 +208,12 @@ module.exports = {
             template: './layout/src/html/news/news_page.html'
         }),
 
+        // TODO: Actions
+
         // TODO: Contacts
-        // new HtmlWebpackPlugin({
-        //     filename: 'html/contacts.html',
-        //     template: './layout/src/html/company/contacts.html'
-        // }),
+        new HtmlWebpackPlugin({
+            filename: 'html/contacts.html',
+            template: './layout/src/html/pages/contacts.html'
+        }),
     ]
 }

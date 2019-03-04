@@ -1,0 +1,15 @@
+.contact-card {
+    .collapse-block__link {
+        color: black;
+    }
+
+    &__title-wrap {}
+
+    &__title {
+        display: block;
+        font-size: 1.6rem;
+        font-weight: 700;
+    }
+
+    &__descr {}
+}

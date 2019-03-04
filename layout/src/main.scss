@@ -4,6 +4,7 @@
 @import "./core/core";
 
 // Cards
+@import "./cards/contact-card";
 @import "./cards/flat-card";
 @import "./cards/flat-type-card";
 @import "./cards/history-card";
@@ -52,6 +53,9 @@
 // Pages [objects]
 @import "./pages/objects/objects";
 
+// Pages [pages]
+@import "./pages/pages/contacts";
+
 
 // Scroll to top
 @import "./scroll-to-top/scroll-to-top";
@@ -96,12 +100,15 @@
 @import "./sections/company/section-vacancies-list";
 @import "./sections/company/company-section";
 
+// Sections [pages]
+@import "./sections/pages/section-contacts-page-content";
 
 // Sections Realty Filters
 @import "./sections/realty-filters/section-family-types-filters";
 // @import "./sections/realty-filters/section-realty-filters";
 @import "./sections/realty-filters/section-realty-flats-filters";
 @import "./sections/realty-filters/section-realty-homepage-filters";
+
 
 // Sliders
 @import "./sliders/custom-controls";

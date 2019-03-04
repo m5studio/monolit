@@ -1,0 +1,14 @@
+#section-contacts-page-content {
+    &__inner {
+        display: grid;
+        grid-column-gap: 30px;
+        grid-row-gap: 30px;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    &__list {}
+
+    &__map {
+        background-color: #CCC;
+    }
+}
