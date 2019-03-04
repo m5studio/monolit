@@ -12,17 +12,18 @@
     }
 
     &__title-wrap {
+        border-bottom: 1px solid #dadada;
         padding: 15px 15px 15px 0;
-
-        &:not(:last-child) {
-            border-bottom: 1px solid #dadada;
-        }
     }
 
     &__title {
-        display: block;
+        display: flex;
+        align-items: center;
+
         font-size: 1.6rem;
         font-weight: 700;
+        line-height: 1.2;
+        min-height: 48px;
     }
 
     &__descr {

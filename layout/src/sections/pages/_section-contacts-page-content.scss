@@ -1,7 +1,5 @@
 #section-contacts-page-content {
-    @include media-breakpoint-down(lg) {
-        margin-bottom: 30px;
-    }
+    margin-bottom: 30px;
 
     &__inner {
         display: grid;
