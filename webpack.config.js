@@ -187,15 +187,14 @@ module.exports = {
             filename: 'html/company_history.html',
             template: './layout/src/html/company/company_history.html'
         }),
+        new HtmlWebpackPlugin({
+            filename: 'html/company_partnership.html',
+            template: './layout/src/html/company/company_partnership.html'
+        }),
         // TODO: Tenders
         // new HtmlWebpackPlugin({
         //     filename: 'html/company_tenders.html',
         //     template: './layout/src/html/company/company_tenders.html'
-        // }),
-        // TODO: Partnership
-        // new HtmlWebpackPlugin({
-        //     filename: 'html/company_partnership.html',
-        //     template: './layout/src/html/company/company_partnership.html'
         // }),
 
         // News
