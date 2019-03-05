@@ -65,6 +65,22 @@
     &-telegram {
         background-image: url('images/icons/telegram.svg');
     }
+    &-deal {
+        background-image: url('images/icons/deal.svg');
+    }
+    &-doc-star {
+        background-image: url('images/icons/doc-star.svg');
+    }
+    &-document-white {
+        background-image: url('images/icons/document-white.svg');
+    }
+    &-hand {
+        background-image: url('images/icons/hand.svg');
+    }
+    &-people {
+        background-image: url('images/icons/people.svg');
+    }
+
 
     // Arrows
     &-arrow-left-green {
@@ -78,5 +94,8 @@
     }
     &-arrow-left-white {
         background-image: url('images/icons/arrow-left-white.svg');
+    }
+    &-arrow-step {
+        background-image: url('images/icons/arrow-step.svg');
     }
 }
