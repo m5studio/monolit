@@ -207,9 +207,17 @@ module.exports = {
             template: './layout/src/html/news/news_page.html'
         }),
 
-        // TODO: Actions
+        // Actions
+        new HtmlWebpackPlugin({
+            filename: 'html/actions.html',
+            template: './layout/src/html/actions/actions.html'
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'html/actions_page.html',
+            template: './layout/src/html/actions/actions_page.html'
+        }),
 
-        // TODO: Contacts
+        // Contacts
         new HtmlWebpackPlugin({
             filename: 'html/contacts.html',
             template: './layout/src/html/pages/contacts.html'

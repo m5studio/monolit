@@ -3,7 +3,8 @@
 
 @import "./core/core";
 
-// Cards
+// ===================== Cards
+@import "./cards/action-card";
 @import "./cards/contact-card";
 @import "./cards/flat-card";
 @import "./cards/flat-type-card";
@@ -15,6 +16,7 @@
 @import "./cards/news-card";
 @import "./cards/object-card";
 @import "./cards/vacancy-card";
+// ===================== END Cards
 
 // Filters
 @import "./filters/filter-family";
@@ -23,9 +25,17 @@
 // Menus
 @import "./menu/main-nav";
 
-// Pages
+// Scroll to top
+@import "./scroll-to-top/scroll-to-top";
+
+
+// ===================== Pages
 @import "./pages/homepage";
 @import "./pages/not-homepage";
+
+// Pages [flats]
+@import "./pages/actions/actions-page";
+@import "./pages/actions/actions";
 
 // Pages [flats]
 @import "./pages/flats/flat-page";
@@ -56,12 +66,10 @@
 
 // Pages [pages]
 @import "./pages/pages/contacts";
+// ===================== END Pages
 
 
-// Scroll to top
-@import "./scroll-to-top/scroll-to-top";
-
-// Sections
+// ===================== Sections
 @import "./sections/section-about";
 @import "./sections/section-compleated-projects";
 @import "./sections/section-flats-list";
@@ -69,6 +77,10 @@
 @import "./sections/section-news";
 @import "./sections/section-objects-list";
 @import "./sections/common-section";
+
+// Sections [actions]
+@import "./sections/actions/section-actions-list";
+@import "./sections/actions/section-actions-partners";
 
 // Sections [flat-page]
 @import "./sections/flat-page/flat-page-section";
@@ -114,12 +126,14 @@
 // @import "./sections/realty-filters/section-realty-filters";
 @import "./sections/realty-filters/section-realty-flats-filters";
 @import "./sections/realty-filters/section-realty-homepage-filters";
+// ===================== END Sections
 
 
-// Sliders
+// ===================== Sliders
 @import "./sliders/custom-controls";
 @import "./sliders/compleated-projects-slider";
 @import "./sliders/main-slider";
+// ===================== END Sliders
 
 // Modules
 @import "./nouislider/nouislider";
