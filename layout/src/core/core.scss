@@ -308,11 +308,21 @@ body {
             }
 
             &__descr {
+                cursor: default;
                 font-size: 1.1rem;
                 margin-top: 15px;
 
+                opacity: .7;
+                transition: opacity ease .5s;
+
                 @include media-breakpoint-down(md) {
                     text-align: center;
+                }
+            }
+
+            &:hover {
+                #page-title-h1__descr {
+                    opacity: 1;
                 }
             }
         }

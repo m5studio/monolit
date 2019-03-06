@@ -126,6 +126,16 @@ module.exports = {
         //     template: './layout/src/html/objects_page.html'
         // }),
 
+        // TODO: Commercial
+        // new HtmlWebpackPlugin({
+        //     filename: 'html/commercial.html',
+        //     template: './layout/src/html/commercial/commercial.html'
+        // }),
+        // new HtmlWebpackPlugin({
+        //     filename: 'html/commercial.html',
+        //     template: './layout/src/html/commercial/commercial_page.html'
+        // }),
+
         // Flats
         new HtmlWebpackPlugin({
             filename: 'html/flats.html',
