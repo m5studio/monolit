@@ -122,8 +122,8 @@ module.exports = {
         }),
         // TODO:
         // new HtmlWebpackPlugin({
-        //     filename: 'html/objects/objects_name.html',
-        //     template: './layout/src/html/objects_name.html'
+        //     filename: 'html/objects/objects_page.html',
+        //     template: './layout/src/html/objects_page.html'
         // }),
 
         // Flats
@@ -132,8 +132,8 @@ module.exports = {
             template: './layout/src/html/flats/flats.html'
         }),
         new HtmlWebpackPlugin({
-            filename: 'html/flats_id.html',
-            template: './layout/src/html/flats/flats_id.html'
+            filename: 'html/flats_page.html',
+            template: './layout/src/html/flats/flats_page.html'
         }),
 
         // Mortgage
