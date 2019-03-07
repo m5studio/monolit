@@ -157,22 +157,6 @@
     </header>
 
     <div id="content">
-        <!-- <nav id="breadcrumbs">
-            <div class="container">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                        <a href="">Главная</a>
-                    </li>
-                    <li class="breadcrumb-item">
-                        <a href="">Проекты</a>
-                    </li>
-                    <li class="breadcrumb-item active">
-                        Жилой квартал Таврический
-                    </li>
-                </ol>
-            </div>
-        </nav> -->
-
         <main id="main">
             <section id="section-object-page-main-info" style="background-image: url('http://monolit.site/media/CACHE/images/2018/01/30/tavricheskaya_panorama_05_1WAWX2W/09555ec6a65b13f1b10419713d670598.jpg');">
                 <div id="section-object-page-main-info__stats">
@@ -320,7 +304,16 @@
 
             <div id="section-building-progress-and-news">
                 <div id="section-building-progress-and-news__inner" class="container">
-                    <!--  -->
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Ход строительства</a>
+                            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Новости</a>
+                        </div>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">...</div>
+                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
+                    </div>
                 </div>
             </div>
         </main>
