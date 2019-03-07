@@ -22,7 +22,8 @@
     }
 
     &__h1-title {
-        background-color: #00998f;
+        // background-color: #00998f;
+        background-color: rgba(0, 153, 143, .8);
         padding: 30px 30px 110px;
 
         display: flex;
@@ -41,10 +42,11 @@
         &::after {
             border-style: solid;
             border-width: 245px 80px 0 0;
-            border-color: #00998f transparent transparent;
+            border-color: rgba(0, 153, 143, .8) transparent transparent;
             content: "";
             position: absolute;
-            left: calc(100% - 1px);
+            // left: calc(100% - 1px);
+            left: 100%;
             top: 0;
 
             @include media-breakpoint-down(lg) {
@@ -67,6 +69,31 @@
             font-size: 3.7rem;
             font-weight: 700;
             letter-spacing: 1px;
+        }
+    }
+
+    &__stats {
+        background-color: rgba(0, 153, 143, .6);
+        padding: 15px 40px;
+        position: absolute;
+        top: 15%;
+        right: 0;
+
+        .stats-item {
+            color: white;
+            text-shadow: 0 0 1px black;
+
+            &:not(:last-child) {
+                margin-bottom: 15px;
+            }
+
+            &__label {
+                font-size: .9rem;
+            }
+
+            &__val {
+                font-size: 1.4rem;
+            }
         }
     }
 }

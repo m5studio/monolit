@@ -205,7 +205,8 @@ body {
                     align-items: center;
 
                     @include media-breakpoint-up(md) {
-                        grid-template-columns: 34px 128px;
+                        // grid-template-columns: 34px 128px;
+                        grid-template-columns: 34px 1fr;
                     }
                     @include media-breakpoint-down(sm) {
                         display: none;
