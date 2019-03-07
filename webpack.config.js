@@ -120,11 +120,10 @@ module.exports = {
             filename: 'html/objects.html',
             template: './layout/src/html/objects/objects.html'
         }),
-        // TODO:
-        // new HtmlWebpackPlugin({
-        //     filename: 'html/objects/objects_page.html',
-        //     template: './layout/src/html/objects_page.html'
-        // }),
+        new HtmlWebpackPlugin({
+            filename: 'html/objects_page.html',
+            template: './layout/src/html/objects/objects_page.html'
+        }),
 
         // TODO: Commercial
         // new HtmlWebpackPlugin({

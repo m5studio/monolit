@@ -62,6 +62,7 @@
 @import "./pages/news/news";
 
 // Pages [objects]
+@import "./pages/objects/object-page";
 @import "./pages/objects/objects";
 
 // Pages [pages]
@@ -118,6 +119,9 @@
 @import "./sections/company/section-vacancies-list";
 @import "./sections/company/company-section";
 
+// Sections [company]
+@import "./sections/objects/section-object-page-main-info";
+
 // Sections [pages]
 @import "./sections/pages/section-contacts-page-content";
 
@@ -134,6 +138,7 @@
 @import "./sliders/compleated-projects-slider";
 @import "./sliders/main-slider";
 // ===================== END Sliders
+
 
 // Modules
 @import "./nouislider/nouislider";
