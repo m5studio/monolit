@@ -23,7 +23,22 @@
                     display: grid;
                     grid-row-gap: 15px;
                     grid-column-gap: 15px;
-                    grid-template-columns: repeat(6, 1fr);
+
+                    @include media-breakpoint-only(xl) {
+                        grid-template-columns: repeat(6, 1fr);
+                    }
+                    @include media-breakpoint-only(lg) {
+                        grid-template-columns: repeat(4, 1fr);
+                    }
+                    @include media-breakpoint-only(md) {
+                        grid-template-columns: repeat(3, 1fr);
+                    }
+                    @include media-breakpoint-only(sm) {
+                        grid-template-columns: repeat(2, 1fr);
+                    }
+                    @include media-breakpoint-down(xs) {
+                        grid-template-columns: 1fr;
+                    }
                 }
 
                 .bp-card {
@@ -60,7 +75,14 @@
                     display: grid;
                     grid-row-gap: 15px;
                     grid-column-gap: 15px;
-                    grid-template-columns: repeat(4, 1fr);
+                    grid-template-columns: repeat(3, 1fr);
+
+                    @include media-breakpoint-down(lg) {
+                        grid-template-columns: repeat(2, 1fr);
+                    }
+                    @include media-breakpoint-down(sm) {
+                        grid-template-columns: 1fr;
+                    }
                 }
             }
         }
