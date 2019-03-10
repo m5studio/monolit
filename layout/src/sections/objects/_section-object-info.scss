@@ -28,9 +28,9 @@
                     display: grid;
                     grid-row-gap: 15px;
                     grid-column-gap: 15px;
-                    grid-template-columns: 1.5fr 1fr;
+                    grid-template-columns: 1.3fr 1fr;
 
-                    @include media-breakpoint-down(sm) {
+                    @include media-breakpoint-down(lg) {
                         grid-template-columns: 1fr;
                     }
                 }
@@ -67,9 +67,8 @@
 
                 &__img {
                     background-repeat: no-repeat;
-                    background-position: 50%;
+                    background-position: 50% 0;
                     background-size: cover;
-
                     min-height: 386px;
                 }
             }
