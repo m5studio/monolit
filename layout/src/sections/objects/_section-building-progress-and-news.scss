@@ -3,32 +3,41 @@
         #bp-and-news-pills-tabs {
             &.nav-pills .nav-link.active,
             &.nav-pills .show > .nav-link {
-                background-color: #007bff;
+                background-color: rgba(0,153,143,1);
                 border-radius: 0;
-                color: #fff;
-                font-size: 1.1rem;
+                color: white;
+            }
+
+            &.nav-pills .nav-link {
+                color: black;
+                font-size: 1.5rem;
+                font-weight: 600;
             }
         }
 
         #bp-and-news-pills-tabs-content {
-            margin-top: 30px;
+            margin-top: 15px;
 
             #bp-and-news-pills-building-progress {
-                display: grid;
-                grid-row-gap: 15px;
-                grid-column-gap: 15px;
-                grid-template-columns: repeat(5, 1fr);
+                &__inner {
+                    display: grid;
+                    grid-row-gap: 15px;
+                    grid-column-gap: 15px;
+                    grid-template-columns: repeat(6, 1fr);
+                }
 
                 .bp-card {
                     background-repeat: no-repeat;
                     background-position: 50%;
                     background-size: cover;
+                    border-radius: 7px;
 
                     display: block;
                     width: 100%;
-                    height: 128px;
+                    height: 150px;
 
                     position: relative;
+                    transition: all ease-in-out .3s;
 
                     &__date {
                         background-color: #222;
@@ -38,10 +47,22 @@
                         left: 0;
                         bottom: 30px;
                     }
+
+                    &:hover {
+                        opacity: .7;
+                        transform: translate3d(0,-3px,0);
+                    }
                 }
             }
 
-            #bp-and-news-pills-news {}
+            #bp-and-news-pills-news {
+                &__inner {
+                    display: grid;
+                    grid-row-gap: 15px;
+                    grid-column-gap: 15px;
+                    grid-template-columns: repeat(4, 1fr);
+                }
+            }
         }
     }
 }
