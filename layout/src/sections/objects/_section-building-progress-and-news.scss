@@ -3,7 +3,7 @@
         #bp-and-news-pills-tabs {
             &.nav-pills .nav-link.active,
             &.nav-pills .show > .nav-link {
-                background-color: rgba(0,153,143,1);
+                background-color: #00998f;
                 border-radius: 0;
                 color: white;
             }
@@ -53,6 +53,9 @@
 
                     position: relative;
                     transition: all ease-in-out .3s;
+
+                    max-width: 368px;
+                    justify-self: center;
 
                     &__date {
                         background-color: #222;

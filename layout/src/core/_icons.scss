@@ -18,6 +18,10 @@
         width: 32px;
         height: 32px;
     }
+    // &-64 {
+    //     width: 64px;
+    //     height: 64px;
+    // }
 
     // Icons
     &-blanks {
@@ -79,6 +83,28 @@
     }
     &-people {
         background-image: url('images/icons/people.svg');
+    }
+
+    &-object-about {
+        background-image: url('images/icons/object-about.svg');
+    }
+    &-object-architecture {
+        background-image: url('images/icons/object-architecture.svg');
+    }
+    &-object-arrangement {
+        background-image: url('images/icons/object-arrangement.svg');
+    }
+    &-object-communications {
+        background-image: url('images/icons/object-communications.svg');
+    }
+    &-object-land-improvement {
+        background-image: url('images/icons/object-land-improvement.svg');
+    }
+    &-object-location {
+        background-image: url('images/icons/object-location.svg');
+    }
+    &-object-storage-room {
+        background-image: url('images/icons/object-storage-room.svg');
     }
 
 

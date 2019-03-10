@@ -22,21 +22,20 @@
     }
 
     &__h1-title {
-        // background-color: #00998f;
         background-color: rgba(0, 153, 143, .8);
         padding: 30px 30px 110px;
 
         display: flex;
         align-items: center;
-        height: 240px;
+        min-height: 240px;
 
         position: absolute;
         left: 0;
         bottom: 0;
 
         @include media-breakpoint-down(lg) {
-            height: 201px;
-            padding: 30px;
+            min-height: 201px;
+            padding: 30px 30px 50px;
         }
 
         &::after {
@@ -45,7 +44,6 @@
             border-color: rgba(0, 153, 143, .8) transparent transparent;
             content: "";
             position: absolute;
-            // left: calc(100% - 1px);
             left: 100%;
             top: 0;
 
@@ -69,6 +67,14 @@
             font-size: 3.7rem;
             font-weight: 700;
             letter-spacing: 1px;
+
+            @include media-breakpoint-only(sm) {
+                font-size: 4.5vh;
+            }
+            @include media-breakpoint-down(xs) {
+                font-size: 3vh;
+                font-weight: 600;
+            }
         }
     }
 
@@ -78,6 +84,10 @@
         position: absolute;
         top: 15%;
         right: 0;
+
+        @include media-breakpoint-down(xs) {
+            display: none;
+        }
 
         .stats-item {
             color: white;

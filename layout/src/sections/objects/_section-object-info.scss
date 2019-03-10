@@ -1,3 +1,78 @@
 #section-object-info {
-    &__inner {}
+    &__inner {
+        #object-info-pills-tabs {
+            @include media-breakpoint-down(sm) {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            &.nav-pills .nav-link.active,
+            &.nav-pills .show > .nav-link {
+                background-color: #00998f;
+                border-radius: 0;
+                color: white;
+            }
+
+            &.nav-pills .nav-link {
+                color: black;
+                font-size: 1.3rem;
+                font-weight: 600;
+            }
+        }
+
+        #object-info-pills-tabs-content {
+            margin-top: 15px;
+
+            .tab-pane {
+                &__inner {
+                    display: grid;
+                    grid-row-gap: 15px;
+                    grid-column-gap: 15px;
+                    grid-template-columns: 1.5fr 1fr;
+
+                    @include media-breakpoint-down(sm) {
+                        grid-template-columns: 1fr;
+                    }
+                }
+
+                &__content {
+                    .icon {
+                        background-color: #e3f4eb;
+                        border-radius: 100%;
+
+                        display: block;
+                        width: 100px;
+                        height: 100px;
+
+                        margin-right: -20px;
+                    }
+
+                    h3 {
+                        font-size: 3rem;
+                        font-weight: 400;
+                        margin: 0;
+                    }
+                }
+
+                &__title-group {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    margin-bottom: 15px;
+                }
+
+                &__descr {
+                    padding-left: 80px;
+                }
+
+                &__img {
+                    background-repeat: no-repeat;
+                    background-position: 50%;
+                    background-size: cover;
+
+                    min-height: 386px;
+                }
+            }
+        }
+    }
 }
