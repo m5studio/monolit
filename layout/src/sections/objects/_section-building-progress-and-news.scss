@@ -57,6 +57,11 @@
                     max-width: 368px;
                     justify-self: center;
 
+                    // Hide all image cards all after 6th
+                    &:nth-child(n+7) {
+                        display: none;
+                    }
+
                     &__date {
                         background-color: #222;
                         color: white;
