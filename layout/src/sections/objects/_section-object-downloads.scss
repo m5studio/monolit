@@ -24,7 +24,7 @@
             grid-template-columns: 1fr 100px 32px;
 
             @include media-breakpoint-down(md) {
-                grid-template-columns: 1fr 32px;
+                grid-template-columns: 1fr 80px;
                 grid-row-gap: 10px;
             }
 
@@ -40,7 +40,7 @@
                 font-style: italic;
                 text-align: center;
 
-                @include media-breakpoint-down(sm) {
+                @include media-breakpoint-down(md) {
                     order: 3;
                     text-align: left;
                 }
