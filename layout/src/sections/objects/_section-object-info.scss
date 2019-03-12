@@ -1,4 +1,6 @@
 #section-object-info {
+    background-color: #fafafa;
+
     &__inner {
         #object-info-pills-tabs {
             @include media-breakpoint-down(sm) {
