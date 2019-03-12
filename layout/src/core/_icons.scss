@@ -18,10 +18,10 @@
         width: 32px;
         height: 32px;
     }
-    // &-64 {
-    //     width: 64px;
-    //     height: 64px;
-    // }
+    &-64 {
+        width: 64px;
+        height: 64px;
+    }
 
     // Icons
     &-blanks {
@@ -86,6 +86,9 @@
     }
     &-download {
         background-image: url('images/icons/download.svg');
+    }
+    &-day-night {
+        background-image: url('images/icons/day-night.svg');
     }
 
     &-object-about {

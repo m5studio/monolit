@@ -1,4 +1,13 @@
 #section-object-genplan {
+    .common-section__title--right {
+        display: flex;
+        align-items: center;
+
+        .icon {
+            margin-right: 15px;
+        }
+    }
+
     &__image {
         img {
             width: 100%;
