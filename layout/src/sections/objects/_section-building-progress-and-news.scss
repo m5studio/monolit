@@ -58,8 +58,30 @@
                     justify-self: center;
 
                     // Hide all image cards all after 6th
-                    &:nth-child(n+7) {
-                        display: none;
+                    @include media-breakpoint-only(xl) {
+                        &:nth-child(n+7) {
+                            display: none;
+                        }
+                    }
+                    @include media-breakpoint-only(lg) {
+                        &:nth-child(n+5) {
+                            display: none;
+                        }
+                    }
+                    @include media-breakpoint-only(md) {
+                        &:nth-child(n+4) {
+                            display: none;
+                        }
+                    }
+                    @include media-breakpoint-only(sm) {
+                        &:nth-child(n+3) {
+                            display: none;
+                        }
+                    }
+                    @include media-breakpoint-down(xs) {
+                        &:nth-child(n+2) {
+                            display: none;
+                        }
                     }
 
                     &__date {

@@ -31,8 +31,8 @@
             .tab-pane {
                 &__inner {
                     display: grid;
-                    grid-row-gap: 15px;
-                    grid-column-gap: 15px;
+                    grid-row-gap: 30px;
+                    grid-column-gap: 30px;
                     grid-template-columns: 1.3fr 1fr;
 
                     @include media-breakpoint-down(lg) {
