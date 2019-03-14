@@ -25,9 +25,6 @@
 // Menus
 @import "./menu/main-nav";
 
-// Scroll to top
-@import "./scroll-to-top/scroll-to-top";
-
 
 // ===================== Pages
 @import "./pages/homepage";
@@ -146,5 +143,8 @@
 // ===================== END Sliders
 
 
-// Modules
-@import "./nouislider/nouislider";
+// ===================== Modules
+@import "./modules/fancybox/fancybox";
+@import "./modules/nouislider/nouislider";
+@import "./modules/scroll-to-top/scroll-to-top";
+// ===================== END Modules

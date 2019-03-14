@@ -1,35 +1,33 @@
 import "./main.scss"
-
 import "./boostrap/boostrap"
 
 import {stickyMainNav, toggleMainNav} from "./menu/main-nav"
 
-// Realty filters
-import {realtySquareFilters} from "./nouislider/realty_square_filters"
-import {realtyPriceFilters} from "./nouislider/realty_price_filters"
-import {realtyFloorFilters} from "./nouislider/realty_floor_filters"
-
+// Fiters
 import {familyFiltersToggle} from "./filters/family-filters-toggle"
 import {familyFiltersReset} from "./filters/family-filters-reset"
 
-// Scroll to Top
-import {scrollToTop} from "./scroll-to-top/scroll-to-top"
+// Realty filters
+import {realtySquareFilters} from "./modules/nouislider/realty_square_filters"
+import {realtyPriceFilters} from "./modules/nouislider/realty_price_filters"
+import {realtyFloorFilters} from "./modules/nouislider/realty_floor_filters"
 
+// Scroll to Top
+import {scrollToTop} from "./modules/scroll-to-top/scroll-to-top"
 
 // Fancybox https://fancyapps.com/fancybox/3/
-import "./fancybox/fancybox.scss"
 import '@fancyapps/fancybox'
 
 
 $(document).ready(function() {
     toggleMainNav()
 
-    // homepage
+    // Homepage
     if ( $('#section-realty-homepage-filters').length ) {
         realtySquareFilters()
         realtyPriceFilters()
     }
-    // flats
+    // Flats
     if ( $('#section-realty-flats-filters').length ) {
         realtySquareFilters()
         realtyPriceFilters()

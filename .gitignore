@@ -368,3 +368,4 @@ DocProject/Help/html
 !layout/dist/*
 
 package-lock.json
+*package-lock.json
