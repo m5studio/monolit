@@ -369,3 +369,5 @@ DocProject/Help/html
 
 package-lock.json
 *package-lock.json
+package-lock.json*
+*-lock.json
