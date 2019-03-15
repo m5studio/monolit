@@ -3,50 +3,62 @@
     background-repeat: no-repeat;
     background-attachment: fixed;
 
-    #download-commercial-catalog {
-        background-image: linear-gradient(-45deg, #18a29b, #1cc3ba);
-        margin-top: 30px;
-        width: fit-content;
-        max-width: 420px;
+    #content {
+        #main {
+            #page-title-h1 {
+                h1 {
+                    @include media-breakpoint-down(lg) {
+                        font-size: 3.5vh;
+                    }
+                }
 
-        @include media-breakpoint-only(xl) {
-            position: absolute;
-            top: 15%;
-            right: 0;
-        }
-        @include media-breakpoint-down(lg) {
-            margin: 30px auto 0;
-        }
+                #download-commercial-catalog {
+                    background-image: linear-gradient(-45deg, #18a29b, #1cc3ba);
+                    margin-top: 30px;
+                    width: fit-content;
+                    max-width: 420px;
 
-        a {
-            color: white;
-            display: flex;
-            font-size: 1.25rem;
-            padding: 15px 25px;
-            text-shadow: 0 0 1px black;
-            transition: opacity ease .3s;
+                    @include media-breakpoint-only(xl) {
+                        position: absolute;
+                        top: 15%;
+                        right: 0;
+                    }
+                    @include media-breakpoint-down(lg) {
+                        margin: 30px auto 0;
+                    }
 
-            .icon {
-                margin-right: 15px;
-            }
+                    a {
+                        color: white;
+                        display: flex;
+                        font-size: 1.25rem;
+                        padding: 15px 25px;
+                        text-shadow: 0 0 1px black;
+                        transition: opacity ease .3s;
 
-            span {
-                font-weight: 700;
-                line-height: 1.2;
-            }
+                        .icon {
+                            margin-right: 15px;
+                        }
 
-            small {
-                display: block;
-                font-size: .8rem;
-                font-style: italic;
-                font-weight: 300;
-                margin-top: 10px;
-                text-shadow: none;
-            }
+                        span {
+                            font-weight: 700;
+                            line-height: 1.2;
+                        }
 
-            &:hover {
-                opacity: .8;
-                text-decoration: none;
+                        small {
+                            display: block;
+                            font-size: .8rem;
+                            font-style: italic;
+                            font-weight: 300;
+                            margin-top: 10px;
+                            text-shadow: none;
+                        }
+
+                        &:hover {
+                            opacity: .8;
+                            text-decoration: none;
+                        }
+                    }
+                }
             }
         }
     }
