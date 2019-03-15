@@ -125,11 +125,11 @@ module.exports = {
             template: './layout/src/html/objects/objects_page.html'
         }),
 
-        // TODO: Commercial
-        // new HtmlWebpackPlugin({
-        //     filename: 'html/commercial.html',
-        //     template: './layout/src/html/commercial/commercial.html'
-        // }),
+        // Commercial
+        new HtmlWebpackPlugin({
+            filename: 'html/commercial.html',
+            template: './layout/src/html/commercial/commercial.html'
+        }),
         // new HtmlWebpackPlugin({
         //     filename: 'html/commercial.html',
         //     template: './layout/src/html/commercial/commercial_page.html'

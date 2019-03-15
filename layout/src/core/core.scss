@@ -318,6 +318,9 @@ body {
                 opacity: .7;
                 transition: opacity ease .5s;
 
+                @include media-breakpoint-only(xl) {
+                    max-width: 50%;
+                }
                 @include media-breakpoint-down(md) {
                     text-align: center;
                 }

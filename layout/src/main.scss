@@ -5,6 +5,7 @@
 
 // ===================== Cards
 @import "./cards/action-card";
+@import "./cards/commercial-object-card";
 @import "./cards/contact-card";
 @import "./cards/flat-card";
 @import "./cards/flat-type-card";
@@ -30,9 +31,13 @@
 @import "./pages/homepage";
 @import "./pages/not-homepage";
 
-// Pages [flats]
+// Pages [actions]
 @import "./pages/actions/actions-page";
 @import "./pages/actions/actions";
+
+// Pages [commercial]
+// @import "./pages/commercial/commercial-page";
+@import "./pages/commercial/commercial";
 
 // Pages [flats]
 @import "./pages/flats/flat-page";
@@ -80,6 +85,23 @@
 @import "./sections/actions/section-actions-list";
 @import "./sections/actions/section-actions-partners";
 
+// Sections [commercial]
+@import "./sections/commercial/section-commercial-how-to-buy";
+@import "./sections/commercial/section-commercial-objects-list";
+
+// Sections [company]
+@import "./sections/company/section-company-about";
+@import "./sections/company/section-company-history";
+@import "./sections/company/section-company-management";
+@import "./sections/company/section-company-partnership-basic-concepts";
+@import "./sections/company/section-company-partnership-basic-principles";
+@import "./sections/company/section-company-partnership-official-partners";
+@import "./sections/company/section-company-partnership-phone";
+@import "./sections/company/section-company-partnership-steps";
+@import "./sections/company/section-sertificates";
+@import "./sections/company/section-vacancies-list";
+@import "./sections/company/company-section";
+
 // Sections [flat-page]
 @import "./sections/flat-page/flat-page-section";
 @import "./sections/flat-page/section-flat-page-content";
@@ -104,19 +126,7 @@
 @import "./sections/news/section-news-page-content";
 @import "./sections/news/section-other-news";
 
-// Sections [company]
-@import "./sections/company/section-company-about";
-@import "./sections/company/section-company-history";
-@import "./sections/company/section-company-management";
-@import "./sections/company/section-company-partnership-basic-concepts";
-@import "./sections/company/section-company-partnership-basic-principles";
-@import "./sections/company/section-company-partnership-official-partners";
-@import "./sections/company/section-company-partnership-phone";
-@import "./sections/company/section-company-partnership-steps";
-@import "./sections/company/section-vacancies-list";
-@import "./sections/company/company-section";
-
-// Sections [company]
+// Sections [object]
 @import "./sections/objects/section-building-progress-and-news";
 @import "./sections/objects/section-object-downloads";
 @import "./sections/objects/section-object-genplan";
