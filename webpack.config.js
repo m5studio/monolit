@@ -130,10 +130,10 @@ module.exports = {
             filename: 'html/commercial.html',
             template: './layout/src/html/commercial/commercial.html'
         }),
-        // new HtmlWebpackPlugin({
-        //     filename: 'html/commercial.html',
-        //     template: './layout/src/html/commercial/commercial_page.html'
-        // }),
+        new HtmlWebpackPlugin({
+            filename: 'html/commercial_page.html',
+            template: './layout/src/html/commercial/commercial_page.html'
+        }),
 
         // Flats
         new HtmlWebpackPlugin({
