@@ -24,11 +24,12 @@
         font-weight: 700;
         line-height: 1.2;
         min-height: 48px;
+
+        width: 93%;
     }
 
     &__descr {
         border-bottom: 1px solid #dadada;
-
         padding-top: 15px;
         padding-bottom: 15px;
 
@@ -39,6 +40,12 @@
 
         @include media-breakpoint-down(md) {
             grid-template-columns: 1fr;
+        }
+
+        p {
+            &:last-child {
+                margin-bottom: 0;
+            }
         }
     }
 
