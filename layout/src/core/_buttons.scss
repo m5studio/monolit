@@ -32,7 +32,9 @@ button {
     border: none;
     cursor: pointer;
     color: white;
-    padding: 10px 40px;
+    line-height: 1.2;
+    padding: 15px 40px;
+    text-align: center;
     transition: box-shadow .3s ease, opacity .3s ease;
 
     &:focus,
