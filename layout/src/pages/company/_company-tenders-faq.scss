@@ -4,6 +4,11 @@
     background-attachment: fixed;
 
     #section-contacts-page-content {
+        .contact-card__title-wrap {
+            padding-top: 25px;
+            padding-bottom: 25px;
+        }
+
         .contact-card__descr {
             grid-row-gap: 0;
             grid-template-columns: 1fr;

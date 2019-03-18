@@ -72,10 +72,6 @@ module.exports = {
             'layout/dist'
 
             // './layout/dist/**/*.*',
-            // './layout/dist/css/**/*.*',
-            // './layout/dist/html/**/*.*',
-            // './layout/dist/images/*.*',
-            // './layout/dist/js/**/*.*'
         ]),
 
         // Copy favicons
