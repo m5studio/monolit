@@ -52,10 +52,15 @@ $main_nav_toggle: "#main-navigationToggle";
 
         position: absolute;
         right: 0;
-        // z-index: 201;
 
         &.opened {
             background-image: url('images/menu-close.svg');
+
+            @include media-breakpoint-down(sm) {
+                position: fixed;
+                top: 30px;
+                right: 30px;
+            }
         }
 
         &:hover {
@@ -259,7 +264,7 @@ $main_nav_toggle: "#main-navigationToggle";
         display: none;
 
         &.opened {
-            background-color: rgba(0, 0, 0, .9);
+            background-color: rgba(0, 0, 0, .95);
 
             display: block;
             width: 40vw;
@@ -337,7 +342,7 @@ $main_nav_toggle: "#main-navigationToggle";
         &.opened {
             width: 100vw;
             height: 100vh;
-            padding: 7vh 0 0 10vh;
+            padding: 7vh 0 0 15vh;
         }
     }
 }
@@ -345,7 +350,7 @@ $main_nav_toggle: "#main-navigationToggle";
 @include media-breakpoint-down(xs) {
     #{$main_nav} {
         &.opened {
-            // padding: 7vh 0 0 5vh;
+            padding: 7vh 0 0 5vh;
 
             ul.main-nav__list {
                 li.main-nav__item {

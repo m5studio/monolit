@@ -21,6 +21,10 @@
 
             .icon {
                 margin-right: 15px;
+
+                @include media-breakpoint-down(sm) {
+                    display: none;
+                }
             }
         }
     }

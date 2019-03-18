@@ -19,12 +19,22 @@
                 color: #00998f;
             }
         }
+
+        &:after {
+            @include media-breakpoint-down(sm) {
+                background-size: contain;
+                width: 24px;
+                height: 24px;
+            }
+        }
     }
 
     &__title {
         display: block;
         font-size: 1.4rem;
         font-weight: 700;
+        line-height: 1.2;
+        width: 94%;
     }
 
     &__experience {

@@ -204,10 +204,10 @@ module.exports = {
             filename: 'html/company_tenders.html',
             template: './layout/src/html/company/company_tenders.html'
         }),
-        // new HtmlWebpackPlugin({
-        //     filename: 'html/company_tenders.html',
-        //     template: './layout/src/html/company/company_tenders.html'
-        // }),
+        new HtmlWebpackPlugin({
+            filename: 'html/company_tenders_faq.html',
+            template: './layout/src/html/company/company_tenders_faq.html'
+        }),
 
         // News
         new HtmlWebpackPlugin({

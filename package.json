@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
-    "watch": "webpack --watch --progress",
+    "building": "webpack",
     "watching": "webpack --watch --progress",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
