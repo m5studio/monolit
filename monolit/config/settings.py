@@ -56,6 +56,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
 
+    'solo',
+
     'apps.settings',
     'apps.realty',
 ]
@@ -159,3 +161,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Datetime settngs
 DATETIME_FORMAT = 'd/m/Y H:i:s'
 SHORT_DATETIME_FORMAT = 'd/m/Y H:i'
+
+
+# ============================ Additional modules
+
+# https://github.com/lazybird/django-solo
+if not DEBUG:
+    pass
