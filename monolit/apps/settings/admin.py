@@ -1,12 +1,9 @@
 from django.contrib import admin
-from solo.admin import SingletonModelAdmin
 from apps.settings.classes.turn_off_admin_logging import TurnOffAdminLogging
 from .models import SiteSettings
 
 
 class SiteSettingsAdmin(TurnOffAdminLogging, admin.ModelAdmin):
-    pass
-    """
     # Disable mass actions
     actions = None
 
@@ -22,8 +19,5 @@ class SiteSettingsAdmin(TurnOffAdminLogging, admin.ModelAdmin):
             if count == 0:
                 return True
         return False
-    """
 
-
-# admin.site.register(SiteSettings, SiteSettingsAdmin)
-admin.site.register(SiteSettings, SingletonModelAdmin)
+admin.site.register(SiteSettings, SiteSettingsAdmin)

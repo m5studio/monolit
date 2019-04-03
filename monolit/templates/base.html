@@ -1,7 +1,3 @@
-{% load solo_tags %}
-{% get_solo 'settings.SiteSettings' as site_settings %}
-
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -11,13 +7,6 @@
 </head>
 <body>
     <h1>Monolit base.html</h1>
-
-    <hr>
-    <h2>{{ site_settings.site_title }}</h2>
-    <h2>{{ site_settings.site_description }}</h2>
-    <h2>{{ site_settings.site_email }}</h2>
-    <h2>{{ site_settings.site_phone }}</h2>
-    <hr>
 
     {% block content %}{% endblock %}
 </body>

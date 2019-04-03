@@ -56,8 +56,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
 
-    'solo',
-
     'apps.settings',
     'apps.realty',
 ]
@@ -105,6 +103,7 @@ if DEBUG:
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
+# TODO: setup producrion DB
 if not DEBUG:
     print("!!! SET DB Settings for non-DEBUG mode")
     pass
@@ -162,9 +161,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DATETIME_FORMAT = 'd/m/Y H:i:s'
 SHORT_DATETIME_FORMAT = 'd/m/Y H:i'
 
+# TODO: Setup Django Сaching https://docs.djangoproject.com/en/2.2/topics/cache/
 
-# ============================ Additional modules
-
-# https://github.com/lazybird/django-solo
-if not DEBUG:
-    pass
+# ============================ Additional modules Settings
