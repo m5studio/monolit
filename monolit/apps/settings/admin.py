@@ -4,22 +4,8 @@ from apps.settings.classes.singleton_model import SingletonAdminModel
 from .models import SiteSettings
 
 
-# class SiteSettingsAdmin(TurnOffAdminLogging, admin.ModelAdmin):
-class SiteSettingsAdmin(TurnOffAdminLogging, SingletonAdminModel):
-    # Disable mass actions
-    # actions = None
+# class SiteSettingsAdmin(TurnOffAdminLogging, SingletonAdminModel):
+#     pass
 
-    # Remove Delete button
-    # def has_delete_permission(self, request, obj=None):
-    #     return False
-
-    # Remove "Save and add another" button
-    def has_add_permission(self, request):
-        base_add_permission = super(SiteSettingsAdmin, self).has_add_permission(request)
-        if base_add_permission:
-            count = SiteSettings.objects.all().count()
-            if count == 0:
-                return True
-        return False
-
-admin.site.register(SiteSettings, SiteSettingsAdmin)
+# admin.site.register(SiteSettings, SiteSettingsAdmin)
+admin.site.register(SiteSettings, SingletonAdminModel)
