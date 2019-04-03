@@ -2,6 +2,8 @@
 from django.db import models
 from django.core.cache import cache
 
+from django.contrib import admin
+
 
 class SingletonModel(models.Model):
 
@@ -26,3 +28,25 @@ class SingletonModel(models.Model):
             if not created:
                 obj.set_cache()
         return cache.get(cls.__name__)
+
+
+class SingletonAdminModel(admin.ModelAdmin):
+
+    class Meta:
+        abstract = True
+
+    # Disable mass actions
+    actions = None
+
+    # Remove Delete button
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+    # Remove "Save and add another" button
+    # def has_add_permission(self, request):
+    #     base_add_permission = super(SiteSettingsAdmin, self).has_add_permission(request)
+    #     if base_add_permission:
+    #         count = SiteSettings.objects.all().count()
+    #         if count == 0:
+    #             return True
+    #     return False

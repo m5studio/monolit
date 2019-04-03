@@ -1,15 +1,17 @@
 from django.contrib import admin
 from apps.settings.classes.turn_off_admin_logging import TurnOffAdminLogging
+from apps.settings.classes.singleton_model import SingletonAdminModel
 from .models import SiteSettings
 
 
-class SiteSettingsAdmin(TurnOffAdminLogging, admin.ModelAdmin):
+# class SiteSettingsAdmin(TurnOffAdminLogging, admin.ModelAdmin):
+class SiteSettingsAdmin(TurnOffAdminLogging, SingletonAdminModel):
     # Disable mass actions
-    actions = None
+    # actions = None
 
     # Remove Delete button
-    def has_delete_permission(self, request, obj=None):
-        return False
+    # def has_delete_permission(self, request, obj=None):
+    #     return False
 
     # Remove "Save and add another" button
     def has_add_permission(self, request):
