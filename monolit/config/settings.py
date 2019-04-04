@@ -56,8 +56,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
 
-    'apps.settings',
-    'apps.realty',
+    'multiselectfield',
+
+    'apps.settings.apps.SettingsConfig',
+    'apps.realty.apps.RealtyConfig',
 ]
 
 MIDDLEWARE = [

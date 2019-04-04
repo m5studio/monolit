@@ -2,4 +2,6 @@ from django.apps import AppConfig
 
 
 class RealtyConfig(AppConfig):
-    name = 'realty'
+    name = 'apps.realty'
+    verbose_name = 'Недвижимость'
+    label = 'realty'

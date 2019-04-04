@@ -1,8 +1,8 @@
 # Author: https://steelkiwi.com/blog/practical-application-singleton-design-pattern/
 from django.db import models
 from django.core.cache import cache
-
 from django.contrib import admin
+from apps.settings.classes.turn_off_admin_logging import TurnOffAdminLogging
 
 
 class SingletonModel(models.Model):
@@ -30,7 +30,7 @@ class SingletonModel(models.Model):
         return cache.get(cls.__name__)
 
 
-class SingletonAdminModel(admin.ModelAdmin):
+class SingletonAdminModel(TurnOffAdminLogging, admin.ModelAdmin):
 
     # Disable mass actions
     actions = None

@@ -9,8 +9,8 @@ class SiteSettings(SingletonModel):
     site_phone       = models.CharField('Site Phone', max_length=50, blank=True, null=True, help_text='define site main email, e.g.: +79784447711')
 
     def __str__(self):
-        return 'Site SEO Settings'
+        return 'Основные настройки сайта'
 
     class Meta:
-        verbose_name = 'Site Settings'
-        verbose_name_plural = 'Site Settings'
+        verbose_name = 'Основные настройки сайта'
+        verbose_name_plural = 'Основные настройки сайта'

@@ -21,7 +21,6 @@ from django.conf.urls.static import static
 
 admin.site.site_header = "Monolit Admin"
 admin.site.site_title = admin.site.site_header
-# admin.site.site_title = "Monolit Admin"
 admin.site.index_title = "Monolit Applications"
 
 

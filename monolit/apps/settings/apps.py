@@ -2,4 +2,6 @@ from django.apps import AppConfig
 
 
 class SettingsConfig(AppConfig):
-    name = 'settings'
+    name = 'apps.settings'
+    verbose_name = 'Настройки сайта'
+    label = 'settings'
