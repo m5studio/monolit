@@ -70,7 +70,6 @@ module.exports = {
         new CleanWebpackPlugin([
             // instead clenning inner folders, delete entire dist
             'layout/dist'
-
             // './layout/dist/**/*.*',
         ]),
 
