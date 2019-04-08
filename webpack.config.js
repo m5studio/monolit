@@ -77,7 +77,7 @@ module.exports = {
 
         // Copy favicons
         new CopyWebpackPlugin([
-            {from:'./layout/src/images/favicons', to:'images/favicons'}
+            { from:'layout/src/images/favicons', to:'images/favicons' }
         ]),
 
         // Add jQuery to Webpack
