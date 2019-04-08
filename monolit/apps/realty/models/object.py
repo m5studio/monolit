@@ -13,7 +13,6 @@ class Object(models.Model):
     )
 
     OBJECT_TYPES = (
-        ('empty', '- Выберите тип объекта -'),
         ('business_center', 'Бизнес центр'),
         ('city', 'Город'),
         ('living_house', 'Жилой дом'),
@@ -27,7 +26,6 @@ class Object(models.Model):
     )
 
     CITIES = (
-        ('empty', '- Выберите город -'),
         ('alushta', 'Алушта'),
         ('evpatoriya', 'Евпатория'),
         ('simferopol', 'Симферополь'),
@@ -42,10 +40,11 @@ class Object(models.Model):
     slug         = models.SlugField('URL адрес', max_length=100, help_text='e.g.: status-house (max 100 chars), получим https://monolit.site/objects/status-house/')
     category     = MultiSelectField('Категория объекта',
                                    choices=CATEGORIES,
-                                   default=[CATEGORIES[0][0], CATEGORIES[1][0]],
+                                   # default=[CATEGORIES[0][0], CATEGORIES[1][0]],
+                                   blank=True, null=True,
                                    help_text='Выберите категорию(и) объекта недвижимости')
-    object_type  = models.CharField('Тип Объекта', max_length=100, choices=OBJECT_TYPES, default=0)
-    city         = models.CharField('Город', max_length=100, choices=CITIES, default=0)
+    object_type  = models.CharField('Тип Объекта', max_length=100, choices=OBJECT_TYPES, blank=True, null=True)
+    city         = models.CharField('Город', max_length=100, choices=CITIES, blank=True, null=True)
     address      = models.CharField('Адрес', max_length=255, blank=True, null=True, help_text='Город, улица, номер дома (для завершенных/построенных объектов)')
     location     = PlainLocationField(verbose_name='Локация', blank=True, null=True, based_fields=['address'], help_text='Географические координаты - широта и долгота')
     description  = RichTextField('Описание', blank=True, null=True)
