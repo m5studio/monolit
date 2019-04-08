@@ -13,6 +13,7 @@ class Object(models.Model):
     )
 
     OBJECT_TYPES = (
+        ('empty', '- Выберите тип объекта -'),
         ('business_center', 'Бизнес центр'),
         ('city', 'Город'),
         ('living_house', 'Жилой дом'),
@@ -26,6 +27,7 @@ class Object(models.Model):
     )
 
     CITIES = (
+        ('empty', '- Выберите город -'),
         ('alushta', 'Алушта'),
         ('evpatoriya', 'Евпатория'),
         ('simferopol', 'Симферополь'),
@@ -42,16 +44,16 @@ class Object(models.Model):
                                    choices=CATEGORIES,
                                    default=[CATEGORIES[0][0], CATEGORIES[1][0]],
                                    help_text='Выберите категорию(и) объекта недвижимости')
-    object_type  = models.CharField('Тип Объекта', max_length=100, choices=OBJECT_TYPES)
-    city         = models.CharField('Город', max_length=100, choices=CITIES)
+    object_type  = models.CharField('Тип Объекта', max_length=100, choices=OBJECT_TYPES, default=0)
+    city         = models.CharField('Город', max_length=100, choices=CITIES, default=0)
     address      = models.CharField('Адрес', max_length=255, blank=True, null=True, help_text='Город, улица, номер дома (для завершенных/построенных объектов)')
-    location     = PlainLocationField(verbose_name='Локация', blank=True, null=True, based_fields=['address'])
+    location     = PlainLocationField(verbose_name='Локация', blank=True, null=True, based_fields=['address'], help_text='Географические координаты - широта и долгота')
     description  = RichTextField('Описание', blank=True, null=True)
     has_military = models.BooleanField('Военная ипотека', default=False, help_text='Подходит ли данный объект для военной ипотеки')
     webcam       = models.URLField('Cсылка на web-камеру', blank=True, null=True, help_text='e.g.: https://rtsp.me/embed/3KASrTkG/')
     panoram      = models.URLField('Cсылка на панораму', blank=True, null=True, help_text='e.g.: https://monolit360.com/files/main/index.html?s=pano1692')
-    created      = models.DateTimeField(auto_now=False, auto_now_add=True)
-    updated      = models.DateTimeField(auto_now=True, auto_now_add=False)
+    created      = models.DateTimeField(auto_now=False, auto_now_add=True, blank=True, null=True)
+    updated      = models.DateTimeField(auto_now=True, auto_now_add=False, blank=True, null=True)
 
     def __str__(self):
         return self.name
