@@ -67,11 +67,13 @@ module.exports = {
         }
     },
     plugins: [
-        new CleanWebpackPlugin([
-            // instead clenning inner folders, delete entire dist
-            'layout/dist'
-            // './layout/dist/**/*.*',
-        ]),
+        // new CleanWebpackPlugin([
+        //     // instead clenning inner folders, delete entire dist
+        //     'layout/dist'
+        //     // './layout/dist/**/*.*',
+        // ]),
+
+        new CleanWebpackPlugin(),
 
         // Copy favicons
         new CopyWebpackPlugin([
