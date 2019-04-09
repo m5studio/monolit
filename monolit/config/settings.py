@@ -194,7 +194,8 @@ LOCATION_FIELD_PATH = STATIC_URL + 'location_field'
 
 LOCATION_FIELD = {
     'map.provider': 'google',
-    'map.zoom': 17,
+    # 'map.zoom': 17,
+    'map.zoom': 8,
 
     'search.provider': 'google',
     'search.suffix': '',
