@@ -14,12 +14,24 @@ class ObjectSectionInline(admin.TabularInline):
     model = ObjectSection
     extra = 0
 
+    # def get_max_num(self, request, obj=None, **kwargs):
+    #     # TODO: correct check
+    #     if not ObjectBlock.objects.exists():
+    #         return 0
+
+    # def get_extra(self, request, obj=None, **kwargs):
+    #     if not hasattr(obj, 'ObjectBlock') or not obj.ObjectBlock.exists():
+    #         return 1
+    #     return 0
+
 @admin.register(ObjectSection)
 class ObjectSectionAdmin(TurnOffAdminLogging, admin.ModelAdmin):
+    # raw_id_fields = ("object",)
+
     # Hide Model from admin index
-    def get_model_perms(self, request):
-        return dict()
-    # pass
+    # def get_model_perms(self, request):
+    #     return dict()
+    pass
 
 
 class ObjectBlockInline(admin.TabularInline):
