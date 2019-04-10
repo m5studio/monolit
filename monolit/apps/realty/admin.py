@@ -6,6 +6,31 @@ from apps.realty.models.object_info_tab import ObjectInfoTab
 from apps.realty.models.document import Document
 from apps.realty.models.video import Video
 from apps.realty.models.object_file import ObjectFile
+from apps.realty.models.object_block import ObjectBlock
+from apps.realty.models.object_section import ObjectSection
+
+
+class ObjectSectionInline(admin.TabularInline):
+    model = ObjectSection
+    extra = 0
+
+@admin.register(ObjectSection)
+class ObjectSectionAdmin(TurnOffAdminLogging, admin.ModelAdmin):
+    # Hide Model from admin index
+    def get_model_perms(self, request):
+        return dict()
+    # pass
+
+
+class ObjectBlockInline(admin.TabularInline):
+    model = ObjectBlock
+    extra = 0
+
+@admin.register(ObjectBlock)
+class ObjectBlockAdmin(TurnOffAdminLogging, admin.ModelAdmin):
+    # Hide Model from admin index
+    def get_model_perms(self, request):
+        return dict()
 
 
 class ObjectFileInline(admin.TabularInline):
@@ -59,6 +84,8 @@ class ObjectInfoTabAdmin(TurnOffAdminLogging, admin.ModelAdmin):
 class ObjectAdmin(TurnOffAdminLogging, admin.ModelAdmin):
     inlines = [
         ObjectInfoTabInline,
+        ObjectBlockInline,
+        ObjectSectionInline,
         VideoInline,
         ObjectFileInline,
         DocumentInline,
