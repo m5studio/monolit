@@ -5,6 +5,8 @@ from multiselectfield import MultiSelectField
 from ckeditor.fields import RichTextField
 from location_field.models.plain import PlainLocationField
 
+from apps.realty.models.object_gallery import Gallery
+
 
 class Object(models.Model):
     CATEGORIES = (
@@ -54,7 +56,7 @@ class Object(models.Model):
     panoram      = models.URLField('Cсылка на панораму', blank=True, null=True, help_text='e.g.: https://monolit360.com/files/main/index.html?s=pano1692')
     created      = models.DateTimeField(auto_now=False, auto_now_add=True, blank=True, null=True)
     updated      = models.DateTimeField(auto_now=True, auto_now_add=False, blank=True, null=True)
-    # galleries    = models.ManyToManyField(Gallery, verbose_name='Галереи Объекта', help_text='Связанные с Объектом галереи изображений')
+    galleries    = models.ManyToManyField(Gallery, verbose_name='Галереи Объекта', help_text='Связанные с Объектом галереи изображений')
 
     def __str__(self):
         return self.name

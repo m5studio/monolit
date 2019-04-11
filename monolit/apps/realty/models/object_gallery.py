@@ -1,9 +1,9 @@
 from django.db import models
-from apps.realty.models.object import Object
+# from apps.realty.models.object import Object
 
 
 class Gallery(models.Model):
-    object  = models.ForeignKey(Object, verbose_name='Объект', on_delete=models.SET_NULL, blank=True, null=True)
+    # object  = models.ForeignKey(Object, verbose_name='Объект', on_delete=models.CASCADE)
     title   = models.CharField('Заголовок галереи', max_length=255)
 
     def __str__(self):

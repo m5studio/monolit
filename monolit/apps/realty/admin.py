@@ -12,9 +12,9 @@ from apps.realty.models.object_section import ObjectSection
 from apps.realty.models.object_gallery import Gallery, Image
 
 
-class ImageInline(admin.TabularInline):
-    model = Image
-    extra = 0
+# class ImageInline(admin.TabularInline):
+#     model = Image
+#     extra = 0
 
 @admin.register(Image)
 class ImageAdmin(TurnOffAdminLogging, admin.ModelAdmin):
@@ -25,9 +25,10 @@ class ImageAdmin(TurnOffAdminLogging, admin.ModelAdmin):
 
 @admin.register(Gallery)
 class GalleryAdmin(TurnOffAdminLogging, admin.ModelAdmin):
-    inlines = [
-        ImageInline,
-    ]
+    search_fields = ['galleries']
+    # inlines = [
+    #     ImageInline,
+    # ]
     # search_fields = ['galleries']
     # list_display = ('title', 'object')
     # autocomplete_fields = ['object']
@@ -109,7 +110,7 @@ class ObjectInfoTabAdmin(TurnOffAdminLogging, admin.ModelAdmin):
 class ObjectAdmin(TurnOffAdminLogging, admin.ModelAdmin):
     inlines = [
         ObjectInfoTabInline,
-        GalleryInline,
+        # GalleryInline,
         ObjectBlockInline,
         ObjectSectionInline,
         VideoInline,
@@ -123,4 +124,4 @@ class ObjectAdmin(TurnOffAdminLogging, admin.ModelAdmin):
     ordering = ('order',)
     readonly_fields=('crm_id',)
 
-    # autocomplete_fields = ['galleries']
+    autocomplete_fields = ['galleries']
