@@ -49,13 +49,12 @@ class Object(models.Model):
     location     = PlainLocationField(verbose_name='Локация', blank=True, null=True, based_fields=['address'], default='44.952117,34.10241700000006', help_text='Географические координаты - широта и долгота')
     description  = RichTextField('Описание', blank=True, null=True)
     genplan      = models.ImageField('Генплан', upload_to='realty/objects/genplan/', blank=True, null=True, help_text='Изображение с генпланом')
-    # TODO: to object_section + # TODO: object_block
-    # genplan_svg  = models.TextField('Выделение SVG на Генплане', blank=True, null=True, help_text='Выеделение с помощью SVG координат объектов на Генплане')
     has_military = models.BooleanField('Военная ипотека', default=False, help_text='Подходит ли данный объект для военной ипотеки')
     webcam       = models.URLField('Cсылка на web-камеру', blank=True, null=True, help_text='e.g.: https://rtsp.me/embed/3KASrTkG/')
     panoram      = models.URLField('Cсылка на панораму', blank=True, null=True, help_text='e.g.: https://monolit360.com/files/main/index.html?s=pano1692')
     created      = models.DateTimeField(auto_now=False, auto_now_add=True, blank=True, null=True)
     updated      = models.DateTimeField(auto_now=True, auto_now_add=False, blank=True, null=True)
+    # galleries    = models.ManyToManyField(Gallery, verbose_name='Галереи Объекта', help_text='Связанные с Объектом галереи изображений')
 
     def __str__(self):
         return self.name

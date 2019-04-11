@@ -3,35 +3,48 @@ from apps.settings.classes.turn_off_admin_logging import TurnOffAdminLogging
 
 from apps.realty.models.object import Object
 from apps.realty.models.object_info_tab import ObjectInfoTab
-from apps.realty.models.document import Document
-from apps.realty.models.video import Video
+from apps.realty.models.object_document import Document
+from apps.realty.models.object_video import Video
 from apps.realty.models.object_file import ObjectFile
 from apps.realty.models.object_block import ObjectBlock
 from apps.realty.models.object_section import ObjectSection
+
+from apps.realty.models.object_gallery import Gallery, Image
+
+
+class ImageInline(admin.TabularInline):
+    model = Image
+    extra = 0
+
+@admin.register(Image)
+class ImageAdmin(TurnOffAdminLogging, admin.ModelAdmin):
+    # Hide Model from admin index
+    def get_model_perms(self, request):
+        return dict()
+
+
+@admin.register(Gallery)
+class GalleryAdmin(TurnOffAdminLogging, admin.ModelAdmin):
+    inlines = [
+        ImageInline,
+    ]
+    # search_fields = ['galleries']
+    # list_display = ('title', 'object')
+    # autocomplete_fields = ['object']
+
+
+class GalleryInline(admin.TabularInline):
+    model = Gallery
+    extra = 0
 
 
 class ObjectSectionInline(admin.TabularInline):
     model = ObjectSection
     extra = 0
 
-    # def get_max_num(self, request, obj=None, **kwargs):
-    #     # TODO: correct check
-    #     if not ObjectBlock.objects.exists():
-    #         return 0
-
-    # def get_extra(self, request, obj=None, **kwargs):
-    #     if not hasattr(obj, 'ObjectBlock') or not obj.ObjectBlock.exists():
-    #         return 1
-    #     return 0
-
 @admin.register(ObjectSection)
 class ObjectSectionAdmin(TurnOffAdminLogging, admin.ModelAdmin):
-    # raw_id_fields = ("object",)
-
-    # Hide Model from admin index
-    # def get_model_perms(self, request):
-    #     return dict()
-    pass
+    list_display = ('name', 'object')
 
 
 class ObjectBlockInline(admin.TabularInline):
@@ -96,6 +109,7 @@ class ObjectInfoTabAdmin(TurnOffAdminLogging, admin.ModelAdmin):
 class ObjectAdmin(TurnOffAdminLogging, admin.ModelAdmin):
     inlines = [
         ObjectInfoTabInline,
+        GalleryInline,
         ObjectBlockInline,
         ObjectSectionInline,
         VideoInline,
@@ -108,3 +122,5 @@ class ObjectAdmin(TurnOffAdminLogging, admin.ModelAdmin):
     search_fields = ['name']
     ordering = ('order',)
     readonly_fields=('crm_id',)
+
+    # autocomplete_fields = ['galleries']
