@@ -1,17 +1,18 @@
 from django.db import models
-# from apps.realty.models.object import Object
+from apps.realty.models.object import Object
 
 
 class Gallery(models.Model):
-    # object  = models.ForeignKey(Object, verbose_name='Объект', on_delete=models.CASCADE)
+    object  = models.ForeignKey(Object, verbose_name='Объект', on_delete=models.CASCADE, blank=True, null=True)
     title   = models.CharField('Заголовок галереи', max_length=255)
+    updated = models.DateTimeField(auto_now=True, auto_now_add=False, blank=True, null=True)
 
     def __str__(self):
         return self.title
 
     class Meta:
         verbose_name = 'Галерея Объекта'
-        verbose_name_plural = 'Объекты (Гелереи изображений)'
+        verbose_name_plural = 'Объекты (Фото Галереи этапов строительства)'
 
 
 class Image(models.Model):

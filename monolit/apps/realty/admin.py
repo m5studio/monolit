@@ -8,13 +8,18 @@ from apps.realty.models.object_video import Video
 from apps.realty.models.object_file import ObjectFile
 from apps.realty.models.object_block import ObjectBlock
 from apps.realty.models.object_section import ObjectSection
-
 from apps.realty.models.object_gallery import Gallery, Image
+from apps.realty.models.object_site import ObjectSite
 
 
-# class ImageInline(admin.TabularInline):
-#     model = Image
-#     extra = 0
+@admin.register(ObjectSite)
+class ObjectSiteAdmin(TurnOffAdminLogging, admin.ModelAdmin):
+    readonly_fields=('crm_id', 'price_total')
+
+
+class ImageInline(admin.TabularInline):
+    model = Image
+    extra = 0
 
 @admin.register(Image)
 class ImageAdmin(TurnOffAdminLogging, admin.ModelAdmin):
@@ -23,20 +28,17 @@ class ImageAdmin(TurnOffAdminLogging, admin.ModelAdmin):
         return dict()
 
 
-@admin.register(Gallery)
-class GalleryAdmin(TurnOffAdminLogging, admin.ModelAdmin):
-    search_fields = ['galleries']
-    # inlines = [
-    #     ImageInline,
-    # ]
-    # search_fields = ['galleries']
-    # list_display = ('title', 'object')
-    # autocomplete_fields = ['object']
-
-
 class GalleryInline(admin.TabularInline):
     model = Gallery
     extra = 0
+
+@admin.register(Gallery)
+class GalleryAdmin(TurnOffAdminLogging, admin.ModelAdmin):
+    inlines = [
+        ImageInline,
+    ]
+    list_display = ('title', 'object', 'updated')
+    # search_fields = ['galleries']
 
 
 class ObjectSectionInline(admin.TabularInline):
@@ -110,7 +112,7 @@ class ObjectInfoTabAdmin(TurnOffAdminLogging, admin.ModelAdmin):
 class ObjectAdmin(TurnOffAdminLogging, admin.ModelAdmin):
     inlines = [
         ObjectInfoTabInline,
-        # GalleryInline,
+        GalleryInline,
         ObjectBlockInline,
         ObjectSectionInline,
         VideoInline,
@@ -123,5 +125,4 @@ class ObjectAdmin(TurnOffAdminLogging, admin.ModelAdmin):
     search_fields = ['name']
     ordering = ('order',)
     readonly_fields=('crm_id',)
-
-    autocomplete_fields = ['galleries']
+    # autocomplete_fields = ['galleries']

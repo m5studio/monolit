@@ -8,11 +8,15 @@
 <body>
     <h1>Monolit base.html</h1>
 
-    <hr>
-    <h2>{{ settings.site_title }}</h2>
-    <h2>{{ settings.site_phone }}</h2>
-    <h2>{{ settings.site_email }}</h2>
-    <hr>
+    {% if settings.site_title %}
+        <h2>{{ settings.site_title }}</h2>
+    {% endif %}
+    {% if settings.site_phone %}
+        <h2>{{ settings.site_phone }}</h2>
+    {% endif %}
+    {% if settings.site_email %}
+        <h2>{{ settings.site_email }}</h2>
+    {% endif %}
 
     {% block content %}{% endblock %}
 </body>
