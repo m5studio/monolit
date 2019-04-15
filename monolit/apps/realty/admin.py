@@ -12,6 +12,7 @@ from apps.realty.models.object_gallery import Gallery, Image
 from apps.realty.models.object_site import ObjectSite
 from apps.realty.models.object_site_balcony import ObjectBalcony
 from apps.realty.models.object_site_bathroom import ObjectBathroom
+from apps.realty.models.object_elevator import ObjectElevator
 
 
 class ObjectBathroomInline(admin.TabularInline):
@@ -44,6 +45,7 @@ class ObjectSiteAdmin(TurnOffAdminLogging, admin.ModelAdmin):
         ObjectBathroomInline,
         ObjectBalconyInline,
     ]
+    list_display = ('name', 'object', 'status', 'updated')
     readonly_fields=('crm_id', 'price_total')
 
 
@@ -69,6 +71,20 @@ class GalleryAdmin(TurnOffAdminLogging, admin.ModelAdmin):
     ]
     list_display = ('title', 'object', 'updated')
     # search_fields = ['galleries']
+    search_fields = ['object']
+    autocomplete_fields = ['object']
+
+
+class ObjectElevatorInline(admin.TabularInline):
+    model = ObjectElevator
+    extra = 0
+    max_num = 5
+
+@admin.register(ObjectElevator)
+class ObjectElevatorAdmin(TurnOffAdminLogging, admin.ModelAdmin):
+    # Hide Model from admin index
+    def get_model_perms(self, request):
+        return dict()
 
 
 class ObjectSectionInline(admin.TabularInline):
@@ -77,6 +93,9 @@ class ObjectSectionInline(admin.TabularInline):
 
 @admin.register(ObjectSection)
 class ObjectSectionAdmin(TurnOffAdminLogging, admin.ModelAdmin):
+    inlines = [
+        ObjectElevatorInline,
+    ]
     list_display = ('name', 'object')
 
 
@@ -142,7 +161,7 @@ class ObjectInfoTabAdmin(TurnOffAdminLogging, admin.ModelAdmin):
 class ObjectAdmin(TurnOffAdminLogging, admin.ModelAdmin):
     inlines = [
         ObjectInfoTabInline,
-        GalleryInline,
+        # GalleryInline,
         ObjectBlockInline,
         ObjectSectionInline,
         VideoInline,
@@ -150,7 +169,7 @@ class ObjectAdmin(TurnOffAdminLogging, admin.ModelAdmin):
         DocumentInline,
     ]
 
-    list_display = ('name', 'order', 'active', 'updated', 'created')
+    list_display = ('name', 'order', 'active', 'updated')
     list_editable = ('order',)
     search_fields = ['name']
     ordering = ('order',)

@@ -59,9 +59,10 @@ class Object(models.Model):
     description   = RichTextField('Описание', blank=True, null=True)
     genplan       = models.ImageField('Генплан', upload_to='realty/objects/genplan/', blank=True, null=True, help_text='Изображение с генпланом')
     has_military  = models.BooleanField('Военная ипотека', default=False, help_text='Подходит ли данный объект для военной ипотеки')
+    has_mother    = models.BooleanField('Материнский капитал', default=False, help_text='Подходит ли данный объект под оплату мат.капиталом')
     webcam        = models.URLField('Cсылка на web-камеру', blank=True, null=True, help_text='e.g.: https://rtsp.me/embed/3KASrTkG/')
     panoram       = models.URLField('Cсылка на панораму', blank=True, null=True, help_text='e.g.: https://monolit360.com/files/main/index.html?s=pano1692')
-    created       = models.DateTimeField(auto_now=False, auto_now_add=True, blank=True, null=True)
+    # created       = models.DateTimeField(auto_now=False, auto_now_add=True, blank=True, null=True)
     updated       = models.DateTimeField(auto_now=True, auto_now_add=False, blank=True, null=True)
 
     def __str__(self):

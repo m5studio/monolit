@@ -3,7 +3,6 @@ from apps.realty.models.object_site import ObjectSite
 
 
 class ObjectBalcony(models.Model):
-
     BALCONY_TYPES = (
         ('balcony', 'Балкон'),
         ('loggia', 'Лоджия'),
@@ -18,7 +17,7 @@ class ObjectBalcony(models.Model):
     balcony_qty  = models.PositiveIntegerField('Количество балконов', default=1, blank=True, null=True)
 
     def __str__(self):
-        return self.object_site
+        return self.balcony_type
 
     class Meta:
         verbose_name = 'Балкон'
