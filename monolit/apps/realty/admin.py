@@ -10,10 +10,40 @@ from apps.realty.models.object_block import ObjectBlock
 from apps.realty.models.object_section import ObjectSection
 from apps.realty.models.object_gallery import Gallery, Image
 from apps.realty.models.object_site import ObjectSite
+from apps.realty.models.object_site_balcony import ObjectBalcony
+from apps.realty.models.object_site_bathroom import ObjectBathroom
+
+
+class ObjectBathroomInline(admin.TabularInline):
+    model = ObjectBathroom
+    extra = 0
+    max_num = 5
+
+@admin.register(ObjectBathroom)
+class ObjectBalconyAdmin(TurnOffAdminLogging, admin.ModelAdmin):
+    # Hide Model from admin index
+    def get_model_perms(self, request):
+        return dict()
+
+
+class ObjectBalconyInline(admin.TabularInline):
+    model = ObjectBalcony
+    extra = 0
+    max_num = 5
+
+@admin.register(ObjectBalcony)
+class ObjectBalconyAdmin(TurnOffAdminLogging, admin.ModelAdmin):
+    # Hide Model from admin index
+    def get_model_perms(self, request):
+        return dict()
 
 
 @admin.register(ObjectSite)
 class ObjectSiteAdmin(TurnOffAdminLogging, admin.ModelAdmin):
+    inlines = [
+        ObjectBathroomInline,
+        ObjectBalconyInline,
+    ]
     readonly_fields=('crm_id', 'price_total')
 
 
