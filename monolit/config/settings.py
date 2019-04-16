@@ -59,6 +59,9 @@ INSTALLED_APPS = [
     'ckeditor',
     'location_field',
     'multiselectfield',
+    'django_unused_media',
+    'django_cleanup.apps.CleanupConfig',
+    'imagekit',
 
     'apps.settings.apps.SettingsConfig',
     'apps.realty.apps.RealtyConfig',
@@ -222,3 +225,8 @@ LOCATION_FIELD = {
             ],
     },
 }
+
+
+# https://github.com/matthewwithanm/django-imagekit
+# IMAGEKIT_CACHEFILE_DIR = 'CACHE'
+IMAGEKIT_CACHEFILE_DIR = 'cache'

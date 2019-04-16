@@ -1,6 +1,8 @@
 from django.contrib import admin
 from apps.settings.classes.turn_off_admin_logging import TurnOffAdminLogging
 
+from imagekit.admin import AdminThumbnail
+
 from apps.realty.models.object import Object
 from apps.realty.models.object_info_tab import ObjectInfoTab
 from apps.realty.models.object_document import Document
@@ -52,9 +54,18 @@ class ObjectSiteAdmin(TurnOffAdminLogging, admin.ModelAdmin):
 class ImageInline(admin.TabularInline):
     model = Image
     extra = 0
+    # fields = ('gallery', 'alt', 'image', 'image_thumbnail_admin')
+
+    image_thumbnail_admin = AdminThumbnail(image_field='image_thumbnail_admin')
+    fields = ('gallery', 'alt', 'image', 'image_thumbnail_admin')
+    # fields = ('image_thumbnail_admin',)
+    readonly_fields = ('image_thumbnail_admin',)
 
 @admin.register(Image)
 class ImageAdmin(TurnOffAdminLogging, admin.ModelAdmin):
+    # list_display = ('gallery', 'alt', 'image', 'image_thumbnail_admin')
+    # image_thumbnail_admin = AdminThumbnail(image_field='image_thumbnail_admin')
+
     # Hide Model from admin index
     def get_model_perms(self, request):
         return dict()
