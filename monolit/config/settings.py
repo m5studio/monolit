@@ -229,4 +229,4 @@ LOCATION_FIELD = {
 
 # https://github.com/matthewwithanm/django-imagekit
 # IMAGEKIT_CACHEFILE_DIR = 'CACHE'
-IMAGEKIT_CACHEFILE_DIR = 'cache'
+IMAGEKIT_CACHEFILE_DIR = 'cached-images'
