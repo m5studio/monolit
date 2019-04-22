@@ -172,7 +172,12 @@ SHORT_DATETIME_FORMAT = 'd/m/Y H:i'
 
 # TODO: Setup Django Сaching https://docs.djangoproject.com/en/2.2/topics/cache/
 
-""" ================== Additional modules Settings ================== """
+""" [ Additional modules Settings ] """
+
+# Custom settings
+MAX_IMG_WIDTH = 1980
+IMG_QUALITY = 70
+
 
 # CKEditor https://github.com/django-ckeditor/django-ckeditor
 CKEDITOR_CONFIGS = {

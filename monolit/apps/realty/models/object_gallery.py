@@ -1,6 +1,6 @@
 from django.db import models
 
-from django.db.models.signals import pre_save, post_delete
+from django.db.models.signals import pre_save, post_save, post_delete
 from django.dispatch import receiver
 
 from imagekit.models import ImageSpecField
@@ -8,6 +8,7 @@ from imagekit.processors import ResizeToFill, ResizeToFit
 
 from apps.settings.classes.clean_media import CleanMedia
 from apps.settings.classes.file_processing import FileProcessing
+from apps.settings.classes.image_optimizer import ImageOptimizer
 
 from apps.realty.models.object import Object
 
@@ -31,6 +32,7 @@ class Gallery(models.Model):
 
 def upload_path(instance, filename):
     gallery_name = instance.gallery.id
+
     filename = FileProcessing(filename)
     # filename = filename.newFileNameTranslitSlugify()
     filename = filename.newFileNameGenerated()
@@ -45,14 +47,6 @@ class Image(models.Model):
                                            processors=[ResizeToFit(256, 256)],
                                            options={'quality': 70})
 
-    # def __str__(self):
-    #     return self.alt
-
-    # def delete(self, *args, **kwargs):
-    #     print('[DELETE METHOD Image]')
-    #     print(self.image.path)
-    #     super(Image, self).delete(*args, **kwargs)
-
     class Meta:
         verbose_name = 'Изображение'
         verbose_name_plural = 'Изображения'
@@ -64,8 +58,15 @@ def change_gallery_title(sender, instance, **kwargs):
     instance.title = instance.title.title()
 
 
+@receiver(post_save, sender=Image)
+def image_optimization(sender, instance, created, **kwargs):
+    if instance.image:
+        image = ImageOptimizer(instance.image.path)
+        image.optimizeAndSaveImg()
+
+
 @receiver(post_delete, sender=Image)
-def post_clean_empty_dirs(sender, instance, **kwargs):
+def clean_empty_media_dirs(sender, instance, **kwargs):
     cleanMedia = CleanMedia()
 
     # Delete imagekit chache file
