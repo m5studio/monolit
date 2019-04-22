@@ -7,6 +7,7 @@ from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill, ResizeToFit
 
 from apps.settings.classes.clean_media import CleanMedia
+from apps.settings.classes.file_processing import FileProcessing
 
 from apps.realty.models.object import Object
 
@@ -30,20 +31,9 @@ class Gallery(models.Model):
 
 def upload_path(instance, filename):
     gallery_name = instance.gallery.id
-    filename = filename.lower()
-
-    import os, uuid
-    from django.utils.text import slugify
-    from transliterate import translit
-
-    name, ext = os.path.splitext(filename)
-    transliterated_name = translit(name, 'ru', reversed=True)
-    trasliterated_and_slugified_name = slugify(transliterated_name)
-
-    generated_filename = uuid.uuid4()
-    # filename = '{0}{1}'.format(trasliterated_and_slugified_name, ext)
-    filename = '{0}{1}'.format(generated_filename, ext)
-
+    filename = FileProcessing(filename)
+    # filename = filename.newFileNameTranslitSlugify()
+    filename = filename.newFileNameGenerated()
     return 'realty/galleries/{0}/{1}'.format(gallery_name, filename)
 
 class Image(models.Model):

@@ -1,3 +1,8 @@
+"""
+    This class using for clean /media/ folder from empty dirs
+    and for delete unused imagekit module files
+"""
+
 import os, itertools
 from django.conf import settings
 
