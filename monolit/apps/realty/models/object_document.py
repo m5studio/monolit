@@ -4,7 +4,7 @@ from django.db import models
 from apps.realty.models.object import Object
 
 
-class Document(models.Model):
+class ObjectDocument(models.Model):
     object  = models.ForeignKey(Object, on_delete=models.CASCADE, default=0)
     title   = models.CharField('Название документа', max_length=255, blank=True, null=True)
     author  = models.CharField('Автор', max_length=255, blank=True, null=True)

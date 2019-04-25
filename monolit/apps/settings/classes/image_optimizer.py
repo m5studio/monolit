@@ -76,6 +76,7 @@ class ImageOptimizer:
         # Enlarge image
         # if 1000 <= self.getWidth() < 1280:
         #     return self.fixModeAndResize(1280)
+        # Skip image less then 640px width
         # if self.getWidth() < 640:
         #     print('Image is too small')
         #     return self.fixImgMode()

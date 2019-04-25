@@ -1,10 +1,10 @@
 """
-Stop logging recent actions in admin
+    Stop logging recent actions in admin
 
-Usage example:
+    Usage example:
 
-class BlogAdmin(TurnOffAdminLogging, admin.ModelAdmin):
-    ...
+    class BlogAdmin(TurnOffAdminLogging, admin.ModelAdmin):
+        ...
 """
 
 class TurnOffAdminLogging:

@@ -6,7 +6,6 @@ django-environ==0.4.5
 django-imagekit==4.0.2
 django-js-asset==1.2.2
 django-location-field==2.1.0
-django-multiselectfield==0.1.8
 django-unused-media==0.1.13
 pilkit==2.0
 Pillow==6.0.0

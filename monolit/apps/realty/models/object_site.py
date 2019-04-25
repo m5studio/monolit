@@ -1,10 +1,19 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
-from multiselectfield import MultiSelectField
+
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 
 from apps.realty.models.object import Object
 from apps.realty.models.object_block import ObjectBlock
 from apps.realty.models.object_section import ObjectSection
+
+
+class ObjectSiteWindowsView(models.Model):
+    name = models.CharField('Вид из окон', max_length=255)
+
+    def __str__(self):
+        return self.name
 
 
 class ObjectSite(models.Model):
@@ -29,13 +38,13 @@ class ObjectSite(models.Model):
         ('1', 'Чистовая отделка'),
     )
 
-    WINDOWS_VIEW = (
-        ('yard', 'Во двор'),
-        ('street', 'Улица'),
-        ('sea', 'Море'),
-        ('lake', 'Озеро'),
-        ('mountains', 'Горы'),
-    )
+    # WINDOWS_VIEW = (
+    #     ('yard', 'Во двор'),
+    #     ('street', 'Улица'),
+    #     ('sea', 'Море'),
+    #     ('lake', 'Озеро'),
+    #     ('mountains', 'Горы'),
+    # )
 
     status                  = models.BooleanField('Активный', default=True, help_text='Опубликован на сайте')
     special_offer           = models.BooleanField('Спецпредложение', default=False)
@@ -45,12 +54,11 @@ class ObjectSite(models.Model):
     object_block            = models.ForeignKey(ObjectBlock, verbose_name='Блок Объекта', on_delete=models.SET_NULL, blank=True, null=True)
     object_section          = models.ForeignKey(ObjectSection, verbose_name='Секция Объекта', on_delete=models.SET_NULL, blank=True, null=True)
 
-    name                    = models.CharField('Название помещения', max_length=255) # TODO: CHANGE TO crm_id, DELETE THIS FIELD
-    crm_id                  = models.CharField('CRM ID', max_length=100, blank=True, null=True, help_text='ID объекта в 1C (Заполняется автоматически при выгрузке)')
+    crm_id                  = models.CharField('CRM ID', max_length=100, unique=True, blank=True, null=True, help_text='ID объекта в 1C (Заполняется автоматически при выгрузке)')
     floor                   = models.IntegerField('Этаж', validators=[MinValueValidator(-5), MaxValueValidator(100)], blank=True, null=True)
     site_number             = models.CharField('Номер квартиры или помещения', max_length=100, blank=True, null=True)
     price_per_square        = models.DecimalField('Цена за м2 (руб.)', max_digits=20, decimal_places=2, blank=True, null=True, help_text='Стоимость одного квадратного метра')
-    price_total             = models.DecimalField('Общая стоимость (руб.)', max_digits=30, decimal_places=2, blank=True, null=True)
+    price_total             = models.DecimalField('Общая стоимость (руб.)', max_digits=30, decimal_places=2, blank=True, null=True, help_text='Считается автоматически из Площади помещения * Цена за м2')
     rooms_qty               = models.CharField('Количество комнат в помещении', max_length=100, choices=ROOMS_QTY, blank=True, null=True)
     site_area               = models.DecimalField('Площадь помещения', max_digits=10, decimal_places=2, blank=True, null=True)
     living_area             = models.DecimalField('Жилая площадь', max_digits=10, decimal_places=2, blank=True, null=True)
@@ -62,7 +70,7 @@ class ObjectSite(models.Model):
     wardrobe                = models.BooleanField('Гардеробная', default=False, help_text='Помещение для гардеробной или кладовой')
 
     finish_type             = models.CharField('Отделка', max_length=100, choices=FINISHING_TYPES, blank=True, null=True)
-    window_view             = MultiSelectField('Вид из окон', choices=WINDOWS_VIEW, blank=True, null=True)
+    window_view             = models.ManyToManyField(ObjectSiteWindowsView, verbose_name='Вид из окон')
 
     image_planning          = models.ImageField('Планировка', upload_to='objects/', blank=True, null=True)
     image_planning3d        = models.ImageField('Планировка 3D', upload_to='objects/', blank=True, null=True)
@@ -73,13 +81,13 @@ class ObjectSite(models.Model):
     updated                 = models.DateTimeField(auto_now=True, auto_now_add=False, blank=True, null=True)
 
     def __str__(self):
-        return self.name
-
-    def save(self, *args, **kwargs):
-        if self.site_area is not None and self.price_per_square is not None:
-            self.price_total = self.site_area * self.price_per_square
-        super().save(*args, **kwargs)
+        return self.crm_id
 
     class Meta:
         verbose_name = 'Помещение'
         verbose_name_plural = 'Помещения (квартиры, апартаменты, коммерческие)'
+
+
+@receiver(pre_save, sender=ObjectSite)
+def calculate_total_price(sender, instance, **kwargs):
+    instance.price_total = instance.site_area * instance.price_per_square

@@ -1,18 +1,40 @@
 from django.db import models
 from django.urls import reverse
 
-from multiselectfield import MultiSelectField
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
 from ckeditor.fields import RichTextField
 from location_field.models.plain import PlainLocationField
 
-# from apps.realty.models.object_gallery import Gallery
+from apps.settings.classes.file_processing import FileProcessing
+from apps.settings.classes.image_optimizer import ImageOptimizer
+
+
+class ObjectCategory(models.Model):
+    name = models.CharField('Название категории', max_length=255)
+
+    def __str__(self):
+        return self.name
+
+
+def genplan_upload_path(instance, filename):
+    # object_name = instance.id
+    # object_name = instance.slug
+    object_name = instance.crm_id
+
+    filename = FileProcessing(filename)
+    # filename = filename.newFileNameGenerated()
+    # return 'objects/{0}/genplan/{1}'.format(object_name, filename)
+    filename = filename.newFileNameGenplan()
+    return 'objects/{0}/{1}'.format(object_name, filename)
 
 
 class Object(models.Model):
-    CATEGORIES = (
-        ('living', 'Жилой'),
-        ('commercial', 'Коммерческий'),
-    )
+    # CATEGORIES = (
+    #     ('living', 'Жилой'),
+    #     ('commercial', 'Коммерческий'),
+    # )
 
     OBJECT_TYPES = (
         ('business_center', 'Бизнес центр'),
@@ -43,26 +65,33 @@ class Object(models.Model):
     active        = models.BooleanField('Активный', default=True, help_text='Опубликован на сайте')
     completed     = models.BooleanField('Строительство завершено', default=False)
     order         = models.PositiveIntegerField('Порядок', default=0, blank=True, null=True, help_text='Чем выше число, тем ниже объект в списке')
-    crm_id        = models.CharField('CRM ID', max_length=100, blank=True, null=True, help_text='ID объекта в 1C (Заполняется автоматически при выгрузке)')
-    name          = models.CharField('Название объекта', max_length=255, db_index=True)
-    slug          = models.SlugField('URL адрес', max_length=100, help_text='e.g.: status-house (max 100 chars), получим https://monolit.site/objects/status-house/')
-    category      = MultiSelectField('Категория объекта',
-                                   choices=CATEGORIES,
-                                   # default=[CATEGORIES[0][0], CATEGORIES[1][0]],
-                                   blank=True, null=True,
-                                   help_text='Выберите категорию(и) объекта недвижимости')
+    crm_id        = models.CharField('CRM ID', max_length=100, unique=True, help_text='ID объекта в 1C (Заполняется автоматически при выгрузке)')
+    name          = models.CharField('Название объекта', unique=True, max_length=255, db_index=True)
+    slug          = models.SlugField('URL адрес', max_length=100, unique=True, help_text='e.g.: status-house (max 100 chars), получим https://monolit.site/objects/status-house/')
+
+    # category      = models.ManyToManyField(ObjectCategory, verbose_name='Категория объекта', default=ObjectCategory.objects.all().values_list('pk', flat=True))
+    category      = models.ManyToManyField(ObjectCategory,
+                                           verbose_name='Категория объекта',
+                                           help_text='Выберите категорию(и) объекта недвижимости')
+
     object_type   = models.CharField('Тип Объекта', max_length=100, choices=OBJECT_TYPES, blank=True, null=True)
     building_type = models.CharField('Тип Здания', max_length=100, choices=BUILDING_TYPES, blank=True, null=True)
     city          = models.CharField('Город', max_length=100, choices=CITIES, blank=True, null=True)
     address       = models.CharField('Адрес', max_length=255, blank=True, null=True, help_text='Город, улица, номер дома (для завершенных/построенных объектов)')
-    location      = PlainLocationField(verbose_name='Локация', blank=True, null=True, based_fields=['address'], default='44.952117,34.10241700000006', help_text='Географические координаты - широта и долгота')
+    location      = PlainLocationField(verbose_name='Локация',
+                                       blank=True, null=True,
+                                       based_fields=['address'],
+                                       default='44.952117,34.10241700000006',
+                                       help_text='Географические координаты - широта и долгота')
     description   = RichTextField('Описание', blank=True, null=True)
-    genplan       = models.ImageField('Генплан', upload_to='realty/objects/genplan/', blank=True, null=True, help_text='Изображение с генпланом')
+    genplan       = models.ImageField('Генплан',
+                                      upload_to=genplan_upload_path,
+                                      blank=True, null=True,
+                                      help_text='Изображение с генпланом')
     has_military  = models.BooleanField('Военная ипотека', default=False, help_text='Подходит ли данный объект для военной ипотеки')
     has_mother    = models.BooleanField('Материнский капитал', default=False, help_text='Подходит ли данный объект под оплату мат.капиталом')
     webcam        = models.URLField('Cсылка на web-камеру', blank=True, null=True, help_text='e.g.: https://rtsp.me/embed/3KASrTkG/')
     panoram       = models.URLField('Cсылка на панораму', blank=True, null=True, help_text='e.g.: https://monolit360.com/files/main/index.html?s=pano1692')
-    # created       = models.DateTimeField(auto_now=False, auto_now_add=True, blank=True, null=True)
     updated       = models.DateTimeField(auto_now=True, auto_now_add=False, blank=True, null=True)
 
     def __str__(self):
@@ -74,3 +103,10 @@ class Object(models.Model):
     class Meta:
         verbose_name = 'Объект'
         verbose_name_plural = 'Объекты (Жилые, Коммерческие)'
+
+
+@receiver(post_save, sender=Object)
+def genplan_image_optimization(sender, instance, created, **kwargs):
+    if instance.genplan:
+        image = ImageOptimizer(instance.genplan.path)
+        image.optimizeAndSaveImg()

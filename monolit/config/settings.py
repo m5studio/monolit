@@ -58,7 +58,6 @@ INSTALLED_APPS = [
 
     'ckeditor',
     'location_field',
-    'multiselectfield',
     'django_unused_media',
     'django_cleanup.apps.CleanupConfig',
     'imagekit',

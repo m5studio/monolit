@@ -40,3 +40,6 @@ class FileProcessing:
 
     def newFileNameGenerated(self) -> str:
         return "{0}{1}".format(self.genarateFileName(), self.getFileExt())
+
+    def newFileNameGenplan(self) -> str:
+        return "{0}{1}".format('genplan', self.getFileExt())
