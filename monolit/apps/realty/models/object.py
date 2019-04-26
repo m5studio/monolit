@@ -19,13 +19,9 @@ class ObjectCategory(models.Model):
 
 
 def genplan_upload_path(instance, filename):
-    # object_name = instance.id
-    # object_name = instance.slug
     object_name = instance.crm_id
 
     filename = FileProcessing(filename)
-    # filename = filename.newFileNameGenerated()
-    # return 'objects/{0}/genplan/{1}'.format(object_name, filename)
     filename = filename.newFileNameGenplan()
     return 'objects/{0}/{1}'.format(object_name, filename)
 

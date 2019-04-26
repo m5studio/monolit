@@ -1,5 +1,5 @@
 import "./main.scss"
-import "./boostrap/boostrap"
+import "./bootstrap/bootstrap"
 
 import {stickyMainNav, toggleMainNav} from "./menu/main-nav"
 

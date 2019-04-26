@@ -1,10 +1,11 @@
 from django.db import models
 
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 
 from ckeditor.fields import RichTextField
 
+from apps.settings.classes.clean_media import CleanMedia
 from apps.settings.classes.file_processing import FileProcessing
 from apps.settings.classes.image_optimizer import ImageOptimizer
 
@@ -28,10 +29,10 @@ class ObjectInfoTab(models.Model):
     def __str__(self):
         return self.name
 
-    def image_display(self):
+    def image_preview(self):
         from django.utils.html import mark_safe
         return mark_safe('<img src="{}" alt="" style="width: 128px; height: auto;" />'.format(self.image.url) )
-    image_display.short_description = 'Изображение (preview)'
+    image_preview.short_description = 'Изображение (preview)'
 
     class Meta:
         verbose_name = 'Таб [Информация об объекте]'
@@ -43,3 +44,10 @@ def image_optimization(sender, instance, created, **kwargs):
     if instance.image:
         image = ImageOptimizer(instance.image.path)
         image.optimizeAndSaveImg()
+
+
+@receiver(post_delete, sender=ObjectInfoTab)
+def clean_empty_media_dirs(sender, instance, **kwargs):
+    cleanMedia = CleanMedia()
+    # Delete emty dirs in /media/
+    cleanMedia.deleteEmptyDirsRecusive()

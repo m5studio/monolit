@@ -1,8 +1,12 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 
-from django.db.models.signals import pre_save
+from django.db.models.signals import pre_save, post_save, post_delete
 from django.dispatch import receiver
+
+from apps.settings.classes.clean_media import CleanMedia
+from apps.settings.classes.file_processing import FileProcessing
+from apps.settings.classes.image_optimizer import ImageOptimizer
 
 from apps.realty.models.object import Object
 from apps.realty.models.object_block import ObjectBlock
@@ -16,11 +20,19 @@ class ObjectSiteWindowsView(models.Model):
         return self.name
 
 
+def image_upload_path(instance, filename):
+    object_crm_id = instance.object.crm_id
+    site_crm_id = instance.crm_id
+
+    filename = FileProcessing(filename)
+    filename = filename.newFileNameGenerated()
+    return 'objects/{object_crm_id}/sites/{site_crm_id}/{filename}'.format(object_crm_id=object_crm_id, site_crm_id=site_crm_id, filename=filename)
+
 class ObjectSite(models.Model):
     SITE_TYPES = (
         ('flat', 'Квартира'),
         ('apartments', 'Апартаменты'),
-        ('commercial', 'Коммерческое'),
+        ('commercial', 'Коммерческое помещение'),
     )
 
     ROOMS_QTY = (
@@ -48,13 +60,13 @@ class ObjectSite(models.Model):
 
     status                  = models.BooleanField('Активный', default=True, help_text='Опубликован на сайте')
     special_offer           = models.BooleanField('Спецпредложение', default=False)
-    site_type               = models.CharField('Тип помещения', max_length=100, choices=SITE_TYPES, blank=True, null=True)
 
-    object                  = models.ForeignKey(Object, verbose_name='Объект', on_delete=models.SET_NULL, blank=True, null=True)
+    object                  = models.ForeignKey(Object, verbose_name='Объект', on_delete=models.SET_NULL, null=True)
+    site_type               = models.CharField('Тип помещения', max_length=100, choices=SITE_TYPES, blank=True, null=True)
     object_block            = models.ForeignKey(ObjectBlock, verbose_name='Блок Объекта', on_delete=models.SET_NULL, blank=True, null=True)
     object_section          = models.ForeignKey(ObjectSection, verbose_name='Секция Объекта', on_delete=models.SET_NULL, blank=True, null=True)
 
-    crm_id                  = models.CharField('CRM ID', max_length=100, unique=True, blank=True, null=True, help_text='ID объекта в 1C (Заполняется автоматически при выгрузке)')
+    crm_id                  = models.CharField('CRM ID', max_length=100, unique=True, help_text='ID объекта в 1C (Заполняется автоматически при выгрузке)')
     floor                   = models.IntegerField('Этаж', validators=[MinValueValidator(-5), MaxValueValidator(100)], blank=True, null=True)
     site_number             = models.CharField('Номер квартиры или помещения', max_length=100, blank=True, null=True)
     price_per_square        = models.DecimalField('Цена за м2 (руб.)', max_digits=20, decimal_places=2, blank=True, null=True, help_text='Стоимость одного квадратного метра')
@@ -72,12 +84,13 @@ class ObjectSite(models.Model):
     finish_type             = models.CharField('Отделка', max_length=100, choices=FINISHING_TYPES, blank=True, null=True)
     window_view             = models.ManyToManyField(ObjectSiteWindowsView, verbose_name='Вид из окон')
 
-    image_planning          = models.ImageField('Планировка', upload_to='objects/', blank=True, null=True)
-    image_planning3d        = models.ImageField('Планировка 3D', upload_to='objects/', blank=True, null=True)
-    image_floor             = models.ImageField('Квартира на этаже', upload_to='objects/', blank=True, null=True, help_text='Планировка квартиры на этаже')
-    image_section           = models.ImageField('Этаж в секции', upload_to='objects/', blank=True, null=True, help_text='Выделенный этаж в секции объекта')
-    image_section_in_object = models.ImageField('Секция в доме', upload_to='objects/', blank=True, null=True, help_text='Выделенная секция в доме')
-    image_genplan           = models.ImageField('Дом на генплане', upload_to='objects/', blank=True, null=True, help_text='Выделенный дом на генплане')
+    image_planning          = models.ImageField('Планировка', upload_to=image_upload_path, blank=True, null=True)
+    image_planning3d        = models.ImageField('Планировка 3D', upload_to=image_upload_path, blank=True, null=True)
+    image_floor             = models.ImageField('Квартира на этаже', upload_to=image_upload_path, blank=True, null=True, help_text='Планировка квартиры на этаже')
+    image_section           = models.ImageField('Этаж в секции', upload_to=image_upload_path, blank=True, null=True, help_text='Выделенный этаж в секции объекта')
+    image_section_in_object = models.ImageField('Секция в доме', upload_to=image_upload_path, blank=True, null=True, help_text='Выделенная секция в доме')
+    image_genplan           = models.ImageField('Дом на генплане', upload_to=image_upload_path, blank=True, null=True, help_text='Выделенный дом на генплане')
+
     updated                 = models.DateTimeField(auto_now=True, auto_now_add=False, blank=True, null=True)
 
     def __str__(self):
@@ -90,4 +103,35 @@ class ObjectSite(models.Model):
 
 @receiver(pre_save, sender=ObjectSite)
 def calculate_total_price(sender, instance, **kwargs):
-    instance.price_total = instance.site_area * instance.price_per_square
+    if instance.site_area is not None and instance.price_per_square is not None:
+        instance.price_total = instance.site_area * instance.price_per_square
+
+
+@receiver(post_save, sender=ObjectSite)
+def image_optimization(sender, instance, created, **kwargs):
+    # TODO: Refactor this!!!
+    if instance.image_planning:
+        image = ImageOptimizer(instance.image_planning.path)
+        image.optimizeAndSaveImg()
+    if instance.image_planning3d:
+        image = ImageOptimizer(instance.image_planning3d.path)
+        image.optimizeAndSaveImg()
+    if instance.image_floor:
+        image = ImageOptimizer(instance.image_floor.path)
+        image.optimizeAndSaveImg()
+    if instance.image_section:
+        image = ImageOptimizer(instance.image_section.path)
+        image.optimizeAndSaveImg()
+    if instance.image_section_in_object:
+        image = ImageOptimizer(instance.image_section_in_object.path)
+        image.optimizeAndSaveImg()
+    if instance.image_genplan:
+        image = ImageOptimizer(instance.image_genplan.path)
+        image.optimizeAndSaveImg()
+
+
+@receiver(post_delete, sender=ObjectSite)
+def clean_empty_media_dirs(sender, instance, **kwargs):
+    cleanMedia = CleanMedia()
+    # Delete emty dirs in /media/
+    cleanMedia.deleteEmptyDirsRecusive()

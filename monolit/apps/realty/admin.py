@@ -59,7 +59,7 @@ class ObjectSiteAdmin(TurnOffAdminLogging, admin.ModelAdmin):
     ]
     list_display = ('crm_id', 'object', 'status', 'updated')
     readonly_fields=('price_total',)
-    autocomplete_fields = ['window_view']
+    autocomplete_fields = ['object', 'object_section', 'window_view']
 """ [ END ObjectSite ] """
 
 
@@ -174,8 +174,8 @@ class ObjectInfoTabInline(admin.TabularInline):
     extra = 1
     max_num = 8
 
-    fields = ('object', 'order', 'name', 'icon_name', 'description', 'image', 'image_display',)
-    readonly_fields = ('image_display',)
+    fields = ('object', 'order', 'name', 'icon_name', 'description', 'image', 'image_preview',)
+    readonly_fields = ('image_preview',)
 
 @admin.register(ObjectInfoTab)
 class ObjectInfoTabAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.ModelAdmin):
