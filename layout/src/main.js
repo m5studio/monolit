@@ -27,6 +27,7 @@ $(document).ready(function() {
         realtySquareFilters()
         realtyPriceFilters()
     }
+
     // Flats
     if ( $('#section-realty-flats-filters').length ) {
         realtySquareFilters()
