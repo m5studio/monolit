@@ -90,7 +90,6 @@ class ObjectSite(models.Model):
     image_section           = models.ImageField('Этаж в секции', upload_to=image_upload_path, blank=True, null=True, help_text='Выделенный этаж в секции объекта')
     image_section_in_object = models.ImageField('Секция в доме', upload_to=image_upload_path, blank=True, null=True, help_text='Выделенная секция в доме')
     image_genplan           = models.ImageField('Дом на генплане', upload_to=image_upload_path, blank=True, null=True, help_text='Выделенный дом на генплане')
-
     updated                 = models.DateTimeField(auto_now=True, auto_now_add=False, blank=True, null=True)
 
     def __str__(self):

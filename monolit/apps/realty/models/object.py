@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.utils.html import mark_safe
 
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -89,6 +90,10 @@ class Object(models.Model):
     webcam        = models.URLField('Cсылка на web-камеру', blank=True, null=True, help_text='e.g.: https://rtsp.me/embed/3KASrTkG/')
     panoram       = models.URLField('Cсылка на панораму', blank=True, null=True, help_text='e.g.: https://monolit360.com/files/main/index.html?s=pano1692')
     updated       = models.DateTimeField(auto_now=True, auto_now_add=False, blank=True, null=True)
+
+    def genplan_preview(self):
+        return mark_safe('<img src="{}" alt="" style="width: 256px; height: auto;" />'.format(self.genplan.url) )
+    genplan_preview.short_description = 'Генплан (preview)'
 
     def __str__(self):
         return self.name
