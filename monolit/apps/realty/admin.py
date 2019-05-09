@@ -202,9 +202,6 @@ class ObjectAdmin(TurnOffAdminLogging, admin.ModelAdmin):
         ObjectDocumentInline,
     ]
 
-    # fields = ('active', 'completed', 'order', 'crm_id',
-    #           ('name', 'slug'),
-    #           'category', 'object_type', 'building_type', 'city', 'address', 'location', 'description', 'has_military', 'has_mother', 'webcam', 'panoram')
     readonly_fields = ('genplan_preview',)
 
     fieldsets = (
