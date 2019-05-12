@@ -57,8 +57,25 @@ class ObjectSiteAdmin(TurnOffAdminLogging, admin.ModelAdmin):
         ObjectBathroomInline,
         ObjectBalconyInline,
     ]
+
+    readonly_fields=('price_total', 'image_planning_thumb', 'image_planning3d_thumb', 'image_floor_thumb', 'image_section_thumb', 'image_section_in_object_thumb', 'image_genplan_thumb')
+    fieldsets = (
+        (None, {
+            'fields': ('status', 'special_offer', 'object', 'site_type', 'object_block', 'object_section', 'crm_id', 'floor', 'site_number', 'price_per_square', 'price_total', 'rooms_qty', 'site_area', 'living_area', 'kitchen_area', 'ceiling_height', 'two_levels', 'entresol', 'wardrobe', 'finish_type', 'window_view')
+        }),
+        ('Изображения', {
+           'fields': (
+                ('image_planning_thumb', 'image_planning'),
+                ('image_planning3d_thumb', 'image_planning3d'),
+                ('image_floor_thumb', 'image_floor'),
+                ('image_section_thumb', 'image_section'),
+                ('image_section_in_object_thumb', 'image_section_in_object'),
+                ('image_genplan_thumb', 'image_genplan')
+            )
+        }),
+    )
+
     list_display = ('crm_id', 'object', 'status', 'updated')
-    readonly_fields=('price_total',)
     autocomplete_fields = ['object', 'object_section', 'window_view']
 """ [ END ObjectSite ] """
 
@@ -174,8 +191,8 @@ class ObjectInfoTabInline(admin.TabularInline):
     extra = 1
     max_num = 8
 
-    fields = ('object', 'order', 'name', 'icon_name', 'description', 'image', 'image_preview',)
-    readonly_fields = ('image_preview',)
+    readonly_fields = ('image_thumb',)
+    fields = ('object', 'order', 'name', 'icon_name', 'description', 'image', 'image_thumb',)
 
 @admin.register(ObjectInfoTab)
 class ObjectInfoTabAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.ModelAdmin):
@@ -202,14 +219,16 @@ class ObjectAdmin(TurnOffAdminLogging, admin.ModelAdmin):
         ObjectDocumentInline,
     ]
 
-    readonly_fields = ('genplan_preview',)
-
+    readonly_fields = ('genplan_thumb',)
     fieldsets = (
         (None, {
-            'fields': ('active', 'completed', 'order', 'crm_id', 'name', 'slug', 'category', 'object_type', 'building_type', 'city', 'address', 'location', 'description', 'has_military', 'has_mother', 'webcam', 'panoram')
+            'fields': ('active', 'completed', 'order', 'crm_id', 'name', 'slug', 'category', 'object_type', 'building_type', 'description', 'has_military', 'has_mother', 'webcam', 'panoram')
+        }),
+        ('Адрес и локация', {
+           'fields': ('city', 'address', 'location')
         }),
         ('Генплан', {
-           'fields': ('genplan_preview', 'genplan')
+           'fields': ('genplan_thumb', 'genplan')
         }),
     )
 

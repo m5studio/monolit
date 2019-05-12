@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.html import mark_safe
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 from django.db.models.signals import pre_save, post_save, post_delete
@@ -90,10 +91,40 @@ class ObjectSite(models.Model):
     image_section           = models.ImageField('Этаж в секции', upload_to=image_upload_path, blank=True, null=True, help_text='Выделенный этаж в секции объекта')
     image_section_in_object = models.ImageField('Секция в доме', upload_to=image_upload_path, blank=True, null=True, help_text='Выделенная секция в доме')
     image_genplan           = models.ImageField('Дом на генплане', upload_to=image_upload_path, blank=True, null=True, help_text='Выделенный дом на генплане')
+
     updated                 = models.DateTimeField(auto_now=True, auto_now_add=False, blank=True, null=True)
+
+    # Thumbnails for admin
+    def image_planning_thumb(self):
+        return mark_safe('<img src="{}" alt="" style="width: 256px; height: auto;" />'.format(self.image_planning.url))
+    image_planning_thumb.short_description = 'Планировка (thumbnail)'
+
+    def image_planning3d_thumb(self):
+        return mark_safe('<img src="{}" alt="" style="width: 256px; height: auto;" />'.format(self.image_planning3d.url))
+    image_planning3d_thumb.short_description = 'Планировка 3D (thumbnail)'
+
+    def image_floor_thumb(self):
+        return mark_safe('<img src="{}" alt="" style="width: 256px; height: auto;" />'.format(self.image_floor.url))
+    image_floor_thumb.short_description = 'Квартира на этаже (thumbnail)'
+
+    def image_section_thumb(self):
+        return mark_safe('<img src="{}" alt="" style="width: 256px; height: auto;" />'.format(self.image_section.url))
+    image_section_thumb.short_description = 'Этаж в секции (thumbnail)'
+
+    def image_section_in_object_thumb(self):
+        return mark_safe('<img src="{}" alt="" style="width: 256px; height: auto;" />'.format(self.image_section_in_object.url))
+    image_section_in_object_thumb.short_description = 'Секция в доме (thumbnail)'
+
+    def image_genplan_thumb(self):
+        return mark_safe('<img src="{}" alt="" style="width: 256px; height: auto;" />'.format(self.image_genplan.url))
+    image_genplan_thumb.short_description = 'Дом на генплане (thumbnail)'
+    # END Thumbnails for admin
 
     def __str__(self):
         return self.crm_id
+
+    def get_absolute_url(self):
+        return reverse('object-site-detail', kwargs={"slug": self.slug})
 
     class Meta:
         verbose_name = 'Помещение'

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+
+{% block body_classes %}{% spaceless %}
+    {{ block.super }} object-list
+{% endspaceless %}{% endblock %}
+
+
+{% block content %}
+    <h2>object_list.html</h2>
+
+    {% for object in object_list %}
+        <div>
+            <h3><a href="{{ object.get_absolute_url }}">{{ object.name }}</a></h3>
+        </div>
+    {% endfor %}
+{% endblock %}

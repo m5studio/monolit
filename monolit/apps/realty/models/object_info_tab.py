@@ -27,9 +27,9 @@ class ObjectInfoTab(models.Model):
     description  = RichTextField('Описание', blank=True, null=True)
     image        = models.ImageField('Изображение', upload_to=image_upload_path, blank=True, null=True)
 
-    def image_preview(self):
-        return mark_safe('<img src="{}" alt="" style="width: 128px; height: auto;" />'.format(self.image.url) )
-    image_preview.short_description = 'Изображение (preview)'
+    def image_thumb(self):
+        return mark_safe('<img src="{}" alt="" style="width: 128px; height: auto;" />'.format(self.image.url))
+    image_thumb.short_description = 'Изображение (thumbnail)'
 
     def __str__(self):
         return self.name

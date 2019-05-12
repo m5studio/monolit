@@ -91,9 +91,11 @@ class Object(models.Model):
     panoram       = models.URLField('Cсылка на панораму', blank=True, null=True, help_text='e.g.: https://monolit360.com/files/main/index.html?s=pano1692')
     updated       = models.DateTimeField(auto_now=True, auto_now_add=False, blank=True, null=True)
 
-    def genplan_preview(self):
-        return mark_safe('<img src="{}" alt="" style="width: 256px; height: auto;" />'.format(self.genplan.url) )
-    genplan_preview.short_description = 'Генплан (preview)'
+    # Thumbnails for admin
+    def genplan_thumb(self):
+        return mark_safe('<img src="{}" alt="" style="width: 256px; height: auto;" />'.format(self.genplan.url))
+    genplan_thumb.short_description = 'Генплан (thumbnail)'
+    # END Thumbnails for admin
 
     def __str__(self):
         return self.name

@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+{% load static admin_urls %}<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Monolit</title>
 </head>
-<body>
+<body class="{% block body_classes %}{% if request.path != '/' %}not-homepage{% endif %}{% endblock %}">
     <h1>Monolit base.html</h1>
 
     {% if settings.site_title %}
