@@ -4,12 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
-    <title>Homepage | Monolit</title>
+
+    <!-- <title>Homepage | Monolit</title> -->
+
+    <title>{% spaceless %}
+        {% if request.path == '/' %}
+            ГК Монолит – Квартиры от застройщика в Крыму
+        {% else %}
+            {% if page_title %}
+                {{ page_title }}
+            {% elif object.title %}
+                {{ object.title }}
+            {% endif %}
+             |
+            {% if site_settings.site_title %}
+                {{ site_settings.site_title }}
+            {% else %}
+                ГК Монолит – Квартиры от застройщика в Крыму
+            {% endif %}
+        {% endif %}
+    {% endspaceless %}</title>
+    <meta name="description" content="{% spaceless %}
+        {% if site_settings.site_description %}
+            {{ site_settings.site_description }}
+        {% else %}
+            Группа компаний Монолит  Квартиры от застройщика в Крыму
+        {% endif %}{% endspaceless %}">
 
     {% include "includes/favicons.html" %}
 
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <link rel="stylesheet" href="{% static 'css/1.styles.css' %}">
+    {% block css %}
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+        <link rel="stylesheet" href="{% static 'css/1.styles.css' %}">
+    {% endblock %}
 </head>
 <body class="{% block body_classes %}{% if request.path != '/' %}not-homepage{% endif %}{% endblock %}">
     <header id="header">
@@ -26,19 +53,19 @@
                 </div>
             </div>
         </div>
-        {% include "includes/main_nav.html" %}
+        {% include "includes/main-nav.html" %}
     </header>
 
     {% comment %}
-    {% if settings.site_title %}
-        <h2>{{ settings.site_title }}</h2>
-    {% endif %}
-    {% if settings.site_phone %}
-        <h2>{{ settings.site_phone }}</h2>
-    {% endif %}
-    {% if settings.site_email %}
-        <h2>{{ settings.site_email }}</h2>
-    {% endif %}
+        {% if settings.site_title %}
+            <h2>{{ settings.site_title }}</h2>
+        {% endif %}
+        {% if settings.site_phone %}
+            <h2>{{ settings.site_phone }}</h2>
+        {% endif %}
+        {% if settings.site_email %}
+            <h2>{{ settings.site_email }}</h2>
+        {% endif %}
     {% endcomment %}
 
     <div id="content">
@@ -157,7 +184,9 @@
         </div>
     </footer>
 
-    <script src="{% static 'js/main.js' %}"></script>
-    <script src="{% static 'js/vendors~main.js' %}"></script>
+    {% block js %}
+        <script src="{% static 'js/main.js' %}"></script>
+        <script src="{% static 'js/vendors~main.js' %}"></script>
+    {% endblock %}
 </body>
 </html>

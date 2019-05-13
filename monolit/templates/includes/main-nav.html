@@ -5,13 +5,16 @@
         <div id="main-navigation-wrap">
             <nav id="main-navigation" class="main-nav" role="navigation">
                 <ul class="main-nav__list">
-                    <li class="main-nav__item">
-                        <a href="" class="main-nav__link">
+                    {% url 'objects-list' as objects_list %}
+                    <li class="main-nav__item{% if objects_list == request.path or objects_list in request.path %} active{% endif %}">
+                        <a href="{{ objects_list }}" class="main-nav__link">
                             Объекты
                         </a>
                     </li>
-                    <li class="main-nav__item">
-                        <a href="" class="main-nav__link">
+
+                    {% url 'objects-sites-list' as objects_site_list %}
+                    <li class="main-nav__item{% if objects_site_list == request.path or objects_site_list in request.path %} active{% endif %}">
+                        <a href="{{ objects_site_list }}" class="main-nav__link">
                             Выбор квартир
                         </a>
                     </li>
@@ -21,7 +24,8 @@
                         </a>
                         <div class="dropdown">
                             <ul class="main-nav-submenu__list">
-                                <li class="main-nav-submenu__item">
+                                <!-- TODO: active request.path -->
+                                <li class="main-nav-submenu__item active">
                                     <a href="" class="main-nav-submenu__link">
                                         Военная ипотека
                                     </a>
