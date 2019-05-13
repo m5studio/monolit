@@ -158,6 +158,11 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'layout/dist'),
+
+    ('css', os.path.join(BASE_DIR, 'layout/dist/css')),
+    ('js', os.path.join(BASE_DIR, 'layout/dist/js')),
+    ('favicons', os.path.join(BASE_DIR, 'layout/dist/images/favicons')),
 ]
 
 MEDIA_URL = '/media/'
@@ -233,4 +238,4 @@ LOCATION_FIELD = {
 
 # https://github.com/matthewwithanm/django-imagekit
 # IMAGEKIT_CACHEFILE_DIR = 'CACHE'
-IMAGEKIT_CACHEFILE_DIR = 'cached-images'
+IMAGEKIT_CACHEFILE_DIR = 'cache-images'

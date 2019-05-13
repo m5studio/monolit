@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+
+{% block body_classes %}{% spaceless %}
+    {{ block.super }} objectsite-detail
+{% endspaceless %}{% endblock %}
+
+
+{% block content %}
+    <h2>objectsite_detail.html</h2>
+
+    <h1>{% if object.rooms_qty %}{{ object.rooms_qty }} комнатная {% endif %}{{ object.get_site_type_display }} в {{ object.object.get_object_type_display }} {{ object.object.name }}</h1>
+
+    <div>
+        <h3>{{ object.crm_id }}</h3>
+    </div>
+{% endblock %}
