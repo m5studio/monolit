@@ -8,6 +8,7 @@ from django.dispatch import receiver
 from ckeditor.fields import RichTextField
 from location_field.models.plain import PlainLocationField
 
+from apps.settings.classes.clean_media import CleanMedia
 from apps.settings.classes.file_processing import FileProcessing
 from apps.settings.classes.image_optimizer import ImageOptimizer
 
@@ -21,11 +22,15 @@ class ObjectCategory(models.Model):
 
 def genplan_upload_path(instance, filename):
     object_name = instance.crm_id
-
     filename = FileProcessing(filename)
     filename = filename.newFileNameGenplan()
-    return 'objects/{0}/{1}'.format(object_name, filename)
+    return 'objects/{object_name}/{filename}'.format(object_name=object_name, filename=filename)
 
+def image_upload_path(instance, filename):
+    object_crm_id = instance.crm_id
+    filename = FileProcessing(filename)
+    filename = filename.newFileNameGenerated()
+    return 'objects/{object_crm_id}/images/{filename}'.format(object_crm_id=object_crm_id, filename=filename)
 
 class Object(models.Model):
     # CATEGORIES = (
@@ -87,14 +92,24 @@ class Object(models.Model):
                                       help_text='Изображение с генпланом')
     has_military  = models.BooleanField('Военная ипотека', default=False, help_text='Подходит ли данный объект для военной ипотеки')
     has_mother    = models.BooleanField('Материнский капитал', default=False, help_text='Подходит ли данный объект под оплату мат.капиталом')
+
     webcam        = models.URLField('Cсылка на web-камеру', blank=True, null=True, help_text='e.g.: https://rtsp.me/embed/3KASrTkG/')
     panoram       = models.URLField('Cсылка на панораму', blank=True, null=True, help_text='e.g.: https://monolit360.com/files/main/index.html?s=pano1692')
+
+    main_image    = models.ImageField('Главное изображение',
+                                      upload_to=image_upload_path,
+                                      blank=True, null=True)
+
     updated       = models.DateTimeField(auto_now=True, auto_now_add=False, blank=True, null=True)
 
     # Thumbnails for admin
     def genplan_thumb(self):
         return mark_safe('<img src="{}" alt="" style="width: 256px; height: auto;" />'.format(self.genplan.url))
     genplan_thumb.short_description = 'Генплан (thumbnail)'
+
+    def main_image_thumb(self):
+        return mark_safe('<img src="{}" alt="" style="width: 40%; height: auto;" />'.format(self.main_image.url))
+    main_image_thumb.short_description = 'Главное изображение (thumbnail)'
     # END Thumbnails for admin
 
     def __str__(self):
@@ -113,3 +128,11 @@ def genplan_image_optimization(sender, instance, created, **kwargs):
     if instance.genplan:
         image = ImageOptimizer(instance.genplan.path)
         image.optimizeAndSaveImg()
+
+    if instance.main_image:
+        image = ImageOptimizer(instance.main_image.path)
+        image.optimizeAndSaveImg()
+
+    # Do some cleaning
+    cleanMedia = CleanMedia()
+    cleanMedia.deleteEmptyDirsRecusive()

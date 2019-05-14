@@ -219,16 +219,19 @@ class ObjectAdmin(TurnOffAdminLogging, admin.ModelAdmin):
         ObjectDocumentInline,
     ]
 
-    readonly_fields = ('genplan_thumb',)
+    readonly_fields = ('genplan_thumb', 'main_image_thumb')
     fieldsets = (
         (None, {
             'fields': ('active', 'completed', 'order', 'crm_id', 'name', 'slug', 'category', 'object_type', 'building_type', 'description', 'has_military', 'has_mother', 'webcam', 'panoram')
         }),
-        ('Адрес и локация', {
-           'fields': ('city', 'address', 'location')
+        ('Главное изображение', {
+           'fields': ('main_image_thumb', 'main_image')
         }),
         ('Генплан', {
            'fields': ('genplan_thumb', 'genplan')
+        }),
+        ('Адрес и локация', {
+           'fields': ('city', 'address', 'location')
         }),
     )
 
