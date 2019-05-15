@@ -20,10 +20,21 @@ def image_upload_path(instance, filename):
     return 'objects/{object_crm_id}/info-tabs/{filename}'.format(object_crm_id=object_crm_id, filename=filename)
 
 class ObjectInfoTab(models.Model):
+    ICONS = (
+        ('about', 'Об объекте'),
+        ('architecture', 'Архитектура'),
+        ('land-improvement', 'Благоустройство'),
+        ('location', 'Расположение'),
+        ('communications', 'Коммуникации'),
+        ('arrangement', 'Планировки'),
+        ('storage-room', 'Кладовые'),
+        # ('', 'Паркинг'),
+    )
+
     object       = models.ForeignKey(Object, on_delete=models.CASCADE, default=0)
     order        = models.PositiveIntegerField('Порядок', default=0, blank=True, null=True, help_text='Чем выше число, тем ниже объект в списке')
     name         = models.CharField('Название Вкладки', max_length=100)
-    icon_name    = models.SlugField('Имя иконки', max_length=100, blank=True, null=True, help_text='e.g.: object-about')
+    icon_name    = models.SlugField('Имя иконки', max_length=100, choices=ICONS, blank=True, null=True)
     description  = RichTextField('Описание', blank=True, null=True)
     image        = models.ImageField('Изображение', upload_to=image_upload_path, blank=True, null=True)
 
@@ -36,7 +47,7 @@ class ObjectInfoTab(models.Model):
 
     class Meta:
         verbose_name = 'Таб [Информация об объекте]'
-        verbose_name_plural = 'Табы [Информация об объекте: О комплексе, Архитектура, Благоустройство, Расположение, Коммуникации, Планировки, Кладовые...]'
+        verbose_name_plural = 'Табы [Информация об объекте: Об объекте, Архитектура, Благоустройство, Расположение, Коммуникации, Планировки, Кладовые...]'
 
 
 @receiver(post_save, sender=ObjectInfoTab)

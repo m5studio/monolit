@@ -16,8 +16,14 @@ def file_upload_path(instance, filename):
     return 'objects/{object_crm_id}/files/{filename}'.format(object_crm_id=object_crm_id, filename=filename)
 
 class ObjectFile(models.Model):
+    FILE_TYPES = (
+        ('info_booklet', 'Информационный буклет'),
+        ('object_genplan', 'Генплан объекта недвижимости'),
+        ('commercial_offer', 'Коммерческое предложение'),
+    )
+
     object = models.ForeignKey(Object, on_delete=models.CASCADE, default=0)
-    title  = models.CharField('Название документа', max_length=255, blank=True, null=True)
+    name  = models.CharField('Название документа', max_length=100, choices=FILE_TYPES, blank=True, null=True)
     file   = models.FileField('Файл', upload_to=file_upload_path, blank=True, null=True)
 
     # def __str__(self):
