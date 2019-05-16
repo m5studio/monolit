@@ -15,11 +15,11 @@ from apps.realty.models.object import Object
 
 class ObjectGallery(models.Model):
     object  = models.ForeignKey(Object, verbose_name='Объект', on_delete=models.CASCADE)
-    title   = models.CharField('Заголовок галереи', max_length=255)
+    name   = models.CharField('Заголовок галереи', max_length=255)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False, blank=True, null=True)
 
     def __str__(self):
-        return self.title
+        return self.name
 
     class Meta:
         verbose_name = 'Галерея Объекта'

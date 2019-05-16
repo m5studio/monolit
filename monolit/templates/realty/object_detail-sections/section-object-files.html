@@ -1,5 +1,4 @@
 {% load custom_filters %}
-
 <div id="section-company-partnership-steps" class="common-section">
     <div id="section-company-partnership-steps__bottom" class="container">
         {% for file in object_files %}
@@ -12,30 +11,5 @@
                 <a href="{% if file.file %}{{ file.file.url }}{% endif %}" class="stretched-link" target="_blank" title="Скачать"></a>
             </div>
         {% endfor %}
-
-        <!-- <div class="download-card-two">
-            <div class="download-card-two__inner">
-                <div class="icon icon-document-white"></div>
-                <div class="download-card-two__name">Информационный буклет</div>
-                <div class="download-card-two__size">PDF, 258.1 КБ</div>
-            </div>
-            <a href="" class="stretched-link" title="Скачать"></a>
-        </div>
-        <div class="download-card-two">
-            <div class="download-card-two__inner">
-                <div class="icon icon-document-white"></div>
-                <div class="download-card-two__name">Генплан объекта недвижимости</div>
-                <div class="download-card-two__size">PDF, 258.1 КБ</div>
-            </div>
-            <a href="" class="stretched-link" title="Скачать"></a>
-        </div>
-        <div class="download-card-two">
-            <div class="download-card-two__inner">
-                <div class="icon icon-document-white"></div>
-                <div class="download-card-two__name">Коммерческое предложение</div>
-                <div class="download-card-two__size">PDF, 258.1 КБ</div>
-            </div>
-            <a href="" class="stretched-link" title="Скачать"></a>
-        </div> -->
     </div>
 </div>

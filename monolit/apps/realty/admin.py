@@ -105,7 +105,7 @@ class ObjectGalleryAdmin(TurnOffAdminLogging, admin.ModelAdmin):
     inlines = [
         ObjectGalleryImageInline,
     ]
-    list_display = ('title', 'object', 'updated')
+    list_display = ('name', 'object', 'updated')
     search_fields = ['object']
     autocomplete_fields = ['object']
 """ [ END ObjectGallery ] """
