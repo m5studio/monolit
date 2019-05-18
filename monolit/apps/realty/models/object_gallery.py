@@ -15,7 +15,8 @@ from apps.realty.models.object import Object
 
 class ObjectGallery(models.Model):
     object  = models.ForeignKey(Object, verbose_name='Объект', on_delete=models.CASCADE)
-    name   = models.CharField('Заголовок галереи', max_length=255)
+    order   = models.PositiveIntegerField('Порядок', default=0, blank=True, null=True, help_text='Чем выше число, тем ниже объект в списке')
+    name    = models.CharField('Заголовок галереи', max_length=255)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False, blank=True, null=True)
 
     def __str__(self):
@@ -37,7 +38,6 @@ def image_upload_path(instance, filename):
 
 class ObjectGalleryImage(models.Model):
     gallery               = models.ForeignKey(ObjectGallery, verbose_name='Галерея', on_delete=models.CASCADE)
-    alt                   = models.CharField(max_length=100, blank=True, null=True, help_text='alt изображения')
     image                 = models.ImageField('Изображение', upload_to=image_upload_path)
     image_thumbnail_admin = ImageSpecField(source='image',
                                            # processors=[ResizeToFill(256, 256)],
@@ -52,7 +52,7 @@ class ObjectGalleryImage(models.Model):
 @receiver(pre_save, sender=ObjectGallery)
 def change_gallery_title(sender, instance, **kwargs):
     # titling Gallery title
-    instance.title = instance.title.title()
+    instance.name = instance.name.title()
 
 
 @receiver(post_save, sender=ObjectGalleryImage)

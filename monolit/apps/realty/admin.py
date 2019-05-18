@@ -86,7 +86,7 @@ class ObjectGalleryImageInline(admin.TabularInline):
     extra = 0
 
     image_thumbnail_admin = AdminThumbnail(image_field='image_thumbnail_admin')
-    fields = ('gallery', 'alt', 'image', 'image_thumbnail_admin')
+    fields = ('gallery', 'image', 'image_thumbnail_admin')
     readonly_fields = ('image_thumbnail_admin',)
 
 @admin.register(ObjectGalleryImage)
@@ -105,7 +105,8 @@ class ObjectGalleryAdmin(TurnOffAdminLogging, admin.ModelAdmin):
     inlines = [
         ObjectGalleryImageInline,
     ]
-    list_display = ('name', 'object', 'updated')
+    list_display = ('name', 'order', 'object', 'updated')
+    list_editable = ('order',)
     search_fields = ['object']
     autocomplete_fields = ['object']
 """ [ END ObjectGallery ] """
