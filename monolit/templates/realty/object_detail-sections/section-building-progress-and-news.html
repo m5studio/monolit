@@ -32,7 +32,7 @@
                 </select> -->
                 {% if object_galleries %}
                     <form method="GET">
-                        <select name="test_gal">
+                        <select name="gallery_id">
                             {% for gallery in object_galleries %}
                                 <option value="{{ gallery.id }}">{{ gallery }}</option>
                             {% endfor %}
@@ -41,8 +41,6 @@
                     </form>
                     <br><br>
                 {% endif %}
-
-                {{ req }}
 
                 <div id="bp-and-news-pills-building-progress__inner">
                     {% for gallery_img in object_galleries_images %}
