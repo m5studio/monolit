@@ -38,10 +38,6 @@ class ObjectDetailView(DetailView):
 
         return context
 
-    # def get(self, request, *args, **kwargs):
-    #     from django.http import HttpResponse
-    #     return HttpResponse('my HttpResponse')
-
 
 class ObjectSiteListView(ListView):
     model = ObjectSite
