@@ -22,5 +22,7 @@ urlpatterns = [
         path('<int:pk>/', ObjectSiteDetailView.as_view(), name='object-site-detail')
     ])),
 
-    path('gallery-obj/', gallery_content)
+    # path('gallery-obj/', gallery_content),
+    path('object-gal/<int:gallery_id>/', gallery_content),
+    # path('gallery-obj/<int:object_id>/<int:gallery_id>/', gallery_content)
 ]

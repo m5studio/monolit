@@ -31,25 +31,16 @@
                     <option>Сентябрь 2018</option>
                 </select> -->
                 {% if object_galleries %}
-                    <form method="GET">
-                        <select name="gallery_id">
-                            {% for gallery in object_galleries %}
-                                <option value="{{ gallery.id }}">{{ gallery }}</option>
-                            {% endfor %}
-                        </select>
-                        <button type="submit">Submit</button>
-                    </form>
+                    <select name="gallery_id">
+                        {% for gallery in object_galleries %}
+                            <option value="{{ gallery.id }}">{{ gallery }}</option>
+                        {% endfor %}
+                    </select>
                     <br><br>
                 {% endif %}
 
-                <!-- <a data-fancybox data-type="ajax" data-src="http://127.0.0.1:8000/gallery-obj/"  href="javascript:;"> -->
-                <a data-fancybox data-type="iframe" data-src="http://monolit.site/complex/chernika/"  href="javascript:;">
-                    AJAX content
-                </a>
-                <br><br>
-
                 <div id="bp-and-news-pills-building-progress__inner">
-                    {% for gallery_img in object_galleries_images %}
+                    <!-- {% for gallery_img in object_galleries_images %}
                         <a data-fancybox="bp-gallery"
                             data-caption="[{{ gallery_img.gallery.object.get_object_type_display }} {{ gallery_img.gallery.object.name }}] {{ gallery_img.gallery.name }}"
                             class="bp-card"
@@ -57,7 +48,7 @@
                             style="background-image: url('{{ gallery_img.image.url }}');">
                             <div class="bp-card__date">{{ gallery_img.gallery.name }}</div>
                         </a>
-                    {% endfor %}
+                    {% endfor %} -->
                     <!-- <a data-fancybox="bp-gallery" class="bp-card" href="http://monolit.site/media/images/img_6479.JPG" style="background-image: url('http://monolit.site/media/images/img_6479.JPG');">
                         <div class="bp-card__date">28 сентября 2018</div>
                     </a>

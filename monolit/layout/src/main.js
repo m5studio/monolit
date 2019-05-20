@@ -40,6 +40,19 @@ $(document).ready(function() {
 
     scrollToTop()
 
+
+    // Get object gallery images from json
+    $('select[name=gallery_id]').change(function() {
+        let selected_val = $("option:selected", this).val()
+        $('#bp-and-news-pills-building-progress__inner').empty()
+
+        $.getJSON('http://127.0.0.1:8000/object-gal/'+selected_val+'/', function(data) {
+            $.each(data, function(i, val) {
+                $('#bp-and-news-pills-building-progress__inner').append('<a data-fancybox="bp-gallery" data-caption="" class="bp-card" href="/media/'+val.image+'" style="background-image: url(/media/'+val.image+');"><div class="bp-card__date">28 сентября 2018</div></a>')
+            })
+        })
+    })
+
 })
 
 
