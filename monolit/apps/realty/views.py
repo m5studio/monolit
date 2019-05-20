@@ -30,15 +30,11 @@ class ObjectDetailView(DetailView):
         context['object_files'] = ObjectFile.objects.filter(object_id=self.get_object().pk)
 
         context['object_galleries'] = ObjectGallery.objects.filter(object=self.get_object().pk).order_by('-order')
-        # context['object_galleries_images'] = ObjectGalleryImage.objects.filter(gallery__object=self.get_object().pk)
-        # context['object_galleries_images'] = ObjectGalleryImage.objects.filter(gallery__object=self.get_object().pk, gallery=self.request.GET.get('gallery_id'))
-        # context['object_galleries_images'] = ObjectGalleryImage.objects.filter(gallery__object=self.get_object().pk, gallery=self.request.POST.get('gallery_id'))
         context['object_galleries_images'] = ObjectGalleryImage.objects.filter(gallery__object=self.get_object().pk, gallery=context['object_galleries'].first())
 
         # Galleries filter
         if self.request.method == "GET" and self.request.GET.get('gallery_id'):
             context['object_galleries_images'] = ObjectGalleryImage.objects.filter(gallery__object=self.get_object().pk, gallery=self.request.GET.get('gallery_id'))
-
         return context
 
 

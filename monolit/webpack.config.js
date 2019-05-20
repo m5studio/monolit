@@ -67,17 +67,12 @@ module.exports = {
         }
     },
     plugins: [
-        // new CleanWebpackPlugin([
-        //     // instead clenning inner folders, delete entire dist
-        //     'layout/dist'
-        //     // './layout/dist/**/*.*',
-        // ]),
-
         new CleanWebpackPlugin(),
 
         // Copy favicons
         new CopyWebpackPlugin([
-            { from:'layout/src/images/favicons', to:'images/favicons' }
+            // { from:'layout/src/images/favicons', to:'images/favicons' },
+            { from:'./layout/src/images/favicons', to:'images/favicons' },
         ]),
 
         // Add jQuery to Webpack

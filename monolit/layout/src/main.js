@@ -40,22 +40,6 @@ $(document).ready(function() {
 
     scrollToTop()
 
-    // AJAX
-    $("select[name='gallery_id']").change(function() {
-        $.ajax({
-            url: '/objects/lavanda/',
-            type: 'GET',
-            success: function(data) {
-                // console.log(data)
-                console.log( $("select[name='gallery_id']").children("option:selected").val() )
-            },
-            failure: function(data) {
-                console.log('Ooops, we\'ve got an error =(')
-            }
-        })
-    })
-
-
 })
 
 

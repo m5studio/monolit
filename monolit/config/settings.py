@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     'django_cleanup.apps.CleanupConfig',
     'imagekit',
 
+    'apps.core.apps.CoreConfig',
     'apps.settings.apps.SettingsConfig',
     'apps.realty.apps.RealtyConfig',
 ]
