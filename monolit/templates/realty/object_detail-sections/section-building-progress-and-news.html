@@ -33,22 +33,23 @@
                 {% if object_galleries %}
                     <select name="gallery_id">
                         {% for gallery in object_galleries %}
-                            <option value="{{ gallery.id }}">{{ gallery }}</option>
+                            <option value="{% url 'object-gallery' gallery_id=gallery.id %}">{{ gallery }}</option>
                         {% endfor %}
                     </select>
                     <br><br>
                 {% endif %}
 
                 <div id="bp-and-news-pills-building-progress__inner">
-                    <!-- {% for gallery_img in object_galleries_images %}
+                    {% for gallery_img in object_galleries_images %}
                         <a data-fancybox="bp-gallery"
-                            data-caption="[{{ gallery_img.gallery.object.get_object_type_display }} {{ gallery_img.gallery.object.name }}] {{ gallery_img.gallery.name }}"
+                            {# data-caption="[{{ gallery_img.gallery.object.get_object_type_display }} {{ gallery_img.gallery.object.name }}] {{ gallery_img.gallery.name }}" #}
+                            data-caption="{{ gallery_img.gallery.name }}"
                             class="bp-card"
                             href="{{ gallery_img.image.url }}"
                             style="background-image: url('{{ gallery_img.image.url }}');">
                             <div class="bp-card__date">{{ gallery_img.gallery.name }}</div>
                         </a>
-                    {% endfor %} -->
+                    {% endfor %}
                     <!-- <a data-fancybox="bp-gallery" class="bp-card" href="http://monolit.site/media/images/img_6479.JPG" style="background-image: url('http://monolit.site/media/images/img_6479.JPG');">
                         <div class="bp-card__date">28 сентября 2018</div>
                     </a>

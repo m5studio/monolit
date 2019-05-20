@@ -54,7 +54,7 @@ class ObjectSiteDetailView(DetailView):
 
 
 # Object gallery in json format
-def gallery_content(request, gallery_id):
+def object_gallery(request, gallery_id):
     gallery_images = ObjectGalleryImage.objects.filter(gallery=gallery_id).values('image', 'gallery')
     gallery_images = list(gallery_images)
     return JsonResponse(gallery_images, safe=False)
