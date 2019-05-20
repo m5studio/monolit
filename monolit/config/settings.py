@@ -63,7 +63,6 @@ INSTALLED_APPS = [
     'imagekit',
 
     'apps.core.apps.CoreConfig',
-    'apps.settings.apps.SettingsConfig',
     'apps.realty.apps.RealtyConfig',
 ]
 
@@ -93,7 +92,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
 
-                'apps.settings.context_processors.settings',
+                'apps.core.context_processors.settings',
             ],
         },
     },

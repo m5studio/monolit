@@ -2,7 +2,7 @@
 from django.db import models
 from django.core.cache import cache
 from django.contrib import admin
-from apps.settings.classes.turn_off_admin_logging import TurnOffAdminLogging
+from apps.core.classes.turn_off_admin_logging import TurnOffAdminLogging
 
 
 class SingletonModel(models.Model):

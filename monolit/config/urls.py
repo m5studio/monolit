@@ -26,7 +26,7 @@ admin.site.index_title = "Monolit Applications"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('apps.settings.urls')),
+    path('', include('apps.core.urls')),
     path('', include('apps.realty.urls')),
 ]
 

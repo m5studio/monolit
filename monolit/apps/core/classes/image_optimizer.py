@@ -6,7 +6,7 @@ import os
 from PIL import Image
 from django.conf import settings
 
-from apps.settings.classes.file_utils import FileUtils
+from apps.core.classes.file_utils import FileUtils
 
 
 class ImageOptimizer:

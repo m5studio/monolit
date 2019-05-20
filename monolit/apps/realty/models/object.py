@@ -8,9 +8,9 @@ from django.dispatch import receiver
 from ckeditor.fields import RichTextField
 from location_field.models.plain import PlainLocationField
 
-from apps.settings.classes.clean_media import CleanMedia
-from apps.settings.classes.file_processing import FileProcessing
-from apps.settings.classes.image_optimizer import ImageOptimizer
+from apps.core.classes.clean_media import CleanMedia
+from apps.core.classes.file_processing import FileProcessing
+from apps.core.classes.image_optimizer import ImageOptimizer
 
 
 class ObjectCategory(models.Model):

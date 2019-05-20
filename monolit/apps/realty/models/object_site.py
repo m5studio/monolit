@@ -6,9 +6,9 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db.models.signals import pre_save, post_save, post_delete
 from django.dispatch import receiver
 
-from apps.settings.classes.clean_media import CleanMedia
-from apps.settings.classes.file_processing import FileProcessing
-from apps.settings.classes.image_optimizer import ImageOptimizer
+from apps.core.classes.clean_media import CleanMedia
+from apps.core.classes.file_processing import FileProcessing
+from apps.core.classes.image_optimizer import ImageOptimizer
 
 from apps.realty.models.object import Object
 from apps.realty.models.object_block import ObjectBlock

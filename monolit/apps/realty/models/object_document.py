@@ -4,8 +4,8 @@ from django.db import models
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
 
-from apps.settings.classes.clean_media import CleanMedia
-from apps.settings.classes.file_processing import FileProcessing
+from apps.core.classes.clean_media import CleanMedia
+from apps.core.classes.file_processing import FileProcessing
 
 from apps.realty.models.object import Object
 

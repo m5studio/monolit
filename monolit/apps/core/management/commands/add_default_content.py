@@ -4,7 +4,7 @@ from django.core.management.base import BaseCommand, CommandError
 
 from apps.realty.models.object import ObjectCategory
 from apps.realty.models.object_site import ObjectSiteWindowsView
-from apps.settings.models import SiteSettings
+from apps.core.models import SiteSettings
 
 
 class Command(BaseCommand):

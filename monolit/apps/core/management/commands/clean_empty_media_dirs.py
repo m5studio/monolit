@@ -2,7 +2,7 @@
 
 from django.core.management.base import BaseCommand, CommandError
 
-from apps.settings.classes.clean_media import CleanMedia
+from apps.core.classes.clean_media import CleanMedia
 
 
 class Command(BaseCommand):

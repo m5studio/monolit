@@ -6,9 +6,9 @@ from django.dispatch import receiver
 
 from ckeditor.fields import RichTextField
 
-from apps.settings.classes.clean_media import CleanMedia
-from apps.settings.classes.file_processing import FileProcessing
-from apps.settings.classes.image_optimizer import ImageOptimizer
+from apps.core.classes.clean_media import CleanMedia
+from apps.core.classes.file_processing import FileProcessing
+from apps.core.classes.image_optimizer import ImageOptimizer
 
 from apps.realty.models.object import Object
 
