@@ -21,17 +21,8 @@
                 id="bp-and-news-pills-building-progress"
                 role="tabpanel"
                 aria-labelledby="bp-and-news-pills-building-progress-tab">
-                <!-- <select>
-                    <option>Март 2019</option>
-                    <option>Февраль 2019</option>
-                    <option>Январь 2019</option>
-                    <option>Декабрь 2018</option>
-                    <option>Ноябрь 2018</option>
-                    <option>Октябрь 2018</option>
-                    <option>Сентябрь 2018</option>
-                </select> -->
                 {% if object_galleries %}
-                    <select name="gallery_id">
+                    <select name="object_gallery_id">
                         {% for gallery in object_galleries %}
                             <option value="{% url 'object-gallery' gallery_id=gallery.id %}">{{ gallery }}</option>
                         {% endfor %}
@@ -42,7 +33,6 @@
                 <div id="bp-and-news-pills-building-progress__inner">
                     {% for gallery_img in object_galleries_images %}
                         <a data-fancybox="bp-gallery"
-                            {# data-caption="[{{ gallery_img.gallery.object.get_object_type_display }} {{ gallery_img.gallery.object.name }}] {{ gallery_img.gallery.name }}" #}
                             data-caption="{{ gallery_img.gallery.name }}"
                             class="bp-card"
                             href="{{ gallery_img.image.url }}"
@@ -50,36 +40,6 @@
                             <div class="bp-card__date">{{ gallery_img.gallery.name }}</div>
                         </a>
                     {% endfor %}
-                    <!-- <a data-fancybox="bp-gallery" class="bp-card" href="http://monolit.site/media/images/img_6479.JPG" style="background-image: url('http://monolit.site/media/images/img_6479.JPG');">
-                        <div class="bp-card__date">28 сентября 2018</div>
-                    </a>
-                    <a data-fancybox="bp-gallery" class="bp-card" href="http://monolit.site/media/images/1_ukopnEF.JPG" style="background-image: url('http://monolit.site/media/images/1_ukopnEF.JPG');">
-                        <div class="bp-card__date">31 января 2019</div>
-                    </a>
-                    <a data-fancybox="bp-gallery" class="bp-card" href="http://monolit.site/media/images/file/img_8085.JPG" style="background-image: url('http://monolit.site/media/images/file/img_8085.JPG');">
-                        <div class="bp-card__date">31 января 2019</div>
-                    </a>
-                    <a data-fancybox="bp-gallery" class="bp-card" href="http://monolit.site/media/images/file/1_n9amjg2.JPG" style="background-image: url('http://monolit.site/media/images/file/1_n9amjg2.JPG');">
-                        <div class="bp-card__date">31 января 2019</div>
-                    </a>
-                    <a data-fancybox="bp-gallery" class="bp-card" href="http://monolit.site/media/images/file/1_qg47hgo.JPG" style="background-image: url('http://monolit.site/media/images/file/1_qg47hgo.JPG');">
-                        <div class="bp-card__date">31 января 2019</div>
-                    </a>
-                    <a data-fancybox="bp-gallery" class="bp-card" href="http://monolit.site/media/images/img_5692.JPG" style="background-image: url('http://monolit.site/media/images/img_5692.JPG');">
-                        <div class="bp-card__date">31 января 2019</div>
-                    </a>
-                    <a data-fancybox="bp-gallery" class="bp-card" href="http://monolit.site/media/images/img_6479.JPG" style="background-image: url('http://monolit.site/media/images/img_6479.JPG');">
-                        <div class="bp-card__date">28 сентября 2018</div>
-                    </a>
-                    <a data-fancybox="bp-gallery" class="bp-card" href="http://monolit.site/media/images/1_ukopnEF.JPG" style="background-image: url('http://monolit.site/media/images/1_ukopnEF.JPG');">
-                        <div class="bp-card__date">31 января 2019</div>
-                    </a>
-                    <a data-fancybox="bp-gallery" class="bp-card" href="http://monolit.site/media/images/file/img_8085.JPG" style="background-image: url('http://monolit.site/media/images/file/img_8085.JPG');">
-                        <div class="bp-card__date">31 января 2019</div>
-                    </a>
-                    <a data-fancybox="bp-gallery" class="bp-card" href="http://monolit.site/media/images/file/1_n9amjg2.JPG" style="background-image: url('http://monolit.site/media/images/file/1_n9amjg2.JPG');">
-                        <div class="bp-card__date">31 января 2019</div>
-                    </a> -->
                 </div>
             </div>
 

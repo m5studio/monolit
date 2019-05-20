@@ -15,6 +15,9 @@ import {realtyFloorFilters} from "./modules/nouislider/realty_floor_filters"
 // Scroll to Top
 import {scrollToTop} from "./modules/scroll-to-top/scroll-to-top"
 
+// Object page
+import {objectPageGalleries} from "./pages/objects/object-page-galleries"
+
 // Fancybox https://fancyapps.com/fancybox/3/
 import '@fancyapps/fancybox'
 
@@ -41,19 +44,10 @@ $(document).ready(function() {
     scrollToTop()
 
 
-    // Get object gallery images from json
-    $('select[name=gallery_id]').change(function() {
-        let selected_val = $("option:selected", this).val()
-        let selected_text = $("option:selected", this).html()
-        $('#bp-and-news-pills-building-progress__inner').empty()
-
-        // $.getJSON('/object-gal/'+selected_val+'/', function(data) {
-        $.getJSON(selected_val, function(data) {
-            $.each(data, function(i, val) {
-                $('#bp-and-news-pills-building-progress__inner').append('<a data-fancybox="bp-gallery" data-caption="'+selected_text+'" class="bp-card" href="/media/'+val.image+'" style="background-image: url(/media/'+val.image+');"><div class="bp-card__date">'+selected_text+'</div></a>')
-            })
-        })
-    })
+    // Object page galleries
+    if ( $('.object-page').length ) {
+        objectPageGalleries()
+    }
 
 })
 

@@ -1,4 +1,4 @@
-# from django.shortcuts import render
+from django.http import JsonResponse
 from django.views.generic import ListView, DetailView
 
 from apps.realty.models.object import Object
@@ -6,8 +6,6 @@ from apps.realty.models.object_site import ObjectSite
 from apps.realty.models.object_info_tab import ObjectInfoTab
 from apps.realty.models.object_file import ObjectFile
 from apps.realty.models.object_gallery import (ObjectGallery, ObjectGalleryImage)
-
-from django.http import JsonResponse
 
 
 class ObjectListView(ListView):
@@ -30,13 +28,8 @@ class ObjectDetailView(DetailView):
         # context['page_meta_description'] = 'my custom meta'
         context['object_info_tabs'] = ObjectInfoTab.objects.filter(object_id=self.get_object().pk).order_by('-order')
         context['object_files'] = ObjectFile.objects.filter(object_id=self.get_object().pk)
-
         context['object_galleries'] = ObjectGallery.objects.filter(object=self.get_object().pk).order_by('-order')
         context['object_galleries_images'] = ObjectGalleryImage.objects.filter(gallery__object=self.get_object().pk, gallery=context['object_galleries'].first())
-
-        # Galleries filter
-        if self.request.method == "GET" and self.request.GET.get('gallery_id'):
-            context['object_galleries_images'] = ObjectGalleryImage.objects.filter(gallery__object=self.get_object().pk, gallery=self.request.GET.get('gallery_id'))
         return context
 
 
@@ -55,6 +48,6 @@ class ObjectSiteDetailView(DetailView):
 
 # Object gallery in json format
 def object_gallery(request, gallery_id):
-    gallery_images = ObjectGalleryImage.objects.filter(gallery=gallery_id).values('image', 'gallery')
+    gallery_images = ObjectGalleryImage.objects.filter(gallery=gallery_id).values('image',)
     gallery_images = list(gallery_images)
     return JsonResponse(gallery_images, safe=False)
