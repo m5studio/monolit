@@ -5,7 +5,9 @@ from apps.realty.views import (
     ObjectDetailView,
 
     ObjectSiteListView,
-    ObjectSiteDetailView
+    ObjectSiteDetailView,
+
+    gallery_content
 )
 
 
@@ -19,4 +21,6 @@ urlpatterns = [
         path('', ObjectSiteListView.as_view(), name='objects-sites-list'),
         path('<int:pk>/', ObjectSiteDetailView.as_view(), name='object-site-detail')
     ])),
+
+    path('gallery-obj/', gallery_content)
 ]

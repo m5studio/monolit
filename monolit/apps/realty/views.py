@@ -7,6 +7,8 @@ from apps.realty.models.object_info_tab import ObjectInfoTab
 from apps.realty.models.object_file import ObjectFile
 from apps.realty.models.object_gallery import (ObjectGallery, ObjectGalleryImage)
 
+from django.http import JsonResponse
+
 
 class ObjectListView(ListView):
     model = Object
@@ -49,3 +51,13 @@ class ObjectSiteListView(ListView):
 
 class ObjectSiteDetailView(DetailView):
     model = ObjectSite
+
+
+def gallery_content(request):
+    # data = [{'src': 'http://monolit.site/media/images/img_0054.JPG', 'email': 'peter@example.org'},
+    #         {'src': 'http://monolit.site/media/images/img_0054.JPG', 'email': 'julia@example.org'}]
+    # return JsonResponse(data, safe=False)
+
+    gallery_images = ObjectGalleryImage.objects.filter(gallery=1).values('image', 'gallery')
+    gallery_images = list(gallery_images)
+    return JsonResponse(gallery_images, safe=False)
