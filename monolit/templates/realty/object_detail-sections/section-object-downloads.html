@@ -12,7 +12,7 @@
                     </div>
                     <div class="doc-download__d-u-wrap">
                         <div class="doc-download__date">
-                            Дата: {{ document.date }}
+                            Дата: {{ document.date|date:"d/m/Y" }}
                         </div>
                         <div class="doc-download__user-name">
                             Автор: {{ document.author }}
