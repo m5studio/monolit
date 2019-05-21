@@ -17,7 +17,10 @@ def file_upload_path(instance, filename):
     return 'objects/{object_crm_id}/documents/{filename}'.format(object_crm_id=object_crm_id, filename=filename)
 
 class ObjectDocumentAuthor(models.Model):
-    name = models.CharField('Автор', max_length=255, blank=True, null=True, help_text='Пример: Иванов В.А.')
+    name = models.CharField('Автор', max_length=255, help_text='Пример: Иванов В.А.')
+
+    def __str__(self):
+        return self.name
 
     class Meta:
         verbose_name = 'Автор документа'
