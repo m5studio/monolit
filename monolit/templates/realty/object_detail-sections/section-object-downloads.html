@@ -1,0 +1,186 @@
+{% load custom_filters %}
+<section id="section-object-downloads" class="common-section">
+    <div class="common-section__title container">
+        <h2>Документы</h2>
+    </div>
+    <div id="section-object-downloads__inner" class="container">
+        {% for document in object_documents %}
+            <div class="doc-download">
+                <div class="doc-download__t-d-u-wrap">
+                    <div class="doc-download__title">
+                        {{ document.title }}
+                    </div>
+                    <div class="doc-download__d-u-wrap">
+                        <div class="doc-download__date">
+                            Дата: {{ document.date }}
+                        </div>
+                        <div class="doc-download__user-name">
+                            Автор: {{ document.author }}
+                        </div>
+                    </div>
+                </div>
+                <div class="doc-download__size">
+                    {% if document.file %}{{ document.file.url|get_file_ext|upper }}, {{ document.file.size|bytes_to_mb }}{% endif %}
+                </div>
+                <div class="doc-download__link">
+                    <div class="icon icon-32 icon-download"></div>
+                    <a href="{% if document.file %}{{ document.file.url }}{% endif %}" class="stretched-link" target="_blank" title="Скачать"></a>
+                </div>
+            </div>
+        {% endfor %}
+        {% comment %}
+        <!-- <div class="doc-download">
+            <div class="doc-download__t-d-u-wrap">
+                <div class="doc-download__title">
+                    Проектная декларация «Многоэтажные жилые дома по ул. Битакская в г. Симферополе» от 14.01.2019
+                </div>
+                <div class="doc-download__d-u-wrap">
+                    <div class="doc-download__date">
+                        Дата: 16.01.2019
+                    </div>
+                    <div class="doc-download__user-name">
+                        Автор: Мамутова Л.И.
+                    </div>
+                </div>
+            </div>
+            <div class="doc-download__size">
+                PDF, 396.3 КБ
+            </div>
+            <div class="doc-download__link">
+                <div class="icon icon-32 icon-download"></div>
+                <a href="" class="stretched-link" title="Скачать"></a>
+            </div>
+        </div>
+        <div class="doc-download">
+            <div class="doc-download__t-d-u-wrap">
+                <div class="doc-download__title">
+                    Проектная декларация «Многоэтажные жилые дома по ул. Битакская в г. Симферополе» от 14.01.2019
+                </div>
+                <div class="doc-download__d-u-wrap">
+                    <div class="doc-download__date">
+                        Дата: 16.01.2019
+                    </div>
+                    <div class="doc-download__user-name">
+                        Автор: Мамутова Л.И.
+                    </div>
+                </div>
+            </div>
+            <div class="doc-download__size">
+                PDF, 396.3 КБ
+            </div>
+            <div class="doc-download__link">
+                <div class="icon icon-32 icon-download"></div>
+                <a href="" class="stretched-link" title="Скачать"></a>
+            </div>
+        </div>
+        <div class="doc-download">
+            <div class="doc-download__t-d-u-wrap">
+                <div class="doc-download__title">
+                    Проектная декларация «Многоэтажные жилые дома по ул. Битакская в г. Симферополе» от 14.01.2019
+                </div>
+                <div class="doc-download__d-u-wrap">
+                    <div class="doc-download__date">
+                        Дата: 16.01.2019
+                    </div>
+                    <div class="doc-download__user-name">
+                        Автор: Мамутова Л.И.
+                    </div>
+                </div>
+            </div>
+            <div class="doc-download__size">
+                PDF, 396.3 КБ
+            </div>
+            <div class="doc-download__link">
+                <div class="icon icon-32 icon-download"></div>
+                <a href="" class="stretched-link" title="Скачать"></a>
+            </div>
+        </div>
+        <div class="doc-download">
+            <div class="doc-download__t-d-u-wrap">
+                <div class="doc-download__title">
+                    Проектная декларация «Многоэтажные жилые дома по ул. Битакская в г. Симферополе» от 14.01.2019
+                </div>
+                <div class="doc-download__d-u-wrap">
+                    <div class="doc-download__date">
+                        Дата: 16.01.2019
+                    </div>
+                    <div class="doc-download__user-name">
+                        Автор: Мамутова Л.И.
+                    </div>
+                </div>
+            </div>
+            <div class="doc-download__size">
+                PDF, 396.3 КБ
+            </div>
+            <div class="doc-download__link">
+                <div class="icon icon-32 icon-download"></div>
+                <a href="" class="stretched-link" title="Скачать"></a>
+            </div>
+        </div>
+        <div class="doc-download">
+            <div class="doc-download__t-d-u-wrap">
+                <div class="doc-download__title">
+                    Проектная декларация «Многоэтажные жилые дома по ул. Битакская в г. Симферополе» от 14.01.2019
+                </div>
+                <div class="doc-download__d-u-wrap">
+                    <div class="doc-download__date">
+                        Дата: 16.01.2019
+                    </div>
+                    <div class="doc-download__user-name">
+                        Автор: Мамутова Л.И.
+                    </div>
+                </div>
+            </div>
+            <div class="doc-download__size">
+                PDF, 396.3 КБ
+            </div>
+            <div class="doc-download__link">
+                <div class="icon icon-32 icon-download"></div>
+                <a href="" class="stretched-link" title="Скачать"></a>
+            </div>
+        </div>
+        <div class="doc-download">
+            <div class="doc-download__t-d-u-wrap">
+                <div class="doc-download__title">
+                    Проектная декларация «Многоэтажные жилые дома по ул. Битакская в г. Симферополе» от 14.01.2019
+                </div>
+                <div class="doc-download__d-u-wrap">
+                    <div class="doc-download__date">
+                        Дата: 16.01.2019
+                    </div>
+                    <div class="doc-download__user-name">
+                        Автор: Мамутова Л.И.
+                    </div>
+                </div>
+            </div>
+            <div class="doc-download__size">
+                PDF, 396.3 КБ
+            </div>
+            <div class="doc-download__link">
+                <div class="icon icon-32 icon-download"></div>
+                <a href="" class="stretched-link" title="Скачать"></a>
+            </div>
+        </div> -->
+        {% endcomment %}
+    </div>
+
+    <nav class="monolit-pagination container">
+        <ul class="pagination">
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true"><</a>
+            </li>
+            <li class="page-item active">
+                <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">2</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">3</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">></a>
+            </li>
+        </ul>
+    </nav>
+</section>

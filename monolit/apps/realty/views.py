@@ -6,7 +6,7 @@ from apps.realty.models.object_site import ObjectSite
 from apps.realty.models.object_info_tab import ObjectInfoTab
 from apps.realty.models.object_file import ObjectFile
 from apps.realty.models.object_gallery import (ObjectGallery, ObjectGalleryImage)
-
+from apps.realty.models.object_document import ObjectDocument
 
 class ObjectListView(ListView):
     model = Object
@@ -28,8 +28,11 @@ class ObjectDetailView(DetailView):
         # context['page_meta_description'] = 'my custom meta'
         context['object_info_tabs'] = ObjectInfoTab.objects.filter(object_id=self.get_object().pk).order_by('-order')
         context['object_files'] = ObjectFile.objects.filter(object_id=self.get_object().pk)
+
         context['object_galleries'] = ObjectGallery.objects.filter(object=self.get_object().pk).order_by('-order')
         context['object_galleries_images'] = ObjectGalleryImage.objects.filter(gallery__object=self.get_object().pk, gallery=context['object_galleries'].first())
+
+        context['object_documents'] = ObjectDocument.objects.filter(object=self.get_object().pk).order_by('-updated')
         return context
 
 
