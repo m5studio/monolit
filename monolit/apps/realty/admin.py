@@ -6,7 +6,7 @@ from apps.core.classes.hide_from_admin_index import HideFromAdminIndex
 from imagekit.admin import AdminThumbnail
 
 from apps.realty.models.object_block import ObjectBlock
-from apps.realty.models.object_document import ObjectDocument
+from apps.realty.models.object_document import ObjectDocument, ObjectDocumentAuthor
 from apps.realty.models.object_elevator import ObjectElevator
 from apps.realty.models.object_file import ObjectFile
 from apps.realty.models.object_gallery import ObjectGallery, ObjectGalleryImage
@@ -175,10 +175,19 @@ class ObjectVideoAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.ModelAdmin
 """ [ END ObjectVideo ] """
 
 
+""" [ ObjectDocumentAuthor ] """
+@admin.register(ObjectDocumentAuthor)
+class ObjectDocumentAuthorAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.ModelAdmin):
+    search_fields = ['author']
+""" [ END ObjectDocumentAuthor ] """
+
+
 """ [ ObjectDocument ] """
 class ObjectDocumentInline(admin.TabularInline):
     model = ObjectDocument
     extra = 1
+
+    autocomplete_fields = ['author']
 
 @admin.register(ObjectDocument)
 class ObjectDocumentAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.ModelAdmin):
@@ -235,7 +244,6 @@ class ObjectAdmin(TurnOffAdminLogging, admin.ModelAdmin):
            'fields': ('city', 'address', 'location')
         }),
     )
-
     list_display = ('name', 'crm_id', 'order', 'active', 'updated')
     list_editable = ('order', 'active')
     search_fields = ['name']

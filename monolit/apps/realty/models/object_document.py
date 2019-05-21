@@ -17,7 +17,7 @@ def file_upload_path(instance, filename):
     return 'objects/{object_crm_id}/documents/{filename}'.format(object_crm_id=object_crm_id, filename=filename)
 
 class ObjectDocumentAuthor(models.Model):
-    name = models.CharField(verbose_name='Имя автора', max_length=255, blank=True, null=True, help_text='Пример: Иванов В.А.')
+    name = models.CharField('Автор', max_length=255, blank=True, null=True, help_text='Пример: Иванов В.А.')
 
     class Meta:
         verbose_name = 'Автор документа'
@@ -29,7 +29,7 @@ class ObjectDocument(models.Model):
     title   = models.CharField('Название документа', max_length=255, blank=True, null=True)
 
     # author  = models.CharField('Автор', max_length=255, blank=True, null=True)
-    author  = models.ForeignKey(ObjectDocumentAuthor, on_delete=models.SET_NULL, blank=True, null=True)
+    author  = models.ForeignKey(ObjectDocumentAuthor, verbose_name='Автор', on_delete=models.SET_NULL, blank=True, null=True)
 
     date    = models.DateField(verbose_name='Дата', default=datetime.date.today)
     file    = models.FileField('Файл', upload_to=file_upload_path, blank=True, null=True)
