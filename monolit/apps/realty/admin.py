@@ -202,7 +202,7 @@ class ObjectInfoTabInline(admin.TabularInline):
     max_num = 8
 
     readonly_fields = ('image_thumb',)
-    fields = ('object', 'order', 'name', 'icon_name', 'description', 'image', 'image_thumb',)
+    fields = ('object', 'icon_name', 'description', 'image', 'image_thumb',)
 
 @admin.register(ObjectInfoTab)
 class ObjectInfoTabAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.ModelAdmin):

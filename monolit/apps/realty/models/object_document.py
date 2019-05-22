@@ -1,7 +1,7 @@
 import datetime
 from django.db import models
 
-from django.db.models.signals import post_delete
+from django.db.models.signals import post_delete, post_save
 from django.dispatch import receiver
 
 from apps.core.classes.clean_media import CleanMedia
@@ -14,6 +14,7 @@ def file_upload_path(instance, filename):
     object_crm_id = instance.object.crm_id
     filename = FileProcessing(filename)
     filename = filename.newFileNameTranslitSlugify()
+    # filename = filename.newFileNameFromField(instance.title)
     return 'objects/{object_crm_id}/documents/{filename}'.format(object_crm_id=object_crm_id, filename=filename)
 
 class ObjectDocumentAuthor(models.Model):
@@ -29,18 +30,15 @@ class ObjectDocumentAuthor(models.Model):
 
 class ObjectDocument(models.Model):
     object  = models.ForeignKey(Object, on_delete=models.CASCADE, default=0)
-    title   = models.CharField('Название документа', max_length=255, blank=True, null=True)
-
-    # author  = models.CharField('Автор', max_length=255, blank=True, null=True)
+    title   = models.CharField('Название документа', max_length=255)
     author  = models.ForeignKey(ObjectDocumentAuthor, verbose_name='Автор', on_delete=models.SET_NULL, blank=True, null=True)
-
     date    = models.DateField(verbose_name='Дата', default=datetime.date.today)
     file    = models.FileField('Файл', upload_to=file_upload_path, blank=True, null=True)
     # created = models.DateTimeField(auto_now=False, auto_now_add=True, blank=True, null=True)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False, blank=True, null=True)
 
-    # def __str__(self):
-    #     return self.title
+    def __str__(self):
+        return self.title
 
     class Meta:
         verbose_name = 'Документ'

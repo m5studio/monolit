@@ -28,13 +28,12 @@ class ObjectInfoTab(models.Model):
         ('communications', 'Коммуникации'),
         ('arrangement', 'Планировки'),
         ('storage-room', 'Кладовые'),
-        # ('', 'Паркинг'),
+        ('parking', 'Паркинг'),
     )
 
     object       = models.ForeignKey(Object, on_delete=models.CASCADE, default=0)
-    order        = models.PositiveIntegerField('Порядок', default=0, blank=True, null=True, help_text='Чем выше число, тем ниже объект в списке')
-    name         = models.CharField('Название Вкладки', max_length=100)
-    icon_name    = models.SlugField('Имя иконки', max_length=100, choices=ICONS, blank=True, null=True)
+    # order        = models.PositiveIntegerField('Порядок', default=0, blank=True, null=True, help_text='Чем выше число, тем ниже объект в списке')
+    icon_name    = models.SlugField('Имя иконки (оно же заголовок таба)', max_length=100, choices=ICONS, blank=True, null=True)
     description  = RichTextField('Описание', blank=True, null=True)
     image        = models.ImageField('Изображение', upload_to=image_upload_path, blank=True, null=True)
 
@@ -43,7 +42,7 @@ class ObjectInfoTab(models.Model):
     image_thumb.short_description = 'Изображение (thumbnail)'
 
     def __str__(self):
-        return self.name
+        return self.get_icon_name_display()
 
     class Meta:
         verbose_name = 'Таб [Информация об объекте]'

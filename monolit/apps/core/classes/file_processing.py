@@ -43,3 +43,7 @@ class FileProcessing:
 
     def newFileNameGenplan(self) -> str:
         return "{0}{1}".format('genplan', self.getFileExt())
+
+    def newFileNameFromField(self, fieldname) -> str:
+        fieldname = slugify(translit(fieldname, 'ru', reversed=True))
+        return "{0}{1}".format(fieldname, self.getFileExt())
