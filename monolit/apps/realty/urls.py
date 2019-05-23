@@ -7,7 +7,8 @@ from apps.realty.views import (
     ObjectSiteListView,
     ObjectSiteDetailView,
 
-    object_gallery
+    object_gallery,
+    requestAjax
 )
 
 
@@ -23,4 +24,5 @@ urlpatterns = [
     ])),
 
     path('object-gallery/<int:gallery_id>/', object_gallery, name='object-gallery'),
+    path('object-docs/<int:object_id>/', requestAjax, name='object-docs')
 ]

@@ -1,7 +1,7 @@
 #section-object-downloads {
     &__inner {
         display: grid;
-        grid-column-gap: 30px;
+        grid-column-gap: 60px;
         grid-row-gap: 30px;
         grid-template-columns: repeat(3, 1fr);
 
@@ -19,7 +19,7 @@
         .doc-download {
             position: relative;
             display: grid;
-            grid-column-gap: 10px;
+            grid-column-gap: 15px;
             align-items: center;
             grid-template-columns: 1fr 100px 32px;
 
@@ -32,6 +32,7 @@
                 color: #00bbaf;
                 font-weight: 600;
                 line-height: 1.2;
+                min-height: 40px;
             }
 
             &__d-u-wrap {

@@ -32,7 +32,7 @@ class ObjectDetailView(DetailView):
         context['object_galleries'] = ObjectGallery.objects.filter(object=self.get_object().pk).order_by('-order')
         context['object_galleries_images'] = ObjectGalleryImage.objects.filter(gallery__object=self.get_object().pk, gallery=context['object_galleries'].first())
 
-        context['object_documents'] = ObjectDocument.objects.filter(object=self.get_object().pk).order_by('-updated')
+        context['object_documents'] = ObjectDocument.objects.filter(object=self.get_object().pk).order_by('-updated')[:9]
         return context
 
 
@@ -54,3 +54,12 @@ def object_gallery(request, gallery_id):
     gallery_images = ObjectGalleryImage.objects.filter(gallery=gallery_id).values('image',)
     gallery_images = list(gallery_images)
     return JsonResponse(gallery_images, safe=False)
+
+
+def requestAjax(request, object_id):
+    data = 'nothing'
+    if request.is_ajax():
+        # data = ObjectDocument.objects.filter(object=object_id).values('title', 'author__name', 'date', 'file')
+        data = ObjectDocument.objects.filter(object=object_id).values('title', 'author__name', 'date', 'file')[:3]
+        data = list(data)
+    return JsonResponse(data, safe=False)

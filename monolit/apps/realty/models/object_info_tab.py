@@ -32,7 +32,6 @@ class ObjectInfoTab(models.Model):
     )
 
     object       = models.ForeignKey(Object, on_delete=models.CASCADE, default=0)
-    # order        = models.PositiveIntegerField('Порядок', default=0, blank=True, null=True, help_text='Чем выше число, тем ниже объект в списке')
     icon_name    = models.SlugField('Имя иконки (оно же заголовок таба)', max_length=100, choices=ICONS, blank=True, null=True)
     description  = RichTextField('Описание', blank=True, null=True)
     image        = models.ImageField('Изображение', upload_to=image_upload_path, blank=True, null=True)
