@@ -4,6 +4,7 @@
         <h2>Документы</h2>
     </div>
 
+    {% comment %}
     <div class="container">
         <form id="ajax-form" action="{% url 'object-docs' object_id=object.id %}" method="post">
             {% csrf_token %}
@@ -11,6 +12,21 @@
             <input type="hidden" name="object_id_url" id="object_id_url" value="{% url 'object-docs' object_id=object.id %}">
             <button type="submit">Submit Ajax</button>
         </form>
+        <br><br>
+    </div>
+    {% endcomment %}
+
+    <div class="container">
+        Page {{ object_documents.number }} of {{ object_documents.paginator.num_pages }}<br>
+
+        <span class="pagination-links">
+            {% if object_documents.has_previous %}
+                <a id="prev" href="{{ request.path }}?page-docs={{ object_documents.previous_page_number }}">Previous page</a>
+            {% endif %}
+            {% if object_documents.has_next %}
+                <a id="next" href="{{ request.path }}?page-docs={{ object_documents.next_page_number }}">Next page</a>
+            {% endif %}
+        </span>
         <br><br>
     </div>
 
