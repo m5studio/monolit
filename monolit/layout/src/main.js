@@ -15,8 +15,8 @@ import {realtyFloorFilters} from "./modules/nouislider/realty_floor_filters"
 // Scroll to Top
 import {scrollToTop} from "./modules/scroll-to-top/scroll-to-top"
 
-// Object page
-import {objectPageGalleries} from "./pages/objects/object-page-galleries"
+// Ajax
+import {objectPageGalleries} from "./ajax/object-page-galleries"
 
 // Fancybox https://fancyapps.com/fancybox/3/
 import '@fancyapps/fancybox'
@@ -106,7 +106,6 @@ $(document).ready(function() {
     //             $.each(data, (i, val) => {
     //                 let file_link = '/media/'+val.file
     //                 let doc_layout = '<div class="doc-download"><div class="doc-download__t-d-u-wrap"><div class="doc-download__title">'+val.title+'</div><div class="doc-download__d-u-wrap"><div class="doc-download__date">Дата: '+val.date+'</div><div class="doc-download__user-name">Автор: '+val.author__name+'</div></div></div><div class="doc-download__size">{{ document.file.url|get_file_ext|upper }}, {{ document.file.size|bytes_to_mb }}</div><div class="doc-download__link"><div class="icon icon-32 icon-download"></div><a href="'+file_link+'" class="stretched-link" target="_blank" title="Скачать"></a></div></div>'
-    //
     //                 docs_list_container.append(doc_layout)
     //             })
     //         }
@@ -114,19 +113,129 @@ $(document).ready(function() {
     // })
     // END Django Ajax
 
-    $('.pagination-links a#next').click((e) => {
+
+    $('a#page-docs-prev').click((e) => {
         e.preventDefault()
+        let page_url = $('a#page-docs-prev', this).attr('href')
+        console.log( page_url )
 
-        console.log('next clicked!')
+        $.ajax({
+            url: page_url,
+            type: 'GET',
+            success: (data) => {
+                $('#section-object-downloads__inner').empty()
+                $('#section-object-downloads__inner').append( $(data).find('#section-object-downloads__inner').html() )
 
-        let next_link = $('.pagination-links #next').attr('href')
-
-        // $('#section-object-downloads__inner').load(next_link)
-
-        $.get(next_link, function(data) {
-            console.log(data)
-            // $('#section-object-downloads__inner').html(data)
+                $('#page-docs-pagination').empty()
+                $('#page-docs-pagination').append( $(data).find('#page-docs-pagination').html() )
+            }
         })
+
+        // $.get(page_url, function(data) {
+        //     $('#section-object-downloads__inner').empty()
+        //     $('#section-object-downloads__inner').append( $(data).find('#section-object-downloads__inner').html() )
+        //
+        //     $('#page-docs-pagination').empty()
+        //     $('#page-docs-pagination').append( $(data).find('#page-docs-pagination').html() )
+        // })
+    })
+    $('a#page-docs-next').click((e) => {
+        e.preventDefault()
+        let page_url = $('a#page-docs-next', this).attr('href')
+        console.log( page_url )
+
+        $.ajax({
+            url: page_url,
+            type: 'GET',
+            success: (data) => {
+                $('#section-object-downloads__inner').empty()
+                $('#section-object-downloads__inner').append( $(data).find('#section-object-downloads__inner').html() )
+
+                $('#page-docs-pagination').empty()
+                $('#page-docs-pagination').append( $(data).find('#page-docs-pagination').html() )
+            }
+        })
+
+        // $.get(page_url, function(data) {
+        //     $('#section-object-downloads__inner').empty()
+        //     $('#section-object-downloads__inner').append( $(data).find('#section-object-downloads__inner').html() )
+        //
+        //     $('#page-docs-pagination').empty()
+        //     $('#page-docs-pagination').append( $(data).find('#page-docs-pagination').html() )
+        // })
+    })
+    // END Object Documents Ajax pagination
+
+    $('#page-docs-pagination a.page-link').each((index, el) => {
+        // console.log( $(el).attr('href') )
+        $(el).click((e) => {
+            e.preventDefault()
+
+            console.log('!!!!!!!!!!!' + $('a.page-link', this).attr('href') )
+        })
+    })
+
+})
+
+$(document).ajaxStop(function() {
+    $('#page-docs-pagination a.page-link').each((index, el) => {
+        // console.log( $(el).attr('href') )
+        $(el).click((e) => {
+            e.preventDefault()
+
+            console.log('!!!!!!!!!!!' + $('a.page-link', this).attr('href') )
+        })
+    })
+
+    $('a#page-docs-prev').click((e) => {
+        e.preventDefault()
+        let page_url = $('a#page-docs-prev', this).attr('href')
+        console.log( page_url )
+
+        $.ajax({
+            url: page_url,
+            type: 'GET',
+            success: (data) => {
+                $('#section-object-downloads__inner').empty()
+                $('#section-object-downloads__inner').append( $(data).find('#section-object-downloads__inner').html() )
+
+                $('#page-docs-pagination').empty()
+                $('#page-docs-pagination').append( $(data).find('#page-docs-pagination').html() )
+            }
+        })
+
+        // $.get(page_url, function(data) {
+        //     $('#section-object-downloads__inner').empty()
+        //     $('#section-object-downloads__inner').append( $(data).find('#section-object-downloads__inner').html() )
+        //
+        //     $('#page-docs-pagination').empty()
+        //     $('#page-docs-pagination').append( $(data).find('#page-docs-pagination').html() )
+        // })
+    })
+    $('a#page-docs-next').click((e) => {
+        e.preventDefault()
+        let page_url = $('a#page-docs-next', this).attr('href')
+        console.log( page_url )
+
+        $.ajax({
+            url: page_url,
+            type: 'GET',
+            success: (data) => {
+                $('#section-object-downloads__inner').empty()
+                $('#section-object-downloads__inner').append( $(data).find('#section-object-downloads__inner').html() )
+
+                $('#page-docs-pagination').empty()
+                $('#page-docs-pagination').append( $(data).find('#page-docs-pagination').html() )
+            }
+        })
+
+        // $.get(page_url, function(data) {
+        //     $('#section-object-downloads__inner').empty()
+        //     $('#section-object-downloads__inner').append( $(data).find('#section-object-downloads__inner').html() )
+        //
+        //     $('#page-docs-pagination').empty()
+        //     $('#page-docs-pagination').append( $(data).find('#page-docs-pagination').html() )
+        // })
     })
 })
 

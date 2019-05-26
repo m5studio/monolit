@@ -4,32 +4,6 @@
         <h2>Документы</h2>
     </div>
 
-    {% comment %}
-    <div class="container">
-        <form id="ajax-form" action="{% url 'object-docs' object_id=object.id %}" method="post">
-            {% csrf_token %}
-            <!-- <input type="text" name="message" id="message"> -->
-            <input type="hidden" name="object_id_url" id="object_id_url" value="{% url 'object-docs' object_id=object.id %}">
-            <button type="submit">Submit Ajax</button>
-        </form>
-        <br><br>
-    </div>
-    {% endcomment %}
-
-    <div class="container">
-        Page {{ object_documents.number }} of {{ object_documents.paginator.num_pages }}<br>
-
-        <span class="pagination-links">
-            {% if object_documents.has_previous %}
-                <a id="prev" href="{{ request.path }}?page-docs={{ object_documents.previous_page_number }}">Previous page</a>
-            {% endif %}
-            {% if object_documents.has_next %}
-                <a id="next" href="{{ request.path }}?page-docs={{ object_documents.next_page_number }}">Next page</a>
-            {% endif %}
-        </span>
-        <br><br>
-    </div>
-
     <div id="section-object-downloads__inner" class="container">
         {% for document in object_documents %}
             <div class="doc-download">
@@ -192,7 +166,7 @@
         {% endcomment %}
     </div>
 
-    <nav class="monolit-pagination container">
+    <!-- <nav class="monolit-pagination container">
         <ul class="pagination">
             <li class="page-item disabled">
                 <a class="page-link" href="#" tabindex="-1" aria-disabled="true"><</a>
@@ -209,6 +183,51 @@
             <li class="page-item">
                 <a class="page-link" href="#">></a>
             </li>
+        </ul>
+    </nav> -->
+
+    <nav id="page-docs-pagination" class="monolit-pagination container">
+        {% comment %}
+            <!-- Page {{ object_documents.number }} of {{ object_documents.paginator.num_pages }}<br>
+
+            {% if object_documents.has_previous %}
+                <a id="prev" href="{{ request.path }}?page-docs={{ object_documents.previous_page_number }}">Previous page</a>
+            {% endif %}
+            {% if object_documents.has_next %}
+                <a id="next" href="{{ request.path }}?page-docs={{ object_documents.next_page_number }}">Next page</a>
+            {% endif %} -->
+        {% endcomment %}
+
+        <ul class="pagination">
+            {% if object_documents.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" id="page-docs-prev" href="{{ request.path }}?page-docs={{ object_documents.previous_page_number }}"><</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" id="page-docs-prev" href="#" tabindex="-1" aria-disabled="true"><</a>
+                </li>
+            {% endif %}
+            {% for i in object_documents.paginator.page_range %}
+                {% if object_documents.number == i %}
+                    <li class="page-item active">
+                        <a class="page-link" href="{{ request.path }}?page-docs={{ i }}">{{ i }}</a>
+                    </li>
+                {% else %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ request.path }}?page-docs={{ i }}">{{ i }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+            {% if object_documents.has_next %}
+                <li class="page-item">
+                    <a class="page-link" id="page-docs-next" href="{{ request.path }}?page-docs={{ object_documents.next_page_number }}">></a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" id="page-docs-next" href="#" tabindex="-1" aria-disabled="true">></a>
+                </li>
+            {% endif %}
         </ul>
     </nav>
 </section>
