@@ -43,7 +43,6 @@ $(document).ready(function() {
 
     scrollToTop()
 
-
     // Object page galleries
     if ( $('.object-page').length ) {
         objectPageGalleries()

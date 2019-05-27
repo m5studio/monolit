@@ -491,4 +491,15 @@ body {
 
         &__disclamer {}
     }
+
+    #js-disabled {
+        background-color: rgba(255, 255, 255, .7);
+        color: red;
+        padding: 15px;
+
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
 }
