@@ -114,6 +114,61 @@ $(document).ready(function() {
 
 
     // Object Documents Ajax pagination
+    /*
+    $('a#page-docs-prev').click((e) => {
+        e.preventDefault()
+        let page_url = $('a#page-docs-prev', this).attr('href')
+        console.log( page_url )
+
+        $.ajax({
+            url: page_url,
+            type: 'GET',
+            success: (data) => {
+                $('#section-object-downloads__inner').empty()
+                $('#section-object-downloads__inner').append( $(data).find('#section-object-downloads__inner').html() )
+
+                $('#page-docs-pagination').empty()
+                $('#page-docs-pagination').append( $(data).find('#page-docs-pagination').html() )
+            }
+        })
+
+        // $.get(page_url, function(data) {
+        //     $('#section-object-downloads__inner').empty()
+        //     $('#section-object-downloads__inner').append( $(data).find('#section-object-downloads__inner').html() )
+        //
+        //     $('#page-docs-pagination').empty()
+        //     $('#page-docs-pagination').append( $(data).find('#page-docs-pagination').html() )
+        // })
+    })
+    $('a#page-docs-next').click((e) => {
+        e.preventDefault()
+        let page_url = $('a#page-docs-next', this).attr('href')
+        console.log( page_url )
+
+        $.ajax({
+            url: page_url,
+            type: 'GET',
+            success: (data) => {
+                $('#section-object-downloads__inner').empty()
+                $('#section-object-downloads__inner').append( $(data).find('#section-object-downloads__inner').html() )
+
+                $('#page-docs-pagination').empty()
+                $('#page-docs-pagination').append( $(data).find('#page-docs-pagination').html() )
+            }
+        })
+
+        // $.get(page_url, function(data) {
+        //     $('#section-object-downloads__inner').empty()
+        //     $('#section-object-downloads__inner').append( $(data).find('#section-object-downloads__inner').html() )
+        //
+        //     $('#page-docs-pagination').empty()
+        //     $('#page-docs-pagination').append( $(data).find('#page-docs-pagination').html() )
+        // })
+    })
+    */
+    // END Object Documents Ajax pagination
+
+    // Object Documents Ajax pagination
     $('#page-docs-pagination a.page-link').each((index, el) => {
         $(el).click((e) => {
             e.preventDefault()
