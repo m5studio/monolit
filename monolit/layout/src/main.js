@@ -52,7 +52,6 @@ $(document).ready(function() {
 
     // Django Ajax
     // README: https://medium.com/@a01701414/how-to-apply-ajax-with-django-2-1-8e9a4943f73
-
     // Cookie obtainer Django
     function getCookie(name) {
         let cookieValue = null;
@@ -114,129 +113,55 @@ $(document).ready(function() {
     // END Django Ajax
 
 
-    $('a#page-docs-prev').click((e) => {
-        e.preventDefault()
-        let page_url = $('a#page-docs-prev', this).attr('href')
-        console.log( page_url )
+    // Object Documents Ajax pagination
+    $('#page-docs-pagination a.page-link').each((index, el) => {
+        $(el).click((e) => {
+            e.preventDefault()
 
-        $.ajax({
-            url: page_url,
-            type: 'GET',
-            success: (data) => {
-                $('#section-object-downloads__inner').empty()
-                $('#section-object-downloads__inner').append( $(data).find('#section-object-downloads__inner').html() )
+            let page_url = $(el).attr('href')
+            // console.log( page_url )
 
-                $('#page-docs-pagination').empty()
-                $('#page-docs-pagination').append( $(data).find('#page-docs-pagination').html() )
-            }
+            $.ajax({
+                url: page_url,
+                type: 'GET',
+                success: (data) => {
+                    $('#section-object-downloads__inner').empty()
+                    $('#section-object-downloads__inner').append( $(data).find('#section-object-downloads__inner').html() )
+
+                    $('#page-docs-pagination').empty()
+                    $('#page-docs-pagination').append( $(data).find('#page-docs-pagination').html() )
+                }
+            })
         })
-
-        // $.get(page_url, function(data) {
-        //     $('#section-object-downloads__inner').empty()
-        //     $('#section-object-downloads__inner').append( $(data).find('#section-object-downloads__inner').html() )
-        //
-        //     $('#page-docs-pagination').empty()
-        //     $('#page-docs-pagination').append( $(data).find('#page-docs-pagination').html() )
-        // })
-    })
-    $('a#page-docs-next').click((e) => {
-        e.preventDefault()
-        let page_url = $('a#page-docs-next', this).attr('href')
-        console.log( page_url )
-
-        $.ajax({
-            url: page_url,
-            type: 'GET',
-            success: (data) => {
-                $('#section-object-downloads__inner').empty()
-                $('#section-object-downloads__inner').append( $(data).find('#section-object-downloads__inner').html() )
-
-                $('#page-docs-pagination').empty()
-                $('#page-docs-pagination').append( $(data).find('#page-docs-pagination').html() )
-            }
-        })
-
-        // $.get(page_url, function(data) {
-        //     $('#section-object-downloads__inner').empty()
-        //     $('#section-object-downloads__inner').append( $(data).find('#section-object-downloads__inner').html() )
-        //
-        //     $('#page-docs-pagination').empty()
-        //     $('#page-docs-pagination').append( $(data).find('#page-docs-pagination').html() )
-        // })
     })
     // END Object Documents Ajax pagination
 
-    $('#page-docs-pagination a.page-link').each((index, el) => {
-        // console.log( $(el).attr('href') )
-        $(el).click((e) => {
-            e.preventDefault()
-
-            console.log('!!!!!!!!!!!' + $('a.page-link', this).attr('href') )
-        })
-    })
-
 })
 
+
 $(document).ajaxStop(function() {
+    // Object Documents Ajax pagination
     $('#page-docs-pagination a.page-link').each((index, el) => {
-        // console.log( $(el).attr('href') )
         $(el).click((e) => {
             e.preventDefault()
 
-            console.log('!!!!!!!!!!!' + $('a.page-link', this).attr('href') )
+            let page_url = $(el).attr('href')
+            // console.log( page_url )
+
+            $.ajax({
+                url: page_url,
+                type: 'GET',
+                success: (data) => {
+                    $('#section-object-downloads__inner').empty()
+                    $('#section-object-downloads__inner').append( $(data).find('#section-object-downloads__inner').html() )
+
+                    $('#page-docs-pagination').empty()
+                    $('#page-docs-pagination').append( $(data).find('#page-docs-pagination').html() )
+                }
+            })
         })
     })
-
-    $('a#page-docs-prev').click((e) => {
-        e.preventDefault()
-        let page_url = $('a#page-docs-prev', this).attr('href')
-        console.log( page_url )
-
-        $.ajax({
-            url: page_url,
-            type: 'GET',
-            success: (data) => {
-                $('#section-object-downloads__inner').empty()
-                $('#section-object-downloads__inner').append( $(data).find('#section-object-downloads__inner').html() )
-
-                $('#page-docs-pagination').empty()
-                $('#page-docs-pagination').append( $(data).find('#page-docs-pagination').html() )
-            }
-        })
-
-        // $.get(page_url, function(data) {
-        //     $('#section-object-downloads__inner').empty()
-        //     $('#section-object-downloads__inner').append( $(data).find('#section-object-downloads__inner').html() )
-        //
-        //     $('#page-docs-pagination').empty()
-        //     $('#page-docs-pagination').append( $(data).find('#page-docs-pagination').html() )
-        // })
-    })
-    $('a#page-docs-next').click((e) => {
-        e.preventDefault()
-        let page_url = $('a#page-docs-next', this).attr('href')
-        console.log( page_url )
-
-        $.ajax({
-            url: page_url,
-            type: 'GET',
-            success: (data) => {
-                $('#section-object-downloads__inner').empty()
-                $('#section-object-downloads__inner').append( $(data).find('#section-object-downloads__inner').html() )
-
-                $('#page-docs-pagination').empty()
-                $('#page-docs-pagination').append( $(data).find('#page-docs-pagination').html() )
-            }
-        })
-
-        // $.get(page_url, function(data) {
-        //     $('#section-object-downloads__inner').empty()
-        //     $('#section-object-downloads__inner').append( $(data).find('#section-object-downloads__inner').html() )
-        //
-        //     $('#page-docs-pagination').empty()
-        //     $('#page-docs-pagination').append( $(data).find('#page-docs-pagination').html() )
-        // })
-    })
+    // END Object Documents Ajax pagination
 })
 
 
