@@ -7,7 +7,16 @@
                 href="#object-video-and-panoram-pills-video"
                 role="tab"
                 aria-controls="object-video-and-panoram-pills-video"
-                aria-selected="true">Видео о комплексе</a>
+                aria-selected="true">Видео</a>
+            {% if object.webcam %}
+                <a class="nav-link"
+                        id="object-video-and-panoram-pills-webcam-tab"
+                        data-toggle="pill"
+                        href="#object-video-and-panoram-pills-webcam"
+                        role="tab"
+                        aria-controls="object-video-and-panoram-pills-webcam"
+                        aria-selected="false">Веб-камера</a>
+            {% endif %}
             {% if object.panoram %}
                 <a class="nav-link"
                     id="object-video-and-panoram-pills-panoram-tab"
@@ -27,12 +36,22 @@
                     <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/JbacFR_B-jw" allowfullscreen></iframe>
                 </div>
             </div>
+            {% if object.webcam %}
+                <div class="tab-pane fade"
+                    id="object-video-and-panoram-pills-webcam"
+                    role="tabpanel"
+                    aria-labelledby="object-video-and-panoram-pills-webcam-tab">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" src="{{ object.webcam }}" allowfullscreen></iframe>
+                    </div>
+                </div>
+            {% endif %}
             {% if object.panoram %}
                 <div class="tab-pane fade"
                     id="object-video-and-panoram-pills-panoram"
                     role="tabpanel"
                     aria-labelledby="object-video-and-panoram-pills-panoram-tab">
-                    <iframe class="" src="{{ object.panoram }}" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
+                    <iframe src="{{ object.panoram }}" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
                 </div>
             {% endif %}
         </div>

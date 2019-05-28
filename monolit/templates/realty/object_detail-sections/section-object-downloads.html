@@ -31,7 +31,8 @@
         {% endfor %}
     </div>
 
-    <nav id="page-docs-pagination" class="monolit-pagination container">{% spaceless %}
+    {% spaceless %}
+    <nav id="page-docs-pagination" class="monolit-pagination container">
         <ul class="pagination">
             {% if object_documents.has_previous %}
                 <li class="page-item">
@@ -63,5 +64,6 @@
                 </li>
             {% endif %}
         </ul>
-    {% endspaceless %}</nav>
+    </nav>
+    {% endspaceless %}
 </section>
