@@ -71,6 +71,7 @@ class Object(models.Model):
     name          = models.CharField('Название объекта', unique=True, max_length=255, db_index=True)
     slug          = models.SlugField('URL адрес', max_length=100, unique=True, help_text='e.g.: status-house (max 100 chars), получим https://monolit.site/objects/status-house/')
 
+    # Flatten ManyToManyField relation
     # category      = models.ManyToManyField(ObjectCategory, verbose_name='Категория объекта', default=ObjectCategory.objects.all().values_list('pk', flat=True))
     category      = models.ManyToManyField(ObjectCategory,
                                            verbose_name='Категория объекта',
@@ -90,6 +91,7 @@ class Object(models.Model):
                                       upload_to=genplan_upload_path,
                                       blank=True, null=True,
                                       help_text='Изображение с генпланом')
+    genplan_svg   = models.TextField('SVG Генплан', blank=True, null=True,)
     has_military  = models.BooleanField('Военная ипотека', default=False, help_text='Подходит ли данный объект для военной ипотеки')
     has_mother    = models.BooleanField('Материнский капитал', default=False, help_text='Подходит ли данный объект под оплату мат.капиталом')
 

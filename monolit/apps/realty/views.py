@@ -1,8 +1,6 @@
 from django.http import JsonResponse
 from django.views.generic import ListView, DetailView
-
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-# from django.views.generic.list import MultipleObjectMixin
 
 from apps.realty.models.object import Object
 from apps.realty.models.object_site import ObjectSite
@@ -46,7 +44,6 @@ class ObjectDetailView(DetailView):
             context['object_documents'] = paginator.page(1)
         except EmptyPage:
             context['object_documents'] = paginator.page(paginator.num_pages)
-
         return context
 
 

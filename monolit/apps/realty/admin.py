@@ -238,7 +238,7 @@ class ObjectAdmin(TurnOffAdminLogging, admin.ModelAdmin):
            'fields': ('main_image_thumb', 'main_image')
         }),
         ('Генплан', {
-           'fields': ('genplan_thumb', 'genplan')
+           'fields': ('genplan_thumb', 'genplan', 'genplan_svg')
         }),
         ('Адрес и локация', {
            'fields': ('city', 'address', 'location')
