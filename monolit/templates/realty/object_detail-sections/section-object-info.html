@@ -27,7 +27,7 @@
                                 {{ tab.description|safe }}
                             </div>
                         </div>
-                        <div class="tab-pane__img" style="background-image: url('{% if tab.image %}{{ tab.image.url }}{% endif %}');"></div>
+                        {% if tab.image %}<div class="tab-pane__img" style="background-image: url('{{ tab.image.url }}');"></div>{% endif %}
                     </div>
                 </div>
             {% endfor %}

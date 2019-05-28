@@ -130,7 +130,6 @@ def genplan_image_optimization(sender, instance, created, **kwargs):
     if instance.genplan:
         image = ImageOptimizer(instance.genplan.path)
         image.optimizeAndSaveImg()
-
     if instance.main_image:
         image = ImageOptimizer(instance.main_image.path)
         image.optimizeAndSaveImg()

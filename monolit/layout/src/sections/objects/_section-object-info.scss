@@ -55,7 +55,6 @@
                         @include media-breakpoint-down(sm) {
                             width: 70px;
                             height: 70px;
-
                             margin-right: -15px;
                         }
                     }
@@ -92,6 +91,10 @@
                     background-position: 50% 0;
                     background-size: cover;
                     min-height: 386px;
+
+                    @include media-breakpoint-down(lg) {
+                        display: none;
+                    }
                 }
             }
         }

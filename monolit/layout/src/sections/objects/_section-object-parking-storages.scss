@@ -59,6 +59,14 @@
                         background-color: rgba(0, 0, 0, .5);
                     }
                 }
+
+                &--parking {
+                    background-image: url('images/bg-parking.jpg');
+                }
+
+                &--storage-room {
+                    background-image: url('images/bg-storage-room.jpg');
+                }
             }
         }
 
