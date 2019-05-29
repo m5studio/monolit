@@ -35,7 +35,7 @@ class ObjectDetailView(DetailView):
 
         # Object Documents Pagination
         context['object_documents'] = ObjectDocument.objects.filter(object=self.get_object().pk).order_by('-updated')
-        paginator = Paginator(context['object_documents'], 9)
+        paginator = Paginator(context['object_documents'], 1)
         page_docs = self.request.GET.get('page-docs')
         try:
             context['object_documents'] = paginator.page(page_docs)
