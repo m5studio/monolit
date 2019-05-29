@@ -44,12 +44,12 @@ $(document).ready(function() {
 
     scrollToTop()
 
-    // Object page galleries, ajax documents pagination
+    // Object page galleries ajax documents pagination
     if ( $('.object-page').length ) {
         objectPageGalleries()
         objectPageDocsPagination()
     }
-
+    // END Object page galleries ajax documents pagination
 })
 
 
