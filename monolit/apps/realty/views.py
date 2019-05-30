@@ -29,7 +29,6 @@ class ObjectDetailView(DetailView):
         # context['page_meta_description'] = 'my custom meta'
         context['object_info_tabs'] = ObjectInfoTab.objects.filter(object_id=self.get_object().pk)
         context['object_files'] = ObjectFile.objects.filter(object_id=self.get_object().pk)
-
         context['object_galleries'] = ObjectGallery.objects.filter(object=self.get_object().pk).order_by('-order')
         context['object_galleries_images'] = ObjectGalleryImage.objects.filter(gallery__object=self.get_object().pk, gallery=context['object_galleries'].first())
 
