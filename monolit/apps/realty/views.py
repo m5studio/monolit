@@ -8,6 +8,8 @@ from apps.realty.models.object_info_tab import ObjectInfoTab
 from apps.realty.models.object_file import ObjectFile
 from apps.realty.models.object_gallery import ObjectGallery, ObjectGalleryImage
 from apps.realty.models.object_document import ObjectDocument
+from apps.realty.models.object_video import ObjectVideo
+
 
 class ObjectListView(ListView):
     model = Object
@@ -34,7 +36,7 @@ class ObjectDetailView(DetailView):
 
         # Object Documents Pagination
         context['object_documents'] = ObjectDocument.objects.filter(object=self.get_object().pk).order_by('-updated')
-        paginator = Paginator(context['object_documents'], 1)
+        paginator = Paginator(context['object_documents'], 9)
         page_docs = self.request.GET.get('page-docs')
         try:
             context['object_documents'] = paginator.page(page_docs)
@@ -43,6 +45,8 @@ class ObjectDetailView(DetailView):
         except EmptyPage:
             context['object_documents'] = paginator.page(paginator.num_pages)
         # END Object Documents Pagination
+
+        context['object_videos'] = ObjectVideo.objects.filter(object=self.get_object().pk)
         return context
 
 
