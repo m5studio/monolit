@@ -36,6 +36,9 @@ class ObjectDetailView(DetailView):
         context['object_galleries'] = ObjectGallery.objects.filter(object=self.get_object().pk).order_by('-order')
         context['object_galleries_images'] = ObjectGalleryImage.objects.filter(gallery__object=self.get_object().pk, gallery=context['object_galleries'].first())
 
+        # TODO: filter
+        context['object_news'] = News.objects.all()
+
         # Object Documents Pagination
         context['object_documents'] = ObjectDocument.objects.filter(object=self.get_object().pk).order_by('-updated')
         paginator = Paginator(context['object_documents'], 9)
