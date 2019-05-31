@@ -18,8 +18,8 @@ import sys
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Add apps dir to PythonPath
-APPS_DIR = os.path.join(BASE_DIR, 'apps')
-sys.path.append(APPS_DIR)
+# APPS_DIR = os.path.join(BASE_DIR, 'apps')
+# sys.path.append(APPS_DIR)
 
 # Django Environ https://github.com/joke2k/django-environ
 import environ

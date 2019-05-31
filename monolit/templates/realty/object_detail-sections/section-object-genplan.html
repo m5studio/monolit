@@ -11,7 +11,7 @@
 
         {% if object.genplan_svg %}
             <div id="section-object-genplan__objects-svg-layer">
-                {% spaceless %}{{ object.genplan_svg|safe }}{% endspaceless %}
+                {{ object.genplan_svg|safe }}
                 {% comment %}
                 <!-- <svg version="1.1" x="0" y="0" viewBox="0 0 1800 1354">
                     <g data-id="72" data-href="/flats/?complex=56&amp;building=72">

@@ -7,101 +7,68 @@
                 <ul class="main-nav__list">
                     {% url 'objects-list' as objects_list %}
                     <li class="main-nav__item{% if objects_list == request.path or objects_list in request.path %} active{% endif %}">
-                        <a href="{{ objects_list }}" class="main-nav__link">
-                            Объекты
-                        </a>
+                        <a href="{{ objects_list }}" class="main-nav__link">Объекты</a>
                     </li>
 
                     {% url 'objects-sites-list' as objects_site_list %}
                     <li class="main-nav__item{% if objects_site_list == request.path or objects_site_list in request.path %} active{% endif %}">
-                        <a href="{{ objects_site_list }}" class="main-nav__link">
-                            Выбор квартир
-                        </a>
+                        <a href="{{ objects_site_list }}" class="main-nav__link">Выбор квартир</a>
                     </li>
                     <li class="main-nav__item has-dropdown">
-                        <a href="" class="main-nav__link">
-                            Ипотека
-                        </a>
+                        <a href="" class="main-nav__link">Ипотека</a>
                         <div class="dropdown">
                             <ul class="main-nav-submenu__list">
-                                <!-- TODO: active request.path -->
+                                {# TODO: active request.path #}
                                 <li class="main-nav-submenu__item active">
-                                    <a href="" class="main-nav-submenu__link">
-                                        Военная ипотека
-                                    </a>
+                                    <a href="" class="main-nav-submenu__link">Военная ипотека</a>
                                 </li>
                                 <li class="main-nav-submenu__item">
-                                    <a href="" class="main-nav-submenu__link">
-                                        Материнский капитал
-                                    </a>
+                                    <a href="" class="main-nav-submenu__link">Материнский капитал</a>
                                 </li>
                                 <li class="main-nav-submenu__item">
-                                    <a href="" class="main-nav-submenu__link">
-                                        КорпорАКТИВ
-                                    </a>
+                                    <a href="" class="main-nav-submenu__link">КорпорАКТИВ</a>
                                 </li>
                             </ul>
                         </div>
                     </li>
                     <li class="main-nav__item has-dropdown">
-                        <a href="" class="main-nav__link">
-                            О компании
-                        </a>
+                        <a href="" class="main-nav__link">О компании</a>
                         <div class="dropdown">
                             <ul class="main-nav-submenu__list">
                                 <li class="main-nav-submenu__item">
-                                    <a href="" class="main-nav-submenu__link">
-                                        Миссия и ценности
-                                    </a>
+                                    <a href="" class="main-nav-submenu__link">Миссия и ценности</a>
                                 </li>
                                 <li class="main-nav-submenu__item">
-                                    <a href="" class="main-nav-submenu__link">
-                                        Менеджмент
-                                    </a>
+                                    <a href="" class="main-nav-submenu__link">Менеджмент</a>
                                 </li>
                                 <li class="main-nav-submenu__item">
-                                    <a href="" class="main-nav-submenu__link">
-                                        Структура компании
-                                    </a>
+                                    <a href="" class="main-nav-submenu__link">Структура компании</a>
                                 </li>
                                 <li class="main-nav-submenu__item">
-                                    <a href="" class="main-nav-submenu__link">
-                                        Работа в компании
-                                    </a>
+                                    <a href="" class="main-nav-submenu__link">Работа в компании</a>
                                 </li>
                                 <li class="main-nav-submenu__item">
-                                    <a href="" class="main-nav-submenu__link">
-                                        Социальная ответственность
-                                    </a>
+                                    <a href="" class="main-nav-submenu__link">Социальная ответственность</a>
                                 </li>
                                 <li class="main-nav-submenu__item">
-                                    <a href="" class="main-nav-submenu__link">
-                                        История
-                                    </a>
+                                    <a href="" class="main-nav-submenu__link">История</a>
                                 </li>
                             </ul>
                         </div>
                     </li>
                     <li class="main-nav__item">
-                        <a href="" class="main-nav__link">
-                            Новости
-                        </a>
+                        <a href="" class="main-nav__link">Новости</a>
                     </li>
                     <li class="main-nav__item">
-                        <a href="" class="main-nav__link">
-                            Партнерам
-                        </a>
+                        <a href="" class="main-nav__link">Партнерам</a>
                     </li>
                     <li class="main-nav__item">
-                        <a href="" class="main-nav__link">
-                            Контакты
-                        </a>
+                        <a href="" class="main-nav__link">Контакты</a>
                     </li>
                 </ul>
             </nav>
             <div id="main-navigationToggle"></div>
         </div>
-
         <div id="hb-aside">
             <div id="favories">
                 <span class="icon icon-heart-solid-green rounded-34"></span>

@@ -3,7 +3,6 @@
     <div class="common-section__title container">
         <h2>Документы</h2>
     </div>
-
     <div id="section-object-downloads__inner" class="container">
         {% for document in object_documents %}
             <div class="doc-download">
@@ -30,8 +29,6 @@
             </div>
         {% endfor %}
     </div>
-
-    {% spaceless %}
     <nav id="page-docs-pagination" class="monolit-pagination container">
         <ul class="pagination">
             {% if object_documents.has_previous %}
@@ -75,5 +72,4 @@
             {% endif %}
         </ul>
     </nav>
-    {% endspaceless %}
 </section>

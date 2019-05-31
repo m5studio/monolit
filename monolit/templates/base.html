@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <title>{% spaceless %}
         {% if request.path == '/' %}
             {% if settings.site_title %}{{ settings.site_title }}{% endif %}
@@ -11,21 +10,18 @@
             {% if page_title %}{{ page_title }} | {% endif %}{% if settings.site_title %}{{ settings.site_title }}{% endif %}
         {% endif %}
     {% endspaceless %}</title>
-
     <meta name="description" content="{% spaceless %}
         {% if page_meta_description %}
             {{ page_meta_description }}
         {% elif not page_meta_description %}
             {{ settings.site_description }}
         {% endif %}{% endspaceless %}">
-
     {% include "includes/favicons.html" %}
-    {% block css %}
-        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-        <link rel="stylesheet" href="{% static 'css/1.styles.css' %}">
-    {% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/1.styles.css' %}">{% endblock %}
 </head>
-<body class="{% block body_classes %}{% if request.path != '/' %}not-homepage{% endif %}{% endblock %}">
+<body class="{% block body_classes %}{% if request.path != '/' %}not-homepage{% endif %}{% endblock %}">{% spaceless %}
     <header id="header">
         <div id="header__top">
             <div id="header__top--inner" class="container">
@@ -42,18 +38,6 @@
         </div>
         {% include "includes/main-nav.html" %}
     </header>
-
-    {% comment %}
-        {% if settings.site_title %}
-            <h2>{{ settings.site_title }}</h2>
-        {% endif %}
-        {% if settings.site_phone %}
-            <h2>{{ settings.site_phone }}</h2>
-        {% endif %}
-        {% if settings.site_email %}
-            <h2>{{ settings.site_email }}</h2>
-        {% endif %}
-    {% endcomment %}
 
     <div id="content">
         {% block content %}{% endblock %}
@@ -92,7 +76,6 @@
                     </li>
                 </ul>
             </div>
-
             <div id="footer-commercial" class="footer-block">
                 <ul class="footer-block__menu-list">
                     <li class="footer-block__menu-item">
@@ -115,7 +98,6 @@
                     </li>
                 </ul>
             </div>
-
             <div id="footer-about" class="footer-block">
                 <div class="footer-block__title">
                     <a href="">О компании</a>
@@ -141,43 +123,42 @@
                     </li>
                 </ul>
             </div>
-
             <div id="footer-contacts" class="footer-block">
                 <div id="footer-contacts__phones">
                     <a href="tel:+78003028808" title="Позвонить">8 (800) 302-88-08</a>
                     <a href="tel:+79780887858" title="Позвонить">+7 (978) 088-78-58</a>
                     <a href="tel:+73652500500" title="Позвонить">+7 (3652) 500-500</a>
                 </div>
-
                 <div id="footer-contacts__social">
-                    <a href="https://instagram.com/monolit.crimea/" target="_blank" class="icon icon-instagram footer-icon">Instagram</a>
-                    <a href="https://facebook.com/monolit" target="_blank" class="icon icon-facebook footer-icon">Facebook</a>
-                    <a href="https://vk.com/monolit.crimea" target="_blank" class="icon icon-vk footer-icon">Vk</a>
-                    <a href="https://t.me/monolitstroit" target="_blank" class="icon icon-telegram footer-icon">Telegram</a>
+                    {% if settings.site_instagram %}
+                        <a href="{{ settings.site_instagram }}" target="_blank" class="icon icon-instagram footer-icon">Instagram</a>
+                    {% endif %}
+                    {% if settings.site_facebook %}
+                        <a href="{{ settings.site_facebook }}" target="_blank" class="icon icon-facebook footer-icon">Facebook</a>
+                    {% endif %}
+                    {% if settings.site_vk %}
+                        <a href="{{ settings.site_vk }}" target="_blank" class="icon icon-vk footer-icon">Vk</a>
+                    {% endif %}
+                    {% if settings.site_telegram %}
+                        <a href="{{ settings.site_telegram }}" target="_blank" class="icon icon-telegram footer-icon">Telegram</a>
+                    {% endif %}
                 </div>
-
                 <div id="footer-info-wrap">
-                    <div id="footer-contacts__copyrights">
-                        &copy; Группа компаний &laquo;Монолит&raquo; 2005&ndash;2019
-                    </div>
+                    <div id="footer-contacts__copyrights">&copy; Группа Компаний &laquo;Монолит&raquo; 2005&ndash;{% now "Y" %}</div>
                     <div id="footer-contacts__developed-in-m5">
                         <a href="https://m5-web.com" target="_blank">Программирование &ndash; m5</a>, <a href="http://idaproject.com" target="_blank" rel="nofollow">дизайн &ndash; idaproject</a>
                     </div>
-                    <div id="footer-contacts__disclamer">
-                        Вся представленная на сайте информация носит ознакомительный характер и не является публичной офертой в соответствии со ст. 437 Гражданского Кодекса Российской Федерации
-                    </div>
+                    <div id="footer-contacts__disclamer">Вся представленная на сайте информация носит ознакомительный характер и не является публичной офертой в соответствии со ст. 437 Гражданского Кодекса Российской Федерации</div>
                 </div>
             </div>
         </div>
-
         <noscript>
             <div id="js-disabled">Сайт не может полноценно функционировать без JavaScript =(</div>
         </noscript>
     </footer>
-
-    {% block js %}
-        <script src="{% static 'js/main.js' %}"></script>
-        <script src="{% static 'js/vendors~main.js' %}"></script>
-    {% endblock %}
-</body>
+{% block js %}
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/vendors~main.js' %}"></script>
+{% endblock %}
+{% endspaceless %}</body>
 </html>

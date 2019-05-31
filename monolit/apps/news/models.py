@@ -9,7 +9,7 @@ from apps.realty.models.object import Object
 
 
 class NewsCategory(models.Model):
-    name = models.CharField('Название категории', max_length=255)
+    name = models.CharField('Имя категории', max_length=255)
 
     def __str__(self):
         return self.name

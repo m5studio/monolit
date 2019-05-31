@@ -10,6 +10,8 @@ from apps.realty.models.object_gallery import ObjectGallery, ObjectGalleryImage
 from apps.realty.models.object_document import ObjectDocument
 from apps.realty.models.object_video import ObjectVideo
 
+from apps.news.models import News
+
 
 class ObjectListView(ListView):
     model = Object
