@@ -33,11 +33,6 @@ def image_upload_path(instance, filename):
     return 'objects/{object_crm_id}/images/{filename}'.format(object_crm_id=object_crm_id, filename=filename)
 
 class Object(models.Model):
-    # CATEGORIES = (
-    #     ('living', 'Жилой'),
-    #     ('commercial', 'Коммерческий'),
-    # )
-
     OBJECT_TYPES = (
         ('business_center', 'Бизнес центр'),
         ('city', 'Город'),

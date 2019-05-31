@@ -8,11 +8,9 @@ from apps.news.models import NewsCategory, News
 
 @admin.register(NewsCategory)
 class NewsCategoryAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.ModelAdmin):
-    # search_fields = ['name']
-    pass
+    search_fields = ['name']
 
 
 @admin.register(News)
 class NewsAdmin(TurnOffAdminLogging, admin.ModelAdmin):
-    # autocomplete_fields = ['category']
-    pass
+    autocomplete_fields = ['object', 'category']
