@@ -70,13 +70,9 @@ class Object(models.Model):
     crm_id        = models.CharField('CRM ID', max_length=100, unique=True, help_text='ID объекта в 1C (Заполняется автоматически при выгрузке)')
     name          = models.CharField('Название объекта', unique=True, max_length=255, db_index=True)
     slug          = models.SlugField('URL адрес', max_length=100, unique=True, help_text='e.g.: status-house (max 100 chars), получим https://monolit.site/objects/status-house/')
-
-    # Flatten ManyToManyField relation
-    # category      = models.ManyToManyField(ObjectCategory, verbose_name='Категория объекта', default=ObjectCategory.objects.all().values_list('pk', flat=True))
     category      = models.ManyToManyField(ObjectCategory,
                                            verbose_name='Категория объекта',
                                            help_text='Выберите категорию(и) объекта недвижимости')
-
     object_type   = models.CharField('Тип Объекта', max_length=100, choices=OBJECT_TYPES, blank=True, null=True)
     building_type = models.CharField('Тип Здания', max_length=100, choices=BUILDING_TYPES, blank=True, null=True)
     city          = models.CharField('Город', max_length=100, choices=CITIES, blank=True, null=True)
