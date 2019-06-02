@@ -21,7 +21,8 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <link rel="stylesheet" href="{% static 'css/1.styles.css' %}">{% endblock %}
 </head>
-<body class="{% block body_classes %}{% if request.path != '/' %}not-homepage{% endif %}{% endblock %}">{% spaceless %}
+<body class="{% block body_classes %}{% if request.path != '/' %}not-homepage{% endif %}{% endblock %}">
+{% spaceless %}
     <header id="header">
         <div id="header__top">
             <div id="header__top--inner" class="container">

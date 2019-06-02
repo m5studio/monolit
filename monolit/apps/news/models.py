@@ -19,7 +19,7 @@ class News(models.Model):
     title    = models.CharField('Заголовок новости', max_length=255)
     object   = models.ManyToManyField(Object, verbose_name='Объект(ы)',
                                       blank=True,
-                                      help_text='Относится ли данная новость к Объекту(ам)? Если нет, то оставьтепустым')
+                                      help_text='Относится ли данная новость к Объекту(ам) недвижимости? Если нет, то оставьте пустым')
     category = models.ManyToManyField(NewsCategory, blank=True, verbose_name='Категории новости')
     date     = models.DateField(verbose_name='Дата', default=datetime.date.today)
     body     = RichTextField('Текст новости', blank=True, null=True)
