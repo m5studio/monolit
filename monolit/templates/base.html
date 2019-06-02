@@ -16,7 +16,7 @@
         {% elif not page_meta_description %}
             {{ settings.site_description }}
         {% endif %}{% endspaceless %}">
-    {% include "includes/favicons.html" %}
+    {% spaceless %}{% include "includes/favicons.html" %}{% endspaceless %}
 {% block css %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <link rel="stylesheet" href="{% static 'css/1.styles.css' %}">{% endblock %}
@@ -155,10 +155,10 @@
         <noscript>
             <div id="js-disabled">Сайт не может полноценно функционировать без JavaScript =(</div>
         </noscript>
-    </footer>
+    </footer>{% endspaceless %}
 {% block js %}
     <script src="{% static 'js/main.js' %}"></script>
     <script src="{% static 'js/vendors~main.js' %}"></script>
 {% endblock %}
-{% endspaceless %}</body>
+</body>
 </html>
