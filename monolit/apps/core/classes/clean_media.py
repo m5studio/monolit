@@ -31,12 +31,12 @@ class CleanMedia:
         [ Get all empty dirs inside MEDIA_ROOT folder ]
     """
     def getEmptyDirs(self) -> list:
-        emty_dirs = list()
+        empty_dirs = list()
         for root, dirs, files in os.walk(self.MEDIA_ROOT):
             # Get empty dirs
             if not len(dirs) and not len(files):
-                emty_dirs.append(root)
-        return emty_dirs
+                empty_dirs.append(root)
+        return empty_dirs
 
 
     """
@@ -54,7 +54,7 @@ class CleanMedia:
     """
         [ Delete empty directories ]
     """
-    def deleteEmtyDirs(self):
+    def deleteEmptyDirs(self):
         return list(map(self.deleteDir, self.getEmptyDirs()))
 
 
@@ -72,5 +72,5 @@ class CleanMedia:
         # repeat deleting iterations N times
         for _ in itertools.repeat(None, repeat):
             for directory in self.getEmptyDirs():
-                self.deleteEmtyDirs()
+                self.deleteEmptyDirs()
         print('[REMOVE RECUSIVE {} TIMES]'.format(repeat))

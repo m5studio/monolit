@@ -47,5 +47,5 @@ class ObjectDocument(models.Model):
 @receiver(post_delete, sender=ObjectDocument)
 def clean_empty_media_dirs(sender, instance, **kwargs):
     cleanMedia = CleanMedia()
-    # Delete emty dirs in /media/
+    # Delete empty dirs in /media/
     cleanMedia.deleteEmptyDirsRecusive()

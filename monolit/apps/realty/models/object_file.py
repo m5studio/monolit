@@ -37,5 +37,5 @@ class ObjectFile(models.Model):
 @receiver(post_delete, sender=ObjectFile)
 def clean_empty_media_dirs(sender, instance, **kwargs):
     cleanMedia = CleanMedia()
-    # Delete emty dirs in /media/
+    # Delete empty dirs in /media/
     cleanMedia.deleteEmptyDirsRecusive()

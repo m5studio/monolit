@@ -164,5 +164,5 @@ def image_optimization(sender, instance, created, **kwargs):
 @receiver(post_delete, sender=ObjectSite)
 def clean_empty_media_dirs(sender, instance, **kwargs):
     cleanMedia = CleanMedia()
-    # Delete emty dirs in /media/
+    # Delete empty dirs in /media/
     cleanMedia.deleteEmptyDirsRecusive()

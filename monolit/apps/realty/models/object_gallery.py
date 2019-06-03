@@ -67,5 +67,5 @@ def clean_empty_media_dirs(sender, instance, **kwargs):
     cleanMedia = CleanMedia()
     # Delete imagekit chache file
     cleanMedia.cleanImagekitCacheImage(instance.image_thumbnail_admin)
-    # Delete emty dirs in /media/
+    # Delete empty dirs in /media/
     cleanMedia.deleteEmptyDirsRecusive()

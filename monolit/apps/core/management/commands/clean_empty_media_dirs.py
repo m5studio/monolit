@@ -10,6 +10,6 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         cleanMedia = CleanMedia()
-        # Delete emty dirs in /media/
+        # Delete empty dirs in /media/
         cleanMedia.deleteEmptyDirsRecusive()
         self.stdout.write(self.style.SUCCESS('All empty dirs in /media/ has been cleaned'))
