@@ -35,8 +35,7 @@ class ObjectDetailView(DetailView):
         context['object_files'] = ObjectFile.objects.filter(object_id=self.get_object().pk)
         context['object_galleries'] = ObjectGallery.objects.filter(object=self.get_object().pk).order_by('-order')
         context['object_galleries_images'] = ObjectGalleryImage.objects.filter(gallery__object=self.get_object().pk, gallery=context['object_galleries'].first())
-
-        # TODO: filter
+        # context['object_news'] = News.objects.filter(object=self.get_object().pk).order_by('-date')
         context['object_news'] = News.objects.all()
 
         # Object Documents Pagination

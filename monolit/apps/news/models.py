@@ -7,6 +7,9 @@ from django.utils.html import mark_safe
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 
+from imagekit.models import ProcessedImageField
+from imagekit.processors import ResizeToFill, ResizeToFit
+
 from ckeditor.fields import RichTextField
 
 from apps.core.classes.clean_media import CleanMedia
@@ -14,7 +17,6 @@ from apps.core.classes.file_processing import FileProcessing
 from apps.core.classes.image_optimizer import ImageOptimizer
 
 from apps.realty.models.object import Object
-# from ..realty.models.object import Object
 
 
 class NewsCategory(models.Model):
@@ -23,17 +25,28 @@ class NewsCategory(models.Model):
     def __str__(self):
         return self.name
 
+def main_image_upload_path(instance, filename):
+    news_id = instance.id
+    filename = FileProcessing(filename)
+    filename = filename.newFileNameGenerated()
+    return 'news/{news_id}/{filename}'.format(news_id=news_id, filename=filename)
 
 class News(models.Model):
-    title    = models.CharField('Заголовок новости', max_length=255)
-    object   = models.ManyToManyField(Object, verbose_name='Объект(ы)',
+    title      = models.CharField('Заголовок новости', max_length=255)
+    object     = models.ManyToManyField(Object, verbose_name='Объект(ы)',
                                       blank=True,
                                       help_text='Относится ли данная новость к Объекту(ам) недвижимости? Если нет, то оставьте пустым')
-    category = models.ManyToManyField(NewsCategory, blank=True, verbose_name='Категории новости')
-    date     = models.DateField(verbose_name='Дата', default=datetime.date.today)
-    body     = RichTextField('Текст новости', blank=True, null=True)
-    created  = models.DateTimeField(auto_now=False, auto_now_add=True)
-    updated  = models.DateTimeField(auto_now=True, auto_now_add=False)
+    category   = models.ManyToManyField(NewsCategory, blank=True, verbose_name='Категории новости')
+    date       = models.DateField(verbose_name='Дата', default=datetime.date.today)
+    main_image = models.ImageField('Главное изображение', blank=True, null=True, upload_to=main_image_upload_path)
+    main_image_proc = ProcessedImageField(upload_to=main_image_upload_path,
+                                        blank=True, null=True,
+                                        processors=[ResizeToFit(512, 512)],
+                                        format='JPEG',
+                                        options={'quality': 70})
+    body       = RichTextField('Текст новости', blank=True, null=True)
+    created    = models.DateTimeField(auto_now=False, auto_now_add=True)
+    updated    = models.DateTimeField(auto_now=True, auto_now_add=False)
 
     def __str__(self):
         return self.title
@@ -54,7 +67,7 @@ def image_upload_path(instance, filename):
 
 class NewsImage(models.Model):
     news  = models.ForeignKey(News, verbose_name='Новость', on_delete=models.CASCADE)
-    image = models.ImageField('Изображение', blank=True, upload_to=image_upload_path)
+    image = models.ImageField('Изображение', blank=True, null=True, upload_to=image_upload_path)
 
     # Thumbnails for admin
     def image_thumb(self):
@@ -63,11 +76,18 @@ class NewsImage(models.Model):
     # END Thumbnails for admin
 
     def __str__(self):
-        return 'image {0} to [{1}]'.format(self.id, self.news) 
+        return '{1} (image {0})'.format(self.id, self.news)
 
     class Meta:
         verbose_name = 'Изображение'
         verbose_name_plural = 'Изображения'
+
+
+@receiver(post_save, sender=News)
+def main_image_optimization(sender, instance, created, **kwargs):
+    if instance.main_image:
+        image = ImageOptimizer(instance.main_image.path)
+        image.optimizeAndSaveImg()
 
 
 @receiver(post_save, sender=NewsImage)
