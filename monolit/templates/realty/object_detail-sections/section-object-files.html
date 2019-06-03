@@ -1,15 +1,17 @@
-{% load custom_filters %}
-<div id="section-company-partnership-steps" class="common-section">
-    <div id="section-company-partnership-steps__bottom" class="container">
-        {% for file in object_files %}
-            <div class="download-card-two">
-                <div class="download-card-two__inner">
-                    <div class="icon icon-document-white"></div>
-                    <div class="download-card-two__name">{{ file.get_name_display }}</div>
-                    <div class="download-card-two__size">{% if file.file %}{{ file.file.url|get_file_ext|upper }}{% endif %}, {% if file.file %}{{ file.file.size|bytes_to_mb }}{% endif %}</div>
+{% if object_files %}
+    {% load custom_filters %}
+    <div id="section-company-partnership-steps" class="common-section">
+        <div id="section-company-partnership-steps__bottom" class="container">
+            {% for file in object_files %}
+                <div class="download-card-two">
+                    <div class="download-card-two__inner">
+                        <div class="icon icon-document-white"></div>
+                        <div class="download-card-two__name">{{ file.get_name_display }}</div>
+                        <div class="download-card-two__size">{% if file.file %}{{ file.file.url|get_file_ext|upper }}{% endif %}, {% if file.file %}{{ file.file.size|bytes_to_mb }}{% endif %}</div>
+                    </div>
+                    <a href="{% if file.file %}{{ file.file.url }}{% endif %}" class="stretched-link" target="_blank" title="Скачать"></a>
                 </div>
-                <a href="{% if file.file %}{{ file.file.url }}{% endif %}" class="stretched-link" target="_blank" title="Скачать"></a>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
-</div>
+{% endif %}

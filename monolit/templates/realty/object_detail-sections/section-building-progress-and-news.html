@@ -31,9 +31,8 @@
                     <div id="bp-and-news-pills-news__inner">
                         {% for news in object_news %}
                             <article class="news-card">
-                                <!-- <a href="{# news.get_absolute_url #}"> -->
-                                <a href="#">
-                                    <div class="news-card__image" style="background-image: url('{{ news.main_image_proc.url }}');"></div>
+                                <a href="{{ news.get_absolute_url }}">
+                                    <div class="news-card__image" style="background-image: url('{{ news.main_image.url }}');"></div>
                                     <div class="news-card__inner">
                                         <div class="news-card__datetime">{{ news.date|date:'j F Y' }}</div>
                                         <h3 class="news-card__title">{{ news.title }}</h3>

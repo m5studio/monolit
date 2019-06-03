@@ -35,12 +35,11 @@ class ObjectDetailView(DetailView):
         context['object_files'] = ObjectFile.objects.filter(object_id=self.get_object().pk)
         context['object_galleries'] = ObjectGallery.objects.filter(object=self.get_object().pk).order_by('-order')
         context['object_galleries_images'] = ObjectGalleryImage.objects.filter(gallery__object=self.get_object().pk, gallery=context['object_galleries'].first())
-        # context['object_news'] = News.objects.filter(object=self.get_object().pk).order_by('-date')
-        context['object_news'] = News.objects.all()
+        context['object_news'] = News.objects.filter(object=self.get_object().pk).order_by('-date')
 
         # Object Documents Pagination
         context['object_documents'] = ObjectDocument.objects.filter(object=self.get_object().pk).order_by('-updated')
-        paginator = Paginator(context['object_documents'], 9)
+        paginator = Paginator(context['object_documents'], 1)
         page_docs = self.request.GET.get('page-docs')
         try:
             context['object_documents'] = paginator.page(page_docs)

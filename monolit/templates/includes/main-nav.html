@@ -56,8 +56,10 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="main-nav__item">
-                        <a href="" class="main-nav__link">Новости</a>
+
+                    {% url 'news-list' as news_list %}
+                    <li class="main-nav__item{% if news_list == request.path or news_list in request.path %} active{% endif %}">
+                        <a href="{{ news_list }}" class="main-nav__link">Новости</a>
                     </li>
                     <li class="main-nav__item">
                         <a href="" class="main-nav__link">Партнерам</a>

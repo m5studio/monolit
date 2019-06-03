@@ -38,8 +38,8 @@ class News(models.Model):
                                       help_text='Относится ли данная новость к Объекту(ам) недвижимости? Если нет, то оставьте пустым')
     category   = models.ManyToManyField(NewsCategory, blank=True, verbose_name='Категории новости')
     date       = models.DateField(verbose_name='Дата', default=datetime.date.today)
-    main_image = models.ImageField('Главное изображение', blank=True, null=True, upload_to=main_image_upload_path)
-    main_image_proc = ProcessedImageField(upload_to=main_image_upload_path,
+    main_image = ProcessedImageField(upload_to=main_image_upload_path,
+                                        verbose_name='Главное изображение',
                                         blank=True, null=True,
                                         processors=[ResizeToFit(512, 512)],
                                         format='JPEG',
@@ -52,7 +52,7 @@ class News(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('news-detail', kwargs={'id': self.id})
+        return reverse('news-detail', kwargs={'pk': self.id})
 
     class Meta:
         verbose_name = 'Новость'
