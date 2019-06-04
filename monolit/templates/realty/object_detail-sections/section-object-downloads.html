@@ -8,30 +8,26 @@
             {% for document in object_documents %}
                 <div class="doc-download">
                     <div class="doc-download__t-d-u-wrap">
-                        <div class="doc-download__title">
-                            {{ document.title }}
-                        </div>
+                        <div class="doc-download__title">{{ document.title }}</div>
                         <div class="doc-download__d-u-wrap">
-                            <div class="doc-download__date">
-                                Дата: {{ document.date|date:"d/m/Y" }}
-                            </div>
-                            <div class="doc-download__user-name">
-                                Автор: {{ document.author }}
-                            </div>
+                            <div class="doc-download__date">Дата: {{ document.date|date:'d/m/Y' }}</div>
+                            {% if document.author %}
+                                <div class="doc-download__user-name">Автор: {{ document.author }}</div>
+                            {% endif %}
                         </div>
                     </div>
-                    <div class="doc-download__size">
-                        {% if document.file %}{{ document.file.url|get_file_ext|upper }}, {{ document.file.size|bytes_to_mb }}{% endif %}
-                    </div>
-                    <div class="doc-download__link">
-                        <div class="icon icon-32 icon-download"></div>
-                        <a href="{% if document.file %}{{ document.file.url }}{% endif %}" class="stretched-link" target="_blank" title="Скачать"></a>
-                    </div>
+                    {% if document.file %}
+                        <div class="doc-download__size">{{ document.file.url|get_file_ext|upper }}, {{ document.file.size|bytes_to_mb }}</div>
+                        <div class="doc-download__link">
+                            <div class="icon icon-32 icon-download"></div>
+                            <a href="{{ document.file.url }}" class="stretched-link" target="_blank" title="{% if document.file.url|get_file_ext == '.pdf' %}Откроется в новой вкладке{% else %}Скачать{% endif %}"></a>
+                        </div>
+                    {% endif %}
                 </div>
             {% endfor %}
         </div>
 
-        {% if object_documents.number > 0 %}
+        {% if object_documents.has_previous or object_documents.has_next %}
             <nav id="page-docs-pagination" class="monolit-pagination container">
                 <ul class="pagination">
                     {% if object_documents.has_previous %}

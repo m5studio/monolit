@@ -194,7 +194,8 @@ CKEDITOR_CONFIGS = {
         'toolbar': 'Custom',
         'toolbar_Custom': [
             ['Bold', 'Italic', '-', 'Undo', 'Redo'],
-            ['NumberedList', 'BulletedList', '-', 'Image'],
+            # ['NumberedList', 'BulletedList', '-', 'Image'],
+            ['NumberedList', 'BulletedList'],
             ['Link', 'Unlink'],
             ['ShowBlocks', 'SpecialChar', '-', 'RemoveFormat', 'Source']
         ],
@@ -234,9 +235,9 @@ LOCATION_FIELD = {
     'resources.root_path': LOCATION_FIELD_PATH,
     'resources.media': {
         'js': [
-                LOCATION_FIELD_PATH + '/js/jquery.livequery.js',
-                LOCATION_FIELD_PATH + '/js/form.js',
-            ],
+            LOCATION_FIELD_PATH + '/js/jquery.livequery.js',
+            LOCATION_FIELD_PATH + '/js/form.js',
+        ],
     },
 }
 

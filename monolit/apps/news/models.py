@@ -48,6 +48,12 @@ class News(models.Model):
     created    = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated    = models.DateTimeField(auto_now=True, auto_now_add=False)
 
+    # Thumbnails for admin
+    def main_image_thumb(self):
+        return mark_safe('<img src="{}" alt="" style="width: 386px; height: auto;" />'.format(self.main_image.url))
+    main_image_thumb.short_description = 'Главное изображение (thumbnail)'
+    # END Thumbnails for admin
+
     def __str__(self):
         return self.title
 

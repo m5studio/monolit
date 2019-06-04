@@ -29,6 +29,7 @@ class ObjectDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
         context['page_title'] = '{object_type} {name}'.format(name=self.get_object().name, object_type=self.get_object().get_object_type_display())
         # context['page_meta_description'] = 'my custom meta'
         context['object_info_tabs'] = ObjectInfoTab.objects.filter(object_id=self.get_object().pk)
@@ -36,10 +37,12 @@ class ObjectDetailView(DetailView):
         context['object_galleries'] = ObjectGallery.objects.filter(object=self.get_object().pk).order_by('-order')
         context['object_galleries_images'] = ObjectGalleryImage.objects.filter(gallery__object=self.get_object().pk, gallery=context['object_galleries'].first())
         context['object_news'] = News.objects.filter(object=self.get_object().pk).order_by('-date')
+        context['other_objects'] = Object.objects.filter(active=True).exclude(id=self.get_object().pk).order_by('?')[:4]
+        context['object_videos'] = ObjectVideo.objects.filter(object=self.get_object().pk)
 
         # Object Documents Pagination
         context['object_documents'] = ObjectDocument.objects.filter(object=self.get_object().pk).order_by('-updated')
-        paginator = Paginator(context['object_documents'], 1)
+        paginator = Paginator(context['object_documents'], 9)
         page_docs = self.request.GET.get('page-docs')
         try:
             context['object_documents'] = paginator.page(page_docs)
@@ -49,7 +52,6 @@ class ObjectDetailView(DetailView):
             context['object_documents'] = paginator.page(paginator.num_pages)
         # END Object Documents Pagination
 
-        context['object_videos'] = ObjectVideo.objects.filter(object=self.get_object().pk)
         return context
 
 

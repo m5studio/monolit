@@ -31,4 +31,14 @@ class NewsAdmin(TurnOffAdminLogging, admin.ModelAdmin):
         NewsImageInline,
     ]
 
+    readonly_fields = ('main_image_thumb',)
+    fieldsets = (
+        (None, {
+            'fields': ('title', 'object', 'category', 'date', 'body')
+        }),
+        ('Главное изображение', {
+           'fields': ('main_image_thumb', 'main_image')
+        }),
+    )
+
     autocomplete_fields = ['object', 'category']

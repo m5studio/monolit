@@ -58,6 +58,10 @@
         h1 {
             color: white;
             margin: 0;
+
+            span {
+                display: block;
+            }
         }
 
         &--type {

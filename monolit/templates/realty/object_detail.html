@@ -109,6 +109,17 @@
 
         {% include "realty/object_detail-sections/section-building-progress-and-news.html" %}
 
+        {% if object.description %}
+            <section class="common-section">
+                <div class="common-section__title container">
+                    <h2>Информация о {{ object.get_object_type_display }} {{ object.name }}</h2>
+                </div>
+                <div class="container">
+                    {{ object.description|safe }}
+                </div>
+            </section>
+        {% endif %}
+
         {% include "realty/object_detail-sections/section-object-info.html" %}
 
         {% include "realty/object_detail-sections/section-object-files.html" %}
@@ -416,6 +427,7 @@
         </section>
 
         <section id="section-objects-list" class="common-section">
+            {{ other_objects }}
             <div class="common-section__title container">
                 <h2>Другие объекты в продаже</h2>
             </div>
@@ -750,7 +762,7 @@
                 </div>
             </div>
             <div id="section-objects-list__see-all">
-                <a href="" class="green-button">Посмотреть все объекты</a>
+                <a href="{% url 'objects-list' %}" class="green-button">Посмотреть все объекты</a>
             </div>
         </section>
     </main>

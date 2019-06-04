@@ -82,7 +82,7 @@ class Object(models.Model):
                                       upload_to=genplan_upload_path,
                                       blank=True, null=True,
                                       help_text='Изображение с генпланом')
-    genplan_svg   = models.TextField('SVG Генплан', blank=True, null=True,)
+    genplan_svg   = models.TextField('SVG объекты на генплане', blank=True, null=True)
     has_military  = models.BooleanField('Военная ипотека', default=False, help_text='Подходит ли данный объект для военной ипотеки')
     has_mother    = models.BooleanField('Материнский капитал', default=False, help_text='Подходит ли данный объект под оплату мат.капиталом')
 
