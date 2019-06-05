@@ -2,8 +2,8 @@ function objectPageGalleries() {
     const gallery_images_display_div = $('#bp-and-news-pills-building-progress__inner')
 
     $('select[name=object_gallery_id]').change(() => {
-        let selected_val_url = $("option:selected", this).val()
-        let selected_text    = $("option:selected", this).html()
+        let selected_val_url = $('option:selected', this).val()
+        let selected_text    = $('option:selected', this).html()
 
         $.getJSON(selected_val_url, (data) => {
             gallery_images_display_div.empty()

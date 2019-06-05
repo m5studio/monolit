@@ -103,8 +103,8 @@
             #bp-and-news-pills-news {
                 &__inner {
                     display: grid;
-                    grid-row-gap: 15px;
-                    grid-column-gap: 15px;
+                    grid-row-gap: 30px;
+                    grid-column-gap: 30px;
                     grid-template-columns: repeat(3, 1fr);
 
                     @include media-breakpoint-down(lg) {

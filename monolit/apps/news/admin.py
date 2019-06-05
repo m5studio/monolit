@@ -40,5 +40,5 @@ class NewsAdmin(TurnOffAdminLogging, admin.ModelAdmin):
            'fields': ('main_image_thumb', 'main_image')
         }),
     )
-
+    list_display = ('title', 'updated')
     autocomplete_fields = ['object', 'category']

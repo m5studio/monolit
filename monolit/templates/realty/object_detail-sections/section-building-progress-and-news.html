@@ -41,17 +41,8 @@
                         <div class="tab-pane fade show active" id="bp-and-news-pills-news" role="tabpanel" aria-labelledby="bp-and-news-pills-news-tab">
                     {% endif %}
                             <div id="bp-and-news-pills-news__inner">
-                                {% for news in object_news %}
-                                    <article class="news-card" title="Подробнее...">
-                                        <a href="{{ news.get_absolute_url }}">
-                                            <div class="news-card__image" style="background-image: url('{{ news.main_image.url }}');"></div>
-                                            <div class="news-card__inner">
-                                                <div class="news-card__datetime">{{ news.date|date:'j F Y' }}</div>
-                                                <h3 class="news-card__title">{{ news.title }}</h3>
-                                            </div>
-                                            <div class="news-card__green-arr icon-arrow-right-white"></div>
-                                        </a>
-                                    </article>
+                                {% for object in object_news %}
+                                    {% include "news/cards/news-card.html" %}
                                 {% endfor %}
                             </div>
                         </div>

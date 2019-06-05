@@ -16,6 +16,8 @@ import {realtyFloorFilters} from "./modules/nouislider/realty_floor_filters"
 import {scrollToTop} from "./modules/scroll-to-top/scroll-to-top"
 
 // Ajax
+// import {objectPageGalleries} from "./ajax/ajax-django"
+import {newsPageLoadMoreNews} from "./ajax/news-page-load-more-news"
 import {objectPageGalleries} from "./ajax/object-page-galleries"
 import {objectPageDocsPagination} from "./ajax/object-page-documents-pagination"
 
@@ -50,6 +52,12 @@ $(document).ready(function() {
         objectPageDocsPagination()
     }
     // END Object page galleries ajax documents pagination
+
+    // News page Load more news...
+    if ( $('.news').length ) {
+        newsPageLoadMoreNews()
+    }
+    // END News page Load more news...
 })
 
 
@@ -59,6 +67,12 @@ $(document).ajaxStop(function() {
         objectPageDocsPagination()
     }
     // END Object Documents Ajax pagination
+
+    // News page Load more news...
+    if ( $('.news').length ) {
+        newsPageLoadMoreNews()
+    }
+    // END News page Load more news...
 })
 
 

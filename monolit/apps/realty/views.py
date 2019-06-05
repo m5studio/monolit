@@ -36,7 +36,7 @@ class ObjectDetailView(DetailView):
         context['object_files'] = ObjectFile.objects.filter(object_id=self.get_object().pk)
         context['object_galleries'] = ObjectGallery.objects.filter(object=self.get_object().pk).order_by('-order')
         context['object_galleries_images'] = ObjectGalleryImage.objects.filter(gallery__object=self.get_object().pk, gallery=context['object_galleries'].first())
-        context['object_news'] = News.objects.filter(object=self.get_object().pk).order_by('-date')
+        context['object_news'] = News.objects.filter(object=self.get_object().pk).order_by('-updated')
         context['other_objects'] = Object.objects.filter(active=True).exclude(id=self.get_object().pk).order_by('?')[:4]
         context['object_videos'] = ObjectVideo.objects.filter(object=self.get_object().pk)
 
