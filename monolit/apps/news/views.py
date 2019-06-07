@@ -1,7 +1,7 @@
 from django.views.generic import ListView, DetailView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from apps.news.models import News
+from apps.news.models import News, NewsImage
 
 
 class NewsListView(ListView):
@@ -23,8 +23,14 @@ class NewsListView(ListView):
         except EmptyPage:
             context['object_list'] = paginator.page(paginator.num_pages)
         # END Object list pagination
+
         return context
 
 
 class NewsDetailView(DetailView):
     model = News
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['news_images'] = NewsImage.objects.filter(news=self.get_object().pk)
+        return context

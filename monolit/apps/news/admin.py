@@ -31,13 +31,13 @@ class NewsAdmin(TurnOffAdminLogging, admin.ModelAdmin):
         NewsImageInline,
     ]
 
-    readonly_fields = ('main_image_thumb',)
+    readonly_fields = ('main_image_admin_thumb',)
     fieldsets = (
         (None, {
             'fields': ('title', 'object', 'category', 'date', 'body')
         }),
         ('Главное изображение', {
-           'fields': ('main_image_thumb', 'main_image')
+           'fields': ('main_image_admin_thumb', 'main_image')
         }),
     )
     list_display = ('title', 'updated')

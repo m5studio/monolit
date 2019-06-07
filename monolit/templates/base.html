@@ -4,8 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{% spaceless %}
+        {% url 'news-list' as news_list %}
+        {% url 'news-detail' as news_detail %}
+
         {% if request.path == '/' %}
             {% if settings.site_title %}{{ settings.site_title }}{% endif %}
+        {% elif news_list == request.path %}
+            Новости Группы Компаний Монолит
+        {% elif news_detail in request.path %}
+            {{ object.title }} | Новости Группы Компаний Монолит
         {% else %}
             {% if page_title %}{{ page_title }} | {% endif %}{% if settings.site_title %}{{ settings.site_title }}{% endif %}
         {% endif %}

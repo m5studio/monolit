@@ -1,7 +1,7 @@
 <article class="news-card{% if forloop.first %} news-card__fixed{% endif %}">
     <a class="news-card__link" href="{{ object.get_absolute_url }}">
         {% if object.main_image %}
-            <div class="news-card__image" style="background-image: url('{{ object.main_image.url }}');"></div>
+            <div class="news-card__image" style="background-image: url('{{ object.main_image_thumb.url }}');"></div>
         {% endif %}
         <div class="news-card__inner">
             <div class="news-card__datetime">{{ object.date|date:'j F Y' }}</div>

@@ -7,5 +7,125 @@
 
 
 {% block content %}
-    news_detail.html
+    <nav id="breadcrumbs">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'homepage' %}">Главная</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{% url 'news-list' %}">Новости</a>
+                </li>
+                <li class="breadcrumb-item active">{{ object.title }}</li>
+            </ol>
+        </div>
+    </nav>
+
+    <main id="main">
+        <div id="page-title-h1" class="container">
+            <h1>{{ object.title }}</h1>
+            {% if object.date %}
+                <div id="page-title-h1__descr">
+                    <em><small>{{ object.date|date:'j F Y' }}</small></em>
+                </div>
+            {% endif %}
+        </div>
+
+        {% if object.body or news_images %}
+            <div id="section-news-page-content" class="container">
+                {% if object.body %}
+                    <div id="section-news-page-content__text">
+                        {{ object.body|safe }}
+                    </div>
+                {% endif %}
+                {% if news_images %}
+                    <div id="section-news-page-content__images">
+                        {{ news_images }}
+                        <div class="news-gallery">
+                            <a data-fancybox="news-gallery" href="http://monolit.site/media/images/file/6_4NnlTrZ.jpg" class="news-gallery__first-img" style="background-image: url('http://monolit.site/media/images/file/6_4NnlTrZ.jpg');"></a>
+                            <div class="news-gallery__rest-images">
+                                <a data-fancybox="news-gallery" href="http://monolit.site/media/images/file/1_r1eb1Zo.jpg" class="news-gallery__img" style="background-image: url('http://monolit.site/media/images/file/1_r1eb1Zo.jpg');"></a>
+                                <a data-fancybox="news-gallery" href="http://monolit.site/media/images/file/3_g9n6sja.jpg" class="news-gallery__img" style="background-image: url('http://monolit.site/media/images/file/3_g9n6sja.jpg');"></a>
+                                <a data-fancybox="news-gallery" href="http://monolit.site/media/images/file/5_4M2o22j.jpg" class="news-gallery__img" style="background-image: url('http://monolit.site/media/images/file/5_4M2o22j.jpg');"></a>
+                                <a data-fancybox="news-gallery" href="http://monolit.site/media/images/file/1_r1eb1Zo.jpg" class="news-gallery__img" style="background-image: url('http://monolit.site/media/images/file/1_r1eb1Zo.jpg');"></a>
+                                <a data-fancybox="news-gallery" href="http://monolit.site/media/images/file/3_g9n6sja.jpg" class="news-gallery__img" style="background-image: url('http://monolit.site/media/images/file/3_g9n6sja.jpg');"></a>
+                                <a data-fancybox="news-gallery" href="http://monolit.site/media/images/file/5_4M2o22j.jpg" class="news-gallery__img" style="background-image: url('http://monolit.site/media/images/file/5_4M2o22j.jpg');"></a>
+                                <a data-fancybox="news-gallery" href="http://monolit.site/media/images/file/1_r1eb1Zo.jpg" class="news-gallery__img" style="background-image: url('http://monolit.site/media/images/file/1_r1eb1Zo.jpg');"></a>
+                                <a data-fancybox="news-gallery" href="http://monolit.site/media/images/file/3_g9n6sja.jpg" class="news-gallery__img" style="background-image: url('http://monolit.site/media/images/file/3_g9n6sja.jpg');"></a>
+                                <a data-fancybox="news-gallery" href="http://monolit.site/media/images/file/5_4M2o22j.jpg" class="news-gallery__img" style="background-image: url('http://monolit.site/media/images/file/5_4M2o22j.jpg');"></a>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        {% endif %}
+    </main>
+
+    <section id="section-other-news" class="common-section">
+        <div class="common-section__title container">
+            <h2>Другие новости</h2>
+        </div>
+        <div id="section-other-news__inner" class="container">
+            <article class="news-card">
+                <a href="">
+                    <div class="news-card__image" style="background-image: url('http://monolit.site/media/CACHE/images/press/news/preview/img_8836_9yL6QnN/fb65a2392a39d27b1630214b71c652ec.JPG');"></div>
+                    <div class="news-card__inner">
+                        <div class="news-card__datetime">29 января 2019</div>
+                        <h3 class="news-card__title">Lorem ipsum dolor sit amet, consectetur adipisicing elit</h3>
+                    </div>
+                </a>
+                <div class="news-card__green-arr icon-arrow-right-white"></div>
+            </article>
+            <article class="news-card">
+                <a href="">
+                    <div class="news-card__image" style="background-image: url('http://monolit.site/media/CACHE/images/press/news/preview/img_6680-13-12-18-09-58/bce1c05e81ea26b6b3e96c5e25c0aca0.JPG');"></div>
+                    <div class="news-card__inner">
+                        <div class="news-card__datetime">29 января 2019</div>
+                        <h3 class="news-card__title">В рамках партнёрской программы ГК«Монолит» провела мероприятие «День с Застройщиком»</h3>
+                    </div>
+                </a>
+                <div class="news-card__green-arr icon-arrow-right-white"></div>
+            </article>
+            <article class="news-card">
+                <a href="">
+                    <div class="news-card__image" style="background-image: url('http://monolit.site/media/CACHE/images/press/news/preview/img_6680-13-12-18-09-58/bce1c05e81ea26b6b3e96c5e25c0aca0.JPG');"></div>
+                    <div class="news-card__inner">
+                        <div class="news-card__datetime">29 января 2019</div>
+                        <h3 class="news-card__title">Lorem ipsum dolor sit amet, consectetur adipisicing elit</h3>
+                    </div>
+                </a>
+                <div class="news-card__green-arr icon-arrow-right-white"></div>
+            </article>
+            <article class="news-card">
+                <a href="">
+                    <div class="news-card__image" style="background-image: url('http://monolit.site/media/CACHE/images/press/news/preview/img_8836_9yL6QnN/fb65a2392a39d27b1630214b71c652ec.JPG');"></div>
+                    <div class="news-card__inner">
+                        <div class="news-card__datetime">29 января 2019</div>
+                        <h3 class="news-card__title">Lorem ipsum dolor sit amet, consectetur adipisicing elit</h3>
+                    </div>
+                </a>
+                <div class="news-card__green-arr icon-arrow-right-white"></div>
+            </article>
+            <article class="news-card">
+                <a href="">
+                    <div class="news-card__image" style="background-image: url('http://monolit.site/media/CACHE/images/press/news/preview/img_6680-13-12-18-09-58/bce1c05e81ea26b6b3e96c5e25c0aca0.JPG');"></div>
+                    <div class="news-card__inner">
+                        <div class="news-card__datetime">29 января 2019</div>
+                        <h3 class="news-card__title">В рамках партнёрской программы ГК«Монолит» провела мероприятие «День с Застройщиком»</h3>
+                    </div>
+                </a>
+                <div class="news-card__green-arr icon-arrow-right-white"></div>
+            </article>
+            <article class="news-card">
+                <a href="">
+                    <div class="news-card__image" style="background-image: url('http://monolit.site/media/CACHE/images/press/news/preview/img_6680-13-12-18-09-58/bce1c05e81ea26b6b3e96c5e25c0aca0.JPG');"></div>
+                    <div class="news-card__inner">
+                        <div class="news-card__datetime">29 января 2019</div>
+                        <h3 class="news-card__title">Lorem ipsum dolor sit amet, consectetur adipisicing elit</h3>
+                    </div>
+                </a>
+                <div class="news-card__green-arr icon-arrow-right-white"></div>
+            </article>
+        </div>
+    </section>
 {% endblock %}

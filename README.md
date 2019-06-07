@@ -75,3 +75,10 @@
     $ git pull
     then enter credentials
     ```
+
+## Clean empty folders and unused files
+    Run
+    ```
+    $ python manage.py cleanup_unused_media
+    $ python manage.py clean_empty_media_dirs
+    ```

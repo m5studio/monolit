@@ -7,8 +7,10 @@ from django.utils.html import mark_safe
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 
-from imagekit.models import ProcessedImageField
-from imagekit.processors import ResizeToFill, ResizeToFit
+# from imagekit.models import ProcessedImageField
+# from imagekit.processors import ResizeToFill, ResizeToFit
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFit
 
 from ckeditor.fields import RichTextField
 
@@ -26,32 +28,34 @@ class NewsCategory(models.Model):
         return self.name
 
 def main_image_upload_path(instance, filename):
-    news_id = instance.id
+    date = instance.date
     filename = FileProcessing(filename)
     filename = filename.newFileNameGenerated()
-    return 'news/{news_id}/{filename}'.format(news_id=news_id, filename=filename)
+    return 'news/{date}/{filename}'.format(date=date, filename=filename)
 
 class News(models.Model):
-    title      = models.CharField('Заголовок новости', max_length=255)
-    object     = models.ManyToManyField(Object, verbose_name='Объект(ы)',
+    title            = models.CharField('Заголовок новости', max_length=255)
+    object           = models.ManyToManyField(Object, verbose_name='Объект(ы)',
                                       blank=True,
                                       help_text='Относится ли данная новость к Объекту(ам) недвижимости? Если нет, то оставьте пустым')
-    category   = models.ManyToManyField(NewsCategory, blank=True, verbose_name='Категории новости')
-    date       = models.DateField(verbose_name='Дата', default=datetime.date.today)
-    main_image = ProcessedImageField(upload_to=main_image_upload_path,
-                                        verbose_name='Главное изображение',
-                                        blank=True, null=True,
-                                        processors=[ResizeToFit(512, 512)],
-                                        format='JPEG',
-                                        options={'quality': 70})
-    body       = RichTextField('Текст новости', blank=True, null=True)
-    created    = models.DateTimeField(auto_now=False, auto_now_add=True)
-    updated    = models.DateTimeField(auto_now=True, auto_now_add=False)
+    category         = models.ManyToManyField(NewsCategory, blank=True, verbose_name='Категории новости')
+    date             = models.DateField(verbose_name='Дата', default=datetime.date.today)
+    main_image       = models.ImageField(upload_to=main_image_upload_path,
+                                         verbose_name='Главное изображение',
+                                         blank=True, null=True)
+    main_image_thumb = ImageSpecField(source='main_image',
+                                      processors=[ResizeToFit(512, 512)],
+                                      format='JPEG',
+                                      options={'quality': 70})
+
+    body             = RichTextField('Текст новости', blank=True, null=True)
+    # created          = models.DateTimeField(auto_now=False, auto_now_add=True)
+    updated          = models.DateTimeField(auto_now=True, auto_now_add=False)
 
     # Thumbnails for admin
-    def main_image_thumb(self):
+    def main_image_admin_thumb(self):
         return mark_safe('<img src="{}" alt="" style="width: 386px; height: auto;" />'.format(self.main_image.url))
-    main_image_thumb.short_description = 'Главное изображение (thumbnail)'
+    main_image_admin_thumb.short_description = 'Главное изображение (thumbnail)'
     # END Thumbnails for admin
 
     def __str__(self):
@@ -66,14 +70,16 @@ class News(models.Model):
 
 
 def image_upload_path(instance, filename):
-    news_id = instance.news.id
+    date = instance.news.date
     filename = FileProcessing(filename)
     filename = filename.newFileNameGenerated()
-    return 'news/{news_id}/{filename}'.format(news_id=news_id, filename=filename)
+    return 'news/{date}/{filename}'.format(date=date, filename=filename)
 
 class NewsImage(models.Model):
     news  = models.ForeignKey(News, verbose_name='Новость', on_delete=models.CASCADE)
-    image = models.ImageField('Изображение', blank=True, null=True, upload_to=image_upload_path)
+    image = models.ImageField(upload_to=image_upload_path,
+                              verbose_name='Изображение',
+                              blank=True, null=True)
 
     # Thumbnails for admin
     def image_thumb(self):
@@ -95,6 +101,14 @@ def main_image_optimization(sender, instance, created, **kwargs):
         image = ImageOptimizer(instance.main_image.path)
         image.optimizeAndSaveImg()
 
+@receiver(post_delete, sender=News)
+def clean_empty_media_dirs(sender, instance, **kwargs):
+    cleanMedia = CleanMedia()
+    # Delete imagekit chache file
+    cleanMedia.cleanImagekitCacheImage(instance.main_image_thumb)
+    # Delete empty dirs in /media/
+    cleanMedia.deleteEmptyDirsRecusive()
+
 
 @receiver(post_save, sender=NewsImage)
 def image_optimization(sender, instance, created, **kwargs):
@@ -106,7 +120,5 @@ def image_optimization(sender, instance, created, **kwargs):
 @receiver(post_delete, sender=NewsImage)
 def clean_empty_media_dirs(sender, instance, **kwargs):
     cleanMedia = CleanMedia()
-    # Delete imagekit chache file
-    cleanMedia.cleanImagekitCacheImage(instance.image_thumbnail_admin)
     # Delete empty dirs in /media/
     cleanMedia.deleteEmptyDirsRecusive()
