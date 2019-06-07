@@ -5,10 +5,11 @@ from apps.news.views import (
     NewsDetailView
 )
 
+app_name = 'news'
 
 urlpatterns = [
     path('news/', include([
-        path('', NewsListView.as_view(), name='news-list'),
-        path('<int:pk>/', NewsDetailView.as_view(), name='news-detail')
+        path('', NewsListView.as_view(), name='list'),
+        path('<int:pk>/', NewsDetailView.as_view(), name='detail')
     ])),
 ]
