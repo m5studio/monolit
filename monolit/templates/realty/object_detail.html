@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load custom_filters %}
+
 
 {% block body_classes %}{% spaceless %}
     {{ block.super }} object-page
@@ -110,7 +112,7 @@
         {% include "realty/object_detail-sections/section-building-progress-and-news.html" %}
 
         {% if object.description %}
-            <section class="common-section">
+            <section id="section-object-description" class="common-section">
                 <div class="common-section__title container">
                     <h2>Информация о {{ object.get_object_type_display }} {{ object.name }}</h2>
                 </div>
@@ -185,7 +187,10 @@
                         <div class="flat-card__footer--bottom">
                             <div class="flat-card__info">
                                 <div class="flat-card__price-total">
-                                    <span>5 319 971</span> <small>руб.</small>
+                                    <!-- <span>5 319 971</span><small> руб</small> -->
+                                    {% with my_number=531911 %}
+                                    <span>{{ my_number|format_number }}</span><small> руб</small>
+                                    {% endwith %}
                                 </div>
                                 <div class="flat-card__price-per-meter">78 120 руб/м<sup>2</sup></div>
                             </div>
@@ -227,7 +232,7 @@
                         <div class="flat-card__footer--bottom">
                             <div class="flat-card__info">
                                 <div class="flat-card__price-total">
-                                    <span>5 319 971</span> <small>руб.</small></div>
+                                    <span>5 319 971</span><small> руб</small></div>
                                 <div class="flat-card__price-per-meter">78 120 руб/м<sup>2</sup></div>
                             </div>
                         </div>
@@ -268,7 +273,7 @@
                         <div class="flat-card__footer--bottom">
                             <div class="flat-card__info">
                                 <div class="flat-card__price-total">
-                                    <span>5 319 971</span> <small>руб.</small>
+                                    <span>5 319 971</span><small> руб</small>
                                 </div>
                                 <div class="flat-card__price-per-meter">78 120 руб/м<sup>2</sup></div>
                             </div>

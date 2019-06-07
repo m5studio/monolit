@@ -14,3 +14,8 @@ def get_file_ext(value):
     from apps.core.classes.file_processing import FileProcessing
     file = FileProcessing(value)
     return file.getFileExt()
+
+
+@register.filter(name='format_number')
+def format_number(value):
+    return '{:,}'.format(value).replace(',', ' ')
