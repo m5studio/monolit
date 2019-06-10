@@ -61,7 +61,7 @@ class ObjectSiteAdmin(TurnOffAdminLogging, admin.ModelAdmin):
     readonly_fields=('price_total', 'image_planning_thumb', 'image_planning3d_thumb', 'image_floor_thumb', 'image_section_thumb', 'image_section_in_object_thumb', 'image_genplan_thumb')
     fieldsets = (
         (None, {
-            'fields': ('status', 'special_offer', 'object', 'site_type', 'object_block', 'object_section', 'crm_id', 'floor', 'site_number', 'price_per_square', 'price_total', 'rooms_qty', 'site_area', 'living_area', 'kitchen_area', 'ceiling_height', 'two_levels', 'entresol', 'wardrobe', 'finish_type', 'window_view')
+            'fields': ('active', 'special_offer', 'object', 'site_type', 'object_block', 'object_section', 'crm_id', 'floor', 'site_number', 'price_per_square', 'price_total', 'rooms_qty', 'site_area', 'living_area', 'kitchen_area', 'ceiling_height', 'two_levels', 'entresol', 'wardrobe', 'finish_type', 'window_view')
         }),
         ('Изображения', {
            'fields': (
@@ -74,8 +74,8 @@ class ObjectSiteAdmin(TurnOffAdminLogging, admin.ModelAdmin):
             )
         }),
     )
-
-    list_display = ('crm_id', 'object', 'status', 'updated')
+    list_display = ('crm_id', 'object', 'site_type', 'active', 'special_offer', 'updated')
+    list_editable = ('active', 'special_offer')
     autocomplete_fields = ['object', 'object_section', 'window_view']
 """ [ END ObjectSite ] """
 
@@ -85,9 +85,9 @@ class ObjectGalleryImageInline(admin.TabularInline):
     model = ObjectGalleryImage
     extra = 0
 
-    image_thumbnail_admin = AdminThumbnail(image_field='image_thumbnail_admin')
-    fields = ('gallery', 'image', 'image_thumbnail_admin')
-    readonly_fields = ('image_thumbnail_admin',)
+    image_thumb = AdminThumbnail(image_field='image_thumb')
+    fields = ('gallery', 'image', 'image_thumb')
+    readonly_fields = ('image_thumb',)
 
 @admin.register(ObjectGalleryImage)
 class ObjectGalleryImageAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.ModelAdmin):

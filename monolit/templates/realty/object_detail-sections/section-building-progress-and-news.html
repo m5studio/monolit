@@ -20,7 +20,7 @@
                     {% endif %}
                             <select name="object_gallery_id">
                                 {% for gallery in object_galleries %}
-                                    <option value="{% url 'object-gallery' gallery_id=gallery.id %}">{{ gallery }}</option>
+                                    <option value="{% url 'object:gallery' gallery_id=gallery.id %}">{{ gallery }}</option>
                                 {% endfor %}
                             </select>
                             <br><br>
@@ -42,7 +42,7 @@
                     {% endif %}
                             <div id="bp-and-news-pills-news__inner">
                                 {% for object in object_news %}
-                                    {% include "news/cards/news-card.html" %}
+                                    {% include 'news/cards/news-card.html' %}
                                 {% endfor %}
                             </div>
                         </div>

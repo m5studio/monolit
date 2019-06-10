@@ -23,7 +23,7 @@
         {% elif not page_meta_description %}
             {{ settings.site_description }}
         {% endif %}{% endspaceless %}">
-    {% spaceless %}{% include "includes/favicons.html" %}{% endspaceless %}
+    {% spaceless %}{% include 'includes/favicons.html' %}{% endspaceless %}
 {% block css %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <link rel="stylesheet" href="{% static 'css/1.styles.css' %}">{% endblock %}
@@ -44,7 +44,7 @@
                 </div>
             </div>
         </div>
-        {% include "includes/main-nav.html" %}
+        {% include 'includes/main-nav.html' %}
     </header>
 
     <div id="content">

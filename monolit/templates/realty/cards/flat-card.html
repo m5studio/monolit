@@ -1,0 +1,57 @@
+{% load custom_filters %}
+
+<div class="flat-card">
+    <div class="flat-card__header">
+        <div class="flat-card__add-to-favorites">
+            <div class="icon icon-18 icon-heart-contour-green"></div>
+            <div class="flat-card__add-to-favorites--title">В избранное</div>
+        </div>
+        <div class="flat-card__id">ID: {{ object.crm_id }}</div>
+    </div>
+    <div class="flat-card__img" style="background-image: url('{% spaceless %}
+        {% if object.image_planning %}
+            {{ object.image_planning.url }}
+        {% else %}
+            https://via.placeholder.com/386/FFFFFF/555555?text=No+Image
+        {% endif %}
+    {% endspaceless %}');">
+        <a href="{{ object.get_absolute_url }}"></a>
+    </div>
+    <div class="flat-card__footer">
+        <div class="flat-card__footer--top">
+            <div class="flat-card__info">
+                <div class="flat-card__heading">{% if object.object.object_type %}{{ object.object.get_object_type_display }}{% endif %}</div>
+                <div class="flat-card__object-name">{% if object.object.name %}{{ object.object.name }}{% endif %}</div>
+            </div>
+    </div>
+        <div class="flat-card__footer--middle">
+            <div class="flat-card__info">
+                <div class="flat-card__heading">{% if object.rooms_qty %}{{ object.get_rooms_qty_display }}{% endif %}</div>
+                <div class="flat-card__val">{% if object.site_area %}{{ object.site_area }} м<sup>2</sup>{% endif %}</div>
+            </div>
+            <div class="flat-card__info">
+                <div class="flat-card__heading">Этаж</div>
+                <div class="flat-card__val">
+                    <!-- TODO:  -->
+                    <!-- 14/16 -->
+                    {% if object.floor %}{{ object.floor }}{% endif %}/ <!-- TODO: total floors -->
+                </div>
+            </div>
+            <div class="flat-card__info">
+                <div class="flat-card__heading">Секция</div>
+                <div class="flat-card__val">
+                    <!-- TODO:  -->
+                    <!-- 1 -->
+                </div>
+            </div>
+        </div>
+        <div class="flat-card__footer--bottom">
+            <div class="flat-card__info">
+                <div class="flat-card__price-total">
+                    {% if object.price_total %}<span>{{ object.price_total|format_and_round_number }}</span><small> руб</small>{% endif %}
+                </div>
+                <div class="flat-card__price-per-meter">{% if object.price_per_square %}{{ object.price_per_square|format_and_round_number }} руб/м<sup>2</sup>{% endif %}</div>
+            </div>
+        </div>
+    </div>
+</div>

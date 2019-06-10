@@ -16,6 +16,19 @@ def get_file_ext(value):
     return file.getFileExt()
 
 
+def custom_format_number(value):
+    return '{:,}'.format(value).replace(',', ' ')
+
 @register.filter(name='format_number')
 def format_number(value):
-    return '{:,}'.format(value).replace(',', ' ')
+    return custom_format_number(value)
+
+
+@register.filter(name='round_number')
+def round_number(value):
+    return round(value, 0)
+
+
+@register.filter(name='format_and_round_number')
+def format_and_round_number(value):
+    return custom_format_number(round(value, 0))

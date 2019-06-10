@@ -5,12 +5,12 @@
         <div id="main-navigation-wrap">
             <nav id="main-navigation" class="main-nav" role="navigation">
                 <ul class="main-nav__list">
-                    {% url 'objects-list' as objects_list %}
+                    {% url 'object:list' as objects_list %}
                     <li class="main-nav__item{% if objects_list == request.path or objects_list in request.path %} active{% endif %}">
                         <a href="{{ objects_list }}" class="main-nav__link" title="Жилые комплексы, Бизнес-центры, Торговые центры...">Объекты</a>
                     </li>
 
-                    {% url 'objects-sites-list' as objects_site_list %}
+                    {% url 'object:site-list' as objects_site_list %}
                     <li class="main-nav__item{% if objects_site_list == request.path or objects_site_list in request.path %} active{% endif %} has-dropdown">
                         <a href="{{ objects_site_list }}" class="main-nav__link" title="Выбор жилой или коммерческой недвижимости">Выбор недвижимости</a>
                         <div class="dropdown">

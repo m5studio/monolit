@@ -37,9 +37,9 @@ def image_upload_path(instance, filename):
     return 'objects/{object_crm_id}/galleries/{gallery_name}/{filename}'.format(object_crm_id=object_crm_id, gallery_name=gallery_name, filename=filename)
 
 class ObjectGalleryImage(models.Model):
-    gallery               = models.ForeignKey(ObjectGallery, verbose_name='Галерея', on_delete=models.CASCADE)
-    image                 = models.ImageField('Изображение', upload_to=image_upload_path)
-    image_thumbnail_admin = ImageSpecField(source='image',
+    gallery     = models.ForeignKey(ObjectGallery, verbose_name='Галерея', on_delete=models.CASCADE)
+    image       = models.ImageField('Изображение', upload_to=image_upload_path)
+    image_thumb = ImageSpecField(source='image',
                                            # processors=[ResizeToFill(256, 256)],
                                            processors=[ResizeToFit(256, 256)],
                                            options={'quality': 70})

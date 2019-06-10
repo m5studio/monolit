@@ -1,0 +1,25 @@
+{% if object_special_offers %}
+    <section id="section-flat-page-simular-flats" class="common-section">
+        <div class="common-section__title container">
+            <h2>Спецпредложения в &laquo;{{ page_title }}&raquo;</h2>
+        </div>
+        <div id="section-flat-page-simular-flats__inner" class="common-section__inner container">
+            {% if object_special_offers_qty %}
+                <div id="flats-simular">
+                    <div id="flats-simular__total">{{ object_special_offers_qty }}</div>
+                    <div id="flats-simular__simular-objects">Спецпредложени{% if object_special_offers_qty < 5 %}я{% else %}й{% endif %}<br>по квартирам</div>
+                    <div id="flats-simular__see-all">
+                        <!-- TODO: link to special offers -->
+                        <a href="">
+                            <span>Смотреть все</span>
+                            <div class="icon icon-arrow-right-green"></div>
+                        </a>
+                    </div>
+                </div>
+            {% endif %}
+            {% for object in object_special_offers %}
+                {% include 'realty/cards/flat-card.html' %}
+            {% endfor %}
+        </div>
+    </section>
+{% endif %}

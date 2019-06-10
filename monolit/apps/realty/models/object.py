@@ -109,7 +109,7 @@ class Object(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('object-detail', kwargs={'slug': self.slug})
+        return reverse('object:detail', kwargs={'slug': self.slug})
 
     class Meta:
         verbose_name = 'Объект'

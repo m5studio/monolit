@@ -39,11 +39,11 @@ class ObjectSite(models.Model):
 
     ROOMS_QTY = (
         ('0', 'Студия'),
-        ('1', '1'),
-        ('2', '2'),
-        ('3', '3'),
-        ('4', '4'),
-        ('5', '5'),
+        ('1', '1 комнатная'),
+        ('2', '2 комнатная'),
+        ('3', '3 комнатная'),
+        ('4', '4 комнатная'),
+        ('5', '5 комнатная'),
     )
 
     FINISHING_TYPES = (
@@ -52,19 +52,11 @@ class ObjectSite(models.Model):
         ('1', 'Чистовая отделка'),
     )
 
-    # WINDOWS_VIEW = (
-    #     ('yard', 'Во двор'),
-    #     ('street', 'Улица'),
-    #     ('sea', 'Море'),
-    #     ('lake', 'Озеро'),
-    #     ('mountains', 'Горы'),
-    # )
-
-    status                  = models.BooleanField('Активный', default=True, help_text='Опубликован на сайте')
+    active                  = models.BooleanField('Активный', default=True, help_text='Опубликован на сайте')
     special_offer           = models.BooleanField('Спецпредложение', default=False)
 
     object                  = models.ForeignKey(Object, verbose_name='Объект', on_delete=models.SET_NULL, null=True)
-    site_type               = models.CharField('Тип помещения', max_length=100, choices=SITE_TYPES, blank=True, null=True)
+    site_type               = models.CharField('Тип помещения', max_length=100, choices=SITE_TYPES)
     object_block            = models.ForeignKey(ObjectBlock, verbose_name='Блок Объекта', on_delete=models.SET_NULL, blank=True, null=True)
     object_section          = models.ForeignKey(ObjectSection, verbose_name='Секция Объекта', on_delete=models.SET_NULL, blank=True, null=True)
 
@@ -84,7 +76,7 @@ class ObjectSite(models.Model):
     wardrobe                = models.BooleanField('Гардеробная', default=False, help_text='Помещение для гардеробной или кладовой')
 
     finish_type             = models.CharField('Отделка', max_length=100, choices=FINISHING_TYPES, blank=True, null=True)
-    window_view             = models.ManyToManyField(ObjectSiteWindowsView, verbose_name='Вид из окон')
+    window_view             = models.ManyToManyField(ObjectSiteWindowsView, verbose_name='Вид из окон', blank=True, null=True)
 
     image_planning          = models.ImageField('Планировка', upload_to=image_upload_path, blank=True, null=True)
     image_planning3d        = models.ImageField('Планировка 3D', upload_to=image_upload_path, blank=True, null=True)
@@ -125,7 +117,7 @@ class ObjectSite(models.Model):
         return self.crm_id
 
     def get_absolute_url(self):
-        return reverse('object-site-detail', kwargs={"pk": self.id})
+        return reverse('object:site-detail', kwargs={"pk": self.id})
 
     class Meta:
         verbose_name = 'Помещение'

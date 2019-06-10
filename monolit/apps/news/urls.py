@@ -5,6 +5,7 @@ from apps.news.views import (
     NewsDetailView
 )
 
+
 app_name = 'news'
 
 urlpatterns = [

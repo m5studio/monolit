@@ -40,6 +40,9 @@ class ObjectDetailView(DetailView):
         context['other_objects'] = Object.objects.filter(active=True).exclude(id=self.get_object().pk).order_by('?')[:4]
         context['object_videos'] = ObjectVideo.objects.filter(object=self.get_object().pk)
 
+        context['object_special_offers'] = ObjectSite.objects.filter(object=self.get_object().pk, active=True, special_offer=True).order_by('?')[:3]
+        context['object_special_offers_qty'] = ObjectSite.objects.filter(object=self.get_object().pk, active=True, special_offer=True).count()
+
         # Object Documents Pagination
         context['object_documents'] = ObjectDocument.objects.filter(object=self.get_object().pk).order_by('-updated')
         paginator = Paginator(context['object_documents'], 9)
@@ -57,6 +60,7 @@ class ObjectDetailView(DetailView):
 
 class ObjectSiteListView(ListView):
     model = ObjectSite
+    queryset = ObjectSite.objects.filter(active=True).order_by('-updated')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -66,6 +70,11 @@ class ObjectSiteListView(ListView):
 
 class ObjectSiteDetailView(DetailView):
     model = ObjectSite
+    queryset = ObjectSite.objects.filter(active=True)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
 
 
 # Object gallery in json format

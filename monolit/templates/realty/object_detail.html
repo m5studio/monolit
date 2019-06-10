@@ -1,7 +1,5 @@
 {% extends 'base.html' %}
 
-{% load custom_filters %}
-
 
 {% block body_classes %}{% spaceless %}
     {{ block.super }} object-page
@@ -10,7 +8,7 @@
 
 {% block content %}
     <main id="main">
-        {% include "realty/object_detail-sections/section-object-page-main-info.html" %}
+        {% include 'realty/object_detail-sections/section-object-page-main-info.html' %}
 
         <div id="section-flats-types">
             <div id="section-flats-types__inner" class="container">
@@ -109,181 +107,28 @@
             </div>
         </div>
 
-        {% include "realty/object_detail-sections/section-building-progress-and-news.html" %}
+        {% include 'realty/object_detail-sections/section-building-progress-and-news.html' %}
 
-        {% if object.description %}
-            <section id="section-object-description" class="common-section">
-                <div class="common-section__title container">
-                    <h2>Информация о {{ object.get_object_type_display }} {{ object.name }}</h2>
-                </div>
-                <div class="container">
-                    {{ object.description|safe }}
-                </div>
-            </section>
-        {% endif %}
+        {% include 'realty/object_detail-sections/section-object-description.html' %}
 
-        {% include "realty/object_detail-sections/section-object-info.html" %}
+        {% include 'realty/object_detail-sections/section-object-info.html' %}
 
-        {% include "realty/object_detail-sections/section-object-files.html" %}
+        {% include 'realty/object_detail-sections/section-object-files.html' %}
 
-        {% include "realty/object_detail-sections/section-object-downloads.html" %}
+        {% include 'realty/object_detail-sections/section-object-downloads.html' %}
 
-        {% include "realty/object_detail-sections/section-object-genplan.html" %}
+        {% include 'realty/object_detail-sections/section-object-genplan.html' %}
 
         <!-- TODO: map -->
         <!-- <div id="section-object-infrastructure">
             <div style="background-color: #CCC; display: block; min-height: 600px; width: 100%;"></div>
         </div> -->
 
-        {% include "realty/object_detail-sections/section-object-parking-storages.html" %}
+        {% include 'realty/object_detail-sections/section-object-parking-storages.html' %}
 
-        <section id="section-flat-page-simular-flats" class="common-section">
-            <div class="common-section__title container">
-                <h2>Спецпредложения в &laquo;{{ page_title }}&raquo;</h2>
-            </div>
-            <div id="section-flat-page-simular-flats__inner" class="common-section__inner container">
-                <div id="flats-simular">
-                    <div id="flats-simular__total">5</div>
-                    <div id="flats-simular__simular-objects">Спецпредложений<br>по квартирам</div>
-                    <div id="flats-simular__see-all">
-                        <a href="">
-                            <span>Смотреть все</span>
-                            <div class="icon icon-arrow-right-green"></div>
-                        </a>
-                    </div>
-                </div>
-                <div class="flat-card">
-                    <div class="flat-card__header">
-                        <div class="flat-card__add-to-favorites">
-                            <div class="icon icon-18 icon-heart-contour-green"></div>
-                            <div class="flat-card__add-to-favorites--title">В избранное</div>
-                        </div>
-                        <div class="flat-card__id">ID: 000000676</div>
-                    </div>
-                    <div class="flat-card__img" style="background-image: url('http://monolit.site/media/realty/flat/layout/80_zq8zw2q.jpg');">
-                        <a href=""></a>
-                    </div>
-                    <div class="flat-card__footer">
-                        <div class="flat-card__footer--top">
-                            <div class="flat-card__info">
-                                <div class="flat-card__heading">Жилой дом</div>
-                                <div class="flat-card__object-name">на ул. Балаклавской</div>
-                            </div>
-                        </div>
-                        <div class="flat-card__footer--middle">
-                            <div class="flat-card__info">
-                                <div class="flat-card__heading">2 комнатная</div>
-                                <div class="flat-card__val">68.1 м<sup>2</sup></div>
-                            </div>
-                            <div class="flat-card__info">
-                                <div class="flat-card__heading">Этаж</div>
-                                <div class="flat-card__val">14/16</div>
-                            </div>
-                            <div class="flat-card__info">
-                                <div class="flat-card__heading">Секция</div>
-                                <div class="flat-card__val">1</div>
-                            </div>
-                        </div>
-                        <div class="flat-card__footer--bottom">
-                            <div class="flat-card__info">
-                                <div class="flat-card__price-total">
-                                    <!-- <span>5 319 971</span><small> руб</small> -->
-                                    {% with my_number=531911 %}
-                                    <span>{{ my_number|format_number }}</span><small> руб</small>
-                                    {% endwith %}
-                                </div>
-                                <div class="flat-card__price-per-meter">78 120 руб/м<sup>2</sup></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="flat-card">
-                    <div class="flat-card__header">
-                        <div class="flat-card__add-to-favorites">
-                            <div class="icon icon-18 icon-heart-contour-green"></div>
-                            <div class="flat-card__add-to-favorites--title">В избранное</div>
-                        </div>
-                        <div class="flat-card__id">ID: 000000676</div>
-                    </div>
-                    <div class="flat-card__img" style="background-image: url('http://monolit.site/media/realty/flat/layout/80_zq8zw2q.jpg');">
-                        <a href=""></a>
-                    </div>
-                    <div class="flat-card__footer">
-                        <div class="flat-card__footer--top">
-                            <div class="flat-card__info">
-                                <div class="flat-card__heading">Жилой дом</div>
-                                <div class="flat-card__object-name">на ул. Балаклавской</div>
-                            </div>
-                        </div>
-                        <div class="flat-card__footer--middle">
-                            <div class="flat-card__info">
-                                <div class="flat-card__heading">2 комнатная</div>
-                                <div class="flat-card__val">68.1 м<sup>2</sup></div>
-                            </div>
-                            <div class="flat-card__info">
-                                <div class="flat-card__heading">Этаж</div>
-                                <div class="flat-card__val">14/16</div>
-                            </div>
-                            <div class="flat-card__info">
-                                <div class="flat-card__heading">Секция</div>
-                                <div class="flat-card__val">1</div>
-                            </div>
-                        </div>
-                        <div class="flat-card__footer--bottom">
-                            <div class="flat-card__info">
-                                <div class="flat-card__price-total">
-                                    <span>5 319 971</span><small> руб</small></div>
-                                <div class="flat-card__price-per-meter">78 120 руб/м<sup>2</sup></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="flat-card">
-                    <div class="flat-card__header">
-                        <div class="flat-card__add-to-favorites">
-                            <div class="icon icon-18 icon-heart-contour-green"></div>
-                            <div class="flat-card__add-to-favorites--title">В избранное</div>
-                        </div>
-                        <div class="flat-card__id">ID: 000000676</div>
-                    </div>
-                    <div class="flat-card__img" style="background-image: url('http://monolit.site/media/realty/flat/layout/80_zq8zw2q.jpg');">
-                        <a href=""></a>
-                    </div>
-                    <div class="flat-card__footer">
-                        <div class="flat-card__footer--top">
-                            <div class="flat-card__info">
-                                <div class="flat-card__heading">Жилой дом</div>
-                                <div class="flat-card__object-name">на ул. Балаклавской</div>
-                            </div>
-                        </div>
-                        <div class="flat-card__footer--middle">
-                            <div class="flat-card__info">
-                                <div class="flat-card__heading">2 комнатная</div>
-                                <div class="flat-card__val">68.1 м<sup>2</sup></div>
-                            </div>
-                            <div class="flat-card__info">
-                                <div class="flat-card__heading">Этаж</div>
-                                <div class="flat-card__val">14/16</div>
-                            </div>
-                            <div class="flat-card__info">
-                                <div class="flat-card__heading">Секция</div>
-                                <div class="flat-card__val">1</div>
-                            </div>
-                        </div>
-                        <div class="flat-card__footer--bottom">
-                            <div class="flat-card__info">
-                                <div class="flat-card__price-total">
-                                    <span>5 319 971</span><small> руб</small>
-                                </div>
-                                <div class="flat-card__price-per-meter">78 120 руб/м<sup>2</sup></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        {% include 'realty/object_detail-sections/section-object-special-offers.html' %}
 
-        {% include "realty/object_detail-sections/section-object-video-and-panoram.html" %}
+        {% include 'realty/object_detail-sections/section-object-video-and-panoram.html' %}
 
         <section id="section-flat-page-mortgage" class="common-section">
             <div class="common-section__title container">
@@ -767,7 +612,7 @@
                 </div>
             </div>
             <div id="section-objects-list__see-all">
-                <a href="{% url 'objects-list' %}" class="green-button">Посмотреть все объекты</a>
+                <a href="{% url 'object:list' %}" class="green-button">Посмотреть все объекты</a>
             </div>
         </section>
     </main>
