@@ -7,7 +7,7 @@ class ObjectBlock(models.Model):
     name   = models.CharField('Номер блока или его название', max_length=255, blank=True, null=True)
 
     def __str__(self):
-        return self.name
+        return '{} {}'.format(self.object.name, self.name)
 
     class Meta:
         verbose_name = 'Блок Объекта'
