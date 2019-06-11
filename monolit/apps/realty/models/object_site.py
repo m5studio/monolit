@@ -76,7 +76,7 @@ class ObjectSite(models.Model):
     wardrobe                = models.BooleanField('Гардеробная', default=False, help_text='Помещение для гардеробной или кладовой')
 
     finish_type             = models.CharField('Отделка', max_length=100, choices=FINISHING_TYPES, blank=True, null=True)
-    window_view             = models.ManyToManyField(ObjectSiteWindowsView, verbose_name='Вид из окон', blank=True, null=True)
+    window_view             = models.ManyToManyField(ObjectSiteWindowsView, verbose_name='Вид из окон', blank=True)
 
     image_planning          = models.ImageField('Планировка', upload_to=image_upload_path, blank=True, null=True)
     image_planning3d        = models.ImageField('Планировка 3D', upload_to=image_upload_path, blank=True, null=True)

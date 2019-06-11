@@ -249,4 +249,6 @@ class ObjectAdmin(TurnOffAdminLogging, admin.ModelAdmin):
     search_fields = ['name']
     ordering = ('order',)
     autocomplete_fields = ['category']
+
+    # TODO: conditional admin fields
 """ [ END Object ] """

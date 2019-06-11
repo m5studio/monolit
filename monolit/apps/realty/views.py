@@ -15,7 +15,7 @@ from apps.news.models import News
 
 class ObjectListView(ListView):
     model = Object
-    queryset = Object.objects.filter(active=True)
+    queryset = Object.objects.filter(active=True).order_by('order')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

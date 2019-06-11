@@ -234,12 +234,12 @@
 
         {% if object_list %}
             <div id="section-flats-list" class="common-section">
-                <div class="common-section__title container">
-                    <!-- <h2>8 объектов в продаже</h2>
+                <!-- <div class="common-section__title container">
+                    <h2>8 объектов в продаже</h2>
                     <span class="common-section__title--right">
                         <a href="#" class="scale-line">Реализованные объекты</a>
-                    </span> -->
-                </div>
+                    </span>
+                </div> -->
                 <div id="section-flats-list__inner" class="container">
                     {% for object in object_list %}
                         {% include 'realty/cards/flat-card.html' %}

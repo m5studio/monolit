@@ -4,18 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{% spaceless %}
-        {% url 'news:list' as news_list %}
-        {% url 'news:detail' as news_detail %}
-
         {% if request.path == '/' %}
             {% if settings.site_title %}{{ settings.site_title }}{% endif %}
-        {% elif news_list == request.path %}
-            Новости ГК Монолит
-        {% elif news_detail in request.path %}
-            {{ object.title }} | Новости ГК Монолит
         {% else %}
             {% if page_title %}{{ page_title }} | {% endif %}{% if settings.site_title %}{{ settings.site_title }}{% endif %}
         {% endif %}
+
+        {% comment %}
+            {% url 'news:list' as news_list_url %}
+            {% url 'news:detail' as news_detail_url %}
+
+            {% if news_list_url == request.path %}
+                Новости ГК Монолит
+            {% elif news_detail_url in request.path %}
+                {{ object.title }} | Новости ГК Монолит
+            {% endif %}
+
+
+            {% url 'object:list' as object_list_url %}
+            {% url 'object:detail' as object_detail_url %}
+
+            {% if object_list_url == request.path %}
+                Жилые и коммерческие объекты ГК Монолит
+            {% elif object_detail_url in request.path %}
+                {{ object.title }} | Жилые и коммерческие объекты ГК Монолит
+            {% endif %}
+        {% endcomment %}
     {% endspaceless %}</title>
     <meta name="description" content="{% spaceless %}
         {% if page_meta_description %}
