@@ -36,7 +36,7 @@ class ObjectSection(models.Model):
                                                 help_text='макс. этаж: 100')
 
     def __str__(self):
-        return self.name
+        return '{} {}'.format(self.object.name, self.name)
 
     class Meta:
         verbose_name = 'Секция Объекта'

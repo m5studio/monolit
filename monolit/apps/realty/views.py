@@ -74,6 +74,11 @@ class ObjectSiteDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['page_title'] = '{rooms_qty} {site_type} №{site_number} в {object_type} «{object_name}»'.format(rooms_qty=self.get_object().get_rooms_qty_display(),
+                                                                 site_type=self.get_object().get_site_type_display(),
+                                                                 site_number=self.get_object().site_number,
+                                                                 object_type=self.get_object().object.get_object_type_display(),
+                                                                 object_name=self.get_object().object.name)
         return context
 
 

@@ -11,11 +11,12 @@
                     </li>
 
                     {% url 'object:site-list' as objects_site_list_url %}
+                    {% url 'object:site-detail' as objects_site_detail_url %}
                     <li class="main-nav__item{% if objects_site_list_url == request.path or objects_site_list_url in request.path %} active{% endif %} has-dropdown">
                         <a href="{{ objects_site_list_url }}" class="main-nav__link" title="Выбор жилой или коммерческой недвижимости">Выбор недвижимости</a>
                         <div class="dropdown">
                             <ul class="main-nav-submenu__list">
-                                <li class="main-nav-submenu__item">
+                                <li class="main-nav-submenu__item{% if objects_site_list_url == request.path or objects_site_list_url in request.path %} active{% endif %}">
                                     <a href="{{ objects_site_list_url }}" class="main-nav-submenu__link">Квартиры</a>
                                 </li>
                                 <li class="main-nav-submenu__item">
