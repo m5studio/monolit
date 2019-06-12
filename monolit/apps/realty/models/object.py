@@ -76,7 +76,7 @@ class Object(models.Model):
                                        blank=True, null=True,
                                        based_fields=['address'],
                                        default='44.952117,34.10241700000006',
-                                       help_text='Географические координаты - широта и долгота')
+                                       help_text='Географические координаты: широта, долгота')
     description   = RichTextField('Описание', blank=True, null=True)
     genplan       = models.ImageField('Генплан',
                                       upload_to=genplan_upload_path,

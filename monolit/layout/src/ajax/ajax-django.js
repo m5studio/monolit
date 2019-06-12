@@ -5,7 +5,7 @@
 
 // Cookie obtainer Django
 function getCookie(name) {
-    let cookieValue = null;
+    let cookieValue = null
     if (document.cookie && document.cookie !== '') {
         let cookies = document.cookie.split(';')
         for (let i = 0; i < cookies.length; i++) {

@@ -109,6 +109,11 @@ class ObjectGalleryAdmin(TurnOffAdminLogging, admin.ModelAdmin):
     list_editable = ('order',)
     search_fields = ['object']
     autocomplete_fields = ['object']
+
+    # def get_fields(self, request, obj=None):
+    #     if obj:
+    #         return ['name', 'order', 'object']
+    #     return ['name', 'object']
 """ [ END ObjectGallery ] """
 
 
@@ -128,6 +133,9 @@ class ObjectElevatorAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.ModelAd
 class ObjectSectionInline(admin.TabularInline):
     model = ObjectSection
     extra = 0
+
+    search_fields = ['object_block']
+    autocomplete_fields = ['object_block']
 
 @admin.register(ObjectSection)
 class ObjectSectionAdmin(TurnOffAdminLogging, admin.ModelAdmin):
@@ -232,7 +240,8 @@ class ObjectAdmin(TurnOffAdminLogging, admin.ModelAdmin):
     readonly_fields = ('genplan_thumb', 'main_image_thumb')
     fieldsets = (
         (None, {
-            'fields': ('active', 'completed', 'order', 'crm_id', 'name', 'slug', 'category', 'object_type', 'building_type', 'description', 'has_military', 'has_mother', 'webcam', 'panoram')
+            'fields': ('active', 'completed', 'order', 'crm_id', 'name', 'slug', 'category', 'object_type', 'building_type', 'description', 'has_military', 'has_mother', 'webcam', 'panoram'),
+            # 'description': 'Some description if needed'
         }),
         ('Главное изображение', {
            'fields': ('main_image_thumb', 'main_image')
@@ -250,5 +259,17 @@ class ObjectAdmin(TurnOffAdminLogging, admin.ModelAdmin):
     ordering = ('order',)
     autocomplete_fields = ['category']
 
-    # TODO: conditional admin fields
+    # Conditionals for fieldsets
+    # def get_fieldsets(self, request, obj=None):
+    #     if obj:
+    #         return [(None, {'fields': ('active', 'completed', 'order', 'crm_id', 'name', 'slug', 'category', 'object_type', 'building_type', 'description', 'has_military', 'has_mother', 'webcam', 'panoram')})]
+    #     return [(None, {'fields': ('active', 'completed', 'order', 'crm_id', 'name', 'slug', 'category')})]
+
+    # Conditionals for inlines
+    # def get_formsets_with_inlines(self, request, obj=None):
+    #     for inline in self.get_inline_instances(request, obj):
+    #         # hide ObjectSectionInline in the add view
+    #         if not isinstance(inline, ObjectSectionInline) or obj is not None:
+    #             yield inline.get_formset(request, obj), inline
+
 """ [ END Object ] """
