@@ -94,11 +94,11 @@
                 <div id="flat-price" class="flat-content-block--flex">
                     <div id="flat-price__per-meter" class="flat-price-block">
                         <div class="flat-price-block__name">Стоимость кв. метра</div>
-                        <div class="flat-price-block__val">54 900 руб/м<sup>2</sup></div>
+                        <div class="flat-price-block__val">{{ object.price_per_square|format_and_round_number }} руб/м<sup>2</sup></div>
                     </div>
                     <div id="flat-price__total" class="flat-price-block">
                         <div class="flat-price-block__name">Стоимость квартиры</div>
-                        <div class="flat-price-block__val">3 426 309 руб.</div>
+                        <div class="flat-price-block__val">{{ object.price_total|format_and_round_number }} руб.</div>
                     </div>
                 </div>
 
