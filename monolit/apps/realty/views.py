@@ -66,6 +66,10 @@ class ObjectSiteListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['page_title'] = 'Выбор квартир'
+
+        # Get value of single field
+        context['section_max_floor'] = ObjectSection.objects.values_list('floor_last', flat=True).get(pk=self.get_object().object_section.pk)
+
         return context
 
 

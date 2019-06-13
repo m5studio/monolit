@@ -34,7 +34,7 @@
                 <div class="flat-card__val">
                     <!-- TODO:  -->
                     <!-- 14/16 -->
-                    {% if object.floor %}{{ object.floor }}{% endif %}/ <!-- TODO: total floors -->
+                    {% if object.floor %}{{ object.floor }}{% endif %}{% if section_max_floor %}/{{ section_max_floor }}{% endif %}
                 </div>
             </div>
             <div class="flat-card__info">

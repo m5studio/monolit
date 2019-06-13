@@ -110,7 +110,12 @@
                     {% if object.floor %}
                         <div class="flat-params-block">
                             <div class="flat-params-block__name">Этаж</div>
-                            <div class="flat-params-block__val">{{ object.floor }}/{{ section_max_floor }}</div>
+                            <!-- <div class="flat-params-block__val">{{ object.floor }}{% if section_max_floor %}/{{ section_max_floor }}{% endif %}</div> -->
+                            <div class="flat-params-block__val">
+                                <span style="font-size: 1.4rem;">{{ object.floor }}</span>
+                                <span class="text-muted">{% if section_max_floor %}/{{ section_max_floor }}{% endif %}</span>
+
+                            </div>
                         </div>
                     {% endif %}
                     {% if object.site_number %}
