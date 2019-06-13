@@ -21,11 +21,13 @@ def custom_format_number(value):
 
 @register.filter(name='format_number')
 def format_number(value):
+    # if value is not None and isinstance(int):
     return custom_format_number(value)
 
 
 @register.filter(name='round_number')
 def round_number(value):
+    # if value is not None and isinstance(int):
     return round(value, 0)
 
 

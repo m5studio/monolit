@@ -22,13 +22,13 @@ class ObjectSection(models.Model):
                                                             MaxValueValidator(2100)
                                                         ],
                                                         help_text='Допустимые значения от 2019 до 2100')
-    floor_start           = models.IntegerField('Этаж Первый',
+    floor_first           = models.IntegerField('Этаж Первый',
                                                 blank=True, null=True,
                                                 validators=[
                                                     MinValueValidator(-5), MaxValueValidator(0)
                                                 ],
                                                 help_text='мин. этаж: -5')
-    floor_end             = models.IntegerField('Этаж Последний',
+    floor_last             = models.IntegerField('Этаж Последний',
                                                 blank=True, null=True,
                                                 validators=[
                                                     MinValueValidator(0), MaxValueValidator(100)

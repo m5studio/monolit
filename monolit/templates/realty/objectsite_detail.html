@@ -8,14 +8,6 @@
 
 
 {% block content %}
-    <!-- <h2>objectsite_detail.html</h2>
-
-    <h1>{% if object.rooms_qty %}{{ object.rooms_qty }} комнатная {% endif %}{{ object.get_site_type_display }} в {{ object.object.get_object_type_display }} {{ object.object.name }}</h1>
-
-    <div>
-        <h3>{{ object.crm_id }}</h3>
-    </div> -->
-
     <nav id="breadcrumbs">
         <div class="container">
             <ol class="breadcrumb">
@@ -109,36 +101,48 @@
                     <h1>{{ page_title }}</h1>
                 </div>
                 <div id="flat-params" class="flat-content-block">
-                    <div class="flat-params-block">
-                        <div class="flat-params-block__name">Комнат</div>
-                        <div class="flat-params-block__val">{{ object.rooms_qty }}</div>
-                    </div>
-                    <div class="flat-params-block">
-                        <div class="flat-params-block__name">Этаж</div>
-                        <div class="flat-params-block__val">{{ object.floor }}/17</div>
-                    </div>
-                    <div class="flat-params-block">
-                        <div class="flat-params-block__name">Номер</div>
-                        <div class="flat-params-block__val">№ {{ object.site_number }}</div>
-                    </div>
-
-                    <div class="flat-params-block">
-                        <div class="flat-params-block__name">Общая площадь</div>
-                        <div class="flat-params-block__val">{{ object.site_area|round_number }} м<sup>2</sup></div>
-                    </div>
-                    <div class="flat-params-block">
-                        <div class="flat-params-block__name">Жилая площадь</div>
-                        <div class="flat-params-block__val">{{ object.living_area|round_number }} м<sup>2</sup></div>
-                    </div>
-                    <div class="flat-params-block">
-                        <div class="flat-params-block__name">Площадь кухни</div>
-                        <div class="flat-params-block__val">{{ object.kitchen_area|round_number }} м<sup>2</sup></div>
-                    </div>
-
-                    <div class="flat-params-block">
-                        <div class="flat-params-block__name">Выстота потолка</div>
-                        <div class="flat-params-block__val">{{ object.ceiling_height }} м</div>
-                    </div>
+                    {% if object.rooms_qty %}
+                        <div class="flat-params-block">
+                            <div class="flat-params-block__name">Комнат</div>
+                            <div class="flat-params-block__val">{{ object.rooms_qty }}</div>
+                        </div>
+                    {% endif %}
+                    {% if object.floor %}
+                        <div class="flat-params-block">
+                            <div class="flat-params-block__name">Этаж</div>
+                            <div class="flat-params-block__val">{{ object.floor }}/{{ section_max_floor }}</div>
+                        </div>
+                    {% endif %}
+                    {% if object.site_number %}
+                        <div class="flat-params-block">
+                            <div class="flat-params-block__name">Номер</div>
+                            <div class="flat-params-block__val">№ {{ object.site_number }}</div>
+                        </div>
+                    {% endif %}
+                    {% if object.site_area %}
+                        <div class="flat-params-block">
+                            <div class="flat-params-block__name">Общая площадь</div>
+                            <div class="flat-params-block__val">{{ object.site_area|round_number }} м<sup>2</sup></div>
+                        </div>
+                    {% endif %}
+                    {% if object.living_area %}
+                        <div class="flat-params-block">
+                            <div class="flat-params-block__name">Жилая площадь</div>
+                            <div class="flat-params-block__val">{{ object.living_area|round_number }} м<sup>2</sup></div>
+                        </div>
+                    {% endif %}
+                    {% if object.kitchen_area %}
+                        <div class="flat-params-block">
+                            <div class="flat-params-block__name">Площадь кухни</div>
+                            <div class="flat-params-block__val">{{ object.kitchen_area|round_number }} м<sup>2</sup></div>
+                        </div>
+                    {% endif %}
+                    {% if object.ceiling_height %}
+                        <div class="flat-params-block">
+                            <div class="flat-params-block__name">Выстота потолка</div>
+                            <div class="flat-params-block__val">{{ object.ceiling_height }} м</div>
+                        </div>
+                    {% endif %}
                     {% if object.two_levels %}
                         <div class="flat-params-block">
                             <div class="flat-params-block__name">Два уровня</div>
@@ -148,13 +152,13 @@
                     {% if object.entresol %}
                         <div class="flat-params-block">
                             <div class="flat-params-block__name">Антресоль</div>
-                            <div class="flat-params-block__val">{{ object.entresol }}</div>
+                            <div class="flat-params-block__val">Есть</div>
                         </div>
                     {% endif %}
                     {% if object.wardrobe %}
                         <div class="flat-params-block">
                             <div class="flat-params-block__name">Гардеробная</div>
-                            <div class="flat-params-block__val">{{ object.wardrobe }}</div>
+                            <div class="flat-params-block__val">Есть</div>
                         </div>
                     {% endif %}
                     {% if object.finish_type %}
@@ -165,16 +169,18 @@
                     {% endif %}
                 </div>
 
-                <div id="flat-price" class="flat-content-block--flex">
-                    <div id="flat-price__per-meter" class="flat-price-block">
-                        <div class="flat-price-block__name">Стоимость кв. метра</div>
-                        <div class="flat-price-block__val">{{ object.price_per_square|format_and_round_number }} руб/м<sup>2</sup></div>
+                {% if object.price_per_square and object.price_total %}
+                    <div id="flat-price" class="flat-content-block--flex">
+                        <div id="flat-price__per-meter" class="flat-price-block">
+                            <div class="flat-price-block__name">Стоимость кв. метра</div>
+                            <div class="flat-price-block__val">{{ object.price_per_square|format_and_round_number }} руб/м<sup>2</sup></div>
+                        </div>
+                        <div id="flat-price__total" class="flat-price-block">
+                            <div class="flat-price-block__name">Стоимость квартиры</div>
+                            <div class="flat-price-block__val">{{ object.price_total|format_and_round_number }} руб.</div>
+                        </div>
                     </div>
-                    <div id="flat-price__total" class="flat-price-block">
-                        <div class="flat-price-block__name">Стоимость квартиры</div>
-                        <div class="flat-price-block__val">{{ object.price_total|format_and_round_number }} руб.</div>
-                    </div>
-                </div>
+                {% endif %}
 
                 <div id="flat-actions" class="flat-content-block--grid">
                     <div id="flat-actions__book-flat" class="flat-actions-block">

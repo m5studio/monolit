@@ -9,6 +9,7 @@ from apps.realty.models.object_file import ObjectFile
 from apps.realty.models.object_gallery import ObjectGallery, ObjectGalleryImage
 from apps.realty.models.object_document import ObjectDocument
 from apps.realty.models.object_video import ObjectVideo
+from apps.realty.models.object_section import ObjectSection
 
 from apps.news.models import News
 
@@ -75,14 +76,18 @@ class ObjectSiteDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['page_title'] = '{rooms_qty} {site_type} №{site_number} в {object_type} «{object_name}»'.format(rooms_qty=self.get_object().get_rooms_qty_display(),
-                                                                 site_type=self.get_object().get_site_type_display(),
-                                                                 site_number=self.get_object().site_number,
-                                                                 object_type=self.get_object().object.get_object_type_display(),
-                                                                 object_name=self.get_object().object.name)
+                                                                                                        site_type=self.get_object().get_site_type_display(),
+                                                                                                        site_number=self.get_object().site_number,
+                                                                                                        object_type=self.get_object().object.get_object_type_display(),
+                                                                                                        object_name=self.get_object().object.name)
         # TODO: make more complicated and detailed query selection
         other_flats_query = ObjectSite.objects.filter(active=True, object=self.get_object().object.pk, rooms_qty=self.get_object().rooms_qty).exclude(id=self.get_object().pk)
         context['simular_flats'] = other_flats_query.order_by('?')[:3]
         context['simular_flats_count'] = other_flats_query.count()
+
+        # Get value of single field
+        context['section_max_floor'] = ObjectSection.objects.values_list('floor_last', flat=True).get(pk=self.get_object().object_section.pk)
+
         return context
 
 
