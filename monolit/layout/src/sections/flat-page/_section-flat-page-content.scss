@@ -157,6 +157,19 @@
             border-bottom: 1px solid #e1e1e1;
             margin-top: 60px;
 
+            display: grid;
+            grid-row-gap: 30px;
+            align-items: center;
+            grid-template-columns: repeat(3, 1fr);
+
+            @include media-breakpoint-down(sm) {
+                grid-column-gap: 15px;
+            }
+            @include media-breakpoint-down(xs) {
+                grid-row-gap: 15px;
+                grid-template-columns: repeat(2, 1fr);
+            }
+
             .flat-params-block {
                 text-align: center;
 
@@ -167,7 +180,12 @@
 
                 &__name {
                     color: #a6a6a6;
+                    line-height: 1.2;
                     margin-bottom: 7px;
+
+                    // @include media-breakpoint-only(sm) {
+                    //     font-size: .9rem;
+                    // }
                 }
 
                 &__val {

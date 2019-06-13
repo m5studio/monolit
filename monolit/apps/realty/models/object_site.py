@@ -69,7 +69,7 @@ class ObjectSite(models.Model):
     site_area               = models.DecimalField('Площадь помещения', max_digits=10, decimal_places=2, blank=True, null=True)
     living_area             = models.DecimalField('Жилая площадь', max_digits=10, decimal_places=2, blank=True, null=True)
     kitchen_area            = models.DecimalField('Площадь кухни', max_digits=10, decimal_places=2, blank=True, null=True)
-    ceiling_height          = models.DecimalField('Высота потолков (м)', max_digits=10, decimal_places=2, blank=True, null=True, help_text='Пример: 2.30 = 2 метра 30 см')
+    ceiling_height          = models.DecimalField('Высота потолка (м)', max_digits=10, decimal_places=2, blank=True, null=True, help_text='Пример: 2.30 = 2 метра 30 см')
 
     two_levels              = models.BooleanField('Двухуровневая квартира', default=False, help_text='Квартира с полноценным 2-м этажом')
     entresol                = models.BooleanField('Антресоль', default=False, help_text='Наличие в квартире этажа-антресоли')

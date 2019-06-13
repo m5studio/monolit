@@ -79,6 +79,10 @@ class ObjectSiteDetailView(DetailView):
                                                                  site_number=self.get_object().site_number,
                                                                  object_type=self.get_object().object.get_object_type_display(),
                                                                  object_name=self.get_object().object.name)
+        # TODO: make more complicated and detailed query selection
+        other_flats_query = ObjectSite.objects.filter(active=True, object=self.get_object().object.pk, rooms_qty=self.get_object().rooms_qty).exclude(id=self.get_object().pk)
+        context['simular_flats'] = other_flats_query.order_by('?')[:3]
+        context['simular_flats_count'] = other_flats_query.count()
         return context
 
 
