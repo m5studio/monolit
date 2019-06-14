@@ -13,7 +13,7 @@ class ObjectBathroom(models.Model):
     bathroom_qty  = models.PositiveIntegerField('Количество санузлов', default=1, blank=True, null=True)
 
     def __str__(self):
-        return self.bathroom_type
+        return self.get_bathroom_type_display()
 
     class Meta:
         verbose_name = 'Санузел'

@@ -116,74 +116,101 @@
                             </div>
                         </div>
                     {% endif %}
-                    {% if object.site_number %}
-                        <div class="flat-params-block">
-                            <div class="flat-params-block__name">Номер</div>
-                            <div class="flat-params-block__val">№ {{ object.site_number }}</div>
-                        </div>
-                    {% endif %}
-                    {% if object.site_area %}
-                        <div class="flat-params-block">
-                            <div class="flat-params-block__name">Общая площадь</div>
-                            <div class="flat-params-block__val">{{ object.site_area|round_number }} м<sup>2</sup></div>
-                        </div>
-                    {% endif %}
-                    {% if object.living_area %}
-                        <div class="flat-params-block">
-                            <div class="flat-params-block__name">Жилая площадь</div>
-                            <div class="flat-params-block__val">{{ object.living_area|round_number }} м<sup>2</sup></div>
-                        </div>
-                    {% endif %}
-                    {% if object.kitchen_area %}
-                        <div class="flat-params-block">
-                            <div class="flat-params-block__name">Площадь кухни</div>
-                            <div class="flat-params-block__val">{{ object.kitchen_area|round_number }} м<sup>2</sup></div>
-                        </div>
-                    {% endif %}
                     {% if object.ceiling_height %}
                         <div class="flat-params-block">
                             <div class="flat-params-block__name">Выстота потолка</div>
                             <div class="flat-params-block__val">{{ object.ceiling_height }} м</div>
                         </div>
                     {% endif %}
-                    {% if object.two_levels %}
+                    {% if object.site_area %}
                         <div class="flat-params-block">
-                            <div class="flat-params-block__name">Два уровня</div>
-                            <div class="flat-params-block__val">Да</div>
+                            <div class="flat-params-block__name">Общая площадь</div>
+                            <div class="flat-params-block__val">{{ object.site_area }} м<sup>2</sup></div>
                         </div>
                     {% endif %}
-                    {% if object.entresol %}
+                    {% if object.living_area %}
                         <div class="flat-params-block">
-                            <div class="flat-params-block__name">Антресоль</div>
-                            <div class="flat-params-block__val">Есть</div>
+                            <div class="flat-params-block__name">Жилая площадь</div>
+                            <div class="flat-params-block__val">{{ object.living_area }} м<sup>2</sup></div>
                         </div>
                     {% endif %}
-                    {% if object.wardrobe %}
+                    {% if object.kitchen_area %}
                         <div class="flat-params-block">
-                            <div class="flat-params-block__name">Гардеробная</div>
-                            <div class="flat-params-block__val">Есть</div>
+                            <div class="flat-params-block__name">Площадь кухни</div>
+                            <div class="flat-params-block__val">{{ object.kitchen_area }} м<sup>2</sup></div>
                         </div>
                     {% endif %}
-                    {% if object.finish_type %}
-                        <div class="flat-params-block">
-                            <div class="flat-params-block__name">Отделка</div>
-                            <div class="flat-params-block__val">{{ object.get_finish_type_display }}</div>
-                        </div>
-                    {% endif %}
-                    {% if object.window_view %}
-                        <div class="flat-params-block">
-                            <div class="flat-params-block__name">Вид</div>
-                            <div class="flat-params-block__val--normal">{{ object.window_view.all|join:', ' }}</div>
-                        </div>
-                    {% endif %}
+                </div>
 
-                    <div class="flat-params-block">
-                        <div class="flat-params-block__name">Санузел</div>
-                        <div class="flat-params-block__val--normal"></div>
-                    </div>
-                    <div class="flat-params-block">
-                        <div class="flat-params-block__name">Балкон</div>
-                        <div class="flat-params-block__val--normal"></div>
+                <div id="flat-params-secondary" class="flat-content-block">
+                    <div class="h4">Доп информация</div>
+                    <div id="flat-params-secondary__inner">
+                        {% if object.site_number %}
+                            <div class="flat-params-block">
+                                <div class="flat-params-block__name">Номер</div>
+                                <div class="flat-params-block__val">{{ object.site_number }}</div>
+                            </div>
+                        {% endif %}
+                        {% if object.two_levels %}
+                            <div class="flat-params-block">
+                                <div class="flat-params-block__name">Два уровня</div>
+                                <div class="flat-params-block__val">Да</div>
+                            </div>
+                        {% endif %}
+                        {% if object.entresol %}
+                            <div class="flat-params-block">
+                                <div class="flat-params-block__name">Антресоль</div>
+                                <div class="flat-params-block__val">Есть</div>
+                            </div>
+                        {% endif %}
+                        {% if object.wardrobe %}
+                            <div class="flat-params-block">
+                                <div class="flat-params-block__name">Гардеробная</div>
+                                <div class="flat-params-block__val">Есть</div>
+                            </div>
+                        {% endif %}
+                        {% if object.finish_type %}
+                            <div class="flat-params-block">
+                                <div class="flat-params-block__name">Отделка</div>
+                                <div class="flat-params-block__val">{{ object.get_finish_type_display }}</div>
+                            </div>
+                        {% endif %}
+                        {% if object.window_view %}
+                            <div class="flat-params-block">
+                                <div class="flat-params-block__name">Вид</div>
+                                <div class="flat-params-block__val">{{ object.window_view.all|join:', ' }}</div>
+                            </div>
+                        {% endif %}
+                        {% if bathrooms %}
+                            <div class="flat-params-block">
+                                <div class="flat-params-block__name">Санузел</div>
+                                <div class="flat-params-block__val">
+                                    {% for bath in bathrooms %}
+                                        {{ bath.bathroom_qty }} {{ bath.get_bathroom_type_display }}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% if balconies %}
+                            <div class="flat-params-block">
+                                <div class="flat-params-block__name">Балкон</div>
+                                <div class="flat-params-block__val">
+                                    {% for balcony in balconies %}
+                                        {{ balcony.balcony_qty }} {{ balcony.get_balcony_type_display }}<br>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% if elevators %}
+                            <div class="flat-params-block">
+                                <div class="flat-params-block__name">Лифт</div>
+                                <div class="flat-params-block__val">
+                                    {% for elevator in elevators %}
+                                        {{ elevator.elevator_qty }} {{ elevator.get_elevator_type_display }}<br>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
 

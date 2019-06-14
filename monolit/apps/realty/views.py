@@ -12,6 +12,10 @@ from apps.realty.models.object_video import ObjectVideo
 
 from apps.news.models import News
 
+from apps.realty.models.object_site_bathroom import ObjectBathroom
+from apps.realty.models.object_site_balcony import ObjectBalcony
+from apps.realty.models.object_elevator import ObjectElevator
+
 
 class ObjectListView(ListView):
     model = Object
@@ -83,6 +87,10 @@ class ObjectSiteDetailView(DetailView):
         other_flats_query = ObjectSite.objects.filter(active=True, object=self.get_object().object.pk, rooms_qty=self.get_object().rooms_qty).exclude(id=self.get_object().pk)
         context['simular_flats'] = other_flats_query.order_by('?')[:3]
         context['simular_flats_count'] = other_flats_query.count()
+
+        context['bathrooms'] = ObjectBathroom.objects.filter(object_site=self.get_object().pk)
+        context['balconies'] = ObjectBalcony.objects.filter(object_site=self.get_object().pk)
+        context['elevators'] = ObjectElevator.objects.filter(object_section=self.get_object().object_section.pk)
 
         return context
 

@@ -17,7 +17,7 @@ class ObjectBalcony(models.Model):
     balcony_qty  = models.PositiveIntegerField('Количество балконов', default=1, blank=True, null=True)
 
     def __str__(self):
-        return self.balcony_type
+        return self.get_balcony_type_display()
 
     class Meta:
         verbose_name = 'Балкон'
