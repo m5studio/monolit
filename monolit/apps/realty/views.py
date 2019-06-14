@@ -9,7 +9,6 @@ from apps.realty.models.object_file import ObjectFile
 from apps.realty.models.object_gallery import ObjectGallery, ObjectGalleryImage
 from apps.realty.models.object_document import ObjectDocument
 from apps.realty.models.object_video import ObjectVideo
-from apps.realty.models.object_section import ObjectSection
 
 from apps.news.models import News
 
@@ -66,10 +65,6 @@ class ObjectSiteListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['page_title'] = 'Выбор квартир'
-
-        # Get value of single field
-        context['section_max_floor'] = ObjectSection.objects.values_list('floor_last', flat=True).get(pk=self.get_object().object_section.pk)
-
         return context
 
 
@@ -88,9 +83,6 @@ class ObjectSiteDetailView(DetailView):
         other_flats_query = ObjectSite.objects.filter(active=True, object=self.get_object().object.pk, rooms_qty=self.get_object().rooms_qty).exclude(id=self.get_object().pk)
         context['simular_flats'] = other_flats_query.order_by('?')[:3]
         context['simular_flats_count'] = other_flats_query.count()
-
-        # Get value of single field
-        context['section_max_floor'] = ObjectSection.objects.values_list('floor_last', flat=True).get(pk=self.get_object().object_section.pk)
 
         return context
 

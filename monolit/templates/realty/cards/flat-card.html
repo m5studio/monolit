@@ -23,7 +23,7 @@
                 <div class="flat-card__heading">{% if object.object.object_type %}{{ object.object.get_object_type_display }}{% endif %}</div>
                 <div class="flat-card__object-name">{% if object.object.name %}{{ object.object.name }}{% endif %}</div>
             </div>
-    </div>
+        </div>
         <div class="flat-card__footer--middle">
             <div class="flat-card__info">
                 <div class="flat-card__heading">{% if object.rooms_qty %}{{ object.get_rooms_qty_display }}{% endif %}</div>
@@ -32,17 +32,17 @@
             <div class="flat-card__info">
                 <div class="flat-card__heading">Этаж</div>
                 <div class="flat-card__val">
-                    <!-- TODO:  -->
-                    <!-- 14/16 -->
-                    {% if object.floor %}{{ object.floor }}{% endif %}{% if section_max_floor %}/{{ section_max_floor }}{% endif %}
+                    {% if object.floor %}
+                        <span class="flat-floor">{{ object.floor }}</span>
+                    {% endif %}
+                    {% if object.object_section.floor_last %}
+                        <span class="last-floor">/{{ object.object_section.floor_last }}</span>
+                    {% endif %}
                 </div>
             </div>
             <div class="flat-card__info">
                 <div class="flat-card__heading">Секция</div>
-                <div class="flat-card__val">
-                    <!-- TODO:  -->
-                    <!-- 1 -->
-                </div>
+                <div class="flat-card__val">{{ object.object_section.number }}</div>
             </div>
         </div>
         <div class="flat-card__footer--bottom">

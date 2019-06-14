@@ -48,8 +48,8 @@ class ObjectSite(models.Model):
 
     FINISHING_TYPES = (
         ('0', 'Без отделки'),
-        ('1', 'Черновая отделка'),
-        ('1', 'Чистовая отделка'),
+        ('1', 'Черновая'),
+        ('2', 'Чистовая'),
     )
 
     active                  = models.BooleanField('Активный', default=True, help_text='Опубликован на сайте')

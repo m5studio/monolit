@@ -106,6 +106,15 @@
     &__val {
         font-size: 1.15rem;
         line-height: 1.1;
+
+        .flat-floor {
+            font-size: 1.3rem;
+        }
+
+        .last-floor {
+            font-size: .9rem;
+            opacity: .5;
+        }
     }
 
     &__object-name {

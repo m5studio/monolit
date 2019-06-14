@@ -10,7 +10,8 @@ from apps.realty.models.object_block import ObjectBlock
 class ObjectSection(models.Model):
     object                = models.ForeignKey(Object, verbose_name='Объект', on_delete=models.CASCADE)
     object_block          = models.ForeignKey(ObjectBlock, verbose_name='Блок Объекта', on_delete=models.CASCADE, default=0, blank=True, null=True)
-    name                  = models.CharField('Номер секции или её название', max_length=255)
+    number                = models.PositiveIntegerField('Номер секции', help_text='Номер секции числом')
+    name                  = models.CharField('Название секции', max_length=255, help_text='Название секции и её номер. Например: Секция 1')
     genplan_svg           = models.TextField('SVG координары выделения секции на Генплане',
                                              blank=True, null=True,
                                              help_text='Выеделение с помощью SVG координат секции на Генплане')

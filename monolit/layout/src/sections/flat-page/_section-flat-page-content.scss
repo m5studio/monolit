@@ -150,6 +150,7 @@
         #flat-id {
             color: #a6a6a6;
             margin-bottom: 10px;
+            text-align: right;
         }
 
         #flat-params {
@@ -182,10 +183,6 @@
                     color: #a6a6a6;
                     line-height: 1.2;
                     margin-bottom: 7px;
-
-                    // @include media-breakpoint-only(sm) {
-                    //     font-size: .9rem;
-                    // }
                 }
 
                 &__val {
@@ -195,6 +192,18 @@
                     @include media-breakpoint-down(xs) {
                         font-size: 1.5rem;
                     }
+
+                    &--normal {
+                        font-size: 1rem;
+                        font-weight: 500;
+                    }
+                }
+
+                // .flat-floor {}
+
+                .last-floor {
+                    font-size: 1rem;
+                    opacity: .5;
                 }
             }
         }
@@ -273,6 +282,7 @@
                         justify-content: flex-end;
                     }
                 }
+
                 .icon {
                     margin-right: 10px;
                 }
