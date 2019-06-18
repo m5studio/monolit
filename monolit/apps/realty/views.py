@@ -24,6 +24,9 @@ class ObjectListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['page_title'] = 'Объекты'
+        context['objects_qty'] = Object.objects.filter(active=True).count()
+        # TODO: write correct query
+        context['object_sites_qty'] = ObjectSite.objects.filter(active=True, object=2)
         return context
 
 
