@@ -26,7 +26,11 @@ import '@fancyapps/fancybox'
 
 
 $(document).ready(function() {
+
     toggleMainNav()
+
+    // TODO: check this
+    stickyMainNav()
 
     // Homepage
     if ( $('#section-realty-homepage-filters').length ) {
