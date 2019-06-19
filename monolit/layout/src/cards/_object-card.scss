@@ -103,7 +103,7 @@
             z-index: 1;
         }
     }
-    
+
     &__put-into-operation {
         background-color: #0baca2;
         color: white;
@@ -368,6 +368,9 @@
             }
             &:nth-child(5) {
                 transition-delay: .20s;
+            }
+            &:nth-child(6) {
+                transition-delay: .25s;
             }
         }
     }

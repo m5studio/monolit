@@ -16,6 +16,8 @@ from apps.realty.models.object_site_bathroom import ObjectBathroom
 from apps.realty.models.object_site_balcony import ObjectBalcony
 from apps.realty.models.object_elevator import ObjectElevator
 
+from django.db.models import Q
+
 
 class ObjectListView(ListView):
     model = Object
@@ -25,8 +27,11 @@ class ObjectListView(ListView):
         context = super().get_context_data(**kwargs)
         context['page_title'] = 'Объекты'
         context['objects_qty'] = Object.objects.filter(active=True).count()
+
         # TODO: write correct query
-        context['object_sites_qty'] = ObjectSite.objects.filter(active=True, object=2)
+        # context['object_sites_qty'] = ObjectSite.objects.filter( Q(object_id=2) )
+        context['object_sites_qty'] = ObjectSite.objects.filter( Q(object_id=2) )
+
         return context
 
 

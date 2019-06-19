@@ -11,8 +11,7 @@
             justify-content: space-between;
         }
 
-        h2,
-        .h2 {
+        h2, .h2 {
             font-size: 2.4rem;
             font-weight: 700;
             margin: 0;
@@ -30,6 +29,7 @@
 
         a {
             color: #00998f;
+            display: inline-block;
             font-size: 1.2rem;
             font-weight: 400;
             line-height: 1.2;
@@ -42,5 +42,5 @@
         }
     }
 
-    &__inner {}
+    // &__inner {}
 }
