@@ -16,8 +16,6 @@ from apps.realty.models.object_site_bathroom import ObjectBathroom
 from apps.realty.models.object_site_balcony import ObjectBalcony
 from apps.realty.models.object_elevator import ObjectElevator
 
-from django.db.models import Q
-
 
 class ObjectListView(ListView):
     model = Object
@@ -27,11 +25,6 @@ class ObjectListView(ListView):
         context = super().get_context_data(**kwargs)
         context['page_title'] = 'Объекты'
         context['objects_qty'] = Object.objects.filter(active=True).count()
-
-        # TODO: write correct query
-        # context['object_sites_qty'] = ObjectSite.objects.filter( Q(object_id=2) )
-        context['object_sites_qty'] = ObjectSite.objects.filter( Q(object_id=2) )
-
         return context
 
 
@@ -103,11 +96,33 @@ class ObjectSiteDetailView(DetailView):
         return context
 
 
-# Object gallery in json format
-def object_gallery(request, gallery_id):
-    gallery_images = ObjectGalleryImage.objects.filter(gallery=gallery_id).values('image',)
+# Object gallery JSON
+def json_object_gallery(request, gallery_id):
+    gallery_images = ObjectGalleryImage.objects.filter(gallery=gallery_id).values('image')
     gallery_images = list(gallery_images)
     return JsonResponse(gallery_images, safe=False)
+
+
+# ObjectSite info JSON
+def json_object_sites_info(request, object_id):
+    # sites = ObjectSite.objects.filter(active=True, object=object_id).values('site_type', 'floor', 'price_per_square', 'site_area')
+    sites = ObjectSite.objects.filter(active=True, object=object_id)
+    # sites = list(sites)
+
+    from django.db.models import Min, Max
+
+    sites_total = sites.count()
+    min_site_area = sites.aggregate(Min('site_area'))
+    max_site_area = sites.aggregate(Max('site_area'))
+
+    sites_info = list()
+
+    sites_info = {'sites_info': [{
+                                    'sites_total': sites_total,
+                                    'min_site_area': min_site_area,
+                                    'max_site_area': max_site_area,
+                                }]}
+    return JsonResponse(sites_info, safe=False)
 
 
 # def requestAjax(request, object_id):
