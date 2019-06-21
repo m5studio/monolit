@@ -28,7 +28,6 @@ class ObjectSiteQuerySet(models.QuerySet):
 
     def get_all_active_sites_object(self, object_id):
         return self.active().filter(object=object_id)
-    # ObjectSite.objects.filter(active=True, object=object_id)
 
 def image_upload_path(instance, filename):
     object_crm_id = instance.object.crm_id
