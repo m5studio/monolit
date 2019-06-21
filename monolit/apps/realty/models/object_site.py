@@ -22,6 +22,14 @@ class ObjectSiteWindowsView(models.Model):
         return self.name
 
 
+class ObjectSiteQuerySet(models.QuerySet):
+    def active(self):
+        return self.filter(active=True)
+
+    def get_all_active_sites_object(self, object_id):
+        return self.active().filter(object=object_id)
+    # ObjectSite.objects.filter(active=True, object=object_id)
+
 def image_upload_path(instance, filename):
     object_crm_id = instance.object.crm_id
     site_crm_id = instance.crm_id
@@ -50,6 +58,9 @@ class ObjectSite(models.Model):
         ('1', 'Черновая'),
         ('2', 'Чистовая'),
     )
+
+    # QuerySet
+    objects = ObjectSiteQuerySet.as_manager()
 
     active                  = models.BooleanField('Активный', default=True, help_text='Опубликован на сайте')
     special_offer           = models.BooleanField('Спецпредложение', default=False)

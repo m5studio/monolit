@@ -1,3 +1,5 @@
+from django.db.models import Count, Min, Max
+
 from django.http import JsonResponse
 from django.views.generic import ListView, DetailView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -105,23 +107,33 @@ def json_object_gallery(request, gallery_id):
 
 # ObjectSite info JSON
 def json_object_sites_info(request, object_id):
-    # sites = ObjectSite.objects.filter(active=True, object=object_id).values('site_type', 'floor', 'price_per_square', 'site_area')
-    sites = ObjectSite.objects.filter(active=True, object=object_id)
-    # sites = list(sites)
 
-    from django.db.models import Min, Max
+    # TODO: move all this stuff to object_site model QuerySet
+    # sites = ObjectSite.objects.filter(active=True, object=object_id)
+    sites = ObjectSite.objects.get_all_active_sites_object(object_id)
 
-    sites_total = sites.count()
-    min_site_area = sites.aggregate(Min('site_area'))
-    max_site_area = sites.aggregate(Max('site_area'))
+    sites_total     = sites.aggregate(sites_total=Count('id'))
+    min_site_area   = sites.aggregate(min_site_area=Min('site_area'))
+    max_site_area   = sites.aggregate(max_site_area=Max('site_area'))
+    min_price_total = sites.aggregate(min_price_total=Min('price_total'))
+
+    get_site_flats = sites.filter(site_type='flat')
+
+    # studio_room_flats_qty = get_site_flats.filter(rooms_qty=0).values('id')
+    studio_room_flats = get_site_flats.filter(rooms_qty=0).aggregate(studio_room_flats_qty=Count('id'),
+                                                                     min_price=Min('price_total'))
+    one_room_flats    = get_site_flats.filter(rooms_qty=1).aggregate(one_room_flats_qty=Count('id'))
+    two_room_flats    = get_site_flats.filter(rooms_qty=2).aggregate(one_room_flats_qty=Count('id'))
+    three_room_flats  = get_site_flats.filter(rooms_qty=3).aggregate(one_room_flats_qty=Count('id'))
+    four_room_flats   = get_site_flats.filter(rooms_qty=4).aggregate(one_room_flats_qty=Count('id'))
+
+    flats_info = list()
+    flats_info.extend([studio_room_flats, one_room_flats, two_room_flats, three_room_flats, four_room_flats])
 
     sites_info = list()
+    sites_info.extend([sites_total, min_site_area, max_site_area, min_price_total, {'flats': flats_info}])
+    # sites_info.extend([sites_total, min_site_area, max_site_area, min_price_total])
 
-    sites_info = {'sites_info': [{
-                                    'sites_total': sites_total,
-                                    'min_site_area': min_site_area,
-                                    'max_site_area': max_site_area,
-                                }]}
     return JsonResponse(sites_info, safe=False)
 
 
