@@ -107,32 +107,18 @@ def json_object_gallery(request, gallery_id):
 
 # ObjectSite info JSON
 def json_object_sites_info(request, object_id):
+    object_sites = ObjectSite.objects
 
-    # TODO: move all this stuff to object_site model QuerySet
-    # sites = ObjectSite.objects.filter(active=True, object=object_id)
-    sites = ObjectSite.objects.get_all_active_sites_object(object_id)
+    object_sites_info = object_sites.object_sites_info_aggregated(object_id)
 
-    sites_total     = sites.aggregate(sites_total=Count('id'))
-    min_site_area   = sites.aggregate(min_site_area=Min('site_area'))
-    max_site_area   = sites.aggregate(max_site_area=Max('site_area'))
-    min_price_total = sites.aggregate(min_price_total=Min('price_total'))
-
-    get_site_flats = sites.filter(site_type='flat')
-
-    # studio_room_flats_qty = get_site_flats.filter(rooms_qty=0).values('id')
-    studio_room_flats = get_site_flats.filter(rooms_qty=0).aggregate(studio_room_flats_qty=Count('id'),
-                                                                     min_price=Min('price_total'))
-    one_room_flats    = get_site_flats.filter(rooms_qty=1).aggregate(one_room_flats_qty=Count('id'))
-    two_room_flats    = get_site_flats.filter(rooms_qty=2).aggregate(one_room_flats_qty=Count('id'))
-    three_room_flats  = get_site_flats.filter(rooms_qty=3).aggregate(one_room_flats_qty=Count('id'))
-    four_room_flats   = get_site_flats.filter(rooms_qty=4).aggregate(one_room_flats_qty=Count('id'))
-
-    flats_info = list()
-    flats_info.extend([studio_room_flats, one_room_flats, two_room_flats, three_room_flats, four_room_flats])
+    room_0 = object_sites.flats_info_aggregated(object_id, 0)
+    room_1 = object_sites.flats_info_aggregated(object_id, 1)
+    room_2 = object_sites.flats_info_aggregated(object_id, 2)
+    room_3 = object_sites.flats_info_aggregated(object_id, 3)
+    room_4 = object_sites.flats_info_aggregated(object_id, 4)
 
     sites_info = list()
-    sites_info.extend([sites_total, min_site_area, max_site_area, min_price_total, {'flats': flats_info}])
-    # sites_info.extend([sites_total, min_site_area, max_site_area, min_price_total])
+    sites_info.extend([object_sites_info, {'flats_info': [room_0, room_1, room_2, room_3, room_4]}])
 
     return JsonResponse(sites_info, safe=False)
 
