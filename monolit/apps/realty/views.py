@@ -118,7 +118,14 @@ def json_object_sites_info(request, object_id):
     room_4 = object_sites.flats_info_aggregated(object_id, 4)
 
     sites_info = list()
-    sites_info.extend([object_sites_info, {'flats_info': [room_0, room_1, room_2, room_3, room_4]}])
+    sites_info.extend([object_sites_info,
+                        {'flats_info': [
+                                {'studio': room_0},
+                                {'room_1': room_1},
+                                {'room_2': room_2},
+                                {'room_3': room_3},
+                                {'room_4': room_4}]
+                        }])
 
     return JsonResponse(sites_info, safe=False)
 

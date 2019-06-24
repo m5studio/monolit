@@ -36,15 +36,18 @@ class ObjectSiteQuerySet(models.QuerySet):
 
     def object_sites_info_aggregated(self, object_id):
         return self.aggregate(
-            sites_min_price=Min('price_total'),
+            object_min_site_area=Min('site_area'),
+            object_max_site_area=Max('site_area'),
+            object_min_site_price=Min('price_total'),
         )
 
     def flats_info_aggregated(self, object_id, rooms_qty: int):
         flats = self.get_flats_and_apartments(object_id) & Q(rooms_qty=rooms_qty)
-        return self.aggregate(
-            min_area=Min('site_area', filter=flats),
-            max_area=Max('site_area', filter=flats),
-        )
+        if self.filter(active=True, object=object_id, rooms_qty=rooms_qty).count() > 0:
+            return self.aggregate(
+                min_area=Min('site_area', filter=flats),
+                max_area=Max('site_area', filter=flats),
+            )
 
 
 def image_upload_path(instance, filename):
