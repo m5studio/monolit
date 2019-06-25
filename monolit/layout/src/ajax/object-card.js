@@ -1,10 +1,3 @@
-function thousands_separator(num) {
-    let num_parts = num.toString().split(".")
-    // num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-    num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ")
-    return num_parts.join(".")
-}
-
 function objectCardSitesInfo() {
     $('.object-card').each((index, el) => {
         let site_info_url = $(el).data('sites-info-url')
@@ -17,7 +10,6 @@ function objectCardSitesInfo() {
                 // let site_price = parseInt(val['object_min_site_price'], 10)
                 // let site_price = parseInt(val['object_min_site_price'], 10).toString()
                 // let site_price = parseFloat(val['object_min_site_price'], 1).toString()
-                // $(el).find('.oc-min-price').append( thousands_separator(site_price) )
                 // $(el).find('.oc-min-price').append( site_price.replace(/\B(?=(\d{3})+(?!\d))/g, " ") )
                 // $(el).find('.oc-min-price').append( site_price.replace(/\B(?=(\d{3})+(?!\d))/g, " ").replace('NaN','') )
 
