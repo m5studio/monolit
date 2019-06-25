@@ -20,6 +20,7 @@ import {scrollToTop} from "./modules/scroll-to-top/scroll-to-top"
 import {newsPageLoadMoreNews} from "./ajax/news-page-load-more-news"
 import {objectPageGalleries} from "./ajax/object-page-galleries"
 import {objectPageDocsPagination} from "./ajax/object-page-documents-pagination"
+import {objectCardSitesInfo} from "./ajax/object-card"
 
 // Fancybox https://fancyapps.com/fancybox/3/
 import '@fancyapps/fancybox'
@@ -62,6 +63,12 @@ $(document).ready(function() {
         newsPageLoadMoreNews()
     }
     // END News page Load more news...
+
+    // Get object-card sites info
+    if ( $('.object-card').length ) {
+        objectCardSitesInfo()
+    }
+    // END Get object-card sites info
 })
 
 
