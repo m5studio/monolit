@@ -12,7 +12,6 @@ function objectCardSitesInfo() {
                 // let site_price = parseFloat(val['object_min_site_price'], 1).toString()
                 // $(el).find('.oc-min-price').append( site_price.replace(/\B(?=(\d{3})+(?!\d))/g, " ") )
                 // $(el).find('.oc-min-price').append( site_price.replace(/\B(?=(\d{3})+(?!\d))/g, " ").replace('NaN','') )
-
                 $(el).find('.oc-min-price').append( site_price )
             })
         })
