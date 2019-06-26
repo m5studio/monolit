@@ -61,7 +61,6 @@
                 <a href="{{ object.get_absolute_url }}">{% if object.object_type %}{{ object.get_object_type_display }} {% endif %}{{ object.name }}</a>
             </div>
             <div class="object-card__flat">
-                <!-- <a href="#" class="object-card__flat--count">30 квартир</a> -->
                 <a href="#" class="object-card__flat--count"><span class="oc-total-flats-qty"></span> квартир</a>
                 <div class="object-card__flat-types">
                     <a href="" class="object-card__flat-types-item">Ст</a>
@@ -75,11 +74,11 @@
         <div class="object-card__features">
             <div class="object-card__features--block">
                 <div class="object-card__features--name">Площадь</div>
-                <div class="object-card__features--value">от 62.0 до 62.4 м<sup>2</sup></div>
+                <!-- <div class="object-card__features--value">от 62.0 до 62.4 м<sup>2</sup></div> -->
+                <div class="object-card__features--value">от <span class="oc-flats-area-min"></span> до <span class="oc-flats-area-max"></span> м<sup>2</sup></div>
             </div>
             <div class="object-card__features--block">
                 <div class="object-card__features--name">Стоимость</div>
-                <!-- <div class="object-card__features--value">от 3 402 702 руб.</div> -->
                 <div class="object-card__features--value">от <span class="oc-min-price"></span> руб.</div>
             </div>
         </div>
