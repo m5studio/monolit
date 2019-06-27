@@ -15,7 +15,7 @@ function objectCardSitesInfo() {
         $.getJSON(site_info_url, (data) => {
             $.each(data, (index, val) => {
                 if ( val['object_total_sites_qty'] === 0 ) {
-                    $(el).addClass('nothing')
+                    $(el).addClass('sold')
                     $(el).find('.object-card__features').html('нет в продаже')
                 }
 
