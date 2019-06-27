@@ -14,34 +14,19 @@ function objectCardSitesInfo() {
 
         $.getJSON(site_info_url, (data) => {
             $.each(data, (index, val) => {
+                // Нет в продаже
                 if ( val['object_total_sites_qty'] === 0 ) {
                     $(el).addClass('sold')
                     $(el).find('.object-card__features').html('нет в продаже')
                 }
 
+                // Кол-во квартир
                 if ( val['object_total_sites_qty'] > 0 ) {
-                    // let flats_qty_text = () => {
-                    //     if ( val['object_total_sites_qty'] === 1) {
-                    //         return val['object_total_sites_qty'] + ' квартира'
-                    //     } else if ( val['object_total_sites_qty'] > 1 && val['object_total_sites_qty'] < 5 ) {
-                    //         return val['object_total_sites_qty'] + ' квартиры'
-                    //     } else {
-                    //         return val['object_total_sites_qty'] + ' квартир'
-                    //     }
-                    // }
-
-                    // $(el).find('.oc-flats-total-qty').text( flats_qty_text() )
-
                     $(el).find('.object-card__flat--count').append(
                         '<a href="">' +
                             '<span class="oc-flats-total-qty">' + val['object_total_sites_qty'] + ' квартир</span>' +
                         '</a>'
                     )
-
-                    // $(el).find('.object-card__footer').append(
-                    //     '<a href="" class="object-card__footer-btn object-card__footer-btn--dark object-card__footer-btn--choose-flat">Выбрать квартиру</a>'
-                    // )
-                }
 
                 // Площадь от - до
                 if ( val['object_min_site_area'] && val['object_max_site_area'] ) {
