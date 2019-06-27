@@ -1,6 +1,10 @@
 .object-card {
     background-color: white;
     box-shadow: 0 4px 4px rgba(0,0,0,.15);
+
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+
     min-height: 450px;
 
     @include media-breakpoint-down(sm) {
@@ -163,7 +167,7 @@
         color: white;
 
         display: grid;
-        grid-template-columns: 25px 1fr 1fr 25px;
+        grid-template-columns: 25px 1fr auto 25px;
         grid-column-gap: 10px;
         align-items: center;
 
@@ -210,19 +214,24 @@
     }
 
     // Main
-    &__main {}
+    &__main {
+        display: grid;
+        grid-template-rows: 1fr auto;
+    }
 
     &__info {
-        height: 115px;
-        padding-top: 10px;
-        padding-left: 15px;
+        display: grid;
+        grid-template-rows: repeat(2, 1fr);
+        grid-row-gap: 15px;
+
+        height: 120px;
+        padding: 10px 15px;
     }
 
     &__title {
         font-size: 1.3rem;
         font-weight: 700;
         line-height: 1.2;
-        margin-bottom: 15px;
 
         @include media-breakpoint-only(lg) {
             font-size: 1.2rem;
@@ -235,15 +244,18 @@
 
     &__flat {
         display: flex;
-    }
+        align-items: center;
 
-    &__flat--count {
-        color: #0baca2;
-        font-weight: 900;
-        margin-right: 20px;
+        &--count {
+            a {
+                color: #0baca2;
+                font-weight: 900;
+                margin-right: 20px;
 
-        &:hover {
-            color: black;
+                &:hover {
+                    color: black;
+                }
+            }
         }
     }
 
@@ -295,11 +307,14 @@
 
         font-size: .9rem;
         text-align: center;
+
+        min-height: 72px;
     }
 
     &__features--block {
         padding-top: 10px;
         padding-bottom: 10px;
+        height: 100%;
 
         &:first-child {
             border-right: 1px solid #eaeaea;
@@ -311,7 +326,7 @@
         margin-bottom: 7px;
     }
 
-    &__features--value {}
+    // &__features--value {}
 
     // Footer
     &__footer {
@@ -372,6 +387,41 @@
             }
             &:nth-child(6) {
                 transition-delay: .25s;
+            }
+        }
+    }
+
+    // If no flats in Object
+    &.nothing {
+        .object-card__img {
+            filter: grayscale(70%);
+            opacity: .85;
+            transition: all ease-in-out .3s;
+        }
+
+        .object-card__features {
+            grid-template-columns: 1fr;
+
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        .object-card__footer {
+            grid-template-columns: 1fr;
+
+            &-btn--choose-flat {
+                display: none;
+            }
+        }
+
+        &:hover {
+            .object-card__img {
+                filter: grayscale(0);
+                opacity: 1;
+            }
+
+            .object-card__emerge {
+                background-color: transparent;
             }
         }
     }

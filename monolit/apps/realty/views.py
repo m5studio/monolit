@@ -116,15 +116,32 @@ def json_object_sites_info(request, object_id):
     room_2 = object_sites.flats_info_aggregated(object_id, 2)
     room_3 = object_sites.flats_info_aggregated(object_id, 3)
     room_4 = object_sites.flats_info_aggregated(object_id, 4)
+    # room_5 = object_sites.flats_info_aggregated(object_id, 5)
+
+    # def mergeDicts(dict1, dict2):
+    #     return(dict2.update(dict1))
+
+    def mergeTwoDicts(dict1, dict2):
+        result = dict1.copy()
+        result.update(dict2)
+        return result
 
     sites_info = list()
     sites_info.extend([object_sites_info,
                         {'flats_info': [
-                                {'studio': room_0},
-                                {'room_1': room_1},
-                                {'room_2': room_2},
-                                {'room_3': room_3},
-                                {'room_4': room_4}]
+                                # {'name': 'Ст', 'info': room_0},
+                                # {'name': '1',  'info': room_1},
+                                # {'name': '2',  'info': room_2},
+                                # {'name': '3',  'info': room_3},
+                                # {'name': '4+', 'info': room_4},
+
+                                mergeTwoDicts({'rooms': 'Ст'}, room_0),
+                                mergeTwoDicts({'rooms': '1'}, room_1),
+                                mergeTwoDicts({'rooms': '2'}, room_2),
+                                mergeTwoDicts({'rooms': '3'}, room_3),
+                                mergeTwoDicts({'rooms': '4+'}, room_4),
+                                # mergeTwoDicts({'name': '4+'}, room_5),
+                            ]
                         }])
 
     return JsonResponse(sites_info, safe=False)

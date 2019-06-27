@@ -12,48 +12,7 @@
                 <div class="object-card__put-into-operation">Сдан в эксплуатацию</div>
             {% endif %}
         </div>
-        <div class="object-card__emerge">
-            <div class="object-card__emerge-object">
-                <a href="" class="object-card__emerge-link">
-                    <div class="object-card__flat-types-item">Ст</div>
-                    <div class="object-card__emerge-title">4 квартиры</div>
-                    <div class="object-card__emerge-area-space">82.2 - 82.6 м<sup>2</sup></div>
-                    <div class="object-card__emerge-arrow"></div>
-                </a>
-            </div>
-            <div class="object-card__emerge-object">
-                <a href="" class="object-card__emerge-link">
-                    <div class="object-card__flat-types-item">1</div>
-                    <div class="object-card__emerge-title">4 квартиры</div>
-                    <div class="object-card__emerge-area-space">82.2 - 82.6 м<sup>2</sup></div>
-                    <div class="object-card__emerge-arrow"></div>
-                </a>
-            </div>
-            <div class="object-card__emerge-object">
-                <a href="" class="object-card__emerge-link">
-                    <div class="object-card__flat-types-item">2</div>
-                    <div class="object-card__emerge-title">4 квартиры</div>
-                    <div class="object-card__emerge-area-space">82.2 - 82.6 м<sup>2</sup></div>
-                    <div class="object-card__emerge-arrow"></div>
-                </a>
-            </div>
-            <div class="object-card__emerge-object">
-                <a href="" class="object-card__emerge-link">
-                    <div class="object-card__flat-types-item">3</div>
-                    <div class="object-card__emerge-title">4 квартиры</div>
-                    <div class="object-card__emerge-area-space">82.2 - 82.6 м<sup>2</sup></div>
-                    <div class="object-card__emerge-arrow"></div>
-                </a>
-            </div>
-            <div class="object-card__emerge-object">
-                <a href="" class="object-card__emerge-link">
-                    <div class="object-card__flat-types-item">4+</div>
-                    <div class="object-card__emerge-title">4 квартиры</div>
-                    <div class="object-card__emerge-area-space">82.2 - 82.6 м<sup>2</sup></div>
-                    <div class="object-card__emerge-arrow"></div>
-                </a>
-            </div>
-        </div>
+        <div class="object-card__emerge"></div>
     </div>
     <div class="object-card__main">
         <div class="object-card__info">
@@ -61,30 +20,16 @@
                 <a href="{{ object.get_absolute_url }}">{% if object.object_type %}{{ object.get_object_type_display }} {% endif %}{{ object.name }}</a>
             </div>
             <div class="object-card__flat">
-                <a href="#" class="object-card__flat--count"><span class="oc-total-flats-qty"></span> квартир</a>
-                <div class="object-card__flat-types">
-                    <a href="" class="object-card__flat-types-item">Ст</a>
-                    <a href="" class="object-card__flat-types-item">1</a>
-                    <a href="" class="object-card__flat-types-item">2</a>
-                    <a href="" class="object-card__flat-types-item">3</a>
-                    <a href="" class="object-card__flat-types-item">4+</a>
-                </div>
+                <div class="object-card__flat--count"></div>
+                <div class="object-card__flat-types"></div>
             </div>
         </div>
         <div class="object-card__features">
-            <div class="object-card__features--block">
-                <div class="object-card__features--name">Площадь</div>
-                <!-- <div class="object-card__features--value">от 62.0 до 62.4 м<sup>2</sup></div> -->
-                <div class="object-card__features--value">от <span class="oc-flats-area-min"></span> до <span class="oc-flats-area-max"></span> м<sup>2</sup></div>
-            </div>
-            <div class="object-card__features--block">
-                <div class="object-card__features--name">Стоимость</div>
-                <div class="object-card__features--value">от <span class="oc-min-price"></span> руб.</div>
-            </div>
+            {# all stuff in \layout\src\ajax\object-card.js #}
         </div>
     </div>
     <div class="object-card__footer">
-        <a href="{{ object.get_absolute_url }}" class="object-card__footer-btn object-card__footer-btn--green">О комплексе</a>
-        <a href="" class="object-card__footer-btn object-card__footer-btn--dark">Выбрать квартиру</a>
+        <a href="{{ object.get_absolute_url }}" class="object-card__footer-btn object-card__footer-btn--green object-card__footer-btn--about">О комплексе</a>
+        <a href="" class="object-card__footer-btn object-card__footer-btn--dark object-card__footer-btn--choose-flat">Выбрать квартиру</a>
     </div>
 </div>

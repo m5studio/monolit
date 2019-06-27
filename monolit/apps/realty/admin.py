@@ -74,8 +74,10 @@ class ObjectSiteAdmin(TurnOffAdminLogging, admin.ModelAdmin):
             )
         }),
     )
-    list_display = ('crm_id', 'object', 'site_type', 'active', 'special_offer', 'updated')
+    list_display = ('crm_id', 'object', 'site_type', 'rooms_qty', 'site_area', 'active', 'special_offer', 'updated')
     list_editable = ('active', 'special_offer')
+    list_filter = ('object', 'rooms_qty')
+
     autocomplete_fields = ['object', 'object_block', 'object_section', 'window_view']
 """ [ END ObjectSite ] """
 
