@@ -98,6 +98,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
 
                 'apps.core.context_processors.settings',
+                'apps.core.context_processors.monolit_objects',
             ],
         },
     },

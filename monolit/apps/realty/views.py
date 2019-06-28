@@ -21,12 +21,14 @@ from apps.realty.models.object_elevator import ObjectElevator
 
 class ObjectListView(ListView):
     model = Object
-    queryset = Object.objects.filter(active=True).order_by('order')
+    # queryset = Object.objects.filter(active=True).order_by('order')
+    queryset = Object.objects.filter(active=True, all_sold=False).order_by('order')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['page_title'] = 'Объекты'
-        context['objects_qty'] = Object.objects.filter(active=True).count()
+        context['objects_qty'] = Object.objects.filter(active=True, all_sold=False).count()
+        context['objects_sold'] = Object.objects.filter(active=True, all_sold=True).order_by('order')
         return context
 
 
@@ -44,7 +46,7 @@ class ObjectDetailView(DetailView):
         context['object_galleries'] = ObjectGallery.objects.filter(object=self.get_object().pk).order_by('-order')
         context['object_galleries_images'] = ObjectGalleryImage.objects.filter(gallery__object=self.get_object().pk, gallery=context['object_galleries'].first())
         context['object_news'] = News.objects.filter(object=self.get_object().pk).order_by('-updated')
-        context['other_objects'] = Object.objects.filter(active=True).exclude(id=self.get_object().pk).order_by('?')[:4]
+        context['other_objects'] = Object.objects.filter(active=True, all_sold=False).exclude(id=self.get_object().pk).order_by('?')[:4]
         context['object_videos'] = ObjectVideo.objects.filter(object=self.get_object().pk)
 
         context['object_special_offers'] = ObjectSite.objects.filter(object=self.get_object().pk, active=True, special_offer=True).order_by('?')[:3]
@@ -116,10 +118,6 @@ def json_object_sites_info(request, object_id):
     room_2 = object_sites.flats_info_aggregated(object_id, 2)
     room_3 = object_sites.flats_info_aggregated(object_id, 3)
     room_4 = object_sites.flats_info_aggregated(object_id, 4)
-    # room_5 = object_sites.flats_info_aggregated(object_id, 5)
-
-    # def mergeDicts(dict1, dict2):
-    #     return(dict2.update(dict1))
 
     def mergeTwoDicts(dict1, dict2):
         result = dict1.copy()
@@ -134,13 +132,11 @@ def json_object_sites_info(request, object_id):
                                 # {'name': '2',  'info': room_2},
                                 # {'name': '3',  'info': room_3},
                                 # {'name': '4+', 'info': room_4},
-
                                 mergeTwoDicts({'rooms': 'Ст'}, room_0),
                                 mergeTwoDicts({'rooms': '1'}, room_1),
                                 mergeTwoDicts({'rooms': '2'}, room_2),
                                 mergeTwoDicts({'rooms': '3'}, room_3),
                                 mergeTwoDicts({'rooms': '4+'}, room_4),
-                                # mergeTwoDicts({'name': '4+'}, room_5),
                             ]
                         }])
 

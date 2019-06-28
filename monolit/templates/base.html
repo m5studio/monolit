@@ -69,10 +69,15 @@
         <div id="footer__inner" class="container">
             <div id="footer-projects" class="footer-block">
                 <div class="footer-block__title">
-                    <a href="">Проекты</a>
+                    <a href="{% url 'object:list' %}">Объекты</a>
                 </div>
                 <ul class="footer-block__menu-list">
-                    <li class="footer-block__menu-item">
+                    {% for object in monolit_objects %}
+                        <li class="footer-block__menu-item">
+                            <a href="{{ object.get_absolute_url }}">{{ object.name }}</a>
+                        </li>
+                    {% endfor %}
+                    <!-- <li class="footer-block__menu-item">
                         <a href="">Лаванда</a>
                     </li>
                     <li class="footer-block__menu-item">
@@ -95,7 +100,7 @@
                     </li>
                     <li class="footer-block__menu-item">
                         <a href="">на ул. Балаклавской</a>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
             <div id="footer-commercial" class="footer-block">

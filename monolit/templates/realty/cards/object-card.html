@@ -1,4 +1,8 @@
-<div class="object-card" data-sites-info-url="{% url 'object:json-object-sites-info' object_id=object.id %}">
+{% if not object.all_sold %}
+    <div class="object-card" data-sites-info-url="{% url 'object:json-object-sites-info' object_id=object.id %}">
+{% else %}
+    <div class="object-card sold">
+{% endif %}
     <div class="object-card__header">
         <div class="object-card__img" style="background-image: url('https://i.ibb.co/7tDS78z/856b97582c74edd185d730fafe0c69ef.jpg')"></div>
         <div class="object-card__header-info">
@@ -26,10 +30,16 @@
         </div>
         <div class="object-card__features">
             {# all stuff in \layout\src\ajax\object-card.js #}
+
+            {% if object.all_sold %}
+                <span>нет в продаже</span>
+            {% endif %}
         </div>
     </div>
     <div class="object-card__footer">
         <a href="{{ object.get_absolute_url }}" class="object-card__footer-btn object-card__footer-btn--green object-card__footer-btn--about">О комплексе</a>
-        <a href="" class="object-card__footer-btn object-card__footer-btn--dark object-card__footer-btn--choose-flat">Выбрать квартиру</a>
+        {% if not object.all_sold %}
+            <a href="" class="object-card__footer-btn object-card__footer-btn--dark object-card__footer-btn--choose-flat">Выбрать квартиру</a>
+        {% endif %}
     </div>
 </div>

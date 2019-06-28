@@ -37,6 +37,10 @@
                 {% for object in object_list %}
                     {% include 'realty/cards/object-card.html' %}
                 {% endfor %}
+
+                {% for object in objects_sold %}
+                    {% include 'realty/cards/object-card.html' %}
+                {% endfor %}
             </div>
         </section>
     </main>

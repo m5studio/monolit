@@ -185,15 +185,12 @@ body {
                 align-items: center;
                 overflow: hidden;
 
-                // @include media-breakpoint-only(xl) {
-                //     margin-left: 15px;
-                // }
                 @include media-breakpoint-down(lg) {
                     order: 2;
                     justify-self: end;
                 }
                 // Fix for large resolution menu
-                @media (min-width: 1200px) and (max-width: 1365px) {
+                @media (min-width: 1200px) and (max-width: 1440px) {
                     display: none;
                 }
 
