@@ -5,11 +5,12 @@
 {% endif %}
         <div class="object-card__header">
             <div class="object-card__img" style="background-image: url('{% spaceless %}
-                    {% if object.main_image %}
-                        {{ object.main_image_thumb.url }}
-                    {% else %}
-                        https://via.placeholder.com/512x386/EEEEEE/555555?text=No+Image
-                    {% endif %}{% endspaceless %}')"></div>
+                {% if object.main_image %}
+                    {{ object.main_image_thumb.url }}
+                {% else %}
+                    https://via.placeholder.com/512x386/EEEEEE/555555?text=No+Image
+                {% endif %}{% endspaceless %}')"></div>
+
             <div class="object-card__header-info">
                 {% if object.object_type %}
                     <div class="object-card__living-quarter">{{ object.get_object_type_display }}</div>

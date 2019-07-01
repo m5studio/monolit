@@ -9,7 +9,7 @@ from ckeditor.fields import RichTextField
 from location_field.models.plain import PlainLocationField
 
 from imagekit.models import ImageSpecField
-from imagekit.processors import ResizeToFill, ResizeToFit
+from imagekit.processors import ResizeToFill
 
 from apps.core.classes.clean_media import CleanMedia
 from apps.core.classes.file_processing import FileProcessing
@@ -98,7 +98,6 @@ class Object(models.Model):
                                       blank=True, null=True)
     main_image_thumb = ImageSpecField(source='main_image',
                                         processors=[ResizeToFill(512, 386)],
-                                        # processors=[ResizeToFit(512, 512)],
                                         format = 'JPEG',
                                         options={'quality': 70})
 
