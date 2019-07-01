@@ -125,9 +125,9 @@ then enter credentials
 ## How to update from GitHub
 Run:
 ```
-$ cd monolit\monolit
-$ git pull
-then enter credentials
+$ cd monolit/
+$ git pull https://github.com/m5studio/monolit.git
+... then enter credentials
 ```
 
 ## Clean empty folders and unused files
