@@ -127,7 +127,7 @@ Run:
 ```
 $ cd monolit/
 $ git pull https://github.com/m5studio/monolit.git
-... then enter credentials
+... then enter your credentials
 ```
 
 ## Clean empty folders and unused files
