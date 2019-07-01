@@ -1,7 +1,7 @@
 # Monolit README
 
 ## How to deploy
-1. Create virtualenv:
+1. ### Create virtualenv:
     ```
     $ virtualenv venv
     ```
@@ -17,12 +17,12 @@
     ```
     $ source venv\bin\activate
     ```
-1. Install packages from requirements.txt:
+1. ### Install packages from requirements.txt:
     ```
     $ pip install -r monolit\requirements\requirements.txt
     ```
 
-1. If you need to update all Python packages
+1. ### If you need to update all Python packages
 
     **List outdated packages**
     ```
@@ -41,12 +41,12 @@
     $ pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -
     ```
 
-1. Go to monolit project folder:
+1. ### Go to monolit project folder:
     ```
     $ cd monolit/
     ```
 
-1. Create .env:
+1. ### Create .env:
     ```
     $ touch .env
     ```
@@ -57,7 +57,7 @@
     ALLOWED_HOSTS=monolit.site|www.monolit.site
     SECRET_KEY=1mnn8bj$(zm5$t9=io*_1ndo43w2p5kv$+sn(xf%d@2so7v_&#
     ```
-1. Install & Update node packages  
+1. ### Install & Update node packages  
 
     **Install node packages**
     ```
@@ -71,29 +71,29 @@
     $ npm update --save
     ```
 
-1. Compile with Webpack:
+1. ### Compile with Webpack:
     ```
     $ npm run build
     ```
 
-1. Run migrations:
+1. ### Run migrations:
     ```
     $ python manage.py makemigrations
     $ python manage.py migrate
     ```
 
-1. Create Superuser:
+1. ### Create Superuser:
     ```
     $ python manage.py createsuperuser
     ```
     then answer the questions in order to create Superuser account
 
-1. Create default content:
+1. ### Create default content:
     ```
     $ python manage.py add_default_content
     ```
 
-1. Run local server:
+1. ### Run local server:
     ```
     $ python manage.py runserver
     ```
