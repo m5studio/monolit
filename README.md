@@ -18,7 +18,7 @@
     ```
 1. Install packages from requirements.txt:
     ```
-    pip install -r monolit\requirements\requirements.txt
+    $ pip install -r monolit\requirements\requirements.txt
     ```
 
 1. Go to monolit project folder:
