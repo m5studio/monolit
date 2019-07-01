@@ -25,22 +25,18 @@
     ```
 
 
-### 3. If you need to update all Python packages  
-
-    **List outdated packages**  
-
+### 3. If you need to update all Python packages
+    List outdated packages
     ```
     $ pip list --outdated
     ```
 
-    **Update all outdated packages Manually**  
-
+    Update all outdated packages Manually
     ```
     $ pip install django, pip, pillow --update
     ```
 
-    **Update all outdated packages**  
-
+    Update all outdated packages
     ```
     $ pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -
     ```
