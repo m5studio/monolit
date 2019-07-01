@@ -25,7 +25,7 @@
     ```
 
 
-### 3. If you need to update all Python packages
+### 3. If you need to update all Python packages  
 
     **List outdated packages**  
 
