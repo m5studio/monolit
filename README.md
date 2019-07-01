@@ -30,13 +30,14 @@
     ```
     $ touch .env
     ```
+
     with content:
     ```
     DEBUG=True
     ALLOWED_HOSTS=monolit.site|www.monolit.site
     SECRET_KEY=1mnn8bj$(zm5$t9=io*_1ndo43w2p5kv$+sn(xf%d@2so7v_&#
     ```
-1. Install & Update node packages
+1. Install & Update node packages  
     **Install node packages**
     ```
     $ cd monolit\monolit
