@@ -16,12 +16,12 @@
         $ source venv\bin\activate
         ```
 
-* Go to monolit project folder:
+2. Go to monolit project folder:
     ```
     $ cd monolit
     ```
 
-* Create .env:
+3. Create .env:
     ```
     $ touch .env
     ```
@@ -31,30 +31,30 @@
     ALLOWED_HOSTS=monolit.site|www.monolit.site
     SECRET_KEY=1mnn8bj$(zm5$t9=io*_1ndo43w2p5kv$+sn(xf%d@2so7v_&#
     ```
-* Install node packages
+4. Install node packages
     ```
     $ cd monolit\monolit
     $ npm i
     ```
 
-* Compile with Webpack:
+5. Compile with Webpack:
     ```
     $ nmp run build
     ```
 
-* Run migrations:
+6. Run migrations:
     ```
     $ python manage.py makemigrations
     $ python manage.py migrate
     ```
 
-* Create Superuser:
+7. Create Superuser:
     ```
     $ python manage.py createsuperuser
     then create superuser account
     ```
 
-* Create default content:
+8. Create default content:
     ```
     $ python manage.py add_default_content
     ```
