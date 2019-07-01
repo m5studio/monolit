@@ -62,8 +62,7 @@
     ```
 
 
-### 6.  Install & Update node packages  
-
+### 6. Install & Update node packages
     **Install node packages**
     ```
     $ cd monolit\monolit
@@ -77,33 +76,33 @@
     ```
 
 
-### 7.  Compile with Webpack:
+### 7. Compile with Webpack:
     ```
     $ npm run build
     ```
 
 
-### 8.  Run migrations:
+### 8. Run migrations:
     ```
     $ python manage.py makemigrations
     $ python manage.py migrate
     ```
 
 
-### 9.  Create Superuser:
+### 9. Create Superuser:
     ```
     $ python manage.py createsuperuser
     ```
     then answer the questions in order to create Superuser account
 
 
-### 10.  Create default content:
+### 10. Create default content:
     ```
     $ python manage.py add_default_content
     ```
 
 
-### 11.  Run local server:
+### 11. Run local server:
     ```
     $ python manage.py runserver
     ```
@@ -111,7 +110,7 @@
 
 
 ## How to get from GitHub
-1. Clone from GitHub:
+    Clone from GitHub:
     ```
     $ git clone https://github.com/m5studio/monolit.git
     then enter credentials
@@ -119,7 +118,7 @@
 
 
 ## How to update from GitHub
-1. Run:
+    Run:
     ```
     $ cd monolit\monolit
     $ git pull
@@ -127,7 +126,7 @@
     ```
 
 ## Clean empty folders and unused files
-    Run
+    Run:
     ```
     $ python manage.py cleanup_unused_media
     $ python manage.py clean_empty_media_dirs
