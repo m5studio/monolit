@@ -5,7 +5,7 @@
     ```
     virtualenv venv
     ```
-    activate venv:    
+    activate venv:
     * for win
         ```
         $ venv\Scripts\activate
@@ -15,13 +15,17 @@
         ```
         $ source venv\bin\activate
         ```
+2. Install packages from requirements.txt:
+    ```
+    pip install -r monolit\requirements\requirements.txt
+    ```
 
-2. Go to monolit project folder:
+3. Go to monolit project folder:
     ```
     $ cd monolit
     ```
 
-3. Create .env:
+4. Create .env:
     ```
     $ touch .env
     ```
@@ -31,30 +35,30 @@
     ALLOWED_HOSTS=monolit.site|www.monolit.site
     SECRET_KEY=1mnn8bj$(zm5$t9=io*_1ndo43w2p5kv$+sn(xf%d@2so7v_&#
     ```
-4. Install node packages
+5. Install node packages
     ```
     $ cd monolit\monolit
     $ npm i
     ```
 
-5. Compile with Webpack:
+6. Compile with Webpack:
     ```
     $ nmp run build
     ```
 
-6. Run migrations:
+7. Run migrations:
     ```
     $ python manage.py makemigrations
     $ python manage.py migrate
     ```
 
-7. Create Superuser:
+8. Create Superuser:
     ```
     $ python manage.py createsuperuser
     then create superuser account
     ```
 
-8. Create default content:
+9. Create default content:
     ```
     $ python manage.py add_default_content
     ```
