@@ -36,15 +36,22 @@
     ALLOWED_HOSTS=monolit.site|www.monolit.site
     SECRET_KEY=1mnn8bj$(zm5$t9=io*_1ndo43w2p5kv$+sn(xf%d@2so7v_&#
     ```
-1. Install node packages
+1. Install & Update node packages
+    **Install node packages**
     ```
     $ cd monolit\monolit
     $ npm i
     ```
 
+    **Update node packages**
+    ```
+    $ npm update --save-dev
+    $ npm update --save
+    ```
+
 1. Compile with Webpack:
     ```
-    $ nmp run build
+    $ npm run build
     ```
 
 1. Run migrations:
