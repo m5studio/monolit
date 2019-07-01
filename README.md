@@ -5,7 +5,7 @@
     ```
     virtualenv venv
     ```
-    Activate venv:
+    Activate venv:  
     for Windows
     ```
     $ venv\Scripts\activate
