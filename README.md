@@ -3,29 +3,30 @@
 ## How to deploy
 1. Create virtualenv:
     ```
-    virtualenv venv
+    $ virtualenv venv
     ```
-    Activate venv:  
-    for Windows
+    **Activate venv:**  
+
+    *for Windows*
     ```
     $ venv\Scripts\activate
     ```
 
-    for Linux
+    *for Linux*
     ```
     $ source venv\bin\activate
     ```
-2. Install packages from requirements.txt:
+1. Install packages from requirements.txt:
     ```
     pip install -r monolit\requirements\requirements.txt
     ```
 
-3. Go to monolit project folder:
+1. Go to monolit project folder:
     ```
-    $ cd monolit
+    $ cd monolit/
     ```
 
-4. Create .env:
+1. Create .env:
     ```
     $ touch .env
     ```
@@ -35,30 +36,30 @@
     ALLOWED_HOSTS=monolit.site|www.monolit.site
     SECRET_KEY=1mnn8bj$(zm5$t9=io*_1ndo43w2p5kv$+sn(xf%d@2so7v_&#
     ```
-5. Install node packages
+1. Install node packages
     ```
     $ cd monolit\monolit
     $ npm i
     ```
 
-6. Compile with Webpack:
+1. Compile with Webpack:
     ```
     $ nmp run build
     ```
 
-7. Run migrations:
+1. Run migrations:
     ```
     $ python manage.py makemigrations
     $ python manage.py migrate
     ```
 
-8. Create Superuser:
+1. Create Superuser:
     ```
     $ python manage.py createsuperuser
     then create superuser account
     ```
 
-9. Create default content:
+1. Create default content:
     ```
     $ python manage.py add_default_content
     ```
