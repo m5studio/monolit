@@ -2,21 +2,21 @@
 
 ## How to deploy
 ### 1. Create virtualenv:
-    ```
-    $ virtualenv venv
-    ```
+```
+$ virtualenv venv
+```
 
-    **Activate venv:**  
+**Activate venv:**  
 
-    *for Windows*
-    ```
-    $ venv\Scripts\activate
-    ```
+*for Windows*
+```
+$ venv\Scripts\activate
+```
 
-    *for Linux*
-    ```
-    $ source venv\bin\activate
-    ```
+*for Linux*
+```
+$ source venv\bin\activate
+```
 
 
 ### 2. Install packages from requirements.txt:
