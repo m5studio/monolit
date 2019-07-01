@@ -33,12 +33,18 @@ $ pip list --outdated
 
 Update all outdated packages Manually
 ```
-$ pip install django, pip, pillow --update
+$ pip install django, pip, pillow --upgrade
 ```
 
 Update all outdated packages
 ```
 $ pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -
+```
+
+**!!! IMPORTANT**
+After update outdated packages save all to *requirements.txt*
+```
+$ pip freeze > requirements\requirements.txt
 ```
 
 
