@@ -31,7 +31,7 @@ List outdated packages
 $ pip list --outdated
 ```
 
-Update all outdated packages Manually
+Update outdated packages Manually
 ```
 $ pip install django, pip, pillow --upgrade
 ```
