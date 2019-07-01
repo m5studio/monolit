@@ -1,10 +1,12 @@
 {% if object.name %}
-    <section id="section-object-page-main-info" style="background-image: url('{% spaceless %}
-        {% if object.main_image %}
-            {{ object.main_image.url }}
-        {% else %}
-            https://via.placeholder.com/1920x1080/FFFFFF/555555?text=No+Image
-        {% endif %}{% endspaceless %}');">
+    {% spaceless %}
+    <section id="section-object-page-main-info"{% if not object.all_sold %} data-sites-info-url="{% url 'object:json-object-sites-info' object_id=object.id %}"{% else %} class="sold"{% endif %} style="background-image: url('{% spaceless %}
+            {% if object.main_image %}
+                {{ object.main_image.url }}
+            {% else %}
+                https://via.placeholder.com/1920x1080/FFFFFF/555555?text=No+Image
+            {% endif %}{% endspaceless %}');">
+    {% endspaceless %}
 
         <div id="section-object-page-main-info__stats">
             <div class="stats-item">

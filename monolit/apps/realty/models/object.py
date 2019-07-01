@@ -2,11 +2,14 @@ from django.db import models
 from django.urls import reverse
 from django.utils.html import mark_safe
 
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 
 from ckeditor.fields import RichTextField
 from location_field.models.plain import PlainLocationField
+
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill, ResizeToFit
 
 from apps.core.classes.clean_media import CleanMedia
 from apps.core.classes.file_processing import FileProcessing
@@ -93,6 +96,11 @@ class Object(models.Model):
     main_image    = models.ImageField('Главное изображение',
                                       upload_to=image_upload_path,
                                       blank=True, null=True)
+    main_image_thumb = ImageSpecField(source='main_image',
+                                        processors=[ResizeToFill(512, 386)],
+                                        # processors=[ResizeToFit(512, 512)],
+                                        format = 'JPEG',
+                                        options={'quality': 70})
 
     updated       = models.DateTimeField(auto_now=True, auto_now_add=False, blank=True, null=True)
 
@@ -101,9 +109,9 @@ class Object(models.Model):
         return mark_safe('<img src="{}" alt="" style="width: 256px; height: auto;" />'.format(self.genplan.url))
     genplan_thumb.short_description = 'Генплан (thumbnail)'
 
-    def main_image_thumb(self):
+    def main_image_thumb_admin(self):
         return mark_safe('<img src="{}" alt="" style="width: 40%; height: auto;" />'.format(self.main_image.url))
-    main_image_thumb.short_description = 'Главное изображение (thumbnail)'
+    main_image_thumb_admin.short_description = 'Главное изображение (thumbnail)'
     # END Thumbnails for admin
 
     def __str__(self):
@@ -127,4 +135,13 @@ def genplan_image_optimization(sender, instance, created, **kwargs):
         image.optimizeAndSaveImg()
     # Delete empty dirs in /media/
     cleanMedia = CleanMedia()
+    cleanMedia.deleteEmptyDirsRecusive()
+
+
+@receiver(post_delete, sender=Object)
+def clean_empty_media_dirs(sender, instance, **kwargs):
+    cleanMedia = CleanMedia()
+    # Delete imagekit chache file
+    cleanMedia.cleanImagekitCacheImage(instance.main_image_thumb)
+    # Delete empty dirs in /media/
     cleanMedia.deleteEmptyDirsRecusive()
