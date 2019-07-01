@@ -5,16 +5,16 @@
     ```
     virtualenv venv
     ```
-    activate venv:
-    * for win
-        ```
-        $ venv\Scripts\activate
-        ```
+    Activate venv:
+    for Windows
+    ```
+    $ venv\Scripts\activate
+    ```
 
-    * for linux
-        ```
-        $ source venv\bin\activate
-        ```
+    for Linux
+    ```
+    $ source venv\bin\activate
+    ```
 2. Install packages from requirements.txt:
     ```
     pip install -r monolit\requirements\requirements.txt
