@@ -5,6 +5,7 @@
     ```
     $ virtualenv venv
     ```
+
     **Activate venv:**  
 
     *for Windows*
@@ -19,6 +20,25 @@
 1. Install packages from requirements.txt:
     ```
     $ pip install -r monolit\requirements\requirements.txt
+    ```
+
+1. If you need to update all Python packages
+
+    **List outdated packages**
+    ```
+    $ pip list --outdated
+    $ pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -
+    ```
+
+    **Update all outdated packages Manually**
+    ```
+    $ pip install django, pip, pillow --update
+    $ pip install django, pip, pillow --upgrade
+    ```
+
+    **Update all outdated packages**
+    ```
+    $ pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -
     ```
 
 1. Go to monolit project folder:
@@ -38,6 +58,7 @@
     SECRET_KEY=1mnn8bj$(zm5$t9=io*_1ndo43w2p5kv$+sn(xf%d@2so7v_&#
     ```
 1. Install & Update node packages  
+
     **Install node packages**
     ```
     $ cd monolit\monolit
@@ -64,12 +85,17 @@
 1. Create Superuser:
     ```
     $ python manage.py createsuperuser
-    then create superuser account
     ```
+    then answer the questions in order to create Superuser account
 
 1. Create default content:
     ```
     $ python manage.py add_default_content
+    ```
+
+1. Run local server:
+    ```
+    $ python manage.py runserver
     ```
 
 
