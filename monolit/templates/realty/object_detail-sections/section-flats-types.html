@@ -1,96 +1,98 @@
-<div id="section-flats-types">
-    <div id="section-flats-types__inner" class="container">
-        <div id="section-flats-types__bottom">
-            <div class="flat-type-card">
-                <div class="flat-type-card__icon" style="background-image: url('http://monolit.site/static/images/studio.6031014a5ce2.png');"></div>
-                <div class="flat-type-card__content">
-                    <div class="flat-type-card__title">
-                        <a href="">Студии</a>
-                    </div>
-                    <div class="flat-type-card__info">
-                        <div class="flat-type-card__info--block">
-                            <div class="flat-type-card__info--title">Площадь</div>
-                            <div class="">от 44.7 до 44.7 м<sup>2</sup></div>
+{% if not object.all_sold %}
+    <div id="section-flats-types">
+        <div id="section-flats-types__inner" class="container">
+            <div id="section-flats-types__bottom">
+                <div class="flat-type-card flat-type-card__room-0">
+                    <div class="flat-type-card__icon" style="background-image: url('http://monolit.site/static/images/studio.6031014a5ce2.png');"></div>
+                    <div class="flat-type-card__content">
+                        <div class="flat-type-card__title">
+                            <a href="">Студии</a>
                         </div>
-                        <div class="flat-type-card__info--block">
-                            <div class="flat-type-card__info--title">Стоимость</div>
-                            <div class="">от 5.4 млн руб.</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="flat-type-card">
-                <div class="flat-type-card__icon" style="background-image: url('http://monolit.site/static/images/1room.f3fd59d167cd.png');"></div>
-                <div class="flat-type-card__content">
-                    <div class="flat-type-card__title">
-                        <a href="">1 комнатные</a>
-                    </div>
-                    <div class="flat-type-card__info">
-                        <div class="flat-type-card__info--block">
-                            <div class="flat-type-card__info--title">Площадь</div>
-                            <div class="">от 44.7 до 44.7 м<sup>2</sup></div>
-                        </div>
-                        <div class="flat-type-card__info--block">
-                            <div class="flat-type-card__info--title">Стоимость</div>
-                            <div class="">от 5.4 млн руб.</div>
+                        <div class="flat-type-card__info">
+                            <div class="flat-type-card__info--block">
+                                <div class="flat-type-card__info--title">Площадь</div>
+                                <div class="flat-type-card__info--area"></div>
+                            </div>
+                            <div class="flat-type-card__info--block">
+                                <div class="flat-type-card__info--title">Стоимость</div>
+                                <div class="flat-type-card__info--price"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="flat-type-card">
-                <div class="flat-type-card__icon" style="background-image: url('http://monolit.site/static/images/2room.eda257dede73.png');"></div>
-                <div class="flat-type-card__content">
-                    <div class="flat-type-card__title">
-                        <a href="">2 комнатные</a>
-                    </div>
-                    <div class="flat-type-card__info">
-                        <div class="flat-type-card__info--block">
-                            <div class="flat-type-card__info--title">Площадь</div>
-                            <div class="">от 44.7 до 44.7 м<sup>2</sup></div>
+                <div class="flat-type-card flat-type-card__room-1">
+                    <div class="flat-type-card__icon" style="background-image: url('http://monolit.site/static/images/1room.f3fd59d167cd.png');"></div>
+                    <div class="flat-type-card__content">
+                        <div class="flat-type-card__title">
+                            <a href="">1 комнатные</a>
                         </div>
-                        <div class="flat-type-card__info--block">
-                            <div class="flat-type-card__info--title">Стоимость</div>
-                            <div class="">от 5.4 млн руб.</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="flat-type-card">
-                <div class="flat-type-card__icon" style="background-image: url('http://monolit.site/static/images/3room.1f4982964531.png');"></div>
-                <div class="flat-type-card__content">
-                    <div class="flat-type-card__title">
-                        <a href="">3 комнатные</a>
-                    </div>
-                    <div class="flat-type-card__info">
-                        <div class="flat-type-card__info--block">
-                            <div class="flat-type-card__info--title">Площадь</div>
-                            <div class="">от 44.7 до 44.7 м<sup>2</sup></div>
-                        </div>
-                        <div class="flat-type-card__info--block">
-                            <div class="flat-type-card__info--title">Стоимость</div>
-                            <div class="">от 5.4 млн руб.</div>
+                        <div class="flat-type-card__info">
+                            <div class="flat-type-card__info--block">
+                                <div class="flat-type-card__info--title">Площадь</div>
+                                <div class="flat-type-card__info--area"></div>
+                            </div>
+                            <div class="flat-type-card__info--block">
+                                <div class="flat-type-card__info--title">Стоимость</div>
+                                <div class="flat-type-card__info--price"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="flat-type-card">
-                <div class="flat-type-card__icon" style="background-image: url('http://monolit.site/static/images/4room.6dbbe76812db.png');"></div>
-                <div class="flat-type-card__content">
-                    <div class="flat-type-card__title">
-                        <a href="">4+ комнатные</a>
-                    </div>
-                    <div class="flat-type-card__info">
-                        <div class="flat-type-card__info--block">
-                            <div class="flat-type-card__info--title">Площадь</div>
-                            <div class="">от 44.7 до 44.7 м<sup>2</sup></div>
+                <div class="flat-type-card flat-type-card__room-2">
+                    <div class="flat-type-card__icon" style="background-image: url('http://monolit.site/static/images/2room.eda257dede73.png');"></div>
+                    <div class="flat-type-card__content">
+                        <div class="flat-type-card__title">
+                            <a href="">2 комнатные</a>
                         </div>
-                        <div class="flat-type-card__info--block">
-                            <div class="flat-type-card__info--title">Стоимость</div>
-                            <div class="">от 5.4 млн руб.</div>
+                        <div class="flat-type-card__info">
+                            <div class="flat-type-card__info--block">
+                                <div class="flat-type-card__info--title">Площадь</div>
+                                <div class="flat-type-card__info--area"></div>
+                            </div>
+                            <div class="flat-type-card__info--block">
+                                <div class="flat-type-card__info--title">Стоимость</div>
+                                <div class="flat-type-card__info--price"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flat-type-card flat-type-card__room-3">
+                    <div class="flat-type-card__icon" style="background-image: url('http://monolit.site/static/images/3room.1f4982964531.png');"></div>
+                    <div class="flat-type-card__content">
+                        <div class="flat-type-card__title">
+                            <a href="">3 комнатные</a>
+                        </div>
+                        <div class="flat-type-card__info">
+                            <div class="flat-type-card__info--block">
+                                <div class="flat-type-card__info--title">Площадь</div>
+                                <div class="flat-type-card__info--area"></div>
+                            </div>
+                            <div class="flat-type-card__info--block">
+                                <div class="flat-type-card__info--title">Стоимость</div>
+                                <div class="flat-type-card__info--price"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flat-type-card flat-type-card__room-4">
+                    <div class="flat-type-card__icon" style="background-image: url('http://monolit.site/static/images/4room.6dbbe76812db.png');"></div>
+                    <div class="flat-type-card__content">
+                        <div class="flat-type-card__title">
+                            <a href="">4+ комнатные</a>
+                        </div>
+                        <div class="flat-type-card__info">
+                            <div class="flat-type-card__info--block">
+                                <div class="flat-type-card__info--title">Площадь</div>
+                                <div class="flat-type-card__info--area"></div>
+                            </div>
+                            <div class="flat-type-card__info--block">
+                                <div class="flat-type-card__info--title">Стоимость</div>
+                                <div class="flat-type-card__info--price"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+{% endif %}

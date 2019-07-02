@@ -1,7 +1,12 @@
 .flat-type-card {
-    display: grid;
+    display: none;
+    // display: grid;
     grid-template-columns: 96px 1fr;
     grid-column-gap: 10px;
+
+    &.active {
+        display: grid;
+    }
 
     &__icon {
         background-repeat: no-repeat;
@@ -13,7 +18,7 @@
         height: 96px;
     }
 
-    &__content {}
+    // &__content {}
 
     &__title {
         margin-bottom: 10px;
@@ -37,7 +42,7 @@
 
     &__info {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, auto);
         grid-column-gap: 5px;
 
         &--block {

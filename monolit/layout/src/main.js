@@ -21,7 +21,7 @@ import {newsPageLoadMoreNews} from "./ajax/news-page-load-more-news"
 import {objectPageGalleries} from "./ajax/object-page-galleries"
 import {objectPageDocsPagination} from "./ajax/object-page-documents-pagination"
 import {objectCardSitesInfo} from "./ajax/object-card"
-import {objectPageSitesInfo} from "./ajax/object_detail/object-page-sites-info"
+import {objectPageSitesInfo, objectPageFlatsTypes} from "./ajax/object_detail/object-page-sites-info"
 
 
 // Fancybox https://fancyapps.com/fancybox/3/
@@ -54,6 +54,7 @@ $(document).ready(function() {
     // Object page galleries ajax documents pagination
     if ( $('.object-page').length ) {
         objectPageSitesInfo()
+        objectPageFlatsTypes()
         objectPageGalleries()
         objectPageDocsPagination()
     }

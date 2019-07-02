@@ -39,7 +39,15 @@ class ObjectDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context['page_title'] = '{object_type} {name}'.format(name=self.get_object().name, object_type=self.get_object().get_object_type_display())
+        # context['page_title'] = '{object_type} {name}'.format(name=self.get_object().name,
+        #                                                       object_type=self.get_object().get_object_type_display())
+        # context['page_title'] = self.get_object().object_type if '{object_type} {name}'.format(name=self.get_object().name, object_type=self.get_object().get_object_type_display()) else  '{name}'.format(name=self.get_object().name)
+
+        context['page_title'] = '{name}'.format(name=self.get_object().name)
+        if self.get_object().object_type:
+            context['page_title'] = '{object_type} {name}'.format(object_type=self.get_object().get_object_type_display(), name=self.get_object().name)
+
+
         # context['page_meta_description'] = 'my custom meta'
         context['object_info_tabs'] = ObjectInfoTab.objects.filter(object_id=self.get_object().pk)
         context['object_files'] = ObjectFile.objects.filter(object_id=self.get_object().pk)
@@ -127,16 +135,11 @@ def json_object_sites_info(request, object_id):
     sites_info = list()
     sites_info.extend([object_sites_info,
                         {'flats_info': [
-                                # {'name': 'Ст', 'info': room_0},
-                                # {'name': '1',  'info': room_1},
-                                # {'name': '2',  'info': room_2},
-                                # {'name': '3',  'info': room_3},
-                                # {'name': '4+', 'info': room_4},
-                                mergeTwoDicts({'rooms': 'Ст'}, room_0),
-                                mergeTwoDicts({'rooms': '1'}, room_1),
-                                mergeTwoDicts({'rooms': '2'}, room_2),
-                                mergeTwoDicts({'rooms': '3'}, room_3),
-                                mergeTwoDicts({'rooms': '4+'}, room_4),
+                                mergeTwoDicts({'name': 'Ст', 'rooms': 0}, room_0),
+                                mergeTwoDicts({'name': '1',  'rooms': 1}, room_1),
+                                mergeTwoDicts({'name': '2',  'rooms': 2}, room_2),
+                                mergeTwoDicts({'name': '3',  'rooms': 3}, room_3),
+                                mergeTwoDicts({'name': '4+', 'rooms': 4}, room_4),
                             ]
                         }])
 

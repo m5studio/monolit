@@ -50,6 +50,7 @@ class ObjectSiteQuerySet(models.QuerySet):
             flats = self.get_flats_and_apartments(object_id) & Q(rooms_qty__in=[4, 5])
         return self.aggregate(
             flats_qty=Count('id', filter=flats),
+            min_price=Min('price_total', filter=flats),
             min_area=Min('site_area', filter=flats),
             max_area=Max('site_area', filter=flats),
         )
