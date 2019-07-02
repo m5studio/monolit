@@ -106,5 +106,13 @@
                 }
             }
         }
+
+        // Hide panorams for mobiles
+        #object-video-webcam-panoram-pills__panoram-tab,
+        #object-video-webcam-panoram-pills__panoram {
+            @include media-breakpoint-down(lg) {
+                display: none;
+            }
+        }
     }
 }
