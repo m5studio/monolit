@@ -15,15 +15,17 @@
             </div>
             <div class="tab-content" id="bp-and-news-pills-tabs-content">
                 {% if object_galleries %}
-                    {% if object_galleries and object_news %}
+                    {% if object_galleries or object_news %}
                         <div class="tab-pane fade show active" id="bp-and-news-pills-building-progress" role="tabpanel" aria-labelledby="bp-and-news-pills-building-progress-tab">
                     {% endif %}
-                            <select name="object_gallery_id">
-                                {% for gallery in object_galleries %}
-                                    <option value="{% url 'object:json-gallery' gallery_id=gallery.id %}">{{ gallery }}</option>
-                                {% endfor %}
-                            </select>
-                            <br><br>
+                            {% if object_galleries.count > 1 %}
+                                <select name="object_gallery_id">
+                                    {% for gallery in object_galleries %}
+                                        <option value="{% url 'object:json-gallery' gallery_id=gallery.id %}">{{ gallery }}</option>
+                                    {% endfor %}
+                                </select>
+                                <br><br>
+                            {% endif %}
                             <div id="bp-and-news-pills-building-progress__inner">
                                 {% for gallery_img in object_galleries_images %}
                                     <a data-fancybox="bp-gallery" data-caption="{{ gallery_img.gallery.name }}" class="bp-card" href="{{ gallery_img.image.url }}" style="background-image: url('{{ gallery_img.image.url }}');">

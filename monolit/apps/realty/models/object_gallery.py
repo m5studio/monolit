@@ -24,7 +24,8 @@ class ObjectGallery(models.Model):
 
     class Meta:
         verbose_name = 'Галерея Объекта'
-        verbose_name_plural = 'Объекты (Фото Галереи этапов строительства)'
+        # verbose_name_plural = 'Объекты (Фото Галереи этапов строительства)'
+        verbose_name_plural = 'Фото Галереи этапов строительства Объектов'
 
 
 def image_upload_path(instance, filename):
