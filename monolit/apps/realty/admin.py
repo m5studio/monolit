@@ -23,7 +23,7 @@ from apps.realty.models.object import ObjectCategory, Object
 class ObjectBathroomInline(admin.TabularInline):
     model = ObjectBathroom
     extra = 0
-    max_num = 4
+    max_num = 2
 
 @admin.register(ObjectBathroom)
 class ObjectBathroomAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.ModelAdmin):
