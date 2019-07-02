@@ -104,7 +104,7 @@
                     {% if object.rooms_qty %}
                         <div class="flat-params-block">
                             <div class="flat-params-block__name">Комнат</div>
-                            <div class="flat-params-block__val">{{ object.rooms_qty }}</div>
+                            <div class="flat-params-block__val">{{ object.get_rooms_qty_display }}</div>
                         </div>
                     {% endif %}
                     {% if object.floor %}
@@ -147,26 +147,26 @@
                     <div id="flat-params-secondary__inner">
                         {% if object.site_number %}
                             <div class="flat-params-block">
-                                <div class="flat-params-block__name">Номер</div>
+                                <div class="flat-params-block__name">Номер квартиры</div>
                                 <div class="flat-params-block__val">{{ object.site_number }}</div>
                             </div>
                         {% endif %}
                         {% if object.two_levels %}
                             <div class="flat-params-block">
                                 <div class="flat-params-block__name">Два уровня</div>
-                                <div class="flat-params-block__val">Да</div>
+                                <div class="flat-params-block__val">{{ object.two_levels }}</div>
                             </div>
                         {% endif %}
                         {% if object.entresol %}
                             <div class="flat-params-block">
                                 <div class="flat-params-block__name">Антресоль</div>
-                                <div class="flat-params-block__val">Есть</div>
+                                <div class="flat-params-block__val">{{ object.entresol }}</div>
                             </div>
                         {% endif %}
                         {% if object.wardrobe %}
                             <div class="flat-params-block">
                                 <div class="flat-params-block__name">Гардеробная</div>
-                                <div class="flat-params-block__val">Есть</div>
+                                <div class="flat-params-block__val">{{ object.wardrobe }}</div>
                             </div>
                         {% endif %}
                         {% if object.finish_type %}
