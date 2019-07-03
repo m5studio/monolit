@@ -39,14 +39,9 @@ class ObjectDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        # context['page_title'] = '{object_type} {name}'.format(name=self.get_object().name,
-        #                                                       object_type=self.get_object().get_object_type_display())
-        # context['page_title'] = self.get_object().object_type if '{object_type} {name}'.format(name=self.get_object().name, object_type=self.get_object().get_object_type_display()) else  '{name}'.format(name=self.get_object().name)
-
         context['page_title'] = '{name}'.format(name=self.get_object().name)
         if self.get_object().object_type:
             context['page_title'] = '{object_type} {name}'.format(object_type=self.get_object().get_object_type_display(), name=self.get_object().name)
-
 
         # context['page_meta_description'] = 'my custom meta'
         context['object_info_tabs'] = ObjectInfoTab.objects.filter(object_id=self.get_object().pk)
