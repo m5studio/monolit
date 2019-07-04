@@ -46,7 +46,7 @@
                 cursor: default;
                 font-size: .8rem;
                 line-height: 1;
-                padding: 3px 6px;
+                padding: 5px;
 
                 display: flex;
                 align-items: center;
@@ -105,7 +105,7 @@
             }
 
             &:hover {
-                background-color: #EEE;
+                background-color: #F0F0F0;
                 opacity: 1;
 
                 .mortgage-offer__best-offer {

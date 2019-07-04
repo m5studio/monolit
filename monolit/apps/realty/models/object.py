@@ -1,9 +1,10 @@
 from django.db import models
-from django.urls import reverse
-from django.utils.html import mark_safe
 
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
+
+from django.urls import reverse
+from django.utils.html import mark_safe
 
 from ckeditor.fields import RichTextField
 from location_field.models.plain import PlainLocationField
@@ -87,8 +88,8 @@ class Object(models.Model):
                                       blank=True, null=True,
                                       help_text='Изображение с генпланом')
     genplan_svg   = models.TextField('SVG объекты на генплане', blank=True, null=True)
-    has_military  = models.BooleanField('Военная ипотека', default=False, help_text='Подходит ли данный объект для военной ипотеки')
-    has_mother    = models.BooleanField('Материнский капитал', default=False, help_text='Подходит ли данный объект под оплату мат.капиталом')
+    # has_military  = models.BooleanField('Военная ипотека', default=False, help_text='Подходит ли данный объект для военной ипотеки')
+    # has_mother    = models.BooleanField('Материнский капитал', default=False, help_text='Подходит ли данный объект под оплату мат.капиталом')
 
     webcam        = models.URLField('Cсылка на web-камеру', blank=True, null=True, help_text='e.g.: https://rtsp.me/embed/3KASrTkG/')
     panoram       = models.URLField('Cсылка на панораму', blank=True, null=True, help_text='e.g.: https://monolit360.com/files/main/index.html?s=pano1692')
