@@ -98,7 +98,9 @@ class ObjectSiteDetailView(DetailView):
 
         context['bathrooms'] = ObjectBathroom.objects.filter(object_site=self.get_object().pk)
         context['balconies'] = ObjectBalcony.objects.filter(object_site=self.get_object().pk)
-        context['elevators'] = ObjectElevator.objects.filter(object_section=self.get_object().object_section.pk)
+
+        if self.get_object().object_section is not None:
+            context['elevators'] = ObjectElevator.objects.filter(object_section=self.get_object().object_section.pk)
 
         return context
 
@@ -113,7 +115,6 @@ def json_object_gallery(request, gallery_id):
 # ObjectSite info JSON
 def json_object_sites_info(request, object_id):
     object_sites = ObjectSite.objects
-
     object_sites_info = object_sites.object_sites_info_aggregated(object_id)
 
     room_0 = object_sites.flats_info_aggregated(object_id, 0)

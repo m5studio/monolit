@@ -153,7 +153,7 @@ class ObjectSite(models.Model):
         return self.crm_id
 
     def get_absolute_url(self):
-        return reverse('object:site-detail', kwargs={"pk": self.id})
+        return reverse('object:site-detail', kwargs={'pk': self.id})
 
     class Meta:
         verbose_name = 'Помещение'
