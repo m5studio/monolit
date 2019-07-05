@@ -559,8 +559,6 @@ MigrationBackup/
 
 
 ######################################################################################################################### My Stuff
-!layout/dist/
-
-monolit/media/*
-
-package-lock.json
+monolit/layout/dist/
+monolit/media/
+monolit/package-lock.json
