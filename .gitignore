@@ -559,13 +559,8 @@ MigrationBackup/
 
 
 ######################################################################################################################### My Stuff
-!layout/dist/
-!layout/dist/*
+!layout/dist/ 
 
-!media/
-!media/*
-
-media/
 media/*
 
 package-lock.json
