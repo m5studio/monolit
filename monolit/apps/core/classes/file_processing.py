@@ -46,7 +46,6 @@ class FileProcessing:
 
     def newFileNameFromField(self, fieldname, prefix: str = None, postfix: str = None) -> str:
         fieldname = slugify(translit(fieldname, 'ru', reversed=True))
-
         if prefix and postfix:
             return "{prefix}_{fieldname}_{postfix}{extention}".format(fieldname=fieldname, extention=self.getFileExt(), prefix=prefix, postfix=postfix)
         elif prefix:
