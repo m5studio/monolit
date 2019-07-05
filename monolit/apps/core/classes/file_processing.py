@@ -44,6 +44,14 @@ class FileProcessing:
     def newFileNameGenplan(self) -> str:
         return "{0}{1}".format('genplan', self.getFileExt())
 
-    def newFileNameFromField(self, fieldname) -> str:
+    def newFileNameFromField(self, fieldname, prefix: str = None, postfix: str = None) -> str:
         fieldname = slugify(translit(fieldname, 'ru', reversed=True))
-        return "{0}{1}".format(fieldname, self.getFileExt())
+
+        if prefix and postfix:
+            return "{prefix}_{fieldname}_{postfix}{extention}".format(fieldname=fieldname, extention=self.getFileExt(), prefix=prefix, postfix=postfix)
+        elif prefix:
+            return "{prefix}_{fieldname}{extention}".format(fieldname=fieldname, extention=self.getFileExt(), prefix=prefix)
+        elif postfix:
+            return "{fieldname}_{postfix}{extention}".format(fieldname=fieldname, extention=self.getFileExt(), postfix=postfix)
+        else:
+            return "{fieldname}{extention}".format(fieldname=fieldname, extention=self.getFileExt())

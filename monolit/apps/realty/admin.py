@@ -247,13 +247,13 @@ class ObjectAdmin(TurnOffAdminLogging, admin.ModelAdmin):
             # 'description': 'Some description if needed'
         }),
         ('Главное изображение', {
-           'fields': ('main_image_thumb_admin', 'main_image')
+            'fields': ('main_image_thumb_admin', 'main_image')
         }),
         ('Генплан', {
-           'fields': ('genplan_thumb', 'genplan', 'genplan_svg')
+            'fields': ('genplan_thumb', 'genplan', 'genplan_svg')
         }),
         ('Адрес и локация', {
-           'fields': ('city', 'address', 'location')
+            'fields': ('city', 'address', 'location')
         }),
     )
     list_display = ('name', 'crm_id', 'order', 'active', 'all_sold', 'updated')

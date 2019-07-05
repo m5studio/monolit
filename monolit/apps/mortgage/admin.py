@@ -13,7 +13,26 @@ class BankAdmin(TurnOffAdminLogging, admin.ModelAdmin):
 
 @admin.register(MortgageOffer)
 class MortgageOfferAdmin(TurnOffAdminLogging, admin.ModelAdmin):
-    pass
+    fieldsets = (
+        (None, {
+            'fields': ('bank', 'title', 'description'),
+        }),
+        ('Первоначальный взнос %', {
+            'fields': (
+                ('first_payment_from', 'first_payment_to'),
+            )
+        }),
+        ('Срок кредита (лет)', {
+            'fields': (
+                ('loan_term_from', 'loan_term_to'),
+            )
+        }),
+        ('Проецентная ставка %', {
+            'fields': (
+                ('interest_rate_from', 'interest_rate_to'),
+            )
+        }),
+    )
 
 
 @admin.register(MortgagePage)
