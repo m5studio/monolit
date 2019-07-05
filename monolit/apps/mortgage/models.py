@@ -6,6 +6,8 @@ from ckeditor.fields import RichTextField
 
 from apps.core.classes.file_processing import FileProcessing
 
+from apps.realty.models.object import Object
+
 
 def logo_upload_path(instance, filename):
     filename = FileProcessing(filename)
@@ -47,6 +49,10 @@ class MortgageOffer(models.Model):
     interest_rate_to   = models.DecimalField('до', max_digits=4, decimal_places=2, blank=True, null=True)
 
     description        = RichTextField('Описание', blank=True, null=True, help_text='Описание и дополнительные условия')
+    objects            = models.ManyToManyField(Object, verbose_name='Объекты', blank=True)
+
+    def __str__(self):
+        return self.title
 
     class Meta:
         verbose_name = 'Ипотечная программа'

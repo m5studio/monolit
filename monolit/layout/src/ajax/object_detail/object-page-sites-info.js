@@ -8,9 +8,13 @@ function objectPageSitesInfo() {
         $.getJSON(site_info_url, (data) => {
             const objectStats = data[0]
 
-            $('.obj-area-min').append( '<small>от</small> ' + formatNumber(objectStats['object_min_site_area'], 2) )
-            $('.obj-area-max').append( ' <small>до</small> ' + formatNumber(objectStats['object_max_site_area'], 2) + ' <small>м<sup>2</sup></small>' )
-            $('.obj-min-price').append( '<small>от</small> ' + formatNumber(objectStats['object_min_site_price'], 0) + ' <small>руб.</small>' )
+            if ( objectStats['object_total_sites_qty'] === 0 ) {
+                $('#section-object-page-main-info__stats').remove()
+            } else {
+                $('.obj-area-min').append( '<small>от</small> ' + formatNumber(objectStats['object_min_site_area'], 2) )
+                $('.obj-area-max').append( ' <small>до</small> ' + formatNumber(objectStats['object_max_site_area'], 2) + ' <small>м<sup>2</sup></small>' )
+                $('.obj-min-price').append( '<small>от</small> ' + formatNumber(objectStats['object_min_site_price'], 0) + ' <small>руб.</small>' )
+            }
         })
     }
 }

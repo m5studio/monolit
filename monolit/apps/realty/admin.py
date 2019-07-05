@@ -242,7 +242,6 @@ class ObjectAdmin(TurnOffAdminLogging, admin.ModelAdmin):
     readonly_fields = ('genplan_thumb', 'main_image_thumb_admin')
     fieldsets = (
         (None, {
-            # 'fields': ('active', 'completed', 'all_sold', 'order', 'crm_id', 'name', 'slug', 'category', 'object_type', 'building_type', 'description', 'has_military', 'has_mother', 'webcam', 'panoram'),
             'fields': ('active', 'completed', 'all_sold', 'order', 'crm_id', 'name', 'slug', 'category', 'object_type', 'building_type', 'description', 'webcam', 'panoram'),
             # 'description': 'Some description if needed'
         }),

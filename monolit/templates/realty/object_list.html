@@ -34,13 +34,17 @@
                 </span>
             </div>
             <div id="section-objects-list__inner" class="container">
-                {% for object in object_list %}
-                    {% include 'realty/cards/object-card.html' %}
-                {% endfor %}
+                {% if object_list %}
+                    {% for object in object_list %}
+                        {% include 'realty/cards/object-card.html' %}
+                    {% endfor %}
+                {% endif %}
 
-                {% for object in objects_sold %}
-                    {% include 'realty/cards/object-card.html' %}
-                {% endfor %}
+                {% if objects_sold %}
+                    {% for object in objects_sold %}
+                        {% include 'realty/cards/object-card.html' %}
+                    {% endfor %}
+                {% endif %}
             </div>
         </section>
     </main>

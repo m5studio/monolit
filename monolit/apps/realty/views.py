@@ -38,11 +38,10 @@ class ObjectDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
+        context['opts'] = Object._meta
         context['page_title'] = '{name}'.format(name=self.get_object().name)
         if self.get_object().object_type:
             context['page_title'] = '{object_type} {name}'.format(object_type=self.get_object().get_object_type_display(), name=self.get_object().name)
-
         # context['page_meta_description'] = 'my custom meta'
         context['object_info_tabs'] = ObjectInfoTab.objects.filter(object_id=self.get_object().pk)
         context['object_files'] = ObjectFile.objects.filter(object_id=self.get_object().pk)
@@ -86,6 +85,7 @@ class ObjectSiteDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['opts'] = ObjectSite._meta
         context['page_title'] = '{rooms_qty} {site_type} №{site_number} в {object_type} «{object_name}»'.format(rooms_qty=self.get_object().get_rooms_qty_display(),
                                                                                                         site_type=self.get_object().get_site_type_display(),
                                                                                                         site_number=self.get_object().site_number,
