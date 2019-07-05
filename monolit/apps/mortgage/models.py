@@ -1,4 +1,6 @@
 from django.db import models
+
+from django.utils.html import mark_safe
 from django.core.validators import MaxValueValidator, MinValueValidator, FileExtensionValidator
 from ckeditor.fields import RichTextField
 
@@ -12,7 +14,13 @@ def logo_upload_path(instance, filename):
 
 class Bank(models.Model):
     name = models.CharField('Название банка', unique=True, max_length=255)
-    logo = models.FileField('Логотип банка .svg', validators=[FileExtensionValidator(['svg'])], upload_to=logo_upload_path, blank=True, null=True)
+    logo = models.FileField('Логотип банка (.svg)', validators=[FileExtensionValidator(['svg'])], upload_to=logo_upload_path, blank=True, null=True)
+
+    # Thumbnails for admin
+    def logo_admin_thumb(self):
+        return mark_safe('<img src="{}" alt="" style="width: 256px; height: auto;" />'.format(self.logo.url))
+    logo_admin_thumb.short_description = 'Thumbnail'
+    # END Thumbnails for admin
 
     def __str__(self):
         return self.name
@@ -23,7 +31,7 @@ class Bank(models.Model):
 
 
 class MortgageOffer(models.Model):
-    bank               = models.ForeignKey(Bank, verbose_name='Банк', default=None, on_delete=models.CASCADE)
+    bank               = models.ForeignKey(Bank, verbose_name='Банк', on_delete=models.CASCADE)
     title              = models.CharField('Название программы', unique=True, max_length=255, help_text='Название ипотечного кредита')
 
     # Первоначальный взнос

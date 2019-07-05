@@ -8,7 +8,15 @@ from apps.mortgage.models import Bank, MortgageOffer, MortgagePage
 
 @admin.register(Bank)
 class BankAdmin(TurnOffAdminLogging, admin.ModelAdmin):
-    pass
+    readonly_fields=('logo_admin_thumb',)
+    fieldsets = (
+        (None, {
+            'fields': ('name',),
+        }),
+        ('Лого', {
+            'fields': ('logo_admin_thumb', 'logo')
+        }),
+    )
 
 
 @admin.register(MortgageOffer)
