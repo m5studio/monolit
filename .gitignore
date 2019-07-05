@@ -565,4 +565,7 @@ MigrationBackup/
 !media/
 !media/*
 
+media/
+media/*
+
 package-lock.json
