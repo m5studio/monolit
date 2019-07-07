@@ -1,11 +1,13 @@
 function scrollToTop() {
     const scrollToTopName = 'scroll-to-top'
     const scrollToTopId = '#'+scrollToTopName
-
     const pxFromTop = 500
 
-    $('#footer').append('<div id="'+scrollToTopName+'">Наверх страницы</div>')
-    $(scrollToTopId).hide()
+    if ( $(window).scrollTop() > pxFromTop ) {
+        $('#footer').append('<div id="'+scrollToTopName+'">Наверх страницы</div>')
+    } else {
+        $(scrollToTopId).hide()
+    }
 
     $(scrollToTopId).click(() => {
         $('html, body').animate({scrollTop: 0}, 500)
@@ -19,5 +21,6 @@ function scrollToTop() {
         }
     })
 }
+
 
 export {scrollToTop}
