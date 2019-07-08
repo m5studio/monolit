@@ -1,9 +1,13 @@
 .mother-capital-step-card {
+    display: grid;
+    grid-template-columns: 45px 1fr;
+    grid-column-gap: 15px;
+
     background-color: #00998f;
     line-height: 1.2;
     padding: 30px;
     width: 100%;
-    min-height: 250px;
+    min-height: 160px;
 
     @include media-breakpoint-down(xs) {
         max-width: 350px;
