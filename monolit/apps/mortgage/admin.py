@@ -8,7 +8,7 @@ from django.db import models
 from django.forms import CheckboxSelectMultiple
 # END Checkboxes for ManyToManyField in Admin
 
-from apps.mortgage.models import Bank, MortgageOffer, MortgagePage
+from apps.mortgage.models import Bank, MortgageOffer
 
 
 @admin.register(Bank)
@@ -62,8 +62,3 @@ class MortgageOfferAdmin(TurnOffAdminLogging, admin.ModelAdmin):
             'fields': ('objects',),
         }),
     )
-
-
-@admin.register(MortgagePage)
-class MortgagePageAdmin(TurnOffAdminLogging, admin.ModelAdmin):
-    pass

@@ -1,0 +1,246 @@
+{% extends 'base.html' %}
+
+
+{% block body_classes %}{% spaceless %}
+    {{ block.super }} mortgage
+{% endspaceless %}{% endblock %}
+
+
+{% block content %}
+    <nav id="breadcrumbs">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'homepage' %}">Главная</a>
+                </li>
+                <li class="breadcrumb-item active">{{ page_tite }}</li>
+            </ol>
+        </div>
+    </nav>
+
+    <main id="main">
+        <div id="page-title-h1" class="container">
+            <h1>{{ page_tite }}</h1>
+        </div>
+
+        <div id="section-mortgage" class="common-section">
+            <div id="section-mortgage__inner" class="container">
+                <div class="mortgage-card">
+                    <div class="mortgage-card__logo bank-logo bank-logo__rnkb"></div>
+                    <div class="mortgage-card__percent">
+                        <span>6%</span>
+                    </div>
+                    <div class="mortgage-card__descr">Ипотека с государственной поддержкой</div>
+                    <div class="mortgage-card__info-blocks">
+                        <div class="mortgage-card__info-blocks--block">
+                            <div class="mortgage-card__info-blocks--small-title">Срок кредита</div>
+                            <div class="mortgage-card__info-blocks--value">до <span>25 лет</span></div>
+                        </div>
+                        <div class="mortgage-card__info-blocks--block">
+                            <div class="mortgage-card__info-blocks--small-title">Первый взнос</div>
+                            <div class="mortgage-card__info-blocks--value">от <span>20%</span></div>
+                        </div>
+                    </div>
+                    <div class="mortgage-card__mortgage-request">
+                        <div class="mortgage-card__mortgage-request--inner">Отправить<br>заявку на ипотеку</div>
+                    </div>
+                </div>
+                <div class="mortgage-card">
+                    <div class="mortgage-card__logo bank-logo bank-logo__rossiya"></div>
+                    <div class="mortgage-card__percent">
+                        от <span>9%</span>
+                    </div>
+                    <div class="mortgage-card__descr">
+                        Военная ипотека
+                    </div>
+                    <div class="mortgage-card__info-blocks">
+                        <div class="mortgage-card__info-blocks--block">
+                            <div class="mortgage-card__info-blocks--small-title">Срок кредита</div>
+                            <div class="mortgage-card__info-blocks--value"><span>1 - 20 лет</span></div>
+                        </div>
+                        <div class="mortgage-card__info-blocks--block">
+                            <div class="mortgage-card__info-blocks--small-title">Первый взнос</div>
+                            <div class="mortgage-card__info-blocks--value">от <span>20%</span></div>
+                        </div>
+                    </div>
+                    <div class="mortgage-card__mortgage-request">
+                        <div class="mortgage-card__mortgage-request--inner">
+                            Отправить<br>заявку на ипотеку
+                        </div>
+                    </div>
+                </div>
+                <div class="mortgage-card">
+                    <div class="mortgage-card__logo bank-logo bank-logo__rossiya"></div>
+                    <div class="mortgage-card__percent">
+                        от <span>9%</span>
+                    </div>
+                    <div class="mortgage-card__descr">
+                        "Новые метры"
+                    </div>
+                    <div class="mortgage-card__info-blocks">
+                        <div class="mortgage-card__info-blocks--block">
+                            <div class="mortgage-card__info-blocks--small-title">Срок кредита</div>
+                            <div class="mortgage-card__info-blocks--value"><span>3 - 25 лет</span></div>
+                        </div>
+                        <div class="mortgage-card__info-blocks--block">
+                            <div class="mortgage-card__info-blocks--small-title">Первый взнос</div>
+                            <div class="mortgage-card__info-blocks--value">от <span>15%</span></div>
+                        </div>
+                    </div>
+                    <div class="mortgage-card__mortgage-request">
+                        <div class="mortgage-card__mortgage-request--inner">
+                            Отправить<br>заявку на ипотеку
+                        </div>
+                    </div>
+                </div>
+                <div class="mortgage-card">
+                    <div class="mortgage-card__logo bank-logo bank-logo__rnkb"></div>
+                    <div class="mortgage-card__percent">
+                        от <span>9,5%</span>
+                    </div>
+                    <div class="mortgage-card__descr">
+                        Военная ипотека
+                    </div>
+                    <div class="mortgage-card__info-blocks">
+                        <div class="mortgage-card__info-blocks--block">
+                            <div class="mortgage-card__info-blocks--small-title">Срок кредита</div>
+                            <div class="mortgage-card__info-blocks--value"><span>3 - 20 лет</span></div>
+                        </div>
+                        <div class="mortgage-card__info-blocks--block">
+                            <div class="mortgage-card__info-blocks--small-title">Первый взнос</div>
+                            <div class="mortgage-card__info-blocks--value">от <span>10%</span></div>
+                        </div>
+                    </div>
+                    <div class="mortgage-card__mortgage-request">
+                        <div class="mortgage-card__mortgage-request--inner">
+                            Отправить<br>заявку на ипотеку
+                        </div>
+                    </div>
+                </div>
+                <div class="mortgage-card">
+                    <div class="mortgage-card__logo bank-logo bank-logo__rnkb"></div>
+                    <div class="mortgage-card__percent">
+                        от <span>9,5%</span>
+                    </div>
+                    <div class="mortgage-card__descr">
+                        "Новостройка"
+                    </div>
+                    <div class="mortgage-card__info-blocks">
+                        <div class="mortgage-card__info-blocks--block">
+                            <div class="mortgage-card__info-blocks--small-title">Срок кредита</div>
+                            <div class="mortgage-card__info-blocks--value"><span>3 - 20 лет</span></div>
+                        </div>
+                        <div class="mortgage-card__info-blocks--block">
+                            <div class="mortgage-card__info-blocks--small-title">Первый взнос</div>
+                            <div class="mortgage-card__info-blocks--value">от <span>10%</span></div>
+                        </div>
+                    </div>
+                    <div class="mortgage-card__mortgage-request">
+                        <div class="mortgage-card__mortgage-request--inner">
+                            Отправить<br>заявку на ипотеку
+                        </div>
+                    </div>
+                </div>
+                <div class="mortgage-card">
+                    <div class="mortgage-card__logo bank-logo bank-logo__rnkb"></div>
+                    <div class="mortgage-card__percent">
+                        от <span>10%</span>
+                    </div>
+                    <div class="mortgage-card__descr">
+                        "Шаг в будущее"
+                    </div>
+                    <div class="mortgage-card__info-blocks">
+                        <div class="mortgage-card__info-blocks--block">
+                            <div class="mortgage-card__info-blocks--small-title">Срок кредита</div>
+                            <div class="mortgage-card__info-blocks--value"><span>3 - 25 лет</span></div>
+                        </div>
+                        <div class="mortgage-card__info-blocks--block">
+                            <div class="mortgage-card__info-blocks--small-title">Первый взнос</div>
+                            <div class="mortgage-card__info-blocks--value">от <span>10%</span></div>
+                        </div>
+                    </div>
+                    <div class="mortgage-card__mortgage-request">
+                        <div class="mortgage-card__mortgage-request--inner">
+                            Отправить<br>заявку на ипотеку
+                        </div>
+                    </div>
+                </div>
+                <div class="mortgage-card">
+                    <div class="mortgage-card__logo bank-logo bank-logo__rnkb"></div>
+                    <div class="mortgage-card__percent">
+                        от <span>10%</span>
+                    </div>
+                    <div class="mortgage-card__descr">
+                        Паркинг в ипотеку
+                    </div>
+                    <div class="mortgage-card__info-blocks">
+                        <div class="mortgage-card__info-blocks--block">
+                            <div class="mortgage-card__info-blocks--small-title">Срок кредита</div>
+                            <div class="mortgage-card__info-blocks--value"><span>3 - 25 лет</span></div>
+                        </div>
+                        <div class="mortgage-card__info-blocks--block">
+                            <div class="mortgage-card__info-blocks--small-title">Первый взнос</div>
+                            <div class="mortgage-card__info-blocks--value">от <span>10%</span></div>
+                        </div>
+                    </div>
+                    <div class="mortgage-card__mortgage-request">
+                        <div class="mortgage-card__mortgage-request--inner">
+                            Отправить<br>заявку на ипотеку
+                        </div>
+                    </div>
+                </div>
+                <div class="mortgage-card">
+                    <div class="mortgage-card__logo bank-logo bank-logo__rnkb"></div>
+                    <div class="mortgage-card__percent">
+                        от <span>10%</span>
+                    </div>
+                    <div class="mortgage-card__descr">
+                        "Готовая квартира"
+                    </div>
+                    <div class="mortgage-card__info-blocks">
+                        <div class="mortgage-card__info-blocks--block">
+                            <div class="mortgage-card__info-blocks--small-title">Срок кредита</div>
+                            <div class="mortgage-card__info-blocks--value"><span>3 - 20 лет</span></div>
+                        </div>
+                        <div class="mortgage-card__info-blocks--block">
+                            <div class="mortgage-card__info-blocks--small-title">Первый взнос</div>
+                            <div class="mortgage-card__info-blocks--value">от <span>10%</span></div>
+                        </div>
+                    </div>
+                    <div class="mortgage-card__mortgage-request">
+                        <div class="mortgage-card__mortgage-request--inner">
+                            Отправить<br>заявку на ипотеку
+                        </div>
+                    </div>
+                </div>
+                <div class="mortgage-card">
+                    <div class="mortgage-card__logo bank-logo bank-logo__rnkb"></div>
+                    <div class="mortgage-card__percent">
+                        от <span>10%</span>
+                    </div>
+                    <div class="mortgage-card__descr">
+                        "Простая ипотека"
+                        Только паспорт и СНИЛС
+                    </div>
+                    <div class="mortgage-card__info-blocks">
+                        <div class="mortgage-card__info-blocks--block">
+                            <div class="mortgage-card__info-blocks--small-title">Срок кредита</div>
+                            <div class="mortgage-card__info-blocks--value"><span>3 - 25 лет</span></div>
+                        </div>
+                        <div class="mortgage-card__info-blocks--block">
+                            <div class="mortgage-card__info-blocks--small-title">Первый взнос</div>
+                            <div class="mortgage-card__info-blocks--value">от <span>35%</span></div>
+                        </div>
+                    </div>
+                    <div class="mortgage-card__mortgage-request">
+                        <div class="mortgage-card__mortgage-request--inner">
+                            Отправить<br>заявку на ипотеку
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% include 'mortgage/sections/mortgage-types-and-application.html' %}
+    </main>
+{% endblock %}

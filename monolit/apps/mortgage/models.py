@@ -57,11 +57,3 @@ class MortgageOffer(models.Model):
     class Meta:
         verbose_name = 'Ипотечная программа'
         verbose_name_plural = 'Ипотечные программы'
-
-
-class MortgagePage(models.Model):
-    title = models.CharField('Заголовок', unique=True, max_length=255, help_text='Заголовок страницы по ипотеке пример: Материнский капитал, КорпорАктив, Военная ипотека...')
-
-    class Meta:
-        verbose_name = 'Страница (Ипотека)'
-        verbose_name_plural = 'Страницы (Ипотека)'

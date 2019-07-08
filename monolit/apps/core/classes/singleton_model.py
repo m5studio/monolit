@@ -2,11 +2,11 @@
 from django.db import models
 from django.core.cache import cache
 from django.contrib import admin
+
 from apps.core.classes.turn_off_admin_logging import TurnOffAdminLogging
 
 
 class SingletonModel(models.Model):
-
     class Meta:
         abstract = True
 
@@ -31,7 +31,6 @@ class SingletonModel(models.Model):
 
 
 class SingletonAdminModel(TurnOffAdminLogging, admin.ModelAdmin):
-
     # Disable mass actions
     actions = None
 

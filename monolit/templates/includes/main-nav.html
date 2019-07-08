@@ -25,18 +25,23 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="main-nav__item has-dropdown">
-                        <a href="" class="main-nav__link">Ипотека</a>
+
+                    {% url 'mortgage:mortgage' as mortgage_url %}
+                    {% url 'mortgage:military' as mortgage_military_url %}
+                    {% url 'mortgage:mother' as mortgage_mother_url %}
+                    {% url 'mortgage:corporactive' as mortgage_corporactive_url %}
+                    <li class="main-nav__item{% if mortgage_url == request.path or mortgage_military_url in request.path or mortgage_mother_url in request.path or mortgage_corporactive_url in request.path %} active{% endif %} has-dropdown">
+                        <a href="{{ mortgage_url }}" class="main-nav__link">Ипотека</a>
                         <div class="dropdown">
                             <ul class="main-nav-submenu__list">
-                                <li class="main-nav-submenu__item">
-                                    <a href="" class="main-nav-submenu__link">Военная ипотека</a>
+                                <li class="main-nav-submenu__item{% if mortgage_military_url == request.path %} active{% endif %}">
+                                    <a href="{{ mortgage_military_url }}" class="main-nav-submenu__link">Военная ипотека</a>
                                 </li>
-                                <li class="main-nav-submenu__item">
-                                    <a href="" class="main-nav-submenu__link">Материнский капитал</a>
+                                <li class="main-nav-submenu__item{% if mortgage_mother_url == request.path %} active{% endif %}">
+                                    <a href="{{ mortgage_mother_url }}" class="main-nav-submenu__link">Материнский капитал</a>
                                 </li>
-                                <li class="main-nav-submenu__item">
-                                    <a href="" class="main-nav-submenu__link">КорпорАКТИВ</a>
+                                <li class="main-nav-submenu__item{% if mortgage_corporactive_url == request.path %} active{% endif %}">
+                                    <a href="{{ mortgage_corporactive_url }}" class="main-nav-submenu__link">КорпорАКТИВ</a>
                                 </li>
                             </ul>
                         </div>
