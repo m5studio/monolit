@@ -9,9 +9,12 @@
     width: 100%;
     min-height: 160px;
 
+    @include media-breakpoint-down(sm) {
+        max-width: 70%;
+        justify-self: center;
+    }
     @include media-breakpoint-down(xs) {
         max-width: 350px;
-        justify-self: center;
     }
 
     &__number {
