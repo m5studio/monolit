@@ -4,6 +4,7 @@ from apps.core.classes.turn_off_admin_logging import TurnOffAdminLogging
 # from apps.core.classes.hide_from_admin_index import HideFromAdminIndex
 
 # Checkboxes for ManyToManyField in Admin
+# FIXME: !!!
 from django.db import models
 from django.forms import CheckboxSelectMultiple
 # END Checkboxes for ManyToManyField in Admin
@@ -31,6 +32,7 @@ class MortgageOfferAdmin(TurnOffAdminLogging, admin.ModelAdmin):
     description_text = 'Если надо заполнить без ОТ и ДО, то заполняем оба поля одинаковыми значениями'
 
     # Checkboxes for ManyToManyField in Admin
+    # FIXME: !!!
     formfield_overrides = {
         models.ManyToManyField: {'widget': CheckboxSelectMultiple},
     }
@@ -58,6 +60,7 @@ class MortgageOfferAdmin(TurnOffAdminLogging, admin.ModelAdmin):
             ),
             'description': description_text
         }),
+        # FIXME: !!!
         # ('Объекты участвующие в программе', {
         #     'fields': ('objects',),
         # }),
