@@ -3,10 +3,18 @@
     box-shadow: 0 4px 8px rgba(0,0,0,.15);
     border-radius: 5px;
     cursor: pointer;
+    padding-top: 15px;
     position: relative;
     overflow: hidden;
 
-    &__logo {
+    display: grid;
+    grid-template-rows: 80px repeat(3, 1fr) 0;
+
+    &__bank-logo {
+        background-repeat: no-repeat;
+        background-position: 50%;
+        background-size: auto;
+        min-height: 32px;
         height: 80px;
     }
 

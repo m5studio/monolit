@@ -16,7 +16,7 @@ def logo_upload_path(instance, filename):
 
 class Bank(models.Model):
     name = models.CharField('Название банка', unique=True, max_length=255)
-    logo = models.FileField('Логотип банка (.svg)', validators=[FileExtensionValidator(['svg'])], upload_to=logo_upload_path, blank=True, null=True)
+    logo = models.FileField('Логотип банка (svg, png)', validators=[FileExtensionValidator(['svg', 'png'])], upload_to=logo_upload_path, blank=True, null=True)
 
     # Thumbnails for admin
     def logo_admin_thumb(self):
@@ -34,7 +34,7 @@ class Bank(models.Model):
 
 class MortgageOffer(models.Model):
     bank               = models.ForeignKey(Bank, verbose_name='Банк', on_delete=models.CASCADE)
-    title              = models.CharField('Название программы', unique=True, max_length=255, help_text='Название ипотечного кредита')
+    title              = models.CharField('Название программы', max_length=255, help_text='Название ипотечного кредита')
 
     # Первоначальный взнос
     first_payment_from = models.DecimalField('от', max_digits=4, decimal_places=2, blank=True, null=True)
@@ -45,8 +45,8 @@ class MortgageOffer(models.Model):
     loan_term_to       = models.PositiveIntegerField('до', validators=[MinValueValidator(1), MaxValueValidator(50)], blank=True, null=True)
 
     # Проецентная ставка
-    interest_rate_from = models.DecimalField('от', max_digits=4, decimal_places=2, blank=True, null=True)
-    interest_rate_to   = models.DecimalField('до', max_digits=4, decimal_places=2, blank=True, null=True)
+    rate_from          = models.DecimalField('от', max_digits=4, decimal_places=2, blank=True, null=True)
+    rate_to            = models.DecimalField('до', max_digits=4, decimal_places=2, blank=True, null=True)
 
     description        = RichTextField('Описание', blank=True, null=True, help_text='Описание и дополнительные условия')
     objects            = models.ManyToManyField(Object, verbose_name='Объекты', blank=True)

@@ -40,9 +40,9 @@ class MortgageOfferAdmin(TurnOffAdminLogging, admin.ModelAdmin):
         (None, {
             'fields': ('bank', 'title', 'description'),
         }),
-        ('Первоначальный взнос %', {
+        ('Проецентная ставка %', {
             'fields': (
-                ('first_payment_from', 'first_payment_to'),
+                ('rate_from', 'rate_to'),
             ),
             'description': description_text
         }),
@@ -52,13 +52,13 @@ class MortgageOfferAdmin(TurnOffAdminLogging, admin.ModelAdmin):
             ),
             'description': description_text
         }),
-        ('Проецентная ставка %', {
+        ('Первоначальный взнос %', {
             'fields': (
-                ('interest_rate_from', 'interest_rate_to'),
+                ('first_payment_from', 'first_payment_to'),
             ),
             'description': description_text
         }),
-        ('Объекты участвующие в программе', {
-            'fields': ('objects',),
-        }),
+        # ('Объекты участвующие в программе', {
+        #     'fields': ('objects',),
+        # }),
     )
