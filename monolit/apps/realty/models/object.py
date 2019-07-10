@@ -80,8 +80,8 @@ class Object(models.Model):
     genplan       = models.ImageField('Генплан', upload_to=genplan_upload_path, blank=True, null=True, help_text='Изображение с генпланом')
     genplan_svg   = models.TextField('SVG объекты на генплане', blank=True, null=True)
 
-    mortgage_military = models.BooleanField('Военная ипотека', default=False, help_text='Подходит ли данный объект под условия Военной ипотеки?')
-    mortgage_mother   = models.BooleanField('Материнский капитал', default=False, help_text='Подходит ли данный объект под оплату Материнским капиталом?')
+    # mortgage_military = models.BooleanField('Военная ипотека', default=False, help_text='Подходит ли данный объект под условия Военной ипотеки?')
+    # mortgage_mother   = models.BooleanField('Материнский капитал', default=False, help_text='Подходит ли данный объект под оплату Материнским капиталом?')
 
     webcam        = models.URLField('Cсылка на web-камеру', blank=True, null=True, help_text='e.g.: https://rtsp.me/embed/3KASrTkG/')
     panoram       = models.URLField('Cсылка на панораму', blank=True, null=True, help_text='e.g.: https://monolit360.com/files/main/index.html?s=pano1692')

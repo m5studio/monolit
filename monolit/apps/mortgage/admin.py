@@ -1,15 +1,15 @@
 from django.contrib import admin
 
-from apps.core.classes.turn_off_admin_logging import TurnOffAdminLogging
-# from apps.core.classes.hide_from_admin_index import HideFromAdminIndex
-
-# Checkboxes for ManyToManyField in Admin
-# FIXME: !!!
+# Admin ManyToManyField with checkboxes
 from django.db import models
 from django.forms import CheckboxSelectMultiple
-# END Checkboxes for ManyToManyField in Admin
+# END Admin ManyToManyField with checkboxes
 
-from apps.mortgage.models import Bank, MortgageOffer
+from apps.core.classes.turn_off_admin_logging import TurnOffAdminLogging
+# from apps.core.classes.hide_from_admin_index import HideFromAdminIndex
+from apps.core.classes.singleton_model import SingletonAdminModel
+
+from apps.mortgage.models import Bank, Offer, WayToBuy
 
 
 @admin.register(Bank)
@@ -25,22 +25,19 @@ class BankAdmin(TurnOffAdminLogging, admin.ModelAdmin):
     )
 
 
-@admin.register(MortgageOffer)
-class MortgageOfferAdmin(TurnOffAdminLogging, admin.ModelAdmin):
-    list_display = ('title', 'bank')
-
-    description_text = 'Если надо заполнить без ОТ и ДО, то заполняем оба поля одинаковыми значениями'
-
-    # Checkboxes for ManyToManyField in Admin
-    # FIXME: !!!
+@admin.register(Offer)
+class OfferAdmin(TurnOffAdminLogging, admin.ModelAdmin):
+    # Admin ManyToManyField with checkboxes
     formfield_overrides = {
         models.ManyToManyField: {'widget': CheckboxSelectMultiple},
     }
-    # END Checkboxes for ManyToManyField in Admin
+    # END Admin ManyToManyField with checkboxes
 
+    list_display = ('title', 'bank')
+    description_text = 'Если надо заполнить без ОТ и ДО, то заполняем оба поля одинаковыми значениями'
     fieldsets = (
         (None, {
-            'fields': ('bank', 'title', 'description'),
+            'fields': ('bank', 'title', 'description', 'object'),
         }),
         ('Проецентная ставка %', {
             'fields': (
@@ -60,8 +57,14 @@ class MortgageOfferAdmin(TurnOffAdminLogging, admin.ModelAdmin):
             ),
             'description': description_text
         }),
-        # FIXME: !!!
-        # ('Объекты участвующие в программе', {
-        #     'fields': ('objects',),
-        # }),
     )
+
+
+@admin.register(WayToBuy)
+# class WayToBuyAdmin(TurnOffAdminLogging, admin.ModelAdmin):
+class WayToBuyAdmin(SingletonAdminModel, admin.ModelAdmin):
+    # Admin ManyToManyField with checkboxes
+    formfield_overrides = {
+        models.ManyToManyField: {'widget': CheckboxSelectMultiple},
+    }
+    # END Admin ManyToManyField with checkboxes

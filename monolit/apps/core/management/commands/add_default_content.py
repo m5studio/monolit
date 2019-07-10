@@ -6,6 +6,8 @@ from apps.realty.models.object import ObjectCategory
 from apps.realty.models.object_site import ObjectSiteWindowsView
 from apps.core.models import SiteSettings
 
+from apps.mortgage.models import WayToBuy
+
 
 class Command(BaseCommand):
     help = 'Create Default content'

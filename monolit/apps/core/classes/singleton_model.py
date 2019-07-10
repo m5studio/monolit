@@ -18,6 +18,7 @@ class SingletonModel(models.Model):
         super(SingletonModel, self).save(*args, **kwargs)
         self.set_cache()
 
+    # Restrict deletion
     def delete(self, *args, **kwargs):
         pass
 
@@ -40,4 +41,17 @@ class SingletonAdminModel(TurnOffAdminLogging, admin.ModelAdmin):
 
     # Remove "Save and add another"
     def has_add_permission(self, request):
-        return False
+        if self.model.objects.count() > 0:
+            return False
+        return super().has_add_permission(request)
+
+    # Turn off logging History
+    def log_addition(self, *args):
+        return
+
+    def log_change(self, *args):
+        return
+
+    def log_deletion(self, *args):
+        return
+    # END Turn off logging History

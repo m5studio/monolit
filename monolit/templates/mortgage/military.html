@@ -25,7 +25,7 @@
                     <h2>Объекты с военной ипотекой</h2>
                 </div>
                 <div id="section-objects-list__inner" class="container">
-                    {% for object in objects_military %}
+                    {% for object in objects_military.military.all %}
                         {% include 'realty/cards/object-card.html' %}
                     {% endfor %}
                 </div>

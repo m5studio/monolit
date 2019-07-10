@@ -5,6 +5,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator, FileExt
 from ckeditor.fields import RichTextField
 
 from apps.core.classes.file_processing import FileProcessing
+from apps.core.classes.singleton_model import SingletonModel
 
 from apps.realty.models.object import Object
 
@@ -32,7 +33,8 @@ class Bank(models.Model):
         verbose_name_plural = 'Банки'
 
 
-class MortgageOffer(models.Model):
+# class MortgageOffer(models.Model):
+class Offer(models.Model):
     bank               = models.ForeignKey(Bank, verbose_name='Банк', on_delete=models.CASCADE)
     title              = models.CharField('Название программы', max_length=255, help_text='Название ипотечного кредита')
 
@@ -49,7 +51,7 @@ class MortgageOffer(models.Model):
     rate_to            = models.DecimalField('до', max_digits=4, decimal_places=2, blank=True, null=True)
 
     description        = RichTextField('Описание', blank=True, null=True, help_text='Описание и дополнительные условия')
-    objects            = models.ManyToManyField(Object, verbose_name='Объекты', blank=True)
+    object             = models.ManyToManyField(Object, verbose_name='Объект(ы)', blank=True, help_text='Выберите Объекты подходящие под данную ипотечную программу')
 
     def __str__(self):
         return self.title
@@ -57,3 +59,15 @@ class MortgageOffer(models.Model):
     class Meta:
         verbose_name = 'Ипотечная программа'
         verbose_name_plural = 'Ипотечные программы'
+
+
+class WayToBuy(SingletonModel):
+    military = models.ManyToManyField(Object, verbose_name='Военная ипотека', related_name='mortgage_object_military', blank=True, help_text='Выберите Объекты подходящие под военную ипотеку')
+    mother   = models.ManyToManyField(Object, verbose_name='Материнский капитал', related_name='mortgage_object_mother', blank=True, help_text='Выберите Объекты подходящие под материнский капитал')
+
+    def __str__(self):
+        return 'Способы покупки'
+
+    class Meta:
+        verbose_name = 'Способы покупки'
+        verbose_name_plural = 'Способы покупки'

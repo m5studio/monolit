@@ -1,7 +1,9 @@
 from django.views.generic import TemplateView
 
-from apps.mortgage.models import MortgageOffer
-from apps.realty.models.object import Object
+from django.db.models import Q
+
+from apps.mortgage.models import Offer, WayToBuy
+# from apps.realty.models.object import Object
 
 
 class MortgageView(TemplateView):
@@ -10,7 +12,7 @@ class MortgageView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['page_tite'] = 'Ипотека'
-        context['mortgage_offers'] = MortgageOffer.objects.all()
+        context['mortgage_offers'] = Offer.objects.all().order_by('title')
         return context
 
 
@@ -29,7 +31,12 @@ class MortgageMilitaryView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['page_tite'] = 'Военная ипотека'
-        context['objects_military'] = Object.objects.filter(active=True, mortgage_military=True, all_sold=False).order_by('order')
+
+        # Check if object id=1 in WayToBuy exists and military is not None
+        context['objects_military'] = None
+        if WayToBuy.objects.filter(id=1).exists() and WayToBuy.objects.filter( ~Q(military=None) ):
+            context['objects_military'] = WayToBuy.objects.get(id=1)
+
         return context
 
 

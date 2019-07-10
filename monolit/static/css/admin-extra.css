@@ -1,0 +1,9 @@
+/* Remove Recent actions */
+#recent-actions-module {
+    /* display: none; */
+}
+
+/* Remove History button */
+.historylink {
+    display: none !important;
+}
