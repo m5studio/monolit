@@ -33,7 +33,6 @@ class Bank(models.Model):
         verbose_name_plural = 'Банки'
 
 
-# class MortgageOffer(models.Model):
 class Offer(models.Model):
     bank               = models.ForeignKey(Bank, verbose_name='Банк', on_delete=models.CASCADE)
     title              = models.CharField('Название программы', max_length=255, help_text='Название ипотечного кредита')
@@ -66,8 +65,8 @@ class WayToBuy(SingletonModel):
     mother   = models.ManyToManyField(Object, verbose_name='Материнский капитал', related_name='mortgage_object_mother', blank=True, help_text='Выберите Объекты подходящие под материнский капитал')
 
     def __str__(self):
-        return 'Способы покупки'
+        return 'Способы покупки (Военная ипотека, Мат. капитал)'
 
     class Meta:
-        verbose_name = 'Способы покупки'
-        verbose_name_plural = 'Способы покупки'
+        verbose_name = 'Способы покупки (Военная ипотека, Мат. капитал)'
+        verbose_name_plural = 'Способы покупки (Военная ипотека, Мат. капитал)'

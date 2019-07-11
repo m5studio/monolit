@@ -245,9 +245,6 @@ class ObjectAdmin(TurnOffAdminLogging, admin.ModelAdmin):
             'fields': ('active', 'completed', 'all_sold', 'order', 'crm_id', 'name', 'slug', 'category', 'object_type', 'building_type', 'description', 'webcam', 'panoram'),
             # 'description': 'Some description if needed'
         }),
-        # ('Ипотека', {
-        #     'fields': ('mortgage_military', 'mortgage_mother')
-        # }),
         ('Главное изображение', {
             'fields': ('main_image_thumb_admin', 'main_image')
         }),

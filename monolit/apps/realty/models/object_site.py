@@ -157,7 +157,7 @@ class ObjectSite(models.Model):
 
     class Meta:
         verbose_name = 'Помещение'
-        verbose_name_plural = 'Помещения (квартиры, апартаменты, коммерческие)'
+        verbose_name_plural = 'Помещения (Квартиры, Апартаменты, Коммерческие помещения)'
 
 
 @receiver(pre_save, sender=ObjectSite)

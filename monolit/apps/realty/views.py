@@ -11,12 +11,12 @@ from apps.realty.models.object_file import ObjectFile
 from apps.realty.models.object_gallery import ObjectGallery, ObjectGalleryImage
 from apps.realty.models.object_document import ObjectDocument
 from apps.realty.models.object_video import ObjectVideo
-
-from apps.news.models import News
-
 from apps.realty.models.object_site_bathroom import ObjectBathroom
 from apps.realty.models.object_site_balcony import ObjectBalcony
 from apps.realty.models.object_elevator import ObjectElevator
+
+from apps.news.models import News
+from apps.mortgage.models import Offer
 
 
 class ObjectListView(ListView):
@@ -65,6 +65,8 @@ class ObjectDetailView(DetailView):
         except EmptyPage:
             context['object_documents'] = paginator.page(paginator.num_pages)
         # END Object Documents Pagination
+
+        context['mortgage_offers'] = Offer.objects.filter(object=self.get_object().pk).order_by('rate_from')
 
         return context
 
