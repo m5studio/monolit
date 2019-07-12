@@ -63,9 +63,9 @@ class Offer(models.Model):
         # TODO: create method round inside custom class
         # Round and remove .00
         if self.first_payment_from:
-            self.first_payment_from = str(round(self.first_payment_from, 2)).replace('.00', '')
+            self.first_payment_from = str(round(self.first_payment_from, 1)).replace('.0', '')
         if self.first_payment_to:
-            self.first_payment_from = str(round(self.first_payment_to, 2)).replace('.00', '')
+            self.first_payment_from = str(round(self.first_payment_to, 1)).replace('.0', '')
 
         if self.first_payment_from == self.first_payment_to:
             return f'{self.first_payment_from}%'
@@ -80,9 +80,9 @@ class Offer(models.Model):
         # TODO: create method round inside custom class
         # Round and remove .00
         if self.rate_from:
-            self.rate_from = str(round(self.rate_from, 2)).replace('.00', '')
+            self.rate_from = str(round(self.rate_from, 1)).replace('.0', '')
         if self.rate_to:
-            self.rate_to = str(round(self.rate_to, 2)).replace('.00', '')
+            self.rate_to = str(round(self.rate_to, 1)).replace('.0', '')
 
         # TODO: add <span> tags
         if self.rate_from == self.rate_to:
