@@ -6,12 +6,12 @@
             <div class="mortgage-card__bank-logo" style="background-image: url('{{ object.bank.logo.url }}');"></div>
         {% endif %}
         {% if object.rate_from or object.rate_to %}
-            <div class="mortgage-card__percent">
+            <div class="mortgage-card__percent">{% spaceless %}
                 {% if object.rate_from and object.rate_to and object.rate_from == object.rate_to %}
                     <span>{{ object.rate_to|round_number }}%</span>
 
                 {% elif object.rate_from and object.rate_to and object.rate_from != object.rate_to %}
-                    <span>{{ object.rate_from|round_number }}-{{ object.rate_to|round_number }}%</span>
+                    <span>{{ object.rate_from|round_number }} &dash; {{ object.rate_to|round_number }}%</span>
 
                 {% elif object.rate_from and not object.rate_to %}
                     от <span>{{ object.rate_from|round_number }}%</span>
@@ -19,15 +19,18 @@
                 {% elif not object.rate_from and object.rate_to %}
                     до <span>{{ object.rate_to|round_number }}%</span>
                 {% endif %}
-            </div>
+            {% endspaceless %}</div>
         {% endif %}
         <div class="mortgage-card__descr">{{ object.title }}</div>
         <div class="mortgage-card__info-blocks">
             {% if object.loan_term_from or object.loan_term_to %}
                 <div class="mortgage-card__info-blocks--block">
                     <div class="mortgage-card__info-blocks--small-title">Срок кредита</div>
-                    <div class="mortgage-card__info-blocks--value">
-                        {% if object.loan_term_from and object.loan_term_to %}
+                    <div class="mortgage-card__info-blocks--value">{% spaceless %}
+                        {% if object.loan_term_from and object.loan_term_to and object.loan_term_from == object.loan_term_to %}
+                            <span>{{ object.loan_term_to }} лет</span>
+
+                        {% elif object.loan_term_from and object.loan_term_to and object.loan_term_from != object.loan_term_to %}
                             <span>{{ object.loan_term_from }}</span> &ndash; <span>{{ object.loan_term_to }} лет</span>
 
                         {% elif object.loan_term_from and not object.loan_term_to %}
@@ -36,14 +39,17 @@
                         {% elif not object.loan_term_from and object.loan_term_to %}
                             до <span>{{ object.loan_term_to }} лет</span>
                         {% endif %}
-                    </div>
+                    {% endspaceless %}</div>
                 </div>
             {% endif %}
             {% if object.first_payment_from or object.first_payment_to %}
                 <div class="mortgage-card__info-blocks--block">
                     <div class="mortgage-card__info-blocks--small-title">Первый взнос</div>
-                    <div class="mortgage-card__info-blocks--value">
-                        {% if object.first_payment_from and object.first_payment_to %}
+                    <div class="mortgage-card__info-blocks--value">{% spaceless %}
+                        {% if object.first_payment_from and object.first_payment_to and object.first_payment_from == object.first_payment_to %}
+                            <span>{{ object.first_payment_to|round_number }}</span>
+
+                        {% elif object.first_payment_from and object.first_payment_to and object.first_payment_from != object.first_payment_to %}
                             <span>{{ object.first_payment_from|round_number }}%</span> &ndash; <span>{{ object.first_payment_to|round_number }}</span>
 
                         {% elif object.first_payment_from and not object.first_payment_to %}
@@ -52,7 +58,7 @@
                         {% elif not object.first_payment_from and object.first_payment_to %}
                             до <span>{{ object.first_payment_to|round_number }}%</span>
                         {% endif %}
-                    </div>
+                    {% endspaceless %}</div>
                 </div>
             {% endif %}
         </div>

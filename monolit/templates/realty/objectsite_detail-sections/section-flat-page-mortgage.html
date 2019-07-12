@@ -1,0 +1,17 @@
+{% load custom_filters %}
+
+{% if mortgage_offers %}
+    <div id="section-flat-page-mortgage" class="flat-page-section container">
+        <div class="flat-page-section__title">Ипотека</div>
+        <div class="flat-page-section__content">
+            <div id="section-flat-page-mortgage__offers">
+                {% for object in mortgage_offers %}
+                    {% include 'mortgage/cards/mortgage-offer.html' %}
+                {% endfor %}
+            </div>
+            <div id="section-flat-page-mortgage__request">
+                <a href="" class="green-button">Оформить заявку на ипотеку</a>
+            </div>
+        </div>
+    </div>
+{% endif %}

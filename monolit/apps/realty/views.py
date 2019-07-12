@@ -104,6 +104,8 @@ class ObjectSiteDetailView(DetailView):
         if self.get_object().object_section is not None:
             context['elevators'] = ObjectElevator.objects.filter(object_section=self.get_object().object_section.pk)
 
+        context['mortgage_offers'] = Offer.objects.filter(object=self.get_object().object.pk).order_by('rate_from')
+
         return context
 
 
