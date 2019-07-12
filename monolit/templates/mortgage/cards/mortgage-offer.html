@@ -14,7 +14,7 @@
     {% if object.rate_from or object.rate_to %}
         <div class="mortgage-offer__loan-rate">
             <div class="mortgage-offer__title">% ставка</div>
-            <div class="mortgage-offer__val">{% spaceless %}
+            <!-- <div class="mortgage-offer__val">{% spaceless %}
                 {% if object.rate_from and object.rate_to and object.rate_from == object.rate_to %}
                     {{ object.rate_to|round_number }}%
 
@@ -27,7 +27,8 @@
                 {% elif not object.rate_from and object.rate_to %}
                     до {{ object.rate_to|round_number }}%
                 {% endif %}
-            {% endspaceless %}</div>
+            {% endspaceless %}</div> -->
+            <div class="mortgage-offer__val">{{ object.rate_display|safe }}</div>
         </div>
     {% endif %}
 

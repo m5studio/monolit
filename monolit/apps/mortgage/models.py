@@ -61,7 +61,7 @@ class Offer(models.Model):
 
     def first_payment_dispaly(self):
         # TODO: create method round inside custom class
-        # Round
+        # Round and remove .00
         if self.first_payment_from:
             self.first_payment_from = str(round(self.first_payment_from, 2)).replace('.00', '')
         if self.first_payment_to:
@@ -72,13 +72,13 @@ class Offer(models.Model):
         elif self.first_payment_from and self.first_payment_to:
             return f'{self.first_payment_from} &ndash; {self.first_payment_to}%'
         elif not self.first_payment_to:
-            return f'{self.first_payment_from}%'
+            return f'от {self.first_payment_from}%'
         elif not self.first_payment_from:
-            return f'{self.first_payment_to}%'
+            return f'до {self.first_payment_to}%'
 
     def rate_display(self):
         # TODO: create method round inside custom class
-        # Round
+        # Round and remove .00
         if self.rate_from:
             self.rate_from = str(round(self.rate_from, 2)).replace('.00', '')
         if self.rate_to:
@@ -86,13 +86,13 @@ class Offer(models.Model):
 
         # TODO: add <span> tags
         if self.rate_from == self.rate_to:
-            return f'{self.rate_from}%'
+            return f'<span>{self.rate_from}%</span>'
         elif self.rate_from and self.rate_to:
-            return f'{self.rate_from} &ndash; {self.rate_to}%'
+            return f'<span>{self.rate_from} &ndash; {self.rate_to}%</span>'
         elif not self.rate_to:
-            return f'от {self.rate_from}%'
+            return f'от <span>{self.rate_from}%</span>'
         elif not self.rate_from:
-            return f'до {self.rate_to}%'
+            return f'до <span>{self.rate_to}%</span>'
 
 
 class WayToBuy(SingletonModel):

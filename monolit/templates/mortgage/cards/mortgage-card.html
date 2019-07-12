@@ -20,7 +20,7 @@
                     до <span>{{ object.rate_to|round_number }}%</span>
                 {% endif %}
             {% endspaceless %}</div> -->
-            <div class="mortgage-card__percent">{{ object.rate_display }}</div>
+            <div class="mortgage-card__percent">{{ object.rate_display|safe }}</div>
         {% endif %}
         <div class="mortgage-card__descr">{{ object.title }}</div>
         <div class="mortgage-card__info-blocks">
