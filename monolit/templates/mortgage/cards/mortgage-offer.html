@@ -34,7 +34,7 @@
     {% if object.first_payment_from or object.first_payment_to %}
         <div class="mortgage-offer__first-payment">
             <div class="mortgage-offer__title">Первый взнос</div>
-            <div class="mortgage-offer__val">{% spaceless %}
+            <!-- <div class="mortgage-offer__val">{% spaceless %}
                 {% if object.first_payment_from and object.first_payment_to and object.first_payment_from == object.first_payment_to %}
                     {{ object.first_payment_to|round_number }}%
 
@@ -47,7 +47,10 @@
                 {% elif not object.first_payment_from and object.first_payment_to %}
                     до {{ object.first_payment_to|round_number }}%
                 {% endif %}
-            {% endspaceless %}</div>
+            {% endspaceless %}</div> -->
+            <div class="mortgage-offer__val">
+                {{ object.first_payment_dispaly }}
+            </div>
         </div>
     {% endif %}
 

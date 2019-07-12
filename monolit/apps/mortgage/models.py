@@ -59,6 +59,41 @@ class Offer(models.Model):
         verbose_name = 'Ипотечная программа'
         verbose_name_plural = 'Ипотечные программы'
 
+    def first_payment_dispaly(self):
+        # TODO: create method round inside custom class
+        # Round
+        if self.first_payment_from:
+            self.first_payment_from = str(round(self.first_payment_from, 2)).replace('.00', '')
+        if self.first_payment_to:
+            self.first_payment_from = str(round(self.first_payment_to, 2)).replace('.00', '')
+
+        if self.first_payment_from == self.first_payment_to:
+            return f'{self.first_payment_from}%'
+        elif self.first_payment_from and self.first_payment_to:
+            return f'{self.first_payment_from} &ndash; {self.first_payment_to}%'
+        elif not self.first_payment_to:
+            return f'{self.first_payment_from}%'
+        elif not self.first_payment_from:
+            return f'{self.first_payment_to}%'
+
+    def rate_display(self):
+        # TODO: create method round inside custom class
+        # Round
+        if self.rate_from:
+            self.rate_from = str(round(self.rate_from, 2)).replace('.00', '')
+        if self.rate_to:
+            self.rate_to = str(round(self.rate_to, 2)).replace('.00', '')
+
+        # TODO: add <span> tags
+        if self.rate_from == self.rate_to:
+            return f'{self.rate_from}%'
+        elif self.rate_from and self.rate_to:
+            return f'{self.rate_from} &ndash; {self.rate_to}%'
+        elif not self.rate_to:
+            return f'от {self.rate_from}%'
+        elif not self.rate_from:
+            return f'до {self.rate_to}%'
+
 
 class WayToBuy(SingletonModel):
     military = models.ManyToManyField(Object, verbose_name='Военная ипотека', related_name='mortgage_object_military', blank=True, help_text='Выберите Объекты подходящие под военную ипотеку')
