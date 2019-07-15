@@ -30,6 +30,8 @@ urlpatterns = [
     path('', include('apps.realty.urls')),
     path('', include('apps.news.urls')),
     path('', include('apps.mortgage.urls')),
+    
+    path('', include('apps.api.urls')),
 ]
 
 

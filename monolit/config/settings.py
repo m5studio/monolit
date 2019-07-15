@@ -70,6 +70,8 @@ INSTALLED_APPS = [
     'apps.realty.apps.RealtyConfig',
     'apps.news.apps.NewsConfig',
     'apps.mortgage.apps.MortgageConfig',
+    
+    'apps.api.apps.ApiConfig',
 ]
 
 MIDDLEWARE = [

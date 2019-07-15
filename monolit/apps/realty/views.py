@@ -1,6 +1,5 @@
 from django.db.models import Count, Min, Max
 
-from django.http import JsonResponse
 from django.views.generic import ListView, DetailView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -21,7 +20,6 @@ from apps.mortgage.models import Offer
 
 class ObjectListView(ListView):
     model = Object
-    # queryset = Object.objects.filter(active=True).order_by('order')
     queryset = Object.objects.filter(active=True, all_sold=False).order_by('order')
 
     def get_context_data(self, **kwargs):
@@ -67,7 +65,6 @@ class ObjectDetailView(DetailView):
         # END Object Documents Pagination
 
         context['mortgage_offers'] = Offer.objects.filter(object=self.get_object().pk).order_by('rate_from')
-
         return context
 
 
@@ -88,11 +85,8 @@ class ObjectSiteDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['opts'] = ObjectSite._meta
-        context['page_title'] = '{rooms_qty} {site_type} №{site_number} в {object_type} «{object_name}»'.format(rooms_qty=self.get_object().get_rooms_qty_display(),
-                                                                                                        site_type=self.get_object().get_site_type_display(),
-                                                                                                        site_number=self.get_object().site_number,
-                                                                                                        object_type=self.get_object().object.get_object_type_display(),
-                                                                                                        object_name=self.get_object().object.name)
+        context['page_title'] = '{rooms_qty} {site_type} №{site_number} в {object_type} «{object_name}»'.format(rooms_qty=self.get_object().get_rooms_qty_display(), site_type=self.get_object().get_site_type_display(), site_number=self.get_object().site_number, object_type=self.get_object().object.get_object_type_display(), object_name=self.get_object().object.name)
+
         # TODO: make more complicated and detailed query selection
         other_flats_query = ObjectSite.objects.filter(active=True, object=self.get_object().object.pk, rooms_qty=self.get_object().rooms_qty).exclude(id=self.get_object().pk)
         context['simular_flats'] = other_flats_query.order_by('?')[:3]
@@ -105,51 +99,4 @@ class ObjectSiteDetailView(DetailView):
             context['elevators'] = ObjectElevator.objects.filter(object_section=self.get_object().object_section.pk)
 
         context['mortgage_offers'] = Offer.objects.filter(object=self.get_object().object.pk).order_by('rate_from')
-
         return context
-
-
-# Object gallery JSON
-def json_object_gallery(request, gallery_id):
-    gallery_images = ObjectGalleryImage.objects.filter(gallery=gallery_id).values('image')
-    gallery_images = list(gallery_images)
-    return JsonResponse(gallery_images, safe=False)
-
-
-# ObjectSite info JSON
-def json_object_sites_info(request, object_id):
-    object_sites = ObjectSite.objects
-    object_sites_info = object_sites.object_sites_info_aggregated(object_id)
-
-    room_0 = object_sites.flats_info_aggregated(object_id, 0)
-    room_1 = object_sites.flats_info_aggregated(object_id, 1)
-    room_2 = object_sites.flats_info_aggregated(object_id, 2)
-    room_3 = object_sites.flats_info_aggregated(object_id, 3)
-    room_4 = object_sites.flats_info_aggregated(object_id, 4)
-
-    def mergeTwoDicts(dict1, dict2):
-        result = dict1.copy()
-        result.update(dict2)
-        return result
-
-    sites_info = list()
-    sites_info.extend([object_sites_info,
-                        {'flats_info': [
-                                mergeTwoDicts({'name': 'Ст', 'rooms': 0}, room_0),
-                                mergeTwoDicts({'name': '1',  'rooms': 1}, room_1),
-                                mergeTwoDicts({'name': '2',  'rooms': 2}, room_2),
-                                mergeTwoDicts({'name': '3',  'rooms': 3}, room_3),
-                                mergeTwoDicts({'name': '4+', 'rooms': 4}, room_4),
-                            ]
-                        }])
-
-    return JsonResponse(sites_info, safe=False)
-
-
-# def requestAjax(request, object_id):
-#     data = 'nothing'
-#     if request.is_ajax():
-#         # data = ObjectDocument.objects.filter(object=object_id).values('title', 'author__name', 'date', 'file')
-#         data = ObjectDocument.objects.filter(object=object_id).values('title', 'author__name', 'date', 'file')[:9]
-#         data = list(data)
-#     return JsonResponse(data, safe=False)
