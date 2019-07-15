@@ -126,7 +126,7 @@
                     {% if object.site_area %}
                         <div class="flat-params-block">
                             <div class="flat-params-block__name">Общая площадь</div>
-                            <div class="flat-params-block__val">{{ object.site_area }} м<sup>2</sup></div>
+                            <div class="flat-params-block__val">{{ object.site_area|round_number }} м<sup>2</sup></div>
                         </div>
                     {% endif %}
                     {% if object.living_area %}

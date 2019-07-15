@@ -6,6 +6,7 @@ from ckeditor.fields import RichTextField
 
 from apps.core.classes.file_processing import FileProcessing
 from apps.core.classes.singleton_model import SingletonModel
+from apps.core.classes.numbers_formatter import NumbersFormatter
 
 from apps.realty.models.object import Object
 
@@ -38,19 +39,21 @@ class Offer(models.Model):
     title              = models.CharField('Название программы', max_length=255, help_text='Название ипотечного кредита')
 
     # Первоначальный взнос
-    first_payment_from = models.DecimalField('от', max_digits=4, decimal_places=2, blank=True, null=True)
-    first_payment_to   = models.DecimalField('до', max_digits=4, decimal_places=2, blank=True, null=True)
+    first_payment_from   = models.DecimalField('от', max_digits=4, decimal_places=2, blank=True, null=True)
+    first_payment_to     = models.DecimalField('до', max_digits=4, decimal_places=2, blank=True, null=True)
 
     # Срок кредита
-    loan_term_from     = models.PositiveIntegerField('от', validators=[MinValueValidator(1), MaxValueValidator(50)], blank=True, null=True)
-    loan_term_to       = models.PositiveIntegerField('до', validators=[MinValueValidator(1), MaxValueValidator(50)], blank=True, null=True)
+    loan_term_from       = models.PositiveIntegerField('от', validators=[MinValueValidator(1), MaxValueValidator(50)], blank=True, null=True)
+    loan_term_to         = models.PositiveIntegerField('до', validators=[MinValueValidator(1), MaxValueValidator(50)], blank=True, null=True)
 
     # Проецентная ставка
-    rate_from          = models.DecimalField('от', max_digits=4, decimal_places=2, blank=True, null=True)
-    rate_to            = models.DecimalField('до', max_digits=4, decimal_places=2, blank=True, null=True)
+    rate_from            = models.DecimalField('от', max_digits=4, decimal_places=2, blank=True, null=True)
+    rate_to              = models.DecimalField('до', max_digits=4, decimal_places=2, blank=True, null=True)
 
-    description        = RichTextField('Описание', blank=True, null=True, help_text='Описание и дополнительные условия')
-    object             = models.ManyToManyField(Object, verbose_name='Объект(ы)', blank=True, help_text='Выберите Объекты подходящие под данную ипотечную программу')
+    # loan_payment_monthly = models.DecimalField('Ежемесячный платеж', max_digits=8, decimal_places=2, blank=True, null=True, help_text='Минимальная сумма ежемесячного платежа')
+
+    description          = RichTextField('Описание', blank=True, null=True, help_text='Описание и дополнительные условия')
+    object               = models.ManyToManyField(Object, verbose_name='Объект(ы)', blank=True, help_text='Выберите Объекты подходящие под данную ипотечную программу')
 
     def __str__(self):
         return self.title
@@ -59,13 +62,10 @@ class Offer(models.Model):
         verbose_name = 'Ипотечная программа'
         verbose_name_plural = 'Ипотечные программы'
 
+    # Первоначальный взнос
     def first_payment_dispaly(self):
-        # TODO: create method round inside custom class
-        # Round and remove .00
-        if self.first_payment_from:
-            self.first_payment_from = str(round(self.first_payment_from, 1)).replace('.0', '')
-        if self.first_payment_to:
-            self.first_payment_from = str(round(self.first_payment_to, 1)).replace('.0', '')
+        self.first_payment_from = NumbersFormatter.round_num(self.first_payment_from, 1, '.0', '')
+        self.first_payment_to   = NumbersFormatter.round_num(self.first_payment_to, 1, '.0', '')
 
         if self.first_payment_from == self.first_payment_to:
             return f'{self.first_payment_from}%'
@@ -76,23 +76,33 @@ class Offer(models.Model):
         elif not self.first_payment_from:
             return f'до {self.first_payment_to}%'
 
-    def rate_display(self):
-        # TODO: create method round inside custom class
-        # Round and remove .00
-        if self.rate_from:
-            self.rate_from = str(round(self.rate_from, 1)).replace('.0', '')
-        if self.rate_to:
-            self.rate_to = str(round(self.rate_to, 1)).replace('.0', '')
+    # Срок кредита
+    def loan_term_display(self):
+        self.loan_term_from = NumbersFormatter.round_num(self.loan_term_from, 1, '.0', '')
+        self.loan_term_to   = NumbersFormatter.round_num(self.loan_term_to, 1, '.0', '')
 
-        # TODO: add <span> tags
+        if self.loan_term_from == self.loan_term_to:
+            return f'{self.loan_term_from} лет'
+        elif self.loan_term_from and self.loan_term_to:
+            return f'{self.loan_term_from} &ndash; {self.loan_term_to} лет'
+        elif not self.loan_term_to:
+            return f'от {self.loan_term_from} лет'
+        elif not self.loan_term_from:
+            return f'до {self.loan_term_to} лет'
+
+    # Проецентная ставка
+    def rate_display(self):
+        self.rate_from = NumbersFormatter.round_num(self.rate_from, 1, '.0', '')
+        self.rate_to   = NumbersFormatter.round_num(self.rate_to, 1, '.0', '')
+
         if self.rate_from == self.rate_to:
-            return f'<span>{self.rate_from}%</span>'
+            return f'{self.rate_from}%'
         elif self.rate_from and self.rate_to:
-            return f'<span>{self.rate_from} &ndash; {self.rate_to}%</span>'
+            return f'{self.rate_from} &ndash; {self.rate_to}%'
         elif not self.rate_to:
-            return f'от <span>{self.rate_from}%</span>'
+            return f'от {self.rate_from}%'
         elif not self.rate_from:
-            return f'до <span>{self.rate_to}%</span>'
+            return f'до {self.rate_to}%'
 
 
 class WayToBuy(SingletonModel):

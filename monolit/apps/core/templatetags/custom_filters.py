@@ -1,5 +1,7 @@
 from django import template
 
+from apps.core.classes.numbers_formatter import NumbersFormatter
+
 register = template.Library()
 
 
@@ -17,16 +19,17 @@ def get_file_ext(value):
 
 
 def custom_format_number(value):
-    return '{:,}'.format(value).replace(',', ' ')
+    return '{:,}'.format(value).replace(',', ' ').replace('.0', '')
 
 @register.filter(name='format_number')
 def format_number(value):
-    return custom_format_number(value)
+    return custom_format_number( float(value) )
 
 
 @register.filter(name='round_number')
 def round_number(value):
-    return str(round(value, 1)).replace('.0', '')
+    # return str(round(value, 1)).replace('.0', '')
+    return NumbersFormatter.round_num(value, 1, '.0', '')
 
 
 @register.filter(name='format_and_round_number')

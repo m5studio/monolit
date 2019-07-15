@@ -10,70 +10,28 @@
         {% endif %}
     </div>
     <div class="mortgage-offer__descr">{{ object.title }}</div>
-
     {% if object.rate_from or object.rate_to %}
         <div class="mortgage-offer__loan-rate">
             <div class="mortgage-offer__title">% ставка</div>
-            <!-- <div class="mortgage-offer__val">{% spaceless %}
-                {% if object.rate_from and object.rate_to and object.rate_from == object.rate_to %}
-                    {{ object.rate_to|round_number }}%
-
-                {% elif object.rate_from and object.rate_to and object.rate_from != object.rate_to %}
-                    {{ object.rate_from|round_number }} &ndash; {{ object.rate_to|round_number }}%
-
-                {% elif object.rate_from and not object.rate_to %}
-                    от {{ object.rate_from|round_number }}%
-
-                {% elif not object.rate_from and object.rate_to %}
-                    до {{ object.rate_to|round_number }}%
-                {% endif %}
-            {% endspaceless %}</div> -->
             <div class="mortgage-offer__val">{{ object.rate_display|safe }}</div>
         </div>
     {% endif %}
-
     {% if object.first_payment_from or object.first_payment_to %}
         <div class="mortgage-offer__first-payment">
             <div class="mortgage-offer__title">Первый взнос</div>
-            <!-- <div class="mortgage-offer__val">{% spaceless %}
-                {% if object.first_payment_from and object.first_payment_to and object.first_payment_from == object.first_payment_to %}
-                    {{ object.first_payment_to|round_number }}%
-
-                {% elif object.first_payment_from and object.first_payment_to and object.first_payment_from != object.first_payment_to %}
-                    {{ object.first_payment_from|round_number }} &ndash; {{ object.first_payment_to|round_number }}%
-
-                {% elif object.first_payment_from and not object.first_payment_to %}
-                    от {{ object.first_payment_from|round_number }}%
-
-                {% elif not object.first_payment_from and object.first_payment_to %}
-                    до {{ object.first_payment_to|round_number }}%
-                {% endif %}
-            {% endspaceless %}</div> -->
             <div class="mortgage-offer__val">
                 {{ object.first_payment_dispaly }}
             </div>
         </div>
     {% endif %}
-
     {% if object.loan_term_from or object.loan_term_to %}
         <div class="mortgage-offer__pay-off">
             <div class="mortgage-offer__title">Срок кредита</div>
-            <div class="mortgage-offer__val">{% spaceless %}
-                {% if object.loan_term_from and object.loan_term_to %}
-                    {{ object.loan_term_from }} &ndash; {{ object.loan_term_to }} лет
-
-                {% elif object.loan_term_from and not object.loan_term_to %}
-                    от {{ object.loan_term_from }} лет
-
-                {% elif not object.loan_term_from and object.loan_term_to %}
-                    до {{ object.loan_term_to }} лет
-                {% endif %}
-            {% endspaceless %}</div>
+            <div class="mortgage-offer__val">{{ object.loan_term_display|safe }}</div>
         </div>
     {% endif %}
     <div class="mortgage-offer__monthly-payment">
         <div class="mortgage-offer__title">Ежемесячный платеж</div>
-        <!-- <div class="mortgage-offer__val">18 700 руб</div> -->
-        <div class="mortgage-offer__val">TODO руб</div>
+        <div class="mortgage-offer__val">15 400 руб</div>
     </div>
 </div>

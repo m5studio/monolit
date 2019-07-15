@@ -26,7 +26,9 @@
         {% if mortgage_offers %}
             <div id="section-mortgage" class="common-section">
                 <div id="section-mortgage__inner" class="container">
-                    {% include 'mortgage/cards/mortgage-card.html' %}
+                    {% for object in mortgage_offers %}
+                        {% include 'mortgage/cards/mortgage-card.html' %}
+                    {% endfor %}
                 </div>
             </div>
         {% endif %}
