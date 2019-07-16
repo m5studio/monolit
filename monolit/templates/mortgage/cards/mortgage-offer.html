@@ -1,6 +1,6 @@
 {% load custom_filters %}
 
-<div class="mortgage-offer">
+<div class="mortgage-offer" data-api-mortgage-offer="{% url 'api:mortgage-offer' offer_id=object.id %}">
     <div class="mortgage-offer__bank-logo">
         {% if forloop.first %}
             <div class="mortgage-offer__best-offer">Лучшее предложение</div>
@@ -28,10 +28,13 @@
         <div class="mortgage-offer__pay-off">
             <div class="mortgage-offer__title">Срок кредита</div>
             <div class="mortgage-offer__val">{{ object.loan_term_display|safe }}</div>
+            <div class="mortgage-offer__val">
+                <input type="range" id="" name="" min="3" max="20" step="1">
+            </div>
         </div>
     {% endif %}
     <div class="mortgage-offer__monthly-payment">
         <div class="mortgage-offer__title">Ежемесячный платеж</div>
-        <div class="mortgage-offer__val">15 400 руб</div>
+        <div class="mortgage-offer__val"></div>
     </div>
 </div>

@@ -36,7 +36,7 @@
     </nav>
 
     <main id="main">
-        <div id="section-flat-page-content" class="container">
+        <div id="section-flat-page-content" class="container" data-object-site="{% url 'api:site-info' site_id=object.id %}">
             <div id="section-flat-page-content__left">
                 {% if object.image_planning %}
                     <div id="section-flat-page-content__tabs">
@@ -256,24 +256,6 @@
 
     {% include 'realty/objectsite_detail-sections/section-flat-page-mortgage.html' %}
 
-    {% if simular_flats %}
-        <div id="section-flat-page-simular-flats" class="flat-page-section container">
-            <div class="flat-page-section__title">Похожие квартиры в {{ object.object.get_object_type_display }} {{ object.object.name }}</div>
-            <div id="section-flat-page-simular-flats__inner" class="flat-page-section__content">
-                <div id="flats-simular">
-                    <div id="flats-simular__total">{{ simular_flats_count }}</div>
-                    <div id="flats-simular__simular-objects">Похож{% if simular_flats_count < 2 %}ая{% else %}их{% endif %}<br>квартир{% if simular_flats_count < 2 %}а{% elif simular_flats_count < 5 %}ы{% else %}{% endif %}<br>в объекте</div>
-                    <div id="flats-simular__see-all">
-                        <a href="">
-                            <span>Смотреть все</span>
-                            <div class="icon icon-arrow-right-green"></div>
-                        </a>
-                    </div>
-                </div>
-                {% for object in simular_flats %}
-                    {% include 'realty/cards/flat-card.html' %}
-                {% endfor %}
-            </div>
-        </div>
-    {% endif %}
+    {% include 'realty/objectsite_detail-sections/section-flat-page-simular-flats.html' %}
+
 {% endblock %}

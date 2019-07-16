@@ -22,6 +22,7 @@ import {objectPageGalleries} from "./ajax/object-page-galleries"
 import {objectPageDocsPagination} from "./ajax/object-page-documents-pagination"
 import {objectCardSitesInfo} from "./ajax/object-card"
 import {objectPageSitesInfo, objectPageFlatsTypes} from "./ajax/object_detail/object-page-sites-info"
+import {mortgageOfferMonthlyPaymentCalculate} from "./ajax/objectsite_detail/mortgage-offer-monthly-payment-calculate"
 
 
 // Fancybox https://fancyapps.com/fancybox/3/
@@ -71,6 +72,13 @@ $(document).ready(function() {
         objectCardSitesInfo()
     }
     // END Get object-card sites info
+
+    // Flat page API
+    if ( $('.flat-page').length ) {
+        mortgageOfferMonthlyPaymentCalculate()
+    }
+    // END Flat page API
+
 })
 
 

@@ -3,14 +3,17 @@ from django.http import JsonResponse
 
 from apps.realty.models.object_site import ObjectSite
 from apps.realty.models.object_gallery import ObjectGallery, ObjectGalleryImage
+from apps.mortgage.models import Offer
 
 
+# API for ObjectGallery
 def api_object_gallery(request, gallery_id):
     gallery_images = ObjectGalleryImage.objects.filter(gallery=gallery_id).values('image')
     gallery_images = list(gallery_images)
     return JsonResponse(gallery_images, safe=False)
 
 
+# API for Object sites
 def api_object_sites_info(request, object_id):
     object_sites = ObjectSite.objects
     object_sites_info = object_sites.object_sites_info_aggregated(object_id)
@@ -37,6 +40,20 @@ def api_object_sites_info(request, object_id):
                             ]
                         }])
     return JsonResponse(sites_info, safe=False)
+
+
+# API for ObjectSite
+def api_object_site(request, site_id):
+    site_info = ObjectSite.objects.filter(id=site_id, active=True).values('crm_id', 'site_type', 'price_total')
+    site_info = list(site_info)
+    return JsonResponse(site_info, safe=False)
+
+
+# API for Mortgage Offer
+def api_mortgage_offer(request, offer_id):
+    mortgage_offer = Offer.objects.filter(id=offer_id).values('first_payment_from', 'first_payment_to', 'loan_term_from', 'loan_term_to', 'rate_from', 'rate_to')
+    mortgage_offer = list(mortgage_offer)
+    return JsonResponse(mortgage_offer, safe=False)
 
 
 # def requestAjax(request, object_id):
