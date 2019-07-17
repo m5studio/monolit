@@ -4,7 +4,6 @@
     grid-template-rows: 25px 1fr;
     grid-row-gap: 10px;
     align-items: center;
-
     padding: 20px 25px;
 
     &__title {
@@ -90,11 +89,6 @@
     }
 
     &__select {
-        // background: linear-gradient(180deg, rgba(255, 255, 255, .2), rgba(255, 255, 255, 0)), #00998f;
-        // border: none;
-        // border-radius: 20px;
-        // color: white;
-        // padding: 10px 20px;        
         padding: 10px 15px;
         margin: 0;
         width: 100%;
@@ -107,7 +101,6 @@
         }
 
         &:focus {
-            // border-radius: 20px 20px 0 0;
             outline: none;
         }
     }

@@ -16,7 +16,7 @@ function realtySquareFilters() {
     const inputNumberMin = document.getElementById('realty-filter__square--input-min')
     const inputNumberMax = document.getElementById('realty-filter__square--input-max')
 
-    realtySquareSlider.noUiSlider.on('update', function (values, handle) {
+    realtySquareSlider.noUiSlider.on('update', function(values, handle) {
         let value = values[handle]
 
         if (handle) {
@@ -26,10 +26,10 @@ function realtySquareFilters() {
         }
     })
 
-    inputNumberMin.addEventListener('change', function () {
+    inputNumberMin.addEventListener('change', function() {
         realtySquareSlider.noUiSlider.set([this.value, null])
     })
-    inputNumberMax.addEventListener('change', function () {
+    inputNumberMax.addEventListener('change', function() {
         realtySquareSlider.noUiSlider.set([null, this.value])
     })
 }

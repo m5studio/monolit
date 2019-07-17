@@ -51,7 +51,7 @@ def api_object_site(request, site_id):
 
 # API for Mortgage Offer
 def api_mortgage_offer(request, offer_id):
-    mortgage_offer = Offer.objects.filter(id=offer_id).values('first_payment_from', 'first_payment_to', 'loan_term_from', 'loan_term_to', 'rate_from', 'rate_to')
+    mortgage_offer = Offer.objects.filter(id=offer_id).values('id', 'first_payment_from', 'first_payment_to', 'loan_term_from', 'loan_term_to', 'rate_from', 'rate_to')
     mortgage_offer = list(mortgage_offer)
     return JsonResponse(mortgage_offer, safe=False)
 

@@ -32,6 +32,10 @@
     &__val {
         font-size: 1.1rem;
         font-weight: 600;
+
+        .noUi-target {
+            margin-top: 10px;
+        }
     }
 
     &__best-offer {
@@ -94,6 +98,8 @@
     // &__first-payment {}
 
     // &__pay-off {}
+
+    // &__years {}
 
     &__monthly-payment {
         .mortgage-offer__val {
