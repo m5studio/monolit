@@ -29,38 +29,14 @@ function mortgageOfferMonthlyPaymentCalculate() {
                         let rate_to = mortgage_offer_data[0]['rate_to']
 
 
-                        // Mortgage Calculation
-                        // 1% от стоимости помещения
-                        let one_percent = (site_price_total / 100)
-                        console.log('1% = ' + one_percent + ' руб')
+                        console.log( 'Цена квартиры: ' + site_price_total + ' руб' )
 
-                        // Первоначальный платеж в руб
-                        let first_payment_val = 0
-                        if ( first_payment_from === first_payment_to ) {
-                            first_payment_val = first_payment_from * one_percent
-                            console.log('[Равны] от: ' + first_payment_from + ' до: ' + first_payment_to)
+                        let first_payment_rub = (site_price_total / 100) * first_payment_from
+                        console.log( 'Первоначальный взнос: ' + first_payment_rub + ' руб' )
 
-                        } else if ( first_payment_from != null && first_payment_to != null ) {
-                            first_payment_val = first_payment_from * one_percent
-                            console.log('[НЕ null] от: ' + first_payment_from + ' до: ' + first_payment_to)
+                        let loan_rub = site_price_total - first_payment_rub
+                        console.log( 'Сумма кредита: ' + loan_rub + ' руб' )
 
-                        } else if ( first_payment_to === null ) {
-                            first_payment_val = first_payment_from * one_percent
-                            console.log('[null first_payment_to] от: ' + first_payment_from + ' до: ' + first_payment_to)
-
-                        } else if ( first_payment_from === null ) {
-                            first_payment_val = first_payment_to * one_percent
-                            console.log('[null first_payment_from] от: ' + first_payment_from + ' до: ' + first_payment_to)
-                        }
-                        console.log('Первый платеж: ' + first_payment_val + ' руб')
-
-                        // Сумма кредита
-                        let loan_val = site_price_total - first_payment_val
-                        console.log('Сумма кредита: ' + loan_val + ' руб')
-
-                        // Переплата по кредиту
-                        // TODO: check rate_from and rate_to
-                        let bank_interest = site_price_total + (rate_from * one_percent)
 
                         console.log('')
                         // END Mortgage Calculation
@@ -97,17 +73,23 @@ function mortgageOfferMonthlyPaymentCalculate() {
 
 
                         // loan term slider Changed
-                        loanTermSlider.noUiSlider.on('update', (value) => {
+                        loanTermSlider.noUiSlider.on('update', (years) => {
                             $('#' + loan_term_slider_years_id).empty()
-                            $('#' + loan_term_slider_years_id).html(value + ' лет')
+                            $('#' + loan_term_slider_years_id).html(years + ' лет')
 
-                            let months = value * 12
-                            // let result = loan_val / months
-                            // let result = site_price_total / months
-                            let result = bank_interest / months
+                            let rate = rate_from
+                            let month_rate = rate / 12 / 100
+                            let months = years * 12
+
+                            let k = month_rate * (1 + month_rate) ** months / ((1 + month_rate) ** months - 1)
+                            let payment = k * site_price_total * (1 - loan_rub / 100)
+
+                            // let installment_per_month_rub = loan_rub / years_to_months
+                            // Считаем  годовые
+                            // let result = ((installment_per_month_rub * 12) / 100) * rate_from + (loan_rub / years_to_months)
 
                             $(el).find('.mortgage-offer__monthly-payment .mortgage-offer__val').empty()
-                            $(el).find('.mortgage-offer__monthly-payment .mortgage-offer__val').html( formatNumber(result, 2) + ' руб')
+                            $(el).find('.mortgage-offer__monthly-payment .mortgage-offer__val').html( formatNumber(payment, 2) + ' руб')
                             // $(el).find('.mortgage-offer__monthly-payment .mortgage-offer__val').html( formatNumber(result, 0) + ' руб')
                         })
                         // END loan term slider Changed
