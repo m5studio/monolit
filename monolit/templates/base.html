@@ -20,7 +20,6 @@
                 {{ object.title }} | Новости ГК Монолит
             {% endif %}
 
-
             {% url 'object:list' as object_list_url %}
             {% url 'object:detail' as object_detail_url %}
 
@@ -72,7 +71,6 @@
         {% if request.user.is_superuser and opts %}
             <a class="edit-link" style="position: absolute; right: 15px; z-index: 10;" href="{% url opts|admin_urlname:'change' object.id %}" target="_blank">Edit</a>
         {% endif %}
-
         {% block content %}{% endblock %}
     </div>
 

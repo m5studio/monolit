@@ -22,7 +22,7 @@ import {objectPageGalleries} from "./ajax/object-page-galleries"
 import {objectPageDocsPagination} from "./ajax/object-page-documents-pagination"
 import {objectCardSitesInfo} from "./ajax/object-card"
 import {objectPageSitesInfo, objectPageFlatsTypes} from "./ajax/object_detail/object-page-sites-info"
-import {mortgageOfferMonthlyPaymentCalculate} from "./ajax/objectsite_detail/mortgage-offer-monthly-payment-calculate"
+import {mortgageOfferMonthlyPayment} from "./ajax/objectsite_detail/mortgage-offer-monthly-payment-calculate"
 
 
 // Fancybox https://fancyapps.com/fancybox/3/
@@ -52,33 +52,32 @@ $(document).ready(function() {
 
     scrollToTop()
 
-    // Object page galleries ajax documents pagination
+    // Object page
     if ( $('.object-page').length ) {
         objectPageSitesInfo()
         objectPageFlatsTypes()
         objectPageGalleries()
         objectPageDocsPagination()
     }
-    // END Object page galleries ajax documents pagination
+    // END Object page
 
-    // News page Load more news...
+    // News page
     if ( $('.news').length ) {
         newsPageLoadMoreNews()
     }
-    // END News page Load more news...
+    // END News page
+
+    // Flat page
+    if ( $('.flat-page').length ) {
+        mortgageOfferMonthlyPayment()
+    }
+    // END Flat page
 
     // Get object-card sites info
     if ( $('.object-card').length ) {
         objectCardSitesInfo()
     }
     // END Get object-card sites info
-
-    // Flat page API
-    if ( $('.flat-page').length ) {
-        mortgageOfferMonthlyPaymentCalculate()
-    }
-    // END Flat page API
-
 })
 
 

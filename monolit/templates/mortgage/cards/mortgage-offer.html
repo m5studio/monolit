@@ -19,15 +19,12 @@
     {% if object.first_payment_from or object.first_payment_to %}
         <div class="mortgage-offer__first-payment">
             <div class="mortgage-offer__title">Первый взнос</div>
-            <div class="mortgage-offer__val">
-                {{ object.first_payment_dispaly }}
-            </div>
+            <div class="mortgage-offer__val">{{ object.first_payment_dispaly }}</div>
         </div>
     {% endif %}
     {% if object.loan_term_from or object.loan_term_to %}
         <div class="mortgage-offer__pay-off">
-            <div class="mortgage-offer__title">Срок кредита</div>
-            <!-- <div class="mortgage-offer__val">{{ object.loan_term_display|safe }}</div> -->
+            <div class="mortgage-offer__title">Срок кредита ({{ object.loan_term_display|safe }})</div>
             <div class="mortgage-offer__val"></div>
         </div>
     {% endif %}
