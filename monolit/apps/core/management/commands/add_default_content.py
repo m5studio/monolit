@@ -5,7 +5,6 @@ from django.core.management.base import BaseCommand, CommandError
 from apps.realty.models.object import ObjectCategory
 from apps.realty.models.object_site import ObjectSiteWindowsView
 from apps.core.models import SiteSettings
-
 from apps.mortgage.models import WayToBuy
 
 
@@ -13,7 +12,7 @@ class Command(BaseCommand):
     help = 'Create Default content'
 
     # Create default object categories and window views
-    def _create_categories_and_window_views(self, object_name, values):
+    def _add_content_to_db(self, object_name, values):
         for val in values:
             try:
                 object_name.objects.get(name=val)
@@ -26,10 +25,10 @@ class Command(BaseCommand):
     # Let's fire it up
     def handle(self, *args, **options):
         obj_categories = ['Жилой', 'Коммерческий']
-        self._create_categories_and_window_views(ObjectCategory, obj_categories)
+        self._add_content_to_db(ObjectCategory, obj_categories)
 
         window_views = ['Во двор', 'Улица', 'Море', 'Озеро', 'Горы']
-        self._create_categories_and_window_views(ObjectSiteWindowsView, window_views)
+        self._add_content_to_db(ObjectSiteWindowsView, window_views)
 
         # Add default content to settings
         SiteSettings.objects.filter(id=1).update(
