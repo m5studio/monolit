@@ -36,9 +36,9 @@ Update outdated packages Manually
 $ pip install django, pip, pillow --upgrade
 ```
 
-Update all outdated packages
+Update all outdated packages from requirements.txt
 ```
-$ pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -
+$ pip install -r requirements\requirements.txt
 ```
 
 **!!! IMPORTANT**
