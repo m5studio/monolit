@@ -54,8 +54,10 @@ class Command(BaseCommand):
         if not settings.DEBUG:
             self.stdout.write(self.style.ERROR('You can\'t generate content in PRODUCTION mode, set DEBUG=True'))
         else:
+            i = 0
             for _ in range(options['objects_qty']):
                 self._create_object()
+                self.stdout.write(self.style.SUCCESS(i++))
 
     # self.stdout.write(self.style.ERROR('error message'))
     # self.stdout.write(self.style.SUCCESS('success message'))
