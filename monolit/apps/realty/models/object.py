@@ -121,8 +121,8 @@ def genplan_image_optimization(sender, instance, created, **kwargs):
         image = ImageOptimizer(instance.main_image.path)
         image.optimizeAndSaveImg()
     # Delete empty dirs in /media/
-    cleanMedia = CleanMedia()
-    cleanMedia.deleteEmptyDirsRecusive()
+    # cleanMedia = CleanMedia()
+    # cleanMedia.deleteEmptyDirsRecusive()
 
 
 @receiver(post_delete, sender=Object)
