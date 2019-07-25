@@ -30,7 +30,7 @@ class GenerateContent:
             print(f'ObjectDocumentAuthor {author_name} created')
 
 
-    def _create_ObjectDocument(self, object_id, qty=40):
+    def _create_ObjectDocument(self, object_id, qty=30):
         count_object_document = ObjectDocument.objects.annotate(Count('object')).filter(object=object_id).count()
 
         if count_object_document == 0:
@@ -88,6 +88,8 @@ class GenerateContent:
                         object_type='living_complex', \
                         building_type='monolith', \
                         city=fake.word(cities_list),\
+                        genplan='img-placeholder.jpg', \
+                        main_image='img-placeholder.jpg', \
                         webcam='https://rtsp.me/embed/3KASrTkG/', \
                         panoram='https://monolit360.com/files/main/index.html?s=pano1692', \
                     )
