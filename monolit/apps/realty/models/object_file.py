@@ -30,7 +30,7 @@ class ObjectFile(models.Model):
     #     return self.title
 
     class Meta:
-        verbose_name = 'Фаил Объекта'
+        verbose_name = 'Файл Объекта'
         verbose_name_plural = 'Файлы Объектов [Информационный буклет, Генплан объекта недвижимости, Коммерческое предложение]'
 
 

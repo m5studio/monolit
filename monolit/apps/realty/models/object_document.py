@@ -18,7 +18,7 @@ def file_upload_path(instance, filename):
     return 'objects/{object_crm_id}/documents/{filename}'.format(object_crm_id=object_crm_id, filename=filename)
 
 class ObjectDocumentAuthor(models.Model):
-    name = models.CharField('Автор', max_length=255, help_text='Пример: Иванов В.А.')
+    name = models.CharField('Автор', max_length=255, unique=True, help_text='Пример: Иванов В.А.')
 
     def __str__(self):
         return self.name
@@ -29,7 +29,7 @@ class ObjectDocumentAuthor(models.Model):
 
 
 class ObjectDocument(models.Model):
-    object  = models.ForeignKey(Object, on_delete=models.CASCADE, default=0)
+    object  = models.ForeignKey(Object, on_delete=models.CASCADE)
     title   = models.CharField('Название документа', max_length=255)
     author  = models.ForeignKey(ObjectDocumentAuthor, verbose_name='Автор', on_delete=models.SET_NULL, blank=True, null=True)
     date    = models.DateField(verbose_name='Дата', default=datetime.date.today)

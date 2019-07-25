@@ -27,7 +27,7 @@ class Command(BaseCommand):
         else:
             for _ in range(options['objects_qty']):
                 gen = GenerateContent()
-                gen._create_object()
+                gen._create_Object()
 
 
     # self.stdout.write(self.style.ERROR('error message'))
