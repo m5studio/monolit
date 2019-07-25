@@ -9,6 +9,7 @@ from apps.realty.models.object import Object, ObjectCategory
 from apps.realty.models.object_video import ObjectVideo
 from apps.realty.models.object_file import ObjectFile
 from apps.realty.models.object_document import ObjectDocumentAuthor, ObjectDocument
+from apps.realty.models.object_info_tab import ObjectInfoTab
 
 
 class GenerateContent:
@@ -18,6 +19,20 @@ class GenerateContent:
 
     def _get_objects_ids_list(self):
         return list(Object.objects.values_list('id', flat=True))
+
+
+    def _create_ObjectInfoTab(self, object_id):
+        count_object_info_tabs = ObjectInfoTab.objects.annotate(Count('object')).filter(object=object_id).count()
+
+        object_info_tab_icons = ObjectInfoTab.ICONS
+        object_info_tab_icons_list = [x[0] for x in object_info_tab_icons]
+
+        if count_object_info_tabs == 0:
+            for info_tab in object_info_tab_icons_list:
+                object = Object.objects.get(pk=object_id)
+                object_info_tab = ObjectInfoTab(object=object, icon_name=info_tab, description=self.fake.text(300), image='img-placeholder.jpg')
+                object_info_tab.save()
+                print(f'ObjectInfoTab {info_tab} created for Object {object_id}')
 
 
     def _create_ObjectDocumentAuthor(self):
@@ -88,6 +103,7 @@ class GenerateContent:
                         object_type='living_complex', \
                         building_type='monolith', \
                         city=fake.word(cities_list),\
+                        address='ул. Ленина 12', \
                         genplan='img-placeholder.jpg', \
                         main_image='img-placeholder.jpg', \
                         webcam='https://rtsp.me/embed/3KASrTkG/', \
@@ -106,3 +122,4 @@ class GenerateContent:
             self._create_ObjectVideo(object_id)
             self._create_ObjectFile(object_id)
             self._create_ObjectDocument(object_id)
+            self._create_ObjectInfoTab(object_id)

@@ -1,4 +1,4 @@
-{% if object.genplan_svg %}
+{% if object.genplan_svg or object.genplan %}
     <section id="section-object-genplan" class="common-section">
         <div class="common-section__title container">
             <h2>Генплан &laquo;{{ object.get_object_type_display }} {{ object.name }}&raquo;</h2>
@@ -8,7 +8,9 @@
             </span>
         </div>
         <div id="section-object-genplan__image">
-            {% if object.genplan %}<img src="{{ object.genplan.url }}" alt="Генплан {{ object.get_object_type_display }} {{ object.name }}">{% endif %}
+            {% if object.genplan %}
+                <img src="{{ object.genplan.url }}" alt="Генплан {{ object.get_object_type_display }} {{ object.name }}">
+            {% endif %}
 
             {% if object.genplan_svg %}
                 <div id="section-object-genplan__objects-svg-layer">
