@@ -84,9 +84,17 @@
                         }
                     }
 
+                    // Show date only in first gallery image
+                    &:first-child {
+                        .bp-card__date {
+                            display: block;
+                        }
+                    }
+
                     &__date {
                         background-color: #222;
                         color: white;
+                        display: none;
                         padding: 3px 10px;
                         position: absolute;
                         left: 0;

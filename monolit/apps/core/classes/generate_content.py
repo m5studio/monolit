@@ -12,6 +12,7 @@ from apps.realty.models.object_document import ObjectDocumentAuthor, ObjectDocum
 from apps.realty.models.object_info_tab import ObjectInfoTab
 from apps.realty.models.object_block import ObjectBlock
 from apps.realty.models.object_section import ObjectSection
+from apps.realty.models.object_gallery import ObjectGallery, ObjectGalleryImage
 
 
 class GenerateContent:
@@ -23,6 +24,36 @@ class GenerateContent:
         return list(Object.objects.values_list('id', flat=True))
 
 
+    def _create_ObjectGalleryImage(self, gallery_id):
+        count_images_in_gallery = ObjectGalleryImage.objects.annotate(Count('gallery')).filter(gallery=gallery_id).count()
+
+        if count_images_in_gallery == 0:
+            gallery = ObjectGallery.objects.get(pk=gallery_id)
+
+            for _ in range(7):
+                gallery_image = ObjectGalleryImage(gallery=gallery, image='img-placeholder.jpg')
+                gallery_image.save()
+            print(f'Add gallery images for gallery {gallery_id}')
+
+
+    def _create_ObjectGallery(self, object_id):
+        count_object_galleries = ObjectGallery.objects.annotate(Count('object')).filter(object=object_id).count()
+
+        gal_names = ['Март 2019', 'Июль 2019', 'Сентябрь 2019']
+
+        if count_object_galleries == 0:
+            object = Object.objects.get(pk=object_id)
+
+            for gal_name in gal_names:
+                object_gallery = ObjectGallery(object=object, name=gal_name)
+                object_gallery.save()
+                print(f'Gallery {gal_name} created for Object {object_id}')
+
+                # Create gallery images
+                self._create_ObjectGalleryImage(object_gallery.id)
+
+
+    # TODO:
     def _create_ObjectSection(self, object_id):
         pass
 
@@ -136,7 +167,7 @@ class GenerateContent:
         # Set ManyToMany categories
         object.category.set([1, 2])
 
-        print(f'\n=========[Object created: "{name}"]=========')
+        print(f'\n=========[Object [ID: {object.id}] created: "{name}"]=========')
 
         self._create_ObjectDocumentAuthor()
 
@@ -146,3 +177,4 @@ class GenerateContent:
             self._create_ObjectDocument(object_id)
             self._create_ObjectInfoTab(object_id)
             self._create_ObjectBlock(object_id)
+            self._create_ObjectGallery(object_id)
