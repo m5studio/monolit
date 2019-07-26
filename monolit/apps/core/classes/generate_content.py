@@ -10,6 +10,8 @@ from apps.realty.models.object_video import ObjectVideo
 from apps.realty.models.object_file import ObjectFile
 from apps.realty.models.object_document import ObjectDocumentAuthor, ObjectDocument
 from apps.realty.models.object_info_tab import ObjectInfoTab
+from apps.realty.models.object_block import ObjectBlock
+from apps.realty.models.object_section import ObjectSection
 
 
 class GenerateContent:
@@ -19,6 +21,26 @@ class GenerateContent:
 
     def _get_objects_ids_list(self):
         return list(Object.objects.values_list('id', flat=True))
+
+
+    def _create_ObjectSection(self, object_id):
+        pass
+
+
+    def _create_ObjectBlock(self, object_id):
+        count_object_blocks = ObjectBlock.objects.annotate(Count('object')).filter(object=object_id).count()
+
+        if count_object_blocks == 0:
+            i = 1
+            for _ in range(4):
+                block_name = f'Блок {i}'
+
+                object = Object.objects.get(pk=object_id)
+                object_block = ObjectBlock(object=object, name=block_name)
+                object_block.save()
+
+                print(f'ObjectBlock {block_name} created for Object {object_id}')
+                i += 1
 
 
     def _create_ObjectInfoTab(self, object_id):
@@ -114,7 +136,7 @@ class GenerateContent:
         # Set ManyToMany categories
         object.category.set([1, 2])
 
-        print(f'\nObject created {name}')
+        print(f'\n=========[Object created: "{name}"]=========')
 
         self._create_ObjectDocumentAuthor()
 
@@ -123,3 +145,4 @@ class GenerateContent:
             self._create_ObjectFile(object_id)
             self._create_ObjectDocument(object_id)
             self._create_ObjectInfoTab(object_id)
+            self._create_ObjectBlock(object_id)
