@@ -46,25 +46,20 @@ class GenerateContent:
     def _create_mortgage_WayToBuy(self):
         objects_qty = len(self._get_objects_ids_list())
         way_to_buy = WayToBuy()
-
         objects_range = list(range(1, objects_qty))
 
         if WayToBuy.objects.filter(pk=1).count() == 0:
             way_to_buy.save()
             print(f'WayToBuy is created')
-
             way_to_buy.military.set(objects_range)
             way_to_buy.mother.set(objects_range)
-
             # way_to_buy.military.set([1, 2])
             # way_to_buy.mother.set([1, 2])
         else:
             way_to_buy = WayToBuy.objects.get(pk=1)
             way_to_buy.save()
-
             way_to_buy.military.set(objects_range)
             way_to_buy.mother.set(objects_range)
-
             print(f'WayToBuy is updated')
 
 
@@ -205,7 +200,6 @@ class GenerateContent:
 
     def _create_Object(self):
         name = f'Объект {self.fake.word()} {self.fake.word()} {str(self.fake.random_number(4, True))}'.title()
-
         cities = Object.CITIES
         # Get every first item from cities tuple, and flatten to list
         cities_list = [x[0] for x in cities]
@@ -226,27 +220,15 @@ class GenerateContent:
                         panoram='https://monolit360.com/files/main/index.html?s=pano1692', \
                     )
         object.save()
-
         # Set ManyToMany categories
         object.category.set([1, 2])
-
         print(f'\n=========[Object [ID: {object.id}] created: "{name}"]=========')
-
-        # self._create_ObjectDocumentAuthor()
-
-        # for object_id in self._get_objects_ids_list():
-        #     self._create_ObjectVideo(object_id)
-        #     self._create_ObjectFile(object_id)
-        #     self._create_ObjectDocument(object_id)
-        #     self._create_ObjectInfoTab(object_id)
-        #     self._create_ObjectGallery(object_id)
-        #     self._create_ObjectBlock(object_id)
-        #     self._create_ObjectSection(object_id)
 
 
     def fillEntireSite(self):
         self._create_Object()
         self._create_ObjectDocumentAuthor()
+        self._create_mortgage_WayToBuy()
 
         for object_id in self._get_objects_ids_list():
             self._create_ObjectVideo(object_id)
@@ -256,5 +238,3 @@ class GenerateContent:
             self._create_ObjectGallery(object_id)
             self._create_ObjectBlock(object_id)
             self._create_ObjectSection(object_id)
-
-        self._create_mortgage_WayToBuy()
