@@ -53,9 +53,43 @@ class GenerateContent:
                 self._create_ObjectGalleryImage(object_gallery.id)
 
 
-    # TODO:
     def _create_ObjectSection(self, object_id):
-        pass
+        coount_object_sections = ObjectSection.objects.annotate(Count('object')).filter(object=object_id).count()
+        coount_object_blocks = ObjectBlock.objects.annotate(Count('object')).filter(object=object_id).count()
+
+        # if coount_object_sections == 0 and coount_object_blocks == 0:
+        if coount_object_sections == 0:
+            object = Object.objects.get(pk=object_id)
+            # object_blocks = ObjectBlock.objects.get(pk=object_id)
+            # print(object_blocks.values_list('id', flat=True))
+            # i = 1
+            # for _ in range(5):
+            #     object_section = ObjectSection(object=object, \
+            #                                     object_block=object_blocks, \
+            #                                     number=self.fake.random_number(3, True), \
+            #                                     name=f'Секция {i}', \
+            #                                     floor_first=1, \
+            #                                     floor_last=23 \
+            #                                 )
+            #     object_section.save()
+            #     print(f'ObjectSection Секция {i} created')
+            #     i += 1
+
+            object_blocks_ids = ObjectBlock.objects.filter(object=object_id).values_list('id', flat=True)
+
+            i = 1
+            for object_block_id in object_blocks_ids:
+                object_block = ObjectBlock.objects.filter(object=object_id).get(pk=object_block_id)
+                object_section = ObjectSection(object=object, \
+                                                object_block=object_block, \
+                                                number=self.fake.random_number(3, True), \
+                                                name=f'Секция {i}', \
+                                                floor_first=1, \
+                                                floor_last=23 \
+                                            )
+                object_section.save()
+                print(f'ObjectSection Секция {i} created')
+                i += 1
 
 
     def _create_ObjectBlock(self, object_id):
@@ -140,22 +174,21 @@ class GenerateContent:
 
 
     def _create_Object(self):
-        fake = self.fake
-        name = str('Объект ' + fake.word() + ' ' + fake.word() + ' ' + str(fake.random_number(4, True))).title()
+        name = f'Объект {self.fake.word()} {self.fake.word()} {str(self.fake.random_number(4, True))}'.title()
 
         cities = Object.CITIES
         # Get every first item from cities tuple, and flatten to list
         cities_list = [x[0] for x in cities]
 
-        object = Object(completed=fake.boolean(chance_of_getting_true=40), \
-                        all_sold=fake.boolean(chance_of_getting_true=30), \
-                        crm_id=fake.random_number(7, True), \
+        object = Object(completed=self.fake.boolean(chance_of_getting_true=40), \
+                        all_sold=self.fake.boolean(chance_of_getting_true=30), \
+                        crm_id=self.fake.random_number(7, True), \
                         name=name, \
                         slug=slugify(translit(name, 'ru', reversed=True)), \
-                        description=fake.text(1000), \
+                        description=self.fake.text(1000), \
                         object_type='living_complex', \
                         building_type='monolith', \
-                        city=fake.word(cities_list),\
+                        city=self.fake.word(cities_list),\
                         address='ул. Ленина 12', \
                         genplan='img-placeholder.jpg', \
                         main_image='img-placeholder.jpg', \
@@ -176,5 +209,6 @@ class GenerateContent:
             self._create_ObjectFile(object_id)
             self._create_ObjectDocument(object_id)
             self._create_ObjectInfoTab(object_id)
-            self._create_ObjectBlock(object_id)
             self._create_ObjectGallery(object_id)
+            self._create_ObjectBlock(object_id)
+            self._create_ObjectSection(object_id)
