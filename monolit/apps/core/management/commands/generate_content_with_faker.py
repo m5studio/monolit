@@ -18,16 +18,19 @@ class Command(BaseCommand):
 
 
     def add_arguments(self, parser):
-        parser.add_argument('objects_qty', type=int, help='How many objects to create?')
+        parser.add_argument('objects_qty', type=int, help='How many objects to create? (max 10)')
 
 
     def handle(self, *args, **options):
         if not settings.DEBUG:
             self.stdout.write(self.style.ERROR('You can\'t generate content in PRODUCTION mode, set DEBUG=True'))
+        elif options['objects_qty'] > 10:
+            self.stdout.write(self.style.ERROR('You can\'t generate more then 10 objects'))
         else:
             for _ in range(options['objects_qty']):
                 gen = GenerateContent()
-                gen._create_Object()
+                # gen._create_Object()
+                gen.fillEntireSite()
 
 
     # self.stdout.write(self.style.ERROR('error message'))

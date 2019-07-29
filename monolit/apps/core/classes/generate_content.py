@@ -14,6 +14,10 @@ from apps.realty.models.object_block import ObjectBlock
 from apps.realty.models.object_section import ObjectSection
 from apps.realty.models.object_gallery import ObjectGallery, ObjectGalleryImage
 
+# from apps.realty.models.object_site import ObjectSite, ObjectSiteWindowsView
+
+from apps.mortgage.models import Bank, Offer, WayToBuy
+
 
 class GenerateContent:
     def __init__(self):
@@ -24,6 +28,49 @@ class GenerateContent:
         return list(Object.objects.values_list('id', flat=True))
 
 
+    """ [ObjectSite] methods """
+    # TODO:
+    def _create_ObjectSite(self, object_id):
+        pass
+
+
+    """ [Mortgage] methods """
+    def _create_mortgage_Bank(self):
+        pass
+
+
+    def _create_mortgage_Offer(self):
+        pass
+
+
+    def _create_mortgage_WayToBuy(self):
+        objects_qty = len(self._get_objects_ids_list())
+        way_to_buy = WayToBuy()
+
+        objects_range = list(range(1, objects_qty))
+
+        if WayToBuy.objects.filter(pk=1).count() == 0:
+            way_to_buy.save()
+            print(f'WayToBuy is created')
+
+            way_to_buy.military.set(objects_range)
+            way_to_buy.mother.set(objects_range)
+
+            # way_to_buy.military.set([1, 2])
+            # way_to_buy.mother.set([1, 2])
+        else:
+            way_to_buy = WayToBuy.objects.get(pk=1)
+            way_to_buy.save()
+
+            way_to_buy.military.set(objects_range)
+            way_to_buy.mother.set(objects_range)
+
+            print(f'WayToBuy is updated')
+
+
+
+
+    """ [Object] methods """
     def _create_ObjectGalleryImage(self, gallery_id):
         count_images_in_gallery = ObjectGalleryImage.objects.annotate(Count('gallery')).filter(gallery=gallery_id).count()
 
@@ -54,31 +101,14 @@ class GenerateContent:
 
 
     def _create_ObjectSection(self, object_id):
-        coount_object_sections = ObjectSection.objects.annotate(Count('object')).filter(object=object_id).count()
-        coount_object_blocks = ObjectBlock.objects.annotate(Count('object')).filter(object=object_id).count()
+        count_object_sections = ObjectSection.objects.annotate(Count('object')).filter(object=object_id).count()
 
-        # if coount_object_sections == 0 and coount_object_blocks == 0:
-        if coount_object_sections == 0:
-            object = Object.objects.get(pk=object_id)
-            # object_blocks = ObjectBlock.objects.get(pk=object_id)
-            # print(object_blocks.values_list('id', flat=True))
-            # i = 1
-            # for _ in range(5):
-            #     object_section = ObjectSection(object=object, \
-            #                                     object_block=object_blocks, \
-            #                                     number=self.fake.random_number(3, True), \
-            #                                     name=f'Секция {i}', \
-            #                                     floor_first=1, \
-            #                                     floor_last=23 \
-            #                                 )
-            #     object_section.save()
-            #     print(f'ObjectSection Секция {i} created')
-            #     i += 1
-
+        if count_object_sections == 0:
             object_blocks_ids = ObjectBlock.objects.filter(object=object_id).values_list('id', flat=True)
 
             i = 1
             for object_block_id in object_blocks_ids:
+                object = Object.objects.get(pk=object_id)
                 object_block = ObjectBlock.objects.filter(object=object_id).get(pk=object_block_id)
                 object_section = ObjectSection(object=object, \
                                                 object_block=object_block, \
@@ -202,6 +232,20 @@ class GenerateContent:
 
         print(f'\n=========[Object [ID: {object.id}] created: "{name}"]=========')
 
+        # self._create_ObjectDocumentAuthor()
+
+        # for object_id in self._get_objects_ids_list():
+        #     self._create_ObjectVideo(object_id)
+        #     self._create_ObjectFile(object_id)
+        #     self._create_ObjectDocument(object_id)
+        #     self._create_ObjectInfoTab(object_id)
+        #     self._create_ObjectGallery(object_id)
+        #     self._create_ObjectBlock(object_id)
+        #     self._create_ObjectSection(object_id)
+
+
+    def fillEntireSite(self):
+        self._create_Object()
         self._create_ObjectDocumentAuthor()
 
         for object_id in self._get_objects_ids_list():
@@ -212,3 +256,5 @@ class GenerateContent:
             self._create_ObjectGallery(object_id)
             self._create_ObjectBlock(object_id)
             self._create_ObjectSection(object_id)
+
+        self._create_mortgage_WayToBuy()
