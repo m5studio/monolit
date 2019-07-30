@@ -11,6 +11,18 @@ from apps.core.classes.numbers_formatter import NumbersFormatter
 from apps.realty.models.object import Object
 
 
+class WayToBuy(SingletonModel):
+    military = models.ManyToManyField(Object, verbose_name='Военная ипотека', related_name='mortgage_object_military', blank=True, help_text='Выберите Объекты подходящие под военную ипотеку')
+    mother   = models.ManyToManyField(Object, verbose_name='Материнский капитал', related_name='mortgage_object_mother', blank=True, help_text='Выберите Объекты подходящие под материнский капитал')
+
+    def __str__(self):
+        return 'Способы покупки (Военная ипотека, Материнский капитал)'
+
+    class Meta:
+        verbose_name = 'Способы покупки (Военная ипотека, Материнский капитал)'
+        verbose_name_plural = 'Способы покупки (Военная ипотека, Материнский капитал)'
+
+
 def logo_upload_path(instance, filename):
     filename = FileProcessing(filename)
     filename = filename.newFileNameFromField(instance.name, None, 'logo')
@@ -103,15 +115,3 @@ class Offer(models.Model):
             return f'от {self.rate_from}%'
         elif not self.rate_from:
             return f'до {self.rate_to}%'
-
-
-class WayToBuy(SingletonModel):
-    military = models.ManyToManyField(Object, verbose_name='Военная ипотека', related_name='mortgage_object_military', blank=True, help_text='Выберите Объекты подходящие под военную ипотеку')
-    mother   = models.ManyToManyField(Object, verbose_name='Материнский капитал', related_name='mortgage_object_mother', blank=True, help_text='Выберите Объекты подходящие под материнский капитал')
-
-    def __str__(self):
-        return 'Способы покупки (Военная ипотека, Материнский капитал)'
-
-    class Meta:
-        verbose_name = 'Способы покупки (Военная ипотека, Материнский капитал)'
-        verbose_name_plural = 'Способы покупки (Военная ипотека, Материнский капитал)'

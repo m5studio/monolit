@@ -1,3 +1,5 @@
+import random
+
 from django.db.models import Count
 # from django.conf import settings
 from faker import Faker
@@ -16,7 +18,7 @@ from apps.realty.models.object_gallery import ObjectGallery, ObjectGalleryImage
 
 # from apps.realty.models.object_site import ObjectSite, ObjectSiteWindowsView
 
-from apps.mortgage.models import Bank, Offer, WayToBuy
+from apps.mortgage.models import WayToBuy, Bank, Offer
 
 
 class GenerateContent:
@@ -24,8 +26,15 @@ class GenerateContent:
         self.fake = Faker()
 
 
+    def get_random_list_item(self, list):
+        return random.choice(list)
+
+
     def _get_objects_ids_list(self):
         return list(Object.objects.values_list('id', flat=True))
+
+
+    # TODO: News
 
 
     """ [ObjectSite] methods """
@@ -35,34 +44,58 @@ class GenerateContent:
 
 
     """ [Mortgage] methods """
-    def _create_mortgage_Bank(self):
-        pass
-
-
     def _create_mortgage_Offer(self):
-        pass
+        banks_ids = [1, 2]
+        bank = Bank.objects.get(pk=self.get_random_list_item(banks_ids))
+
+        loan_term_from_list = [1, 3]
+        loan_term_to_list = [25, 30]
+
+        rate_from_list = [11.7, 11]
+        rate_to_list = [11.7, 12]
+
+        offer = Offer(bank=bank,\
+                      title=f'Название программы {str(self.fake.word()).title()} {str(self.fake.random_number(4, True))}', \
+                      first_payment_from=15, \
+                      first_payment_to=15, \
+                      loan_term_from=self.get_random_list_item(loan_term_from_list), \
+                      loan_term_to=self.get_random_list_item(loan_term_to_list), \
+                      rate_from=self.get_random_list_item(rate_from_list), \
+                      rate_to=self.get_random_list_item(rate_to_list), \
+                      description=self.fake.text(500))
+        offer.save()
+
+        objects_ids_list = list(self._get_objects_ids_list())
+        offer.object.set(objects_ids_list)
+        print(f'Mortgage offer {offer.title} created')
+
+
+    def _create_mortgage_Banks(self):
+        if Bank.objects.all().count() > 0:
+            print('Banks already created')
+        else:
+            bank = Bank(name='РНКБ', logo='img-placeholder.jpg')
+            bank.save()
+            bank = Bank(name='Банк Россия', logo='img-placeholder.jpg')
+            bank.save()
+            print('Banks are created')
 
 
     def _create_mortgage_WayToBuy(self):
-        objects_qty = len(self._get_objects_ids_list())
+        objects_ids = self._get_objects_ids_list()
         way_to_buy = WayToBuy()
-        objects_range = list(range(1, objects_qty))
 
         if WayToBuy.objects.filter(pk=1).count() == 0:
             way_to_buy.save()
+            way_to_buy.military.set(objects_ids)
+            way_to_buy.mother.set(objects_ids)
             print(f'WayToBuy is created')
-            way_to_buy.military.set(objects_range)
-            way_to_buy.mother.set(objects_range)
-            # way_to_buy.military.set([1, 2])
-            # way_to_buy.mother.set([1, 2])
         else:
             way_to_buy = WayToBuy.objects.get(pk=1)
             way_to_buy.save()
-            way_to_buy.military.set(objects_range)
-            way_to_buy.mother.set(objects_range)
+            way_to_buy.military.set(objects_ids)
+            way_to_buy.mother.set(objects_ids)
             print(f'WayToBuy is updated')
-
-
 
 
     """ [Object] methods """
@@ -201,6 +234,7 @@ class GenerateContent:
     def _create_Object(self):
         name = f'Объект {self.fake.word()} {self.fake.word()} {str(self.fake.random_number(4, True))}'.title()
         cities = Object.CITIES
+
         # Get every first item from cities tuple, and flatten to list
         cities_list = [x[0] for x in cities]
 
@@ -220,21 +254,30 @@ class GenerateContent:
                         panoram='https://monolit360.com/files/main/index.html?s=pano1692', \
                     )
         object.save()
+
         # Set ManyToMany categories
         object.category.set([1, 2])
+
         print(f'\n=========[Object [ID: {object.id}] created: "{name}"]=========')
 
 
-    def fillEntireSite(self):
-        self._create_Object()
-        self._create_ObjectDocumentAuthor()
-        self._create_mortgage_WayToBuy()
+    def fillEntireSite(self, quantity):
+        for _ in range(quantity):
+            self._create_Object()
+            self._create_ObjectDocumentAuthor()
 
-        for object_id in self._get_objects_ids_list():
-            self._create_ObjectVideo(object_id)
-            self._create_ObjectFile(object_id)
-            self._create_ObjectDocument(object_id)
-            self._create_ObjectInfoTab(object_id)
-            self._create_ObjectGallery(object_id)
-            self._create_ObjectBlock(object_id)
-            self._create_ObjectSection(object_id)
+            self._create_mortgage_WayToBuy()
+            self._create_mortgage_Banks()
+            # self._create_mortgage_Offer()
+
+            for object_id in self._get_objects_ids_list():
+                self._create_ObjectVideo(object_id)
+                self._create_ObjectFile(object_id)
+                self._create_ObjectDocument(object_id)
+                self._create_ObjectInfoTab(object_id)
+                self._create_ObjectGallery(object_id)
+                self._create_ObjectBlock(object_id)
+                self._create_ObjectSection(object_id)
+
+        for _ in range(quantity * 2):
+            self._create_mortgage_Offer()

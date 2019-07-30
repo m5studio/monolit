@@ -27,10 +27,8 @@ class Command(BaseCommand):
         elif options['objects_qty'] > 10:
             self.stdout.write(self.style.ERROR('You can\'t generate more then 10 objects'))
         else:
-            for _ in range(options['objects_qty']):
-                gen = GenerateContent()
-                # gen._create_Object()
-                gen.fillEntireSite()
+            gen = GenerateContent()
+            gen.fillEntireSite(options['objects_qty'])
 
 
     # self.stdout.write(self.style.ERROR('error message'))
