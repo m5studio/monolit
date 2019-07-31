@@ -254,7 +254,7 @@ class GenerateContent:
 
                 object = Object.objects.get(pk=object_id)
                 object_document_author = ObjectDocumentAuthor.objects.first()
-                # object_document_author = ObjectDocumentAuthor.objects.get(pk=2)
+
                 object_document = ObjectDocument(object=object, title=document_fake_title, author=object_document_author)
                 object_document.save()
                 print(f'ObjectDocumentAuthor created {document_fake_title}')
