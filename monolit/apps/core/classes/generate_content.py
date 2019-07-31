@@ -14,11 +14,14 @@ from apps.realty.models.object_document import ObjectDocumentAuthor, ObjectDocum
 from apps.realty.models.object_info_tab import ObjectInfoTab
 from apps.realty.models.object_block import ObjectBlock
 from apps.realty.models.object_section import ObjectSection
+from apps.realty.models.object_elevator import ObjectElevator
 from apps.realty.models.object_gallery import ObjectGallery, ObjectGalleryImage
 
 from apps.mortgage.models import WayToBuy, Bank, Offer
 
-# from apps.realty.models.object_site import ObjectSite, ObjectSiteWindowsView
+from apps.realty.models.object_site import ObjectSite, ObjectSiteWindowsView
+from apps.realty.models.object_site_balcony import ObjectBalcony
+from apps.realty.models.object_site_bathroom import ObjectBathroom
 
 
 class GenerateContent:
@@ -130,6 +133,11 @@ class GenerateContent:
                 self._create_ObjectGalleryImage(object_gallery.id)
 
 
+    # TODO: create elevators
+    def _create_ObjectElevator(self,):
+        pass
+
+
     def _create_ObjectSection(self, object_id):
         count_object_sections = ObjectSection.objects.annotate(Count('object')).filter(object=object_id).count()
 
@@ -145,7 +153,7 @@ class GenerateContent:
                                                 number=self.fake.random_number(3, True), \
                                                 name=f'Секция {i}', \
                                                 floor_first=1, \
-                                                floor_last=23 \
+                                                floor_last=23
                                             )
                 object_section.save()
                 print(f'ObjectSection Секция {i} created')

@@ -91,7 +91,7 @@ class ObjectSite(models.Model):
     active                  = models.BooleanField('Активный', default=True, help_text='Опубликован на сайте')
     special_offer           = models.BooleanField('Спецпредложение', default=False)
 
-    object                  = models.ForeignKey(Object, verbose_name='Объект', on_delete=models.CASCADE, blank=True, null=True)
+    object                  = models.ForeignKey(Object, verbose_name='Объект', on_delete=models.CASCADE)
     site_type               = models.CharField('Тип помещения', max_length=100, choices=SITE_TYPES)
     object_block            = models.ForeignKey(ObjectBlock, verbose_name='Блок Объекта', on_delete=models.SET_NULL, blank=True, null=True)
     object_section          = models.ForeignKey(ObjectSection, verbose_name='Секция Объекта', on_delete=models.SET_NULL, blank=True, null=True)
