@@ -8,7 +8,7 @@ class ObjectElevator(models.Model):
         ('cargo_lift', 'Грузовой лифт'),
     )
 
-    object_section = models.ForeignKey(ObjectSection, verbose_name='Секция Объекта', on_delete=models.SET_NULL, blank=True, null=True)
+    object_section = models.ForeignKey(ObjectSection, verbose_name='Секция Объекта', on_delete=models.CASCADE)
     elevator_type  = models.CharField('Тип лифта', max_length=100, choices=ELEVATORS_TYPES, blank=True, null=True)
     elevator_qty   = models.PositiveIntegerField('Количество лифтов', default=1, blank=True, null=True)
 

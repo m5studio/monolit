@@ -42,8 +42,33 @@ class GenerateContent:
 
 
     """ [ObjectSite] """
+    
+    # TODO: Generate commercial Object types
+
     def _create_ObjectSite(self, object_id):
-        pass
+        site_types = ObjectSite.SITE_TYPES
+        site_types_list = [x[0] for x in site_types]
+        site_types_list.remove('commercial')
+
+        rooms_qty = ObjectSite.ROOMS_QTY
+        rooms_qty_list = [x[0] for x in rooms_qty]
+
+        object = Object.objects.get(pk=object_id)
+
+        object_site = ObjectSite(special_offer=self.fake.boolean(chance_of_getting_true=20), \
+                                 object=object, \
+                                 site_type=self.get_random_list_item(site_types_list), \
+                                 crm_id=self.fake.random_number(9, True), \
+                                 floor=5, \
+                                 site_number=19, \
+                                 price_per_square=57000, \
+                                 rooms_qty=self.get_random_list_item(rooms_qty_list), \
+                                 site_area=67, \
+                                )
+        object_site.save()
+        print(f'ObjectSite {object_site.crm_id} created')
+
+
 
 
     """ [Mortgage] """
@@ -134,8 +159,25 @@ class GenerateContent:
 
 
     # TODO: create elevators
-    def _create_ObjectElevator(self,):
-        pass
+    def _create_ObjectElevator(self, object_section_id):
+        elevator_types = ObjectElevator.ELEVATORS_TYPES
+        elevator_types_list = [x[0] for x in elevator_types]
+
+        object_section = ObjectSection.objects.get(pk=object_section_id)
+
+        object_elevator = ObjectElevator(object_section=object_section, \
+                                         elevator_type=elevator_types_list[0], \
+                                         elevator_qty=2
+                                        )
+        object_elevator.save()
+        print(f'ObjectElevator {elevator_types_list[0]} created')
+
+        object_elevator = ObjectElevator(object_section=object_section, \
+                                         elevator_type=elevator_types_list[1], \
+                                         elevator_qty=1
+                                        )
+        object_elevator.save()
+        print(f'ObjectElevator {elevator_types_list[1]} created')
 
 
     def _create_ObjectSection(self, object_id):
@@ -158,6 +200,10 @@ class GenerateContent:
                 object_section.save()
                 print(f'ObjectSection Секция {i} created')
                 i += 1
+
+                # Create Elevators for Section
+                self._create_ObjectElevator(object_section.id)
+
 
 
     def _create_ObjectBlock(self, object_id):
@@ -289,5 +335,10 @@ class GenerateContent:
                 self._create_ObjectBlock(object_id)
                 self._create_ObjectSection(object_id)
 
-        for _ in range(5):
-            self._create_mortgage_Offer()
+        if Offer.objects.all().count() < 6:
+            for _ in range(6):
+                self._create_mortgage_Offer()
+
+        for object_id in self._get_objects_ids_list():
+            for _ in range(quantity * 10):
+                self._create_ObjectSite(object_id)
