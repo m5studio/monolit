@@ -47,6 +47,7 @@ class GenerateContent:
     def _create_mortgage_Offer(self):
         banks_ids = [1, 2]
         bank = Bank.objects.get(pk=self.get_random_list_item(banks_ids))
+        # bank = Bank.objects.get(pk=1)
 
         loan_term_from_list = [1, 3]
         loan_term_to_list = [25, 30]
@@ -62,7 +63,8 @@ class GenerateContent:
                       loan_term_to=self.get_random_list_item(loan_term_to_list), \
                       rate_from=self.get_random_list_item(rate_from_list), \
                       rate_to=self.get_random_list_item(rate_to_list), \
-                      description=self.fake.text(500))
+                      description=self.fake.text(500)
+                    )
         offer.save()
 
         objects_ids_list = list(self._get_objects_ids_list())
@@ -279,5 +281,5 @@ class GenerateContent:
                 self._create_ObjectBlock(object_id)
                 self._create_ObjectSection(object_id)
 
-        for _ in range(quantity * 2):
+        for _ in range(5):
             self._create_mortgage_Offer()

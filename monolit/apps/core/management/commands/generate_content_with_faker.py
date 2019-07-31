@@ -2,6 +2,8 @@
 
 from django.core.management.base import BaseCommand, CommandError
 
+from django.core.management import call_command
+
 from django.conf import settings
 from apps.core.classes.generate_content import GenerateContent
 
@@ -27,6 +29,9 @@ class Command(BaseCommand):
         elif options['objects_qty'] > 10:
             self.stdout.write(self.style.ERROR('You can\'t generate more then 10 objects'))
         else:
+            # Call my command add_default_content automatically
+            call_command('add_default_content')
+
             gen = GenerateContent()
             gen.fillEntireSite(options['objects_qty'])
 

@@ -7,7 +7,7 @@
     {% endif %}
     {% if object.rate_from or object.rate_to %}
         <div class="mortgage-card__percent">
-            <span>{{ object.rate_display }}</span>
+            <span>{{ object.rate_display|safe }}</span>
         </div>
     {% endif %}
     <div class="mortgage-card__descr">{{ object.title }}</div>
