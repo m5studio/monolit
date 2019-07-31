@@ -28,8 +28,8 @@ class Command(BaseCommand):
         elif options['objects_qty'] > 10:
             self.stdout.write(self.style.ERROR('You can\'t generate more then 10 objects'))
         else:
+            # FIXME:
             if SiteSettings.objects.all().count() == 0:
-                print('!!!!!!!')
                 # Call my command add_default_content automatically
                 call_command('add_default_content')
 
