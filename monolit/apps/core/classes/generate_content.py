@@ -16,9 +16,9 @@ from apps.realty.models.object_block import ObjectBlock
 from apps.realty.models.object_section import ObjectSection
 from apps.realty.models.object_gallery import ObjectGallery, ObjectGalleryImage
 
-# from apps.realty.models.object_site import ObjectSite, ObjectSiteWindowsView
-
 from apps.mortgage.models import WayToBuy, Bank, Offer
+
+# from apps.realty.models.object_site import ObjectSite, ObjectSiteWindowsView
 
 
 class GenerateContent:
@@ -35,15 +35,15 @@ class GenerateContent:
 
 
     # TODO: News
+    """ [News] """
 
 
-    """ [ObjectSite] methods """
-    # TODO:
+    """ [ObjectSite] """
     def _create_ObjectSite(self, object_id):
         pass
 
 
-    """ [Mortgage] methods """
+    """ [Mortgage] """
     def _create_mortgage_Offer(self):
         banks_ids = [1, 2]
         bank = Bank.objects.get(pk=self.get_random_list_item(banks_ids))
@@ -100,7 +100,7 @@ class GenerateContent:
             print(f'WayToBuy is updated')
 
 
-    """ [Object] methods """
+    """ [Object] """
     def _create_ObjectGalleryImage(self, gallery_id):
         count_images_in_gallery = ObjectGalleryImage.objects.annotate(Count('gallery')).filter(gallery=gallery_id).count()
 
