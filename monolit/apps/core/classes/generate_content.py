@@ -42,9 +42,6 @@ class GenerateContent:
 
 
     """ [ObjectSite] """
-    
-    # TODO: Generate commercial Object types
-
     def _create_ObjectSite(self, object_id):
         site_types = ObjectSite.SITE_TYPES
         site_types_list = [x[0] for x in site_types]
@@ -69,6 +66,7 @@ class GenerateContent:
         print(f'ObjectSite {object_site.crm_id} created')
 
 
+    # TODO: Generate commercial ObjectSite types
 
 
     """ [Mortgage] """
@@ -135,6 +133,7 @@ class GenerateContent:
         if count_images_in_gallery == 0:
             gallery = ObjectGallery.objects.get(pk=gallery_id)
 
+            # FIXME:
             for _ in range(7):
                 gallery_image = ObjectGalleryImage(gallery=gallery, image='img-placeholder.jpg')
                 gallery_image.save()
