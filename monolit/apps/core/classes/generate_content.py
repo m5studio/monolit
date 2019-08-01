@@ -41,6 +41,18 @@ class GenerateContent:
         return [x[0] for x in tuple]
 
 
+    def countBanks(self):
+        return Bank.objects.all().count()
+
+
+    def countOffers(self):
+        return Offer.objects.all().count()
+
+
+    def countFlatsInObject(self, object_id) -> int:
+        return ObjectSite.objects.annotate(Count('object')).filter(object=object_id).count()
+
+
     # TODO: News
     """ [News] """
 
@@ -49,31 +61,44 @@ class GenerateContent:
     def _create_ObjectSite(self, object_id):
         site_types_list = self.convert_tuple_to_flat_list(ObjectSite.SITE_TYPES)
         site_types_list.remove('commercial')
-        
+
         rooms_qty_list = self.convert_tuple_to_flat_list(ObjectSite.ROOMS_QTY)
         object = Object.objects.get(pk=object_id)
 
-        object_site = ObjectSite(special_offer=self.fake.boolean(chance_of_getting_true=20), \
-                                 object=object, \
-                                 site_type=self.get_random_list_item(site_types_list), \
-                                 crm_id=self.fake.random_number(9, True), \
-                                 floor=5, \
-                                 site_number=19, \
-                                 price_per_square=57000, \
-                                 rooms_qty=self.get_random_list_item(rooms_qty_list), \
-                                 site_area=67, \
-                                )
-        object_site.save()
-        print(f'ObjectSite {object_site.crm_id} created')
+        floors_list = list(range(1, 23))
+        site_numbers_list = list(range(100, 200))
+        price_per_square_list = list(range(52000, 89000))
+        site_area_list = list(range(57, 119))
+
+        qty = 0
+        if self.countFlatsInObject(object_id) == 0:
+            qty = 100
+        elif self.countFlatsInObject(object_id) < 100:
+            qty = 100 - self.countFlatsInObject(object_id)
+
+        for _ in range(qty):
+            object_site = ObjectSite(special_offer=self.fake.boolean(chance_of_getting_true=20), \
+                                     object=object, \
+                                     site_type=self.get_random_list_item(site_types_list), \
+                                     crm_id=self.fake.random_number(9, True), \
+                                     floor=self.get_random_list_item(floors_list), \
+                                     site_number=self.get_random_list_item(site_numbers_list), \
+                                     price_per_square=self.get_random_list_item(price_per_square_list), \
+                                     rooms_qty=self.get_random_list_item(rooms_qty_list), \
+                                     site_area=self.get_random_list_item(site_area_list), \
+                                    )
+            object_site.save()
+            print(f'[ObjectSite] {object_site.crm_id} created for Object {object_id}')
+        print(f'\n В Объекте {object_id}, {self.countFlatsInObject(object_id)} квартир, было создано, {qty} квартир')
 
 
     # TODO: Generate commercial ObjectSite types
 
 
     """ [Mortgage] """
-    def _create_mortgage_Offer(self):
-        # banks_ids = [1, 2]
-        bank_ids = list(Bank.objects.order_by('id').values_list('id', flat=True))
+    def _create_Offer(self):
+        # banks_ids = [1,2]
+        banks_ids = list(Bank.objects.order_by('id').values_list('id', flat=True))
         bank = Bank.objects.get(pk=self.get_random_list_item(banks_ids))
 
         loan_term_from_list = [1, 3]
@@ -83,7 +108,7 @@ class GenerateContent:
         rate_to_list = [11.7, 12]
 
         offer = Offer(bank=bank,\
-                      title=f'Название программы {str(self.fake.word()).title()} {str(self.fake.random_number(4, True))}', \
+                      title=f'Ипотечная программа {str(self.fake.word()).title()} {str(self.fake.random_number(4, True))}', \
                       first_payment_from=15, \
                       first_payment_to=15, \
                       loan_term_from=self.get_random_list_item(loan_term_from_list), \
@@ -96,21 +121,22 @@ class GenerateContent:
 
         objects_ids_list = list(self._get_objects_ids_list())
         offer.object.set(objects_ids_list)
-        print(f'Mortgage offer {offer.title} created')
+        print(f'[Offer] {offer.title} created')
 
 
-    def _create_mortgage_Banks(self):
+    def _create_Bank(self):
         if Bank.objects.all().count() > 0:
-            print('Banks already created')
+            print('[Bank] already created')
         else:
             bank = Bank(name='РНКБ', logo='img-placeholder.jpg')
             bank.save()
+
             bank = Bank(name='Банк Россия', logo='img-placeholder.jpg')
             bank.save()
-            print('Banks are created')
+            print('[Bank] are created')
 
 
-    def _create_mortgage_WayToBuy(self):
+    def _create_WayToBuy(self):
         objects_ids = self._get_objects_ids_list()
         way_to_buy = WayToBuy()
 
@@ -118,13 +144,13 @@ class GenerateContent:
             way_to_buy.save()
             way_to_buy.military.set(objects_ids)
             way_to_buy.mother.set(objects_ids)
-            print(f'WayToBuy is created')
+            print(f'[WayToBuy] is created')
         else:
             way_to_buy = WayToBuy.objects.get(pk=1)
             way_to_buy.save()
             way_to_buy.military.set(objects_ids)
             way_to_buy.mother.set(objects_ids)
-            print(f'WayToBuy is updated')
+            print(f'[WayToBuy] is updated')
 
 
     """ [Object] """
@@ -321,33 +347,15 @@ class GenerateContent:
             self._create_ObjectDocument(object_id, 23)
 
         # 4. Fill Mortgage
+        self._create_WayToBuy()
 
+        if self.countBanks() < 2:
+            self._create_Bank()
 
-        """
-        for _ in range(quantity):
-            self._create_Object()
-            self._create_ObjectDocumentAuthor()
+        if self.countOffers() < 5:
+            for _ in range(5 - self.countOffers()):
+                self._create_Offer()
 
-            self._create_mortgage_WayToBuy()
-            self._create_mortgage_Banks()
-            # self._create_mortgage_Offer()
-
-            for object_id in self._get_objects_ids_list():
-                self._create_ObjectVideo(object_id)
-                self._create_ObjectFile(object_id)
-                self._create_ObjectDocument(object_id)
-                self._create_ObjectInfoTab(object_id)
-
-                self._create_ObjectBlock(object_id)
-                self._create_ObjectSection(object_id)
-
-                self._create_ObjectGallery(object_id)
-
-        if Offer.objects.all().count() < 6:
-            for _ in range(6):
-                self._create_mortgage_Offer()
-
+        # 5. Generate Flats and apartments
         for object_id in self._get_objects_ids_list():
-            for _ in range(quantity * 10):
-                self._create_ObjectSite(object_id)
-        """
+            self._create_ObjectSite(object_id)

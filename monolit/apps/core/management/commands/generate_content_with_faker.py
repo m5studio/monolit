@@ -7,13 +7,6 @@ from apps.core.classes.generate_content import GenerateContent
 from apps.core.models import SiteSettings
 
 
-"""
-    TODO:
-    x Check if site in DEBUG mode
-    2. Add optional arguments for commend
-"""
-
-
 class Command(BaseCommand):
     help = 'Generate fake content with Faker'
 
@@ -29,9 +22,10 @@ class Command(BaseCommand):
             self.stdout.write(self.style.ERROR('You can\'t generate more then 10 objects'))
         else:
             # FIXME:
-            if SiteSettings.objects.all().count() == 0:
-                # Call my command add_default_content automatically
-                call_command('add_default_content')
+            # print( SiteSettings.objects.get(pk=1) )
+            # if SiteSettings.objects.get(pk=1).count() == 0:
+            # Call my command add_default_content automatically
+            call_command('add_default_content')
 
             gen = GenerateContent()
             gen.fillEntireSite(options['objects_qty'])
