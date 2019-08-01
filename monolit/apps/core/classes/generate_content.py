@@ -33,8 +33,12 @@ class GenerateContent:
         return random.choice(list)
 
 
-    def _get_objects_ids_list(self):
-        return list(Object.objects.values_list('id', flat=True))
+    def _get_objects_ids_list(self) -> list:
+        return list(Object.objects.order_by('id').values_list('id', flat=True))
+
+
+    def convert_tuple_to_flat_list(self, tuple):
+        return [x[0] for x in tuple]
 
 
     # TODO: News
@@ -43,13 +47,10 @@ class GenerateContent:
 
     """ [ObjectSite] """
     def _create_ObjectSite(self, object_id):
-        site_types = ObjectSite.SITE_TYPES
-        site_types_list = [x[0] for x in site_types]
+        site_types_list = self.convert_tuple_to_flat_list(ObjectSite.SITE_TYPES)
         site_types_list.remove('commercial')
-
-        rooms_qty = ObjectSite.ROOMS_QTY
-        rooms_qty_list = [x[0] for x in rooms_qty]
-
+        
+        rooms_qty_list = self.convert_tuple_to_flat_list(ObjectSite.ROOMS_QTY)
         object = Object.objects.get(pk=object_id)
 
         object_site = ObjectSite(special_offer=self.fake.boolean(chance_of_getting_true=20), \
@@ -71,9 +72,9 @@ class GenerateContent:
 
     """ [Mortgage] """
     def _create_mortgage_Offer(self):
-        banks_ids = [1, 2]
+        # banks_ids = [1, 2]
+        bank_ids = list(Bank.objects.order_by('id').values_list('id', flat=True))
         bank = Bank.objects.get(pk=self.get_random_list_item(banks_ids))
-        # bank = Bank.objects.get(pk=1)
 
         loan_term_from_list = [1, 3]
         loan_term_to_list = [25, 30]
@@ -127,23 +128,21 @@ class GenerateContent:
 
 
     """ [Object] """
-    def _create_ObjectGalleryImage(self, gallery_id):
+    # x
+    def _create_ObjectGalleryImage(self, gallery_id, qty: int):
         count_images_in_gallery = ObjectGalleryImage.objects.annotate(Count('gallery')).filter(gallery=gallery_id).count()
 
         if count_images_in_gallery == 0:
             gallery = ObjectGallery.objects.get(pk=gallery_id)
 
-            # FIXME:
-            for _ in range(7):
+            for _ in range(qty):
                 gallery_image = ObjectGalleryImage(gallery=gallery, image='img-placeholder.jpg')
                 gallery_image.save()
-            print(f'Add gallery images for gallery {gallery_id}')
+            print(f'[GalleryImage] created for Gallery {gallery_id}')
 
-
-    def _create_ObjectGallery(self, object_id):
+    # x
+    def _create_ObjectGallery(self, object_id, gal_names: list):
         count_object_galleries = ObjectGallery.objects.annotate(Count('object')).filter(object=object_id).count()
-
-        gal_names = ['Март 2019', 'Июль 2019', 'Сентябрь 2019']
 
         if count_object_galleries == 0:
             object = Object.objects.get(pk=object_id)
@@ -151,40 +150,63 @@ class GenerateContent:
             for gal_name in gal_names:
                 object_gallery = ObjectGallery(object=object, name=gal_name)
                 object_gallery.save()
-                print(f'Gallery {gal_name} created for Object {object_id}')
-
+                print(f'[Gallery "{gal_name}"] created for Object {object_id}')
                 # Create gallery images
-                self._create_ObjectGalleryImage(object_gallery.id)
+                self._create_ObjectGalleryImage(object_gallery.id, 7)
 
+    # x
+    def _create_ObjectDocumentAuthor(self):
+        author_name = 'Иванов А.П.'
+        count_object_document_authors = ObjectDocumentAuthor.objects.annotate(Count('name')).filter(name=author_name).count()
 
-    # TODO: create elevators
+        if count_object_document_authors == 0:
+            object_document_author = ObjectDocumentAuthor(name=author_name)
+            object_document_author.save()
+            print(f'[ObjectDocumentAuthor "{author_name}"] created')
+
+    # x
+    def _create_ObjectDocument(self, object_id, qty: int):
+        count_documents_rel_to_object = ObjectDocument.objects.annotate(Count('object')).filter(object=object_id).count()
+
+        if count_documents_rel_to_object == 0:
+            for _ in range(qty):
+                document_fake_title = f'Документ {self.fake.word()} {self.fake.word()} {self.fake.random_number(10, True)}'
+
+                object = Object.objects.get(pk=object_id)
+                object_document_author = ObjectDocumentAuthor.objects.first()
+
+                object_document = ObjectDocument(object=object, title=document_fake_title, author=object_document_author)
+                object_document.save()
+                print(f'[ObjectDocument "{document_fake_title}"] created for Object {object_id}')
+
+    # x
     def _create_ObjectElevator(self, object_section_id):
-        elevator_types = ObjectElevator.ELEVATORS_TYPES
-        elevator_types_list = [x[0] for x in elevator_types]
+        count_elevators_rel_to_section = ObjectElevator.objects.annotate(Count('object_section')).filter(object_section=object_section_id).count()
 
-        object_section = ObjectSection.objects.get(pk=object_section_id)
+        if count_elevators_rel_to_section == 0:
+            elevator_types_list = self.convert_tuple_to_flat_list(ObjectElevator.ELEVATORS_TYPES)
+            object_section = ObjectSection.objects.get(pk=object_section_id)
 
-        object_elevator = ObjectElevator(object_section=object_section, \
-                                         elevator_type=elevator_types_list[0], \
-                                         elevator_qty=2
-                                        )
-        object_elevator.save()
-        print(f'ObjectElevator {elevator_types_list[0]} created')
+            object_elevator = ObjectElevator(object_section=object_section, \
+                                             elevator_type=elevator_types_list[0], \
+                                             elevator_qty=2
+                                            )
+            object_elevator.save()
+            print(f'[ObjectElevator "{elevator_types_list[0]}"] created for ObjectSection {object_section_id}')
 
-        object_elevator = ObjectElevator(object_section=object_section, \
-                                         elevator_type=elevator_types_list[1], \
-                                         elevator_qty=1
-                                        )
-        object_elevator.save()
-        print(f'ObjectElevator {elevator_types_list[1]} created')
+            object_elevator = ObjectElevator(object_section=object_section, \
+                                             elevator_type=elevator_types_list[1], \
+                                             elevator_qty=1
+                                            )
+            object_elevator.save()
+            print(f'[ObjectElevator {elevator_types_list[1]}] created for ObjectSection {object_section_id}')
 
-
+    # x
     def _create_ObjectSection(self, object_id):
-        count_object_sections = ObjectSection.objects.annotate(Count('object')).filter(object=object_id).count()
+        count_sections_rel_to_object = ObjectSection.objects.annotate(Count('object')).filter(object=object_id).count()
 
-        if count_object_sections == 0:
+        if count_sections_rel_to_object == 0:
             object_blocks_ids = ObjectBlock.objects.filter(object=object_id).values_list('id', flat=True)
-
             i = 1
             for object_block_id in object_blocks_ids:
                 object = Object.objects.get(pk=object_id)
@@ -194,88 +216,54 @@ class GenerateContent:
                                                 number=self.fake.random_number(3, True), \
                                                 name=f'Секция {i}', \
                                                 floor_first=1, \
-                                                floor_last=23
+                                                floor_last=23, \
                                             )
                 object_section.save()
-                print(f'ObjectSection Секция {i} created')
+                print(f'[ObjectSection "{object_section.name}"] created for Object {object_id}')
                 i += 1
-
                 # Create Elevators for Section
                 self._create_ObjectElevator(object_section.id)
 
+    # x
+    def _create_ObjectBlock(self, object_id, qty: int):
+        count_blocks_rel_to_object = ObjectBlock.objects.annotate(Count('object')).filter(object=object_id).count()
 
-
-    def _create_ObjectBlock(self, object_id):
-        count_object_blocks = ObjectBlock.objects.annotate(Count('object')).filter(object=object_id).count()
-
-        if count_object_blocks == 0:
+        if count_blocks_rel_to_object == 0:
             i = 1
-            for _ in range(4):
+            for _ in range(qty):
                 block_name = f'Блок {i}'
-
                 object = Object.objects.get(pk=object_id)
                 object_block = ObjectBlock(object=object, name=block_name)
                 object_block.save()
-
-                print(f'ObjectBlock {block_name} created for Object {object_id}')
+                print(f'[ObjectBlock "{block_name}"] created for Object {object_id}')
                 i += 1
 
-
+    # x
     def _create_ObjectInfoTab(self, object_id):
-        count_object_info_tabs = ObjectInfoTab.objects.annotate(Count('object')).filter(object=object_id).count()
+        count_info_tabs_rel_to_object = ObjectInfoTab.objects.annotate(Count('object')).filter(object=object_id).count()
+        object_info_tab_icons_list = self.convert_tuple_to_flat_list(ObjectInfoTab.ICONS)
+        object = Object.objects.get(pk=object_id)
 
-        object_info_tab_icons = ObjectInfoTab.ICONS
-        object_info_tab_icons_list = [x[0] for x in object_info_tab_icons]
-
-        if count_object_info_tabs == 0:
+        if count_info_tabs_rel_to_object == 0:
             for info_tab in object_info_tab_icons_list:
-                object = Object.objects.get(pk=object_id)
                 object_info_tab = ObjectInfoTab(object=object, icon_name=info_tab, description=self.fake.text(300), image='img-placeholder.jpg')
                 object_info_tab.save()
-                print(f'ObjectInfoTab {info_tab} created for Object {object_id}')
+                print(f'[ObjectInfoTab "{info_tab}"] created for Object {object_id}')
 
-
-    def _create_ObjectDocumentAuthor(self):
-        author_name = 'Иванов А.П.'
-        count_object_document_authors = ObjectDocumentAuthor.objects.annotate(Count('name')).filter(name=author_name).count()
-
-        if count_object_document_authors == 0:
-            object_document_author = ObjectDocumentAuthor(name=author_name)
-            object_document_author.save()
-            print(f'ObjectDocumentAuthor {author_name} created')
-
-
-    def _create_ObjectDocument(self, object_id, qty=30):
-        count_object_document = ObjectDocument.objects.annotate(Count('object')).filter(object=object_id).count()
-
-        if count_object_document == 0:
-            for _ in range(qty):
-                document_fake_title = f'Документ {self.fake.word()} {self.fake.word()} {self.fake.random_number(10, True)}'
-
-                object = Object.objects.get(pk=object_id)
-                object_document_author = ObjectDocumentAuthor.objects.first()
-
-                object_document = ObjectDocument(object=object, title=document_fake_title, author=object_document_author)
-                object_document.save()
-                print(f'ObjectDocumentAuthor created {document_fake_title}')
-
-
+    # x
     def _create_ObjectFile(self, object_id):
         count_files_rel_to_object = ObjectFile.objects.annotate(Count('object')).filter(object=object_id).count()
-
-        file_types = ObjectFile.FILE_TYPES
-        file_types_list = [x[0] for x in file_types]
+        file_types_list = self.convert_tuple_to_flat_list(ObjectFile.FILE_TYPES)
 
         if count_files_rel_to_object == 0:
             for file_type in file_types_list:
                 object = Object.objects.get(pk=object_id)
                 object_file = ObjectFile(object=object, name=file_type)
                 object_file.save()
-                print(f'ObjectFile {file_type} created for Object {object_id}')
+                print(f'[ObjectFile {file_type}] created for Object {object_id}')
 
-
-    def _create_ObjectVideo(self, object_id, qty=4):
-        # Count videos in objects
+    # x
+    def _create_ObjectVideo(self, object_id, qty: int):
         count_videos_rel_to_object = ObjectVideo.objects.annotate(Count('object')).filter(object=object_id).count()
 
         if count_videos_rel_to_object == 0:
@@ -283,15 +271,12 @@ class GenerateContent:
                 object = Object.objects.get(pk=object_id)
                 object_video = ObjectVideo(object=object, video='https://www.youtube.com/watch?v=F5mRW0jo-U4')
                 object_video.save()
-                print(f'ObjectVideo created for Object {object_id}')
+                print(f'[ObjectVideo] created for Object {object_id}')
 
-
+    # x
     def _create_Object(self):
         name = f'Объект {self.fake.word()} {self.fake.word()} {str(self.fake.random_number(4, True))}'.title()
-        cities = Object.CITIES
-
-        # Get every first item from cities tuple, and flatten to list
-        cities_list = [x[0] for x in cities]
+        cities_list = self.convert_tuple_to_flat_list(Object.CITIES)
 
         object = Object(completed=self.fake.boolean(chance_of_getting_true=40), \
                         all_sold=self.fake.boolean(chance_of_getting_true=30), \
@@ -309,14 +294,36 @@ class GenerateContent:
                         panoram='https://monolit360.com/files/main/index.html?s=pano1692', \
                     )
         object.save()
-
         # Set ManyToMany categories
         object.category.set([1, 2])
-
-        print(f'\n=========[Object [ID: {object.id}] created: "{name}"]=========')
+        print(f'[Object] (ID: {object.id}) created "{name}"')
 
 
     def fillEntireSite(self, quantity):
+        # 1. Create Objects
+        for _ in range(quantity):
+            self._create_Object()
+        print('\n')
+
+        # 2. Fill related to Objects models with content
+        for object_id in self._get_objects_ids_list():
+            self._create_ObjectVideo(object_id, 4)
+            self._create_ObjectFile(object_id)
+            self._create_ObjectInfoTab(object_id)
+            self._create_ObjectBlock(object_id, 4)
+            self._create_ObjectSection(object_id)
+            self._create_ObjectGallery(object_id, ['Март 2019', 'Август 2019', 'Сентябрь 2019', 'Октябрь 2019'])
+
+        # 3. Fill Objects with Documents
+        self._create_ObjectDocumentAuthor()
+
+        for object_id in self._get_objects_ids_list():
+            self._create_ObjectDocument(object_id, 23)
+
+        # 4. Fill Mortgage
+
+
+        """
         for _ in range(quantity):
             self._create_Object()
             self._create_ObjectDocumentAuthor()
@@ -330,9 +337,11 @@ class GenerateContent:
                 self._create_ObjectFile(object_id)
                 self._create_ObjectDocument(object_id)
                 self._create_ObjectInfoTab(object_id)
-                self._create_ObjectGallery(object_id)
+
                 self._create_ObjectBlock(object_id)
                 self._create_ObjectSection(object_id)
+
+                self._create_ObjectGallery(object_id)
 
         if Offer.objects.all().count() < 6:
             for _ in range(6):
@@ -341,3 +350,4 @@ class GenerateContent:
         for object_id in self._get_objects_ids_list():
             for _ in range(quantity * 10):
                 self._create_ObjectSite(object_id)
+        """
