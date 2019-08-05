@@ -53,22 +53,54 @@ class GenerateContent:
         return ObjectSite.objects.annotate(Count('object')).filter(object=object_id).count()
 
 
-    # TODO: News
     """ [News] """
 
 
     """ [ObjectSite] """
-    def _create_ObjectSite(self, object_id):
+    def _create_ObjectBathroom(self, object_site_id):
+        object_bathroom_list = self.convert_tuple_to_flat_list(ObjectBathroom.BATHROOM_TYPES)
+        count_bathrooms_rel_to_object_site = ObjectBathroom.objects.annotate(Count('object_site')).filter(object_site=object_site_id).count()
+
+        object_site = ObjectSite.objects.get(pk=object_site_id)
+
+        if count_bathrooms_rel_to_object_site == 0 or count_bathrooms_rel_to_object_site < 2:
+            object_bathroom = ObjectBathroom(object_site=object_site, \
+                                             bathroom_type=self.get_random_list_item(object_bathroom_list))
+            object_bathroom.save()
+            print(f'[ObjectBathroom] created for ObjectSite {object_site}')
+
+
+    def _create_ObjectBalcony(self, object_site_id):
+        object_balcony_list = self.convert_tuple_to_flat_list(ObjectBalcony.BALCONY_TYPES)
+        count_balconies_rel_to_object_site = ObjectBalcony.objects.annotate(Count('object_site')).filter(object_site=object_site_id).count()
+
+        object_site = ObjectSite.objects.get(pk=object_site_id)
+
+        if count_balconies_rel_to_object_site == 0 or count_balconies_rel_to_object_site < 2:
+            object_balcony = ObjectBalcony(object_site=object_site, \
+                                           balcony_type=self.get_random_list_item(object_balcony_list))
+            object_balcony.save()
+            print(f'[ObjectBalcony] created for ObjectSite {object_site}')
+
+
+    # Жилые объекты
+    def _create_living_ObjectSite(self, object_id):
         site_types_list = self.convert_tuple_to_flat_list(ObjectSite.SITE_TYPES)
         site_types_list.remove('commercial')
 
         rooms_qty_list = self.convert_tuple_to_flat_list(ObjectSite.ROOMS_QTY)
         object = Object.objects.get(pk=object_id)
 
+        # object_living = Object.objects.filter(category__id=1)
+        # object_commercial = Object.objects.filter(category__id=2)
+        # print(f'!!! Жилые объекты {object_living}')
+        # print(f'!!! Коммерческие объекты {object_commercial}')
+
         floors_list = list(range(1, 23))
         site_numbers_list = list(range(100, 200))
         price_per_square_list = list(range(52000, 89000))
         site_area_list = list(range(57, 119))
+        kitchen_area_list = list(range(10, 15))
 
         qty = 0
         if self.countFlatsInObject(object_id) == 0:
@@ -77,6 +109,9 @@ class GenerateContent:
             qty = 100 - self.countFlatsInObject(object_id)
 
         for _ in range(qty):
+            site_area = self.get_random_list_item(site_area_list)
+            calc_living_area = site_area - 15
+
             object_site = ObjectSite(special_offer=self.fake.boolean(chance_of_getting_true=20), \
                                      object=object, \
                                      site_type=self.get_random_list_item(site_types_list), \
@@ -85,11 +120,23 @@ class GenerateContent:
                                      site_number=self.get_random_list_item(site_numbers_list), \
                                      price_per_square=self.get_random_list_item(price_per_square_list), \
                                      rooms_qty=self.get_random_list_item(rooms_qty_list), \
-                                     site_area=self.get_random_list_item(site_area_list), \
+                                     site_area=site_area, \
+                                     living_area=calc_living_area, \
+                                     kitchen_area=self.get_random_list_item(kitchen_area_list), \
+                                     ceiling_height=2.7,\
                                     )
             object_site.save()
             print(f'[ObjectSite] {object_site.crm_id} created for Object {object_id}')
-        print(f'\n В Объекте {object_id}, {self.countFlatsInObject(object_id)} квартир, было создано, {qty} квартир')
+
+            # Add Balconies
+            for _ in range(2):
+                self._create_ObjectBalcony(object_site.id)
+
+            # Add Batrooms
+            for _ in range(2):
+                self._create_ObjectBathroom(object_site.id)
+
+        print(f'\nВ Объекте {object_id}, {self.countFlatsInObject(object_id)} квартир, было создано, {qty} квартир')
 
 
     # TODO: Generate commercial ObjectSite types
@@ -322,6 +369,7 @@ class GenerateContent:
         object.save()
         # Set ManyToMany categories
         object.category.set([1, 2])
+        # object.category.set([1])
         print(f'[Object] (ID: {object.id}) created "{name}"')
 
 
@@ -338,7 +386,7 @@ class GenerateContent:
             self._create_ObjectInfoTab(object_id)
             self._create_ObjectBlock(object_id, 4)
             self._create_ObjectSection(object_id)
-            self._create_ObjectGallery(object_id, ['Март 2019', 'Август 2019', 'Сентябрь 2019', 'Октябрь 2019'])
+            self._create_ObjectGallery(object_id, ['Март 2019', 'Август 2019', 'Сентябрь 2019'])
 
         # 3. Fill Objects with Documents
         self._create_ObjectDocumentAuthor()
@@ -358,4 +406,4 @@ class GenerateContent:
 
         # 5. Generate Flats and apartments
         for object_id in self._get_objects_ids_list():
-            self._create_ObjectSite(object_id)
+            self._create_living_ObjectSite(object_id)
