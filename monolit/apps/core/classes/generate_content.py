@@ -89,6 +89,8 @@ class GenerateContent:
         site_types_list.remove('commercial')
 
         rooms_qty_list = self.convert_tuple_to_flat_list(ObjectSite.ROOMS_QTY)
+        finishing_types_list = self.convert_tuple_to_flat_list(ObjectSite.FINISHING_TYPES)
+
         object = Object.objects.get(pk=object_id)
 
         # object_living = Object.objects.filter(category__id=1)
@@ -124,8 +126,17 @@ class GenerateContent:
                                      living_area=calc_living_area, \
                                      kitchen_area=self.get_random_list_item(kitchen_area_list), \
                                      ceiling_height=2.7,\
+                                     two_levels=self.fake.boolean(chance_of_getting_true=20), \
+                                     entresol=self.fake.boolean(chance_of_getting_true=30), \
+                                     wardrobe=self.fake.boolean(chance_of_getting_true=40), \
+                                     finish_type=self.get_random_list_item(finishing_types_list), \
                                     )
             object_site.save()
+
+            # TODO: set windows view
+            # windows_view_list = ObjectSiteWindowsView.objects.values_list('name', flat=True)
+            # object_site.window_view.set([])
+
             print(f'[ObjectSite] {object_site.crm_id} created for Object {object_id}')
 
             # Add Balconies
