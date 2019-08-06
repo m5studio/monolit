@@ -39,7 +39,11 @@
                         {% include 'realty/cards/object-card.html' %}
                     {% endfor %}
                 {% endif %}
-
+            </div>
+            <div class="objects-list-separator container">
+                <hr>
+            </div>
+            <div class="objects-list-inner container">
                 {% if objects_sold %}
                     {% for object in objects_sold %}
                         {% include 'realty/cards/object-card.html' %}

@@ -23,6 +23,8 @@ from apps.realty.models.object_site import ObjectSite, ObjectSiteWindowsView
 from apps.realty.models.object_site_balcony import ObjectBalcony
 from apps.realty.models.object_site_bathroom import ObjectBathroom
 
+from apps.news.models import NewsCategory, News, NewsImage
+
 
 class GenerateContent:
     def __init__(self):
@@ -49,11 +51,35 @@ class GenerateContent:
         return Offer.objects.all().count()
 
 
+    def countNews(self):
+        return News.objects.all().count()
+
+
     def countFlatsInObject(self, object_id) -> int:
         return ObjectSite.objects.annotate(Count('object')).filter(object=object_id).count()
 
 
     """ [News] """
+    # TODO:
+    def _create_NewsCategory(self):
+        pass
+
+    # TODO:
+    def _create_NewsImage(self):
+        pass
+
+
+    def _create_News(self):
+        title = f'Новость {self.fake.word()} {self.fake.word()} {self.fake.word()} {self.fake.word()} {self.fake.word()} {str(self.fake.random_number(3, True))}'.title()
+
+        news = News(title=title, \
+                    main_image='img-placeholder.jpg', \
+                    body=self.fake.text(5000),
+                    )
+        news.save()
+        print(f'[News] created {news.title}')
+
+        news.object.set([ self.get_random_list_item(self._get_objects_ids_list()) ])
 
 
     """ [ObjectSite] """
@@ -130,12 +156,18 @@ class GenerateContent:
                                      entresol=self.fake.boolean(chance_of_getting_true=30), \
                                      wardrobe=self.fake.boolean(chance_of_getting_true=40), \
                                      finish_type=self.get_random_list_item(finishing_types_list), \
+                                     image_planning='img-placeholder.jpg', \
+                                     image_planning3d='img-placeholder.jpg', \
+                                     image_floor='img-placeholder.jpg', \
+                                     image_section='img-placeholder.jpg', \
+                                     image_section_in_object='img-placeholder.jpg', \
+                                     image_genplan='img-placeholder.jpg'
                                     )
             object_site.save()
 
-            # TODO: set windows view
-            # windows_view_list = ObjectSiteWindowsView.objects.values_list('name', flat=True)
-            # object_site.window_view.set([])
+            # Set ObjectSiteWindowsView
+            windows_view_list = list(ObjectSiteWindowsView.objects.values_list('id', flat=True))
+            object_site.window_view.set([self.get_random_list_item(windows_view_list), self.get_random_list_item(windows_view_list)])
 
             print(f'[ObjectSite] {object_site.crm_id} created for Object {object_id}')
 
@@ -418,3 +450,8 @@ class GenerateContent:
         # 5. Generate Flats and apartments
         for object_id in self._get_objects_ids_list():
             self._create_living_ObjectSite(object_id)
+
+        # 6. Generate News
+        if self.countNews() < 100:
+            for _ in range(100 - self.countNews()):
+                self._create_News()
