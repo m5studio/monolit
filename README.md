@@ -136,3 +136,12 @@ Run:
 $ python manage.py cleanup_unused_media
 $ python manage.py clean_empty_media_dirs
 ```
+
+## How fill site with dummy content
+Enshure you're in DEBUG=True mode  
+Then put or check in ```/media/``` folder two files: ```dummy-document.pdf``` and ```dummy-image.jpg```
+
+Run:
+```
+$ python manage.py generate_content_with_faker 5
+```

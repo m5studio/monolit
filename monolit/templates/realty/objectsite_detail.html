@@ -120,25 +120,25 @@
                     {% if object.ceiling_height %}
                         <div class="flat-params-block">
                             <div class="flat-params-block__name">Выстота потолка</div>
-                            <div class="flat-params-block__val">{{ object.ceiling_height }} м</div>
+                            <div class="flat-params-block__val">{{ object.ceiling_height|format_number }} м</div>
                         </div>
                     {% endif %}
                     {% if object.site_area %}
                         <div class="flat-params-block">
                             <div class="flat-params-block__name">Общая площадь</div>
-                            <div class="flat-params-block__val">{{ object.site_area|round_number }} м<sup>2</sup></div>
+                            <div class="flat-params-block__val">{{ object.site_area|format_number }} м<sup>2</sup></div>
                         </div>
                     {% endif %}
                     {% if object.living_area %}
                         <div class="flat-params-block">
                             <div class="flat-params-block__name">Жилая площадь</div>
-                            <div class="flat-params-block__val">{{ object.living_area }} м<sup>2</sup></div>
+                            <div class="flat-params-block__val">{{ object.living_area|format_number }} м<sup>2</sup></div>
                         </div>
                     {% endif %}
                     {% if object.kitchen_area %}
                         <div class="flat-params-block">
                             <div class="flat-params-block__name">Площадь кухни</div>
-                            <div class="flat-params-block__val">{{ object.kitchen_area }} м<sup>2</sup></div>
+                            <div class="flat-params-block__val">{{ object.kitchen_area|format_number }} м<sup>2</sup></div>
                         </div>
                     {% endif %}
                 </div>
@@ -156,19 +156,19 @@
                             {% if object.two_levels %}
                                 <div class="flat-params-block">
                                     <div class="flat-params-block__name">Два уровня</div>
-                                    <div class="flat-params-block__val">{{ object.two_levels }}</div>
+                                    <div class="flat-params-block__val">&#10004;</div>
                                 </div>
                             {% endif %}
                             {% if object.entresol %}
                                 <div class="flat-params-block">
                                     <div class="flat-params-block__name">Антресоль</div>
-                                    <div class="flat-params-block__val">{{ object.entresol }}</div>
+                                    <div class="flat-params-block__val">&#10004;</div>
                                 </div>
                             {% endif %}
                             {% if object.wardrobe %}
                                 <div class="flat-params-block">
                                     <div class="flat-params-block__name">Гардеробная</div>
-                                    <div class="flat-params-block__val">{{ object.wardrobe }}</div>
+                                    <div class="flat-params-block__val">&#10004;</div>
                                 </div>
                             {% endif %}
                             {% if object.finish_type %}
@@ -195,7 +195,7 @@
                             {% endif %}
                             {% if balconies %}
                                 <div class="flat-params-block">
-                                    <div class="flat-params-block__name">Балкон</div>
+                                    <div class="flat-params-block__name">Балконы</div>
                                     <div class="flat-params-block__val">
                                         {% for balcony in balconies %}
                                             {{ balcony.balcony_qty }} {{ balcony.get_balcony_type_display }}<br>

@@ -1,7 +1,6 @@
 import random
 
 from django.db.models import Count
-# from django.conf import settings
 from faker import Faker
 
 from django.utils.text import slugify
@@ -29,7 +28,8 @@ from apps.news.models import NewsCategory, News, NewsImage
 class GenerateContent:
     def __init__(self):
         self.fake = Faker()
-
+        self.DUMMY_IMG_NAME = 'dummy-image.jpg'
+        self.DUMMY_DOC_NAME = 'dummy-document.pdf'
 
     def get_random_list_item(self, list):
         return random.choice(list)
@@ -60,26 +60,42 @@ class GenerateContent:
 
 
     """ [News] """
-    # TODO:
     def _create_NewsCategory(self):
-        pass
+        if NewsCategory.objects.all().count() == 0:
+            news_cats_list = ['Акции', 'Политика', 'Экономика', 'Строительство']
 
-    # TODO:
-    def _create_NewsImage(self):
-        pass
+            for category in news_cats_list:
+                news_category = NewsCategory(name=category)
+                news_category.save()
+                print(f'[NewsCategory] created {news_category.name}')
+
+
+    def _create_NewsImage(self, news_id):
+        count_images_rel_to_news = NewsImage.objects.annotate(Count('news')).filter(news=news_id).count()
+        news = News.objects.get(pk=news_id)
+
+        if count_images_rel_to_news == 0:
+            for _ in range(10):
+                news_image = NewsImage(news=news, image=self.DUMMY_IMG_NAME)
+                news_image.save()
+                print(f'[NewsImage] created for {news_id}')
 
 
     def _create_News(self):
         title = f'Новость {self.fake.word()} {self.fake.word()} {self.fake.word()} {self.fake.word()} {self.fake.word()} {str(self.fake.random_number(3, True))}'.title()
 
         news = News(title=title, \
-                    main_image='img-placeholder.jpg', \
+                    main_image=self.DUMMY_IMG_NAME, \
                     body=self.fake.text(5000),
                     )
         news.save()
         print(f'[News] created {news.title}')
 
         news.object.set([ self.get_random_list_item(self._get_objects_ids_list()) ])
+        news_categories_list = list(NewsCategory.objects.values_list('id', flat=True))
+        news.category.set([ self.get_random_list_item(news_categories_list) ])
+
+        self._create_NewsImage(news.id)
 
 
     """ [ObjectSite] """
@@ -138,7 +154,7 @@ class GenerateContent:
 
         for _ in range(qty):
             site_area = self.get_random_list_item(site_area_list)
-            calc_living_area = site_area - 15
+            calc_living_area = site_area - 15.26
 
             object_site = ObjectSite(special_offer=self.fake.boolean(chance_of_getting_true=20), \
                                      object=object, \
@@ -156,12 +172,12 @@ class GenerateContent:
                                      entresol=self.fake.boolean(chance_of_getting_true=30), \
                                      wardrobe=self.fake.boolean(chance_of_getting_true=40), \
                                      finish_type=self.get_random_list_item(finishing_types_list), \
-                                     image_planning='img-placeholder.jpg', \
-                                     image_planning3d='img-placeholder.jpg', \
-                                     image_floor='img-placeholder.jpg', \
-                                     image_section='img-placeholder.jpg', \
-                                     image_section_in_object='img-placeholder.jpg', \
-                                     image_genplan='img-placeholder.jpg'
+                                     image_planning=self.DUMMY_IMG_NAME, \
+                                     image_planning3d=self.DUMMY_IMG_NAME, \
+                                     image_floor=self.DUMMY_IMG_NAME, \
+                                     image_section=self.DUMMY_IMG_NAME, \
+                                     image_section_in_object=self.DUMMY_IMG_NAME, \
+                                     image_genplan=self.DUMMY_IMG_NAME
                                     )
             object_site.save()
 
@@ -218,10 +234,10 @@ class GenerateContent:
         if Bank.objects.all().count() > 0:
             print('[Bank] already created')
         else:
-            bank = Bank(name='РНКБ', logo='img-placeholder.jpg')
+            bank = Bank(name='РНКБ', logo=self.DUMMY_IMG_NAME)
             bank.save()
 
-            bank = Bank(name='Банк Россия', logo='img-placeholder.jpg')
+            bank = Bank(name='Банк Россия', logo=self.DUMMY_IMG_NAME)
             bank.save()
             print('[Bank] are created')
 
@@ -244,7 +260,7 @@ class GenerateContent:
 
 
     """ [Object] """
-    # x
+
     def _create_ObjectGalleryImage(self, gallery_id, qty: int):
         count_images_in_gallery = ObjectGalleryImage.objects.annotate(Count('gallery')).filter(gallery=gallery_id).count()
 
@@ -252,11 +268,11 @@ class GenerateContent:
             gallery = ObjectGallery.objects.get(pk=gallery_id)
 
             for _ in range(qty):
-                gallery_image = ObjectGalleryImage(gallery=gallery, image='img-placeholder.jpg')
+                gallery_image = ObjectGalleryImage(gallery=gallery, image=self.DUMMY_IMG_NAME)
                 gallery_image.save()
             print(f'[GalleryImage] created for Gallery {gallery_id}')
 
-    # x
+
     def _create_ObjectGallery(self, object_id, gal_names: list):
         count_object_galleries = ObjectGallery.objects.annotate(Count('object')).filter(object=object_id).count()
 
@@ -270,7 +286,7 @@ class GenerateContent:
                 # Create gallery images
                 self._create_ObjectGalleryImage(object_gallery.id, 7)
 
-    # x
+
     def _create_ObjectDocumentAuthor(self):
         author_name = 'Иванов А.П.'
         count_object_document_authors = ObjectDocumentAuthor.objects.annotate(Count('name')).filter(name=author_name).count()
@@ -280,7 +296,7 @@ class GenerateContent:
             object_document_author.save()
             print(f'[ObjectDocumentAuthor "{author_name}"] created')
 
-    # x
+
     def _create_ObjectDocument(self, object_id, qty: int):
         count_documents_rel_to_object = ObjectDocument.objects.annotate(Count('object')).filter(object=object_id).count()
 
@@ -291,11 +307,11 @@ class GenerateContent:
                 object = Object.objects.get(pk=object_id)
                 object_document_author = ObjectDocumentAuthor.objects.first()
 
-                object_document = ObjectDocument(object=object, title=document_fake_title, author=object_document_author)
+                object_document = ObjectDocument(object=object, title=document_fake_title, author=object_document_author, file=self.DUMMY_DOC_NAME)
                 object_document.save()
                 print(f'[ObjectDocument "{document_fake_title}"] created for Object {object_id}')
 
-    # x
+
     def _create_ObjectElevator(self, object_section_id):
         count_elevators_rel_to_section = ObjectElevator.objects.annotate(Count('object_section')).filter(object_section=object_section_id).count()
 
@@ -317,7 +333,7 @@ class GenerateContent:
             object_elevator.save()
             print(f'[ObjectElevator {elevator_types_list[1]}] created for ObjectSection {object_section_id}')
 
-    # x
+
     def _create_ObjectSection(self, object_id):
         count_sections_rel_to_object = ObjectSection.objects.annotate(Count('object')).filter(object=object_id).count()
 
@@ -340,7 +356,7 @@ class GenerateContent:
                 # Create Elevators for Section
                 self._create_ObjectElevator(object_section.id)
 
-    # x
+
     def _create_ObjectBlock(self, object_id, qty: int):
         count_blocks_rel_to_object = ObjectBlock.objects.annotate(Count('object')).filter(object=object_id).count()
 
@@ -354,7 +370,7 @@ class GenerateContent:
                 print(f'[ObjectBlock "{block_name}"] created for Object {object_id}')
                 i += 1
 
-    # x
+
     def _create_ObjectInfoTab(self, object_id):
         count_info_tabs_rel_to_object = ObjectInfoTab.objects.annotate(Count('object')).filter(object=object_id).count()
         object_info_tab_icons_list = self.convert_tuple_to_flat_list(ObjectInfoTab.ICONS)
@@ -362,11 +378,11 @@ class GenerateContent:
 
         if count_info_tabs_rel_to_object == 0:
             for info_tab in object_info_tab_icons_list:
-                object_info_tab = ObjectInfoTab(object=object, icon_name=info_tab, description=self.fake.text(300), image='img-placeholder.jpg')
+                object_info_tab = ObjectInfoTab(object=object, icon_name=info_tab, description=self.fake.text(300), image=self.DUMMY_IMG_NAME)
                 object_info_tab.save()
                 print(f'[ObjectInfoTab "{info_tab}"] created for Object {object_id}')
 
-    # x
+
     def _create_ObjectFile(self, object_id):
         count_files_rel_to_object = ObjectFile.objects.annotate(Count('object')).filter(object=object_id).count()
         file_types_list = self.convert_tuple_to_flat_list(ObjectFile.FILE_TYPES)
@@ -374,11 +390,11 @@ class GenerateContent:
         if count_files_rel_to_object == 0:
             for file_type in file_types_list:
                 object = Object.objects.get(pk=object_id)
-                object_file = ObjectFile(object=object, name=file_type)
+                object_file = ObjectFile(object=object, name=file_type, file=self.DUMMY_DOC_NAME)
                 object_file.save()
                 print(f'[ObjectFile {file_type}] created for Object {object_id}')
 
-    # x
+
     def _create_ObjectVideo(self, object_id, qty: int):
         count_videos_rel_to_object = ObjectVideo.objects.annotate(Count('object')).filter(object=object_id).count()
 
@@ -389,7 +405,7 @@ class GenerateContent:
                 object_video.save()
                 print(f'[ObjectVideo] created for Object {object_id}')
 
-    # x
+
     def _create_Object(self):
         name = f'Объект {self.fake.word()} {self.fake.word()} {str(self.fake.random_number(4, True))}'.title()
         cities_list = self.convert_tuple_to_flat_list(Object.CITIES)
@@ -404,8 +420,8 @@ class GenerateContent:
                         building_type='monolith', \
                         city=self.fake.word(cities_list),\
                         address='ул. Ленина 12', \
-                        genplan='img-placeholder.jpg', \
-                        main_image='img-placeholder.jpg', \
+                        genplan=self.DUMMY_IMG_NAME, \
+                        main_image=self.DUMMY_IMG_NAME, \
                         webcam='https://rtsp.me/embed/3KASrTkG/', \
                         panoram='https://monolit360.com/files/main/index.html?s=pano1692', \
                     )
@@ -452,6 +468,9 @@ class GenerateContent:
             self._create_living_ObjectSite(object_id)
 
         # 6. Generate News
-        if self.countNews() < 100:
-            for _ in range(100 - self.countNews()):
+        self._create_NewsCategory()
+
+        if self.countNews() < 200:
+            # for _ in range(100 - self.countNews()):
+            for _ in range(25):
                 self._create_News()
