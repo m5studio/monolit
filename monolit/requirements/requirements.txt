@@ -1,4 +1,4 @@
-Django==2.2.3
+Django==2.2.4
 django-appconf==1.0.3
 django-ckeditor==5.7.1
 django-cleanup==4.0.0
@@ -11,7 +11,7 @@ Faker==2.0.0
 pilkit==2.0
 Pillow==6.1.0
 python-dateutil==2.8.0
-pytz==2019.1
+pytz==2019.2
 six==1.12.0
 sqlparse==0.3.0
 text-unidecode==1.2

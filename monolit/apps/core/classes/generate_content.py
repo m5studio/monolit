@@ -146,11 +146,15 @@ class GenerateContent:
         site_area_list = list(range(57, 119))
         kitchen_area_list = list(range(10, 15))
 
-        qty = 0
-        if self.countFlatsInObject(object_id) == 0:
-            qty = 100
-        elif self.countFlatsInObject(object_id) < 100:
-            qty = 100 - self.countFlatsInObject(object_id)
+        # NOTE: this shit really slows down generator
+        # qty = 0
+        # if self.countFlatsInObject(object_id) == 0:
+        #     qty = 100
+        # elif self.countFlatsInObject(object_id) < 100:
+        #     qty = 100 - self.countFlatsInObject(object_id)
+
+        flats_qty_list = list(range(91, 126))
+        qty = self.get_random_list_item(flats_qty_list)
 
         for _ in range(qty):
             site_area = self.get_random_list_item(site_area_list)
@@ -187,13 +191,13 @@ class GenerateContent:
 
             print(f'[ObjectSite] {object_site.crm_id} created for Object {object_id}')
 
-            # Add Balconies
-            for _ in range(2):
-                self._create_ObjectBalcony(object_site.id)
+        # Add Balconies
+        for _ in range(2):
+            self._create_ObjectBalcony(object_site.id)
 
-            # Add Batrooms
-            for _ in range(2):
-                self._create_ObjectBathroom(object_site.id)
+        # Add Batrooms
+        for _ in range(2):
+            self._create_ObjectBathroom(object_site.id)
 
         print(f'\nВ Объекте {object_id}, {self.countFlatsInObject(object_id)} квартир, было создано, {qty} квартир')
 

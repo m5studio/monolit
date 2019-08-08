@@ -1,7 +1,5 @@
 from django import template
 
-from apps.core.classes.numbers_formatter import NumbersFormatter
-
 register = template.Library()
 
 
@@ -28,8 +26,7 @@ def format_number(value):
 
 @register.filter(name='round_number')
 def round_number(value):
-    # return str(round(value, 1)).replace('.0', '')
-    return NumbersFormatter.round_num(value, 1, '.0', '')
+    return str(round(value, 1)).replace('.00', '').replace('.0', '')
 
 
 @register.filter(name='format_and_round_number')

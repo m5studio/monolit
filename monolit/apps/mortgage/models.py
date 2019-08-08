@@ -6,7 +6,6 @@ from ckeditor.fields import RichTextField
 
 from apps.core.classes.file_processing import FileProcessing
 from apps.core.classes.singleton_model import SingletonModel
-from apps.core.classes.numbers_formatter import NumbersFormatter
 
 from apps.realty.models.object import Object
 
@@ -76,8 +75,8 @@ class Offer(models.Model):
 
     # Первоначальный взнос
     def first_payment_dispaly(self):
-        self.first_payment_from = NumbersFormatter.round_num(self.first_payment_from, 1, '.0', '')
-        self.first_payment_to   = NumbersFormatter.round_num(self.first_payment_to, 1, '.0', '')
+        self.first_payment_from = str(round(self.first_payment_from, 1)).replace('.0', '')
+        self.first_payment_to   = str(round(self.first_payment_to, 1)).replace('.0', '')
 
         if self.first_payment_from == self.first_payment_to:
             return f'{self.first_payment_from}%'
@@ -90,8 +89,8 @@ class Offer(models.Model):
 
     # Срок кредита
     def loan_term_display(self):
-        self.loan_term_from = NumbersFormatter.round_num(self.loan_term_from, 1, '.0', '')
-        self.loan_term_to   = NumbersFormatter.round_num(self.loan_term_to, 1, '.0', '')
+        self.loan_term_from = str(round(self.loan_term_from, 1)).replace('.0', '')
+        self.loan_term_to   = str(round(self.loan_term_to, 1)).replace('.0', '')
 
         if self.loan_term_from == self.loan_term_to:
             return f'{self.loan_term_from} лет'
@@ -104,8 +103,8 @@ class Offer(models.Model):
 
     # Проецентная ставка
     def rate_display(self):
-        self.rate_from = NumbersFormatter.round_num(self.rate_from, 1, '.0', '')
-        self.rate_to   = NumbersFormatter.round_num(self.rate_to, 1, '.0', '')
+        self.rate_from = str(round(self.rate_from, 1)).replace('.0', '')
+        self.rate_to   = str(round(self.rate_to, 1)).replace('.0', '')
 
         if self.rate_from == self.rate_to:
             return f'{self.rate_from}%'
