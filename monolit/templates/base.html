@@ -4,11 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{% spaceless %}
+        {% comment %}<!-- {% if request.path == '/' %}
+            {% if settings.site_title %}{{ settings.site_title }}{% endif %}
+        {% elif page_title and settings.site_title %}
+            {{ page_title }} | {{ settings.site_title }}
+        {% elif page_title and not settings.site_title %}
+            {{ page_title }}
+        {% else %}
+        {% endif %} -->{% endcomment %}
+
+        {% url 'object:list' as object_list_url %}
+        {% url 'object:detail' slug=object.slug as object_detail_url %}
+
         {% if request.path == '/' %}
             {% if settings.site_title %}{{ settings.site_title }}{% endif %}
+        {% elif request.path == object_list_url %}
+            Объекты
+        {% elif request.path == object_detail_url %}
+            Страница Объекта
         {% else %}
-            {% if page_title %}{{ page_title }} | {% endif %}{% if settings.site_title %}{{ settings.site_title }}{% endif %}
+            else...
         {% endif %}
+
+        {{ object_detail_url }}
 
         {% comment %}
             {% url 'news:list' as news_list_url %}
@@ -30,19 +48,16 @@
             {% endif %}
         {% endcomment %}
     {% endspaceless %}</title>
+
     <meta name="description" content="{% spaceless %}
         {% if page_meta_description %}
             {{ page_meta_description }}
         {% elif not page_meta_description %}
             {{ settings.site_description }}
         {% endif %}{% endspaceless %}">
-    {% spaceless %}{% include 'includes/favicons.html' %}{% endspaceless %}
 
-    <!-- TODO: open graph tags: https://developers.facebook.com/docs/sharing/webmasters/ -->
-    <!-- <meta property="og:url"         content="http://www.nytimes.com/2015/02/19/arts/international/when-great-minds-dont-think-alike.html" />
-    <meta property="og:title"       content="When Great Minds Don’t Think Alike" />
-    <meta property="og:description" content="How much does culture influence creative thinking?" />
-    <meta property="og:image"       content="http://static01.nyt.com/images/2015/02/19/arts/international/19iht-btnumbers19A/19iht-btnumbers19A-facebookJumbo-v2.jpg" /> -->
+    {% spaceless %}{% include 'includes/favicons.html' %}
+    {% include 'includes/seo/og-tags.html' %}{% endspaceless %}
 
 {% block css %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">

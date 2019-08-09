@@ -25,11 +25,14 @@ from apps.realty.models.object_site_bathroom import ObjectBathroom
 from apps.news.models import NewsCategory, News, NewsImage
 
 
+DUMMY_IMG_NAME = 'dummy-image.jpg'
+DUMMY_DOC_NAME = 'dummy-document.pdf'
+
 class GenerateContent:
     def __init__(self):
         self.fake = Faker()
-        self.DUMMY_IMG_NAME = 'dummy-image.jpg'
-        self.DUMMY_DOC_NAME = 'dummy-document.pdf'
+        # self.DUMMY_IMG_NAME = 'dummy-image.jpg'
+        # self.DUMMY_DOC_NAME = 'dummy-document.pdf'
 
     def get_random_list_item(self, list):
         return random.choice(list)
@@ -76,7 +79,7 @@ class GenerateContent:
 
         if count_images_rel_to_news == 0:
             for _ in range(10):
-                news_image = NewsImage(news=news, image=self.DUMMY_IMG_NAME)
+                news_image = NewsImage(news=news, image=DUMMY_IMG_NAME)
                 news_image.save()
                 print(f'[NewsImage] created for {news_id}')
 
@@ -85,7 +88,7 @@ class GenerateContent:
         title = f'Новость {self.fake.word()} {self.fake.word()} {self.fake.word()} {self.fake.word()} {self.fake.word()} {str(self.fake.random_number(3, True))}'.title()
 
         news = News(title=title, \
-                    main_image=self.DUMMY_IMG_NAME, \
+                    main_image=DUMMY_IMG_NAME, \
                     body=self.fake.text(5000),
                     )
         news.save()
@@ -135,6 +138,7 @@ class GenerateContent:
 
         object = Object.objects.get(pk=object_id)
 
+        # NOTE: this is for generate commercial objects
         # object_living = Object.objects.filter(category__id=1)
         # object_commercial = Object.objects.filter(category__id=2)
         # print(f'!!! Жилые объекты {object_living}')
@@ -146,58 +150,57 @@ class GenerateContent:
         site_area_list = list(range(57, 119))
         kitchen_area_list = list(range(10, 15))
 
-        # NOTE: this shit really slows down generator
-        # qty = 0
-        # if self.countFlatsInObject(object_id) == 0:
-        #     qty = 100
-        # elif self.countFlatsInObject(object_id) < 100:
-        #     qty = 100 - self.countFlatsInObject(object_id)
+        sections_rel_to_object_ids_list = list(ObjectSection.objects.filter(object=object).values_list('id', flat=True))
 
         flats_qty_list = list(range(91, 126))
         qty = self.get_random_list_item(flats_qty_list)
 
-        for _ in range(qty):
-            site_area = self.get_random_list_item(site_area_list)
-            calc_living_area = site_area - 15.26
+        if self.countFlatsInObject(object_id) < qty:
+            for _ in range(qty - self.countFlatsInObject(object_id)):
+                site_area = self.get_random_list_item(site_area_list)
+                calc_living_area = site_area - 15.26
 
-            object_site = ObjectSite(special_offer=self.fake.boolean(chance_of_getting_true=20), \
-                                     object=object, \
-                                     site_type=self.get_random_list_item(site_types_list), \
-                                     crm_id=self.fake.random_number(9, True), \
-                                     floor=self.get_random_list_item(floors_list), \
-                                     site_number=self.get_random_list_item(site_numbers_list), \
-                                     price_per_square=self.get_random_list_item(price_per_square_list), \
-                                     rooms_qty=self.get_random_list_item(rooms_qty_list), \
-                                     site_area=site_area, \
-                                     living_area=calc_living_area, \
-                                     kitchen_area=self.get_random_list_item(kitchen_area_list), \
-                                     ceiling_height=2.7,\
-                                     two_levels=self.fake.boolean(chance_of_getting_true=20), \
-                                     entresol=self.fake.boolean(chance_of_getting_true=30), \
-                                     wardrobe=self.fake.boolean(chance_of_getting_true=40), \
-                                     finish_type=self.get_random_list_item(finishing_types_list), \
-                                     image_planning=self.DUMMY_IMG_NAME, \
-                                     image_planning3d=self.DUMMY_IMG_NAME, \
-                                     image_floor=self.DUMMY_IMG_NAME, \
-                                     image_section=self.DUMMY_IMG_NAME, \
-                                     image_section_in_object=self.DUMMY_IMG_NAME, \
-                                     image_genplan=self.DUMMY_IMG_NAME
-                                    )
-            object_site.save()
+                object_section = ObjectSection.objects.get(pk=self.get_random_list_item(sections_rel_to_object_ids_list))
 
-            # Set ObjectSiteWindowsView
-            windows_view_list = list(ObjectSiteWindowsView.objects.values_list('id', flat=True))
-            object_site.window_view.set([self.get_random_list_item(windows_view_list), self.get_random_list_item(windows_view_list)])
+                object_site = ObjectSite(special_offer=self.fake.boolean(chance_of_getting_true=20), \
+                                         object=object, \
+                                         site_type=self.get_random_list_item(site_types_list), \
+                                         object_section=object_section, \
+                                         crm_id=self.fake.random_number(9, True), \
+                                         floor=self.get_random_list_item(floors_list), \
+                                         site_number=self.get_random_list_item(site_numbers_list), \
+                                         price_per_square=self.get_random_list_item(price_per_square_list), \
+                                         rooms_qty=self.get_random_list_item(rooms_qty_list), \
+                                         site_area=site_area, \
+                                         living_area=calc_living_area, \
+                                         kitchen_area=self.get_random_list_item(kitchen_area_list), \
+                                         ceiling_height=2.7,\
+                                         two_levels=self.fake.boolean(chance_of_getting_true=20), \
+                                         entresol=self.fake.boolean(chance_of_getting_true=30), \
+                                         wardrobe=self.fake.boolean(chance_of_getting_true=40), \
+                                         finish_type=self.get_random_list_item(finishing_types_list), \
+                                         image_planning=DUMMY_IMG_NAME, \
+                                         image_planning3d=DUMMY_IMG_NAME, \
+                                         image_floor=DUMMY_IMG_NAME, \
+                                         image_section=DUMMY_IMG_NAME, \
+                                         image_section_in_object=DUMMY_IMG_NAME, \
+                                         image_genplan=DUMMY_IMG_NAME
+                                        )
+                object_site.save()
 
-            print(f'[ObjectSite] {object_site.crm_id} created for Object {object_id}')
+                # Set ObjectSiteWindowsView
+                windows_view_list = list(ObjectSiteWindowsView.objects.values_list('id', flat=True))
+                object_site.window_view.set([self.get_random_list_item(windows_view_list), self.get_random_list_item(windows_view_list)])
 
-        # Add Balconies
-        for _ in range(2):
-            self._create_ObjectBalcony(object_site.id)
+                print(f'[ObjectSite] {object_site.crm_id} created for Object {object_id}')
 
-        # Add Batrooms
-        for _ in range(2):
-            self._create_ObjectBathroom(object_site.id)
+            # Add Balconies
+            for _ in range(2):
+                self._create_ObjectBalcony(object_site.id)
+
+            # Add Batrooms
+            for _ in range(2):
+                self._create_ObjectBathroom(object_site.id)
 
         print(f'\nВ Объекте {object_id}, {self.countFlatsInObject(object_id)} квартир, было создано, {qty} квартир')
 
@@ -238,10 +241,10 @@ class GenerateContent:
         if Bank.objects.all().count() > 0:
             print('[Bank] already created')
         else:
-            bank = Bank(name='РНКБ', logo=self.DUMMY_IMG_NAME)
+            bank = Bank(name='РНКБ', logo=DUMMY_IMG_NAME)
             bank.save()
 
-            bank = Bank(name='Банк Россия', logo=self.DUMMY_IMG_NAME)
+            bank = Bank(name='Банк Россия', logo=DUMMY_IMG_NAME)
             bank.save()
             print('[Bank] are created')
 
@@ -272,7 +275,7 @@ class GenerateContent:
             gallery = ObjectGallery.objects.get(pk=gallery_id)
 
             for _ in range(qty):
-                gallery_image = ObjectGalleryImage(gallery=gallery, image=self.DUMMY_IMG_NAME)
+                gallery_image = ObjectGalleryImage(gallery=gallery, image=DUMMY_IMG_NAME)
                 gallery_image.save()
             print(f'[GalleryImage] created for Gallery {gallery_id}')
 
@@ -311,7 +314,7 @@ class GenerateContent:
                 object = Object.objects.get(pk=object_id)
                 object_document_author = ObjectDocumentAuthor.objects.first()
 
-                object_document = ObjectDocument(object=object, title=document_fake_title, author=object_document_author, file=self.DUMMY_DOC_NAME)
+                object_document = ObjectDocument(object=object, title=document_fake_title, author=object_document_author, file=DUMMY_DOC_NAME)
                 object_document.save()
                 print(f'[ObjectDocument "{document_fake_title}"] created for Object {object_id}')
 
@@ -382,7 +385,7 @@ class GenerateContent:
 
         if count_info_tabs_rel_to_object == 0:
             for info_tab in object_info_tab_icons_list:
-                object_info_tab = ObjectInfoTab(object=object, icon_name=info_tab, description=self.fake.text(300), image=self.DUMMY_IMG_NAME)
+                object_info_tab = ObjectInfoTab(object=object, icon_name=info_tab, description=self.fake.text(300), image=DUMMY_IMG_NAME)
                 object_info_tab.save()
                 print(f'[ObjectInfoTab "{info_tab}"] created for Object {object_id}')
 
@@ -394,7 +397,7 @@ class GenerateContent:
         if count_files_rel_to_object == 0:
             for file_type in file_types_list:
                 object = Object.objects.get(pk=object_id)
-                object_file = ObjectFile(object=object, name=file_type, file=self.DUMMY_DOC_NAME)
+                object_file = ObjectFile(object=object, name=file_type, file=DUMMY_DOC_NAME)
                 object_file.save()
                 print(f'[ObjectFile {file_type}] created for Object {object_id}')
 
@@ -424,8 +427,8 @@ class GenerateContent:
                         building_type='monolith', \
                         city=self.fake.word(cities_list),\
                         address='ул. Ленина 12', \
-                        genplan=self.DUMMY_IMG_NAME, \
-                        main_image=self.DUMMY_IMG_NAME, \
+                        genplan=DUMMY_IMG_NAME, \
+                        main_image=DUMMY_IMG_NAME, \
                         webcam='https://rtsp.me/embed/3KASrTkG/', \
                         panoram='https://monolit360.com/files/main/index.html?s=pano1692', \
                     )

@@ -245,12 +245,12 @@
     &__flat {
         display: flex;
         align-items: center;
+        justify-content: space-between;
 
         &--count {
             a {
                 color: #0baca2;
                 font-weight: 900;
-                margin-right: 20px;
 
                 &:hover {
                     color: black;
@@ -424,5 +424,22 @@
                 background-color: transparent;
             }
         }
+    }
+}
+
+
+@media (min-width: 1199px) and (max-width: 1335px) {
+    .object-card__title {
+        font-size: 1.2rem;
+    }
+
+    .object-card__flat--count {
+        a {
+            font-size: .85rem;
+        }
+    }
+
+    .object-card__footer-btn {
+        font-size: .85rem;
     }
 }

@@ -30,7 +30,7 @@
                     <h2>{{ objects_qty }} объект{% if objects_qty >= 2 and objects_qty <= 4 %}а{% elif objects_qty >= 5 and objects_qty <= 20 %}ов{% endif %} в продаже</h2>
                 {% endif %}
                 <span class="common-section__title--right">
-                    <a href="#" class="scale-line">Реализованные объекты</a>
+                    <a href="#compleated-projects" class="scale-line">Реализованные объекты</a>
                 </span>
             </div>
             <div id="section-objects-list__inner" class="container">
@@ -40,8 +40,14 @@
                     {% endfor %}
                 {% endif %}
             </div>
-            <div class="objects-list-separator container">
+            {% comment %}
+            <!-- <div class="objects-list-separator container">
                 <hr>
+            </div> -->
+            {% endcomment %}
+            <div id="compleated-projects" style="padding-top: 90px;"></div>
+            <div class="common-section__title container">
+                <div class="h2">Реализованные объекты</div>
             </div>
             <div class="objects-list-inner container">
                 {% if objects_sold %}

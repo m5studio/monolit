@@ -5,15 +5,17 @@ import {formatNumber} from "../modules/format-number"
 function objectCardSitesInfo() {
     $('.object-card').each((index, el) => {
         let site_info_url = $(el).data('sites-info-url')
+        let sites_url = $(el).data('sites-url')
 
         $.getJSON(site_info_url, (data) => {
             $.each(data, (index, val) => {
                 // Кол-во квартир
                 if ( val['object_total_sites_qty'] > 0 ) {
                     $(el).find('.object-card__flat--count').append(
+                        // '<a href="' + sites_url + '">' +
                         '<a href="">' +
-                            // '<span class="oc-flats-total-qty">' + singularPlural(val['object_total_sites_qty'], ['квартира', 'квартиры', 'квартир'], true) + '</span>' +
-                            '<span class="oc-flats-total-qty">' + val['object_total_sites_qty'] + ' квартир' + '</span>' +
+                            '<span class="oc-flats-total-qty">' + val['object_total_sites_qty'] + ' ' + singularPlural(val['object_total_sites_qty'], ['квартира', 'квартиры', 'квартир']) + '</span>' +
+                            // '<span class="oc-flats-total-qty">' + val['object_total_sites_qty'] + ' квартир' + '</span>' +
                         '</a>'
                     )
                 }
