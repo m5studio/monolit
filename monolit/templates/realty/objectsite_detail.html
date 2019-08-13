@@ -240,7 +240,7 @@
                                 <a href=""><span class="icon icon-32 icon-heart-contour-green"></span> Добавить в избранное</a>
                             </li>
                             <li>
-                                <a href="" target="_blank" title="Откроется в новой вкладке"><span class="icon icon-32 icon-print-solid-green"></span> Распечатать в PDF</a>
+                                <a href="{% url 'object:site-detail-pdf' pk=object.id %}" target="_blank" title="Откроется в новой вкладке"><span class="icon icon-32 icon-print-solid-green"></span> Распечатать в PDF</a>
                             </li>
                         </ul>
                     </div>

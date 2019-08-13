@@ -1,7 +1,9 @@
 from django.db.models import Count, Min, Max
 
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, View
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
+from apps.core.classes.render_to_pdf import RenderToPDF
 
 from apps.realty.models.object import Object
 from apps.realty.models.object_site import ObjectSite
@@ -100,3 +102,14 @@ class ObjectSiteDetailView(DetailView):
 
         context['mortgage_offers'] = Offer.objects.filter(object=self.get_object().object.pk).order_by('rate_from')
         return context
+
+
+class ObjectSiteDetailViewPDF(View):
+    def get(self, request, pk):
+        object = ObjectSite.objects.filter(active=True).get(id=pk)
+        filename = '[monolit.site] ' + getattr(object, 'site_type') + ' ID ' + getattr(object, 'crm_id')
+        context = {
+            'object': object,
+            'request': request
+        }
+        return RenderToPDF.render('pdf/objectsite_detail_pdf.html', context, filename)

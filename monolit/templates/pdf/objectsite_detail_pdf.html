@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>ГК Монолит, {{ object.object.name }}, {{ object.get_site_type_display }} ID: {{ object.crm_id }}</title>
+    <style>
+        @page {
+            size: A4 portrait;
+            /* size: A4 landscape; */
+            margin: 1cm;
+
+            @frame header_frame {           /* Static Frame */
+                -pdf-frame-content: header_frame;
+                left: 50pt; width: 512pt; top: 50pt; height: 40pt;
+                -pdf-frame-border: 1; /* for debug */
+            }
+            @frame content_frame {          /* Content Frame */
+                left: 50pt; width: 512pt; top: 90pt; height: 632pt;
+                -pdf-frame-border: 1; /* for debug */
+            }
+            @frame footer_frame {           /* Another static Frame */
+                -pdf-frame-content: footer_frame;
+                left: 50pt; width: 512pt; top: 772pt; height: 20pt;
+                -pdf-frame-border: 1; /* for debug */
+            }
+        }
+
+        h2 {
+            font-size: 60px;
+            line-height: 1.2;
+            width: 100%;
+        }
+
+        #footer_frame {
+            text-align: center;
+        }
+
+        /* .some-class {
+            font-weight: 700;
+        } */
+    </style>
+</head>
+<body>
+    <div id="header_frame">
+        header
+    </div>
+
+    <div id="content_frame">
+        <!-- content -->
+
+        <h2>{{ object.crm_id }}</h2>
+
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic libero, non delectus corporis laboriosam aliquid, repellendus, illo debitis ullam quisquam quo. Aperiam cum iusto debitis numquam quod officiis quidem eos alias, delectus voluptas blanditiis magnam minima qui voluptatibus tempore corrupti incidunt eius cumque ex a. Nostrum optio fuga consequatur ducimus iste quibusdam officia commodi voluptatem incidunt nobis dolore dolorum eum nam corporis perspiciatis sit odit dolores minima quasi, reprehenderit, ea id, tenetur quidem! Facilis, illo harum alias tenetur neque, dolorem voluptates minima. Error dolorum, harum quaerat rem sunt rerum, numquam aliquid corporis aperiam magnam sint mollitia exercitationem in totam alias quae porro dolor omnis nemo vero ut nobis natus minima necessitatibus nulla. Vel ut porro quibusdam expedita aliquam quas possimus ducimus amet error, ex, sed sunt voluptate alias. Dignissimos dolorum, est, maxime, voluptates perferendis adipisci tenetur suscipit iure non dolorem dicta voluptate perspiciatis inventore reprehenderit aperiam blanditiis. Ad est laudantium quaerat labore, deserunt voluptatem quis voluptates voluptatibus atque, fugiat, repellat aspernatur exercitationem nihil. Ullam vel deserunt, provident rem eum officia laborum dolorem, dolor quia cumque mollitia, veniam facilis a in reiciendis alias asperiores repellendus, iste incidunt. Quisquam tempore cumque quod laborum maxime, rerum mollitia placeat ullam suscipit pariatur ut aliquid ipsa laudantium facere molestias excepturi quis est, sunt praesentium ipsum culpa, ducimus numquam voluptate qui? Minima harum quibusdam hic voluptatem neque autem magnam nesciunt eum a quaerat, dolorem corrupti voluptatum incidunt totam numquam commodi excepturi quod animi! Vitae ullam veritatis velit id natus quos est in similique impedit voluptate fugit hic aliquid, porro quod beatae sint autem quae sit deserunt inventore eius iste suscipit totam saepe et. Non autem nulla, nesciunt aliquam debitis ipsam, animi quae. Eaque quos, enim. Voluptatem impedit, sed dolor. Eum nisi quasi, fugiat eaque rerum ex, facere minima non, quibusdam eos mollitia aspernatur nobis quisquam blanditiis debitis placeat officiis assumenda excepturi est esse quos. Distinctio vero molestiae consequatur rerum corrupti? Repudiandae architecto quasi tempora distinctio, sed ipsam quae eum soluta enim perspiciatis earum nisi nam facilis aspernatur, aut alias inventore, explicabo odit ex. Sequi obcaecati quo perferendis amet incidunt, odio error autem earum enim accusantium? Labore est illum facilis numquam, excepturi nisi at nihil fugit officiis eveniet voluptas dignissimos, voluptatum dicta repellendus odit iste quia atque aperiam laborum. Obcaecati doloribus ab omnis beatae architecto porro animi tempore blanditiis numquam maiores eveniet mollitia ut illo quis distinctio ipsum adipisci consectetur magni deleniti, itaque sed, nobis! Beatae laboriosam illum eveniet quidem impedit molestiae, dolor, cupiditate quod ullam necessitatibus eligendi quibusdam, libero numquam rerum ad a, accusamus saepe. Id laboriosam, alias doloremque numquam possimus laborum quasi voluptatem recusandae, reiciendis sunt provident cupiditate cum placeat at iure. Beatae atque, possimus, incidunt expedita assumenda ex laborum officiis distinctio iusto quis est ad cumque adipisci dignissimos vitae quibusdam velit veniam quam natus aliquam sint, enim ullam dolores. Nemo sunt cupiditate cumque quo, libero dignissimos corrupti eveniet rem in, commodi, dolore totam facilis architecto doloribus error eaque, fugit ullam! Quaerat debitis similique eum assumenda beatae voluptatum, qui sint ratione voluptatem, dolor, necessitatibus eos.</p>
+
+        <!-- {% for object in objects %}
+            <h2>{{ object.crm_id }}</h2>
+        {% endfor %} -->
+    </div>
+
+    <div id="footer_frame">
+        <pdf:pagenumber> from <pdf:pagecount>
+    </div>
+
+</body>
+</html>
