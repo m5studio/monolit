@@ -10,12 +10,13 @@ class RenderToPDF:
     def render(path: str, params: dict, filename='my_filename'):
         template = get_template(path)
         html = template.render(params)
-        response = BytesIO()
-        pdf = pisa.pisaDocument(BytesIO(html.encode("UTF-8")), response)
+        result  = BytesIO()
+        pdf = pisa.pisaDocument(BytesIO(html.encode("UTF-8")), result)
+        # pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
         if not pdf.err:
-            # return HttpResponse(response.getvalue(), content_type='application/pdf')
-            resp = HttpResponse(response.getvalue(), content_type='application/pdf')
-            resp['Content-Disposition'] = f'inline; filename={filename}.pdf'
-            return resp
+            # return HttpResponse(result .getvalue(), content_type='application/pdf')
+            response = HttpResponse(result .getvalue(), content_type='application/pdf')
+            response['Content-Disposition'] = f'inline; filename={filename}.pdf'
+            return response
         else:
             return HttpResponse("Error Rendering PDF", status=400)
