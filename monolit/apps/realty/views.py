@@ -1,3 +1,6 @@
+import os
+from django.conf import settings
+
 from django.db.models import Count, Min, Max
 
 from django.views.generic import ListView, DetailView, View
@@ -108,7 +111,18 @@ class ObjectSiteDetailViewPDF(View):
     def get(self, request, pk):
         object = ObjectSite.objects.filter(active=True).get(id=pk)
         filename = '[monolit.site] ' + getattr(object, 'site_type') + ' ID ' + getattr(object, 'crm_id')
+
+        # Full path to Cirilic font
+        path_to_static_dir = os.path.join(settings.BASE_DIR, 'static')
+        path_to_fonts_dir = os.path.join(path_to_static_dir, 'fonts')
+        path_to_font = os.path.join(path_to_fonts_dir, 'roboto_regular.ttf')
+
+        path_to_images_dir = os.path.join(path_to_static_dir, 'images')
+        path_to_monolit_logo = os.path.join(path_to_images_dir, 'monolit-logo-text.png')
+
         context = {
+            'font_path': path_to_font,
+            'monolit_logo': path_to_monolit_logo,
             'object': object,
             'request': request
         }

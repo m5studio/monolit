@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{% load static custom_filters %}<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -12,73 +12,140 @@
             @frame header_frame {
                 -pdf-frame-content: header_frame;
                 left: 50pt; width: 512pt; top: 50pt; height: 40pt;
-
-                -pdf-frame-border: 1;
+                /* -pdf-frame-border: 1; */
             }
 
             @frame content_frame {
                 left: 50pt; width: 512pt; top: 110pt; height: 632pt;
-
-                -pdf-frame-border: 1;
+                /* -pdf-frame-border: 1; */
             }
 
             @frame footer_frame {
                 -pdf-frame-content: footer_frame;
                 left: 50pt; width: 512pt; top: 772pt; height: 20pt;
-
-                -pdf-frame-border: 1;
+                /* -pdf-frame-border: 1; */
             }
         }
 
+        @font-face {
+            font-family: 'Roboto Regular', arial;
+            src: url('{{ font_path }}');
+            /* src: url({% static 'fonts/roboto_regular.ttf' %}); */
+            /* src: url('http://127.0.0.1:8000/static/fonts/fonts/roboto_regular.ttf'); */
+            /* src: url('C:\Users\DeN\Dropbox\JOB\monolit.site\monolit\monolit\static\fonts\roboto_regular.ttf'); */
+        }
+
         body {
-
-            font-size: 10pt;
-        }
-
-        #object_id {
-            text-align: right;
-        }
-
-        #image_planning {
-            border: 1px solid;
-
-            text-align: center;
-            margin-bottom: 15pt;
-        }
-
-        #image_planning img {
-            width: 180pt;
-            height: auto;
+            font-family: 'Roboto Regular', arial;
+            font-size: 11pt;
         }
 
         #header_frame {
             text-align: center;
         }
 
+        #content_frame {
+            /* text-align: center; */
+        }
+
         #footer_frame {
             text-align: center;
+        }
+
+        #monolit_logo img {
+            opacity: .5;
+        }
+
+        #site_name {
+            font-size: 19pt;
+            font-weight: bolder;
+            line-height: 1.2;
+            margin-bottom: 10pt;
+
+            text-align: center;
+        }
+
+        #image_planning {
+            /* border: 1px solid; */
+            text-align: center;
+            margin-bottom: 25pt;
+        }
+
+        #image_planning img {
+            width: 200pt;
+            height: auto;
+        }
+
+        #site_params {}
+
+        table {
+            -pdf-keep-in-frame-mode: shrink;
+        }
+
+        table tr td {
+            vertical-align: middle;
         }
     </style>
 </head>
 <body>
     <div id="header_frame">
-        <!-- {% url 'object:site-detail' pk=object.id %} -->
-        <div id="object_id">ID: {{ object.crm_id }}</div>
+        <!-- <img src="C:\Users\DeN\Dropbox\JOB\monolit.site\monolit\monolit\static\images\monolit-logo-text.png" alt=""> -->
+        <div id="monolit_logo">
+            <img src="{{ monolit_logo }}" alt="">
+        </div>
     </div>
 
     <div id="content_frame">
+        <div id="site_name">
+            {{ object.get_rooms_qty_display }} {{ object.get_site_type_display }} в {{ object.object.get_object_type_display }} {{ object.object.name }}, {{ object.object_section.name }}
+        </div>
+        <div style="color: #777; margin-bottom: 15pt; text-align: center;">ID: {{ object.crm_id }}</div>
+
         <div id="image_planning">
-            <img src="http://monolit.site/media/realty/flat/layout/7-64.jpg" alt="">
+            <img src="{{ object.image_planning.path }}" alt="">
         </div>
         <div id="site_params">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos laborum odio veritatis, beatae hic deleniti, laboriosam aspernatur neque consectetur temporibus ullam voluptates earum minima corrupti quod vel asperiores ut, ad dolorum. Esse, excepturi, quia! Veritatis in ad eum iure. Quasi neque ad asperiores excepturi similique iste molestias distinctio amet unde, blanditiis nulla, hic, odit accusamus eveniet aliquam itaque eius ipsa quis modi! Perspiciatis quia dignissimos porro modi dolores, atque provident ut laudantium aspernatur veritatis saepe molestiae ex quidem temporibus quae fugiat quas nihil dolor architecto repellat? Officia veritatis aperiam explicabo quisquam corrupti nostrum excepturi id! Atque fugit nam est odit. Eaque repudiandae ut, explicabo reprehenderit totam assumenda hic quis, in voluptate ipsa fuga esse perferendis labore quo. Earum dicta aliquid quia reiciendis delectus cupiditate, culpa, eveniet odio repudiandae assumenda iste ipsam! Assumenda quam sequi accusantium ut reprehenderit dignissimos, dolore, quae eaque sit quo. Commodi consequatur qui animi suscipit id excepturi ipsam, fuga aspernatur est, ipsa illo sed quia minima. Dolor quasi ipsum cupiditate magni expedita deleniti dolorem aliquam iste sed ullam incidunt deserunt quas tenetur velit aspernatur debitis, autem esse, unde omnis placeat voluptate quod mollitia doloribus! Quasi modi nostrum dolorum ut voluptatem perspiciatis rerum possimus natus vel corporis eum quam, atque necessitatibus tempora explicabo, reprehenderit accusantium provident nobis voluptates debitis beatae in praesentium, architecto sapiente. Optio eum ipsum porro eligendi deleniti, exercitationem aspernatur nisi qui quas cum, similique ea illo quos consequatur? Doloribus velit, ex, nostrum accusamus asperiores corporis eligendi ipsa laboriosam officiis quibusdam quo blanditiis inventore quidem similique id, qui modi tempore repudiandae? Libero facere alias deleniti commodi natus beatae, molestias possimus nemo neque provident placeat! Enim expedita cupiditate eius deleniti voluptates iste culpa laborum illo quaerat, aspernatur.
+            <div>Цена: {{ object.price_total|format_number }} руб.</div>
+            <div style="color: #777;">1м<sup>2</sup> = {{ object.price_per_square|format_number }} руб.</div>
+            <br>
+            <div>Этаж: {{ object.floor }} из {{ object.object_section.floor_last }}</div>
+            <div>Общая площадь: {{ object.site_area|format_number }} м<sup>2</sup></div>
+            <div>Жилая площадь: {{ object.living_area|format_number }} м<sup>2</sup></div>
+            <div>Площадь кухни: {{ object.kitchen_area|format_number }} м<sup>2</sup></div>
         </div>
+
+        <br>
+
+        <table border="1" cellpadding="5">
+            <tr>
+                <td style="width: 10pt;">Этаж</td>
+                <td>{{ object.floor }} из {{ object.object_section.floor_last }}</td>
+            </tr>
+            <tr>
+                <td>Общая площадь</td>
+                <td>{{ object.site_area|format_number }} м<sup>2</sup></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
     </div>
 
     <div id="footer_frame">
-        <div>
-            Страница <pdf:pagenumber> из <pdf:pagecount>
-        </div>
+        <!-- Страница <pdf:pagenumber> из <pdf:pagecount> -->
     </div>
 
 </body>
