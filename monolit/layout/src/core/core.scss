@@ -182,7 +182,7 @@ body {
                 grid-template-columns: repeat(2, 1fr);
                 grid-column-gap: 15px;
                 align-items: center;
-                overflow: hidden;
+                // overflow: hidden;
 
                 @include media-breakpoint-down(lg) {
                     order: 2;
@@ -216,6 +216,8 @@ body {
                 #search-by-id {
                     // Search apartment by ID form
                     .sbi-form {
+                        position: relative;
+
                         &__input {
                             background-color: transparent;
                             border: none;
@@ -235,6 +237,17 @@ body {
                             &:focus {
                                 border-bottom: 1px solid black;
                             }
+                        }
+
+                        #search-by-site-id__results {
+                            background-color: white;
+                            width: 100%;
+                            // padding: 5px;
+                            max-height: 40vh;
+                            overflow: hidden;
+
+                            position: absolute;
+                            left: 0;
                         }
                     }
                 }
