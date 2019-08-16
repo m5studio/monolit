@@ -22,7 +22,7 @@
 
             @frame footer_frame {
                 -pdf-frame-content: footer_frame;
-                left: 50pt; width: 512pt; top: 772pt; height: 20pt;
+                left: 50pt; width: 512pt; top: 772pt; height: 40pt;
                 /* -pdf-frame-border: 1; */
             }
         }
@@ -44,16 +44,10 @@
             text-align: center;
         }
 
-        #content_frame {
-            /* text-align: center; */
-        }
+        #content_frame {}
 
         #footer_frame {
             text-align: center;
-        }
-
-        #monolit_logo img {
-            opacity: .5;
         }
 
         #site_name {
@@ -74,16 +68,6 @@
         #image_planning img {
             width: 200pt;
             height: auto;
-        }
-
-        #site_params {}
-
-        table {
-            -pdf-keep-in-frame-mode: shrink;
-        }
-
-        table tr td {
-            vertical-align: middle;
         }
     </style>
 </head>
@@ -108,43 +92,19 @@
             <div>Цена: {{ object.price_total|format_number }} руб.</div>
             <div style="color: #777;">1м<sup>2</sup> = {{ object.price_per_square|format_number }} руб.</div>
             <br>
-            <div>Этаж: {{ object.floor }} из {{ object.object_section.floor_last }}</div>
             <div>Общая площадь: {{ object.site_area|format_number }} м<sup>2</sup></div>
             <div>Жилая площадь: {{ object.living_area|format_number }} м<sup>2</sup></div>
             <div>Площадь кухни: {{ object.kitchen_area|format_number }} м<sup>2</sup></div>
+            <br>
+            <div>Этаж: {{ object.floor }} из {{ object.object_section.floor_last }}</div>
+            <div>Высота потолков: {{ object.ceiling_height|format_number }} м</div>
+            <div>Отделка: {{ object.get_finish_type_display }}</div>
         </div>
-
-        <br>
-
-        <table border="1" cellpadding="5">
-            <tr>
-                <td style="width: 10pt;">Этаж</td>
-                <td>{{ object.floor }} из {{ object.object_section.floor_last }}</td>
-            </tr>
-            <tr>
-                <td>Общая площадь</td>
-                <td>{{ object.site_area|format_number }} м<sup>2</sup></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-            </tr>
-        </table>
     </div>
 
     <div id="footer_frame">
+        <div>г. Симферополь, пр. Победы, 28а</div>
+        <div>8 (800) 302-88-08, +7(978) 088-78-58, +7(3652) 500-500</div>
         <!-- Страница <pdf:pagenumber> из <pdf:pagecount> -->
     </div>
 

@@ -117,6 +117,7 @@ class ObjectSiteDetailViewPDF(View):
         path_to_fonts_dir = os.path.join(path_to_static_dir, 'fonts')
         path_to_font = os.path.join(path_to_fonts_dir, 'roboto_regular.ttf')
 
+        # Full path to Monolit logo
         path_to_images_dir = os.path.join(path_to_static_dir, 'images')
         path_to_monolit_logo = os.path.join(path_to_images_dir, 'monolit-logo-text.png')
 

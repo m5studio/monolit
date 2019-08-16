@@ -93,8 +93,9 @@
             </div>
             <div id="search-by-id">
                 <span class="icon icon-search-green rounded-34"></span>
-                <form class="sbi-form" action="" method="post">
-                    <input type="search" class="sbi-form__input" name="search-flat-id" id="search-flat-id" placeholder="Поиск по ID">
+                <form class="sbi-form" autocomplete="off">
+                    <input type="text" class="sbi-form__input" name="search-by-site-id" id="search-by-site-id" placeholder="Поиск по ID" data-api-all-sites="{% url 'api:object-sites-all' %}">
+                    <div id="search-by-site-id__results"></div>
                 </form>
             </div>
         </div>

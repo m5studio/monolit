@@ -24,11 +24,11 @@ def format_number(value):
     return custom_format_number(float(value))
 
 
-@register.filter(name='round_number')
-def round_number(value):
-    return str(round(value, 1)).replace('.00', '').replace('.0', '')
-
-
-@register.filter(name='format_and_round_number')
-def format_and_round_number(value):
-    return custom_format_number(round(value, 0))
+# @register.filter(name='round_number')
+# def round_number(value):
+#     return str(round(value, 1)).replace('.00', '').replace('.0', '')
+#
+#
+# @register.filter(name='format_and_round_number')
+# def format_and_round_number(value):
+#     return custom_format_number(round(value, 0))

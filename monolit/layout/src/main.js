@@ -23,6 +23,7 @@ import {objectPageDocsPagination} from "./ajax/object-page-documents-pagination"
 import {objectCardSitesInfo} from "./ajax/object-card"
 import {objectPageSitesInfo, objectPageFlatsTypes} from "./ajax/object_detail/object-page-sites-info"
 import {mortgageOfferMonthlyPayment} from "./ajax/objectsite_detail/mortgage-offer-monthly-payment-calculate"
+import {search_by_site_id} from "./ajax/search_by_site_id"
 
 
 // Fancybox https://fancyapps.com/fancybox/3/
@@ -33,6 +34,9 @@ $(document).ready(function() {
 
     toggleMainNav()
     stickyMainNav()
+
+    // Search by site id
+    search_by_site_id()
 
     // Homepage
     if ( $('#section-realty-homepage-filters').length ) {

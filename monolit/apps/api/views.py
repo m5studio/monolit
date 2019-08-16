@@ -9,11 +9,18 @@ from apps.mortgage.models import Offer
 # API for ObjectGallery
 def api_object_gallery(request, gallery_id):
     gallery_images = ObjectGalleryImage.objects.filter(gallery=gallery_id).values('image')
-    gallery_images = list(gallery_images)
-    return JsonResponse(gallery_images, safe=False)
+    gallery_images_list = list(gallery_images)
+    return JsonResponse(gallery_images_list, safe=False)
 
 
-# API for Object sites
+# API for ObjectSite all
+def api_object_sites_all(request):
+    object_sites = ObjectSite.objects.filter(active=True).values('id', 'crm_id')
+    object_sites_list = list(object_sites)
+    return JsonResponse(object_sites_list, safe=False)
+
+
+# API for ObjectSite info related to Object
 def api_object_sites_info(request, object_id):
     object_sites = ObjectSite.objects
     object_sites_info = object_sites.object_sites_info_aggregated(object_id)
