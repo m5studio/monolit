@@ -34,11 +34,12 @@ def main_image_upload_path(instance, filename):
     return 'news/{date}/{filename}'.format(date=date, filename=filename)
 
 class News(models.Model):
+    active           = models.BooleanField('Активная', default=True, help_text='Опубликована на сайте')
     title            = models.CharField('Заголовок новости', max_length=255)
     object           = models.ManyToManyField(Object, verbose_name='Объект(ы)', blank=True, help_text='Относится ли данная новость к Объекту(ам) недвижимости? Если нет, то оставьте пустым')
     category         = models.ManyToManyField(NewsCategory, blank=True, verbose_name='Категории новости')
     date             = models.DateField(verbose_name='Дата', default=datetime.date.today)
-    
+
     main_image       = models.ImageField(upload_to=main_image_upload_path, verbose_name='Главное изображение', blank=True, null=True)
     main_image_thumb = ImageSpecField(source='main_image', processors=[ResizeToFit(512, 512)], format='JPEG', options={'quality': 70})
 

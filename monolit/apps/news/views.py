@@ -6,14 +6,16 @@ from apps.news.models import News, NewsImage
 
 class NewsListView(ListView):
     model = News
+    queryset = News.objects.filter(active=True).order_by('-updated')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['page_title'] = 'Новости'
         context['page_meta_description'] = 'Новости Группы Компаний Монолит'
 
+        # context['object_list'] = News.objects.filter(active=True).order_by('-updated')
+
         # Object list pagination
-        context['object_list'] = News.objects.all().order_by('-updated')
         paginator = Paginator(context['object_list'], 11)
         page = self.request.GET.get('page')
         try:
@@ -29,6 +31,7 @@ class NewsListView(ListView):
 
 class NewsDetailView(DetailView):
     model = News
+    queryset = News.objects.filter(active=True)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

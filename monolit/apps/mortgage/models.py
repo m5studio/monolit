@@ -61,8 +61,6 @@ class Offer(models.Model):
     rate_from            = models.DecimalField('от', max_digits=4, decimal_places=2, blank=True, null=True)
     rate_to              = models.DecimalField('до', max_digits=4, decimal_places=2, blank=True, null=True)
 
-    # loan_payment_monthly = models.DecimalField('Ежемесячный платеж', max_digits=8, decimal_places=2, blank=True, null=True, help_text='Минимальная сумма ежемесячного платежа')
-
     description          = RichTextField('Описание', blank=True, null=True, help_text='Описание и дополнительные условия')
     object               = models.ManyToManyField(Object, verbose_name='Объект(ы)', blank=True, help_text='Выберите Объекты подходящие под данную ипотечную программу')
 
