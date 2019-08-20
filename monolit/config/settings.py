@@ -70,7 +70,7 @@ INSTALLED_APPS = [
     'apps.realty.apps.RealtyConfig',
     'apps.news.apps.NewsConfig',
     'apps.mortgage.apps.MortgageConfig',
-    
+
     'apps.api.apps.ApiConfig',
 ]
 
@@ -102,6 +102,7 @@ TEMPLATES = [
 
                 'apps.core.context_processors.settings',
                 'apps.core.context_processors.monolit_objects',
+                'apps.core.context_processors.monolit_company_age',
             ],
         },
     },

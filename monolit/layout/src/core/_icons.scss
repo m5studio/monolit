@@ -149,3 +149,30 @@
         background-image: url('images/icons/arrow-step.svg');
     }
 }
+
+// Rooms
+.room {
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-size: contain;
+
+    display: block;
+    width: 96px;
+    height: 96px;
+
+    &_0 {
+        background-image: url('images/icons/room_0.png');
+    }
+    &_1 {
+        background-image: url('images/icons/room_1.png');
+    }
+    &_2 {
+        background-image: url('images/icons/room_2.png');
+    }
+    &_3 {
+        background-image: url('images/icons/room_3.png');
+    }
+    &_4 {
+        background-image: url('images/icons/room_4.png');
+    }
+}

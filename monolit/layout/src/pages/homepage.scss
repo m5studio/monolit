@@ -21,7 +21,11 @@
 
     #section-flats-types {
         @include media-breakpoint-up(lg) {
-            background: linear-gradient(rgba(0,0,0,.2), transparent), #545454;
+            background: linear-gradient(rgba(0, 0, 0, .2), transparent), #545454;
+        }
+
+        .flat-type-card {
+            display: grid;
         }
     }
 
