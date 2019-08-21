@@ -27,4 +27,4 @@ def format_number(value):
 @register.filter(name='round_million')
 def round_million(value):
     value = round(value / 1000000, 1)
-    return value
+    return '{}'.format(value).replace('.0', '')

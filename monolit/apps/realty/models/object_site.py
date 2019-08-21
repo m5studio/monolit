@@ -31,9 +31,11 @@ class ObjectSiteQuerySet(models.QuerySet):
     def get_all_active_sites_object(self, object_id):
         return self.active() & Q(object=object_id)
 
+    # TODO: rename to get_flats_and_apartments to object
     def get_flats_and_apartments(self, object_id):
         return self.active() & self.get_all_active_sites_object(object_id) & Q(site_type__in=['flat', 'apartments'])
 
+    # TODO: rename
     def object_sites_info_aggregated(self, object_id):
         flats = self.get_flats_and_apartments(object_id)
         return self.aggregate(
@@ -54,6 +56,10 @@ class ObjectSiteQuerySet(models.QuerySet):
             min_area=Min('site_area', filter=flats),
             max_area=Max('site_area', filter=flats),
         )
+
+    # TODO:
+    def count_object_sites_room_0_site_area_min(self):
+        return self.filter(active=True, rooms_qty=0, site_type__in=['flat', 'apartments']).aggregate(Min('site_area'))
 
 
 def image_upload_path(instance, filename):
