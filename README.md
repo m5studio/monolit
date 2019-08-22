@@ -143,5 +143,6 @@ Then put or check in ```/media/``` folder two files: ```dummy-document.pdf``` an
 
 Run:
 ```
-$ python manage.py generate_content_with_faker 5
+$ python manage.py generate_content 5
 ```
+Note: you can generate 10 objects at ones

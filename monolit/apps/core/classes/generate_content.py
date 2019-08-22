@@ -131,18 +131,12 @@ class GenerateContent:
     # Жилые объекты
     def _create_living_ObjectSite(self, object_id):
         site_types_list = self.convert_tuple_to_flat_list(ObjectSite.SITE_TYPES)
-        site_types_list.remove('commercial')
+        # site_types_list.remove('commercial')
 
         rooms_qty_list = self.convert_tuple_to_flat_list(ObjectSite.ROOMS_QTY)
         finishing_types_list = self.convert_tuple_to_flat_list(ObjectSite.FINISHING_TYPES)
 
         object = Object.objects.get(pk=object_id)
-
-        # NOTE: this is for generate commercial objects
-        # object_living = Object.objects.filter(category__id=1)
-        # object_commercial = Object.objects.filter(category__id=2)
-        # print(f'!!! Жилые объекты {object_living}')
-        # print(f'!!! Коммерческие объекты {object_commercial}')
 
         floors_list = list(range(1, 23))
         site_numbers_list = list(range(100, 200))

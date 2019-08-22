@@ -8,7 +8,7 @@ from apps.core.models import SiteSettings
 
 
 class Command(BaseCommand):
-    help = 'Generate fake content with Faker'
+    help = 'Generate fake content'
 
 
     def add_arguments(self, parser):
