@@ -7,7 +7,7 @@
                 <ul class="main-nav__list">
                     {% url 'object:list' as object_list_url %}
                     <li class="main-nav__item{% if object_list_url == request.path or object_list_url in request.path %} active{% endif %}">
-                        <a href="{{ object_list_url }}" class="main-nav__link" title="Жилые комплексы, Бизнес-центры, Торговые центры...">Объекты</a>
+                        <a href="{{ object_list_url }}" class="main-nav__link" title="Жилые комплексы, Бизнес-центры, Торговые центры">Объекты</a>
                     </li>
 
                     {% url 'object:site-list' as objects_site_list_url %}
@@ -17,7 +17,7 @@
                         <div class="dropdown">
                             <ul class="main-nav-submenu__list">
                                 <li class="main-nav-submenu__item{% if objects_site_list_url == request.path or objects_site_list_url in request.path %} active{% endif %}">
-                                    <a href="{{ objects_site_list_url }}" class="main-nav-submenu__link">Квартиры</a>
+                                    <a href="{{ objects_site_list_url }}" class="main-nav-submenu__link">Квартиры и апартаменты</a>
                                 </li>
                                 <li class="main-nav-submenu__item">
                                     <a href="" class="main-nav-submenu__link">Коммерческая недвижимость</a>

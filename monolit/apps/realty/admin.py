@@ -17,26 +17,6 @@ from apps.realty.models.object_site_bathroom import ObjectBathroom
 from apps.realty.models.object_site import ObjectSiteWindowsView, ObjectSite
 from apps.realty.models.object_video import ObjectVideo
 from apps.realty.models.object import ObjectCategory, Object
-from apps.realty.models.object_parking import ObjectParking
-
-
-""" [ ObjectParking ] """
-@admin.register(ObjectParking)
-class ObjectParkingAdmin(TurnOffAdminLogging, admin.ModelAdmin):
-    readonly_fields = ('price_total', 'image_planning_thumb', 'image_planning_parking_thumb',)
-    fieldsets = (
-        (None, {
-            'fields': ('object_section', 'crm_id', 'site_number', 'floor', 'site_area', 'price_per_square', 'price_total'),
-        }),
-        ('Планировка', {
-            'fields': ('image_planning_thumb', 'image_planning')
-        }),
-        ('Место на плане паркинга', {
-            'fields': ('image_planning_parking_thumb', 'image_planning_parking')
-        }),
-    )
-    autocomplete_fields = ['object_section']
-""" [ END ObjectParking ] """
 
 
 """ [ ObjectBathroom ] """
