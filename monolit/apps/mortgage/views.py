@@ -32,7 +32,6 @@ class MortgageMilitaryView(TemplateView):
         # Check if object id=1 in WayToBuy exists and military is not None
         context['objects_military'] = None
         if WayToBuy.objects.filter(id=1).exists() and WayToBuy.objects.filter( ~Q(military=None) ):
-            # context['objects_military'] = WayToBuy.objects.get(id=1)
             way_to_buy = WayToBuy.objects.get(id=1)
             context['objects_military'] = way_to_buy.military.filter(all_sold=False)
 

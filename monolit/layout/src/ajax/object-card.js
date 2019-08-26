@@ -12,10 +12,8 @@ function objectCardSitesInfo() {
                 // Кол-во квартир
                 if ( val['object_total_sites_qty'] > 0 ) {
                     $(el).find('.object-card__flat--count').append(
-                        // '<a href="' + sites_url + '">' +
                         '<a href="">' +
                             '<span class="oc-flats-total-qty">' + val['object_total_sites_qty'] + ' ' + singularPlural(val['object_total_sites_qty'], ['квартира', 'квартиры', 'квартир']) + '</span>' +
-                            // '<span class="oc-flats-total-qty">' + val['object_total_sites_qty'] + ' квартир' + '</span>' +
                         '</a>'
                     )
                 }
@@ -60,7 +58,6 @@ function objectCardSitesInfo() {
                                 '</a>' +
                             '</div>'
                         )
-
                         $(el).find('.object-card__flat-types').append('<a href="" class="object-card__flat-types-item">' + v['name'] + '</a>')
                     }
                 })
