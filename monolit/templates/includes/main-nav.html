@@ -46,8 +46,10 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="main-nav__item has-dropdown">
-                        <a href="" class="main-nav__link">О компании</a>
+
+                    {% url 'company:company' as company_url %}
+                    <li class="main-nav__item{% if company_url == request.path %} active{% endif %} has-dropdown">
+                        <a href="{{ company_url }}" class="main-nav__link">О компании</a>
                         <div class="dropdown">
                             <ul class="main-nav-submenu__list">
                                 <li class="main-nav-submenu__item">

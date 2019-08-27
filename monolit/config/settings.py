@@ -70,6 +70,7 @@ INSTALLED_APPS = [
     'apps.realty.apps.RealtyConfig',
     'apps.news.apps.NewsConfig',
     'apps.mortgage.apps.MortgageConfig',
+    'apps.company.apps.CompanyConfig',
 
     'apps.api.apps.ApiConfig',
 ]

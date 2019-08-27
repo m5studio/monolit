@@ -1,4 +1,5 @@
-import datetime
+from datetime import datetime
+from dateutil import relativedelta
 
 from apps.core.models import SiteSettings
 from apps.realty.models.object import Object
@@ -13,5 +14,14 @@ def monolit_objects(request):
 
 
 def monolit_company_age(request):
-    now = datetime.datetime.now()
-    return {'monolit_company_age': now.year - 2005}
+    foundation_date = datetime(2005, 8, 16, 00, 00)
+    now = datetime.now()
+    difference = relativedelta.relativedelta(now, foundation_date)
+
+    years   = difference.years
+    months  = difference.years * 12 + difference.months
+    days    = difference.years * 365 + difference.days
+    hours   = difference.years * 8760 + difference.hours
+    minutes = (difference.years * (8760 * 60)) + difference.minutes
+
+    return {'monolit_company_age': years}

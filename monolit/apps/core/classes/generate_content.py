@@ -24,6 +24,8 @@ from apps.realty.models.object_site_bathroom import ObjectBathroom
 
 from apps.news.models import NewsCategory, News, NewsImage
 
+from apps.company.models.certificate import Certificate
+
 
 DUMMY_IMG_NAME = 'dummy-image.jpg'
 DUMMY_DOC_NAME = 'dummy-document.pdf'
@@ -31,35 +33,39 @@ DUMMY_DOC_NAME = 'dummy-document.pdf'
 class GenerateContent:
     def __init__(self):
         self.fake = Faker()
-        # self.DUMMY_IMG_NAME = 'dummy-image.jpg'
-        # self.DUMMY_DOC_NAME = 'dummy-document.pdf'
 
     def get_random_list_item(self, list):
         return random.choice(list)
 
-
     def _get_objects_ids_list(self) -> list:
         return list(Object.objects.order_by('id').values_list('id', flat=True))
-
 
     def convert_tuple_to_flat_list(self, tuple):
         return [x[0] for x in tuple]
 
-
     def countBanks(self):
         return Bank.objects.all().count()
-
 
     def countOffers(self):
         return Offer.objects.all().count()
 
-
     def countNews(self):
         return News.objects.all().count()
 
+    def countCertificate(self):
+        return Certificate.objects.all().count()
 
     def countFlatsInObject(self, object_id) -> int:
         return ObjectSite.objects.annotate(Count('object')).filter(object=object_id).count()
+
+
+    """ [Company] """
+    def _create_Certificate(self):
+        title = f'Сертификат {self.fake.word()} {self.fake.word()} {self.fake.word()} {self.fake.word()} {self.fake.word()}'
+
+        certificate_image = Certificate(title=title, image=DUMMY_IMG_NAME)
+        certificate_image.save()
+        print(f'[Certificate] created')
 
 
     """ [News] """
@@ -475,3 +481,8 @@ class GenerateContent:
             # for _ in range(100 - self.countNews()):
             for _ in range(25):
                 self._create_News()
+
+        # Company
+        if self.countCertificate() < 8:
+            for _ in range(8 - self.countCertificate()):
+                self._create_Certificate()
