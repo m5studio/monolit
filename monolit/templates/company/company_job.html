@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+
+
+{% block body_classes %}{% spaceless %}
+    {{ block.super }} company-vacancy
+{% endspaceless %}{% endblock %}
+
+
+{% block content %}
+    {% include 'company/breadcrumbs/breadcrumbs.html' %}
+
+    <main id="main">
+        <div id="page-title-h1" class="container">
+            <h1>{{ page_tite }}</h1>
+        </div>
+
+        {% for object in job_blocks %}
+            <div class="company-section">
+                <div class="company-section__inner container">
+                    <div class="company-section__left">
+                        {% if object.title %}
+                            <div class="company-section__title">
+                                <h2>{{ object.title }}</h2>
+                            </div>
+                        {% endif %}
+                        {% if object.body %}{{ object.body|safe }}{% endif %}
+                    </div>
+                    <div class="company-section__right company-section__img"{% if object.image %} style="background-image: url('{{ object.image.url }}')"{% endif %}></div>
+                </div>
+            </div>
+        {% endfor %}
+    </main>
+
+    <section id="section-vacancies-list" class="common-section">
+        <div class="common-section__title container">
+            <h2>Вакансии</h2>
+            <div><em>Актуальные на {{ current_month_rus|title }} {% now "Y" %}</em></div>
+        </div>
+
+        <div id="section-vacancies-list__inner" class="container">
+            <div id="vacancies-list-accordion">
+                <div class="vacancy-card collapse-block">
+                    <div class="vacancy-card__title-wrap">
+                        <a class="collapse-block__link" data-toggle="collapse" href="#vacancy-1" aria-expanded="false" aria-controls="vacancy-1">
+                            <span class="vacancy-card__title">Архитектор</span>
+                            <span class="vacancy-card__experience">Опыт: 3 - 6 лет</span>
+                        </a>
+                    </div>
+                    <div id="vacancy-1" class="vacancy-card__descr collapse" data-parent="#vacancies-list-accordion">
+                        <p><strong>Обязанности:</strong></p>
+                        <ul>
+                            <li>разработка и проверка BIM-модели и проектной документации;</li>
+                            <li>разработка архитектурной концепции под руководством Главного архитектора проекта / Ведущего архитектора</li>
+                        </ul>
+                        <p><strong>Требования:</strong></p>
+                        <ul>
+                            <li>резюме + ссылка на портфолио</li>
+                            <li>стаж работы от 3-х лет</li>
+                            <li>знание BIM-программ ArchiCad/Revit;</li>
+                            <li>знание 3Dmax, Photoshop будет рассмотрено как преимущество;</li>
+                            <li>опыт ведения и разработки проектов;</li>
+                            <li>опыт разработки жилых многоквартирных домов;</li>
+                            <li>навыки рабочего проектирования;</li>
+                            <li>высшее образование;</li>
+                        </ul>
+                        <p><strong>Условия:</strong></p>
+                        <ul>
+                            <li>работа в стабильной развивающейся компании;</li>
+                            <li>комфортные условия труда.</li>
+                        </ul>
+                        <p><em>Телефон: <a href="tel:+79788164888">+7 (978) 816-48-88</a> (Ольга)<br>
+                        Почта: <a href="mailto:personal@monolit.net">personal@monolit.net</a></em></p>
+                    </div>
+                </div>
+                <div class="vacancy-card collapse-block">
+                    <div class="vacancy-card__title-wrap">
+                        <a class="collapse-block__link" data-toggle="collapse" href="#vacancy-2" aria-expanded="false" aria-controls="vacancy-2">
+                            <span class="vacancy-card__title">Архитектор-генпланист / Градостроитель</span>
+                            <span class="vacancy-card__experience">Опыт: 3 - 6 лет</span>
+                        </a>
+                    </div>
+                    <div id="vacancy-2" class="vacancy-card__descr collapse" data-parent="#vacancies-list-accordion">
+                        <p><strong>Обязанности:</strong></p>
+                        <ul>
+                            <li>разработка и проверка BIM-модели и проектной документации;</li>
+                            <li>разработка архитектурной концепции под руководством Главного архитектора проекта / Ведущего архитектора</li>
+                        </ul>
+                        <p><strong>Требования:</strong></p>
+                        <ul>
+                            <li>резюме + ссылка на портфолио</li>
+                            <li>стаж работы от 3-х лет</li>
+                            <li>знание BIM-программ ArchiCad/Revit;</li>
+                            <li>знание 3Dmax, Photoshop будет рассмотрено как преимущество;</li>
+                            <li>опыт ведения и разработки проектов;</li>
+                            <li>опыт разработки жилых многоквартирных домов;</li>
+                            <li>навыки рабочего проектирования;</li>
+                            <li>высшее образование;</li>
+                        </ul>
+                        <p><strong>Условия:</strong></p>
+                        <ul>
+                            <li>работа в стабильной развивающейся компании;</li>
+                            <li>комфортные условия труда.</li>
+                        </ul>
+                        <p><em>Телефон: <a href="tel:+79788164888">+7 (978) 816-48-88</a> (Ольга)<br>
+                        Почта: <a href="mailto:personal@monolit.net">personal@monolit.net</a></em></p>
+                    </div>
+                </div>
+                <div class="vacancy-card collapse-block">
+                    <div class="vacancy-card__title-wrap">
+                        <a class="collapse-block__link" data-toggle="collapse" href="#vacancy-3" aria-expanded="false" aria-controls="vacancy-3">
+                            <span class="vacancy-card__title">Директор благотворительного фонда</span>
+                            <span class="vacancy-card__experience">Опыт: 1 - 3 лет</span>
+                        </a>
+                    </div>
+                    <div id="vacancy-3" class="vacancy-card__descr collapse" data-parent="#vacancies-list-accordion">
+                        <p><strong>Описание:</strong></p>
+                        <p>Цели должности:</p>
+                        <ul>
+                            <li>управление Благотворительным фондом (далее Фонд)</li>
+                            <li>развитие и продвижение деятельности Фонда на территории Российской Федерации</li>
+                            <li>привлечение добровольных взносов и пожертвований в Фонд на цели деятельности Фонда</li>
+                        </ul>
+                        <p><strong>Обязанности:</strong></p>
+                        <ul>
+                            <li>проведение мероприятий, направленных на сбор пожертвований;</li>
+                            <li>создание Интернет-ресурсов, направленных на привлечение средств для достижения целей Фонда и информирования о его деятельности;</li>
+                            <li>проведение культурных мероприятий, соответствующих целям создания Фонда и их освещение в средствах массовой информации;</li>
+                            <li>привлечение добровольцев для участия в мероприятиях, организуемых Фондом;</li>
+                            <li>организация и проведение благотворительных культурно-зрелищных, культурно-массовых мероприятий, аукционов, выставок и ярмарок, направленных на достижение целей̆ Фонда;</li>
+                            <li>организация театрализованных представлений, концертов, фестивалей̆, творческих встреч в рамках целей Фонда;</li>
+                            <li>привлечение инвесторов, партнеров и меценатов к финансированию проектов, программ, и направлений Фонда;</li>
+                            <li>развитие системы сотрудничества и привлечения специалистов для развития Фонда и реализации целей деятельности Фонда;</li>
+                            <li>осуществление издательской̆ деятельности, в ее рамках: выпуск и распространение брошюр, журналов, буклетов, календарей̆, и другой̆ печатной̆ продукции тематики, соответствующей̆ целям, в том числе информационных материалов;</li>
+                        </ul>
+                        <p><strong>Требования:</strong></p>
+                        <ul>
+                            <li>высокая социальная ответственность и активная гражданская позиция в рамках целей деятельности Фонда;</li>
+                            <li>широкий круг деловых контактов, в том числе в социальных сетях;</li>
+                            <li>высоко развитые коммуникативные навыки;</li>
+                            <li>опыт в маркетинговом продвижении услуг/продуктов/деятельности;</li>
+                            <li>опыт организации и координации публичных, массовых мероприятий и событий;</li>
+                            <li>опыт деловых переговоров на разных уровнях, публичных выступлений;</li>
+                            <li>общие знания и понимание деятельности некоммерческих организаций;</li>
+                            <li>грамотная письменная и устная речь;</li>
+                            <li>умение формировать технические задания на создание/разработку/проведение проектов, событий и т.д.</li>
+                        </ul>
+                        <p><strong>Условия:</strong></p>
+                        <p>Функционально работа директора БФ координируется заместителем генерального директора группы компаний «Монолит». Общий контроль за деятельностью Фонда осуществляется Попечительским Советом Фонда в рамках полномочий по уставу Фонда.</p>
+                        <ul>
+                            <li>5-ти дневная рабочая неделя, возможен гибких график.</li>
+                            <li>Возможна работа в выходной и праздничный день, если проводятся мероприятия и события в рамках деятельности Фонда.</li>
+                            <li>В рабочее время с 9.00 до 18.00 необходимо быть на связи любым средством связи (электронная почта, мессенджеры, социальные сети и т.д.)</li>
+                            <li>Испытательный срок – 6 месяцев.</li>
+                            <li>Официальное оформление.</li>
+                            <li>Отпуск 28 календарных дней в год.</li>
+                            <li>Оплата труда: оклад + бонусная система</li>
+                        </ul>
+                        <p><em>Необходимо также приложить сопроводительное письмо, в котором есть ответ на вопрос "Зачем мне эта работа?".</em></p>
+                        <p><em>Телефон: <a href="tel:+79788164888">+7 (978) 816-48-88</a> (Ольга)<br>
+                        Почта: <a href="mailto:personal@monolit.net">personal@monolit.net</a></em></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="common-section">
+        <div class="common-section__title container">
+            <h2>Не нашлось подходящей вакансии? Стань частью нашей команды!</h2>
+        </div>
+        <div class="common-section__inner container">
+            <p>В любой высокоразвитой компании ценнейшим ресурсом являются люди.<br>
+                А основой роста, развития и эффективной реализации проектов - действия сплоченной команды.<br>
+                Именно поэтому мы всегда в поиске профессионалов, опытных специалистов, целеустремленных личностей, которые чувствуют в себе силы менять наш полуостров и создавать новый формат жизни для людей.</p>
+            <p>У вас есть уникальная возможность работать в крупнейшем строительном холдинге Крыма, расти рядом с профессионалами.</p>
+            <div class="h4"><strong>Работа в ГК Монолит &ndash; это масштабно!</strong></div>
+            <p>Стань частью нашей команды заполнив анкету или отправив резюме.</p>
+            <div id="vacancy-sign-up">
+                <a href="" class="green-button">Заполнить анкету</a>
+                <a href="" class="green-button">Отправить резюме</a>
+            </div>
+        </div>
+    </section>
+{% endblock %}

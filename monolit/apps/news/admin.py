@@ -7,7 +7,7 @@ from apps.news.models import NewsCategory, News, NewsImage
 
 
 @admin.register(NewsCategory)
-class NewsCategoryAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.ModelAdmin):
+class NewsCategoryAdmin(TurnOffAdminLogging, admin.ModelAdmin):
     search_fields = ['name']
 
 
@@ -16,7 +16,6 @@ class NewsImageInline(admin.TabularInline):
     model = NewsImage
     extra = 0
     max_num = 50
-
     readonly_fields = ('image_thumb',)
 
 @admin.register(NewsImage)
@@ -25,6 +24,7 @@ class NewsImageAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.ModelAdmin):
 """ [ END NewsImage ] """
 
 
+""" [ News ] """
 @admin.register(News)
 class NewsAdmin(TurnOffAdminLogging, admin.ModelAdmin):
     inlines = [
@@ -42,3 +42,4 @@ class NewsAdmin(TurnOffAdminLogging, admin.ModelAdmin):
     )
     list_display = ('title', 'active', 'updated')
     autocomplete_fields = ['object', 'category']
+""" [ END News ] """

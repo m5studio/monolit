@@ -52,9 +52,11 @@
 @import "./sections/commercial/section-commercial-objects-list";
 
 // Sections [company]
+@import "./sections/company/company-section";
 @import "./sections/company/section-company-about";
 @import "./sections/company/section-company-builders";
 @import "./sections/company/section-company-history";
+@import "./sections/company/section-company-management-description";
 @import "./sections/company/section-company-management";
 @import "./sections/company/section-company-partnership-basic-concepts";
 @import "./sections/company/section-company-partnership-basic-principles";
@@ -65,7 +67,6 @@
 @import "./sections/company/section-register-in-tender";
 @import "./sections/company/section-sertificates";
 @import "./sections/company/section-vacancies-list";
-@import "./sections/company/company-section";
 
 // Sections [flat-page]
 @import "./sections/flat-page/flat-page-section";

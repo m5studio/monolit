@@ -177,8 +177,8 @@ module.exports = {
             template: './layout/src/html/company/company_structure.html'
         }),
         new HtmlWebpackPlugin({
-            filename: 'html/company_vacancy.html',
-            template: './layout/src/html/company/company_vacancy.html'
+            filename: 'html/company_job.html',
+            template: './layout/src/html/company/company_job.html'
         }),
         new HtmlWebpackPlugin({
             filename: 'html/company_responsibility.html',

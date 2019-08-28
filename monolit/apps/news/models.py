@@ -27,6 +27,11 @@ class NewsCategory(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = 'Новостная категория'
+        verbose_name_plural = 'Категории новостей'
+
+
 def main_image_upload_path(instance, filename):
     date = instance.date
     filename = FileProcessing(filename)

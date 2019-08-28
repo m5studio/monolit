@@ -104,6 +104,7 @@ TEMPLATES = [
                 'apps.core.context_processors.settings',
                 'apps.core.context_processors.monolit_objects',
                 'apps.core.context_processors.monolit_company_age',
+                'apps.core.context_processors.current_month_rus',
             ],
         },
     },

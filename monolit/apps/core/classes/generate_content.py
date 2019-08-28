@@ -25,6 +25,9 @@ from apps.realty.models.object_site_bathroom import ObjectBathroom
 from apps.news.models import NewsCategory, News, NewsImage
 
 from apps.company.models.certificate import Certificate
+from apps.company.models.management import Management
+from apps.company.models.responsibility import Responsibility
+from apps.company.models.job import JobBlock, JobVacancy
 
 
 DUMMY_IMG_NAME = 'dummy-image.jpg'
@@ -55,6 +58,15 @@ class GenerateContent:
     def countCertificate(self):
         return Certificate.objects.all().count()
 
+    def countManagement(self):
+        return Management.objects.all().count()
+
+    def countResponsibility(self):
+        return Responsibility.objects.all().count()
+
+    def countJobBlock(self):
+        return JobBlock.objects.all().count()
+
     def countFlatsInObject(self, object_id) -> int:
         return ObjectSite.objects.annotate(Count('object')).filter(object=object_id).count()
 
@@ -63,9 +75,33 @@ class GenerateContent:
     def _create_Certificate(self):
         title = f'Сертификат {self.fake.word()} {self.fake.word()} {self.fake.word()} {self.fake.word()} {self.fake.word()}'
 
-        certificate_image = Certificate(title=title, image=DUMMY_IMG_NAME)
-        certificate_image.save()
-        print(f'[Certificate] created')
+        certificate = Certificate(title=title, image=DUMMY_IMG_NAME)
+        certificate.save()
+        print(f'[Certificate] {certificate.title} created')
+
+
+    def _create_Management(self):
+        position = f'Должность {self.fake.word()} {self.fake.word()} {self.fake.word()} {self.fake.word()}'
+
+        management = Management(image=DUMMY_IMG_NAME, surname='Фамилия', name='Имя', patronymic='Отчество', position=position)
+        management.save()
+        print(f'[Management] {management.position} created')
+
+
+    def _create_Responsibility(self):
+        title = f'Ответственность {self.fake.word()} {self.fake.word()} {self.fake.word()}'
+
+        responsibility = Responsibility(title=title, body=self.fake.text(600), image=DUMMY_IMG_NAME)
+        responsibility.save()
+        print(f'[Responsibility] {responsibility.title} created')
+
+
+    def _create_JobBlock(self):
+        title = f'Блок работа {self.fake.word()} {self.fake.word()} {self.fake.word()}'
+
+        job_block = JobBlock(title=title, body=self.fake.text(600), image=DUMMY_IMG_NAME)
+        job_block.save()
+        print(f'[JobBlock] {job_block.title} created')
 
 
     """ [News] """
@@ -486,3 +522,15 @@ class GenerateContent:
         if self.countCertificate() < 8:
             for _ in range(8 - self.countCertificate()):
                 self._create_Certificate()
+
+        if self.countManagement() < 6:
+            for _ in range(6 - self.countManagement()):
+                self._create_Management()
+
+        if self.countResponsibility() < 10:
+            for _ in range(10 - self.countResponsibility()):
+                self._create_Responsibility()
+
+        if self.countJobBlock() < 5:
+            for _ in range(5 - self.countJobBlock()):
+                self._create_JobBlock()

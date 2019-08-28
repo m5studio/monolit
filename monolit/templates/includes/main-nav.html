@@ -48,24 +48,28 @@
                     </li>
 
                     {% url 'company:company' as company_url %}
-                    <li class="main-nav__item{% if company_url == request.path %} active{% endif %} has-dropdown">
+                    {% url 'company:mission' as company_mission_url %}
+                    {% url 'company:management' as company_management_url %}
+                    {% url 'company:responsibility' as company_responsibility_url %}
+                    {% url 'company:job' as company_job_url %}
+                    <li class="main-nav__item{% if company_url == request.path or company_mission_url in request.path or company_management_url in request.path or company_responsibility_url in request.path or company_job_url in request.path %} active{% endif %} has-dropdown">
                         <a href="{{ company_url }}" class="main-nav__link">О компании</a>
                         <div class="dropdown">
                             <ul class="main-nav-submenu__list">
-                                <li class="main-nav-submenu__item">
-                                    <a href="" class="main-nav-submenu__link">Миссия и ценности</a>
+                                <li class="main-nav-submenu__item{% if company_mission_url == request.path %} active{% endif %}">
+                                    <a href="{{ company_mission_url }}" class="main-nav-submenu__link">Миссия и ценности</a>
                                 </li>
-                                <li class="main-nav-submenu__item">
-                                    <a href="" class="main-nav-submenu__link">Менеджмент</a>
+                                <li class="main-nav-submenu__item{% if company_management_url == request.path %} active{% endif %}">
+                                    <a href="{{ company_management_url }}" class="main-nav-submenu__link">Менеджмент</a>
                                 </li>
                                 <li class="main-nav-submenu__item">
                                     <a href="" class="main-nav-submenu__link">Структура компании</a>
                                 </li>
-                                <li class="main-nav-submenu__item">
-                                    <a href="" class="main-nav-submenu__link">Работа в компании</a>
+                                <li class="main-nav-submenu__item{% if company_job_url == request.path %} active{% endif %}">
+                                    <a href="{{ company_job_url }}" class="main-nav-submenu__link">Работа в компании</a>
                                 </li>
-                                <li class="main-nav-submenu__item">
-                                    <a href="" class="main-nav-submenu__link">Социальная ответственность</a>
+                                <li class="main-nav-submenu__item{% if company_responsibility_url == request.path %} active{% endif %}">
+                                    <a href="{{ company_responsibility_url }}" class="main-nav-submenu__link">Социальная ответственность</a>
                                 </li>
                                 <li class="main-nav-submenu__item">
                                     <a href="" class="main-nav-submenu__link">История</a>
