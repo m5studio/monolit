@@ -46,26 +46,8 @@ class GenerateContent:
     def convert_tuple_to_flat_list(self, tuple):
         return [x[0] for x in tuple]
 
-    def countBanks(self):
-        return Bank.objects.all().count()
-
-    def countOffers(self):
-        return Offer.objects.all().count()
-
-    def countNews(self):
-        return News.objects.all().count()
-
-    def countCertificate(self):
-        return Certificate.objects.all().count()
-
-    def countManagement(self):
-        return Management.objects.all().count()
-
-    def countResponsibility(self):
-        return Responsibility.objects.all().count()
-
-    def countJobBlock(self):
-        return JobBlock.objects.all().count()
+    def countModelObjects(self, model_name):
+        return model_name.objects.all().count()
 
     def countFlatsInObject(self, object_id) -> int:
         return ObjectSite.objects.annotate(Count('object')).filter(object=object_id).count()
@@ -104,6 +86,22 @@ class GenerateContent:
         print(f'[JobBlock] {job_block.title} created')
 
 
+    def _create_JobVacancy(self):
+        title = f'Вакансия {self.fake.word()} {self.fake.word()} {self.fake.word()}'
+
+        job_vacancy = JobVacancy(title=title, \
+                                 experience='3 - 6 лет', \
+                                 duties=self.fake.text(600), \
+                                 requirements=self.fake.text(500), \
+                                 terms=self.fake.text(300), \
+                                 salary='от 30 000 руб./мес', \
+                                 contacts='<p><em>Телефон: <a href=\"tel:+79788164888\">+7 (978) 816-48-88</a> (Ольга)<br>\
+                                            Почта: <a href=\"mailto:personal@monolit.net\">personal@monolit.net</a></em></p>'
+                                )
+        job_vacancy.save()
+        print(f'[JobVacancy] {job_vacancy.title} created')
+
+
     """ [News] """
     def _create_NewsCategory(self):
         if NewsCategory.objects.all().count() == 0:
@@ -129,10 +127,7 @@ class GenerateContent:
     def _create_News(self):
         title = f'Новость {self.fake.word()} {self.fake.word()} {self.fake.word()} {self.fake.word()} {self.fake.word()} {str(self.fake.random_number(3, True))}'.title()
 
-        news = News(title=title, \
-                    main_image=DUMMY_IMG_NAME, \
-                    body=self.fake.text(5000),
-                    )
+        news = News(title=title, main_image=DUMMY_IMG_NAME, body=self.fake.text(5000))
         news.save()
         print(f'[News] created {news.title}')
 
@@ -151,8 +146,7 @@ class GenerateContent:
         object_site = ObjectSite.objects.get(pk=object_site_id)
 
         if count_bathrooms_rel_to_object_site == 0 or count_bathrooms_rel_to_object_site < 2:
-            object_bathroom = ObjectBathroom(object_site=object_site, \
-                                             bathroom_type=self.get_random_list_item(object_bathroom_list))
+            object_bathroom = ObjectBathroom(object_site=object_site, bathroom_type=self.get_random_list_item(object_bathroom_list))
             object_bathroom.save()
             print(f'[ObjectBathroom] created for ObjectSite {object_site}')
 
@@ -164,16 +158,14 @@ class GenerateContent:
         object_site = ObjectSite.objects.get(pk=object_site_id)
 
         if count_balconies_rel_to_object_site == 0 or count_balconies_rel_to_object_site < 2:
-            object_balcony = ObjectBalcony(object_site=object_site, \
-                                           balcony_type=self.get_random_list_item(object_balcony_list))
+            object_balcony = ObjectBalcony(object_site=object_site, balcony_type=self.get_random_list_item(object_balcony_list))
             object_balcony.save()
             print(f'[ObjectBalcony] created for ObjectSite {object_site}')
 
 
     # Жилые объекты
-    def _create_living_ObjectSite(self, object_id):
+    def _create_ObjectSite(self, object_id):
         site_types_list = self.convert_tuple_to_flat_list(ObjectSite.SITE_TYPES)
-        # site_types_list.remove('commercial')
 
         rooms_qty_list = self.convert_tuple_to_flat_list(ObjectSite.ROOMS_QTY)
         finishing_types_list = self.convert_tuple_to_flat_list(ObjectSite.FINISHING_TYPES)
@@ -499,38 +491,42 @@ class GenerateContent:
         # 4. Fill Mortgage
         self._create_WayToBuy()
 
-        if self.countBanks() < 2:
-            self._create_Bank()
+        if self.countModelObjects(Bank) < 3:
+            for _ in range(3):
+                self._create_Bank()
 
-        if self.countOffers() < 5:
-            for _ in range(5 - self.countOffers()):
+        if self.countModelObjects(Offer) < 5:
+            for _ in range(5):
                 self._create_Offer()
 
         # 5. Generate Flats and apartments
         for object_id in self._get_objects_ids_list():
-            self._create_living_ObjectSite(object_id)
+            self._create_ObjectSite(object_id)
 
         # 6. Generate News
         self._create_NewsCategory()
 
-        if self.countNews() < 200:
-            # for _ in range(100 - self.countNews()):
+        if self.countModelObjects(News) < 200:
             for _ in range(25):
                 self._create_News()
 
         # Company
-        if self.countCertificate() < 8:
-            for _ in range(8 - self.countCertificate()):
+        if self.countModelObjects(Certificate) < 8:
+            for _ in range(8):
                 self._create_Certificate()
 
-        if self.countManagement() < 6:
-            for _ in range(6 - self.countManagement()):
+        if self.countModelObjects(Management) < 6:
+            for _ in range(6):
                 self._create_Management()
 
-        if self.countResponsibility() < 10:
-            for _ in range(10 - self.countResponsibility()):
+        if self.countModelObjects(Responsibility) < 10:
+            for _ in range(10):
                 self._create_Responsibility()
 
-        if self.countJobBlock() < 5:
-            for _ in range(5 - self.countJobBlock()):
+        if self.countModelObjects(JobBlock) < 5:
+            for _ in range(5):
                 self._create_JobBlock()
+
+        if self.countModelObjects(JobVacancy) < 16:
+            for _ in range(16):
+                self._create_JobVacancy()
