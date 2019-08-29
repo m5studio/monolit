@@ -7,7 +7,7 @@ django-imagekit==4.0.2
 django-js-asset==1.2.2
 django-location-field==2.1.0
 django-unused-media==0.1.13
-Faker==2.0.0
+Faker==2.0.1
 html5lib==1.0.1
 pilkit==2.0
 Pillow==6.1.0
