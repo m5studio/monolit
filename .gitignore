@@ -572,4 +572,4 @@ MigrationBackup/
 monolit/layout/dist/
 monolit/media/
 monolit/package-lock.json
-monolit.zip
+*monolit.zip
