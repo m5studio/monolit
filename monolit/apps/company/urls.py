@@ -6,6 +6,7 @@ from apps.company.views import (
     CompanyManagementView,
     CompanyResponsibilityView,
     CompanyJobView,
+    CompanyHistory,
 )
 
 
@@ -18,5 +19,6 @@ urlpatterns = [
         path('management/', CompanyManagementView.as_view(), name='management'),
         path('responsibility/', CompanyResponsibilityView.as_view(), name='responsibility'),
         path('job/', CompanyJobView.as_view(), name='job'),
+        path('history/', CompanyHistory.as_view(), name='history'),
     ])),
 ]

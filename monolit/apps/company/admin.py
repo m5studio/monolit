@@ -7,6 +7,7 @@ from apps.company.models.certificate import Certificate
 from apps.company.models.management import Management
 from apps.company.models.responsibility import Responsibility
 from apps.company.models.job import JobBlock, JobVacancy
+from apps.company.models.history import History
 
 
 """ [ Certificate ] """
@@ -96,3 +97,20 @@ class JobVacancyAdmin(TurnOffAdminLogging, admin.ModelAdmin):
     list_editable = ('order',)
     ordering = ('order',)
 """ [ END JobVacancy ] """
+
+
+""" [ History ] """
+@admin.register(History)
+class HistoryAdmin(TurnOffAdminLogging, admin.ModelAdmin):
+    readonly_fields = ('image_thumb',)
+    fieldsets = (
+        (None, {
+            'fields': ('year', 'body',)
+        }),
+        ('Изображение', {
+           'fields': ('image_thumb', 'image')
+        }),
+    )
+    list_display = ('year',)
+    ordering = ('-year',)
+""" [ END History ] """

@@ -1,4 +1,5 @@
 import random
+import datetime
 
 from django.db.models import Count
 from faker import Faker
@@ -28,6 +29,7 @@ from apps.company.models.certificate import Certificate
 from apps.company.models.management import Management
 from apps.company.models.responsibility import Responsibility
 from apps.company.models.job import JobBlock, JobVacancy
+from apps.company.models.history import History
 
 
 DUMMY_IMG_NAME = 'dummy-image.jpg'
@@ -100,6 +102,15 @@ class GenerateContent:
                                 )
         job_vacancy.save()
         print(f'[JobVacancy] {job_vacancy.title} created')
+
+
+    def _create_History(self):
+        years_range = [r for r in range(2005, datetime.date.today().year + 1)]
+
+        for year in years_range:
+            history = History(year=year, body=self.fake.text(600), image=DUMMY_IMG_NAME)
+            history.save()
+            print(f'[History] {history.year} created')
 
 
     """ [News] """
@@ -530,3 +541,6 @@ class GenerateContent:
         if self.countModelObjects(JobVacancy) < 16:
             for _ in range(16):
                 self._create_JobVacancy()
+
+        if self.countModelObjects(History) == 0:
+            self._create_History()

@@ -52,7 +52,8 @@
                     {% url 'company:management' as company_management_url %}
                     {% url 'company:responsibility' as company_responsibility_url %}
                     {% url 'company:job' as company_job_url %}
-                    <li class="main-nav__item{% if company_url == request.path or company_mission_url in request.path or company_management_url in request.path or company_responsibility_url in request.path or company_job_url in request.path %} active{% endif %} has-dropdown">
+                    {% url 'company:history' as company_history_url %}
+                    <li class="main-nav__item{% if company_url == request.path or company_mission_url in request.path or company_management_url in request.path or company_responsibility_url in request.path or company_job_url in request.path or company_history_url in request.path %} active{% endif %} has-dropdown">
                         <a href="{{ company_url }}" class="main-nav__link">О компании</a>
                         <div class="dropdown">
                             <ul class="main-nav-submenu__list">
@@ -74,8 +75,8 @@
                                 <li class="main-nav-submenu__item{% if company_responsibility_url == request.path %} active{% endif %}">
                                     <a href="{{ company_responsibility_url }}" class="main-nav-submenu__link">Социальная ответственность</a>
                                 </li>
-                                <li class="main-nav-submenu__item">
-                                    <a href="" class="main-nav-submenu__link">История</a>
+                                <li class="main-nav-submenu__item{% if company_history_url == request.path %} active{% endif %}">
+                                    <a href="{{ company_history_url }}" class="main-nav-submenu__link">История</a>
                                 </li>
                             </ul>
                         </div>

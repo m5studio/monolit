@@ -4,6 +4,7 @@ from apps.company.models.certificate import Certificate
 from apps.company.models.management import Management
 from apps.company.models.responsibility import Responsibility
 from apps.company.models.job import JobBlock, JobVacancy
+from apps.company.models.history import History
 
 
 class CompanyView(TemplateView):
@@ -53,4 +54,14 @@ class CompanyJobView(TemplateView):
         context['page_tite'] = 'Работа в компании'
         context['job_blocks'] = JobBlock.objects.all().order_by('order')
         context['job_vacancies'] = JobVacancy.objects.all().order_by('order')
+        return context
+
+
+class CompanyHistory(TemplateView):
+    template_name = 'company/company_history.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page_tite'] = 'История компании'
+        context['history'] = History.objects.all().order_by('-year')
         return context
