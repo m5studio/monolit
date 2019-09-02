@@ -7,6 +7,8 @@ from apps.company.views import (
     CompanyResponsibilityView,
     CompanyJobView,
     CompanyHistory,
+    CompanyStructure,
+    CompanyPartnership,
 )
 
 
@@ -20,5 +22,7 @@ urlpatterns = [
         path('responsibility/', CompanyResponsibilityView.as_view(), name='responsibility'),
         path('job/', CompanyJobView.as_view(), name='job'),
         path('history/', CompanyHistory.as_view(), name='history'),
+        path('structure/', CompanyStructure.as_view(), name='structure'),
+        path('partnership/', CompanyPartnership.as_view(), name='partnership'),
     ])),
 ]

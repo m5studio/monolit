@@ -8,6 +8,8 @@ from apps.company.models.management import Management
 from apps.company.models.responsibility import Responsibility
 from apps.company.models.job import JobBlock, JobVacancy
 from apps.company.models.history import History
+from apps.company.models.structure import Structure
+from apps.company.models.partner import Partner
 
 
 """ [ Certificate ] """
@@ -114,3 +116,39 @@ class HistoryAdmin(TurnOffAdminLogging, admin.ModelAdmin):
     list_display = ('year',)
     ordering = ('-year',)
 """ [ END History ] """
+
+
+""" [ Structure ] """
+@admin.register(Structure)
+class StructureAdmin(TurnOffAdminLogging, admin.ModelAdmin):
+    readonly_fields = ('image_thumb',)
+    fieldsets = (
+        (None, {
+            'fields': ('order', 'url', 'body')
+        }),
+        ('Изображение', {
+           'fields': ('image_thumb', 'image')
+        }),
+    )
+    list_display = ('url', 'order',)
+    list_editable = ('order',)
+    ordering = ('order',)
+""" [ END Structure ] """
+
+
+""" [ Partner ] """
+@admin.register(Partner)
+class PartnerAdmin(TurnOffAdminLogging, admin.ModelAdmin):
+    readonly_fields = ('image_thumb',)
+    fieldsets = (
+        (None, {
+            'fields': ('order', 'url',)
+        }),
+        ('Изображение', {
+           'fields': ('image_thumb', 'image')
+        }),
+    )
+    list_display = ('url', 'order',)
+    list_editable = ('order',)
+    ordering = ('order',)
+""" [ END Partner ] """

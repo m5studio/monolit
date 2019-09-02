@@ -240,8 +240,11 @@ class ObjectAdmin(TurnOffAdminLogging, admin.ModelAdmin):
 
     readonly_fields = ('genplan_thumb', 'main_image_thumb_admin')
     fieldsets = (
+        ('Опции', {
+            'fields': ('active', 'completed', 'all_sold', 'partnership')
+        }),
         (None, {
-            'fields': ('active', 'completed', 'all_sold', 'order', 'crm_id', 'name', 'slug', 'category', 'object_type', 'building_type', 'description', 'webcam', 'panoram'),
+            'fields': ('order', 'crm_id', 'name', 'slug', 'category', 'object_type', 'building_type', 'description', 'webcam', 'panoram'),
             # 'description': 'Some description if needed'
         }),
         ('Главное изображение', {
@@ -254,7 +257,7 @@ class ObjectAdmin(TurnOffAdminLogging, admin.ModelAdmin):
             'fields': ('city', 'address', 'location')
         }),
     )
-    list_display = ('name', 'crm_id', 'order', 'active', 'all_sold', 'updated')
+    list_display = ('name', 'crm_id', 'order', 'active', 'all_sold', 'partnership', 'updated')
     list_editable = ('order', 'active')
     search_fields = ['name']
     ordering = ('order',)

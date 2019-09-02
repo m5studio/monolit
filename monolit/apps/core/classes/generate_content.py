@@ -30,6 +30,8 @@ from apps.company.models.management import Management
 from apps.company.models.responsibility import Responsibility
 from apps.company.models.job import JobBlock, JobVacancy
 from apps.company.models.history import History
+from apps.company.models.structure import Structure
+from apps.company.models.partner import Partner
 
 
 DUMMY_IMG_NAME = 'dummy-image.jpg'
@@ -111,6 +113,18 @@ class GenerateContent:
             history = History(year=year, body=self.fake.text(600), image=DUMMY_IMG_NAME)
             history.save()
             print(f'[History] {history.year} created')
+
+
+    def _create_Structure(self):
+        structure = Structure(url='http://monolit.site', body=self.fake.text(500), image=DUMMY_IMG_NAME)
+        structure.save()
+        print(f'[Structure] created')
+
+
+    def _create_Partner(self):
+        partner = Partner(url='https://google.com', image=DUMMY_IMG_NAME)
+        partner.save()
+        print(f'[Partner] created')
 
 
     """ [News] """
@@ -456,8 +470,11 @@ class GenerateContent:
         name = f'Объект {self.fake.word()} {self.fake.word()} {str(self.fake.random_number(4, True))}'.title()
         cities_list = self.convert_tuple_to_flat_list(Object.CITIES)
 
+        fake = Faker()
+
         object = Object(completed=self.fake.boolean(chance_of_getting_true=40), \
                         all_sold=self.fake.boolean(chance_of_getting_true=30), \
+                        partnership=fake.boolean(chance_of_getting_true=20), \
                         crm_id=self.fake.random_number(7, True), \
                         name=name, \
                         slug=slugify(translit(name, 'ru', reversed=True)), \
@@ -544,3 +561,11 @@ class GenerateContent:
 
         if self.countModelObjects(History) == 0:
             self._create_History()
+
+        if self.countModelObjects(Structure) < 15:
+            for _ in range(15):
+                self._create_Structure()
+
+        if self.countModelObjects(Partner) < 8:
+            for _ in range(8):
+                self._create_Partner()

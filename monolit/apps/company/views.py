@@ -5,6 +5,10 @@ from apps.company.models.management import Management
 from apps.company.models.responsibility import Responsibility
 from apps.company.models.job import JobBlock, JobVacancy
 from apps.company.models.history import History
+from apps.company.models.structure import Structure
+from apps.company.models.partner import Partner
+
+from apps.realty.models.object import Object
 
 
 class CompanyView(TemplateView):
@@ -64,4 +68,25 @@ class CompanyHistory(TemplateView):
         context = super().get_context_data(**kwargs)
         context['page_tite'] = 'История компании'
         context['history'] = History.objects.all().order_by('-year')
+        return context
+
+
+class CompanyStructure(TemplateView):
+    template_name = 'company/company_structure.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page_tite'] = 'Стурктура компании'
+        context['structure'] = Structure.objects.all().order_by('order')
+        return context
+
+
+class CompanyPartnership(TemplateView):
+    template_name = 'company/company_partnership.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page_tite'] = 'Партнерская программа'
+        context['partners'] = Partner.objects.all().order_by('order')
+        context['objects_partnership'] = Object.objects.filter(active=True, partnership=True).order_by('?')
         return context
