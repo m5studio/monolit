@@ -10,6 +10,7 @@ from apps.company.models.job import JobBlock, JobVacancy
 from apps.company.models.history import History
 from apps.company.models.structure import Structure
 from apps.company.models.partner import Partner
+from apps.company.models.tender import Tender
 
 
 """ [ Certificate ] """
@@ -152,3 +153,21 @@ class PartnerAdmin(TurnOffAdminLogging, admin.ModelAdmin):
     list_editable = ('order',)
     ordering = ('order',)
 """ [ END Partner ] """
+
+
+""" [ Tender ] """
+@admin.register(Tender)
+class TenderAdmin(TurnOffAdminLogging, admin.ModelAdmin):
+    fieldsets = (
+        (None, {
+            'fields': ('active', 'title', 'category',)
+        }),
+        ('Сроки проведения тендера', {
+           'fields': ('date_start', 'date_end')
+        }),
+        ('Информация', {
+            'fields': ('duties', 'requirements', 'contacts',)
+        }),
+    )
+    list_display = ('title', 'category', 'date_start', 'date_end',)
+""" [ END Tender ] """

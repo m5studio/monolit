@@ -52,7 +52,7 @@ function objectCardSitesInfo() {
                             '<div class="object-card__emerge-object">' +
                                 '<a href="" class="object-card__emerge-link">' +
                                     '<div class="object-card__flat-types-item">' + v['name'] + '</div>' +
-                                    '<div class="object-card__emerge-title">' + singularPlural(v['flats_qty'], ['квартира', 'квартиры', 'квартир'], true) + '</div>' +
+                                    '<div class="object-card__emerge-title">' + v['flats_qty'] + ' ' + singularPlural(v['flats_qty'], ['квартира', 'квартиры', 'квартир'], true) + '</div>' +
                                     '<div class="object-card__emerge-area-space">' + formatNumber(v['min_area'], 1) + ' - ' + formatNumber(v['max_area'], 1) + ' м<sup>2</sup></div>' +
                                     '<div class="object-card__emerge-arrow"></div>' +
                                 '</a>' +

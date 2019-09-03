@@ -32,6 +32,7 @@ from apps.company.models.job import JobBlock, JobVacancy
 from apps.company.models.history import History
 from apps.company.models.structure import Structure
 from apps.company.models.partner import Partner
+from apps.company.models.tender import Tender
 
 
 DUMMY_IMG_NAME = 'dummy-image.jpg'
@@ -125,6 +126,21 @@ class GenerateContent:
         partner = Partner(url='https://google.com', image=DUMMY_IMG_NAME)
         partner.save()
         print(f'[Partner] created')
+
+
+    def _create_Tender(self):
+        title = f'Тендер {self.fake.word()} {self.fake.word()} {self.fake.word()} {self.fake.word()}'.title()
+        tender_cregories_list = self.convert_tuple_to_flat_list(Tender.CATEGORIES)
+
+        tender = Tender(title=title, \
+                        category=self.fake.word(tender_cregories_list), \
+                        duties=self.fake.text(600), \
+                        requirements=self.fake.text(500), \
+                        contacts='<p><em>Телефон: <a href=\"tel:+79788164888\">+7 (978) 816-48-88</a> (Ольга)<br>\
+                                   Почта: <a href=\"mailto:personal@monolit.net\">personal@monolit.net</a></em></p>'
+                        )
+        tender.save()
+        print(f'[Tender] {tender.title} created')
 
 
     """ [News] """
@@ -263,7 +279,6 @@ class GenerateContent:
 
     """ [Mortgage] """
     def _create_Offer(self):
-        # banks_ids = [1,2]
         banks_ids = list(Bank.objects.order_by('id').values_list('id', flat=True))
         bank = Bank.objects.get(pk=self.get_random_list_item(banks_ids))
 
@@ -569,3 +584,7 @@ class GenerateContent:
         if self.countModelObjects(Partner) < 8:
             for _ in range(8):
                 self._create_Partner()
+
+        if self.countModelObjects(Tender) < 25:
+            for _ in range(25):
+                self._create_Tender()

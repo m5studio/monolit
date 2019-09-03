@@ -7,6 +7,7 @@ from apps.company.models.job import JobBlock, JobVacancy
 from apps.company.models.history import History
 from apps.company.models.structure import Structure
 from apps.company.models.partner import Partner
+from apps.company.models.tender import Tender
 
 from apps.realty.models.object import Object
 
@@ -89,4 +90,15 @@ class CompanyPartnership(TemplateView):
         context['page_tite'] = 'Партнерская программа'
         context['partners'] = Partner.objects.all().order_by('order')
         context['objects_partnership'] = Object.objects.filter(active=True, partnership=True).order_by('?')
+        return context
+
+
+class CompanyTenders(TemplateView):
+    template_name = 'company/company_tenders.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page_tite'] = 'Тендеры'
+        context['tenders_categories'] = Tender.CATEGORIES
+        context['tenders'] = Tender.objects.all().order_by('date_end')        
         return context

@@ -1,0 +1,333 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block body_classes %}{% spaceless %}
+    {{ block.super }} company-tenders
+{% endspaceless %}{% endblock %}
+
+
+{% block content %}
+    {% include 'company/breadcrumbs/breadcrumbs.html' %}
+
+    <main id="main">
+        <div id="page-title-h1" class="container">
+            <h1>{{ page_tite }}</h1>
+        </div>
+
+        <section id="section-register-in-tender" class="common-section">
+            <div class="common-section__inner container">
+                <div class="tender-item">
+                    <a href="{% static 'documents/tenders/some_doc.pdf' %}">График проведения тендеров на 2019 год</a>
+                </div>
+                <div class="tender-item">
+                    <a href="{% static 'documents/tenders/some_doc.pdf' %}">Условия участия в тендерном отборе</a>
+                </div>
+                <div class="tender-item">
+                    <a href="{% static 'documents/tenders/some_doc.pdf' %}">Список аккредитованных поставщиков и подрядчиков</a>
+                </div>
+            </div>
+            <div class="common-section__title container">
+                <h2>Регистрация участия в тендере</h2>
+            </div>
+            <div id="section-register-in-tender__send-aplications" class="common-section__inner container">
+                <a href="" class="green-button">Заявка для юридических лиц</a>
+                <a href="" class="green-button">Заявка для ИП</a>
+            </div>
+        </section>
+
+        <section id="section-register-in-tender-faq" class="common-section">
+            <div class="common-section__title container">
+                <h2>
+                    <div class="icon icon-64 icon-faq"></div>
+                    <a href="#">Ответы на часто задаваемые вопросы</a>
+                </h2>
+            </div>
+            <div id="section-register-in-tender-faq__inner" class="container">
+                <p>Обратиться по вопросам участия в тендерах компании, а также направить коммерческое предложение вы можете на <a href="mailto:tender@monolit.site">tender@monolit.site</a></p>
+            </div>
+        </section>
+
+        <section id="section-vacancies-list" class="common-section">
+            <div class="common-section__title container">
+                <h2>Открытые Тенедеры</h2>
+                <div><em>Актуальные на {{ current_month_rus|title }} {% now "Y" %}</em></div>
+            </div>
+
+            <div id="section-vacancies-list__inner" class="container">
+                {% if tenders_categories %}
+                    <select>
+                        <option value="all">- Все виды работ -</option>
+                        {% for category in tenders_categories %}
+                            <option value="{{ category.0 }}">{{ category.1 }}</option>
+                        {% endfor %}
+                    </select>
+                    <br><br>
+                {% endif %}
+                <div id="vacancies-list-accordion">
+                    {% for object in tenders %}
+                        <div class="vacancy-card collapse-block">
+                            <div class="vacancy-card__title-wrap">
+                                <a class="collapse-block__link" data-toggle="collapse" href="#vacancy-{{ object.id }}" aria-expanded="false" aria-controls="vacancy-{{ object.id }}">
+                                    <span class="vacancy-card__title">{{ object.title }}</span>
+                                    <span class="vacancy-card__experience">
+                                        <strong>Сроки проведения:</strong> с {{ object.date_start|date:'d.m.Y H:i' }} до {{ object.date_end|date:'d.m.Y H:i' }}
+                                    </span>
+                                    <span class="vacancy-card__experience">
+                                        <strong>Тип тендера:</strong> {{ object.get_category_display }}
+                                    </span>
+                                </a>
+                            </div>
+                            <div id="vacancy-{{ object.id }}" class="vacancy-card__descr collapse" data-parent="#vacancies-list-accordion">
+                                <p><strong>Обязанности:</strong></p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae quisquam aut necessitatibus repudiandae consequatur doloribus ab, iure minus omnis error. Dolor totam quos aperiam officia autem placeat quod sit, perspiciatis.</p>
+
+                                <p><strong>Требования:</strong></p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae quisquam aut necessitatibus repudiandae consequatur doloribus ab, iure minus omnis error. Dolor totam quos aperiam officia autem placeat quod sit, perspiciatis.</p>
+
+                                <div class="mb-4">
+                                    <strong>Файлы</strong>
+                                    <a href="">Скачать все одним архивом</a>
+                                </div>
+
+                                <p><em>Телефон: <a href="tel:+79788164888">+7 (978) 816-48-88</a> (Ольга)<br>
+                                Почта: <a href="mailto:personal@monolit.net">personal@monolit.net</a></em></p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <!-- <div class="vacancy-card collapse-block">
+                        <div class="vacancy-card__title-wrap">
+                            <a class="collapse-block__link" data-toggle="collapse" href="#vacancy-1" aria-expanded="false" aria-controls="vacancy-1">
+                                <span class="vacancy-card__title">Типовой договор субподряда</span>
+                                <span class="vacancy-card__experience">
+                                    <strong>Срок проведения:</strong> с 15.11.2018 до 31.12.2018 18:00
+                                </span>
+                                <span class="vacancy-card__experience">
+                                    <strong>Тип тендера:</strong> Другое
+                                </span>
+                            </a>
+                        </div>
+                        <div id="vacancy-1" class="vacancy-card__descr collapse" data-parent="#vacancies-list-accordion">
+                            <p><strong>Обязанности:</strong></p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae quisquam aut necessitatibus repudiandae consequatur doloribus ab, iure minus omnis error. Dolor totam quos aperiam officia autem placeat quod sit, perspiciatis.</p>
+                            <p><strong>Требования:</strong></p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae quisquam aut necessitatibus repudiandae consequatur doloribus ab, iure minus omnis error. Dolor totam quos aperiam officia autem placeat quod sit, perspiciatis.</p>
+                            <p><em>Телефон: <a href="tel:+79788164888">+7 (978) 816-48-88</a> (Ольга)<br>
+                            Почта: <a href="mailto:personal@monolit.net">personal@monolit.net</a></em></p>
+                        </div>
+                    </div>
+                    <div class="vacancy-card collapse-block">
+                        <div class="vacancy-card__title-wrap">
+                            <a class="collapse-block__link" data-toggle="collapse" href="#vacancy-2" aria-expanded="false" aria-controls="vacancy-2">
+                                <span class="vacancy-card__title">Выполнение работ по устройству железобетонного каркаса многоуровневой стоянки автомобилей открытого типа в ЖК «Столичный»</span>
+                                <span class="vacancy-card__experience">
+                                    <strong>Срок проведения:</strong> с 15.11.2018 до 31.12.2018 18:00
+                                </span>
+                                <span class="vacancy-card__experience">
+                                    <strong>Тип тендера:</strong> Другое
+                                </span>
+                            </a>
+                        </div>
+                        <div id="vacancy-2" class="vacancy-card__descr collapse" data-parent="#vacancies-list-accordion">
+                            <p><strong>Обязанности:</strong></p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae quisquam aut necessitatibus repudiandae consequatur doloribus ab, iure minus omnis error. Dolor totam quos aperiam officia autem placeat quod sit, perspiciatis.</p>
+                            <p><strong>Требования:</strong></p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae quisquam aut necessitatibus repudiandae consequatur doloribus ab, iure minus omnis error. Dolor totam quos aperiam officia autem placeat quod sit, perspiciatis.</p>
+                            <p><em>Телефон: <a href="tel:+79788164888">+7 (978) 816-48-88</a> (Ольга)<br>
+                            Почта: <a href="mailto:personal@monolit.net">personal@monolit.net</a></em></p>
+                        </div>
+                    </div>
+                    <div class="vacancy-card collapse-block">
+                        <div class="vacancy-card__title-wrap">
+                            <a class="collapse-block__link" data-toggle="collapse" href="#vacancy-3" aria-expanded="false" aria-controls="vacancy-3">
+                                <span class="vacancy-card__title">Выполнение работ по устройству утепления фасадов здания с последующей отделкой «мокрый фасад» ЖК «Луговое" секции Л17-20</span>
+                                <span class="vacancy-card__experience">
+                                    <strong>Срок проведения:</strong> с 15.11.2018 до 31.12.2018 18:00
+                                </span>
+                                <span class="vacancy-card__experience">
+                                    <strong>Тип тендера:</strong> Другое
+                                </span>
+                            </a>
+                        </div>
+                        <div id="vacancy-3" class="vacancy-card__descr collapse" data-parent="#vacancies-list-accordion">
+                            <p><strong>Обязанности:</strong></p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae quisquam aut necessitatibus repudiandae consequatur doloribus ab, iure minus omnis error. Dolor totam quos aperiam officia autem placeat quod sit, perspiciatis.</p>
+                            <p><strong>Требования:</strong></p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae quisquam aut necessitatibus repudiandae consequatur doloribus ab, iure minus omnis error. Dolor totam quos aperiam officia autem placeat quod sit, perspiciatis.</p>
+                            <p><em>Телефон: <a href="tel:+79788164888">+7 (978) 816-48-88</a> (Ольга)<br>
+                            Почта: <a href="mailto:personal@monolit.net">personal@monolit.net</a></em></p>
+                        </div>
+                    </div>
+                    <div class="vacancy-card collapse-block">
+                        <div class="vacancy-card__title-wrap">
+                            <a class="collapse-block__link" data-toggle="collapse" href="#vacancy-4" aria-expanded="false" aria-controls="vacancy-4">
+                                <span class="vacancy-card__title">Выполнение работ по устройству остекление в ЖК Таврический секции Т6, Т7, Т8</span>
+                                <span class="vacancy-card__experience">
+                                    <strong>Срок проведения:</strong> с 15.11.2018 до 31.12.2018 18:00
+                                </span>
+                                <span class="vacancy-card__experience">
+                                    <strong>Тип тендера:</strong> Другое
+                                </span>
+                            </a>
+                        </div>
+                        <div id="vacancy-4" class="vacancy-card__descr collapse" data-parent="#vacancies-list-accordion">
+                            <p><strong>Обязанности:</strong></p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae quisquam aut necessitatibus repudiandae consequatur doloribus ab, iure minus omnis error. Dolor totam quos aperiam officia autem placeat quod sit, perspiciatis.</p>
+                            <p><strong>Требования:</strong></p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae quisquam aut necessitatibus repudiandae consequatur doloribus ab, iure minus omnis error. Dolor totam quos aperiam officia autem placeat quod sit, perspiciatis.</p>
+                            <p><em>Телефон: <a href="tel:+79788164888">+7 (978) 816-48-88</a> (Ольга)<br>
+                            Почта: <a href="mailto:personal@monolit.net">personal@monolit.net</a></em></p>
+                        </div>
+                    </div>
+                    <div class="vacancy-card collapse-block">
+                        <div class="vacancy-card__title-wrap">
+                            <a class="collapse-block__link" data-toggle="collapse" href="#vacancy-5" aria-expanded="false" aria-controls="vacancy-5">
+                                <span class="vacancy-card__title">Выполнение работ по проектированию клубного поселка в г. Алушта</span>
+                                <span class="vacancy-card__experience">
+                                    <strong>Срок проведения:</strong> с 15.11.2018 до 31.12.2018 18:00
+                                </span>
+                                <span class="vacancy-card__experience">
+                                    <strong>Тип тендера:</strong> Другое
+                                </span>
+                            </a>
+                        </div>
+                        <div id="vacancy-5" class="vacancy-card__descr collapse" data-parent="#vacancies-list-accordion">
+                            <p><strong>Обязанности:</strong></p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae quisquam aut necessitatibus repudiandae consequatur doloribus ab, iure minus omnis error. Dolor totam quos aperiam officia autem placeat quod sit, perspiciatis.</p>
+                            <p><strong>Требования:</strong></p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae quisquam aut necessitatibus repudiandae consequatur doloribus ab, iure minus omnis error. Dolor totam quos aperiam officia autem placeat quod sit, perspiciatis.</p>
+                            <p><em>Телефон: <a href="tel:+79788164888">+7 (978) 816-48-88</a> (Ольга)<br>
+                            Почта: <a href="mailto:personal@monolit.net">personal@monolit.net</a></em></p>
+                        </div>
+                    </div>
+                    <div class="vacancy-card collapse-block">
+                        <div class="vacancy-card__title-wrap">
+                            <a class="collapse-block__link" data-toggle="collapse" href="#vacancy-6" aria-expanded="false" aria-controls="vacancy-6">
+                                <span class="vacancy-card__title">Выполнение работ по внешнему электроснабжению многофункционального комплекса Академия г. Симферпооль</span>
+                                <span class="vacancy-card__experience">
+                                    <strong>Срок проведения:</strong> с 15.11.2018 до 31.12.2018 18:00
+                                </span>
+                                <span class="vacancy-card__experience">
+                                    <strong>Тип тендера:</strong> Другое
+                                </span>
+                            </a>
+                        </div>
+                        <div id="vacancy-6" class="vacancy-card__descr collapse" data-parent="#vacancies-list-accordion">
+                            <p><strong>Обязанности:</strong></p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae quisquam aut necessitatibus repudiandae consequatur doloribus ab, iure minus omnis error. Dolor totam quos aperiam officia autem placeat quod sit, perspiciatis.</p>
+                            <p><strong>Требования:</strong></p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae quisquam aut necessitatibus repudiandae consequatur doloribus ab, iure minus omnis error. Dolor totam quos aperiam officia autem placeat quod sit, perspiciatis.</p>
+                            <p><em>Телефон: <a href="tel:+79788164888">+7 (978) 816-48-88</a> (Ольга)<br>
+                            Почта: <a href="mailto:personal@monolit.net">personal@monolit.net</a></em></p>
+                        </div>
+                    </div>
+                    <div class="vacancy-card collapse-block">
+                        <div class="vacancy-card__title-wrap">
+                            <a class="collapse-block__link" data-toggle="collapse" href="#vacancy-7" aria-expanded="false" aria-controls="vacancy-7">
+                                <span class="vacancy-card__title">Проектирование, изготовление и монтаж куполов для храма в г. Симферополь</span>
+                                <span class="vacancy-card__experience">
+                                    <strong>Срок проведения:</strong> с 15.11.2018 до 31.12.2018 18:00
+                                </span>
+                                <span class="vacancy-card__experience">
+                                    <strong>Тип тендера:</strong> Другое
+                                </span>
+                            </a>
+                        </div>
+                        <div id="vacancy-7" class="vacancy-card__descr collapse" data-parent="#vacancies-list-accordion">
+                            <p><strong>Обязанности:</strong></p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae quisquam aut necessitatibus repudiandae consequatur doloribus ab, iure minus omnis error. Dolor totam quos aperiam officia autem placeat quod sit, perspiciatis.</p>
+                            <p><strong>Требования:</strong></p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae quisquam aut necessitatibus repudiandae consequatur doloribus ab, iure minus omnis error. Dolor totam quos aperiam officia autem placeat quod sit, perspiciatis.</p>
+                            <p><em>Телефон: <a href="tel:+79788164888">+7 (978) 816-48-88</a> (Ольга)<br>
+                            Почта: <a href="mailto:personal@monolit.net">personal@monolit.net</a></em></p>
+                        </div>
+                    </div>
+                    <div class="vacancy-card collapse-block">
+                        <div class="vacancy-card__title-wrap">
+                            <a class="collapse-block__link" data-toggle="collapse" href="#vacancy-8" aria-expanded="false" aria-controls="vacancy-8">
+                                <span class="vacancy-card__title">Строительство магистральных сетей водоснабжения и водоотведения для 1 очереди строительства Крымская Роза</span>
+                                <span class="vacancy-card__experience">
+                                    <strong>Срок проведения:</strong> с 15.11.2018 до 31.12.2018 18:00
+                                </span>
+                                <span class="vacancy-card__experience">
+                                    <strong>Тип тендера:</strong> Другое
+                                </span>
+                            </a>
+                        </div>
+                        <div id="vacancy-8" class="vacancy-card__descr collapse" data-parent="#vacancies-list-accordion">
+                            <p><strong>Обязанности:</strong></p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae quisquam aut necessitatibus repudiandae consequatur doloribus ab, iure minus omnis error. Dolor totam quos aperiam officia autem placeat quod sit, perspiciatis.</p>
+                            <p><strong>Требования:</strong></p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae quisquam aut necessitatibus repudiandae consequatur doloribus ab, iure minus omnis error. Dolor totam quos aperiam officia autem placeat quod sit, perspiciatis.</p>
+                            <p><em>Телефон: <a href="tel:+79788164888">+7 (978) 816-48-88</a> (Ольга)<br>
+                            Почта: <a href="mailto:personal@monolit.net">personal@monolit.net</a></em></p>
+                        </div>
+                    </div>
+                    <div class="vacancy-card collapse-block">
+                        <div class="vacancy-card__title-wrap">
+                            <a class="collapse-block__link" data-toggle="collapse" href="#vacancy-9" aria-expanded="false" aria-controls="vacancy-9">
+                                <span class="vacancy-card__title">Запрос цен на выполнение каменных работ (устройство перегородок) г. Симферополь</span>
+                                <span class="vacancy-card__experience">
+                                    <strong>Срок проведения:</strong> с 15.11.2018 до 31.12.2018 18:00
+                                </span>
+                                <span class="vacancy-card__experience">
+                                    <strong>Тип тендера:</strong> Другое
+                                </span>
+                            </a>
+                        </div>
+                        <div id="vacancy-9" class="vacancy-card__descr collapse" data-parent="#vacancies-list-accordion">
+                            <p><strong>Обязанности:</strong></p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae quisquam aut necessitatibus repudiandae consequatur doloribus ab, iure minus omnis error. Dolor totam quos aperiam officia autem placeat quod sit, perspiciatis.</p>
+                            <p><strong>Требования:</strong></p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae quisquam aut necessitatibus repudiandae consequatur doloribus ab, iure minus omnis error. Dolor totam quos aperiam officia autem placeat quod sit, perspiciatis.</p>
+                            <p><em>Телефон: <a href="tel:+79788164888">+7 (978) 816-48-88</a> (Ольга)<br>
+                            Почта: <a href="mailto:personal@monolit.net">personal@monolit.net</a></em></p>
+                        </div>
+                    </div>
+                    <div class="vacancy-card collapse-block">
+                        <div class="vacancy-card__title-wrap">
+                            <a class="collapse-block__link" data-toggle="collapse" href="#vacancy-10" aria-expanded="false" aria-controls="vacancy-10">
+                                <span class="vacancy-card__title">Изготовление и монтаж Алюминиевых и ПВХ изделий (фасадные, балконные) на объекте Крымская Роза</span>
+                                <span class="vacancy-card__experience">
+                                    <strong>Срок проведения:</strong> с 15.11.2018 до 31.12.2018 18:00
+                                </span>
+                                <span class="vacancy-card__experience">
+                                    <strong>Тип тендера:</strong> Другое
+                                </span>
+                            </a>
+                        </div>
+                        <div id="vacancy-10" class="vacancy-card__descr collapse" data-parent="#vacancies-list-accordion">
+                            <p><strong>Обязанности:</strong></p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae quisquam aut necessitatibus repudiandae consequatur doloribus ab, iure minus omnis error. Dolor totam quos aperiam officia autem placeat quod sit, perspiciatis.</p>
+                            <p><strong>Требования:</strong></p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae quisquam aut necessitatibus repudiandae consequatur doloribus ab, iure minus omnis error. Dolor totam quos aperiam officia autem placeat quod sit, perspiciatis.</p>
+                            <p><em>Телефон: <a href="tel:+79788164888">+7 (978) 816-48-88</a> (Ольга)<br>
+                            Почта: <a href="mailto:personal@monolit.net">personal@monolit.net</a></em></p>
+                        </div>
+                    </div>
+                    <div class="vacancy-card collapse-block">
+                        <div class="vacancy-card__title-wrap">
+                            <a class="collapse-block__link" data-toggle="collapse" href="#vacancy-11" aria-expanded="false" aria-controls="vacancy-11">
+                                <span class="vacancy-card__title">Поставка и монтаж дверей на объекте Таврический Т6,7,8</span>
+                                <span class="vacancy-card__experience">
+                                    <strong>Срок проведения:</strong> с 15.11.2018 до 31.12.2018 18:00
+                                </span>
+                                <span class="vacancy-card__experience">
+                                    <strong>Тип тендера:</strong> Другое
+                                </span>
+                            </a>
+                        </div>
+                        <div id="vacancy-11" class="vacancy-card__descr collapse" data-parent="#vacancies-list-accordion">
+                            <p><strong>Обязанности:</strong></p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae quisquam aut necessitatibus repudiandae consequatur doloribus ab, iure minus omnis error. Dolor totam quos aperiam officia autem placeat quod sit, perspiciatis.</p>
+                            <p><strong>Требования:</strong></p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae quisquam aut necessitatibus repudiandae consequatur doloribus ab, iure minus omnis error. Dolor totam quos aperiam officia autem placeat quod sit, perspiciatis.</p>
+                            <p><em>Телефон: <a href="tel:+79788164888">+7 (978) 816-48-88</a> (Ольга)<br>
+                            Почта: <a href="mailto:personal@monolit.net">personal@monolit.net</a></em></p>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}

@@ -55,7 +55,8 @@
                     {% url 'company:history' as company_history_url %}
                     {% url 'company:structure' as company_structure_url %}
                     {% url 'company:partnership' as company_partnership_url %}
-                    <li class="main-nav__item{% if company_url == request.path or company_mission_url in request.path or company_management_url in request.path or company_responsibility_url in request.path or company_job_url in request.path or company_history_url in request.path or company_structure_url in request.path or company_partnership_url in request.path %} active{% endif %} has-dropdown">
+                    {% url 'company:tenders' as company_tenders_url %}
+                    <li class="main-nav__item{% if company_url == request.path or company_mission_url in request.path or company_management_url in request.path or company_responsibility_url in request.path or company_job_url in request.path or company_history_url in request.path or company_structure_url in request.path or company_partnership_url in request.path or company_tenders_url in request.path %} active{% endif %} has-dropdown">
                         <a href="{{ company_url }}" class="main-nav__link">О компании</a>
                         <div class="dropdown">
                             <ul class="main-nav-submenu__list">
@@ -80,8 +81,8 @@
                                 <li class="main-nav-submenu__item{% if company_partnership_url == request.path %} active{% endif %}">
                                     <a href="{{ company_partnership_url }}" class="main-nav-submenu__link">Партнерская программа</a>
                                 </li>
-                                <li class="main-nav-submenu__item">
-                                    <a href="" class="main-nav-submenu__link">Тендеры</a>
+                                <li class="main-nav-submenu__item{% if company_tenders_url == request.path %} active{% endif %}">
+                                    <a href="{{ company_tenders_url }}" class="main-nav-submenu__link">Тендеры</a>
                                 </li>
                                 <li class="main-nav-submenu__item">
                                     <a href="" class="main-nav-submenu__link">Вопросы-ответы по тендерам</a>
