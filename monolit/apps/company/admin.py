@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from apps.core.classes.turn_off_admin_logging import TurnOffAdminLogging
-# from apps.core.classes.hide_from_admin_index import HideFromAdminIndex
+from apps.core.classes.hide_from_admin_index import HideFromAdminIndex
 
 from apps.company.models.certificate import Certificate
 from apps.company.models.management import Management
@@ -10,7 +10,7 @@ from apps.company.models.job import JobBlock, JobVacancy
 from apps.company.models.history import History
 from apps.company.models.structure import Structure
 from apps.company.models.partner import Partner
-from apps.company.models.tender import Tender
+from apps.company.models.tender import Tender, TenderFile
 
 
 """ [ Certificate ] """
@@ -155,9 +155,25 @@ class PartnerAdmin(TurnOffAdminLogging, admin.ModelAdmin):
 """ [ END Partner ] """
 
 
+""" [ TenderFile ] """
+class TenderFileInline(admin.TabularInline):
+    model = TenderFile
+    extra = 1
+    max_num = 10
+
+@admin.register(TenderFile)
+class TenderFileAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.ModelAdmin):
+    pass
+""" [ END TenderFile ] """
+
+
 """ [ Tender ] """
 @admin.register(Tender)
 class TenderAdmin(TurnOffAdminLogging, admin.ModelAdmin):
+    inlines = [
+        TenderFileInline,
+    ]
+
     fieldsets = (
         (None, {
             'fields': ('active', 'title', 'category',)
@@ -169,5 +185,5 @@ class TenderAdmin(TurnOffAdminLogging, admin.ModelAdmin):
             'fields': ('duties', 'requirements', 'contacts',)
         }),
     )
-    list_display = ('title', 'category', 'date_start', 'date_end',)
+    list_display = ('title', 'category', 'active', 'date_start', 'date_end',)
 """ [ END Tender ] """

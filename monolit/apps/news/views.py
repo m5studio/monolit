@@ -37,5 +37,5 @@ class NewsDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['opts'] = News._meta
         context['news_images'] = NewsImage.objects.filter(news=self.get_object().pk)
-        context['other_news'] = News.objects.all().exclude(id=self.get_object().pk).order_by('?')[:6]
+        context['other_news'] = News.objects.filter(active=True).exclude(id=self.get_object().pk).order_by('?')[:6]
         return context

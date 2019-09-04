@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% load static %}
+{% load static custom_filters %}
 
 {% block body_classes %}{% spaceless %}
     {{ block.super }} company-tenders
@@ -68,10 +68,13 @@
                     {% for object in tenders %}
                         <div class="vacancy-card collapse-block">
                             <div class="vacancy-card__title-wrap">
+                                <div class="vacancy-card__status vacancy-card__status--active{% if object.active %} vacancy-card__status--active{% else %} vacancy-card__status--completed{% endif %}" title="Статус тендера: {% if object.active %}Активен{% else %}Завершен{% endif %}"></div>
+
                                 <a class="collapse-block__link" data-toggle="collapse" href="#vacancy-{{ object.id }}" aria-expanded="false" aria-controls="vacancy-{{ object.id }}">
                                     <span class="vacancy-card__title">{{ object.title }}</span>
                                     <span class="vacancy-card__experience"><strong>Сроки проведения:</strong> с {{ object.date_start|date:'d.m.Y H:i' }} до {{ object.date_end|date:'d.m.Y H:i' }}</span>
                                     <span class="vacancy-card__experience"><strong>Тип тендера:</strong> {{ object.get_category_display }}</span>
+                                    {# <span class="vacancy-card__experience"><strong>Статус:</strong>&nbsp;{% if object.active %}<span class="text-success">Активный</span>{% else %}<span class="text-muted">Завершен</span>{% endif %}</span> #}
                                 </a>
                             </div>
                             <div id="vacancy-{{ object.id }}" class="vacancy-card__descr collapse" data-parent="#vacancies-list-accordion">
@@ -87,14 +90,23 @@
                                         <div>{{ object.requirements|safe }}</div>
                                     </div>
                                 {% endif %}
-
+                                <!-- TODO:  -->
                                 <div class="mb-3">
                                     <p><strong>Файлы</strong></p>
                                     <div>
-                                        <a href="">Скачать все одним архивом</a>
+                                        <!-- {{ tender_files }} -->
+                                        {% for file in tender_files %}
+                                            {% if file.tender.id == object.id %}
+                                                <div>
+                                                    <a href="{{ file.file.url }}">{{ file.name }}{{ file.file.url|get_file_ext }}</a> ({{ file.file.size|bytes_to_mb|title }})
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                        <div>
+                                            <a href="">Скачать все одним архивом</a>
+                                        </div>
                                     </div>
                                 </div>
-
                                 {% if object.contacts %}
                                     <div>
                                         <p><strong>Контакты</strong></p>

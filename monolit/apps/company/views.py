@@ -7,7 +7,7 @@ from apps.company.models.job import JobBlock, JobVacancy
 from apps.company.models.history import History
 from apps.company.models.structure import Structure
 from apps.company.models.partner import Partner
-from apps.company.models.tender import Tender
+from apps.company.models.tender import Tender, TenderFile
 
 from apps.realty.models.object import Object
 
@@ -100,5 +100,6 @@ class CompanyTenders(TemplateView):
         context = super().get_context_data(**kwargs)
         context['page_tite'] = 'Тендеры'
         context['tenders_categories'] = Tender.CATEGORIES
-        context['tenders'] = Tender.objects.all().order_by('date_end')        
+        context['tenders'] = Tender.objects.all().order_by('-active', 'date_end')
+        context['tender_files'] = TenderFile.objects.all()
         return context

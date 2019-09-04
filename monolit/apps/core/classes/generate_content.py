@@ -132,7 +132,8 @@ class GenerateContent:
         title = f'Тендер {self.fake.word()} {self.fake.word()} {self.fake.word()} {self.fake.word()}'.title()
         tender_cregories_list = self.convert_tuple_to_flat_list(Tender.CATEGORIES)
 
-        tender = Tender(title=title, \
+        tender = Tender(active=self.fake.boolean(chance_of_getting_true=85), \
+                        title=title, \
                         category=self.fake.word(tender_cregories_list), \
                         duties=self.fake.text(600), \
                         requirements=self.fake.text(500), \

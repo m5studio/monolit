@@ -9,6 +9,7 @@
     &__title-wrap {
         background-color: white;
         padding: 15px;
+        position: relative;
     }
 
     .collapse-block__link {
@@ -26,6 +27,28 @@
                 width: 24px;
                 height: 24px;
             }
+        }
+    }
+
+    &__status {
+        display: block;
+        width: 15px;
+        height: 5px;
+
+        position: absolute;
+        top: 5px;
+        left: 0;
+
+        &--active {
+            background-color: #20bb74;
+        }
+
+        &--completed {
+            background-color: #CCC;
+        }
+
+        &:hover {
+            cursor: help;
         }
     }
 
