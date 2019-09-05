@@ -32,7 +32,7 @@ from apps.company.models.job import JobBlock, JobVacancy
 from apps.company.models.history import History
 from apps.company.models.structure import Structure
 from apps.company.models.partner import Partner
-from apps.company.models.tender import Tender
+from apps.company.models.tender import Tender, TenderFile
 
 
 DUMMY_IMG_NAME = 'dummy-image.jpg'
@@ -47,6 +47,9 @@ class GenerateContent:
 
     def _get_objects_ids_list(self) -> list:
         return list(Object.objects.order_by('id').values_list('id', flat=True))
+
+    def _get_tenders_ids_list(self) -> list:
+        return list(Tender.objects.order_by('id').values_list('id', flat=True))
 
     def convert_tuple_to_flat_list(self, tuple):
         return [x[0] for x in tuple]
@@ -142,6 +145,16 @@ class GenerateContent:
                         )
         tender.save()
         print(f'[Tender] {tender.title} created')
+
+
+    def _create_TenderFile(self, tender_id):
+        count_files_rel_to_tender = TenderFile.objects.annotate(Count('tender')).filter(tender=tender_id).count()
+
+        if count_files_rel_to_tender < 10:
+            tender = Tender.objects.get(pk=tender_id)
+            tender_file = TenderFile(tender=tender, name='Документ с описанием тенедера', file=DUMMY_DOC_NAME)
+            tender_file.save()
+            print(f'[TenderFile] for Tender {tender_file.tender} created')
 
 
     """ [News] """
@@ -336,7 +349,6 @@ class GenerateContent:
 
 
     """ [Object] """
-
     def _create_ObjectGalleryImage(self, gallery_id, qty: int):
         count_images_in_gallery = ObjectGalleryImage.objects.annotate(Count('gallery')).filter(gallery=gallery_id).count()
 
@@ -530,7 +542,7 @@ class GenerateContent:
         self._create_ObjectDocumentAuthor()
 
         for object_id in self._get_objects_ids_list():
-            self._create_ObjectDocument(object_id, 23)
+            self._create_ObjectDocument(object_id, 53)
 
         # 4. Fill Mortgage
         self._create_WayToBuy()
@@ -589,3 +601,7 @@ class GenerateContent:
         if self.countModelObjects(Tender) < 25:
             for _ in range(25):
                 self._create_Tender()
+
+        for tender_id in self._get_tenders_ids_list():
+            for _ in range(random.randrange(10)):
+                self._create_TenderFile(tender_id)

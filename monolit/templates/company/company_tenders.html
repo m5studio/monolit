@@ -90,23 +90,25 @@
                                         <div>{{ object.requirements|safe }}</div>
                                     </div>
                                 {% endif %}
-                                <!-- TODO:  -->
-                                <div class="mb-3">
-                                    <p><strong>Файлы</strong></p>
-                                    <div>
-                                        <!-- {{ tender_files }} -->
-                                        {% for file in tender_files %}
-                                            {% if file.tender.id == object.id %}
-                                                <div>
-                                                    <a href="{{ file.file.url }}">{{ file.name }}{{ file.file.url|get_file_ext }}</a> ({{ file.file.size|bytes_to_mb|title }})
-                                                </div>
-                                            {% endif %}
-                                        {% endfor %}
+                                {% if tender_files %}
+                                    <div class="mb-3">
+                                        <p><strong>Файлы</strong></p>
+                                        <hr>
                                         <div>
-                                            <a href="">Скачать все одним архивом</a>
+                                            {% for file in tender_files %}
+                                                {% if file.tender.id == object.id %}
+                                                    <div>
+                                                        <a href="{{ file.file.url }}" target="_blank">{{ file.name }}{{ file.file.url|get_file_ext }}</a> ({{ file.file.size|bytes_to_mb|title }})
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                            <div class="mt-2">
+                                                <a href="">Скачать все одним архивом</a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                    <hr>
+                                {% endif %}
                                 {% if object.contacts %}
                                     <div>
                                         <p><strong>Контакты</strong></p>

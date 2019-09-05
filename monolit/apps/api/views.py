@@ -4,6 +4,13 @@ from django.http import JsonResponse
 from apps.realty.models.object_site import ObjectSite
 from apps.realty.models.object_gallery import ObjectGallery, ObjectGalleryImage
 from apps.mortgage.models import Offer
+from apps.company.models.tender import Tender, TenderFile
+
+
+def mergeTwoDicts(dict1, dict2):
+    result = dict1.copy()
+    result.update(dict2)
+    return result
 
 
 # API for ObjectGallery
@@ -31,11 +38,6 @@ def api_object_sites_info(request, object_id):
     room_3 = object_sites.flats_info_aggregated(object_id, 3)
     room_4 = object_sites.flats_info_aggregated(object_id, 4)
 
-    def mergeTwoDicts(dict1, dict2):
-        result = dict1.copy()
-        result.update(dict2)
-        return result
-
     sites_info = list()
     sites_info.extend([object_sites_info,
                         {'flats_info': [
@@ -61,6 +63,30 @@ def api_mortgage_offer(request, offer_id):
     mortgage_offer = Offer.objects.filter(id=offer_id).values('id', 'first_payment_from', 'first_payment_to', 'loan_term_from', 'loan_term_to', 'rate_from', 'rate_to')
     mortgage_offer = list(mortgage_offer)
     return JsonResponse(mortgage_offer, safe=False)
+
+
+def api_tender(request):
+    tenders = Tender.objects.all().values('id', 'active', 'title', 'category', 'duties', 'requirements', 'contacts', 'date_start', 'date_end')
+    tenders = list(tenders)
+
+    tenders_files = TenderFile.objects.all().values('tender', 'name', 'file')
+    tenders_files = list(tenders_files)
+
+    tenders_info = list()
+
+    for tender in tenders:
+        # print(tender)
+        # print(tender['id'])
+
+        files_rel_to_tender = list()
+
+        for file in tenders_files:
+            if file['tender'] == tender['id']:
+                files_rel_to_tender.append(file)
+
+        tenders_info.extend([{'tender': tender}, {'files': files_rel_to_tender}])
+
+    return JsonResponse(tenders_info, safe=False)
 
 
 # def requestAjax(request, object_id):
