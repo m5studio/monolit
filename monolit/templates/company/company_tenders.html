@@ -56,12 +56,14 @@
 
             <div id="section-vacancies-list__inner" class="container">
                 {% if tenders_categories %}
-                    <select>
-                        <option value="all">- Все виды работ -</option>
-                        {% for category in tenders_categories %}
-                            <option value="{{ category.0 }}">{{ category.1 }}</option>
-                        {% endfor %}
-                    </select>
+                    <form method="get">
+                        <select name="tender_category" onchange='if(this.value != "all") { this.form.submit() }'>
+                            <option value="all">- Все виды работ -</option>
+                            {% for category in tenders_categories %}
+                                <option value="{{ category.0 }}"{% if request.GET.tender_category == category.0 %} selected{% endif %}>{{ category.1 }}</option>
+                            {% endfor %}
+                        </select>
+                    </form>
                     <br><br>
                 {% endif %}
                 <div id="vacancies-list-accordion">
