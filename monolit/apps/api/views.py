@@ -65,34 +65,12 @@ def api_mortgage_offer(request, offer_id):
     return JsonResponse(mortgage_offer, safe=False)
 
 
-def api_tender(request):
-    tenders = Tender.objects.all().values('id', 'active', 'title', 'category', 'duties', 'requirements', 'contacts', 'date_start', 'date_end')
-    tenders = list(tenders)
-
-    tenders_files = TenderFile.objects.all().values('tender', 'name', 'file')
-    tenders_files = list(tenders_files)
-
-    tenders_info = list()
-
-    for tender in tenders:
-        # print(tender)
-        # print(tender['id'])
-
-        files_rel_to_tender = list()
-
-        for file in tenders_files:
-            if file['tender'] == tender['id']:
-                files_rel_to_tender.append(file)
-
-        tenders_info.extend([{'tender': tender}, {'files': files_rel_to_tender}])
-
-    return JsonResponse(tenders_info, safe=False)
-
-
-# def requestAjax(request, object_id):
-#     data = 'nothing'
-#     if request.is_ajax():
-#         # data = ObjectDocument.objects.filter(object=object_id).values('title', 'author__name', 'date', 'file')
-#         data = ObjectDocument.objects.filter(object=object_id).values('title', 'author__name', 'date', 'file')[:9]
-#         data = list(data)
-#     return JsonResponse(data, safe=False)
+"""
+def requestAjax(request, object_id):
+    data = 'nothing'
+    if request.is_ajax():
+        # data = ObjectDocument.objects.filter(object=object_id).values('title', 'author__name', 'date', 'file')
+        data = ObjectDocument.objects.filter(object=object_id).values('title', 'author__name', 'date', 'file')[:9]
+        data = list(data)
+    return JsonResponse(data, safe=False)
+"""

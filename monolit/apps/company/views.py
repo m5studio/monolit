@@ -1,5 +1,7 @@
 from django.views.generic import TemplateView
 
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 from apps.company.models.certificate import Certificate
 from apps.company.models.management import Management
 from apps.company.models.responsibility import Responsibility
@@ -100,6 +102,20 @@ class CompanyTenders(TemplateView):
         context = super().get_context_data(**kwargs)
         context['page_tite'] = 'Тендеры'
         context['tenders_categories'] = Tender.CATEGORIES
-        context['tenders'] = Tender.objects.all().order_by('-active', 'date_end')
+
+        # context['tenders'] = Tender.objects.all().order_by('-active', 'date_end')
         context['tender_files'] = TenderFile.objects.all()
+
+        # Object Documents Pagination
+        context['tenders'] = Tender.objects.all().order_by('-active', 'date_end')
+        paginator = Paginator(context['tenders'], 10)
+        page_docs = self.request.GET.get('page')
+        try:
+            context['tenders'] = paginator.page(page_docs)
+        except PageNotAnInteger:
+            context['tenders'] = paginator.page(1)
+        except EmptyPage:
+            context['tenders'] = paginator.page(paginator.num_pages)
+        # END Object Documents Pagination
+
         return context

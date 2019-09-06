@@ -6,7 +6,6 @@ from apps.api.views import (
     api_object_sites_info,
     api_object_site,
     api_mortgage_offer,
-    api_tender,
 
     # requestAjax
 )
@@ -21,7 +20,6 @@ urlpatterns = [
         path('object-sites-info/<int:object_id>/', api_object_sites_info, name='object-sites-info'),
         path('site/<int:site_id>/', api_object_site, name='site-info'),
         path('mortgage-offer/<int:offer_id>/', api_mortgage_offer, name='mortgage-offer'),
-        path('tenders/', api_tender, name='tenders'),
     ])),
 
     # path('object-docs/<int:object_id>/', requestAjax, name='docs')
