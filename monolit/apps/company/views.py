@@ -102,12 +102,11 @@ class CompanyTenders(TemplateView):
         context = super().get_context_data(**kwargs)
         context['page_tite'] = 'Тендеры'
         context['tenders_categories'] = Tender.CATEGORIES
-
-        # context['tenders'] = Tender.objects.all().order_by('-active', 'date_end')
         context['tender_files'] = TenderFile.objects.all()
 
         # Object Documents Pagination
         context['tenders'] = Tender.objects.all().order_by('-active', 'date_end')
+
         paginator = Paginator(context['tenders'], 10)
         page_docs = self.request.GET.get('page')
         try:
