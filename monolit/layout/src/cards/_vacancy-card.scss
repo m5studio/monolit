@@ -79,6 +79,24 @@
         }
     }
 
+    .download-tender-files {
+        .download-tender-file {}
+
+        a.download-all-tender-files-in-one-archive {
+            background-image: linear-gradient(180deg, #00b9ad, #008e84);
+            color: white;
+            display: inline-block;
+            padding: 5px 10px;
+            line-height: 1.2;
+
+            &:focus,
+            &:hover {
+                background-image: linear-gradient(180deg, #00ccbf, #008e84);
+                text-decoration: none;
+            }
+        }
+    }
+
     &:hover {
         opacity: 1;
 

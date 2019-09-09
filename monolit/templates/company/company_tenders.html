@@ -57,7 +57,7 @@
             <div id="section-vacancies-list__inner" class="container">
                 {% if tenders_categories %}
                     <form method="get">
-                        <!-- <select name="tender_category" onchange='if(this.value != "all") { this.form.submit() }'> -->
+                        <!-- {# <select name="tender_category" onchange='if(this.value != "all") { this.form.submit() }'> #} -->
                         <select name="tender_category">
                             <option value="all">- Все виды работ -</option>
                             {% for category in tenders_categories %}
@@ -94,19 +94,20 @@
                                     </div>
                                 {% endif %}
                                 {% if tender_files %}
+                                    <hr>
                                     <div class="mb-3">
                                         <p><strong>Файлы</strong></p>
-                                        <hr>
-                                        <div>
+                                        <div class="download-tender-files">
                                             {% for file in tender_files %}
                                                 {% if file.tender.id == object.id %}
-                                                    <div>
-                                                        <a href="{{ file.file.url }}" target="_blank">{{ file.name }}{{ file.file.url|get_file_ext }}</a> ({{ file.file.size|bytes_to_mb|title }})
+                                                    <div class="download-tender-file">
+                                                        <a href="{{ file.file.url }}" target="_blank">{{ file.name }}{{ file.file.url|get_file_ext }}</a>&nbsp;<em class="text-muted">({{ file.file.size|bytes_to_mb|title }})</em>
                                                     </div>
                                                 {% endif %}
                                             {% endfor %}
+                                            <!-- TODO:  -->
                                             <div class="mt-2">
-                                                <a href="">Скачать все одним архивом</a>
+                                                <a class="download-all-tender-files-in-one-archive" href="" title="Загрузить все файлы одним .zip архивом">Скачать одним архивом <em>.zip (5.7 Mb)</em></a>
                                             </div>
                                         </div>
                                     </div>

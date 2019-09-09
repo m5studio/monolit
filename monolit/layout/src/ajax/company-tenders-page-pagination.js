@@ -17,7 +17,6 @@ function selectTenderCategory() {
     })
 }
 
-
 function companyTendersPagination() {
     $('#tenders-pagination a.page-link').each((index, el) => {
         $(el).click((e) => {
