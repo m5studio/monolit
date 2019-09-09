@@ -57,10 +57,11 @@
             <div id="section-vacancies-list__inner" class="container">
                 {% if tenders_categories %}
                     <form method="get">
-                        <select name="tender_category" onchange='if(this.value != "all") { this.form.submit() }'>
+                        <!-- <select name="tender_category" onchange='if(this.value != "all") { this.form.submit() }'> -->
+                        <select name="tender_category">
                             <option value="all">- Все виды работ -</option>
                             {% for category in tenders_categories %}
-                                <option value="{{ category.0 }}"{% if request.GET.tender_category == category.0 %} selected{% endif %}>{{ category.1 }}</option>
+                                <option value="{{ category.0 }}"{% if request.GET.tender_category == category.0 %} selected{% endif %} data-page_url="{% url 'company:tenders' %}?tender_category={{ category.0 }}">{{ category.1 }}</option>
                             {% endfor %}
                         </select>
                     </form>
@@ -126,7 +127,7 @@
                             <ul class="pagination">
                                 {% if tenders.has_previous %}
                                     <li class="page-item">
-                                        <a class="page-link" href="?page={{ tenders.previous_page_number }}">&lt;</a>
+                                        <a class="page-link" href="?page={{ tenders.previous_page_number }}{% if request.GET.tender_category %}&tender_category={{ request.GET.tender_category }}{% endif %}">&lt;</a>
                                     </li>
                                 {% else %}
                                     <li class="page-item disabled">
@@ -135,28 +136,28 @@
                                 {% endif %}
                                 {% if tenders.number|add:'-4' > 1 %}
                                     <li class="page-item">
-                                        <a class="page-link" href="?page={{ tenders.number|add:'-5' }}">&hellip;</a>
+                                        <a class="page-link" href="?page={{ tenders.number|add:'-5' }}{% if request.GET.tender_category %}&tender_category={{ request.GET.tender_category }}{% endif %}">&hellip;</a>
                                     </li>
                                 {% endif %}
                                 {% for i in tenders.paginator.page_range %}
                                     {% if tenders.number == i %}
                                         <li class="page-item active">
-                                            <a class="page-link" href="{{ request.path }}?page={{ i }}">{{ i }}</a>
+                                            <a class="page-link" href="{{ request.path }}?page={{ i }}{% if request.GET.tender_category %}&tender_category={{ request.GET.tender_category }}{% endif %}">{{ i }}</a>
                                         </li>
                                     {% elif i > tenders.number|add:'-5' and i < tenders.number|add:'5' %}
                                         <li class="page-item">
-                                            <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                                            <a class="page-link" href="?page={{ i }}{% if request.GET.tender_category %}&tender_category={{ request.GET.tender_category }}{% endif %}">{{ i }}</a>
                                         </li>
                                     {% endif %}
                                 {% endfor %}
                                 {% if tenders.paginator.num_pages > tenders.number|add:'4' %}
                                     <li class="page-item">
-                                        <a class="page-link" href="?page={{ tenders.number|add:'5' }}">&hellip;</a>
+                                        <a class="page-link" href="?page={{ tenders.number|add:'5' }}{% if request.GET.tender_category %}&tender_category={{ request.GET.tender_category }}{% endif %}">&hellip;</a>
                                     </li>
                                 {% endif %}
                                 {% if tenders.has_next %}
                                     <li class="page-item">
-                                        <a class="page-link" href="?page={{ tenders.next_page_number }}">&gt;</a>
+                                        <a class="page-link" href="?page={{ tenders.next_page_number }}{% if request.GET.tender_category %}&tender_category={{ request.GET.tender_category }}{% endif %}">&gt;</a>
                                     </li>
                                 {% else %}
                                     <li class="page-item disabled">

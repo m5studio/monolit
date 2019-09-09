@@ -102,6 +102,7 @@ class CompanyTenders(TemplateView):
 
     def get(self, request, *args, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['page_tite'] = 'Тендеры'
 
         context['tenders_categories'] = Tender.CATEGORIES
         context['tender_files'] = TenderFile.objects.all()
@@ -113,7 +114,7 @@ class CompanyTenders(TemplateView):
             context['tenders'] = Tender.objects.all().order_by('-active', 'date_end')
 
         # Object Documents Pagination
-        paginator = Paginator(context['tenders'], 10)
+        paginator = Paginator(context['tenders'], 2)
         page_docs = self.request.GET.get('page')
         try:
             context['tenders'] = paginator.page(page_docs)
@@ -125,22 +126,22 @@ class CompanyTenders(TemplateView):
 
         return render(request, self.template_name, context)
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['page_tite'] = 'Тендеры'
-        # context['tenders_categories'] = Tender.CATEGORIES
-        # context['tender_files'] = TenderFile.objects.all()
-        # context['tenders'] = Tender.objects.all().order_by('-active', 'date_end')
-
-        # # Object Documents Pagination
-        # paginator = Paginator(context['tenders'], 10)
-        # page_docs = self.request.GET.get('page')
-        # try:
-        #     context['tenders'] = paginator.page(page_docs)
-        # except PageNotAnInteger:
-        #     context['tenders'] = paginator.page(1)
-        # except EmptyPage:
-        #     context['tenders'] = paginator.page(paginator.num_pages)
-        # # END Object Documents Pagination
-
-        return context
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     # context['page_tite'] = 'Тендеры'
+    #     # context['tenders_categories'] = Tender.CATEGORIES
+    #     # context['tender_files'] = TenderFile.objects.all()
+    #     # context['tenders'] = Tender.objects.all().order_by('-active', 'date_end')
+    #
+    #     # # Object Documents Pagination
+    #     # paginator = Paginator(context['tenders'], 10)
+    #     # page_docs = self.request.GET.get('page')
+    #     # try:
+    #     #     context['tenders'] = paginator.page(page_docs)
+    #     # except PageNotAnInteger:
+    #     #     context['tenders'] = paginator.page(1)
+    #     # except EmptyPage:
+    #     #     context['tenders'] = paginator.page(paginator.num_pages)
+    #     # # END Object Documents Pagination
+    #
+    #     return context
