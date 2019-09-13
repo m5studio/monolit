@@ -19,7 +19,7 @@ function getCookie(name) {
     }
     return cookieValue
 }
-let csrftoken = getCookie('csrftoken')
+const csrftoken = getCookie('csrftoken')
 
 // Setup ajax connections safetly
 function csrfSafeMethod(method) {
