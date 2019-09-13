@@ -122,7 +122,7 @@ class CompanyTenders(TemplateView):
 
             import os
             import zipfile
-            from django.http import HttpResponse
+            from django.http import HttpResponse, FileResponse
             from django.conf import settings
 
             # file_list = ['../js_zip/files/bill_28th_june.pdf', '../js_zip/files/photo.jpg']
@@ -131,13 +131,28 @@ class CompanyTenders(TemplateView):
             #     for name in file_list:
             #         new_zip.write(name)
 
-            # with zipfile.ZipFile('new.zip', 'w') as new_zip:
-            #     for name in file_list:
-            #         new_zip.write(name)
+            file_paths = list()
 
+            # for root, directories, files in os.walk( os.path.join(settings.BASE_DIR, 'media') ):
+            for root, directories, files in os.walk( './media' ):
+                for filename in files:
+                    filepath = os.path.join(root, filename)
+                    file_paths.append(filepath)
+                    print(filepath)
+
+            with zipfile.ZipFile('my_files.zip','w') as zip:
+                # writing each file one by one
+                for file in file_paths:
+                    zip.write(file)
+
+                response = HttpResponse(zip, content_type='application/force-download')
+                response['Content-Disposition'] = 'attachment; filename="{filename}"'.format(filename=zip.filename)
+                return response
+
+            '''
             with zipfile.ZipFile('sampleDir.zip', 'w') as zipObj:
                 # Iterate over all the files in directory
-                for folderName, subfolders, filenames in os.walk( os.path.join(settings.BASE_DIR, 'media') ):
+                for folderName, subfolders, filenames in os.walk( folder ):
                     for filename in filenames:
                         print(filename)
                         # create complete filepath of file in directory
@@ -145,9 +160,10 @@ class CompanyTenders(TemplateView):
                         # Add file to zip
                         zipObj.write(filePath)
 
-                        response = HttpResponse(zipObj, content_type='application/force-download')
-                        response['Content-Disposition'] = 'attachment; filename="%s"' % zipObj.filename
-                        return response
+            response = HttpResponse(zipObj, content_type='application/force-download')
+            response['Content-Disposition'] = 'attachment; filename="%s"' % zipObj.filename
+            return response
+            '''
 
 
         # Object Documents Pagination
