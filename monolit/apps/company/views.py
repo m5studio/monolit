@@ -129,7 +129,9 @@ class CompanyTenders(TemplateView):
             with zipfile.ZipFile(response, 'w') as zip:
                 # writing each file one by one
                 for file in file_paths:
-                    zip.write(file)
+                    # zip.write(file)
+                    # basename to avoide directory structure
+                    zip.write(file, os.path.basename(file))
 
                 # response = HttpResponse(zip, content_type='application/octet-stream')
                 # response = HttpResponse(zip, content_type='application/x-zip-compressed')
