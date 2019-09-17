@@ -115,26 +115,22 @@ class CompanyTenders(TemplateView):
         get_request_tender_id = request.GET.get('download-all-tender-files')
         if get_request_tender_id:
             file_paths = list()
-
-            # for root, directories, files in os.walk( './media/' ):
             for root, directories, files in os.walk( './media/company/tenders/{}'.format(get_request_tender_id) ):
                 for filename in files:
                     filepath = os.path.join(root, filename)
                     file_paths.append(filepath)
-                    print(filepath)
 
             response = HttpResponse(content_type='application/zip')
+            # response = HttpResponse(zip, content_type='application/octet-stream')
+            # response = HttpResponse(zip, content_type='application/x-zip-compressed')
+
             zip_file = zipfile.ZipFile(response, 'w')
 
             with zipfile.ZipFile(response, 'w') as zip:
                 # writing each file one by one
                 for file in file_paths:
-                    # zip.write(file)
-                    # basename to avoide directory structure
+                    # basename to avoid directory structure
                     zip.write(file, os.path.basename(file))
-
-                # response = HttpResponse(zip, content_type='application/octet-stream')
-                # response = HttpResponse(zip, content_type='application/x-zip-compressed')
 
                 new_filename = 'monolit_tender_{}.zip'.format(get_request_tender_id)
                 response['Content-Disposition'] = 'attachment; filename="{filename}"'.format(filename=new_filename)

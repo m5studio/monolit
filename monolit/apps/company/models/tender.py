@@ -14,21 +14,6 @@ from apps.core.classes.file_processing import FileProcessing
 from apps.core.classes.image_optimizer import ImageOptimizer
 
 
-"""
-# TODO:
-1. Model TenderFile
-    x tender
-    x name
-    x file
-
-2. TenderFiles Inline to Tender
-
-3. Tender + TenderFiles to API
-
-4. JS combine all files in one .zip archive
-"""
-
-
 class Tender(models.Model):
     CATEGORIES = (
         ('construction', 'Строительство'),

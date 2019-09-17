@@ -104,11 +104,16 @@
                                                     </div>
                                                 {% endif %}
                                             {% endfor %}
-                                            <!-- TODO:  -->
-                                            <div class="mt-3">
-                                                <!-- <a class="download-all-tender-files-in-one-archive" href="" title="Загрузить все файлы одним .zip архивом">Скачать одним архивом <em>.zip (5.7 Mb)</em></a> -->
-                                                <a class="download-all-tender-files-in-one-archive" href="?download-all-tender-files={{ object.id }}" title="Загрузить все файлы одним .zip архивом">Скачать одним архивом <em>.zip (5.7 Mb)</em></a>                                                
-                                            </div>
+
+                                            {% with object.id|stringformat:"s" as obj_id_string %}
+                                            {% with "./media/company/tenders/"|add:obj_id_string|add:"/"|get_folder_size as tender_folder_size %}
+                                                {% if tender_folder_size > 0 %}
+                                                    <div class="mt-3">
+                                                        <a class="download-all-tender-files-in-one-archive" href="?download-all-tender-files={{ object.id }}" title="Загрузить все файлы одним .zip архивом">Скачать одним архивом <em>(.zip {{ tender_folder_size|bytes_to_mb|title }})</em></a>
+                                                    </div>
+                                                {% endif %}
+                                            {% endwith %}
+                                            {% endwith %}
                                         </div>
                                     </div>
                                     <hr>
