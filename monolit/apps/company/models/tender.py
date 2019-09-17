@@ -4,9 +4,6 @@ from django.db import models
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
 
-from apps.core.classes.clean_media import CleanMedia
-from apps.core.classes.file_processing import FileProcessing
-
 from ckeditor.fields import RichTextField
 
 from apps.core.classes.clean_media import CleanMedia

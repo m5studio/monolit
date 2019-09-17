@@ -3,6 +3,9 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
+from apps.core.classes.file_processing import FileProcessing
+
 from apps.company.models.certificate import Certificate
 from apps.company.models.management import Management
 from apps.company.models.responsibility import Responsibility
@@ -121,8 +124,8 @@ class CompanyTenders(TemplateView):
                     file_paths.append(filepath)
 
             response = HttpResponse(content_type='application/zip')
-            # response = HttpResponse(zip, content_type='application/octet-stream')
-            # response = HttpResponse(zip, content_type='application/x-zip-compressed')
+            # response = HttpResponse(content_type='application/octet-stream')
+            # response = HttpResponse(content_type='application/x-zip-compressed')
 
             zip_file = zipfile.ZipFile(response, 'w')
 
@@ -132,7 +135,15 @@ class CompanyTenders(TemplateView):
                     # basename to avoid directory structure
                     zip.write(file, os.path.basename(file))
 
-                new_filename = 'monolit_tender_{}.zip'.format(get_request_tender_id)
+                # new_filename = 'monolit_tender_{}.zip'.format(get_request_tender_id)
+
+                tender_title = Tender.objects.filter(id=get_request_tender_id).values_list('title', flat=True)
+                # print(tender_title[0])
+                filename = FileProcessing(tender_title[0])
+                # filename = filename.newFileNameTranslitSlugify().title()
+                filename = filename.translitFileName().title() 
+                new_filename = '[monolit.site] tender_{id} {filename}.zip'.format(filename=filename, id=get_request_tender_id)
+
                 response['Content-Disposition'] = 'attachment; filename="{filename}"'.format(filename=new_filename)
                 return response
         # END Download all files related to tender
