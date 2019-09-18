@@ -1,8 +1,8 @@
-import os
-
 """
     Some useful utilities to work with files
 """
+
+import os
 
 
 class FileUtils:

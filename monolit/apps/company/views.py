@@ -13,7 +13,7 @@ from apps.company.models.job import JobBlock, JobVacancy
 from apps.company.models.history import History
 from apps.company.models.structure import Structure
 from apps.company.models.partner import Partner
-from apps.company.models.tender import Tender, TenderFile
+from apps.company.models.tender import Tender, TenderFile, TenderFaq
 from apps.realty.models.object import Object
 
 
@@ -67,7 +67,7 @@ class CompanyJobView(TemplateView):
         return context
 
 
-class CompanyHistory(TemplateView):
+class CompanyHistoryView(TemplateView):
     template_name = 'company/company_history.html'
 
     def get_context_data(self, **kwargs):
@@ -77,7 +77,7 @@ class CompanyHistory(TemplateView):
         return context
 
 
-class CompanyStructure(TemplateView):
+class CompanyStructureView(TemplateView):
     template_name = 'company/company_structure.html'
 
     def get_context_data(self, **kwargs):
@@ -87,18 +87,18 @@ class CompanyStructure(TemplateView):
         return context
 
 
-class CompanyPartnership(TemplateView):
+class CompanyPartnershipView(TemplateView):
     template_name = 'company/company_partnership.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['page_tite'] = 'Партнерская программа'
         context['partners'] = Partner.objects.all().order_by('order')
-        context['objects_partnership'] = Object.objects.filter(active=True, partnership=True).order_by('?')
+        context['objects_partnership'] = Object.objects.filter(active=True, all_sold=False, partnership=True).order_by('?')
         return context
 
 
-class CompanyTenders(TemplateView):
+class CompanyTendersView(TemplateView):
     template_name = 'company/company_tenders.html'
 
     def get(self, request, *args, **kwargs):
@@ -135,13 +135,11 @@ class CompanyTenders(TemplateView):
                     # basename to avoid directory structure
                     zip.write(file, os.path.basename(file))
 
-                # new_filename = 'monolit_tender_{}.zip'.format(get_request_tender_id)
-
+                # Get tender title
                 tender_title = Tender.objects.filter(id=get_request_tender_id).values_list('title', flat=True)
-                # print(tender_title[0])
                 filename = FileProcessing(tender_title[0])
-                # filename = filename.newFileNameTranslitSlugify().title()
-                filename = filename.translitFileName().title() 
+                filename = filename.translitFileName().title()
+                # Formatting filename
                 new_filename = '[monolit.site] tender_{id} {filename}.zip'.format(filename=filename, id=get_request_tender_id)
 
                 response['Content-Disposition'] = 'attachment; filename="{filename}"'.format(filename=new_filename)
@@ -160,3 +158,13 @@ class CompanyTenders(TemplateView):
         # END Object Documents Pagination
 
         return render(request, self.template_name, context)
+
+
+class CompanyTendersFaqView(TemplateView):
+    template_name = 'company/company_tenders_faq.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page_tite'] = 'Вопросы-Ответы по Тендерам'
+        context['tenders_faq'] = TenderFaq.objects.filter(active=True).order_by('order')
+        return context

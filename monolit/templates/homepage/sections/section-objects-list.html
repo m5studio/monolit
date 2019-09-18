@@ -14,11 +14,13 @@
             {% endfor %}
         {% endif %}
 
-        {% if objects_sold %}
-            {% for object in objects_sold %}
-                {% include 'realty/cards/object-card.html' %}
-            {% endfor %}
-        {% endif %}
+        {% comment %}
+            <!-- {% if objects_sold %}
+                {% for object in objects_sold %}
+                    {% include 'realty/cards/object-card.html' %}
+                {% endfor %}
+            {% endif %} -->
+        {% endcomment %}
     </div>
     <div id="section-objects-list__see-all">
         <a href="{% url 'object:list' %}" class="green-button">Посмотреть все объекты</a>

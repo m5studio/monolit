@@ -32,7 +32,7 @@ from apps.company.models.job import JobBlock, JobVacancy
 from apps.company.models.history import History
 from apps.company.models.structure import Structure
 from apps.company.models.partner import Partner
-from apps.company.models.tender import Tender, TenderFile
+from apps.company.models.tender import Tender, TenderFile, TenderFaq
 
 
 DUMMY_IMG_NAME = 'dummy-image.jpg'
@@ -155,6 +155,13 @@ class GenerateContent:
             tender_file = TenderFile(tender=tender, name='Документ с описанием тенедера', file=DUMMY_DOC_NAME)
             tender_file.save()
             print(f'[TenderFile] for Tender {tender_file.tender} created')
+
+
+    def _create_TenderFaq(self):
+        question = f'Вопрос {self.fake.word()} {self.fake.word()} {self.fake.word()} {self.fake.word()} {self.fake.word()}'.title()
+        tender_faq = TenderFaq(question=question, answer=self.fake.text(600))
+        tender_faq.save()
+        print(f'[TenderFaq] {tender_faq.question} created')
 
 
     """ [News] """
@@ -605,3 +612,7 @@ class GenerateContent:
         for tender_id in self._get_tenders_ids_list():
             for _ in range(random.randrange(10)):
                 self._create_TenderFile(tender_id)
+
+        if self.countModelObjects(TenderFaq) < 30:
+            for _ in range(30):
+                self._create_TenderFaq()

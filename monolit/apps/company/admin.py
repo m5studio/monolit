@@ -10,7 +10,7 @@ from apps.company.models.job import JobBlock, JobVacancy
 from apps.company.models.history import History
 from apps.company.models.structure import Structure
 from apps.company.models.partner import Partner
-from apps.company.models.tender import Tender, TenderFile
+from apps.company.models.tender import Tender, TenderFile, TenderFaq
 
 
 """ [ Certificate ] """
@@ -187,3 +187,10 @@ class TenderAdmin(TurnOffAdminLogging, admin.ModelAdmin):
     )
     list_display = ('title', 'category', 'active', 'date_start', 'date_end',)
 """ [ END Tender ] """
+
+
+""" [ TenderFaq ] """
+@admin.register(TenderFaq)
+class TenderFaqAdmin(TurnOffAdminLogging, admin.ModelAdmin):
+    pass
+""" [ END TenderFaq ] """

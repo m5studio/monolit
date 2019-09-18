@@ -7,6 +7,7 @@
         ...
 """
 
+
 class TurnOffAdminLogging:
     def log_addition(self, *args):
         return

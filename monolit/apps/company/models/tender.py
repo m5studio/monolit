@@ -56,6 +56,20 @@ class TenderFile(models.Model):
         verbose_name_plural = 'Тендеры (Файлы)'
 
 
+class TenderFaq(models.Model):
+    active   = models.BooleanField('Активный', default=True, help_text='Является ли данный вопрос-ответ активным?')
+    order    = models.PositiveIntegerField('Порядок', default=0, blank=True, null=True, help_text='Чем выше число, тем ниже вопрос в списке')
+    question = models.CharField('Вопрос', max_length=255)
+    answer   = RichTextField('Ответ', blank=True, null=True)
+
+    def __str__(self):
+        return self.question
+
+    class Meta:
+        verbose_name = 'Вопрос-ответ по Тендерам'
+        verbose_name_plural = 'Тендеры (Вопросы-ответы)'
+
+
 @receiver(post_delete, sender=TenderFile)
 def clean_empty_media_dirs(sender, instance, **kwargs):
     cleanMedia = CleanMedia()

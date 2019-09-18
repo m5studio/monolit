@@ -6,10 +6,11 @@ from apps.company.views import (
     CompanyManagementView,
     CompanyResponsibilityView,
     CompanyJobView,
-    CompanyHistory,
-    CompanyStructure,
-    CompanyPartnership,
-    CompanyTenders,
+    CompanyHistoryView,
+    CompanyStructureView,
+    CompanyPartnershipView,
+    CompanyTendersView,
+    CompanyTendersFaqView,
 )
 
 
@@ -22,9 +23,10 @@ urlpatterns = [
         path('management/', CompanyManagementView.as_view(), name='management'),
         path('responsibility/', CompanyResponsibilityView.as_view(), name='responsibility'),
         path('job/', CompanyJobView.as_view(), name='job'),
-        path('history/', CompanyHistory.as_view(), name='history'),
-        path('structure/', CompanyStructure.as_view(), name='structure'),
-        path('partnership/', CompanyPartnership.as_view(), name='partnership'),
-        path('tenders/', CompanyTenders.as_view(), name='tenders'),
+        path('history/', CompanyHistoryView.as_view(), name='history'),
+        path('structure/', CompanyStructureView.as_view(), name='structure'),
+        path('partnership/', CompanyPartnershipView.as_view(), name='partnership'),
+        path('tenders/', CompanyTendersView.as_view(), name='tenders'),
+        path('tenders/faq/', CompanyTendersFaqView.as_view(), name='tenders-faq'),
     ])),
 ]

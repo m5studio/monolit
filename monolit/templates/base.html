@@ -103,53 +103,77 @@
                     {% endfor %}
                 </ul>
             </div>
-            <div id="footer-commercial" class="footer-block">
+
+            <div id="footer-site-nav" class="footer-block">
                 <ul class="footer-block__menu-list">
+                    <!-- TODO:  -->
                     <li class="footer-block__menu-item">
                         <a href="">Коммерческая недвижимость</a>
                     </li>
-                    <li class="footer-block__menu-item">
-                        <a href="">Выбор квартиры</a>
+
+                    {% url 'object:site-list' as objects_site_list_url %}
+                    <li class="footer-block__menu-item{% if objects_site_list_url == request.path %} active{% endif %}">
+                        <a href="{{ objects_site_list_url }}">Выбор квартиры</a>
                     </li>
-                    <li class="footer-block__menu-item">
-                        <a href="">Как купить</a>
+
+                    {% url 'mortgage:mortgage' as mortgage_url %}
+                    <li class="footer-block__menu-item{% if mortgage_url == request.path %} active{% endif %}">
+                        <a href="{{ mortgage_url }}">Ипотека</a>
                     </li>
+
+                    <!-- TODO:  -->
                     <li class="footer-block__menu-item">
                         <a href="">Дисконт на ремонт</a>
                     </li>
-                    <li class="footer-block__menu-item">
-                        <a href="">Партнерам</a>
+
+                    {% url 'company:partnership' as company_partnership_url %}
+                    <li class="footer-block__menu-item{% if company_partnership_url == request.path %} active{% endif %}">
+                        <a href="{{ company_partnership_url }}">Партнерам</a>
                     </li>
-                    <li class="footer-block__menu-item">
-                        <a href="">Тендеры</a>
+
+                    {% url 'company:tenders' as company_tenders_url %}
+                    <li class="footer-block__menu-item{% if company_tenders_url == request.path %} active{% endif %}">
+                        <a href="{{ company_tenders_url }}">Тендеры</a>
                     </li>
                 </ul>
             </div>
+
             <div id="footer-about" class="footer-block">
+                {% url 'company:company' as company_url %}
                 <div class="footer-block__title">
-                    <a href="">О компании</a>
+                    <a href="{{ company_url }}">О компании</a>
                 </div>
                 <ul class="footer-block__menu-list">
-                    <li class="footer-block__menu-item">
-                        <a href="">Новости</a>
+                    {% url 'news:list' as news_list %}
+                    <li class="footer-block__menu-item{% if news_list == request.path or news_list in request.path %} active{% endif %}">
+                        <a href="{{ news_list }}">Новости</a>
+                    </li>
+
+                    {% url 'company:job' as company_job_url %}
+                    <li class="footer-block__menu-item{% if company_job_url == request.path %} active{% endif %}">
+                        <a href="{{ company_job_url }}">Вакансии</a>
                     </li>
                     <li class="footer-block__menu-item">
-                        <a href="">Вакансии</a>
+                        <a href="{{ company_job_url }}#section-job-reserves">Трудовые резервы</a>
                     </li>
-                    <li class="footer-block__menu-item">
-                        <a href="">Трудовые резервы</a>
-                    </li>
+
+                    <!-- TODO:  -->
                     <li class="footer-block__menu-item">
                         <a href="">Контакты</a>
                     </li>
+
+                    <!-- TODO:  -->
                     <li class="footer-block__menu-item">
-                        <a href="">Правила обработки персональных данных</a>
+                        <a href="">Обработка персональных данных</a>
                     </li>
+
+                    <!-- TODO:  -->
                     <li class="footer-block__menu-item">
                         <a href="">Политика конфиденциальности</a>
                     </li>
                 </ul>
             </div>
+
             <div id="footer-contacts" class="footer-block">
                 <div id="footer-contacts__phones">
                     <a href="tel:+78003028808" title="Позвонить">8 (800) 302-88-08</a>

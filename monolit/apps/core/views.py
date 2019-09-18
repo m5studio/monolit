@@ -13,7 +13,7 @@ class HomepageView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['object_list'] = Object.objects.filter(active=True, all_sold=False).order_by('order')
         context['objects_qty'] = Object.objects.filter(active=True, all_sold=False).count()
-        context['objects_sold'] = Object.objects.filter(active=True, all_sold=True).order_by('order')
+        # context['objects_sold'] = Object.objects.filter(active=True, all_sold=True).order_by('order')
         context['mortgage_offers'] = Offer.objects.order_by('?')[:5]
         context['news_list'] = News.objects.filter(active=True).order_by('-updated')[:5]
 

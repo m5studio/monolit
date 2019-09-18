@@ -105,7 +105,9 @@ $main_nav_toggle: "#main-navigationToggle";
                 }
 
                 a.main-nav__link {
-                    color: #000;
+                    color: black;
+                    font-size: 1.05rem;
+                    font-weight: 600;
                     height: 70px;
                     padding: 0 15px;
                     transition: all ease .1s;

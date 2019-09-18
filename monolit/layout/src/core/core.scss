@@ -433,7 +433,7 @@ body {
         }
     }
 
-    #footer-commercial {
+    #footer-site-nav {
         .footer-block__menu-item {
             &:not(:last-child) {
                 margin-bottom: 30px;
@@ -442,6 +442,12 @@ body {
             a {
                 font-size: 1.4rem;
                 font-weight: 700;
+            }
+
+            &.active {
+                > a {
+                    color: #18a29b;
+                }
             }
         }
     }
@@ -453,6 +459,13 @@ body {
 
         .footer-block__menu-item {
             @extend .footer_block_menu_links;
+
+            &.active {
+                > a {
+                    color: #18a29b;
+                    text-decoration: underline;
+                }
+            }
         }
     }
 

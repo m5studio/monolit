@@ -23,16 +23,27 @@
             <h1>{{ page_tite }}</h1>
         </div>
 
+        {% include 'mortgage/sections/mortgage-types-and-application.html' %}
+
+        <div class="container">
+            <hr>
+        </div>
+
         {% if mortgage_offers %}
-            <div id="section-mortgage" class="common-section">
+            <section id="section-mortgage" class="common-section">
+                <div class="common-section__title container">
+                    <h2>Ипотечные программы</h2>
+                </div>
                 <div id="section-mortgage__inner" class="container">
                     {% for object in mortgage_offers %}
                         {% include 'mortgage/cards/mortgage-card.html' %}
                     {% endfor %}
                 </div>
-            </div>
+            </section>
         {% endif %}
 
-        {% include 'mortgage/sections/mortgage-types-and-application.html' %}
+        <div class="section-application-mortgage">
+            <a href="" class="green-button">Подать заявку на ипотеку</a>
+        </div>
     </main>
 {% endblock %}

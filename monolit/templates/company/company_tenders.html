@@ -39,8 +39,8 @@
         <section id="section-register-in-tender-faq" class="common-section">
             <div class="common-section__title container">
                 <h2>
-                    <div class="icon icon-64 icon-faq"></div>
-                    <a href="#">Ответы на часто задаваемые вопросы</a>
+                    <span class="icon icon-64 icon-faq"></span>
+                    <a href="{% url 'company:tenders-faq' %}">Ответы на часто задаваемые вопросы</a>
                 </h2>
             </div>
             <div id="section-register-in-tender-faq__inner" class="container">
@@ -57,7 +57,6 @@
             <div id="section-vacancies-list__inner" class="container">
                 {% if tenders_categories %}
                     <form class="mb-4" method="get">
-                        <!-- {# <select name="tender_category" onchange='if(this.value != "all") { this.form.submit() }'> #} -->
                         <select name="tender_category">
                             <option value="all">- Все виды работ -</option>
                             {% for category in tenders_categories %}
