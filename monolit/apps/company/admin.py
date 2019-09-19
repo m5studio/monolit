@@ -11,6 +11,7 @@ from apps.company.models.history import History
 from apps.company.models.structure import Structure
 from apps.company.models.partner import Partner
 from apps.company.models.tender import Tender, TenderFile, TenderFaq
+from apps.company.models.contacts import ContactsGroup, ContactsItem
 
 
 """ [ Certificate ] """
@@ -194,3 +195,24 @@ class TenderAdmin(TurnOffAdminLogging, admin.ModelAdmin):
 class TenderFaqAdmin(TurnOffAdminLogging, admin.ModelAdmin):
     pass
 """ [ END TenderFaq ] """
+
+
+""" [ ContactsItem ] """
+class ContactsItemInline(admin.TabularInline):
+    model = ContactsItem
+    extra = 1
+    max_num = 10
+
+@admin.register(ContactsItem)
+class ContactsItemAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.ModelAdmin):
+    pass
+""" [ END ContactsItem ] """
+
+
+""" [ ContactsGroup ] """
+@admin.register(ContactsGroup)
+class ContactsGroupAdmin(TurnOffAdminLogging, admin.ModelAdmin):
+    inlines = [
+        ContactsItemInline,
+    ]
+""" [ END ContactsGroup ] """

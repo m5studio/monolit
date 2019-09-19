@@ -33,6 +33,7 @@ from apps.company.models.history import History
 from apps.company.models.structure import Structure
 from apps.company.models.partner import Partner
 from apps.company.models.tender import Tender, TenderFile, TenderFaq
+from apps.company.models.contacts import ContactsGroup, ContactsItem
 
 
 DUMMY_IMG_NAME = 'dummy-image.jpg'
@@ -162,6 +163,39 @@ class GenerateContent:
         tender_faq = TenderFaq(question=question, answer=self.fake.text(600))
         tender_faq.save()
         print(f'[TenderFaq] {tender_faq.question} created')
+
+
+    def _create_ContactsItem(self, сontacts_group_id):
+        сontact_type_list = self.convert_tuple_to_flat_list(ContactsItem.CONTACTS_TYPES)
+        сontacts_group = ContactsGroup.objects.get(pk=сontacts_group_id)
+
+        сontact_type = self.fake.word(сontact_type_list)
+        contact = 'Something went wrong =('
+        if сontact_type == 'email':
+            contact = 'mail@monolit.net'
+        elif сontact_type == 'phone':
+            contact = '+79270004411'
+
+        сontacts_item = ContactsItem(сontacts_group=сontacts_group, \
+                                     сontact_type=сontact_type, \
+                                     contact=contact
+                                    )
+        сontacts_item.save()
+        print(f'[ContactsItem] for {сontacts_item.сontacts_group} created')
+
+
+    def _create_ContactsGroup(self):
+        name = f'Контакт {self.fake.word()} {self.fake.word()} {str(self.fake.random_number(4, True))}'.title()
+
+        сontacts_group = ContactsGroup(name=name, \
+                                       address='295034 Республика Крым, г. Симферополь, пр. Победы, 28А (3 этаж), оф. 315, 317', \
+                                       work_hours='Пн-Пт c 09:00 до 19:00\nСб c 10:00 до 15:00\nВс - выходной'
+                                      )
+        сontacts_group.save()
+        print(f'[ContactsGroup] {сontacts_group.name} created')
+
+        for _ in range(4):
+            self._create_ContactsItem(сontacts_group.id)
 
 
     """ [News] """
@@ -504,9 +538,7 @@ class GenerateContent:
     def _create_Object(self):
         name = f'Объект {self.fake.word()} {self.fake.word()} {str(self.fake.random_number(4, True))}'.title()
         cities_list = self.convert_tuple_to_flat_list(Object.CITIES)
-
         fake = Faker()
-
         object = Object(completed=self.fake.boolean(chance_of_getting_true=40), \
                         all_sold=self.fake.boolean(chance_of_getting_true=30), \
                         partnership=fake.boolean(chance_of_getting_true=20), \
@@ -616,3 +648,7 @@ class GenerateContent:
         if self.countModelObjects(TenderFaq) < 30:
             for _ in range(30):
                 self._create_TenderFaq()
+
+        if self.countModelObjects(ContactsGroup) < 7:
+            for _ in range(7):
+                self._create_ContactsGroup()
