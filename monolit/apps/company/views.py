@@ -165,6 +165,6 @@ class CompanyTendersFaqView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['page_tite'] = 'Вопросы-Ответы по Тендерам'
+        context['page_tite'] = 'Вопросы-ответы по Тендерам'
         context['tenders_faq'] = TenderFaq.objects.filter(active=True).order_by('order')
         return context
