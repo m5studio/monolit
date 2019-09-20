@@ -30,6 +30,8 @@
             <div id="section-contacts-page-content__inner" class="container">
                 <div id="section-contacts-page-content__list">
                     <div id="contacts-list-accordion">
+                        {% for object in contacts_group %}
+                        {% endfor %}
                         <div class="contact-card collapse-block">
                             <div class="contact-card__title-wrap">
                                 <a class="collapse-block__link" data-toggle="collapse" href="#contact-1" aria-expanded="true" aria-controls="contact-1">
