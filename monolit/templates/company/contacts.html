@@ -29,226 +29,64 @@
         <div id="section-contacts-page-content">
             <div id="section-contacts-page-content__inner" class="container">
                 <div id="section-contacts-page-content__list">
-                    <div id="contacts-list-accordion">
-                        {% for object in contacts_group %}
-                        {% endfor %}
-                        <div class="contact-card collapse-block">
-                            <div class="contact-card__title-wrap">
-                                <a class="collapse-block__link" data-toggle="collapse" href="#contact-1" aria-expanded="true" aria-controls="contact-1">
-                                    <span class="contact-card__title">Офис в Симферополе</span>
-                                </a>
-                            </div>
-                            <div id="contact-1" class="contact-card__descr collapse show" data-parent="#contacts-list-accordion">
-                                <div class="contact-card__item">
-                                    <div class="contact-card__item--label">Бесплатно для всех телефонов</div>
-                                    <div class="contact-card__item--val">
-                                        <a href="tel:+78003028808">8 (800) 302-88-08</a>
+                    {% if contacts_group %}
+                        <div id="contacts-list-accordion">
+                            {% for object in contacts_group %}
+                                <div class="contact-card collapse-block">
+                                    <div class="contact-card__title-wrap">
+                                        <a class="collapse-block__link" data-toggle="collapse" href="#contact-{{ object.id }}" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}" aria-controls="contact-{{ object.id }}">
+                                            <span class="contact-card__title">{{ object.name }}</span>
+                                        </a>
+                                    </div>
+                                    <div id="contact-{{ object.id }}" class="contact-card__descr collapse{% if forloop.first %} show{% endif %}" data-parent="#contacts-list-accordion">
+                                        {% for contact_item in contacts_items %}
+                                            {% if contact_item.сontacts_group.id == object.id %}
+                                                <div class="contact-card__item">
+                                                    <div class="contact-card__item--label">{{ contact_item.contact_description }}</div>
+                                                    <div class="contact-card__item--val">
+                                                        <a href="{% if contact_item.сontact_type == 'phone' %}tel{% elif contact_item.сontact_type == 'email' %}mailto{% endif %}:{{ contact_item.contact }}">{{ contact_item.contact }}</a>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+
+                                        {% if object.address %}
+                                            <div class="contact-card__item">
+                                                <div class="contact-card__item--label">Адрес</div>
+                                                <div class="contact-card__item--val">
+                                                    <address>{{ object.address|safe }}</address>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                        {% if object.work_hours %}
+                                            <div class="contact-card__item">
+                                                <div class="contact-card__item--label">График работы</div>
+                                                <div class="contact-card__item--val">{{ object.work_hours|safe }}</div>
+                                            </div>
+                                        {% endif %}
                                     </div>
                                 </div>
-                                <div class="contact-card__item">
-                                    <div class="contact-card__item--label">Центр выбора квартир</div>
-                                    <div class="contact-card__item--val">
-                                        <a href="tel:+79780887858">+7 (978) 088-78-58</a>
-                                    </div>
-                                </div>
-                                <div class="contact-card__item">
-                                    <div class="contact-card__item--label">Городской телефон</div>
-                                    <div class="contact-card__item--val">
-                                        <a href="tel:+73652500500">+7 (3652) 500-500</a>
-                                    </div>
-                                </div>
-                                <div class="contact-card__item">
-                                    <div class="contact-card__item--label">Приёмная</div>
-                                    <div class="contact-card__item--val">
-                                        <a href="tel:+73652500200">+7 (3652) 500-200</a>
-                                    </div>
-                                </div>
-                                <div class="contact-card__item">
-                                    <div class="contact-card__item--label">Email</div>
-                                    <div class="contact-card__item--val">
-                                        <a href="mailto:rielt@monolit.net">rielt@monolit.net</a>
-                                    </div>
-                                </div>
-                                <div class="contact-card__item"></div>
-                                <div class="contact-card__item">
-                                    <div class="contact-card__item--label">Адрес</div>
-                                    <div class="contact-card__item--val">
-                                        <address>
-                                            295034 Республика Крым, г.Симферополь, пр. Победы, 28А<br>(3 этаж), оф. 315, 317
-                                        </address>
-                                    </div>
-                                </div>
-                                <div class="contact-card__item">
-                                    <div class="contact-card__item--label">График работы</div>
-                                    <div class="contact-card__item--val">
-                                        Пн-Пт c 09:00 до 19:00<br>
-                                        Сб c 10:00 до 15:00<br>
-                                        Вс - выходной
-                                    </div>
-                                </div>
-                            </div>
+                            {% endfor %}
                         </div>
-                        <div class="contact-card collapse-block">
-                            <div class="contact-card__title-wrap">
-                                <a class="collapse-block__link" data-toggle="collapse" href="#contact-2" aria-expanded="false" aria-controls="contact-2">
-                                    <span class="contact-card__title">Офис в Евпатории</span>
-                                </a>
-                            </div>
-                            <div id="contact-2" class="contact-card__descr collapse" data-parent="#contacts-list-accordion">
-                                <div class="contact-card__item">
-                                    <div class="contact-card__item--label">«Золотые пески»</div>
-                                    <div class="contact-card__item--val">
-                                        <a href="tel:+79788068241">+7 (978) 806-82-41</a>
-                                    </div>
-                                </div>
-                                <div class="contact-card__item"></div>
-                                <div class="contact-card__item">
-                                    <div class="contact-card__item--label">Адрес</div>
-                                    <div class="contact-card__item--val">
-                                        <address>
-                                            297402 Республика Крым,<br>г.Евпатория ул. Симферопольская 2о
-                                        </address>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="contact-card collapse-block">
-                            <div class="contact-card__title-wrap">
-                                <a class="collapse-block__link" data-toggle="collapse" href="#contact-3" aria-expanded="false" aria-controls="contact-3">
-                                    <span class="contact-card__title">Управляющая компания Монолит-Сервис</span>
-                                </a>
-                            </div>
-                            <div id="contact-3" class="contact-card__descr collapse" data-parent="#contacts-list-accordion">
-                                <div class="contact-card__item">
-                                    <div class="contact-card__item--label">ТОЦ ГудЗон</div>
-                                    <div class="contact-card__item--val">
-                                        <a href="tel:+79787800055">+7 (978) 780-00-55</a>
-                                    </div>
-                                </div>
-                                <div class="contact-card__item">
-                                    <div class="contact-card__item--label">КК Золотые Пески</div>
-                                    <div class="contact-card__item--val">
-                                        <a href="tel:+79787015560">+7 (978) 701-55-60</a>
-                                    </div>
-                                </div>
-                                <div class="contact-card__item">
-                                    <div class="contact-card__item--label">БЦ Крым Плаза</div>
-                                    <div class="contact-card__item--val">
-                                        <a href="tel:+79787871384">+7 (978) 787-13-84</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="contact-card collapse-block">
-                            <div class="contact-card__title-wrap">
-                                <a class="collapse-block__link" data-toggle="collapse" href="#contact-4" aria-expanded="false" aria-controls="contact-4">
-                                    <span class="contact-card__title">Дирекция комплексной безопасности</span>
-                                </a>
-                            </div>
-                            <div id="contact-4" class="contact-card__descr collapse" data-parent="#contacts-list-accordion">
-                                <div class="contact-card__item">
-                                    <div class="contact-card__item--label">Меметова Лейла Серве́ровна</div>
-                                    <div class="contact-card__item--val">
-                                        <a href="tel:+79787015835">+7 (978) 701-58-35</a>
-                                    </div>
-                                </div>
-                                <div class="contact-card__item">
-                                    <div class="contact-card__item--label">Email</div>
-                                    <div class="contact-card__item--val">
-                                        <a href="mailto:memetova@monolit.net">memetova@monolit.net</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="contact-card collapse-block">
-                            <div class="contact-card__title-wrap">
-                                <a class="collapse-block__link" data-toggle="collapse" href="#contact-5" aria-expanded="false" aria-controls="contact-5">
-                                    <span class="contact-card__title">Пресс-служба</span>
-                                </a>
-                            </div>
-                            <div id="contact-5" class="contact-card__descr collapse" data-parent="#contacts-list-accordion">
-                                <div class="contact-card__item">
-                                    <div class="contact-card__item--label">Рыжая Дарья</div>
-                                    <div class="contact-card__item--val">
-                                        <a href="tel:+79787013436">+7 (978) 701-34-36</a>
-                                    </div>
-                                </div>
-                                <div class="contact-card__item">
-                                    <div class="contact-card__item--label">Email</div>
-                                    <div class="contact-card__item--val">
-                                        <a href="mailto:ruzhaya@monolit.net">ruzhaya@monolit.net</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="contact-card collapse-block">
-                            <div class="contact-card__title-wrap">
-                                <a class="collapse-block__link" data-toggle="collapse" href="#contact-6" aria-expanded="false" aria-controls="contact-6">
-                                    <span class="contact-card__title">Отдел по работе с персоналом</span>
-                                </a>
-                            </div>
-                            <div id="contact-6" class="contact-card__descr collapse" data-parent="#contacts-list-accordion">
-                                <div class="contact-card__item">
-                                    <div class="contact-card__item--label">Ольга</div>
-                                    <div class="contact-card__item--val">
-                                        <a href="tel:+79788164888">+7 (978) 816-48-88</a>
-                                    </div>
-                                </div>
-                                <div class="contact-card__item">
-                                    <div class="contact-card__item--label">Email</div>
-                                    <div class="contact-card__item--val">
-                                        <a href="mailto:personal@monolit.net">personal@monolit.net</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="contact-card collapse-block">
-                            <div class="contact-card__title-wrap">
-                                <a class="collapse-block__link" data-toggle="collapse" href="#contact-7" aria-expanded="false" aria-controls="contact-7">
-                                    <span class="contact-card__title">Регуляторно-правовая дирекция</span>
-                                </a>
-                            </div>
-                            <div id="contact-7" class="contact-card__descr collapse" data-parent="#contacts-list-accordion">
-                                <div class="contact-card__item">
-                                    <div class="contact-card__item--label">Телефон РПД</div>
-                                    <div class="contact-card__item--val">
-                                        <a href="tel:+79787016428">+7 (978) 701-64-28</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="contact-card collapse-block">
-                            <div class="contact-card__title-wrap">
-                                <a class="collapse-block__link" data-toggle="collapse" href="#contact-8" aria-expanded="false" aria-controls="contact-8">
-                                    <span class="contact-card__title">Отдел снабжения</span>
-                                </a>
-                            </div>
-                            <div id="contact-8" class="contact-card__descr collapse" data-parent="#contacts-list-accordion">
-                                <div class="contact-card__item">
-                                    <div class="contact-card__item--label">Александр Лозовой</div>
-                                    <div class="contact-card__item--val">
-                                        <a href="tel:+79788158787">+7 (978) 815-87-87</a>
-                                    </div>
-                                </div>
-                                <div class="contact-card__item">
-                                    <div class="contact-card__item--label">Email</div>
-                                    <div class="contact-card__item--val">
-                                        <a href="mailto:lozovoy@monolit.net">lozovoy@monolit.net</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {% endif %}
 
                     <div id="section-contacts-page-content__main-contacts">
                         <div class="contact-item">
                             <a href="" class="green-button">Написать нам</a>
                         </div>
                         <div class="contact-item">
-                            <a href="https://instagram.com/monolit.crimea/" target="_blank" class="icon icon-instagram footer-icon">Instagram</a>
-                            <a href="https://facebook.com/monolit" target="_blank" class="icon icon-facebook footer-icon">Facebook</a>
-                            <a href="https://vk.com/monolit.crimea" target="_blank" class="icon icon-vk footer-icon">Vk</a>
-                            <a href="https://t.me/monolitstroit" target="_blank" class="icon icon-telegram footer-icon">Telegram</a>
+                            {% if settings.site_instagram %}
+                                <a href="{{ settings.site_instagram }}" target="_blank" class="icon icon-instagram footer-icon">Instagram</a>
+                            {% endif %}
+                            {% if settings.site_facebook %}
+                                <a href="{{ settings.site_facebook }}" target="_blank" class="icon icon-facebook footer-icon">Facebook</a>
+                            {% endif %}
+                            {% if settings.site_vk %}
+                                <a href="{{ settings.site_vk }}" target="_blank" class="icon icon-vk footer-icon">Vk</a>
+                            {% endif %}
+                            {% if settings.site_telegram %}
+                                <a href="{{ settings.site_telegram }}" target="_blank" class="icon icon-telegram footer-icon">Telegram</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

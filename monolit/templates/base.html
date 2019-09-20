@@ -157,9 +157,9 @@
                         <a href="{{ company_job_url }}#section-job-reserves">Трудовые резервы</a>
                     </li>
 
-                    <!-- TODO:  -->
-                    <li class="footer-block__menu-item">
-                        <a href="">Контакты</a>
+                    {% url 'company:contacts' as contacts_url %}
+                    <li class="footer-block__menu-item{% if contacts_url == request.path %} active{% endif %}">
+                        <a href="{{ contacts_url }}">Контакты</a>
                     </li>
 
                     <!-- TODO:  -->

@@ -188,8 +188,8 @@ class GenerateContent:
         name = f'Контакт {self.fake.word()} {self.fake.word()} {str(self.fake.random_number(4, True))}'.title()
 
         сontacts_group = ContactsGroup(name=name, \
-                                       address='295034 Республика Крым, г. Симферополь, пр. Победы, 28А (3 этаж), оф. 315, 317', \
-                                       work_hours='Пн-Пт c 09:00 до 19:00\nСб c 10:00 до 15:00\nВс - выходной'
+                                       address='295034 Республика Крым,<br>г. Симферополь, пр. Победы, 28А<br>(3 этаж), оф. 315, 317', \
+                                       work_hours='Пн-Пт c 09:00 до 19:00<br>Сб c 10:00 до 15:00<br>Вс - выходной'
                                       )
         сontacts_group.save()
         print(f'[ContactsGroup] {сontacts_group.name} created')

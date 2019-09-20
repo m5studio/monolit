@@ -31,7 +31,8 @@ class Command(BaseCommand):
         self._add_content_to_db(ObjectSiteWindowsView, window_views)
 
         # Add default content to settings
-        SiteSettings.objects.filter(id=1).update(
+        # SiteSettings.objects.filter(id=1).update(
+        SiteSettings.objects.filter(id=1).update_or_create(
             site_title='Квартиры от застройщика ГК «Монолит» в Крыму',
             site_description='ГК «Монолит» продажа квартир и коммерческих объектов от застройщика в Крыму без посредников',
             site_email='rielt@monolit.net',
