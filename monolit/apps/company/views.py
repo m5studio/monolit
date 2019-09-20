@@ -14,6 +14,7 @@ from apps.company.models.history import History
 from apps.company.models.structure import Structure
 from apps.company.models.partner import Partner
 from apps.company.models.tender import Tender, TenderFile, TenderFaq
+from apps.company.models.contacts import ContactsGroup, ContactsItem
 from apps.realty.models.object import Object
 
 
@@ -167,4 +168,15 @@ class CompanyTendersFaqView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['page_tite'] = 'Вопросы-ответы по Тендерам'
         context['tenders_faq'] = TenderFaq.objects.filter(active=True).order_by('order')
+        return context
+
+
+class ContactsView(TemplateView):
+    template_name = 'company/contacts.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page_tite'] = 'Контакты'
+        context['contacts_group'] = ContactsGroup.objects.all()
+        context['contacts_items'] = ContactsItem.objects.all()
         return context

@@ -11,6 +11,7 @@ from apps.company.views import (
     CompanyPartnershipView,
     CompanyTendersView,
     CompanyTendersFaqView,
+    ContactsView,
 )
 
 
@@ -29,4 +30,6 @@ urlpatterns = [
         path('tenders/', CompanyTendersView.as_view(), name='tenders'),
         path('tenders/faq/', CompanyTendersFaqView.as_view(), name='tenders-faq'),
     ])),
+
+    path('contacts/', ContactsView.as_view(), name='contacts'),
 ]

@@ -178,8 +178,8 @@ class GenerateContent:
 
         сontacts_item = ContactsItem(сontacts_group=сontacts_group, \
                                      сontact_type=сontact_type, \
-                                     contact=contact
-                                    )
+                                     contact_description='Описание контакта', \
+                                     contact=contact)
         сontacts_item.save()
         print(f'[ContactsItem] for {сontacts_item.сontacts_group} created')
 

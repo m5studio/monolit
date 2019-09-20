@@ -20,9 +20,10 @@ class ContactsItem(models.Model):
         ('email', 'Email'),
     )
 
-    сontacts_group = models.ForeignKey(ContactsGroup, on_delete=models.CASCADE, default=0)
-    сontact_type   = models.CharField('Тип контакта', max_length=100, choices=CONTACTS_TYPES)
-    contact        = models.CharField('Контакт', max_length=255, help_text='Заполняется номером телефона или email. Например: +79270004411 или mail@monolit.net')
+    сontacts_group      = models.ForeignKey(ContactsGroup, on_delete=models.CASCADE, default=0)
+    contact_description = models.CharField('Описание контакта', max_length=255)
+    сontact_type        = models.CharField('Тип контакта', max_length=100, choices=CONTACTS_TYPES)
+    contact             = models.CharField('Контакт', max_length=255, help_text='Заполняется номером телефона или email. Например: +79270004411 или mail@monolit.net')
 
     def __str__(self):
         return self.сontacts_group.name

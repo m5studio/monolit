@@ -200,7 +200,7 @@ class TenderFaqAdmin(TurnOffAdminLogging, admin.ModelAdmin):
 """ [ ContactsItem ] """
 class ContactsItemInline(admin.TabularInline):
     model = ContactsItem
-    extra = 1
+    extra = 0
     max_num = 10
 
 @admin.register(ContactsItem)
