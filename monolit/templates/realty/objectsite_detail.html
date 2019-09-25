@@ -120,25 +120,25 @@
                     {% if object.ceiling_height %}
                         <div class="flat-params-block">
                             <div class="flat-params-block__name">Выстота потолка</div>
-                            <div class="flat-params-block__val">{{ object.ceiling_height|format_number }} м</div>
+                            <div class="flat-params-block__val">{{ object.ceiling_height|floatformat:"-2" }} м</div>
                         </div>
                     {% endif %}
                     {% if object.site_area %}
                         <div class="flat-params-block">
                             <div class="flat-params-block__name">Общая площадь</div>
-                            <div class="flat-params-block__val">{{ object.site_area|format_number }} м<sup>2</sup></div>
+                            <div class="flat-params-block__val">{{ object.site_area|floatformat:"-2" }} м<sup>2</sup></div>
                         </div>
                     {% endif %}
                     {% if object.living_area %}
                         <div class="flat-params-block">
                             <div class="flat-params-block__name">Жилая площадь</div>
-                            <div class="flat-params-block__val">{{ object.living_area|format_number }} м<sup>2</sup></div>
+                            <div class="flat-params-block__val">{{ object.living_area|floatformat:"-2" }} м<sup>2</sup></div>
                         </div>
                     {% endif %}
                     {% if object.kitchen_area %}
                         <div class="flat-params-block">
                             <div class="flat-params-block__name">Площадь кухни</div>
-                            <div class="flat-params-block__val">{{ object.kitchen_area|format_number }} м<sup>2</sup></div>
+                            <div class="flat-params-block__val">{{ object.kitchen_area|floatformat:"-2" }} м<sup>2</sup></div>
                         </div>
                     {% endif %}
                 </div>
@@ -198,7 +198,7 @@
                                     <div class="flat-params-block__name">Балконы</div>
                                     <div class="flat-params-block__val">
                                         {% for balcony in balconies %}
-                                            {{ balcony.balcony_qty }} {{ balcony.get_balcony_type_display }}<br>
+                                            <div>{{ balcony.balcony_qty }} {{ balcony.get_balcony_type_display }}</div>
                                         {% endfor %}
                                     </div>
                                 </div>
@@ -208,7 +208,7 @@
                                     <div class="flat-params-block__name">Лифт</div>
                                     <div class="flat-params-block__val">
                                         {% for elevator in elevators %}
-                                            {{ elevator.elevator_qty }} {{ elevator.get_elevator_type_display }}<br>
+                                            <div>{{ elevator.elevator_qty }} {{ elevator.get_elevator_type_display }}</div>
                                         {% endfor %}
                                     </div>
                                 </div>
@@ -221,11 +221,11 @@
                     <div id="flat-price" class="flat-content-block--flex">
                         <div id="flat-price__per-meter" class="flat-price-block">
                             <div class="flat-price-block__name">Стоимость кв. метра</div>
-                            <div class="flat-price-block__val">{{ object.price_per_square|format_number }} руб/м<sup>2</sup></div>
+                            <div class="flat-price-block__val">{{ object.price_per_square|floatformat:"-2"|split_thousands }} руб/м<sup>2</sup></div>
                         </div>
                         <div id="flat-price__total" class="flat-price-block">
                             <div class="flat-price-block__name">Стоимость квартиры</div>
-                            <div class="flat-price-block__val">{{ object.price_total|format_number }} руб</div>
+                            <div class="flat-price-block__val">{{ object.price_total|floatformat:"-2"|split_thousands }} руб</div>
                         </div>
                     </div>
                 {% endif %}

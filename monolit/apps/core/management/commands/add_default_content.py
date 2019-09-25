@@ -31,18 +31,43 @@ class Command(BaseCommand):
         self._add_content_to_db(ObjectSiteWindowsView, window_views)
 
         # Add default content to settings
-        # SiteSettings.objects.filter(id=1).update(
-        SiteSettings.objects.filter(id=1).update_or_create(
-            site_title='Квартиры от застройщика ГК «Монолит» в Крыму',
-            site_description='ГК «Монолит» продажа квартир и коммерческих объектов от застройщика в Крыму без посредников',
-            site_email='rielt@monolit.net',
-            site_phone='+79784447711',
-            site_instagram='https://instagram.com/monolit.crimea/',
-            site_facebook='https://facebook.com/monolit',
-            site_vk='https://vk.com/monolit.crimea',
-            site_telegram='https://t.me/monolitstroit',
-        )
-        self.stdout.write(self.style.SUCCESS('SiteSettings UPDATED'))
+        try:
+            site_settings = SiteSettings.objects.get(id=1)
+        except SiteSettings.DoesNotExist:
+            site_settings = None
 
-        # self.stdout.write(self.style.SUCCESS('WOW!!! it Works!!!'))
-        # self.stdout.write(self.style.ERROR('WOW!!! it won\'t Works!!!'))
+        default_content = {
+            "site_title": 'Квартиры в Крыму от застройщика ГК Монолит',
+            "site_description": 'ГК «Монолит» продажа квартир и коммерческих объектов от застройщика в Крыму без посредников',
+            "site_email": 'rielt@monolit.net',
+            "site_phone": '+79784447711',
+            "site_instagram":'https://instagram.com/monolit.crimea/',
+            "site_facebook": 'https://facebook.com/monolit',
+            "site_vk": 'https://vk.com/monolit.crimea',
+            "site_telegram": 'https://t.me/monolitstroit',
+        }
+
+        if site_settings:
+            SiteSettings.objects.filter(id=1).update(
+                site_title=default_content['site_title'],
+                site_description=default_content['site_description'],
+                site_email=default_content['site_email'],
+                site_phone=default_content['site_phone'],
+                site_instagram=default_content['site_instagram'],
+                site_facebook=default_content['site_facebook'],
+                site_vk=default_content['site_vk'],
+                site_telegram=default_content['site_telegram'],
+            )
+        elif not site_settings:
+            SiteSettings.objects.filter(id=1).update_or_create(
+                site_title=default_content['site_title'],
+                site_description=default_content['site_description'],
+                site_email=default_content['site_email'],
+                site_phone=default_content['site_phone'],
+                site_instagram=default_content['site_instagram'],
+                site_facebook=default_content['site_facebook'],
+                site_vk=default_content['site_vk'],
+                site_telegram=default_content['site_telegram'],
+            )
+
+        self.stdout.write(self.style.SUCCESS('SiteSettings UPDATED'))

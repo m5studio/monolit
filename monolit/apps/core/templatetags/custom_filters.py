@@ -22,12 +22,10 @@ def get_file_ext(value):
     return file.getFileExt()
 
 
-def custom_format_number(value):
-    return '{:,}'.format(value).replace(',', ' ').replace('.00', '').replace('.0', '')
-
-@register.filter(name='format_number')
-def format_number(value):
-    return custom_format_number(float(value))
+# REVIEW: 
+@register.filter(name='split_thousands')
+def split_thousands(value):
+    return '{:,}'.format(float(value)).replace(',', ' ').replace('.0', '')
 
 
 @register.filter(name='round_million')

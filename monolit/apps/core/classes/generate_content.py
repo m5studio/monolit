@@ -337,6 +337,9 @@ class GenerateContent:
         banks_ids = list(Bank.objects.order_by('id').values_list('id', flat=True))
         bank = Bank.objects.get(pk=self.get_random_list_item(banks_ids))
 
+        first_payment_from_list = [15, 20]
+        first_payment_to_list = [15, 20]
+
         loan_term_from_list = [1, 3]
         loan_term_to_list = [25, 30]
 
@@ -345,8 +348,8 @@ class GenerateContent:
 
         offer = Offer(bank=bank,\
                       title=f'Ипотечная программа {str(self.fake.word()).title()} {str(self.fake.random_number(4, True))}', \
-                      first_payment_from=15, \
-                      first_payment_to=15, \
+                      first_payment_from=self.get_random_list_item(first_payment_from_list), \
+                      first_payment_to=self.get_random_list_item(first_payment_to_list), \
                       loan_term_from=self.get_random_list_item(loan_term_from_list), \
                       loan_term_to=self.get_random_list_item(loan_term_to_list), \
                       rate_from=self.get_random_list_item(rate_from_list), \
@@ -355,6 +358,7 @@ class GenerateContent:
                     )
         offer.save()
 
+        # Apply Offer to an Objects
         objects_ids_list = list(self._get_objects_ids_list())
         offer.object.set(objects_ids_list)
         print(f'[Offer] {offer.title} created')
@@ -590,9 +594,11 @@ class GenerateContent:
             for _ in range(3):
                 self._create_Bank()
 
-        if self.countModelObjects(Offer) < 5:
-            for _ in range(5):
-                self._create_Offer()
+        # if self.countModelObjects(Offer) < 7:
+        #     for _ in range(7):
+        #         self._create_Offer()
+
+        self._create_Offer()
 
         # 5. Generate Flats and apartments
         for object_id in self._get_objects_ids_list():

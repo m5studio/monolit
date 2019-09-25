@@ -27,7 +27,7 @@
         <div class="flat-card__footer--middle">
             <div class="flat-card__info">
                 <div class="flat-card__heading">{% if object.rooms_qty %}{{ object.get_rooms_qty_display }}{% endif %}</div>
-                <div class="flat-card__val">{% if object.site_area %}{{ object.site_area|format_number }} м<sup>2</sup>{% endif %}</div>
+                <div class="flat-card__val">{% if object.site_area %}{{ object.site_area|floatformat:"-2" }} м<sup>2</sup>{% endif %}</div>
             </div>
             <div class="flat-card__info">
                 <div class="flat-card__heading">Этаж</div>
@@ -48,9 +48,9 @@
         <div class="flat-card__footer--bottom">
             <div class="flat-card__info">
                 <div class="flat-card__price-total">
-                    {% if object.price_total %}<span>{{ object.price_total|format_number }}</span><small> руб</small>{% endif %}
+                    {% if object.price_total %}<span>{{ object.price_total|floatformat:"-2"|split_thousands }}</span><small> руб</small>{% endif %}
                 </div>
-                <div class="flat-card__price-per-meter">{% if object.price_per_square %}{{ object.price_per_square|format_number }} руб/м<sup>2</sup>{% endif %}</div>
+                <div class="flat-card__price-per-meter">{% if object.price_per_square %}{{ object.price_per_square|floatformat:"-2"|split_thousands }} руб/м<sup>2</sup>{% endif %}</div>
             </div>
         </div>
     </div>
