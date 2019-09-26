@@ -1,7 +1,7 @@
 from django.views.generic import ListView, DetailView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from apps.news.models import News, NewsImage
+from apps.news.models.news import News, NewsImage
 
 
 class NewsListView(ListView):

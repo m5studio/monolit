@@ -23,7 +23,7 @@ from apps.realty.models.object_site import ObjectSite, ObjectSiteWindowsView
 from apps.realty.models.object_site_balcony import ObjectBalcony
 from apps.realty.models.object_site_bathroom import ObjectBathroom
 
-from apps.news.models import NewsCategory, News, NewsImage
+from apps.news.models.news import NewsCategory, News, NewsImage
 
 from apps.company.models.certificate import Certificate
 from apps.company.models.management import Management
@@ -201,7 +201,7 @@ class GenerateContent:
     """ [News] """
     def _create_NewsCategory(self):
         if NewsCategory.objects.all().count() == 0:
-            news_cats_list = ['Акции', 'Политика', 'Экономика', 'Строительство']
+            news_cats_list = ['Политика', 'Экономика', 'Строительство']
 
             for category in news_cats_list:
                 news_category = NewsCategory(name=category)

@@ -19,7 +19,7 @@ from apps.realty.models.object_site_bathroom import ObjectBathroom
 from apps.realty.models.object_site_balcony import ObjectBalcony
 from apps.realty.models.object_elevator import ObjectElevator
 
-from apps.news.models import News
+from apps.news.models.news import News
 from apps.mortgage.models import Offer
 
 

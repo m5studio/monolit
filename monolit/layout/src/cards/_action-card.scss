@@ -1,17 +1,74 @@
+@keyframes bg_animation {
+    0% {
+        background-position: 50% 50%;
+        background-size: 100%;
+    }
+    100% {
+        background-position: 10% 80%;
+        background-size: 115%;
+    }
+}
+
 .action-card {
-    background-color: white;
-    box-shadow: 0 4px 10px rgba(0,0,0,.1);
-    border-radius: 5px;
+    background-image: url('http://monolit.site/media/CACHE/images/realty/complex/header_wg0hw0l/e270a00a942e7f76713effa733502a94.jpg');
+
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: 100%;
+
     position: relative;
-    min-height: 256px;
+    height: 300px;
+
+    overflow: hidden;
+
+    animation: bg_animation 10s infinite alternate;
+    animation-play-state: paused;
+
+    @include media-breakpoint-down(lg) {
+        min-height: 290px;
+    }
+
+    &::before {
+        content: "";
+        background-color: rgba(0, 0, 0, .5);
+
+        display: block;
+        width: 100%;
+        height: 100%;
+
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        transition: all ease-in-out .6s;
+    }
 
     &__title {
-        background-color: #00998f;
         color: white;
         font-size: 1.5rem;
-        font-weight: 300;
+        font-weight: 600;
+
+        padding-left: 20px;
+        padding-right: 10px;
+
         position: absolute;
-        right: 0;
-        bottom: 30px;
+        top: 15px;
+        left: 0;
+    }
+
+    .stretched-link {}
+
+    &:hover {
+        animation-play-state: running;
+
+        &::before {
+            background-color: rgba(0, 0, 0, .3);
+        }
+
+        .action-card__title {
+            // background-color: #00998f;
+            background-color: rgba(0, 153, 143, .8);
+            font-size: 1.8rem;
+        }
     }
 }

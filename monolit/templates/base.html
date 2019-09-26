@@ -65,12 +65,10 @@
             </div>
 
             <div id="footer-site-nav" class="footer-block">
+                <div class="footer-block__title">
+                    <a href="">Коммерческая недвижимость</a>
+                </div>
                 <ul class="footer-block__menu-list">
-                    <!-- TODO:  -->
-                    <li class="footer-block__menu-item">
-                        <a href="">Коммерческая недвижимость</a>
-                    </li>
-
                     {% url 'object:site-list' as objects_site_list_url %}
                     <li class="footer-block__menu-item{% if objects_site_list_url == request.path %} active{% endif %}">
                         <a href="{{ objects_site_list_url }}">Выбор квартиры</a>
@@ -109,17 +107,17 @@
                         <a href="{{ news_list }}">Новости</a>
                     </li>
 
+                    <!-- TODO:  -->
+                    <li class="footer-block__menu-item">
+                        <a href="">Акции</a>
+                    </li>
+
                     {% url 'company:job' as company_job_url %}
                     <li class="footer-block__menu-item{% if company_job_url == request.path %} active{% endif %}">
                         <a href="{{ company_job_url }}">Вакансии</a>
                     </li>
                     <li class="footer-block__menu-item">
                         <a href="{{ company_job_url }}#section-job-reserves">Трудовые резервы</a>
-                    </li>
-
-                    {% url 'company:contacts' as contacts_url %}
-                    <li class="footer-block__menu-item{% if contacts_url == request.path %} active{% endif %}">
-                        <a href="{{ contacts_url }}">Контакты</a>
                     </li>
 
                     <!-- TODO:  -->
@@ -130,6 +128,11 @@
                     <!-- TODO:  -->
                     <li class="footer-block__menu-item">
                         <a href="">Политика конфиденциальности</a>
+                    </li>
+
+                    {% url 'company:contacts' as contacts_url %}
+                    <li class="footer-block__menu-item{% if contacts_url == request.path %} active{% endif %}">
+                        <a href="{{ contacts_url }}">Контакты</a>
                     </li>
                 </ul>
             </div>

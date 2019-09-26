@@ -3,7 +3,7 @@ from django.views.generic import TemplateView
 from apps.realty.models.object import Object
 from apps.realty.models.object_site import ObjectSite
 from apps.mortgage.models import Offer
-from apps.news.models import News
+from apps.news.models.news import News
 
 
 class HomepageView(TemplateView):

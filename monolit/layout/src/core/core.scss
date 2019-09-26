@@ -395,9 +395,12 @@ body {
 
     .footer-block {
         &__title {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 700;
-            margin-bottom: 40px;
+
+            @include media-breakpoint-up(md) {
+                min-height: 70px;
+            }
         }
 
         &__menu-list {
@@ -436,11 +439,11 @@ body {
     #footer-site-nav {
         .footer-block__menu-item {
             &:not(:last-child) {
-                margin-bottom: 30px;
+                margin-bottom: 15px;
             }
 
             a {
-                font-size: 1.4rem;
+                font-size: 1.3rem;
                 font-weight: 700;
             }
 
@@ -463,7 +466,6 @@ body {
             &.active {
                 > a {
                     color: #18a29b;
-                    text-decoration: underline;
                 }
             }
         }

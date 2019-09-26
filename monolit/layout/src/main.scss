@@ -34,13 +34,9 @@
 
 
 // ===================== Sections
+@import "./sections/common-section";
 @import "./sections/section-about";
 @import "./sections/section-compleated-projects";
-@import "./sections/section-flats-list";
-@import "./sections/section-flats-types";
-@import "./sections/section-news";
-@import "./sections/section-objects-list";
-@import "./sections/common-section";
 @import "./sections/misc";
 
 // Sections [actions]
@@ -68,12 +64,14 @@
 @import "./sections/company/section-sertificates";
 @import "./sections/company/section-vacancies-list";
 
-// Sections [flat-page]
-@import "./sections/flat-page/flat-page-section";
-@import "./sections/flat-page/section-flat-page-content";
-@import "./sections/flat-page/section-flat-page-map";
-@import "./sections/flat-page/section-flat-page-mortgage";
-@import "./sections/flat-page/section-flat-page-simular-flats";
+// Sections [flat]
+@import "./sections/flat/flat-page-section";
+@import "./sections/flat/section-flats-list";
+@import "./sections/flat/section-flats-types";
+@import "./sections/flat/section-flat-page-content";
+@import "./sections/flat/section-flat-page-map";
+@import "./sections/flat/section-flat-page-mortgage";
+@import "./sections/flat/section-flat-page-simular-flats";
 
 // Sections [mortgage]
 @import "./sections/mortgage/section-application-mortgage";
@@ -89,10 +87,12 @@
 @import "./sections/mortgage/section-mortgage";
 
 // Sections [news]
+@import "./sections/news/section-news";
 @import "./sections/news/section-news-page-content";
 @import "./sections/news/section-other-news";
 
 // Sections [object]
+@import "./sections/objects/section-objects-list";
 @import "./sections/objects/section-building-progress-and-news";
 @import "./sections/objects/section-object-downloads";
 @import "./sections/objects/section-object-genplan";
