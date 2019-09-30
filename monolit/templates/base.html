@@ -102,14 +102,14 @@
                     <a href="{{ company_url }}">О компании</a>
                 </div>
                 <ul class="footer-block__menu-list">
-                    {% url 'news:list' as news_list %}
-                    <li class="footer-block__menu-item{% if news_list == request.path or news_list in request.path %} active{% endif %}">
-                        <a href="{{ news_list }}">Новости</a>
+                    {% url 'news:list' as news_list_url %}
+                    <li class="footer-block__menu-item{% if news_list_url == request.path or news_list_url in request.path %} active{% endif %}">
+                        <a href="{{ news_list_url }}">Новости</a>
                     </li>
 
-                    <!-- TODO:  -->
-                    <li class="footer-block__menu-item">
-                        <a href="">Акции</a>
+                    {% url 'news:actions-list' as actions_list_url %}
+                    <li class="footer-block__menu-item{% if actions_list_url == request.path or actions_list_url in request.path %} active{% endif %}">
+                        <a href="{{ actions_list_url }}">Акции</a>
                     </li>
 
                     {% url 'company:job' as company_job_url %}

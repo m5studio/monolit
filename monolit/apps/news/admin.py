@@ -4,6 +4,7 @@ from apps.core.classes.turn_off_admin_logging import TurnOffAdminLogging
 from apps.core.classes.hide_from_admin_index import HideFromAdminIndex
 
 from apps.news.models.news import NewsCategory, News, NewsImage
+from apps.news.models.actions import Actions, ActionsPartner
 
 
 @admin.register(NewsCategory)
@@ -43,3 +44,42 @@ class NewsAdmin(TurnOffAdminLogging, admin.ModelAdmin):
     list_display = ('title', 'active', 'updated')
     autocomplete_fields = ['object', 'category']
 """ [ END News ] """
+
+
+""" [ ActionsPartner ] """
+class ActionsPartnerInline(admin.TabularInline):
+    model = ActionsPartner
+    extra = 0
+    max_num = 20
+    fields = ('name', 'logo_thumb', 'logo', 'site_url')
+    readonly_fields = ('logo_thumb',)
+
+@admin.register(ActionsPartner)
+class ActionsPartnerAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.ModelAdmin):
+    pass
+""" [ END ActionsPartner ] """
+
+
+""" [ Actions ] """
+@admin.register(Actions)
+class ActionsAdmin(TurnOffAdminLogging, admin.ModelAdmin):
+    inlines = [
+        ActionsPartnerInline,
+    ]
+
+    readonly_fields = ('image_card_thumb', 'image_detail_thumb',)
+    fieldsets = (
+        (None, {
+            'fields': ('active', 'title', 'description', 'partners_title')
+        }),
+        ('Даты начала и окончания', {
+           'fields': ('date_start', 'date_end')
+        }),
+        ('Изображение для карточки', {
+           'fields': ('image_card_thumb', 'image_card')
+        }),
+        ('Изображение для страницы', {
+           'fields': ('image_detail_thumb', 'image_detail')
+        }),
+    )
+""" [ END Action ] """
