@@ -26,88 +26,52 @@
             <h1>{{ page_title }}</h1>
         </div>
 
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad sint odio non, nulla at, sequi blanditiis repellendus deleniti, doloremque quo ipsa possimus libero magni! Laboriosam ex quibusdam dignissimos nisi enim libero eos architecto asperiores. Voluptates, cupiditate, illum. Nihil enim consequatur atque ea in vitae mollitia libero amet repudiandae et ut laboriosam perferendis quas architecto quo quibusdam temporibus, perspiciatis expedita neque dicta aliquid sunt cumque tempora doloremque? Sint sit voluptatum, eligendi. Sequi animi, accusamus quae dolores iure rem distinctio officiis eaque fugiat tenetur eius magni cum quisquam accusantium totam unde labore, molestiae. Laboriosam, ipsa molestias accusamus amet facilis quam asperiores autem.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse pariatur at iure distinctio odit, quasi tempora culpa corporis voluptatibus, inventore, neque quam. Dicta, officia error. Earum ipsum ea repudiandae nemo?</p>
-                    <h3>Lorem ipsum dolor sit amet</h3>
-                    <ul>
-                        <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse pariatur at iure distinctio odit, quasi tempora culpa corporis voluptatibus</li>
-                        <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse pariatur at iure distinctio odit, quasi tempora culpa corporis voluptatibus</li>
-                        <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse pariatur at iure distinctio odit, quasi tempora culpa corporis voluptatibus</li>
-                        <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse pariatur at iure distinctio odit, quasi tempora culpa corporis voluptatibus</li>
-                        <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse pariatur at iure distinctio odit, quasi tempora culpa corporis voluptatibus</li>
-                    </ul>
+        {% if object.description or object.image_detail %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        {{ object.description|safe }}
+                    </div>
+                    <div class="col-lg-6">
+                        {% if object.image_detail %}
+                            <img src="{{ object.image_detail.url }}" style="max-width: 100%; height: auto;" alt="{{ page_title }}">
+                        {% endif %}
+                    </div>
                 </div>
-                <div class="col-lg-6">
-                    {% if object.image_detail %}
-                        <img src="{{ object.image_detail.url }}" style="max-width: 100%; height: auto;" alt="{{ page_title }}">
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <section id="section-actions-partners" class="common-section">
-        {% if object.partners_title %}
-            <div class="common-section__title container">
-                <h2>{{ object.partners_title }}</h2>
             </div>
         {% endif %}
-        <div id="section-actions-partners__inner" class="container">
-            <div class="partner-card">
-                <div class="partner-card__logo" style="background-image: url('http://img.monolit.site/nc.jpg');"></div>
-                <a href="http://novacentr.com/monolit/" target="_blank" title="Откроется в новой вкладке" class="stretched-link"></a>
-            </div>
-            <div class="partner-card">
-                <div class="partner-card__logo" style="background-image: url('http://img.monolit.site/kh.png');"></div>
-                <a href="http://www.kafel82.ru/action/7001" target="_blank" title="Откроется в новой вкладке" class="stretched-link"></a>
-            </div>
-            <div class="partner-card">
-                <div class="partner-card__logo" style="background-image: url('http://img.monolit.site/km.jpg');"></div>
-                <a href="http://крымплитка.рф/index.php?route=news/news&news_id=27" target="_blank" title="Откроется в новой вкладке" class="stretched-link"></a>
-            </div>
-            <div class="partner-card">
-                <div class="partner-card__logo" style="background-image: url('http://img.monolit.site/kuhni.jpg');"></div>
-                <a href="http://novacentr.com/terms_of_action_kitchen-plus" target="_blank" title="Откроется в новой вкладке" class="stretched-link"></a>
-            </div>
-            <div class="partner-card">
-                <div class="partner-card__logo" style="background-image: url('http://img.monolit.site/sneha.png');"></div>
-                <a href="http://sneha-city.com/programma-dlya-novoselov/" target="_blank" title="Откроется в новой вкладке" class="stretched-link"></a>
-            </div>
-            <div class="partner-card">
-                <div class="partner-card__logo" style="background-image: url('http://img.monolit.site/dio.png');"></div>
-                <a href="https://дио-крым.рф/partner.html" target="_blank" title="Откроется в новой вкладке" class="stretched-link"></a>
-            </div>
-            <div class="partner-card">
-                <div class="partner-card__logo" style="background-image: url('http://img.monolit.site/sb.jpg');"></div>
-                <a href="http://master-deko.ru/partnery/" target="_blank" title="Откроется в новой вкладке" class="stretched-link"></a>
-            </div>
-        </div>
-    </section>
+    </main>
 
-    <section id="section-actions-list" class="common-section">
-        <div class="common-section__title container">
-            <h2>Другие акции</h2>
-        </div>
-        <div id="section-actions-list__inner" class="container">
-            <div class="action-card">
-                <div class="action-card__title">Название акции</div>
-                <a href="" class="stretched-link"></a>
+    {% if action_partners %}
+        <section id="section-actions-partners" class="common-section">
+            {% if object.partners_title %}
+                <div class="common-section__title container">
+                    <h2>{{ object.partners_title }}</h2>
+                </div>
+            {% endif %}
+            <div id="section-actions-partners__inner" class="container">
+                {% for partner in action_partners %}
+                    <div class="partner-card">
+                        <div class="partner-card__logo"{% if partner.logo %} style="background-image: url('{{ partner.logo.url }}');"{% endif %}></div>
+                        {% if partner.site_url %}
+                            <a href="{{ partner.site_url }}" target="_blank" title="Откроется в новой вкладке" class="stretched-link"></a>
+                        {% endif %}
+                    </div>
+                {% endfor %}
             </div>
-            <div class="action-card">
-                <div class="action-card__title">Название акции</div>
-                <a href="" class="stretched-link"></a>
+        </section>
+    {% endif %}
+
+    {% if other_actions %}
+        <section id="section-actions-list" class="common-section">
+            <div class="common-section__title container">
+                <h2>Другие акции</h2>
             </div>
-            <div class="action-card">
-                <div class="action-card__title">Название акции</div>
-                <a href="" class="stretched-link"></a>
+            <div id="section-actions-list__inner" class="container">
+                {% for object in other_actions %}
+                    {% include 'news/cards/actions-card.html' %}
+                {% endfor %}
             </div>
-            <div class="action-card">
-                <div class="action-card__title">Название акции</div>
-                <a href="" class="stretched-link"></a>
-            </div>
-        </div>
-    </section>
+        </section>
+    {% endif %}
 {% endblock %}

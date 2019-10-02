@@ -59,6 +59,6 @@ class ActionsDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['opts'] = Actions._meta
         context['page_title'] = f'{self.get_object().title}'
-        context['other_actions'] = Actions.objects.filter(active=True).exclude(id=self.get_object().pk).order_by('?')[:4]
         context['action_partners'] = ActionsPartner.objects.filter(action=self.get_object().pk)
+        context['other_actions'] = Actions.objects.filter(active=True).exclude(id=self.get_object().pk).order_by('?')[:4]        
         return context

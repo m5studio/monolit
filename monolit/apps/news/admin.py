@@ -82,4 +82,5 @@ class ActionsAdmin(TurnOffAdminLogging, admin.ModelAdmin):
            'fields': ('image_detail_thumb', 'image_detail')
         }),
     )
+    list_display = ('title', 'active', 'date_start', 'date_end')
 """ [ END Action ] """

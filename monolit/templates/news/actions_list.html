@@ -13,7 +13,7 @@
                 <li class="breadcrumb-item">
                     <a href="{% url 'homepage' %}">Главная</a>
                 </li>
-                <li class="breadcrumb-item active">Акции</li>
+                <li class="breadcrumb-item active">{{ page_title }}</li>
             </ol>
         </div>
     </nav>
@@ -27,10 +27,7 @@
             <div id="section-actions-list" class="common-section">
                 <div id="section-actions-list__inner" class="container">
                     {% for object in object_list %}
-                        <div class="action-card"{% if object.image_card %} style="background-image: url('{{ object.image_card.url }}');"{% endif %}>
-                            <div class="action-card__title">{{ object.title }}</div>
-                            <a href="{{ object.get_absolute_url }}" class="stretched-link"></a>
-                        </div>
+                        {% include 'news/cards/actions-card.html' %}
                     {% endfor %}
                 </div>
             </div>

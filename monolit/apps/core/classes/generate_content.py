@@ -1,5 +1,5 @@
-import random
-import datetime
+import datetime, random
+from django.utils import timezone
 
 from django.db.models import Count
 from faker import Faker
@@ -24,6 +24,7 @@ from apps.realty.models.object_site_balcony import ObjectBalcony
 from apps.realty.models.object_site_bathroom import ObjectBathroom
 
 from apps.news.models.news import NewsCategory, News, NewsImage
+from apps.news.models.actions import Actions, ActionsPartner
 
 from apps.company.models.certificate import Certificate
 from apps.company.models.management import Management
@@ -36,8 +37,8 @@ from apps.company.models.tender import Tender, TenderFile, TenderFaq
 from apps.company.models.contacts import ContactsGroup, ContactsItem
 
 
-DUMMY_IMG_NAME = 'dummy-image.jpg'
-DUMMY_DOC_NAME = 'dummy-document.pdf'
+DUMMY_IMG = 'dummy-image.jpg'
+DUMMY_DOCUMENT = 'dummy-document.pdf'
 
 class GenerateContent:
     def __init__(self):
@@ -66,7 +67,7 @@ class GenerateContent:
     def _create_Certificate(self):
         title = f'Сертификат {self.fake.word()} {self.fake.word()} {self.fake.word()} {self.fake.word()} {self.fake.word()}'
 
-        certificate = Certificate(title=title, image=DUMMY_IMG_NAME)
+        certificate = Certificate(title=title, image=DUMMY_IMG)
         certificate.save()
         print(f'[Certificate] {certificate.title} created')
 
@@ -74,7 +75,7 @@ class GenerateContent:
     def _create_Management(self):
         position = f'Должность {self.fake.word()} {self.fake.word()} {self.fake.word()} {self.fake.word()}'
 
-        management = Management(image=DUMMY_IMG_NAME, surname='Фамилия', name='Имя', patronymic='Отчество', position=position)
+        management = Management(image=DUMMY_IMG, surname='Фамилия', name='Имя', patronymic='Отчество', position=position)
         management.save()
         print(f'[Management] {management.position} created')
 
@@ -82,7 +83,7 @@ class GenerateContent:
     def _create_Responsibility(self):
         title = f'Ответственность {self.fake.word()} {self.fake.word()} {self.fake.word()}'
 
-        responsibility = Responsibility(title=title, body=self.fake.text(600), image=DUMMY_IMG_NAME)
+        responsibility = Responsibility(title=title, body=self.fake.text(600), image=DUMMY_IMG)
         responsibility.save()
         print(f'[Responsibility] {responsibility.title} created')
 
@@ -90,7 +91,7 @@ class GenerateContent:
     def _create_JobBlock(self):
         title = f'Блок работа {self.fake.word()} {self.fake.word()} {self.fake.word()}'
 
-        job_block = JobBlock(title=title, body=self.fake.text(600), image=DUMMY_IMG_NAME)
+        job_block = JobBlock(title=title, body=self.fake.text(600), image=DUMMY_IMG)
         job_block.save()
         print(f'[JobBlock] {job_block.title} created')
 
@@ -115,19 +116,19 @@ class GenerateContent:
         years_range = [r for r in range(2005, datetime.date.today().year + 1)]
 
         for year in years_range:
-            history = History(year=year, body=self.fake.text(600), image=DUMMY_IMG_NAME)
+            history = History(year=year, body=self.fake.text(600), image=DUMMY_IMG)
             history.save()
             print(f'[History] {history.year} created')
 
 
     def _create_Structure(self):
-        structure = Structure(url='http://monolit.site', body=self.fake.text(500), image=DUMMY_IMG_NAME)
+        structure = Structure(url='http://monolit.site', body=self.fake.text(500), image=DUMMY_IMG)
         structure.save()
         print(f'[Structure] created')
 
 
     def _create_Partner(self):
-        partner = Partner(url='https://google.com', image=DUMMY_IMG_NAME)
+        partner = Partner(url='https://google.com', image=DUMMY_IMG)
         partner.save()
         print(f'[Partner] created')
 
@@ -153,7 +154,7 @@ class GenerateContent:
 
         if count_files_rel_to_tender < 10:
             tender = Tender.objects.get(pk=tender_id)
-            tender_file = TenderFile(tender=tender, name='Документ с описанием тенедера', file=DUMMY_DOC_NAME)
+            tender_file = TenderFile(tender=tender, name='Документ с описанием тенедера', file=DUMMY_DOCUMENT)
             tender_file.save()
             print(f'[TenderFile] for Tender {tender_file.tender} created')
 
@@ -215,7 +216,7 @@ class GenerateContent:
 
         if count_images_rel_to_news == 0:
             for _ in range(10):
-                news_image = NewsImage(news=news, image=DUMMY_IMG_NAME)
+                news_image = NewsImage(news=news, image=DUMMY_IMG)
                 news_image.save()
                 print(f'[NewsImage] created for {news_id}')
 
@@ -223,7 +224,7 @@ class GenerateContent:
     def _create_News(self):
         title = f'Новость {self.fake.word()} {self.fake.word()} {self.fake.word()} {self.fake.word()} {self.fake.word()} {str(self.fake.random_number(3, True))}'.title()
 
-        news = News(title=title, main_image=DUMMY_IMG_NAME, body=self.fake.text(5000))
+        news = News(title=title, main_image=DUMMY_IMG, body=self.fake.text(5000))
         news.save()
         print(f'[News] created {news.title}')
 
@@ -232,6 +233,34 @@ class GenerateContent:
         news.category.set([ self.get_random_list_item(news_categories_list) ])
 
         self._create_NewsImage(news.id)
+
+
+    """ [Actions] """
+    def _create_ActionsPartner(self, action_id):
+        action_id = Actions.objects.get(pk=action_id)
+        action_partner = ActionsPartner(action=action_id, \
+                                        name='Название компании партнера',
+                                        logo=DUMMY_IMG,
+                                        site_url='https://google.com')
+        action_partner.save()
+        print(f'[ActionsPartner] created {action_partner.name}')
+
+
+    def _create_Actions(self):
+        title = f'Акция {self.fake.word()} {self.fake.word()} {self.fake.word()} {self.fake.word()} {str(self.fake.random_number(3, True))}'.title()
+        action = Actions(active=True, \
+                         title=title, \
+                         date_start=timezone.now(), \
+                         date_end=timezone.now() + timezone.timedelta(days=45), \
+                         description=self.fake.text(5000), \
+                         partners_title='Заголовок для блока с партнерами акции', \
+                         image_card=DUMMY_IMG, \
+                         image_detail=DUMMY_IMG)
+        action.save()
+        print(f'[Actions] created {action.title}')
+
+        for _ in range(8):
+            self._create_ActionsPartner(action.id)
 
 
     """ [ObjectSite] """
@@ -303,12 +332,12 @@ class GenerateContent:
                                          entresol=self.fake.boolean(chance_of_getting_true=30), \
                                          wardrobe=self.fake.boolean(chance_of_getting_true=40), \
                                          finish_type=self.get_random_list_item(finishing_types_list), \
-                                         image_planning=DUMMY_IMG_NAME, \
-                                         image_planning3d=DUMMY_IMG_NAME, \
-                                         image_floor=DUMMY_IMG_NAME, \
-                                         image_section=DUMMY_IMG_NAME, \
-                                         image_section_in_object=DUMMY_IMG_NAME, \
-                                         image_genplan=DUMMY_IMG_NAME
+                                         image_planning=DUMMY_IMG, \
+                                         image_planning3d=DUMMY_IMG, \
+                                         image_floor=DUMMY_IMG, \
+                                         image_section=DUMMY_IMG, \
+                                         image_section_in_object=DUMMY_IMG, \
+                                         image_genplan=DUMMY_IMG
                                         )
                 object_site.save()
 
@@ -368,10 +397,10 @@ class GenerateContent:
         if Bank.objects.all().count() > 0:
             print('[Bank] already created')
         else:
-            bank = Bank(name='РНКБ', logo=DUMMY_IMG_NAME)
+            bank = Bank(name='РНКБ', logo=DUMMY_IMG)
             bank.save()
 
-            bank = Bank(name='Банк Россия', logo=DUMMY_IMG_NAME)
+            bank = Bank(name='Банк Россия', logo=DUMMY_IMG)
             bank.save()
             print('[Bank] are created')
 
@@ -401,7 +430,7 @@ class GenerateContent:
             gallery = ObjectGallery.objects.get(pk=gallery_id)
 
             for _ in range(qty):
-                gallery_image = ObjectGalleryImage(gallery=gallery, image=DUMMY_IMG_NAME)
+                gallery_image = ObjectGalleryImage(gallery=gallery, image=DUMMY_IMG)
                 gallery_image.save()
             print(f'[GalleryImage] created for Gallery {gallery_id}')
 
@@ -440,7 +469,7 @@ class GenerateContent:
                 object = Object.objects.get(pk=object_id)
                 object_document_author = ObjectDocumentAuthor.objects.first()
 
-                object_document = ObjectDocument(object=object, title=document_fake_title, author=object_document_author, file=DUMMY_DOC_NAME)
+                object_document = ObjectDocument(object=object, title=document_fake_title, author=object_document_author, file=DUMMY_DOCUMENT)
                 object_document.save()
                 print(f'[ObjectDocument "{document_fake_title}"] created for Object {object_id}')
 
@@ -511,7 +540,7 @@ class GenerateContent:
 
         if count_info_tabs_rel_to_object == 0:
             for info_tab in object_info_tab_icons_list:
-                object_info_tab = ObjectInfoTab(object=object, icon_name=info_tab, description=self.fake.text(300), image=DUMMY_IMG_NAME)
+                object_info_tab = ObjectInfoTab(object=object, icon_name=info_tab, description=self.fake.text(300), image=DUMMY_IMG)
                 object_info_tab.save()
                 print(f'[ObjectInfoTab "{info_tab}"] created for Object {object_id}')
 
@@ -523,7 +552,7 @@ class GenerateContent:
         if count_files_rel_to_object == 0:
             for file_type in file_types_list:
                 object = Object.objects.get(pk=object_id)
-                object_file = ObjectFile(object=object, name=file_type, file=DUMMY_DOC_NAME)
+                object_file = ObjectFile(object=object, name=file_type, file=DUMMY_DOCUMENT)
                 object_file.save()
                 print(f'[ObjectFile {file_type}] created for Object {object_id}')
 
@@ -554,8 +583,8 @@ class GenerateContent:
                         building_type='monolith', \
                         city=self.fake.word(cities_list),\
                         address='ул. Ленина 12', \
-                        genplan=DUMMY_IMG_NAME, \
-                        main_image=DUMMY_IMG_NAME, \
+                        genplan=DUMMY_IMG, \
+                        main_image=DUMMY_IMG, \
                         webcam='https://rtsp.me/embed/3KASrTkG/', \
                         panoram='https://monolit360.com/files/main/index.html?s=pano1692', \
                     )
@@ -567,12 +596,12 @@ class GenerateContent:
 
 
     def fillEntireSite(self, quantity):
-        # 1. Create Objects
+        # Create Objects
         for _ in range(quantity):
             self._create_Object()
         print('\n')
 
-        # 2. Fill related to Objects models with content
+        # Fill related to Objects models with content
         for object_id in self._get_objects_ids_list():
             self._create_ObjectVideo(object_id, 4)
             self._create_ObjectFile(object_id)
@@ -581,37 +610,38 @@ class GenerateContent:
             self._create_ObjectSection(object_id)
             self._create_ObjectGallery(object_id, ['Март 2019', 'Август 2019', 'Сентябрь 2019'])
 
-        # 3. Fill Objects with Documents
+        # Fill Objects with Documents
         self._create_ObjectDocumentAuthor()
 
         for object_id in self._get_objects_ids_list():
             self._create_ObjectDocument(object_id, 53)
 
-        # 4. Fill Mortgage
+        # Fill Mortgage
         self._create_WayToBuy()
 
         if self.countModelObjects(Bank) < 3:
             for _ in range(3):
                 self._create_Bank()
 
-        # if self.countModelObjects(Offer) < 7:
-        #     for _ in range(7):
-        #         self._create_Offer()
-
         self._create_Offer()
 
-        # 5. Generate Flats and apartments
+        # Generate Flats and apartments
         for object_id in self._get_objects_ids_list():
             self._create_ObjectSite(object_id)
 
-        # 6. Generate News
+        # Generate News
         self._create_NewsCategory()
 
         if self.countModelObjects(News) < 200:
             for _ in range(25):
                 self._create_News()
 
-        # Company
+        # Generate Actions
+        if self.countModelObjects(Actions) < 18:
+            for _ in range(18):
+                self._create_Actions()
+
+        # Company generator
         if self.countModelObjects(Certificate) < 8:
             for _ in range(8):
                 self._create_Certificate()

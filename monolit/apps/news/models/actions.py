@@ -32,7 +32,7 @@ class Actions(models.Model):
     partners_title = models.CharField('Заголовок для партнеров', max_length=255, blank=True, null=True)
 
     image_card     = ProcessedImageField(upload_to=actions_image_upload_path,
-                                           processors=[ResizeToFill(1024, 768)],
+                                           processors=[ResizeToFill(1440, 900)],
                                            format='JPEG',
                                            options={'quality': 70},
                                            verbose_name='Изображение для карточки', blank=True, null=True)
