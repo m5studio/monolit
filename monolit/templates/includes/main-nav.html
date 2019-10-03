@@ -6,8 +6,18 @@
             <nav id="main-navigation" class="main-nav" role="navigation">
                 <ul class="main-nav__list">
                     {% url 'object:list' as object_list_url %}
-                    <li class="main-nav__item{% if object_list_url == request.path or object_list_url in request.path %} active{% endif %}">
-                        <a href="{{ object_list_url }}" class="main-nav__link" title="Жилые комплексы, Бизнес-центры, Торговые центры в продаже">Объекты</a>
+                    <li class="main-nav__item{% if object_list_url == request.path or object_list_url in request.path %} active{% endif %} has-dropdown"">
+                        <a href="{{ object_list_url }}" class="main-nav__link" title="Жилые и коммерческие объекты">Объекты</a>
+                        <div class="dropdown">
+                            <ul class="main-nav-submenu__list">
+                                <li class="main-nav-submenu__item">
+                                    <a href="{{ objects_site_list_url }}" class="main-nav-submenu__link">Жилые объекты</a>
+                                </li>
+                                <li class="main-nav-submenu__item">
+                                    <a href="" class="main-nav-submenu__link">Коммерческие объекты</a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
 
                     {% url 'object:site-list' as objects_site_list_url %}
@@ -17,10 +27,10 @@
                         <div class="dropdown">
                             <ul class="main-nav-submenu__list">
                                 <li class="main-nav-submenu__item{% if objects_site_list_url == request.path or objects_site_list_url in request.path %} active{% endif %}">
-                                    <a href="{{ objects_site_list_url }}" class="main-nav-submenu__link">Квартиры и апартаменты</a>
+                                    <a href="{{ objects_site_list_url }}" class="main-nav-submenu__link">Жилая</a>
                                 </li>
                                 <li class="main-nav-submenu__item">
-                                    <a href="" class="main-nav-submenu__link">Коммерческая недвижимость</a>
+                                    <a href="" class="main-nav-submenu__link">Коммерческая</a>
                                 </li>
                             </ul>
                         </div>
