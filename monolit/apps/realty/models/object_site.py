@@ -93,7 +93,6 @@ class ObjectSite(models.Model):
     SITE_TYPES = (
         ('flat', 'Квартира'),
         ('apartments', 'Апартаменты'),
-        # ('commercial', 'Коммерческое помещение'),
     )
 
     ROOMS_QTY = (

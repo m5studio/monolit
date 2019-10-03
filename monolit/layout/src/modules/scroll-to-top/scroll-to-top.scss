@@ -1,25 +1,21 @@
 #scroll-to-top {
-    background-color: white;
-    border-radius: 100%;
-    box-shadow: 0 5px 5px rgba(0, 0, 0, .2);
+    background-color: rgba(238, 238, 238, .3);
 
     background-image: url('images/scroll-top-arrow-green.svg');
     background-repeat: no-repeat;
-    background-position: 50% 50%;
+    background-position: 50% 37%;
     background-size: 50%;
 
-    // display: block;
-    width: 64px;
-    height: 64px;
+    width: 55px;
+    height: 100vh;
 
     position: fixed;
-    right: 15px;
-    bottom: 5vh;
+    left: 0;
+    bottom: 0;
 
     text-indent: -9999px;
-    opacity: .45;
-    z-index: 50;
-    transition: opacity ease-in-out .3s;
+    z-index: 40;
+    transition: all ease-in-out .3s;
 
     @include media-breakpoint-down(md) {
         display: none !important;
@@ -27,6 +23,6 @@
 
     &:hover {
         cursor: pointer;
-        opacity: .9;
+        background-color: rgba(238, 238, 238, .5);
     }
 }
