@@ -33,6 +33,9 @@
             @media (min-width: 1200px) and (max-width: 1420px) {
                 font-size: 1.1rem;
             }
+            @include media-breakpoint-down(sm) {
+                font-size: 1.3rem;
+            }
 
             &:hover {
                 color: #0baca2;

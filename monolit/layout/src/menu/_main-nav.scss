@@ -318,15 +318,14 @@ $main_nav_toggle: "#main-navigationToggle";
                     }
 
                     ul.main-nav-submenu__list {
-                        margin-top: 15px;
                         margin-left: 30px;
 
                         li.main-nav-submenu__item {
-                            margin-bottom: 10px;
+                            margin-bottom: 5px;
 
                             a.main-nav-submenu__link {
                                 color: rgba(255, 255, 255, .75);
-                                font-size: 1.3rem;
+                                font-size: 1.4rem;
 
                                 &:focus,
                                 &:hover {
@@ -372,7 +371,7 @@ $main_nav_toggle: "#main-navigationToggle";
         &.opened {
             width: 100vw;
             height: 100vh;
-            padding: 7vh 0 0 15vh;
+            padding: 5vh 0 0 12vh;
         }
     }
 }

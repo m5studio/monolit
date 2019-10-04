@@ -11,7 +11,6 @@ import datetime
 import django.core.validators
 from django.db import migrations, models
 import django.db.models.deletion
-import location_field.models.plain
 
 
 class Migration(migrations.Migration):
@@ -38,7 +37,6 @@ class Migration(migrations.Migration):
                 ('building_type', models.CharField(blank=True, choices=[('monolith', 'Монолитный'), ('monolith_frame', 'Монолитно-каркасный'), ('panel', 'Панельный')], max_length=100, null=True, verbose_name='Тип Здания')),
                 ('city', models.CharField(blank=True, choices=[('alushta', 'Алушта'), ('evpatoriya', 'Евпатория'), ('simferopol', 'Симферополь'), ('yalta', 'Ялта')], max_length=100, null=True, verbose_name='Город')),
                 ('address', models.CharField(blank=True, help_text='Город, улица, номер дома (для завершенных/построенных объектов)', max_length=255, null=True, verbose_name='Адрес')),
-                ('location', location_field.models.plain.PlainLocationField(blank=True, default='44.952117,34.10241700000006', help_text='Географические координаты: широта, долгота', max_length=63, null=True, verbose_name='Локация')),
                 ('description', ckeditor.fields.RichTextField(blank=True, null=True, verbose_name='Описание')),
                 ('genplan', models.ImageField(blank=True, help_text='Изображение с генпланом', null=True, upload_to=apps.realty.models.object.genplan_upload_path, verbose_name='Генплан')),
                 ('genplan_svg', models.TextField(blank=True, null=True, verbose_name='SVG объекты на генплане')),

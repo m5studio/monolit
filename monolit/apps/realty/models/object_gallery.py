@@ -24,8 +24,7 @@ class ObjectGallery(models.Model):
 
     class Meta:
         verbose_name = 'Галерея Объекта'
-        # verbose_name_plural = 'Объекты (Фото Галереи этапов строительства)'
-        verbose_name_plural = 'Фото Галереи этапов строительства Объектов'
+        verbose_name_plural = 'Фото Галереи Объектов'
 
 
 def image_upload_path(instance, filename):
@@ -40,10 +39,7 @@ def image_upload_path(instance, filename):
 class ObjectGalleryImage(models.Model):
     gallery     = models.ForeignKey(ObjectGallery, verbose_name='Галерея', on_delete=models.CASCADE)
     image       = models.ImageField('Изображение', upload_to=image_upload_path)
-    image_thumb = ImageSpecField(source='image',
-                                           # processors=[ResizeToFill(256, 256)],
-                                           processors=[ResizeToFit(256, 256)],
-                                           options={'quality': 70})
+    image_thumb = ImageSpecField(source='image', processors=[ResizeToFit(256, 256)], options={'quality': 70})
 
     class Meta:
         verbose_name = 'Изображение'

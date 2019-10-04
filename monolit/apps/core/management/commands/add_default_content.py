@@ -2,7 +2,6 @@
 
 from django.core.management.base import BaseCommand, CommandError
 
-from apps.realty.models.object import ObjectCategory
 from apps.realty.models.object_site import ObjectSiteWindowsView
 from apps.core.models import SiteSettings
 from apps.mortgage.models import WayToBuy
@@ -24,8 +23,8 @@ class Command(BaseCommand):
 
     # Let's fire it up
     def handle(self, *args, **options):
-        obj_categories = ['Жилой', 'Коммерческий']
-        self._add_content_to_db(ObjectCategory, obj_categories)
+        # obj_categories = ['Жилой', 'Коммерческий']
+        # self._add_content_to_db(ObjectCategory, obj_categories)
 
         window_views = ['Во двор', 'Улица', 'Море', 'Озеро', 'Горы']
         self._add_content_to_db(ObjectSiteWindowsView, window_views)

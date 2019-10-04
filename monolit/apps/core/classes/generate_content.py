@@ -7,7 +7,7 @@ from faker import Faker
 from django.utils.text import slugify
 from transliterate import translit
 
-from apps.realty.models.object import Object, ObjectCategory
+from apps.realty.models.object import Object
 from apps.realty.models.object_video import ObjectVideo
 from apps.realty.models.object_file import ObjectFile
 from apps.realty.models.object_document import ObjectDocumentAuthor, ObjectDocument
@@ -570,7 +570,6 @@ class GenerateContent:
 
     def _create_Object(self):
         name = f'Объект {self.fake.word()} {self.fake.word()} {str(self.fake.random_number(4, True))}'.title()
-        cities_list = self.convert_tuple_to_flat_list(Object.CITIES)
         fake = Faker()
         object = Object(completed=self.fake.boolean(chance_of_getting_true=40), \
                         all_sold=self.fake.boolean(chance_of_getting_true=30), \
@@ -579,9 +578,7 @@ class GenerateContent:
                         name=name, \
                         slug=slugify(translit(name, 'ru', reversed=True)), \
                         description=self.fake.text(1000), \
-                        object_type='living_complex', \
                         building_type='monolith', \
-                        city=self.fake.word(cities_list),\
                         address='ул. Ленина 12', \
                         genplan=DUMMY_IMG, \
                         main_image=DUMMY_IMG, \
@@ -590,8 +587,7 @@ class GenerateContent:
                     )
         object.save()
         # Set ManyToMany categories
-        object.category.set([1, 2])
-        # object.category.set([1])
+        # object.category.set([1, 2])
         print(f'[Object] (ID: {object.id}) created "{name}"')
 
 

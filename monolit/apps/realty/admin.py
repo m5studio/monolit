@@ -16,7 +16,7 @@ from apps.realty.models.object_site_balcony import ObjectBalcony
 from apps.realty.models.object_site_bathroom import ObjectBathroom
 from apps.realty.models.object_site import ObjectSiteWindowsView, ObjectSite
 from apps.realty.models.object_video import ObjectVideo
-from apps.realty.models.object import ObjectCategory, Object
+from apps.realty.models.object import Object
 
 
 """ [ ObjectBathroom ] """
@@ -219,13 +219,6 @@ class ObjectInfoTabAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.ModelAdm
 """ [ END ObjectInfoTab ] """
 
 
-""" [ ObjectCategory ] """
-@admin.register(ObjectCategory)
-class ObjectCategory(TurnOffAdminLogging, HideFromAdminIndex, admin.ModelAdmin):
-    search_fields = ['name']
-""" [ END ObjectCategory ] """
-
-
 """ [ Object ] """
 @admin.register(Object)
 class ObjectAdmin(TurnOffAdminLogging, admin.ModelAdmin):
@@ -244,7 +237,7 @@ class ObjectAdmin(TurnOffAdminLogging, admin.ModelAdmin):
             'fields': ('active', 'completed', 'all_sold', 'partnership')
         }),
         (None, {
-            'fields': ('order', 'crm_id', 'name', 'slug', 'category', 'object_type', 'building_type', 'description', 'webcam', 'panoram'),
+            'fields': ('order', 'crm_id', 'name', 'slug', 'building_type', 'description', 'webcam', 'panoram'),
             # 'description': 'Some description if needed'
         }),
         ('Главное изображение', {
@@ -253,27 +246,12 @@ class ObjectAdmin(TurnOffAdminLogging, admin.ModelAdmin):
         ('Генплан', {
             'fields': ('genplan_thumb', 'genplan', 'genplan_svg')
         }),
-        ('Адрес и локация', {
-            'fields': ('city', 'address', 'location')
+        ('Адрес', {
+            'fields': ('address',)
         }),
     )
     list_display = ('name', 'crm_id', 'order', 'active', 'all_sold', 'partnership', 'updated')
     list_editable = ('order', 'active')
     search_fields = ['name']
     ordering = ('order',)
-    autocomplete_fields = ['category']
-
-    # Conditionals for fieldsets
-    # def get_fieldsets(self, request, obj=None):
-    #     if obj:
-    #         return [(None, {'fields': ('active', 'completed', 'order', 'crm_id', 'name', 'slug', 'category', 'object_type', 'building_type', 'description', 'has_military', 'has_mother', 'webcam', 'panoram')})]
-    #     return [(None, {'fields': ('active', 'completed', 'order', 'crm_id', 'name', 'slug', 'category')})]
-
-    # Conditionals for inlines
-    # def get_formsets_with_inlines(self, request, obj=None):
-    #     for inline in self.get_inline_instances(request, obj):
-    #         # hide ObjectSectionInline in the add view
-    #         if not isinstance(inline, ObjectSectionInline) or obj is not None:
-    #             yield inline.get_formset(request, obj), inline
-
 """ [ END Object ] """

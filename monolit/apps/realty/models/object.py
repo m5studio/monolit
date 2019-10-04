@@ -7,7 +7,6 @@ from django.urls import reverse
 from django.utils.html import mark_safe
 
 from ckeditor.fields import RichTextField
-from location_field.models.plain import PlainLocationField
 
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
@@ -17,11 +16,11 @@ from apps.core.classes.file_processing import FileProcessing
 from apps.core.classes.image_optimizer import ImageOptimizer
 
 
-class ObjectCategory(models.Model):
-    name = models.CharField('Название категории', max_length=255)
-
-    def __str__(self):
-        return self.name
+# class ObjectCategory(models.Model):
+#     name = models.CharField('Название категории', max_length=255)
+#
+#     def __str__(self):
+#         return self.name
 
 
 def genplan_upload_path(instance, filename):
@@ -37,25 +36,25 @@ def image_upload_path(instance, filename):
     return 'objects/{object_crm_id}/images/{filename}'.format(object_crm_id=object_crm_id, filename=filename)
 
 class Object(models.Model):
-    OBJECT_TYPES = (
-        ('business_center', 'Бизнес центр'),
-        ('city', 'Город'),
-        ('living_house', 'Жилой дом'),
-        ('living_quarter', 'Жилой квартал'),
-        ('living_complex', 'Жилой комплекс'),
-        ('resort_complex', 'Курортный комплекс'),
-        ('multipurposes_complex', 'Многофункциональный комплекс'),
-        ('family_quarter', 'Семейный квартал'),
-        ('business_and_retail_center', 'Торгово-офисный центр'),
-        ('mall', 'Торговый центр'),
-    )
+    # OBJECT_TYPES = (
+    #     ('business_center', 'Бизнес центр'),
+    #     ('city', 'Город'),
+    #     ('living_house', 'Жилой дом'),
+    #     ('living_quarter', 'Жилой квартал'),
+    #     ('living_complex', 'Жилой комплекс'),
+    #     ('resort_complex', 'Курортный комплекс'),
+    #     ('multipurposes_complex', 'Многофункциональный комплекс'),
+    #     ('family_quarter', 'Семейный квартал'),
+    #     ('business_and_retail_center', 'Торгово-офисный центр'),
+    #     ('mall', 'Торговый центр'),
+    # )
 
-    CITIES = (
-        ('alushta', 'Алушта'),
-        ('evpatoriya', 'Евпатория'),
-        ('simferopol', 'Симферополь'),
-        ('yalta', 'Ялта'),
-    )
+    # CITIES = (
+    #     ('alushta', 'Алушта'),
+    #     ('evpatoriya', 'Евпатория'),
+    #     ('simferopol', 'Симферополь'),
+    #     ('yalta', 'Ялта'),
+    # )
 
     BUILDING_TYPES = (
         ('monolith', 'Монолитный'),
@@ -71,18 +70,11 @@ class Object(models.Model):
     crm_id        = models.CharField('CRM ID', max_length=100, unique=True, help_text='ID объекта в 1C (Заполняется автоматически при выгрузке)')
     name          = models.CharField('Название объекта', unique=True, max_length=255, db_index=True)
     slug          = models.SlugField('URL адрес', max_length=100, unique=True, help_text='e.g.: status-house (max 100 chars), получим https://monolit.site/objects/status-house/')
-    category      = models.ManyToManyField(ObjectCategory, verbose_name='Категория объекта', help_text='Выберите категорию(и) объекта недвижимости')
-    object_type   = models.CharField('Тип Объекта', max_length=100, choices=OBJECT_TYPES, blank=True, null=True)
     building_type = models.CharField('Тип Здания', max_length=100, choices=BUILDING_TYPES, blank=True, null=True)
-    city          = models.CharField('Город', max_length=100, choices=CITIES, blank=True, null=True)
     address       = models.CharField('Адрес', max_length=255, blank=True, null=True, help_text='Город, улица, номер дома (для завершенных/построенных объектов)')
-    location      = PlainLocationField(verbose_name='Локация', blank=True, null=True, based_fields=['address'], default='44.952117,34.10241700000006', help_text='Географические координаты: широта, долгота')
     description   = RichTextField('Описание', blank=True, null=True)
     genplan       = models.ImageField('Генплан', upload_to=genplan_upload_path, blank=True, null=True, help_text='Изображение с генпланом')
     genplan_svg   = models.TextField('SVG объекты на генплане', blank=True, null=True)
-
-    # mortgage_military = models.BooleanField('Военная ипотека', default=False, help_text='Подходит ли данный объект под условия Военной ипотеки?')
-    # mortgage_mother   = models.BooleanField('Материнский капитал', default=False, help_text='Подходит ли данный объект под оплату Материнским капиталом?')
 
     webcam        = models.URLField('Cсылка на web-камеру', blank=True, null=True, help_text='e.g.: https://rtsp.me/embed/3KASrTkG/')
     panoram       = models.URLField('Cсылка на панораму', blank=True, null=True, help_text='e.g.: https://monolit360.com/files/main/index.html?s=pano1692')
@@ -110,7 +102,7 @@ class Object(models.Model):
 
     class Meta:
         verbose_name = 'Объект'
-        verbose_name_plural = 'Объекты (Жилые, Коммерческие)'
+        verbose_name_plural = 'Объекты (Жилые)'
 
 
 @receiver(post_save, sender=Object)
