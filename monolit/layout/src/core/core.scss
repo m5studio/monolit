@@ -58,15 +58,6 @@ body {
                 padding: 0 25px;
             }
 
-            .link-dark {
-                @extend .link-transparent;
-                background: linear-gradient(180deg, rgba(0, 0, 0, .4), transparent), #4d4d4d;
-
-                &:hover {
-                    color: #CCC;
-                }
-            }
-
             .link-green {
                 @extend .link-transparent;
                 background: linear-gradient(180deg, rgba(0, 0, 0, .4), transparent), #0baca2;
@@ -79,19 +70,9 @@ body {
 
             #ht-left {
                 display: flex;
-
-                @include media-breakpoint-only(md) {
-                    .link-dark {
-                        font-size: .75rem;
-                        padding: 0 15px;
-                    }
-                }
+                
                 @include media-breakpoint-down(sm) {
                     display: none;
-
-                    .link-dark {
-                        display: none;
-                    }
                 }
             }
 
