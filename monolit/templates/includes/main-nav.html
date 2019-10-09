@@ -23,7 +23,7 @@
                     {% url 'object:site-list' as objects_site_list_url %}
                     {% url 'object:site-detail' as objects_site_detail_url %}
                     <li class="main-nav__item{% if objects_site_list_url == request.path or objects_site_list_url in request.path %} active{% endif %} has-dropdown">
-                        <a href="{{ objects_site_list_url }}" class="main-nav__link">Выбор недвижимости</a>
+                        <a href="{{ objects_site_list_url }}" class="main-nav__link">Недвижимость</a>
                         <div class="dropdown">
                             <ul class="main-nav-submenu__list">
                                 <li class="main-nav-submenu__item{% if objects_site_list_url == request.path or objects_site_list_url in request.path %} active{% endif %}">
@@ -72,7 +72,7 @@
                         <div class="dropdown">
                             <ul class="main-nav-submenu__list">
                                 <li class="main-nav-submenu__item{% if company_mission_url == request.path %} active{% endif %}">
-                                    <a href="{{ company_mission_url }}" class="main-nav-submenu__link">Миссия и ценности</a>
+                                    <a href="{{ company_mission_url }}" class="main-nav-submenu__link">Миссия</a>
                                 </li>
                                 <li class="main-nav-submenu__item{% if company_history_url == request.path %} active{% endif %}">
                                     <a href="{{ company_history_url }}" class="main-nav-submenu__link">История</a>
@@ -90,7 +90,7 @@
                                     <a href="{{ company_job_url }}" class="main-nav-submenu__link">Вакансии</a>
                                 </li>
                                 <li class="main-nav-submenu__item{% if company_partnership_url == request.path %} active{% endif %}">
-                                    <a href="{{ company_partnership_url }}" class="main-nav-submenu__link">Партнерская программа</a>
+                                    <a href="{{ company_partnership_url }}" class="main-nav-submenu__link">Партнерам</a>
                                 </li>
                                 <li class="main-nav-submenu__item{% if company_tenders_url == request.path %} active{% endif %}">
                                     <a href="{{ company_tenders_url }}" class="main-nav-submenu__link">Тендеры</a>

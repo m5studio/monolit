@@ -8,7 +8,7 @@ class MortgageView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['page_tite'] = 'Ипотека'
+        context['page_title'] = 'Ипотека'
         context['mortgage_offers'] = Offer.objects.all().order_by('title')
         return context
 
@@ -18,7 +18,7 @@ class MortgageCorporactiveView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['page_tite'] = 'Корпорактив'
+        context['page_title'] = 'Корпорактив'
         return context
 
 
@@ -27,7 +27,7 @@ class MortgageMilitaryView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['page_tite'] = 'Военная ипотека'
+        context['page_title'] = 'Военная ипотека'
 
         # Check if object id=1 in WayToBuy exists and military is not None
         context['objects_military'] = None
@@ -43,5 +43,5 @@ class MortgageMotherView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['page_tite'] = 'Материнский капитал'
+        context['page_title'] = 'Материнский капитал'
         return context

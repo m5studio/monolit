@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {# <title>{{ page_title }} | {{ settings.site_title }}</title> #}
+
     <title>{% spaceless %}
         {% if request.path == '/' %}
             {% if settings.site_title %}{{ settings.site_title }}{% endif %}
@@ -10,6 +12,7 @@
             {{ page_title }} | {{ settings.site_title }}
         {% endif %}
     {% endspaceless %}</title>
+
     <meta name="description" content="{% spaceless %}
         {% if page_meta_description %}
             {{ page_meta_description }}
@@ -29,11 +32,8 @@
         <div id="header__top">
             <div id="header__top--inner" class="container">
                 <div id="ht-left">
-                    {% comment %}
-                    <!-- <a href="#" class="link-dark">Жилая недвижимость</a>
-                    <a href="#" class="link-dark">Коммерческая недвижимость</a> -->
-                    {% endcomment %}
-                    <a href="{% url 'object:site-list' %}" class="link-green">Жилая недвижимость</a>
+                    {% url 'object:site-list' as objects_site_list_url %}
+                    <a href="{{ objects_site_list_url }}" class="link-green{% if objects_site_list_url == request.path or objects_site_list_url in request.path %} active{% endif %}">Жилая недвижимость</a>
                     <a href="" class="link-green">Коммерческая недвижимость</a>
                 </div>
                 <div class="ht-empty"></div>

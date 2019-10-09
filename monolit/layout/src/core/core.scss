@@ -54,15 +54,12 @@ body {
                 }
             }
 
-            .link-transparent {
-                padding: 0 25px;
-            }
-
             .link-green {
-                @extend .link-transparent;
                 background: linear-gradient(180deg, rgba(0, 0, 0, .4), transparent), #0baca2;
+                padding: 0 25px;
 
-                &:hover {
+                &:hover,
+                &.active {
                     background: linear-gradient(180deg, rgba(0, 0, 0, .4), transparent), #0ec2b7;
                     color: white;
                 }
@@ -70,7 +67,7 @@ body {
 
             #ht-left {
                 display: flex;
-                
+
                 @include media-breakpoint-down(sm) {
                     display: none;
                 }

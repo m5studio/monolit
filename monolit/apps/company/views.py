@@ -23,7 +23,7 @@ class CompanyView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['page_tite'] = 'О компании'
+        context['page_title'] = 'О компании'
         context['certificates'] = Certificate.objects.all()
         return context
 
@@ -33,7 +33,7 @@ class CompanyMissionView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['page_tite'] = 'Миссия и ценности'
+        context['page_title'] = 'Миссия и ценности'
         return context
 
 
@@ -42,7 +42,7 @@ class CompanyManagementView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['page_tite'] = 'Менеджмент'
+        context['page_title'] = 'Менеджмент'
         context['management'] = Management.objects.all().order_by('order')
         return context
 
@@ -52,7 +52,7 @@ class CompanyResponsibilityView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['page_tite'] = 'Социальная ответственность'
+        context['page_title'] = 'Социальная ответственность'
         context['responsibilities'] = Responsibility.objects.all().order_by('order')
         return context
 
@@ -62,7 +62,7 @@ class CompanyJobView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['page_tite'] = 'Работа в компании'
+        context['page_title'] = 'Работа в компании'
         context['job_blocks'] = JobBlock.objects.all().order_by('order')
         context['job_vacancies'] = JobVacancy.objects.all().order_by('order')
         return context
@@ -73,7 +73,7 @@ class CompanyHistoryView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['page_tite'] = 'История компании'
+        context['page_title'] = 'История компании'
         context['history'] = History.objects.all().order_by('-year')
         return context
 
@@ -83,7 +83,7 @@ class CompanyStructureView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['page_tite'] = 'Стурктура компании'
+        context['page_title'] = 'Стурктура компании'
         context['structure'] = Structure.objects.all().order_by('order')
         return context
 
@@ -93,7 +93,7 @@ class CompanyPartnershipView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['page_tite'] = 'Партнерская программа'
+        context['page_title'] = 'Партнерская программа'
         context['partners'] = Partner.objects.all().order_by('order')
         context['objects_partnership'] = Object.objects.filter(active=True, all_sold=False, partnership=True).order_by('?')
         return context
@@ -104,7 +104,7 @@ class CompanyTendersView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['page_tite'] = 'Тендеры'
+        context['page_title'] = 'Тендеры'
         context['tenders_categories'] = Tender.CATEGORIES
         context['tender_files'] = TenderFile.objects.all()
         context['tenders'] = Tender.objects.all().order_by('-active', 'date_end')
@@ -166,7 +166,7 @@ class CompanyTendersFaqView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['page_tite'] = 'Вопросы-ответы по Тендерам'
+        context['page_title'] = 'Вопросы-ответы по Тендерам'
         context['tenders_faq'] = TenderFaq.objects.filter(active=True).order_by('order')
         return context
 
@@ -176,7 +176,7 @@ class ContactsView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['page_tite'] = 'Контакты'
+        context['page_title'] = 'Контакты'
         context['contacts_group'] = ContactsGroup.objects.all()
         context['contacts_items'] = ContactsItem.objects.all()
         return context
