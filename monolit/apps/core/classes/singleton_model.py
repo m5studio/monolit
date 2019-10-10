@@ -46,12 +46,12 @@ class SingletonAdminModel(TurnOffAdminLogging, admin.ModelAdmin):
         return super().has_add_permission(request)
 
     # Turn off logging History
-    def log_addition(self, *args):
-        return
-
-    def log_change(self, *args):
-        return
-
-    def log_deletion(self, *args):
-        return
+    # def log_addition(self, *args):
+    #     return
+    #
+    # def log_change(self, *args):
+    #     return
+    #
+    # def log_deletion(self, *args):
+    #     return
     # END Turn off logging History
