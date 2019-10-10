@@ -58,6 +58,11 @@ body {
                 background: linear-gradient(180deg, rgba(0, 0, 0, .4), transparent), #0baca2;
                 padding: 0 25px;
 
+                @include media-breakpoint-only(md) {
+                    font-size: .8rem;
+                    padding: 0 10px;
+                }
+
                 &:hover,
                 &.active {
                     background: linear-gradient(180deg, rgba(0, 0, 0, .4), transparent), #0ec2b7;
@@ -127,7 +132,7 @@ body {
                 }
 
                 a#ht-callback {
-                    @include media-breakpoint-down(sm) {
+                    @include media-breakpoint-down(xs) {
                         &.link-green {
                             padding: 0 15px;
                         }
@@ -142,6 +147,10 @@ body {
         box-shadow: 0 4px 4px rgba(0, 0, 0, .1);
         height: 70px;
 
+        @include media-breakpoint-down(lg) {
+            height: 60px;
+        }
+
         &--inner {
             display: grid;
             grid-template-rows: 70px;
@@ -151,12 +160,18 @@ body {
             }
             @include media-breakpoint-down(lg) {
                 grid-template-columns: 250px 1fr 70px;
+                grid-template-rows: 60px;
             }
-            @include media-breakpoint-down(sm) {
+            @include media-breakpoint-only(sm) {
                 grid-template-columns: 210px 1fr 70px;
+            }
+            @include media-breakpoint-down(xs) {
+                grid-template-columns: 160px 1fr 70px;
             }
 
             a {
+                line-height: 1.2;
+
                 &:focus,
                 &:hover {
                     text-decoration: none;
@@ -167,11 +182,14 @@ body {
                 background-image: url('images/logo-monolit-text.svg');
                 background-repeat: no-repeat;
                 background-position: 0 50%;
-                background-size: 204px 40px;
+                background-size: 204px auto;
                 text-indent: -9999px;
 
-                @include media-breakpoint-down(xs) {
-                    background-size: 100% 40px;
+                @include media-breakpoint-only(md) {
+                    background-size: 190 auto;
+                }
+                @include media-breakpoint-down(sm) {
+                    background-size: 100% auto;
                 }
 
                 &:focus,
@@ -191,7 +209,6 @@ body {
                 grid-template-columns: repeat(2, 1fr);
                 grid-column-gap: 15px;
                 align-items: center;
-                // overflow: hidden;
 
                 @include media-breakpoint-down(lg) {
                     order: 2;
@@ -210,14 +227,11 @@ body {
                     align-items: center;
 
                     @include media-breakpoint-up(md) {
-                        // grid-template-columns: 34px 128px;
                         grid-template-columns: 34px 1fr;
                     }
                     @include media-breakpoint-down(sm) {
                         display: none;
                     }
-                    // .icon {}
-                    // span {}
                 }
 
                 #favories {}
