@@ -16,6 +16,11 @@
             width: 40%;
             margin: 0 auto;
 
+            @include media-breakpoint-down(sm) {
+                font-size: 1.3rem;
+                width: 70%;
+            }
+
             &[name="load-more-news-btn"] {
                 &:hover {
                     // Animate load more dots

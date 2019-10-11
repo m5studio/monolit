@@ -12,14 +12,16 @@ function stickyMainNav() {
 }
 
 
-function toggleMainNav() {
+function mainNav() {
+
+    // Toggle main-nav
     const mainNav = $('#main-navigation')
-    const menuToggle = $('#main-navigationToggle')
+    const menuToggle = $('#main-navigation-toggle')
 
     const opened_class = 'opened'
     const body_overflow_class = 'body-overflow-hidden'
 
-    menuToggle.click(function() {
+    menuToggle.click(() => {
         if (mainNav.hasClass(opened_class)) {
             $('body').removeClass(body_overflow_class)
             $(this).removeClass(opened_class)
@@ -32,7 +34,34 @@ function toggleMainNav() {
             menuToggle.addClass(opened_class)
         }
     })
+
+    // Submenu behavior
+    $('.has-dropdown').each((index, el) => {
+        // wrap .main-nav__link
+        $(el).find('.main-nav__link').wrap(() => {
+            return '<div class="main-nav__link-wrap">' + $(this).text() + '</div>'
+        })
+
+        // Append open-sub- to wrapper
+        $(el).find('.main-nav__link-wrap').append('<span class="open-sub-nav"></span>')
+
+        $(el).find('.open-sub-nav').click(() => {
+            if ( $(el).find('.dropdown').hasClass('opened') ) {
+                $(el).find('.dropdown').removeClass('opened')
+            } else {
+                // Close other opened
+                $('#main-navigation').find('.dropdown').removeClass('opened')
+
+                $(el).find('.dropdown').addClass('opened')
+            }
+        })
+
+        // Make opened to active
+        if ( $(el).hasClass('active') ) {
+            $(el).find('.dropdown').addClass('opened')
+        }
+    })
 }
 
 
-export {stickyMainNav, toggleMainNav}
+export {stickyMainNav, mainNav}

@@ -1,6 +1,6 @@
 // https://css-tricks.com/snippets/sass/use-sass-variable-selector/
 $main_nav: ".main-nav";
-$main_nav_toggle: "#main-navigationToggle";
+$main_nav_toggle: "#main-navigation-toggle";
 
 // #main-navigation {}
 
@@ -46,7 +46,7 @@ $main_nav_toggle: "#main-navigationToggle";
     // Menu hamburger
     #{$main_nav_toggle} {
         // background-color: #00998f;
-        background-color: rgba(0, 153, 143, .7); 
+        background-color: rgba(0, 153, 143, 1);
         background-image: url('images/menu-hamburger.svg');
         background-repeat: no-repeat;
         background-position: 50% 50%;

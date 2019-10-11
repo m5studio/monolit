@@ -1,7 +1,7 @@
 import "./main.scss"
 import "./bootstrap/bootstrap"
 
-import {stickyMainNav, toggleMainNav} from "./menu/main-nav"
+import {stickyMainNav, mainNav} from "./menu/main-nav"
 
 // Fiters
 import {familyFiltersToggle} from "./filters/family-filters-toggle"
@@ -33,7 +33,7 @@ import '@fancyapps/fancybox'
 
 $(document).ready(function() {
 
-    toggleMainNav()
+    mainNav()
     stickyMainNav()
 
     // Search by site id
