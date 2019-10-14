@@ -13,7 +13,7 @@
 
     &__title-wrap {
         border-bottom: 1px solid #dadada;
-        padding: 15px 15px 15px 0;
+        padding: 15px 0 15px 0;
     }
 
     &__title {
@@ -26,6 +26,12 @@
         min-height: 48px;
 
         width: 93%;
+
+        @include media-breakpoint-down(sm) {
+            font-size: 1.3rem;
+            width: 100%;
+            padding-right: 48px;
+        }
     }
 
     &__descr {

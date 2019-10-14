@@ -42,23 +42,27 @@ function mainNav() {
             return '<div class="main-nav__link-wrap">' + $(this).text() + '</div>'
         })
 
-        // Append open-sub- to wrapper
+        // Append open-sub-nav to wrapper
         $(el).find('.main-nav__link-wrap').append('<span class="open-sub-nav"></span>')
 
         $(el).find('.open-sub-nav').click(() => {
             if ( $(el).find('.dropdown').hasClass('opened') ) {
                 $(el).find('.dropdown').removeClass('opened')
+                $(el).find('.open-sub-nav').removeClass('opened')
             } else {
                 // Close other opened
                 $('#main-navigation').find('.dropdown').removeClass('opened')
+                $('#main-navigation').find('.open-sub-nav').removeClass('opened')
 
                 $(el).find('.dropdown').addClass('opened')
+                $(el).find('.open-sub-nav').addClass('opened')
             }
         })
 
         // Make opened to active
         if ( $(el).hasClass('active') ) {
             $(el).find('.dropdown').addClass('opened')
+            $(el).find('.open-sub-nav').addClass('opened')
         }
     })
 }

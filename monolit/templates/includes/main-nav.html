@@ -103,15 +103,15 @@
                     </li>
 
                     {% url 'news:list' as news_list_url %}
-                    <li class="main-nav__item{% if news_list_url == request.path or news_list_url in request.path %} active{% endif %} has-dropdown">
+                    {% url 'news:actions-list' as actions_list_url %}
+                    <li class="main-nav__item{% if news_list_url == request.path or news_list_url in request.path or actions_list_url in request.path %} active{% endif %} has-dropdown">
                         <a href="{{ news_list_url }}" class="main-nav__link">Новости</a>
                         <div class="dropdown">
                             <ul class="main-nav-submenu__list">
-                                <li class="main-nav-submenu__item{% if news_list_url == request.path %} active{% endif %}">
-                                    <a href="{{ news_list_url }}" class="main-nav-submenu__link">Новости ГК Монолит</a>
+                                <li class="main-nav-submenu__item{% if news_list_url == request.path or news_list_url in request.path %} active{% endif %}">
+                                    <a href="{{ news_list_url }}" class="main-nav-submenu__link">Новости</a>
                                 </li>
 
-                                {% url 'news:actions-list' as actions_list_url %}
                                 <li class="main-nav-submenu__item{% if actions_list_url == request.path or actions_list_url in request.path %} active{% endif %}">
                                     <a href="{{ actions_list_url }}" class="main-nav-submenu__link">Акции</a>
                                 </li>
