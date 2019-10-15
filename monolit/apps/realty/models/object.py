@@ -15,6 +15,8 @@ from apps.core.classes.clean_media import CleanMedia
 from apps.core.classes.file_processing import FileProcessing
 from apps.core.classes.image_optimizer import ImageOptimizer
 
+from apps.realty.models.odject_types import ObjectTypes
+
 
 # class ObjectCategory(models.Model):
 #     name = models.CharField('Название категории', max_length=255)
@@ -70,6 +72,7 @@ class Object(models.Model):
     crm_id        = models.CharField('CRM ID', max_length=100, unique=True, help_text='ID объекта в 1C (Заполняется автоматически при выгрузке)')
     name          = models.CharField('Название объекта', unique=True, max_length=255, db_index=True)
     slug          = models.SlugField('URL адрес', max_length=100, unique=True, help_text='e.g.: status-house (max 100 chars), получим https://monolit.site/objects/status-house/')
+    object_type   = models.ForeignKey(ObjectTypes, verbose_name='Тип Объекта', on_delete=models.SET_NULL, blank=True, null=True)
     building_type = models.CharField('Тип Здания', max_length=100, choices=BUILDING_TYPES, blank=True, null=True)
     address       = models.CharField('Адрес', max_length=255, blank=True, null=True, help_text='Город, улица, номер дома (для завершенных/построенных объектов)')
     description   = RichTextField('Описание', blank=True, null=True)

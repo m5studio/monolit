@@ -1,7 +1,7 @@
 {% if object.genplan_svg or object.genplan %}
     <section id="section-object-genplan" class="common-section">
         <div class="common-section__title container">
-            <h2>Генплан &laquo;{{ object.get_object_type_display }} {{ object.name }}&raquo;</h2>
+            <h2>Генплан &laquo;<!-- FIXME: Object Type --> {{ object.name }}&raquo;</h2>
             <span class="common-section__title--right" title="Разположение солнца в разное время светового дня относительно объекта">
                 <span class="icon icon-64 icon-day-night"></span>
                 <a href="#" class="scale-line">Схема инсоляции</a>
@@ -9,7 +9,7 @@
         </div>
         <div id="section-object-genplan__image">
             {% if object.genplan %}
-                <img src="{{ object.genplan.url }}" alt="Генплан {{ object.get_object_type_display }} {{ object.name }}">
+                <img src="{{ object.genplan.url }}" alt="Генплан {{ object.name }}">
             {% endif %}
 
             {% if object.genplan_svg %}

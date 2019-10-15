@@ -21,11 +21,10 @@ class Command(BaseCommand):
         elif options['objects_qty'] > 10:
             self.stdout.write(self.style.ERROR('You can\'t generate more then 10 objects'))
         else:
-            # FIXME: need check this thing
             call_command('add_default_content')
 
-            gen = GenerateContent()
-            gen.fillEntireSite(options['objects_qty'])
+            generator = GenerateContent()
+            generator.fillEntireSite(options['objects_qty'])
 
 
     # self.stdout.write(self.style.ERROR('error message'))

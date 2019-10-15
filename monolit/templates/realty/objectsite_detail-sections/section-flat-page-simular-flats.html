@@ -1,6 +1,6 @@
 {% if simular_flats %}
     <div id="section-flat-page-simular-flats" class="flat-page-section container">
-        <div class="flat-page-section__title">Похожие квартиры в {{ object.object.get_object_type_display }} {{ object.object.name }}</div>
+        <div class="flat-page-section__title">Похожие квартиры в <!-- FIXME: Object Type --> {{ object.object.name }}</div>
         <div id="section-flat-page-simular-flats__inner" class="flat-page-section__content">
             <div id="flats-simular">
                 <div id="flats-simular__total">{{ simular_flats_count }}</div>

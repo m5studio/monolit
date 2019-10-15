@@ -12,9 +12,8 @@
                 {% endif %}{% endspaceless %}')"></div>
 
             <div class="object-card__header-info">
-                {% if object.object_type %}
-                    <div class="object-card__living-quarter">{{ object.get_object_type_display }}</div>
-                {% endif %}
+                <!-- FIXME: Object Type -->
+                <div class="object-card__living-quarter">Object Type</div>
                 {% if object.city %}
                     <div class="object-card__city">{{ object.get_city_display }}</div>
                 {% endif %}
@@ -27,7 +26,7 @@
         <div class="object-card__main">
             <div class="object-card__info">
                 <div class="object-card__title">
-                    <a href="{{ object.get_absolute_url }}">{% if object.object_type %}{{ object.get_object_type_display }} {% endif %}{{ object.name }}</a>
+                    <a href="{{ object.get_absolute_url }}"><!-- FIXME: Object Type -->{{ object.name }}</a>
                 </div>
                 <div class="object-card__flat">
                     <div class="object-card__flat--count"></div>

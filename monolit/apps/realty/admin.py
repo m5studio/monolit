@@ -17,6 +17,8 @@ from apps.realty.models.object_site_bathroom import ObjectBathroom
 from apps.realty.models.object_site import ObjectSiteWindowsView, ObjectSite
 from apps.realty.models.object_video import ObjectVideo
 from apps.realty.models.object import Object
+# from apps.realty.models.object_types import ObjectTypes
+from apps.realty.models.odject_types import ObjectTypes
 
 
 """ [ ObjectBathroom ] """
@@ -204,6 +206,13 @@ class ObjectDocumentAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.ModelAd
 """ [ END ObjectDocument ] """
 
 
+""" [ ObjectTypesAdmin ] """
+@admin.register(ObjectTypes)
+class ObjectTypesAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.ModelAdmin):
+    search_fields = ['name']
+""" [ END ObjectTypesAdmin ] """
+
+
 """ [ ObjectInfoTab ] """
 class ObjectInfoTabInline(admin.TabularInline):
     model = ObjectInfoTab
@@ -237,7 +246,7 @@ class ObjectAdmin(TurnOffAdminLogging, admin.ModelAdmin):
             'fields': ('active', 'completed', 'all_sold', 'partnership')
         }),
         (None, {
-            'fields': ('order', 'crm_id', 'name', 'slug', 'building_type', 'description', 'webcam', 'panoram'),
+            'fields': ('order', 'crm_id', 'name', 'slug', 'object_type', 'building_type', 'description', 'webcam', 'panoram'),
             # 'description': 'Some description if needed'
         }),
         ('Главное изображение', {
@@ -254,4 +263,5 @@ class ObjectAdmin(TurnOffAdminLogging, admin.ModelAdmin):
     list_editable = ('order', 'active')
     search_fields = ['name']
     ordering = ('order',)
+    autocomplete_fields = ['object_type']
 """ [ END Object ] """
