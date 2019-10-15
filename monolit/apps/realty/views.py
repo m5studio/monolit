@@ -43,8 +43,8 @@ class ObjectDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['opts'] = Object._meta
         context['page_title'] = f'{self.get_object().name}'
-        if self.get_object().object_type:
-            context['page_title'] = f'{self.get_object().get_object_type_display()} {self.get_object().name}'
+        # if self.get_object().object_type:
+        #     context['page_title'] = f'{self.get_object().get_object_type_display()} {self.get_object().name}'
         # context['page_meta_description'] = 'my custom meta'
         context['object_info_tabs'] = ObjectInfoTab.objects.filter(object_id=self.get_object().pk)
         context['object_files'] = ObjectFile.objects.filter(object_id=self.get_object().pk)

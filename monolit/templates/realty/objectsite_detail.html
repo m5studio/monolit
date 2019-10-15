@@ -18,9 +18,7 @@
                     <a href="{% url 'object:site-list' %}">Выбор недвижимости</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="{% url 'object:detail' slug=object.object.slug %}">{% spaceless %}
-                        {% if object.object.object_type %}{{ object.object.get_object_type_display }} {% endif %}{{ object.object.name }}
-                    {% endspaceless %}</a>
+                    <a href="{% url 'object:detail' slug=object.object.slug %}">{{ object.object.name }}</a>
                 </li>
                 {% if object.object_section %}
                     <li class="breadcrumb-item">{{ object.object_section }}</li>

@@ -13,7 +13,6 @@ function stickyMainNav() {
 
 
 function mainNav() {
-
     // Toggle main-nav
     const mainNav = $('#main-navigation')
     const menuToggle = $('#main-navigation-toggle')

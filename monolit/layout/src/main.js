@@ -33,6 +33,7 @@ import '@fancyapps/fancybox'
 
 $(document).ready(function() {
 
+    // Main nav
     mainNav()
     stickyMainNav()
 
@@ -116,5 +117,6 @@ $(document).ajaxStop(function() {
 
 
 $(window).scroll(function() {
+    // Main nav
     stickyMainNav()
 })

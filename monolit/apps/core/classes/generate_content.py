@@ -37,12 +37,11 @@ from apps.company.models.tender import Tender, TenderFile, TenderFaq
 from apps.company.models.contacts import ContactsGroup, ContactsItem
 
 
-DUMMY_IMG = 'dummy-image.jpg'
-DUMMY_DOCUMENT = 'dummy-document.pdf'
-
 class GenerateContent:
     def __init__(self):
         self.fake = Faker()
+        self.DUMMY_IMG = 'dummy-image.jpg'
+        self.DUMMY_DOCUMENT = 'dummy-document.pdf'
 
     def get_random_list_item(self, list):
         return random.choice(list)
@@ -67,7 +66,7 @@ class GenerateContent:
     def _create_Certificate(self):
         title = f'Сертификат {self.fake.word()} {self.fake.word()} {self.fake.word()} {self.fake.word()} {self.fake.word()}'
 
-        certificate = Certificate(title=title, image=DUMMY_IMG)
+        certificate = Certificate(title=title, image=self.DUMMY_IMG)
         certificate.save()
         print(f'[Certificate] {certificate.title} created')
 
@@ -75,7 +74,7 @@ class GenerateContent:
     def _create_Management(self):
         position = f'Должность {self.fake.word()} {self.fake.word()} {self.fake.word()} {self.fake.word()}'
 
-        management = Management(image=DUMMY_IMG, surname='Фамилия', name='Имя', patronymic='Отчество', position=position)
+        management = Management(image=self.DUMMY_IMG, surname='Фамилия', name='Имя', patronymic='Отчество', position=position)
         management.save()
         print(f'[Management] {management.position} created')
 
@@ -83,7 +82,7 @@ class GenerateContent:
     def _create_Responsibility(self):
         title = f'Ответственность {self.fake.word()} {self.fake.word()} {self.fake.word()}'
 
-        responsibility = Responsibility(title=title, body=self.fake.text(600), image=DUMMY_IMG)
+        responsibility = Responsibility(title=title, body=self.fake.text(600), image=self.DUMMY_IMG)
         responsibility.save()
         print(f'[Responsibility] {responsibility.title} created')
 
@@ -91,7 +90,7 @@ class GenerateContent:
     def _create_JobBlock(self):
         title = f'Блок работа {self.fake.word()} {self.fake.word()} {self.fake.word()}'
 
-        job_block = JobBlock(title=title, body=self.fake.text(600), image=DUMMY_IMG)
+        job_block = JobBlock(title=title, body=self.fake.text(600), image=self.DUMMY_IMG)
         job_block.save()
         print(f'[JobBlock] {job_block.title} created')
 
@@ -116,19 +115,19 @@ class GenerateContent:
         years_range = [r for r in range(2005, datetime.date.today().year + 1)]
 
         for year in years_range:
-            history = History(year=year, body=self.fake.text(600), image=DUMMY_IMG)
+            history = History(year=year, body=self.fake.text(600), image=self.DUMMY_IMG)
             history.save()
             print(f'[History] {history.year} created')
 
 
     def _create_Structure(self):
-        structure = Structure(url='http://monolit.site', body=self.fake.text(500), image=DUMMY_IMG)
+        structure = Structure(url='http://monolit.site', body=self.fake.text(500), image=self.DUMMY_IMG)
         structure.save()
         print(f'[Structure] created')
 
 
     def _create_Partner(self):
-        partner = Partner(url='https://google.com', image=DUMMY_IMG)
+        partner = Partner(url='https://google.com', image=self.DUMMY_IMG)
         partner.save()
         print(f'[Partner] created')
 
@@ -154,7 +153,7 @@ class GenerateContent:
 
         if count_files_rel_to_tender < 10:
             tender = Tender.objects.get(pk=tender_id)
-            tender_file = TenderFile(tender=tender, name='Документ с описанием тенедера', file=DUMMY_DOCUMENT)
+            tender_file = TenderFile(tender=tender, name='Документ с описанием тенедера', file=self.DUMMY_DOCUMENT)
             tender_file.save()
             print(f'[TenderFile] for Tender {tender_file.tender} created')
 
@@ -216,7 +215,7 @@ class GenerateContent:
 
         if count_images_rel_to_news == 0:
             for _ in range(10):
-                news_image = NewsImage(news=news, image=DUMMY_IMG)
+                news_image = NewsImage(news=news, image=self.DUMMY_IMG)
                 news_image.save()
                 print(f'[NewsImage] created for {news_id}')
 
@@ -224,7 +223,7 @@ class GenerateContent:
     def _create_News(self):
         title = f'Новость {self.fake.word()} {self.fake.word()} {self.fake.word()} {self.fake.word()} {self.fake.word()} {str(self.fake.random_number(3, True))}'.title()
 
-        news = News(title=title, main_image=DUMMY_IMG, body=self.fake.text(5000))
+        news = News(title=title, main_image=self.DUMMY_IMG, body=self.fake.text(5000))
         news.save()
         print(f'[News] created {news.title}')
 
@@ -240,7 +239,7 @@ class GenerateContent:
         action_id = Actions.objects.get(pk=action_id)
         action_partner = ActionsPartner(action=action_id, \
                                         name='Название компании партнера',
-                                        logo=DUMMY_IMG,
+                                        logo=self.DUMMY_IMG,
                                         site_url='https://google.com')
         action_partner.save()
         print(f'[ActionsPartner] created {action_partner.name}')
@@ -254,8 +253,8 @@ class GenerateContent:
                          date_end=timezone.now() + timezone.timedelta(days=45), \
                          description=self.fake.text(5000), \
                          partners_title='Заголовок для блока с партнерами акции', \
-                         image_card=DUMMY_IMG, \
-                         image_detail=DUMMY_IMG)
+                         image_card=self.DUMMY_IMG, \
+                         image_detail=self.DUMMY_IMG)
         action.save()
         print(f'[Actions] created {action.title}')
 
@@ -332,12 +331,12 @@ class GenerateContent:
                                          entresol=self.fake.boolean(chance_of_getting_true=30), \
                                          wardrobe=self.fake.boolean(chance_of_getting_true=40), \
                                          finish_type=self.get_random_list_item(finishing_types_list), \
-                                         image_planning=DUMMY_IMG, \
-                                         image_planning3d=DUMMY_IMG, \
-                                         image_floor=DUMMY_IMG, \
-                                         image_section=DUMMY_IMG, \
-                                         image_section_in_object=DUMMY_IMG, \
-                                         image_genplan=DUMMY_IMG
+                                         image_planning=self.DUMMY_IMG, \
+                                         image_planning3d=self.DUMMY_IMG, \
+                                         image_floor=self.DUMMY_IMG, \
+                                         image_section=self.DUMMY_IMG, \
+                                         image_section_in_object=self.DUMMY_IMG, \
+                                         image_genplan=self.DUMMY_IMG
                                         )
                 object_site.save()
 
@@ -397,10 +396,10 @@ class GenerateContent:
         if Bank.objects.all().count() > 0:
             print('[Bank] already created')
         else:
-            bank = Bank(name='РНКБ', logo=DUMMY_IMG)
+            bank = Bank(name='РНКБ', logo=self.DUMMY_IMG)
             bank.save()
 
-            bank = Bank(name='Банк Россия', logo=DUMMY_IMG)
+            bank = Bank(name='Банк Россия', logo=self.DUMMY_IMG)
             bank.save()
             print('[Bank] are created')
 
@@ -430,7 +429,7 @@ class GenerateContent:
             gallery = ObjectGallery.objects.get(pk=gallery_id)
 
             for _ in range(qty):
-                gallery_image = ObjectGalleryImage(gallery=gallery, image=DUMMY_IMG)
+                gallery_image = ObjectGalleryImage(gallery=gallery, image=self.DUMMY_IMG)
                 gallery_image.save()
             print(f'[GalleryImage] created for Gallery {gallery_id}')
 
@@ -469,7 +468,7 @@ class GenerateContent:
                 object = Object.objects.get(pk=object_id)
                 object_document_author = ObjectDocumentAuthor.objects.first()
 
-                object_document = ObjectDocument(object=object, title=document_fake_title, author=object_document_author, file=DUMMY_DOCUMENT)
+                object_document = ObjectDocument(object=object, title=document_fake_title, author=object_document_author, file=self.DUMMY_DOCUMENT)
                 object_document.save()
                 print(f'[ObjectDocument "{document_fake_title}"] created for Object {object_id}')
 
@@ -540,7 +539,7 @@ class GenerateContent:
 
         if count_info_tabs_rel_to_object == 0:
             for info_tab in object_info_tab_icons_list:
-                object_info_tab = ObjectInfoTab(object=object, icon_name=info_tab, description=self.fake.text(300), image=DUMMY_IMG)
+                object_info_tab = ObjectInfoTab(object=object, icon_name=info_tab, description=self.fake.text(300), image=self.DUMMY_IMG)
                 object_info_tab.save()
                 print(f'[ObjectInfoTab "{info_tab}"] created for Object {object_id}')
 
@@ -552,7 +551,7 @@ class GenerateContent:
         if count_files_rel_to_object == 0:
             for file_type in file_types_list:
                 object = Object.objects.get(pk=object_id)
-                object_file = ObjectFile(object=object, name=file_type, file=DUMMY_DOCUMENT)
+                object_file = ObjectFile(object=object, name=file_type, file=self.DUMMY_DOCUMENT)
                 object_file.save()
                 print(f'[ObjectFile {file_type}] created for Object {object_id}')
 
@@ -580,8 +579,8 @@ class GenerateContent:
                         description=self.fake.text(1000), \
                         building_type='monolith', \
                         address='ул. Ленина 12', \
-                        genplan=DUMMY_IMG, \
-                        main_image=DUMMY_IMG, \
+                        genplan=self.DUMMY_IMG, \
+                        main_image=self.DUMMY_IMG, \
                         webcam='https://rtsp.me/embed/3KASrTkG/', \
                         panoram='https://monolit360.com/files/main/index.html?s=pano1692', \
                     )
