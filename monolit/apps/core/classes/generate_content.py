@@ -306,7 +306,8 @@ class GenerateContent:
 
         sections_rel_to_object_ids_list = list(ObjectSection.objects.filter(object=object).values_list('id', flat=True))
 
-        flats_qty_list = list(range(91, 126))
+        # flats_qty_list = list(range(51, 126))
+        flats_qty_list = [15, 105, 51, 116, 39]
         qty = self.get_random_list_item(flats_qty_list)
 
         if self.countFlatsInObject(object_id) < qty:
