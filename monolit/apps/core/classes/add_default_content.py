@@ -1,5 +1,8 @@
 from apps.core.models import SiteSettings
+
 from apps.realty.models.object_site import ObjectSiteWindowsView
+from apps.realty.models.object_types import ObjectTypes
+from apps.realty.models.object_building_types import ObjectBuildingTypes
 
 
 class AddDefaultContent:
@@ -47,12 +50,59 @@ class AddDefaultContent:
         for window_view in window_views:
             try:
                 ObjectSiteWindowsView.objects.get(name=window_view)
-                print(f'ObjectSiteWindowsView {window_view} already exist and updated')
+                print(f'ObjectSiteWindowsView {window_view} already exist')
             except ObjectSiteWindowsView.DoesNotExist:
                 ObjectSiteWindowsView.objects.create(name=window_view)
                 print(f'ObjectSiteWindowsView {window_view} created')
 
 
+    def add_ObjectTypes(self):
+        object_types = [
+            ('business_center', 'Бизнес центр'),
+            ('city', 'Город'),
+            ('living_house', 'Жилой дом'),
+            ('living_quarter', 'Жилой квартал'),
+            ('living_complex', 'Жилой комплекс'),
+            ('resort_complex', 'Курортный комплекс'),
+            ('multipurposes_complex', 'Многофункциональный комплекс'),
+            ('family_quarter', 'Семейный квартал'),
+            ('business_and_retail_center', 'Торгово-офисный центр'),
+            ('mall', 'Торговый центр'),
+        ]
+
+        for object_type in object_types:
+            name = object_type[1]
+            slug = object_type[0]
+
+            try:
+                ObjectTypes.objects.get(name=name)
+                print(f'ObjectTypes {name} already exist')
+            except ObjectTypes.DoesNotExist:
+                ObjectTypes.objects.create(name=name, slug=slug)
+                print(f'ObjectTypes {name} created')
+
+
+    def add_ObjectBuildingTypes(self):
+        building_types = [
+            ('monolith', 'Монолитный'),
+            ('monolith-frame', 'Монолитно-каркасный'),
+            ('panel', 'Панельный'),
+        ]
+
+        for building_type in building_types:
+            name = building_type[1]
+            slug = building_type[0]
+
+            try:
+                ObjectBuildingTypes.objects.get(name=name)
+                print(f'ObjectBuildingTypes {name} already exist')
+            except ObjectBuildingTypes.DoesNotExist:
+                ObjectBuildingTypes.objects.create(name=name, slug=slug)
+                print(f'ObjectBuildingTypes {name} created')
+
+
     def addContent(self):
         self.add_SiteSettings()
         self.add_ObjectSiteWindowsView()
+        self.add_ObjectTypes()
+        self.add_ObjectBuildingTypes()

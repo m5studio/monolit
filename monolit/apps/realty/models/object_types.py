@@ -3,7 +3,7 @@ from django.db import models
 
 class ObjectTypes(models.Model):
     name = models.CharField('Тип объекта', unique=True, max_length=255)
-    # slug = models.SlugField('Slug', max_length=100, unique=True, help_text='e.g.: status-house (max 100 chars), получим https://monolit.site/objects/status-house/')
+    slug = models.CharField('Тип объекта (eng)', max_length=100, unique=True, blank=True, null=True, help_text='e.g.: если название "Жилой квартал", то здесь заполняется как "living-quarter"')
 
     def __str__(self):
         return self.name

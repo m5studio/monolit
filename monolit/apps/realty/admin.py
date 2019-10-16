@@ -6,6 +6,7 @@ from apps.core.classes.hide_from_admin_index import HideFromAdminIndex
 from imagekit.admin import AdminThumbnail
 
 from apps.realty.models.object_block import ObjectBlock
+from apps.realty.models.object_building_types import ObjectBuildingTypes
 from apps.realty.models.object_document import ObjectDocument, ObjectDocumentAuthor
 from apps.realty.models.object_elevator import ObjectElevator
 from apps.realty.models.object_file import ObjectFile
@@ -15,10 +16,9 @@ from apps.realty.models.object_section import ObjectSection
 from apps.realty.models.object_site_balcony import ObjectBalcony
 from apps.realty.models.object_site_bathroom import ObjectBathroom
 from apps.realty.models.object_site import ObjectSiteWindowsView, ObjectSite
+from apps.realty.models.object_types import ObjectTypes
 from apps.realty.models.object_video import ObjectVideo
 from apps.realty.models.object import Object
-# from apps.realty.models.object_types import ObjectTypes
-from apps.realty.models.odject_types import ObjectTypes
 
 
 """ [ ObjectBathroom ] """
@@ -206,6 +206,13 @@ class ObjectDocumentAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.ModelAd
 """ [ END ObjectDocument ] """
 
 
+""" [ ObjectBuildingTypes ] """
+@admin.register(ObjectBuildingTypes)
+class ObjectBuildingTypesAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.ModelAdmin):
+    search_fields = ['name']
+""" [ END ObjectBuildingTypes ] """
+
+
 """ [ ObjectTypesAdmin ] """
 @admin.register(ObjectTypes)
 class ObjectTypesAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.ModelAdmin):
@@ -263,5 +270,5 @@ class ObjectAdmin(TurnOffAdminLogging, admin.ModelAdmin):
     list_editable = ('order', 'active')
     search_fields = ['name']
     ordering = ('order',)
-    autocomplete_fields = ['object_type']
+    autocomplete_fields = ['object_type', 'building_type']
 """ [ END Object ] """

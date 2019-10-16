@@ -15,14 +15,8 @@ from apps.core.classes.clean_media import CleanMedia
 from apps.core.classes.file_processing import FileProcessing
 from apps.core.classes.image_optimizer import ImageOptimizer
 
-from apps.realty.models.odject_types import ObjectTypes
-
-
-# class ObjectCategory(models.Model):
-#     name = models.CharField('Название категории', max_length=255)
-#
-#     def __str__(self):
-#         return self.name
+from apps.realty.models.object_types import ObjectTypes
+from apps.realty.models.object_building_types import ObjectBuildingTypes
 
 
 def genplan_upload_path(instance, filename):
@@ -38,19 +32,6 @@ def image_upload_path(instance, filename):
     return 'objects/{object_crm_id}/images/{filename}'.format(object_crm_id=object_crm_id, filename=filename)
 
 class Object(models.Model):
-    # OBJECT_TYPES = (
-    #     ('business_center', 'Бизнес центр'),
-    #     ('city', 'Город'),
-    #     ('living_house', 'Жилой дом'),
-    #     ('living_quarter', 'Жилой квартал'),
-    #     ('living_complex', 'Жилой комплекс'),
-    #     ('resort_complex', 'Курортный комплекс'),
-    #     ('multipurposes_complex', 'Многофункциональный комплекс'),
-    #     ('family_quarter', 'Семейный квартал'),
-    #     ('business_and_retail_center', 'Торгово-офисный центр'),
-    #     ('mall', 'Торговый центр'),
-    # )
-
     # CITIES = (
     #     ('alushta', 'Алушта'),
     #     ('evpatoriya', 'Евпатория'),
@@ -58,11 +39,12 @@ class Object(models.Model):
     #     ('yalta', 'Ялта'),
     # )
 
-    BUILDING_TYPES = (
-        ('monolith', 'Монолитный'),
-        ('monolith_frame', 'Монолитно-каркасный'),
-        ('panel', 'Панельный'),
-    )
+    # BUILDING_TYPES = (
+    #     ('monolith', 'Монолитный'),
+    #     ('monolith_frame', 'Монолитно-каркасный'),
+    #     ('panel', 'Панельный'),
+    # )
+    # building_type = models.CharField('Тип Здания', max_length=100, choices=BUILDING_TYPES, blank=True, null=True)
 
     active        = models.BooleanField('Активный', default=True, help_text='Опубликован на сайте')
     completed     = models.BooleanField('Строительство завершено', default=False)
@@ -73,7 +55,7 @@ class Object(models.Model):
     name          = models.CharField('Название объекта', unique=True, max_length=255, db_index=True)
     slug          = models.SlugField('URL адрес', max_length=100, unique=True, help_text='e.g.: status-house (max 100 chars), получим https://monolit.site/objects/status-house/')
     object_type   = models.ForeignKey(ObjectTypes, verbose_name='Тип Объекта', on_delete=models.SET_NULL, blank=True, null=True)
-    building_type = models.CharField('Тип Здания', max_length=100, choices=BUILDING_TYPES, blank=True, null=True)
+    building_type = models.ForeignKey(ObjectBuildingTypes, verbose_name='Тип Здания', on_delete=models.SET_NULL, blank=True, null=True)
     address       = models.CharField('Адрес', max_length=255, blank=True, null=True, help_text='Город, улица, номер дома (для завершенных/построенных объектов)')
     description   = RichTextField('Описание', blank=True, null=True)
     genplan       = models.ImageField('Генплан', upload_to=genplan_upload_path, blank=True, null=True, help_text='Изображение с генпланом')

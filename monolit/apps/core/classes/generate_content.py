@@ -16,6 +16,8 @@ from apps.realty.models.object_block import ObjectBlock
 from apps.realty.models.object_section import ObjectSection
 from apps.realty.models.object_elevator import ObjectElevator
 from apps.realty.models.object_gallery import ObjectGallery, ObjectGalleryImage
+from apps.realty.models.object_building_types import ObjectBuildingTypes
+from apps.realty.models.object_types import ObjectTypes
 
 from apps.mortgage.models import WayToBuy, Bank, Offer
 
@@ -576,8 +578,9 @@ class GenerateContent:
                         crm_id=self.fake.random_number(7, True), \
                         name=name, \
                         slug=slugify(translit(name, 'ru', reversed=True)), \
+                        object_type=ObjectTypes.objects.get(id=5), \
+                        building_type=ObjectBuildingTypes.objects.get(id=1), \
                         description=self.fake.text(1000), \
-                        building_type='monolith', \
                         address='ул. Ленина 12', \
                         genplan=self.DUMMY_IMG, \
                         main_image=self.DUMMY_IMG, \

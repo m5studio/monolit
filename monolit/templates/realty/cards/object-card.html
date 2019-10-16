@@ -12,8 +12,9 @@
                 {% endif %}{% endspaceless %}')"></div>
 
             <div class="object-card__header-info">
-                <!-- FIXME: Object Type -->
-                <div class="object-card__living-quarter">Object Type</div>
+                {% if object.object_type %}
+                    <div class="object-card__living-quarter">{{ object.object_type }}</div>
+                {% endif %}
                 {% if object.city %}
                     <div class="object-card__city">{{ object.get_city_display }}</div>
                 {% endif %}

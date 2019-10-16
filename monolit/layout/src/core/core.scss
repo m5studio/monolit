@@ -14,7 +14,7 @@ body {
 
 #header {
     position: relative;
-    min-height: 110px;
+    min-height: 100px;
     width: 100%;
     z-index: 50;
 
@@ -211,12 +211,14 @@ body {
                 align-items: center;
 
                 @include media-breakpoint-down(lg) {
-                    grid-template-columns: repeat(2, minmax(150, 7fr));
+                    // grid-template-columns: repeat(2, minmax(150px, .7fr));
+                    grid-template-columns: repeat(2, .7fr);
                     order: 2;
                     justify-self: end;
                 }
                 // Fix for large resolution menu
-                @media (min-width: 1200px) and (max-width: 1440px) {
+                // @media (min-width: 1200px) and (max-width: 1440px) {
+                @media (min-width: 1200px) and (max-width: 1350px) {
                     display: none;
                 }
 
