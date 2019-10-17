@@ -57,7 +57,7 @@ class ObjectDetailView(DetailView):
         context['object_special_offers'] = ObjectSite.objects.filter(object=self.get_object().pk, active=True, special_offer=True).order_by('?')[:3]
         context['object_special_offers_qty'] = ObjectSite.objects.filter(object=self.get_object().pk, active=True, special_offer=True).count()
 
-        # Object Documents Pagination
+        # ObjectDocument Pagination
         context['object_documents'] = ObjectDocument.objects.filter(object=self.get_object().pk).order_by('-updated')
         paginator = Paginator(context['object_documents'], 9)
         page_docs = self.request.GET.get('page-docs')
@@ -67,7 +67,7 @@ class ObjectDetailView(DetailView):
             context['object_documents'] = paginator.page(1)
         except EmptyPage:
             context['object_documents'] = paginator.page(paginator.num_pages)
-        # END Object Documents Pagination
+        # END ObjectDocument Pagination
 
         context['mortgage_offers'] = Offer.objects.filter(object=self.get_object().pk).order_by('rate_from')
         return context
@@ -76,6 +76,7 @@ class ObjectDetailView(DetailView):
 class ObjectSiteListView(ListView):
     model = ObjectSite
     queryset = ObjectSite.objects.filter(active=True).order_by('-updated')
+    paginate_by = 12
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

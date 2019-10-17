@@ -28,13 +28,7 @@
         {% include 'realty/objectsite_list-sections/section-realty-flats-filters.html' %}
 
         {% if object_list %}
-            <div id="section-flats-list" class="common-section">
-                <!-- <div class="common-section__title container">
-                    <h2>8 объектов в продаже</h2>
-                    <span class="common-section__title--right">
-                        <a href="#section-compleated-projects" class="scale-line">Реализованные объекты</a>
-                    </span>
-                </div> -->
+            <div id="section-flats-list" class="common-section" data-next-pagination-url="{{ request.path }}?page={{ page_obj.next_page_number }}">
                 <div id="section-flats-list__inner" class="container">
                     {% for object in object_list %}
                         {% include 'realty/cards/flat-card.html' %}

@@ -28,14 +28,11 @@ class ObjectSiteQuerySet(models.QuerySet):
     def active(self):
         return Q(active=True)
 
-
     def get_all_active_sites_object(self, object_id):
         return self.active() & Q(object=object_id)
 
-
     def get_object_flats_and_apartments(self, object_id):
         return self.active() & self.get_all_active_sites_object(object_id) & Q(site_type__in=['flat', 'apartments'])
-
 
     def object_sites_info_aggregated(self, object_id):
         flats = self.get_object_flats_and_apartments(object_id)
@@ -45,7 +42,6 @@ class ObjectSiteQuerySet(models.QuerySet):
             object_max_site_area=Max('site_area', filter=flats),
             object_min_site_price=Min('price_total', filter=flats),
         )
-
 
     def flats_info_aggregated(self, object_id, rooms_qty: int):
         if rooms_qty < 4:

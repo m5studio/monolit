@@ -3,7 +3,7 @@ function objectPageDocsPagination() {
         $(el).click((e) => {
             e.preventDefault()
             let page_url = $(el).attr('href')
-            // console.log( page_url )
+            // console.log(page_url)
             $.ajax({
                 url: page_url,
                 type: 'GET',
