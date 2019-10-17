@@ -25,7 +25,7 @@ import {objectPageSitesInfo, objectPageFlatsTypes} from "./ajax/object_detail/ob
 import {mortgageOfferMonthlyPayment} from "./ajax/objectsite_detail/mortgage-offer-monthly-payment-calculate"
 import {search_by_site_id} from "./ajax/search_by_site_id"
 import {companyTendersPagination, selectTenderCategory} from "./ajax/company-tenders-page-pagination"
-import {objectsite_list_Infinateload} from "./ajax/objectsite_list-infinateload"
+import {objectsite_list_Infinate_scroll} from "./ajax/objectsite_list-infinate-scroll"
 
 
 // Fancybox https://fancyapps.com/fancybox/3/
@@ -93,9 +93,9 @@ $(document).ready(function() {
     }
     // END Company Tenders page
 
-    // ObjectSiteListView infinateload
+    // ObjectSiteListView infinate scroll
     // if ( $('.flats').length ) {
-    //     objectsite_list_Infinateload()
+    //     objectsite_list_Infinate_scroll()
     // }
 })
 
@@ -128,6 +128,6 @@ $(window).on('resize scroll', function() {
     stickyMainNav()
 
     if ( $('.flats').length ) {
-        objectsite_list_Infinateload()
+        objectsite_list_Infinate_scroll()
     }
 })
