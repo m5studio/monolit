@@ -70,6 +70,11 @@ function objectsite_list_infinate_scroll() {
             current_pagination_number++
             getFlats(current_pagination_number)
             console.log(current_pagination_number)
+
+            // TODO: setTimeout
+            setTimeout(function(){
+                console.log('set time out');
+            }, 3000)
         }
     }
 }
