@@ -28,7 +28,8 @@
         {% include 'realty/objectsite_list-sections/section-realty-flats-filters.html' %}
 
         {% if object_list %}
-            <div id="section-flats-list" class="common-section" data-next-pagination-url="{{ request.path }}?page={{ page_obj.next_page_number }}">
+            <!-- <div id="section-flats-list" class="common-section" data-next-pagination-url="{{ request.path }}?page={{ page_obj.next_page_number }}"> -->
+            <div id="section-flats-list" class="common-section" data-current-pagination-number="{{ page_obj.number }}" data-max-pagination-number="{{ page_obj.paginator.num_pages }}">
                 <div id="section-flats-list__inner" class="container">
                     {% for object in object_list %}
                         {% include 'realty/cards/flat-card.html' %}
