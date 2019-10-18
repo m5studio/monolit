@@ -54,6 +54,8 @@ function objectsite_list_infinate_scroll() {
     // console.log(current_pagination_number)
     // console.log(max_pagination_number)
 
+    // if scrolled to bottom
+    // TODO: if scrolled little bit upper than very bottom
     if ( $(window).scrollTop() + 1 >= $('body').height() - $(window).height() ) {
         // mypage++
         // mypage = (mypage < max_pagination_number) ? mypage++ : max_pagination_number
