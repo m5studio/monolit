@@ -6,14 +6,14 @@ django-environ==0.4.5
 django-imagekit==4.0.2
 django-js-asset==1.2.2
 django-unused-media==0.1.13
-Faker==2.0.2
+Faker==2.0.3
 html5lib==1.0.1
 pilkit==2.0
 Pillow==6.2.0
 PyPDF2==1.26.0
 python-dateutil==2.8.0
 pytz==2019.3
-reportlab==3.5.28
+reportlab==3.5.31
 six==1.12.0
 sqlparse==0.3.0
 text-unidecode==1.3

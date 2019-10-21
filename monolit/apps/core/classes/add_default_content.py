@@ -60,13 +60,13 @@ class AddDefaultContent:
         object_types = [
             ('business_center', 'Бизнес центр'),
             ('city', 'Город'),
-            ('living_house', 'Жилой дом'),
-            ('living_quarter', 'Жилой квартал'),
-            ('living_complex', 'Жилой комплекс'),
-            ('resort_complex', 'Курортный комплекс'),
-            ('multipurposes_complex', 'Многофункциональный комплекс'),
-            ('family_quarter', 'Семейный квартал'),
-            ('business_and_retail_center', 'Торгово-офисный центр'),
+            ('living-house', 'Жилой дом'),
+            ('living-quarter', 'Жилой квартал'),
+            ('living-complex', 'Жилой комплекс'),
+            ('resort-complex', 'Курортный комплекс'),
+            ('multipurposes-complex', 'Многофункциональный комплекс'),
+            ('family-quarter', 'Семейный квартал'),
+            ('business-and-retail-center', 'Торгово-офисный центр'),
             ('mall', 'Торговый центр'),
         ]
 

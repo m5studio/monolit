@@ -20,9 +20,10 @@
     <div class="flat-card__footer">
         <div class="flat-card__footer--top">
             <div class="flat-card__info">
-                <!-- FIXME: object type -->
-                <div class="flat-card__heading">Object Type</div>
-                <div class="flat-card__object-name">{% if object.object.name %}{{ object.object.name }}{% endif %}</div>
+                <div class="flat-card__heading">{% if object.object.object_type %}{{ object.object.object_type }}{% endif %}</div>
+                {% if object.object.name %}
+                    <div class="flat-card__object-name">{{ object.object.name }}</div>
+                {% endif %}
             </div>
         </div>
         <div class="flat-card__footer--middle">

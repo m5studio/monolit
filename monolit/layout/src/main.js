@@ -92,11 +92,6 @@ $(document).ready(function() {
         selectTenderCategory()
     }
     // END Company Tenders page
-
-    // ObjectSiteListView infinate scroll
-    // if ( $('.flats').length ) {
-    //     objectsite_list_infinate_scroll()
-    // }
 })
 
 
@@ -122,9 +117,10 @@ $(document).ajaxStop(function() {
 })
 
 $(window).scroll(function() {
-// $(window).on('resize scroll', function() {
     // Main nav
     stickyMainNav()
+
+    // scrollToTop()
 
     if ( $('.flats').length ) {
         objectsite_list_infinate_scroll()

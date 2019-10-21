@@ -7,7 +7,7 @@ from apps.realty.views import (
     ObjectSiteListView,
     ObjectSiteDetailView,
 
-    ObjectSiteDetailViewPDF
+    ObjectSiteDetailViewPDF,
 )
 
 

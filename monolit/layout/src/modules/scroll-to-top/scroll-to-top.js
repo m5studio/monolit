@@ -13,11 +13,22 @@ function scrollToTop() {
         $('html, body').animate({scrollTop: 0}, 500)
     })
 
+    // $(window).scroll(function() {
+    //     // if ( $(this).scrollTop() > pxFromTop ) {
+    //     if ( $(window).scrollTop() > pxFromTop ) {
+    //         $(scrollToTopId).fadeIn()
+    //     } else {
+    //         $(scrollToTopId).fadeOut()
+    //     }
+    // })
+
     $(window).scroll(function() {
-        if ( $(this).scrollTop() > pxFromTop ) {
+        if ( $(window).scrollTop() > pxFromTop ) {
             $(scrollToTopId).fadeIn()
         } else {
             $(scrollToTopId).fadeOut()
+            $(scrollToTopId).remove()
+
         }
     })
 }
