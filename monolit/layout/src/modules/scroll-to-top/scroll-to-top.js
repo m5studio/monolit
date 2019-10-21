@@ -27,8 +27,7 @@ function scrollToTop() {
             $(scrollToTopId).fadeIn()
         } else {
             $(scrollToTopId).fadeOut()
-            $(scrollToTopId).remove()
-
+            // $(scrollToTopId).remove()
         }
     })
 }

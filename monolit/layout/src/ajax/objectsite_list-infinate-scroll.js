@@ -54,7 +54,6 @@ function objectsite_list_infinate_scroll() {
                 setTimeout(function(){
                     working = false
                 }, 1000)
-
             }
         }
     }
