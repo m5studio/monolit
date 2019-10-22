@@ -20,7 +20,9 @@
 
         {% include 'realty/object_detail-sections/section-object-files.html' %}
 
-        {% include 'realty/object_detail-sections/section-object-downloads.html' %}
+        {% include 'realty/object_detail-sections/section-object-video-and-panoram.html' %}
+
+        {% include 'realty/object_detail-sections/section-object-parking-storages.html' %}
 
         <!-- TODO: insolation scheme -->
 
@@ -31,16 +33,14 @@
             <div style="background-color: #CCC; display: block; min-height: 600px; width: 100%;"></div>
         </div> -->
 
-        {% include 'realty/object_detail-sections/section-object-parking-storages.html' %}
-
         {% include 'realty/object_detail-sections/section-object-special-offers.html' %}
-
-        {% include 'realty/object_detail-sections/section-object-video-and-panoram.html' %}
 
         <!-- TODO: mortgage calculator -->
 
         {% include 'realty/object_detail-sections/section-mortgage.html' %}
 
         {% include 'realty/object_detail-sections/section-other-objects.html' %}
+
+        {% include 'realty/object_detail-sections/section-object-downloads.html' %}
     </main>
 {% endblock %}

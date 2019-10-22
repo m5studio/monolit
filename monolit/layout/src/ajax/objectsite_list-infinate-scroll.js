@@ -32,12 +32,11 @@ const max_pagination_number = parseInt($('#section-flats-list').data('max-pagina
 let working = false
 
 function objectsite_list_infinate_scroll() {
-    console.clear()
-    console.log('objectsite_list_infinate_scroll')
-    console.log('current_pagination_number ' + current_pagination_number)
+    // console.clear()
+    // console.log('objectsite_list_infinate_scroll')
+    // console.log('current_pagination_number ' + current_pagination_number)
 
     // if scrolled to page bottom
-    // if scrolled little bit upper than very bottom
     // if ( $(window).scrollTop() + 1 >= $('body').height() - $(window).height() ) {
 
     // if #footer in viewport
@@ -47,7 +46,7 @@ function objectsite_list_infinate_scroll() {
                 working = true
 
                 current_pagination_number++
-                console.log(current_pagination_number)
+                // console.log(current_pagination_number)
                 getFlats(current_pagination_number)
 
                 // Timeout before call

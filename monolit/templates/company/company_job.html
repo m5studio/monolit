@@ -12,6 +12,10 @@
     <main id="main">
         <div id="page-title-h1" class="container">
             <h1>{{ page_title }}</h1>
+
+            <div class="mt-3">
+                <a href="#section-vacancies-list" class="h2">Актуальные Вакансии</a>
+            </div>
         </div>
 
         {% for object in job_blocks %}
@@ -47,14 +51,12 @@
                                     {% if object.experience %}
                                         <span class="vacancy-card__experience"><strong>Опыт:</strong> {{ object.experience }}</span>
                                     {% endif %}
+                                    {% if object.salary %}
+                                        <span class="vacancy-card__experience">{{ object.salary }}</span>
+                                    {% endif %}
                                 </a>
                             </div>
                             <div id="vacancy-{{ object.id }}" class="vacancy-card__descr collapse" data-parent="#vacancies-list-accordion">
-                                {% if object.salary %}
-                                    <div class="mb-3">
-                                        <div class="h5 text-right"><strong>Уровень дохода:</strong> {{ object.salary }}</div>
-                                    </div>
-                                {% endif %}
                                 {% if object.duties %}
                                     <div class="mb-3">
                                         <p><strong>Обязанности:</strong></p>
