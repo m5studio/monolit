@@ -14,7 +14,8 @@
             height: 100vh;
             position: fixed;
             top: 0;
-            left: 0;
+            // left: 0;
+            right: 0;
             padding-top: 70px;
             z-index: 200;
 
@@ -127,14 +128,16 @@
 }
 
 @include media-breakpoint-down(sm) {
-    #{$main_nav_toggle} {
-        z-index: 201;
-    }
+    // #{$main_nav_toggle} {
+    //     z-index: 201;
+    // }
 
     #{$main_nav} {
         &.opened {
             width: 100vw;
             height: 100vh;
+
+            overflow-y: auto;
         }
     }
 }
@@ -144,7 +147,7 @@
         &.opened {
             ul.main-nav__list {
                 li.main-nav__item {
-                    padding: 0 15px;
+                    // padding: 0 15px;
 
                     a.main-nav__link {
                         font-size: 6vw;

@@ -2,15 +2,12 @@
 $main_nav: ".main-nav";
 $main_nav_toggle: "#main-navigation-toggle";
 
-// #main-navigation {}
-
-// Common styles
+// Common main-nav styles
 #{$main_nav} {
     ul {
         list-style: none;
         margin: 0;
         padding: 0;
-        // display: flex;
     }
 
     > ul {
@@ -61,10 +58,11 @@ $main_nav_toggle: "#main-navigation-toggle";
         &.opened {
             background-image: url('images/menu-close.svg');
 
-            @include media-breakpoint-down(sm) {
+            @include media-breakpoint-down(lg) {
                 position: fixed;
                 top: 15px;
                 right: 15px;
+                z-index: 201;
             }
         }
 

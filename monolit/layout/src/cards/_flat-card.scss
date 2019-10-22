@@ -81,7 +81,8 @@
             border-bottom: 1px solid #e4e4e4;
 
             display: grid;
-            grid-template-columns: repeat(2, 1fr) 80px;
+            // grid-template-columns: repeat(2, 1fr) 80px;
+            grid-template-columns: 1fr .7fr 1fr;
         }
 
         &--bottom {
