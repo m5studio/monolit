@@ -181,6 +181,87 @@ class ObjectSite(models.Model):
         verbose_name_plural = 'Помещения (Жилые)'
 
 
+    def flat_name_card(self):
+        result = ''
+        # Квартира
+        if self.site_type == 'flat':
+            site_type = 'квартира'
+
+            if self.rooms_qty == '0':
+                result = f'{site_type.title()}-cтудия'
+            elif self.rooms_qty == '1':
+                result = f'1-комнатная {site_type}'
+            elif self.rooms_qty == '2':
+                result = f'2-комнатная {site_type}'
+            elif self.rooms_qty == '3':
+                result = f'3-комнатная {site_type}'
+            elif self.rooms_qty == '4':
+                result = f'4-комнатная {site_type}'
+            elif self.rooms_qty == '5':
+                result = f'5-комнатная {site_type}'
+
+        # Апартаменты
+        elif self.site_type == 'apartments':
+            site_type = 'апартаменты'
+
+            if self.rooms_qty == '0':
+                result = f'{site_type.title()}-cтудия'
+            elif self.rooms_qty == '1':
+                result = f'1-комнатные {site_type}'
+            elif self.rooms_qty == '2':
+                result = f'2-комнатные {site_type}'
+            elif self.rooms_qty == '3':
+                result = f'3-комнатные {site_type}'
+            elif self.rooms_qty == '4':
+                result = f'4-комнатные {site_type}'
+            elif self.rooms_qty == '5':
+                result = f'5-комнатные {site_type}'
+
+        return f'{result}'
+
+
+    def flat_name_full(self):
+        result = ''
+        # Квартира
+        if self.site_type == 'flat':
+            site_type = 'квартира'
+
+            if self.rooms_qty == '0':
+                result = f'{site_type.title()}-cтудия'
+            elif self.rooms_qty == '1':
+                result = f'1-комнатная {site_type}'
+            elif self.rooms_qty == '2':
+                result = f'2-комнатная {site_type}'
+            elif self.rooms_qty == '3':
+                result = f'3-комнатная {site_type}'
+            elif self.rooms_qty == '4':
+                result = f'4-комнатная {site_type}'
+            elif self.rooms_qty == '5':
+                result = f'5-комнатная {site_type}'
+
+        # Апартаменты
+        elif self.site_type == 'apartments':
+            site_type = 'апартаменты'
+
+            if self.rooms_qty == '0':
+                result = f'{site_type.title()}-cтудия'
+            elif self.rooms_qty == '1':
+                result = f'1-комнатные {site_type}'
+            elif self.rooms_qty == '2':
+                result = f'2-комнатные {site_type}'
+            elif self.rooms_qty == '3':
+                result = f'3-комнатные {site_type}'
+            elif self.rooms_qty == '4':
+                result = f'4-комнатные {site_type}'
+            elif self.rooms_qty == '5':
+                result = f'5-комнатные {site_type}'
+
+        # TODO: check self.object.object_type.name_abbreviation
+        object_type_name = self.object.object_type.name_declension
+
+        return f'{result} на {self.floor} этаже в {object_type_name}'
+
+
 @receiver(pre_save, sender=ObjectSite)
 def calculate_total_price(sender, instance, **kwargs):
     if instance.site_area is not None and instance.price_per_square is not None:

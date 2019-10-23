@@ -58,27 +58,29 @@ class AddDefaultContent:
 
     def add_ObjectTypes(self):
         object_types = [
-            ('business_center', 'Бизнес центр'),
-            ('city', 'Город'),
-            ('living-house', 'Жилой дом'),
-            ('living-quarter', 'Жилой квартал'),
-            ('living-complex', 'Жилой комплекс'),
-            ('resort-complex', 'Курортный комплекс'),
-            ('multipurposes-complex', 'Многофункциональный комплекс'),
-            ('family-quarter', 'Семейный квартал'),
-            ('business-and-retail-center', 'Торгово-офисный центр'),
-            ('mall', 'Торговый центр'),
+            ('business_center', 'Бизнес центр', 'Бизнес центре', 'БЦ'),
+            ('city', 'Город', 'Городе', ''),
+            ('living-house', 'Жилой дом', 'Жилом доме', ''),
+            ('living-quarter', 'Жилой квартал', 'Жилом квартале', ''),
+            ('living-complex', 'Жилой комплекс', 'Жилом комплексе', ''),
+            ('resort-complex', 'Курортный комплекс', 'Курортном комплексе', ''),
+            ('multipurposes-complex', 'Многофункциональный комплекс', 'Многофункциональном комплексе', 'МФК'),
+            ('family-quarter', 'Семейный квартал', 'Семейном квартале', ''),
+            ('business-and-retail-center', 'Торгово-офисный центр', 'Торгово-офисном центре', ''),
+            ('mall', 'Торговый центр', 'Торговом центре', 'ТЦ'),
         ]
 
         for object_type in object_types:
             name = object_type[1]
             slug = object_type[0]
+            name_declension = object_type[2]
+            name_abbreviation = object_type[2]
 
             try:
                 ObjectTypes.objects.get(name=name)
                 print(f'ObjectTypes {name} already exist')
             except ObjectTypes.DoesNotExist:
-                ObjectTypes.objects.create(name=name, slug=slug)
+                ObjectTypes.objects.create(name=name, name_declension=name_declension, name_abbreviation=name_abbreviation, slug=slug)
                 print(f'ObjectTypes {name} created')
 
 

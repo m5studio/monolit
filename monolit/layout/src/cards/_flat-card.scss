@@ -43,7 +43,7 @@
         }
     }
 
-    &__crmid {
+    &__id {
         text-align: right;
     }
 
@@ -52,7 +52,7 @@
         background-position: 50%;
         background-size: contain;
 
-        height: 220px;
+        height: 240px;
 
         a {
             display: block;
@@ -101,11 +101,20 @@
         color: #a6a6a6;
         cursor: default;
         font-size: .79rem;
+        line-height: 1.2;
         margin-bottom: 3px;
     }
 
     &__val {
         line-height: 1.2;
+
+        &.flat-object-name {
+            font-weight: 600;
+        }
+
+        &.flat-block-and-secton {
+            font-size: .9rem;
+        }
 
         .flat-floor {
             font-size: 1.3rem;
@@ -131,8 +140,9 @@
     }
 
     &__price-per-meter {
+        color: #777;
         font-size: .95rem;
-        font-weight: 700;
+        font-weight: 600;
     }
 
     &:hover {

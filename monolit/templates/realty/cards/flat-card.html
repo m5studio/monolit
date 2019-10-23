@@ -6,7 +6,7 @@
             <div class="icon icon-18 icon-heart-contour-green"></div>
             <div class="flat-card__add-to-favorites--title">В избранное</div>
         </div>
-        <div class="flat-card__crmid">ID: {{ object.crm_id }}</div>
+        <div class="flat-card__id">ID: {{ object.crm_id }}</div>
     </div>
     <div class="flat-card__img" style="background-image: url('{% spaceless %}
         {% if object.image_planning %}
@@ -22,13 +22,14 @@
             <div class="flat-card__info">
                 <div class="flat-card__label">{% if object.object.object_type %}{{ object.object.object_type }}{% endif %}</div>
                 {% if object.object.name %}
-                    <div class="flat-card__val font-weight-bold">{{ object.object.name }}</div>
+                    <div class="flat-card__val flat-object-name">{{ object.object.name }}</div>
                 {% endif %}
             </div>
         </div>
         <div class="flat-card__footer--middle">
             <div class="flat-card__info">
-                <div class="flat-card__label">{% if object.rooms_qty %}{{ object.get_rooms_qty_display }}{% endif %}</div>
+                <div class="flat-card__label">{{ object.flat_name_card }}</div>
+                {# <!-- <div class="flat-card__label">{% if object.rooms_qty %}{{ object.get_rooms_qty_display }}{% endif %}</div> --> #}
                 <div class="flat-card__val">{% if object.site_area %}{{ object.site_area|floatformat:"-2" }} м<sup>2</sup>{% endif %}</div>
             </div>
             <div class="flat-card__info">
@@ -43,20 +44,8 @@
                 </div>
             </div>
             <div class="flat-card__info">
-                <div class="flat-card__label">{% spaceless %}
-                    {% if object.object_section.object_block.name %}Блок{% endif %}
-                    {% if object.object_section.object_block.name and object.object_section.number %} / {% endif %}
-                    {% object.object_section.number %}Секция{% endif %}
-                {% endspaceless %}</div>
-                <div class="flat-card__val">{% spaceless %}
-                    {% if object.object_section.object_block.name %}
-                        {{ object.object_section.object_block.name }}
-                    {% endif %}
-                    {% if object.object_section.object_block.name and object.object_section.number %} / {% endif %}
-                    {% object.object_section.number %}
-                        {{ object.object_section.number }}
-                    {% endif %}
-                {% endspaceless %}</div>
+                <div class="flat-card__label">{% if object.object_section.object_block.name %}Блок{% endif %}{% if object.object_section.object_block.name and object.object_section.number %} / {% endif %}{% if object.object_section.number %}Секция{% endif %}</div>
+                <div class="flat-card__val flat-block-and-secton">{% if object.object_section.object_block.name %}{{ object.object_section.object_block.name }}{% endif %}{% if object.object_section.object_block.name and object.object_section.number %} / {% endif %}{% if object.object_section.number %}{{ object.object_section.number }}{% endif %}</div>
             </div>
         </div>
         <div class="flat-card__footer--bottom">

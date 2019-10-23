@@ -20,15 +20,7 @@
                 <li class="breadcrumb-item">
                     <a href="{% url 'object:detail' slug=object.object.slug %}">{{ object.object.name }}</a>
                 </li>
-                {% if object.object_section %}
-                    <li class="breadcrumb-item">{{ object.object_section }}</li>
-                {% endif %}
-                {% if object.site_type %}
-                    <li class="breadcrumb-item">{{ object.get_site_type_display }}</li>
-                {% endif %}
-                {% if object.floor %}
-                    <li class="breadcrumb-item">Этаж {{ object.floor }}</li>
-                {% endif %}
+                <li class="breadcrumb-item">{{ page_title }}</li>
             </ol>
         </div>
     </nav>
