@@ -43,7 +43,7 @@
         }
     }
 
-    &__id {
+    &__crmid {
         text-align: right;
     }
 
@@ -81,7 +81,6 @@
             border-bottom: 1px solid #e4e4e4;
 
             display: grid;
-            // grid-template-columns: repeat(2, 1fr) 80px;
             grid-template-columns: 1fr .7fr 1fr;
         }
 
@@ -98,15 +97,15 @@
         }
     }
 
-    &__heading {
+    &__label {
         color: #a6a6a6;
+        cursor: default;
         font-size: .79rem;
         margin-bottom: 3px;
     }
 
     &__val {
-        font-size: 1.15rem;
-        line-height: 1.1;
+        line-height: 1.2;
 
         .flat-floor {
             font-size: 1.3rem;
@@ -116,12 +115,6 @@
             font-size: .9rem;
             opacity: .5;
         }
-    }
-
-    &__object-name {
-        font-size: 1.15rem;
-        font-weight: 600;
-        line-height: 1.1;
     }
 
     &__price-total {
