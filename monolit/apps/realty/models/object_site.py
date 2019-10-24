@@ -182,84 +182,85 @@ class ObjectSite(models.Model):
 
 
     def flat_name_card(self):
-        result = ''
+        site_type_name = ''
         # Квартира
         if self.site_type == 'flat':
             site_type = 'квартира'
 
             if self.rooms_qty == '0':
-                result = f'{site_type.title()}-cтудия'
+                site_type_name = f'{site_type.title()}-cтудия'
             elif self.rooms_qty == '1':
-                result = f'1-комнатная {site_type}'
+                site_type_name = f'1-комнатная {site_type}'
             elif self.rooms_qty == '2':
-                result = f'2-комнатная {site_type}'
+                site_type_name = f'2-комнатная {site_type}'
             elif self.rooms_qty == '3':
-                result = f'3-комнатная {site_type}'
+                site_type_name = f'3-комнатная {site_type}'
             elif self.rooms_qty == '4':
-                result = f'4-комнатная {site_type}'
+                site_type_name = f'4-комнатная {site_type}'
             elif self.rooms_qty == '5':
-                result = f'5-комнатная {site_type}'
+                site_type_name = f'5-комнатная {site_type}'
 
         # Апартаменты
         elif self.site_type == 'apartments':
             site_type = 'апартаменты'
 
             if self.rooms_qty == '0':
-                result = f'{site_type.title()}-cтудия'
+                site_type_name = f'{site_type.title()}-cтудия'
             elif self.rooms_qty == '1':
-                result = f'1-комнатные {site_type}'
+                site_type_name = f'1-комнатные {site_type}'
             elif self.rooms_qty == '2':
-                result = f'2-комнатные {site_type}'
+                site_type_name = f'2-комнатные {site_type}'
             elif self.rooms_qty == '3':
-                result = f'3-комнатные {site_type}'
+                site_type_name = f'3-комнатные {site_type}'
             elif self.rooms_qty == '4':
-                result = f'4-комнатные {site_type}'
+                site_type_name = f'4-комнатные {site_type}'
             elif self.rooms_qty == '5':
-                result = f'5-комнатные {site_type}'
+                site_type_name = f'5-комнатные {site_type}'
 
-        return f'{result}'
+        return f'{site_type_name}'
 
 
     def flat_name_full(self):
-        result = ''
+        site_type_name = ''
         # Квартира
         if self.site_type == 'flat':
             site_type = 'квартира'
 
             if self.rooms_qty == '0':
-                result = f'{site_type.title()}-cтудия'
+                site_type_name = f'{site_type.title()}-cтудия'
             elif self.rooms_qty == '1':
-                result = f'1-комнатная {site_type}'
+                site_type_name = f'1-комнатная {site_type}'
             elif self.rooms_qty == '2':
-                result = f'2-комнатная {site_type}'
+                site_type_name = f'2-комнатная {site_type}'
             elif self.rooms_qty == '3':
-                result = f'3-комнатная {site_type}'
+                site_type_name = f'3-комнатная {site_type}'
             elif self.rooms_qty == '4':
-                result = f'4-комнатная {site_type}'
+                site_type_name = f'4-комнатная {site_type}'
             elif self.rooms_qty == '5':
-                result = f'5-комнатная {site_type}'
+                site_type_name = f'5-комнатная {site_type}'
 
         # Апартаменты
         elif self.site_type == 'apartments':
             site_type = 'апартаменты'
 
             if self.rooms_qty == '0':
-                result = f'{site_type.title()}-cтудия'
+                site_type_name = f'{site_type.title()}-cтудия'
             elif self.rooms_qty == '1':
-                result = f'1-комнатные {site_type}'
+                site_type_name = f'1-комнатные {site_type}'
             elif self.rooms_qty == '2':
-                result = f'2-комнатные {site_type}'
+                site_type_name = f'2-комнатные {site_type}'
             elif self.rooms_qty == '3':
-                result = f'3-комнатные {site_type}'
+                site_type_name = f'3-комнатные {site_type}'
             elif self.rooms_qty == '4':
-                result = f'4-комнатные {site_type}'
+                site_type_name = f'4-комнатные {site_type}'
             elif self.rooms_qty == '5':
-                result = f'5-комнатные {site_type}'
+                site_type_name = f'5-комнатные {site_type}'
 
-        # TODO: check self.object.object_type.name_abbreviation
         object_type_name = self.object.object_type.name_declension
+        if self.object.object_type.name == 'Жилой комплекс' and self.object.object_type.name_abbreviation:
+            object_type_name = self.object.object_type.name_abbreviation
 
-        return f'{result} на {self.floor} этаже в {object_type_name}'
+        return f'{site_type_name} на {self.floor} этаже в {object_type_name} {self.object.name}'
 
 
 @receiver(pre_save, sender=ObjectSite)

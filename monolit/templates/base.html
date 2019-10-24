@@ -3,11 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    {# <title>{{ page_title }} | {{ settings.site_title }}</title> #}
+    {# <!-- <title>{{ page_title }} | {{ settings.site_title }}</title> --> #}
+
+    {% url 'object:site-list' as objects_site_list_url %}
 
     <title>{% spaceless %}
         {% if request.path == '/' %}
             {% if settings.site_title %}{{ settings.site_title }}{% endif %}
+        {# Квартиры #}
+        {% elif objects_site_list_url in request.path and objects_site_list_url != request.path and page_title %}
+            {{ page_title }}
         {% elif request.path != '/' and page_title %}
             {{ page_title }} | {{ settings.site_title }}
         {% endif %}

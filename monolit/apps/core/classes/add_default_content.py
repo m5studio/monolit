@@ -62,7 +62,7 @@ class AddDefaultContent:
             ('city', 'Город', 'Городе', ''),
             ('living-house', 'Жилой дом', 'Жилом доме', ''),
             ('living-quarter', 'Жилой квартал', 'Жилом квартале', ''),
-            ('living-complex', 'Жилой комплекс', 'Жилом комплексе', ''),
+            ('living-complex', 'Жилой комплекс', 'Жилом комплексе', 'ЖК'),
             ('resort-complex', 'Курортный комплекс', 'Курортном комплексе', ''),
             ('multipurposes-complex', 'Многофункциональный комплекс', 'Многофункциональном комплексе', 'МФК'),
             ('family-quarter', 'Семейный квартал', 'Семейном квартале', ''),
@@ -74,7 +74,7 @@ class AddDefaultContent:
             name = object_type[1]
             slug = object_type[0]
             name_declension = object_type[2]
-            name_abbreviation = object_type[2]
+            name_abbreviation = object_type[3]
 
             try:
                 ObjectTypes.objects.get(name=name)

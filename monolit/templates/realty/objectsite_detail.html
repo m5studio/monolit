@@ -146,7 +146,7 @@
                             {% if object.two_levels %}
                                 <div class="flat-params-block">
                                     <div class="flat-params-block__name">Два уровня</div>
-                                    <div class="flat-params-block__val">&#10004;</div>
+                                    <div class="flat-params-block__val">{% if object.two_levels == True %}Да{% else %}Нет{% endif %}</div>
                                 </div>
                             {% endif %}
                             {% if object.entresol %}
@@ -158,7 +158,7 @@
                             {% if object.wardrobe %}
                                 <div class="flat-params-block">
                                     <div class="flat-params-block__name">Гардеробная</div>
-                                    <div class="flat-params-block__val">&#10004;</div>
+                                    <div class="flat-params-block__val">{% if object.wardrobe == True %}Да{% else %}Нет{% endif %}</div>
                                 </div>
                             {% endif %}
                             {% if object.finish_type %}

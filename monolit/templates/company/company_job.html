@@ -14,7 +14,7 @@
             <h1>{{ page_title }}</h1>
 
             <div class="mt-3">
-                <a href="#section-vacancies-list" class="h2">Актуальные Вакансии</a>
+                <a href="#jobs-list" class="h3 anchor-link">Вакансии актуальные на {{ current_month_rus }} {% now "Y" %}</a>
             </div>
         </div>
 
@@ -36,6 +36,7 @@
     </main>
 
     {% if job_vacancies %}
+        <div class="anchor" id="jobs-list"></div>
         <section id="section-vacancies-list" class="common-section">
             <div class="common-section__title container">
                 <h2>Вакансии</h2>

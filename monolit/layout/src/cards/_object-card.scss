@@ -399,6 +399,15 @@
             transition: all ease-in-out .3s;
         }
 
+        .object-card__info {
+            grid-template-rows: 1fr;
+            height: auto;
+        }
+
+        .object-card__flat {
+            display: none;
+        }
+
         .object-card__features {
             grid-template-columns: 1fr;
 
