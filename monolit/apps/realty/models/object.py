@@ -1,6 +1,6 @@
 from django.db import models
 
-from django.db.models.signals import post_save, post_delete
+from django.db.models.signals import pre_save, post_save, post_delete
 from django.dispatch import receiver
 
 from django.urls import reverse
@@ -50,6 +50,7 @@ class Object(models.Model):
     completed     = models.BooleanField('Строительство завершено', default=False)
     all_sold      = models.BooleanField('Все помещения проданы', default=False, help_text='Все квартиры и помещения проданы')
     partnership   = models.BooleanField('Партнерская программа', default=False, help_text='Участвует ли данный объект в партнерской программе?')
+
     order         = models.PositiveIntegerField('Порядок', default=0, blank=True, null=True, help_text='Чем выше число, тем ниже объект в списке')
     crm_id        = models.CharField('CRM ID', max_length=100, unique=True, help_text='ID объекта в 1C (Заполняется автоматически при выгрузке)')
     name          = models.CharField('Название объекта', unique=True, max_length=255, db_index=True)
@@ -58,6 +59,7 @@ class Object(models.Model):
     building_type = models.ForeignKey(ObjectBuildingTypes, verbose_name='Тип Здания', on_delete=models.SET_NULL, blank=True, null=True)
     address       = models.CharField('Адрес', max_length=255, blank=True, null=True, help_text='Город, улица, номер дома (для завершенных/построенных объектов)')
     description   = RichTextField('Описание', blank=True, null=True)
+
     genplan       = models.ImageField('Генплан', upload_to=genplan_upload_path, blank=True, null=True, help_text='Изображение с генпланом')
     genplan_svg   = models.TextField('SVG объекты на генплане', blank=True, null=True)
 
@@ -86,7 +88,7 @@ class Object(models.Model):
         return reverse('object:detail', kwargs={'slug': self.slug})
 
     class Meta:
-        verbose_name = 'Объект'
+        verbose_name = 'Жилой Объект'
         verbose_name_plural = 'Объекты (Жилые)'
 
 

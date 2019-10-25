@@ -6,6 +6,7 @@ class ObjectBathroom(models.Model):
     BATHROOM_TYPES = (
         ('0', 'Совмещенный'),
         ('1', 'Раздельный'),
+        ('2', 'На этаже'),
     )
 
     object_site   = models.ForeignKey(ObjectSite, on_delete=models.CASCADE, blank=True, null=True)

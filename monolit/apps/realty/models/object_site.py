@@ -112,7 +112,7 @@ class ObjectSite(models.Model):
     active                  = models.BooleanField('Активный', default=True, help_text='Опубликован на сайте')
     special_offer           = models.BooleanField('Спецпредложение', default=False)
 
-    object                  = models.ForeignKey(Object, verbose_name='Объект', on_delete=models.CASCADE)
+    object                  = models.ForeignKey(Object, verbose_name='Жилой Объект', on_delete=models.CASCADE)
     site_type               = models.CharField('Тип помещения', max_length=100, choices=SITE_TYPES)
     object_block            = models.ForeignKey(ObjectBlock, verbose_name='Блок Объекта', on_delete=models.SET_NULL, blank=True, null=True)
     object_section          = models.ForeignKey(ObjectSection, verbose_name='Секция Объекта', on_delete=models.SET_NULL, blank=True, null=True)
@@ -190,13 +190,13 @@ class ObjectSite(models.Model):
             if self.rooms_qty == '0':
                 site_type_name = f'{site_type.title()}-cтудия'
             elif self.rooms_qty == '1':
-                site_type_name = f'1-комнатная {site_type}'
+                site_type_name = f'1 комнатная {site_type}'
             elif self.rooms_qty == '2':
-                site_type_name = f'2-комнатная {site_type}'
+                site_type_name = f'2 комнатная {site_type}'
             elif self.rooms_qty == '3':
-                site_type_name = f'3-комнатная {site_type}'
+                site_type_name = f'3 комнатная {site_type}'
             elif self.rooms_qty == '4':
-                site_type_name = f'4-комнатная {site_type}'
+                site_type_name = f'4 комнатная {site_type}'
             elif self.rooms_qty == '5':
                 site_type_name = f'5-комнатная {site_type}'
 
@@ -207,15 +207,15 @@ class ObjectSite(models.Model):
             if self.rooms_qty == '0':
                 site_type_name = f'{site_type.title()}-cтудия'
             elif self.rooms_qty == '1':
-                site_type_name = f'1-комнатные {site_type}'
+                site_type_name = f'1 комнатные {site_type}'
             elif self.rooms_qty == '2':
-                site_type_name = f'2-комнатные {site_type}'
+                site_type_name = f'2 комнатные {site_type}'
             elif self.rooms_qty == '3':
-                site_type_name = f'3-комнатные {site_type}'
+                site_type_name = f'3 комнатные {site_type}'
             elif self.rooms_qty == '4':
-                site_type_name = f'4-комнатные {site_type}'
+                site_type_name = f'4 комнатные {site_type}'
             elif self.rooms_qty == '5':
-                site_type_name = f'5-комнатные {site_type}'
+                site_type_name = f'5 комнатные {site_type}'
 
         return f'{site_type_name}'
 
@@ -229,15 +229,15 @@ class ObjectSite(models.Model):
             if self.rooms_qty == '0':
                 site_type_name = f'{site_type.title()}-cтудия'
             elif self.rooms_qty == '1':
-                site_type_name = f'1-комнатная {site_type}'
+                site_type_name = f'1 комнатная {site_type}'
             elif self.rooms_qty == '2':
-                site_type_name = f'2-комнатная {site_type}'
+                site_type_name = f'2 комнатная {site_type}'
             elif self.rooms_qty == '3':
-                site_type_name = f'3-комнатная {site_type}'
+                site_type_name = f'3 комнатная {site_type}'
             elif self.rooms_qty == '4':
-                site_type_name = f'4-комнатная {site_type}'
+                site_type_name = f'4 комнатная {site_type}'
             elif self.rooms_qty == '5':
-                site_type_name = f'5-комнатная {site_type}'
+                site_type_name = f'5 комнатная {site_type}'
 
         # Апартаменты
         elif self.site_type == 'apartments':
@@ -246,15 +246,15 @@ class ObjectSite(models.Model):
             if self.rooms_qty == '0':
                 site_type_name = f'{site_type.title()}-cтудия'
             elif self.rooms_qty == '1':
-                site_type_name = f'1-комнатные {site_type}'
+                site_type_name = f'1 комнатные {site_type}'
             elif self.rooms_qty == '2':
-                site_type_name = f'2-комнатные {site_type}'
+                site_type_name = f'2 комнатные {site_type}'
             elif self.rooms_qty == '3':
-                site_type_name = f'3-комнатные {site_type}'
+                site_type_name = f'3 комнатные {site_type}'
             elif self.rooms_qty == '4':
-                site_type_name = f'4-комнатные {site_type}'
+                site_type_name = f'4 комнатные {site_type}'
             elif self.rooms_qty == '5':
-                site_type_name = f'5-комнатные {site_type}'
+                site_type_name = f'5 комнатные {site_type}'
 
         object_type_name = self.object.object_type.name_declension
         if self.object.object_type.name == 'Жилой комплекс' and self.object.object_type.name_abbreviation:
@@ -271,7 +271,6 @@ def calculate_total_price(sender, instance, **kwargs):
 
 @receiver(post_save, sender=ObjectSite)
 def image_optimization(sender, instance, created, **kwargs):
-    # TODO: Refactor this!!!
     if instance.image_planning:
         image = ImageOptimizer(instance.image_planning.path)
         image.optimizeAndSaveImg()

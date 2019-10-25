@@ -23,6 +23,7 @@ class BankAdmin(TurnOffAdminLogging, admin.ModelAdmin):
             'fields': ('logo_admin_thumb', 'logo')
         }),
     )
+    search_fields = ['name']
 
 
 @admin.register(Offer)
@@ -58,6 +59,7 @@ class OfferAdmin(TurnOffAdminLogging, admin.ModelAdmin):
             'description': description_text
         }),
     )
+    autocomplete_fields = ['bank']
 
 
 @admin.register(WayToBuy)

@@ -20,6 +20,16 @@ from apps.realty.models.object_types import ObjectTypes
 from apps.realty.models.object_video import ObjectVideo
 from apps.realty.models.object import Object
 
+from apps.realty.models.object_commercial import ObjectCommercial
+
+
+""" [ ObjectCommercial ] """
+@admin.register(ObjectCommercial)
+class ObjectCommercialAdmin(TurnOffAdminLogging, admin.ModelAdmin):
+    pass
+    # autocomplete_fields = ['object', 'object_blocks', 'object_sections']
+""" [ END ObjectCommercial ] """
+
 
 """ [ ObjectBathroom ] """
 class ObjectBathroomInline(admin.TabularInline):
@@ -48,7 +58,8 @@ class ObjectBalconyAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.ModelAdm
 """ [ ObjectSiteWindowsView ] """
 @admin.register(ObjectSiteWindowsView)
 class ObjectSiteWindowsViewAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.ModelAdmin):
-    search_fields = ['name']
+    pass
+    # search_fields = ['name']
 """ [ END ObjectSiteWindowsView ] """
 
 
@@ -80,7 +91,7 @@ class ObjectSiteAdmin(TurnOffAdminLogging, admin.ModelAdmin):
     list_editable = ('active', 'special_offer')
     list_filter = ('object', 'rooms_qty')
 
-    autocomplete_fields = ['object', 'object_block', 'object_section', 'window_view']
+    # autocomplete_fields = ['object', 'object_block', 'object_section', 'window_view']
 """ [ END ObjectSite ] """
 
 
@@ -111,8 +122,8 @@ class ObjectGalleryAdmin(TurnOffAdminLogging, admin.ModelAdmin):
     ]
     list_display = ('name', 'order', 'object', 'updated')
     list_editable = ('order',)
-    search_fields = ['object']
-    autocomplete_fields = ['object']
+    # search_fields = ['object']
+    # autocomplete_fields = ['object']
 
     # def get_fields(self, request, obj=None):
     #     if obj:
@@ -138,17 +149,20 @@ class ObjectSectionInline(admin.TabularInline):
     model = ObjectSection
     extra = 0
 
-    search_fields = ['object_block']
-    autocomplete_fields = ['object_block']
+    # search_fields = ['object_block']
+    # autocomplete_fields = ['object_block']
 
 @admin.register(ObjectSection)
 class ObjectSectionAdmin(TurnOffAdminLogging, admin.ModelAdmin):
     inlines = [
         ObjectElevatorInline,
     ]
-    list_display = ('name', 'object')
-    search_fields = ['object']
-    autocomplete_fields = ['object', 'object_block']
+    list_display = ('object', 'object_block', 'name')
+    list_filter = ('object',)
+    list_display_links = ('name',)
+
+    # search_fields = ['object', 'object_block']
+    # autocomplete_fields = ['object', 'object_block']
 """ [ END ObjectSection ] """
 
 
@@ -157,9 +171,15 @@ class ObjectBlockInline(admin.TabularInline):
     model = ObjectBlock
     extra = 0
 
+    exclude = ['object_commercial']
+
 @admin.register(ObjectBlock)
-class ObjectBlockAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.ModelAdmin):
-    search_fields = ['object_block']
+# class ObjectBlockAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.ModelAdmin):
+class ObjectBlockAdmin(TurnOffAdminLogging, admin.ModelAdmin):
+    list_display = ('name', 'object', 'object_commercial')
+    list_filter = ('object', 'object_commercial')
+
+    # search_fields = ['name']
 """ [ END ObjectBlock ] """
 
 
@@ -190,7 +210,8 @@ class ObjectVideoAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.ModelAdmin
 """ [ ObjectDocumentAuthor ] """
 @admin.register(ObjectDocumentAuthor)
 class ObjectDocumentAuthorAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.ModelAdmin):
-    search_fields = ['author']
+    pass
+    # search_fields = ['author']
 """ [ END ObjectDocumentAuthor ] """
 
 
@@ -198,7 +219,7 @@ class ObjectDocumentAuthorAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.M
 class ObjectDocumentInline(admin.TabularInline):
     model = ObjectDocument
     extra = 1
-    autocomplete_fields = ['author']
+    # autocomplete_fields = ['author']
 
 @admin.register(ObjectDocument)
 class ObjectDocumentAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.ModelAdmin):
@@ -209,14 +230,16 @@ class ObjectDocumentAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.ModelAd
 """ [ ObjectBuildingTypes ] """
 @admin.register(ObjectBuildingTypes)
 class ObjectBuildingTypesAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.ModelAdmin):
-    search_fields = ['name']
+    pass
+    # search_fields = ['name']
 """ [ END ObjectBuildingTypes ] """
 
 
 """ [ ObjectTypesAdmin ] """
 @admin.register(ObjectTypes)
 class ObjectTypesAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.ModelAdmin):
-    search_fields = ['name']
+    pass
+    # search_fields = ['name']
 """ [ END ObjectTypesAdmin ] """
 
 
@@ -225,6 +248,7 @@ class ObjectInfoTabInline(admin.TabularInline):
     model = ObjectInfoTab
     extra = 1
     max_num = 8
+    # classes = ['collapse']
 
     readonly_fields = ('image_thumb',)
     fields = ('object', 'icon_name', 'description', 'image', 'image_thumb',)
@@ -253,7 +277,8 @@ class ObjectAdmin(TurnOffAdminLogging, admin.ModelAdmin):
             'fields': ('active', 'completed', 'all_sold', 'partnership')
         }),
         (None, {
-            'fields': ('order', 'crm_id', 'name', 'slug', 'object_type', 'building_type', 'description', 'webcam', 'panoram'),
+            # 'fields': ('order', 'crm_id', 'name', 'slug', 'object_type', 'building_type', 'description', 'webcam', 'panoram'),
+            'fields': ('crm_id', 'name', 'slug', 'object_type', 'building_type', 'description', 'webcam', 'panoram'),
             # 'description': 'Some description if needed'
         }),
         ('Главное изображение', {
@@ -268,7 +293,8 @@ class ObjectAdmin(TurnOffAdminLogging, admin.ModelAdmin):
     )
     list_display = ('name', 'crm_id', 'order', 'active', 'all_sold', 'partnership', 'updated')
     list_editable = ('order', 'active')
-    search_fields = ['name']
     ordering = ('order',)
-    autocomplete_fields = ['object_type', 'building_type']
+
+    search_fields = ['name']
+    # autocomplete_fields = ['object_type', 'building_type']
 """ [ END Object ] """

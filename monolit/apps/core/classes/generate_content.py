@@ -509,7 +509,7 @@ class GenerateContent:
                 object_block = ObjectBlock.objects.filter(object=object_id).get(pk=object_block_id)
                 object_section = ObjectSection(object=object, \
                                                 object_block=object_block, \
-                                                number=self.fake.random_number(3, True), \
+                                                # number=self.fake.random_number(3, True), \
                                                 name=f'Секция {i}', \
                                                 floor_first=1, \
                                                 floor_last=23, \
