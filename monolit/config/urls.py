@@ -24,7 +24,6 @@ admin.site.site_header = "Monolit Admin"
 admin.site.site_title = admin.site.site_header
 admin.site.index_title = "Monolit Applications"
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('apps.core.urls')),
@@ -34,7 +33,6 @@ urlpatterns = [
     path('', include('apps.company.urls')),
     path('', include('apps.api.urls')),
 ]
-
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

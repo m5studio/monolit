@@ -119,10 +119,9 @@ if DEBUG:
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
-# TODO: setup producrion DB
+# TODO: setup production DB
 if not DEBUG:
-    print("!!! SET DB Settings for non-DEBUG mode")
-    pass
+    print("!!! SET PRODUCTION DB !!!")
 
 
 # Password validation
