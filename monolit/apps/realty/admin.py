@@ -7,6 +7,7 @@ from imagekit.admin import AdminThumbnail
 
 from apps.realty.models.object_block import ObjectBlock
 from apps.realty.models.object_building_types import ObjectBuildingTypes
+from apps.realty.models.object_cities import ObjectCities
 from apps.realty.models.object_document import ObjectDocument, ObjectDocumentAuthor
 from apps.realty.models.object_elevator import ObjectElevator
 from apps.realty.models.object_file import ObjectFile
@@ -21,6 +22,14 @@ from apps.realty.models.object_video import ObjectVideo
 from apps.realty.models.object import Object
 
 from apps.realty.models.object_commercial import ObjectCommercial
+
+
+""" [ ObjectCities ] """
+@admin.register(ObjectCities)
+# class ObjectCitiesAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.ModelAdmin):
+class ObjectCitiesAdmin(TurnOffAdminLogging, admin.ModelAdmin):
+    pass
+""" [ END ObjectCities ] """
 
 
 """ [ ObjectCommercial ] """
@@ -149,8 +158,8 @@ class ObjectSectionInline(admin.TabularInline):
     model = ObjectSection
     extra = 0
 
-    # search_fields = ['object_block']
-    # autocomplete_fields = ['object_block']
+    # search_fields = ['object',]
+    autocomplete_fields = ['object_block',]
 
 @admin.register(ObjectSection)
 class ObjectSectionAdmin(TurnOffAdminLogging, admin.ModelAdmin):
@@ -161,8 +170,8 @@ class ObjectSectionAdmin(TurnOffAdminLogging, admin.ModelAdmin):
     list_filter = ('object',)
     list_display_links = ('name',)
 
-    # search_fields = ['object', 'object_block']
-    # autocomplete_fields = ['object', 'object_block']
+    search_fields = ['object_block',]
+    # autocomplete_fields = ['object',]
 """ [ END ObjectSection ] """
 
 
@@ -170,8 +179,10 @@ class ObjectSectionAdmin(TurnOffAdminLogging, admin.ModelAdmin):
 class ObjectBlockInline(admin.TabularInline):
     model = ObjectBlock
     extra = 0
-
     exclude = ['object_commercial']
+
+    # search_fields = ['name']
+    # autocomplete_fields = ['object_block',]
 
 @admin.register(ObjectBlock)
 # class ObjectBlockAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.ModelAdmin):
@@ -179,7 +190,8 @@ class ObjectBlockAdmin(TurnOffAdminLogging, admin.ModelAdmin):
     list_display = ('name', 'object', 'object_commercial')
     list_filter = ('object', 'object_commercial')
 
-    # search_fields = ['name']
+    search_fields = ['name']
+    # autocomplete_fields = ['object',]
 """ [ END ObjectBlock ] """
 
 
@@ -288,7 +300,7 @@ class ObjectAdmin(TurnOffAdminLogging, admin.ModelAdmin):
             'fields': ('genplan_thumb', 'genplan', 'genplan_svg')
         }),
         ('Адрес', {
-            'fields': ('address',)
+            'fields': ('city', 'address',)
         }),
     )
     list_display = ('name', 'crm_id', 'order', 'active', 'all_sold', 'partnership', 'updated')

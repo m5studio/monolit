@@ -3,6 +3,7 @@ from apps.core.models import SiteSettings
 from apps.realty.models.object_site import ObjectSiteWindowsView
 from apps.realty.models.object_types import ObjectTypes
 from apps.realty.models.object_building_types import ObjectBuildingTypes
+from apps.realty.models.object_cities import ObjectCities
 
 
 class AddDefaultContent:
@@ -58,21 +59,21 @@ class AddDefaultContent:
 
     def add_ObjectTypes(self):
         object_types = [
-            ('business_center', 'Бизнес центр', 'Бизнес центре', 'БЦ'),
-            ('city', 'Город', 'Городе', ''),
-            ('living-house', 'Жилой дом', 'Жилом доме', ''),
-            ('living-quarter', 'Жилой квартал', 'Жилом квартале', ''),
-            ('living-complex', 'Жилой комплекс', 'Жилом комплексе', 'ЖК'),
-            ('resort-complex', 'Курортный комплекс', 'Курортном комплексе', ''),
-            ('multipurposes-complex', 'Многофункциональный комплекс', 'Многофункциональном комплексе', 'МФК'),
-            ('family-quarter', 'Семейный квартал', 'Семейном квартале', ''),
-            ('business-and-retail-center', 'Торгово-офисный центр', 'Торгово-офисном центре', ''),
-            ('mall', 'Торговый центр', 'Торговом центре', 'ТЦ'),
+            ('Бизнес центр', 'business-center', 'Бизнес центре', 'БЦ'),
+            ('Город', 'city', 'Городе', ''),
+            ('Жилой дом', 'living-house', 'Жилом доме', ''),
+            ('Жилой квартал', 'living-quarter', 'Жилом квартале', ''),
+            ('Жилой комплекс', 'living-complex', 'Жилом комплексе', 'ЖК'),
+            ('Курортный комплекс', 'resort-complex', 'Курортном комплексе', ''),
+            ('Многофункциональный комплекс', 'multipurposes-complex', 'Многофункциональном комплексе', 'МФК'),
+            ('Семейный квартал', 'family-quarter', 'Семейном квартале', ''),
+            ('Торгово-офисный центр', 'business-and-retail', 'Торгово-офисном центре', ''),
+            ('Торговый центр', 'mall', 'Торговом центре', 'ТЦ'),
         ]
 
         for object_type in object_types:
-            name = object_type[1]
-            slug = object_type[0]
+            name = object_type[0]
+            slug = object_type[1]
             name_declension = object_type[2]
             name_abbreviation = object_type[3]
 
@@ -86,14 +87,14 @@ class AddDefaultContent:
 
     def add_ObjectBuildingTypes(self):
         building_types = [
-            ('monolith', 'Монолитный'),
-            ('monolith-frame', 'Монолитно-каркасный'),
-            ('panel', 'Панельный'),
+            ('Монолитный', 'monolith',),
+            ('Монолитно-каркасный', 'monolith-frame',),
+            ('Панельный', 'panel',),
         ]
 
         for building_type in building_types:
-            name = building_type[1]
-            slug = building_type[0]
+            name = building_type[0]
+            slug = building_type[1]
 
             try:
                 ObjectBuildingTypes.objects.get(name=name)
@@ -102,9 +103,29 @@ class AddDefaultContent:
                 ObjectBuildingTypes.objects.create(name=name, slug=slug)
                 print(f'ObjectBuildingTypes {name} created')
 
+    def add_ObjectCities(self):
+        cities = (
+            ('Алушта', 'alushta',),
+            ('Евпатория', 'evpatoriya',),
+            ('Симферополь', 'simferopol',),
+            ('Ялта', 'yalta',),
+        )
+
+        for city in cities:
+            name = city[0]
+            # slug = city[1]
+
+            try:
+                ObjectCities.objects.get(name=name)
+                print(f'ObjectCities {name} already exist')
+            except ObjectCities.DoesNotExist:
+                ObjectCities.objects.create(name=name)
+                print(f'ObjectCities {name} created')
+
 
     def addContent(self):
         self.add_SiteSettings()
         self.add_ObjectSiteWindowsView()
         self.add_ObjectTypes()
         self.add_ObjectBuildingTypes()
+        self.add_ObjectCities()

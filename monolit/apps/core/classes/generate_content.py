@@ -18,6 +18,7 @@ from apps.realty.models.object_elevator import ObjectElevator
 from apps.realty.models.object_gallery import ObjectGallery, ObjectGalleryImage
 from apps.realty.models.object_building_types import ObjectBuildingTypes
 from apps.realty.models.object_types import ObjectTypes
+from apps.realty.models.object_cities import ObjectCities
 
 from apps.mortgage.models import WayToBuy, Bank, Offer
 
@@ -572,6 +573,7 @@ class GenerateContent:
 
     def _create_Object(self):
         name = f'Объект {self.fake.word()} {self.fake.word()} {str(self.fake.random_number(4, True))}'.title()
+        city = ObjectCities.objects.get(name='Симферополь')
         fake = Faker()
         object = Object(completed=self.fake.boolean(chance_of_getting_true=40), \
                         all_sold=self.fake.boolean(chance_of_getting_true=30), \
@@ -582,6 +584,7 @@ class GenerateContent:
                         object_type=ObjectTypes.objects.get(id=5), \
                         building_type=ObjectBuildingTypes.objects.get(id=1), \
                         description=self.fake.text(1000), \
+                        city=city, \
                         address='ул. Ленина 12', \
                         genplan=self.DUMMY_IMG, \
                         main_image=self.DUMMY_IMG, \

@@ -17,6 +17,7 @@ from apps.core.classes.image_optimizer import ImageOptimizer
 
 from apps.realty.models.object_types import ObjectTypes
 from apps.realty.models.object_building_types import ObjectBuildingTypes
+from apps.realty.models.object_cities import ObjectCities
 
 
 def genplan_upload_path(instance, filename):
@@ -32,13 +33,6 @@ def image_upload_path(instance, filename):
     return 'objects/{object_crm_id}/images/{filename}'.format(object_crm_id=object_crm_id, filename=filename)
 
 class Object(models.Model):
-    # CITIES = (
-    #     ('alushta', 'Алушта'),
-    #     ('evpatoriya', 'Евпатория'),
-    #     ('simferopol', 'Симферополь'),
-    #     ('yalta', 'Ялта'),
-    # )
-
     # BUILDING_TYPES = (
     #     ('monolith', 'Монолитный'),
     #     ('monolith_frame', 'Монолитно-каркасный'),
@@ -57,8 +51,10 @@ class Object(models.Model):
     slug          = models.SlugField('URL адрес', max_length=100, unique=True, help_text='e.g.: status-house (max 100 chars), получим https://monolit.site/objects/status-house/')
     object_type   = models.ForeignKey(ObjectTypes, verbose_name='Тип Объекта', on_delete=models.SET_NULL, blank=True, null=True)
     building_type = models.ForeignKey(ObjectBuildingTypes, verbose_name='Тип Здания', on_delete=models.SET_NULL, blank=True, null=True)
-    address       = models.CharField('Адрес', max_length=255, blank=True, null=True, help_text='Город, улица, номер дома (для завершенных/построенных объектов)')
     description   = RichTextField('Описание', blank=True, null=True)
+
+    city          = models.ForeignKey(ObjectCities, verbose_name='Город', on_delete=models.SET_NULL, blank=True, null=True)
+    address       = models.CharField('Адрес', max_length=255, blank=True, null=True, help_text='Город, улица, номер дома (для завершенных/построенных объектов)')
 
     genplan       = models.ImageField('Генплан', upload_to=genplan_upload_path, blank=True, null=True, help_text='Изображение с генпланом')
     genplan_svg   = models.TextField('SVG объекты на генплане', blank=True, null=True)

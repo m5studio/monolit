@@ -19,7 +19,7 @@
     {% if object.first_payment_from or object.first_payment_to %}
         <div class="mortgage-offer__first-payment">
             <div class="mortgage-offer__title">Первый взнос</div>
-            <div class="mortgage-offer__val">{{ object.first_payment_dispaly }}</div>
+            <div class="mortgage-offer__val">{{ object.first_payment_dispaly|safe }}</div>
         </div>
     {% endif %}
     {% if object.loan_term_from or object.loan_term_to %}
