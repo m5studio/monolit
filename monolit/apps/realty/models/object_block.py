@@ -21,4 +21,4 @@ class ObjectBlock(models.Model):
 
     class Meta:
         verbose_name = 'Блок Объекта'
-        verbose_name_plural = 'Объект (Блоки)'
+        verbose_name_plural = '3. Блоки Объектов'

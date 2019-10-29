@@ -11,10 +11,13 @@ from apps.core.classes.file_processing import FileProcessing
 from apps.core.classes.image_optimizer import ImageOptimizer
 
 from apps.realty.models.object import Object
+from apps.realty.models.object_commercial import ObjectCommercial
 
 
 class ObjectGallery(models.Model):
-    object  = models.ForeignKey(Object, verbose_name='Жилой Объект', on_delete=models.CASCADE)
+    object            = models.ForeignKey(Object, verbose_name='Жилой Объект', on_delete=models.CASCADE, blank=True, null=True)
+    object_commercial = models.ForeignKey(ObjectCommercial, verbose_name='Коммерческий Объект', on_delete=models.CASCADE, blank=True, null=True)
+
     order   = models.PositiveIntegerField('Порядок', default=0, blank=True, null=True, help_text='Чем выше число, тем ниже объект в списке')
     name    = models.CharField('Заголовок галереи', max_length=255)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False, blank=True, null=True)
@@ -24,7 +27,7 @@ class ObjectGallery(models.Model):
 
     class Meta:
         verbose_name = 'Галерея Объекта'
-        verbose_name_plural = 'Фото Галереи Объектов'
+        verbose_name_plural = 'Галереи Объектов'
 
 
 def image_upload_path(instance, filename):

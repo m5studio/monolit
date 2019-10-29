@@ -178,7 +178,7 @@ class ObjectSite(models.Model):
 
     class Meta:
         verbose_name = 'Жилое помещение'
-        verbose_name_plural = 'Помещения (Жилые)'
+        verbose_name_plural = '1.1 Жилые Помещения (Квартиры, Апартаменты)'
 
 
     def flat_name_card(self):

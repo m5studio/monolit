@@ -85,7 +85,7 @@ class Object(models.Model):
 
     class Meta:
         verbose_name = 'Жилой Объект'
-        verbose_name_plural = 'Объекты (Жилые)'
+        verbose_name_plural = '1. Жилые Объекты'
 
 
 @receiver(post_save, sender=Object)
