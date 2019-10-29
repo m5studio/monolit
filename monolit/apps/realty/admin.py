@@ -25,16 +25,8 @@ from apps.realty.models.object_commercial import ObjectCommercial
 from apps.realty.models.object_commercial_site import ObjectCommercialSite
 
 
-""" [ ObjectCommercialSite ] """
-@admin.register(ObjectCommercialSite)
-class ObjectCommercialSiteAdmin(TurnOffAdminLogging, admin.ModelAdmin):
-    pass
-""" [ END ObjectCommercialSite ] """
-
-
 """ [ ObjectCities ] """
 @admin.register(ObjectCities)
-# class ObjectCitiesAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.ModelAdmin):
 class ObjectCitiesAdmin(TurnOffAdminLogging, admin.ModelAdmin):
     pass
 """ [ END ObjectCities ] """
@@ -70,38 +62,6 @@ class ObjectSiteWindowsViewAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.
     pass
     # search_fields = ['name']
 """ [ END ObjectSiteWindowsView ] """
-
-
-""" [ ObjectSite ] """
-@admin.register(ObjectSite)
-class ObjectSiteAdmin(TurnOffAdminLogging, admin.ModelAdmin):
-    inlines = [
-        ObjectBathroomInline,
-        ObjectBalconyInline,
-    ]
-
-    readonly_fields=('price_total', 'image_planning_thumb', 'image_planning3d_thumb', 'image_floor_thumb', 'image_section_thumb', 'image_section_in_object_thumb', 'image_genplan_thumb')
-    fieldsets = (
-        (None, {
-            'fields': ('active', 'special_offer', 'object', 'site_type', 'object_block', 'object_section', 'crm_id', 'floor', 'site_number', 'price_per_square', 'price_total', 'rooms_qty', 'site_area', 'living_area', 'kitchen_area', 'ceiling_height', 'two_levels', 'entresol', 'wardrobe', 'finish_type', 'window_view')
-        }),
-        ('Изображения', {
-           'fields': (
-                ('image_planning_thumb', 'image_planning'),
-                ('image_planning3d_thumb', 'image_planning3d'),
-                ('image_floor_thumb', 'image_floor'),
-                ('image_section_thumb', 'image_section'),
-                ('image_section_in_object_thumb', 'image_section_in_object'),
-                ('image_genplan_thumb', 'image_genplan')
-            )
-        }),
-    )
-    list_display = ('crm_id', 'object', 'site_type', 'rooms_qty', 'site_area', 'active', 'special_offer', 'updated')
-    list_editable = ('active', 'special_offer')
-    list_filter = ('object', 'rooms_qty')
-
-    # autocomplete_fields = ['object', 'object_block', 'object_section', 'window_view']
-""" [ END ObjectSite ] """
 
 
 """ [ ObjectGalleryImage ] """
@@ -274,6 +234,41 @@ class ObjectInfoTabAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.ModelAdm
 """ [ END ObjectInfoTab ] """
 
 
+""" [ ObjectSite ] """
+@admin.register(ObjectSite)
+class ObjectSiteAdmin(TurnOffAdminLogging, admin.ModelAdmin):
+    inlines = [
+        ObjectBathroomInline,
+        ObjectBalconyInline,
+    ]
+
+    readonly_fields=('price_total', 'image_planning_thumb', 'image_planning3d_thumb', 'image_floor_thumb', 'image_section_thumb', 'image_section_in_object_thumb', 'image_genplan_thumb')
+    fieldsets = (
+        ('Опции', {
+            'fields': ('active', 'special_offer',)
+        }),
+        (None, {
+            'fields': ('object', 'site_type', 'object_block', 'object_section', 'crm_id', 'floor', 'site_number', 'price_per_square', 'price_total', 'rooms_qty', 'site_area', 'living_area', 'kitchen_area', 'ceiling_height', 'two_levels', 'entresol', 'wardrobe', 'finish_type', 'window_view')
+        }),
+        ('Изображения', {
+           'fields': (
+                ('image_planning_thumb', 'image_planning'),
+                ('image_planning3d_thumb', 'image_planning3d'),
+                ('image_floor_thumb', 'image_floor'),
+                ('image_section_thumb', 'image_section'),
+                ('image_section_in_object_thumb', 'image_section_in_object'),
+                ('image_genplan_thumb', 'image_genplan')
+            )
+        }),
+    )
+    list_display = ('crm_id', 'object', 'site_type', 'rooms_qty', 'site_area', 'active', 'special_offer', 'updated')
+    list_editable = ('active', 'special_offer')
+    list_filter = ('object', 'rooms_qty')
+
+    # autocomplete_fields = ['object', 'object_block', 'object_section', 'window_view']
+""" [ END ObjectSite ] """
+
+
 """ [ Object ] """
 @admin.register(Object)
 class ObjectAdmin(TurnOffAdminLogging, admin.ModelAdmin):
@@ -314,12 +309,27 @@ class ObjectAdmin(TurnOffAdminLogging, admin.ModelAdmin):
 """ [ END Object ] """
 
 
+""" [ ObjectCommercialSite ] """
+@admin.register(ObjectCommercialSite)
+class ObjectCommercialSiteAdmin(TurnOffAdminLogging, admin.ModelAdmin):
+    pass
+""" [ END ObjectCommercialSite ] """
+
+
 """ [ ObjectCommercial ] """
 @admin.register(ObjectCommercial)
 class ObjectCommercialAdmin(TurnOffAdminLogging, admin.ModelAdmin):
-    inlines = [
-        # ObjectBlockInline,
-        # ObjectSectionInline,
-    ]
-    # autocomplete_fields = ['object', 'object_blocks', 'object_sections']
+    fieldsets = (
+        ('Опции', {
+            'fields': ('active', 'completed', 'all_sold')
+        }),
+        (None, {
+            'fields': ('',)
+        }),
+        ('Адрес', {
+           'fields': ('city', 'address',),
+        }),
+    )
+    list_display = ('name', 'crm_id', 'order', 'active', 'all_sold', 'updated')
+    list_editable = ('order', 'active')
 """ [ END ObjectCommercial ] """

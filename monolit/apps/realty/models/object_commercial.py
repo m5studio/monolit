@@ -14,6 +14,7 @@ class ObjectCommercial(models.Model):
 
     order         = models.PositiveIntegerField('Порядок', default=0, blank=True, null=True, help_text='Чем выше число, тем ниже объект в списке')
     crm_id        = models.CharField('CRM ID', max_length=100, unique=True, help_text='ID объекта в 1C (Заполняется автоматически при выгрузке)')
+
     name          = models.CharField('Название объекта', unique=True, max_length=255, db_index=True)
     slug          = models.SlugField('URL адрес', max_length=100, unique=True, help_text='e.g.: status-house (max 100 chars), получим https://monolit.site/commercial/status-house/')
 
@@ -22,7 +23,9 @@ class ObjectCommercial(models.Model):
     description   = RichTextField('Описание', blank=True, null=True)
 
     city          = models.ForeignKey(ObjectCities, verbose_name='Город', on_delete=models.SET_NULL, blank=True, null=True)
-    address       = models.CharField('Адрес', max_length=255, blank=True, null=True, help_text='Город, улица, номер дома (для завершенных/построенных объектов)')
+    address       = models.CharField('Адрес', max_length=255, blank=True, null=True, help_text='Улица, номер дома')
+
+    updated       = models.DateTimeField(auto_now=True, auto_now_add=False, blank=True, null=True)
 
     def __str__(self):
         return self.name

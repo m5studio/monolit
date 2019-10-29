@@ -19,7 +19,14 @@ class ObjectSection(models.Model):
     floor_last           = models.IntegerField('Этаж Последний', blank=True, null=True, validators=[MinValueValidator(0), MaxValueValidator(100)], help_text='макс. этаж: 100')
 
     def __str__(self):
-        return f'{self.name}'
+        if self.object and not self.object_commercial:
+            return f'(Жил.) {self.object} | {self.name}'
+        if not self.object and self.object_commercial:
+            return f'(Комм.) {self.object_commercial} | {self.name}'
+        if self.object and self.object_commercial:
+            return f'(Жил.) {self.object} | (Комм.) {self.object_commercial} | {self.name}'
+        if not self.object and not self.object_commercial:
+            return f'{self.name}'
 
     class Meta:
         verbose_name = 'Секция Объекта'

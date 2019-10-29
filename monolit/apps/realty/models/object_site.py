@@ -114,14 +114,17 @@ class ObjectSite(models.Model):
 
     object                  = models.ForeignKey(Object, verbose_name='Жилой Объект', on_delete=models.CASCADE)
     site_type               = models.CharField('Тип помещения', max_length=100, choices=SITE_TYPES)
+
     object_block            = models.ForeignKey(ObjectBlock, verbose_name='Блок Объекта', on_delete=models.SET_NULL, blank=True, null=True)
     object_section          = models.ForeignKey(ObjectSection, verbose_name='Секция Объекта', on_delete=models.SET_NULL, blank=True, null=True)
 
     crm_id                  = models.CharField('CRM ID', max_length=100, unique=True, help_text='ID объекта в 1C (Заполняется автоматически при выгрузке)')
     floor                   = models.IntegerField('Этаж', validators=[MinValueValidator(-5), MaxValueValidator(100)], blank=True, null=True)
-    site_number             = models.CharField('Номер квартиры или помещения', max_length=100, blank=True, null=True)
+    site_number             = models.CharField('Номер квартиры', max_length=100, blank=True, null=True)
+
     price_per_square        = models.DecimalField('Цена за м2 (руб.)', max_digits=8, decimal_places=2, blank=True, null=True, help_text='Стоимость одного квадратного метра')
     price_total             = models.DecimalField('Общая стоимость (руб.)', max_digits=11, decimal_places=2, blank=True, null=True, help_text='Считается автоматически из Площади помещения * Цена за м2')
+
     rooms_qty               = models.CharField('Количество комнат в помещении', max_length=100, choices=ROOMS_QTY, blank=True, null=True)
     site_area               = models.DecimalField('Площадь помещения', max_digits=6, decimal_places=2, blank=True, null=True)
     living_area             = models.DecimalField('Жилая площадь', max_digits=6, decimal_places=2, blank=True, null=True)
