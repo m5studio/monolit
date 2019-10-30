@@ -152,13 +152,13 @@
                             {% if object.entresol %}
                                 <div class="flat-params-block">
                                     <div class="flat-params-block__name">Антресоль</div>
-                                    <div class="flat-params-block__val">&#10004;</div>
+                                    <div class="flat-params-block__val">{% if object.entresol == True %}Есть{% else %}Нет{% endif %}</div>
                                 </div>
                             {% endif %}
                             {% if object.wardrobe %}
                                 <div class="flat-params-block">
                                     <div class="flat-params-block__name">Гардеробная</div>
-                                    <div class="flat-params-block__val">{% if object.wardrobe == True %}Да{% else %}Нет{% endif %}</div>
+                                    <div class="flat-params-block__val">{% if object.wardrobe == True %}Есть{% else %}Нет{% endif %}</div>
                                 </div>
                             {% endif %}
                             {% if object.finish_type %}

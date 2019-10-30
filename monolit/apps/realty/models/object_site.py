@@ -122,19 +122,18 @@ class ObjectSite(models.Model):
     floor                   = models.IntegerField('Этаж', validators=[MinValueValidator(-5), MaxValueValidator(100)], blank=True, null=True)
     site_number             = models.CharField('Номер квартиры', max_length=100, blank=True, null=True)
 
-    price_per_square        = models.DecimalField('Цена за м2 (руб.)', max_digits=8, decimal_places=2, blank=True, null=True, help_text='Стоимость одного квадратного метра')
-    price_total             = models.DecimalField('Общая стоимость (руб.)', max_digits=11, decimal_places=2, blank=True, null=True, help_text='Считается автоматически из Площади помещения * Цена за м2')
+    price_per_square        = models.DecimalField('Цена за м2 (руб)', max_digits=8, decimal_places=2, blank=True, null=True, help_text='Стоимость одного квадратного метра')
+    price_total             = models.DecimalField('Общая стоимость (руб)', max_digits=11, decimal_places=2, blank=True, null=True, help_text='Считается автоматически из Площади помещения * Цена за м2')
 
-    rooms_qty               = models.CharField('Количество комнат в помещении', max_length=100, choices=ROOMS_QTY, blank=True, null=True)
-    site_area               = models.DecimalField('Площадь помещения', max_digits=6, decimal_places=2, blank=True, null=True)
-    living_area             = models.DecimalField('Жилая площадь', max_digits=6, decimal_places=2, blank=True, null=True)
-    kitchen_area            = models.DecimalField('Площадь кухни', max_digits=5, decimal_places=2, blank=True, null=True)
+    site_area               = models.DecimalField('Площадь помещения м2', max_digits=6, decimal_places=2, blank=True, null=True, help_text='Пример: 65.5 м2')
+    living_area             = models.DecimalField('Жилая площадь м2', max_digits=6, decimal_places=2, blank=True, null=True, help_text='Пример: 42 м2')
+    kitchen_area            = models.DecimalField('Площадь кухни м2', max_digits=5, decimal_places=2, blank=True, null=True, help_text='Пример: 12.7 м2')
+
+    rooms_qty               = models.CharField('Количество комнат', max_length=100, choices=ROOMS_QTY, blank=True, null=True)
     ceiling_height          = models.DecimalField('Высота потолка (м)', max_digits=4, decimal_places=2, blank=True, null=True, help_text='Пример: 2.30 = 2 метра 30 см')
-
     two_levels              = models.BooleanField('Двухуровневая квартира', default=False, help_text='Квартира с полноценным 2-м этажом')
     entresol                = models.BooleanField('Антресоль', default=False, help_text='Наличие в квартире этажа-антресоли')
     wardrobe                = models.BooleanField('Гардеробная', default=False, help_text='Помещение для гардеробной или кладовой')
-
     finish_type             = models.CharField('Отделка', max_length=100, choices=FINISHING_TYPES, blank=True, null=True)
     window_view             = models.ManyToManyField(ObjectSiteWindowsView, verbose_name='Вид из окон', blank=True)
 
@@ -263,6 +262,8 @@ class ObjectSite(models.Model):
         if self.object.object_type.name == 'Жилой комплекс' and self.object.object_type.name_abbreviation:
             object_type_name = self.object.object_type.name_abbreviation
 
+        if self.site_number:
+            return f'{site_type_name} №{self.site_number} на {self.floor} этаже в {object_type_name} {self.object.name}'
         return f'{site_type_name} на {self.floor} этаже в {object_type_name} {self.object.name}'
 
 

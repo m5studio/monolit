@@ -21,25 +21,18 @@ from apps.realty.models.object_cities import ObjectCities
 
 
 def genplan_upload_path(instance, filename):
-    object_name = instance.crm_id
+    object_crm_id = instance.crm_id
     filename = FileProcessing(filename)
     filename = filename.newFileNameGenplan()
-    return 'objects/{object_name}/{filename}'.format(object_name=object_name, filename=filename)
+    return f'objects/{object_crm_id}/{filename}'
 
 def image_upload_path(instance, filename):
     object_crm_id = instance.crm_id
     filename = FileProcessing(filename)
     filename = filename.newFileNameGenerated()
-    return 'objects/{object_crm_id}/images/{filename}'.format(object_crm_id=object_crm_id, filename=filename)
+    return f'objects/{object_crm_id}/images/{filename}'
 
 class Object(models.Model):
-    # BUILDING_TYPES = (
-    #     ('monolith', 'Монолитный'),
-    #     ('monolith_frame', 'Монолитно-каркасный'),
-    #     ('panel', 'Панельный'),
-    # )
-    # building_type = models.CharField('Тип Здания', max_length=100, choices=BUILDING_TYPES, blank=True, null=True)
-
     active        = models.BooleanField('Активный', default=True, help_text='Опубликован на сайте')
     completed     = models.BooleanField('Строительство завершено', default=False)
     all_sold      = models.BooleanField('Все помещения проданы', default=False, help_text='Все квартиры и помещения проданы')
@@ -50,6 +43,7 @@ class Object(models.Model):
 
     name          = models.CharField('Название объекта', unique=True, max_length=255, db_index=True)
     slug          = models.SlugField('URL адрес', max_length=100, unique=True, help_text='e.g.: status-house (max 100 chars), получим https://monolit.site/objects/status-house/')
+
     object_type   = models.ForeignKey(ObjectTypes, verbose_name='Тип Объекта', on_delete=models.SET_NULL, blank=True, null=True)
     building_type = models.ForeignKey(ObjectBuildingTypes, verbose_name='Тип Здания', on_delete=models.SET_NULL, blank=True, null=True)
     description   = RichTextField('Описание', blank=True, null=True)
@@ -60,11 +54,11 @@ class Object(models.Model):
     genplan       = models.ImageField('Генплан', upload_to=genplan_upload_path, blank=True, null=True, help_text='Изображение с генпланом')
     genplan_svg   = models.TextField('SVG объекты на генплане', blank=True, null=True)
 
-    webcam        = models.URLField('Cсылка на web-камеру', blank=True, null=True, help_text='e.g.: https://rtsp.me/embed/3KASrTkG/')
-    panoram       = models.URLField('Cсылка на панораму', blank=True, null=True, help_text='e.g.: https://monolit360.com/files/main/index.html?s=pano1692')
-
     main_image       = models.ImageField('Главное изображение', upload_to=image_upload_path, blank=True, null=True)
     main_image_thumb = ImageSpecField(source='main_image', processors=[ResizeToFill(512, 386)], format = 'JPEG', options={'quality': 70})
+
+    webcam        = models.URLField('Cсылка на web-камеру', blank=True, null=True, help_text='e.g.: https://rtsp.me/embed/3KASrTkG/')
+    panoram       = models.URLField('Cсылка на панораму', blank=True, null=True, help_text='e.g.: https://monolit360.com/files/main/index.html?s=pano1692')
 
     updated       = models.DateTimeField(auto_now=True, auto_now_add=False, blank=True, null=True)
 
@@ -90,7 +84,7 @@ class Object(models.Model):
 
 
 @receiver(post_save, sender=Object)
-def genplan_image_optimization(sender, instance, created, **kwargs):
+def images_optimization(sender, instance, created, **kwargs):
     if instance.genplan:
         image = ImageOptimizer(instance.genplan.path)
         image.optimizeAndSaveImg()

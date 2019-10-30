@@ -59,8 +59,7 @@ class ObjectBalconyAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.ModelAdm
 """ [ ObjectSiteWindowsView ] """
 @admin.register(ObjectSiteWindowsView)
 class ObjectSiteWindowsViewAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.ModelAdmin):
-    pass
-    # search_fields = ['name']
+    search_fields = ['name']
 """ [ END ObjectSiteWindowsView ] """
 
 
@@ -248,7 +247,16 @@ class ObjectSiteAdmin(TurnOffAdminLogging, admin.ModelAdmin):
             'fields': ('active', 'special_offer',)
         }),
         (None, {
-            'fields': ('object', 'site_type', 'object_block', 'object_section', 'crm_id', 'floor', 'site_number', 'price_per_square', 'price_total', 'rooms_qty', 'site_area', 'living_area', 'kitchen_area', 'ceiling_height', 'two_levels', 'entresol', 'wardrobe', 'finish_type', 'window_view')
+            'fields': ('object', 'site_type', 'object_block', 'object_section', 'crm_id')
+        }),
+        ('Параметры', {
+            'fields': ('rooms_qty', 'floor', 'site_number', 'ceiling_height', 'two_levels', 'entresol', 'wardrobe', 'finish_type', 'window_view')
+        }),
+        ('Площадь', {
+            'fields': ('site_area', 'living_area', 'kitchen_area')
+        }),
+        ('Цены', {
+            'fields': ('price_per_square', 'price_total')
         }),
         ('Изображения', {
            'fields': (
@@ -266,6 +274,7 @@ class ObjectSiteAdmin(TurnOffAdminLogging, admin.ModelAdmin):
     list_filter = ('object', 'rooms_qty')
 
     # autocomplete_fields = ['object', 'object_block', 'object_section', 'window_view']
+    autocomplete_fields = ['window_view']
 """ [ END ObjectSite ] """
 
 
@@ -287,7 +296,7 @@ class ObjectAdmin(TurnOffAdminLogging, admin.ModelAdmin):
             'fields': ('active', 'completed', 'all_sold', 'partnership')
         }),
         (None, {
-            'fields': ('crm_id', 'name', 'slug', 'object_type', 'building_type', 'description', 'webcam', 'panoram'),
+            'fields': ('crm_id', 'name', 'slug', 'object_type', 'building_type', 'description'),
             # 'description': 'Some description if needed'
         }),
         ('Главное изображение', {
@@ -295,6 +304,9 @@ class ObjectAdmin(TurnOffAdminLogging, admin.ModelAdmin):
         }),
         ('Генплан', {
             'fields': ('genplan_thumb', 'genplan', 'genplan_svg')
+        }),
+        ('Панорама\\Вебкамера', {
+            'fields': ('webcam', 'panoram')
         }),
         ('Адрес', {
             'fields': ('city', 'address',)
@@ -312,19 +324,42 @@ class ObjectAdmin(TurnOffAdminLogging, admin.ModelAdmin):
 """ [ ObjectCommercialSite ] """
 @admin.register(ObjectCommercialSite)
 class ObjectCommercialSiteAdmin(TurnOffAdminLogging, admin.ModelAdmin):
-    pass
+    inlines = [
+        ObjectBathroomInline,
+        # ObjectBalconyInline,
+    ]
+
+    readonly_fields=('price_total',)
+    fieldsets = (
+        ('Опции', {
+            'fields': ('active', 'special_offer',)
+        }),
+        (None, {
+            'fields': ('object_commercial', 'site_type', 'object_block', 'object_section', 'crm_id', 'floor', 'site_number', 'price_per_square', 'price_total', 'site_area', 'ceiling_height')
+        }),
+    )
 """ [ END ObjectCommercialSite ] """
 
 
 """ [ ObjectCommercial ] """
 @admin.register(ObjectCommercial)
 class ObjectCommercialAdmin(TurnOffAdminLogging, admin.ModelAdmin):
+    readonly_fields = ('genplan_thumb', 'main_image_thumb_admin')
     fieldsets = (
         ('Опции', {
             'fields': ('active', 'completed', 'all_sold')
         }),
         (None, {
-            'fields': ('',)
+            'fields': ('crm_id', 'name', 'slug', 'object_type', 'building_type', 'description')
+        }),
+        ('Главное изображение', {
+            'fields': ('main_image_thumb_admin', 'main_image')
+        }),
+        ('Генплан', {
+            'fields': ('genplan_thumb', 'genplan', 'genplan_svg')
+        }),
+        ('Панорама\\Вебкамера', {
+            'fields': ('webcam', 'panoram')
         }),
         ('Адрес', {
            'fields': ('city', 'address',),
@@ -332,4 +367,5 @@ class ObjectCommercialAdmin(TurnOffAdminLogging, admin.ModelAdmin):
     )
     list_display = ('name', 'crm_id', 'order', 'active', 'all_sold', 'updated')
     list_editable = ('order', 'active')
+    ordering = ('order',)
 """ [ END ObjectCommercial ] """

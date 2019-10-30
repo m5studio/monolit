@@ -41,7 +41,7 @@
                         min-width: 170px;
 
                         position: absolute;
-                        top: 65px;
+                        top: 70px;
                         z-index: 10;
 
                         ul.main-nav-submenu__list {
@@ -122,7 +122,8 @@
 
                 &:hover {
                     a.main-nav__link {
-                        background-color: #00998f;
+                        // background-color: #00998f;
+                        background-image: linear-gradient(180deg, #00998f, rgba(0,153,143,.95));
                         color: white;
                     }
 
@@ -140,7 +141,8 @@
 
                 &.active {
                     a.main-nav__link {
-                        background-color: #00998f;
+                        // background-color: #00998f;
+                        background-image: linear-gradient(180deg, #00998f, rgba(0,153,143,.95));
                         color: white;
                     }
                 }

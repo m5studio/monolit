@@ -22,7 +22,7 @@ class ObjectCommercialSite(models.Model):
     special_offer     = models.BooleanField('Спецпредложение', default=False)
 
     object_commercial = models.ForeignKey(ObjectCommercial, verbose_name='Коммерческий Объект', on_delete=models.CASCADE)
-    site_type         = models.CharField('Тип помещения', max_length=100, default='', choices=SITE_TYPES)
+    site_type         = models.CharField('Тип помещения', max_length=100, choices=SITE_TYPES)
 
     object_block      = models.ForeignKey(ObjectBlock, verbose_name='Блок Объекта', on_delete=models.SET_NULL, blank=True, null=True)
     object_section    = models.ForeignKey(ObjectSection, verbose_name='Секция Объекта', on_delete=models.SET_NULL, blank=True, null=True)
@@ -33,6 +33,11 @@ class ObjectCommercialSite(models.Model):
 
     price_per_square  = models.DecimalField('Цена за м2 (руб.)', max_digits=8, decimal_places=2, blank=True, null=True, help_text='Стоимость одного квадратного метра')
     price_total       = models.DecimalField('Общая стоимость (руб.)', max_digits=11, decimal_places=2, blank=True, null=True, help_text='Считается автоматически из Площади помещения * Цена за м2')
+
+    site_area         = models.DecimalField('Площадь помещения м2', max_digits=6, decimal_places=2, blank=True, null=True, help_text='Пример: 115.5 м2')
+
+    ceiling_height    = models.DecimalField('Высота потолка (м)', max_digits=4, decimal_places=2, blank=True, null=True, help_text='Пример: 2.30 = 2 метра 30 см')
+    street_entrance   = models.BooleanField('Вход с улицы', default=False)
 
     updated           = models.DateTimeField(auto_now=True, auto_now_add=False, blank=True, null=True)
 
