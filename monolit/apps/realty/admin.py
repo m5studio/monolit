@@ -94,11 +94,6 @@ class ObjectGalleryAdmin(TurnOffAdminLogging, admin.ModelAdmin):
 
     # search_fields = ['object']
     # autocomplete_fields = ['object']
-
-    # def get_fields(self, request, obj=None):
-    #     if obj:
-    #         return ['name', 'order', 'object']
-    #     return ['name', 'object']
 """ [ END ObjectGallery ] """
 
 
