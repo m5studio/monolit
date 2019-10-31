@@ -250,7 +250,7 @@ class ObjectSiteAdmin(TurnOffAdminLogging, admin.ModelAdmin):
         ('Площадь', {
             'fields': ('site_area', 'living_area', 'kitchen_area')
         }),
-        ('Цены', {
+        ('Цена', {
             'fields': ('price_per_square', 'price_total')
         }),
         ('Изображения', {
@@ -321,16 +321,29 @@ class ObjectAdmin(TurnOffAdminLogging, admin.ModelAdmin):
 class ObjectCommercialSiteAdmin(TurnOffAdminLogging, admin.ModelAdmin):
     inlines = [
         ObjectBathroomInline,
-        # ObjectBalconyInline,
     ]
 
-    readonly_fields=('price_total',)
+    readonly_fields=('price_total', 'image_planning_thumb')
     fieldsets = (
         ('Опции', {
             'fields': ('active', 'special_offer',)
         }),
         (None, {
-            'fields': ('object_commercial', 'site_type', 'object_block', 'object_section', 'crm_id', 'floor', 'site_number', 'price_per_square', 'price_total', 'site_area', 'ceiling_height')
+            'fields': ('object_commercial', 'site_type', 'object_block', 'object_section', 'crm_id')
+        }),
+        ('Параметры', {
+            'fields': ('floor', 'site_number', 'ceiling_height', 'street_entrance')
+        }),
+        ('Площадь', {
+            'fields': ('site_area',)
+        }),
+        ('Цена', {
+            'fields': ('price_per_square', 'price_total')
+        }),
+        ('Изображения', {
+           'fields': (
+                ('image_planning_thumb', 'image_planning'),
+            )
         }),
     )
 """ [ END ObjectCommercialSite ] """

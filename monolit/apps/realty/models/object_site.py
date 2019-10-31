@@ -8,13 +8,13 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db.models.signals import pre_save, post_save, post_delete
 from django.dispatch import receiver
 
-from apps.core.classes.clean_media import CleanMedia
-from apps.core.classes.file_processing import FileProcessing
-from apps.core.classes.image_optimizer import ImageOptimizer
-
 from apps.realty.models.object import Object
 from apps.realty.models.object_block import ObjectBlock
 from apps.realty.models.object_section import ObjectSection
+
+from apps.core.classes.clean_media import CleanMedia
+from apps.core.classes.file_processing import FileProcessing
+from apps.core.classes.image_optimizer import ImageOptimizer
 
 
 class ObjectSiteWindowsView(models.Model):
@@ -79,11 +79,9 @@ class ObjectSiteQuerySet(models.QuerySet):
 
 
 def image_upload_path(instance, filename):
-    object_crm_id = instance.object.crm_id
-    site_crm_id = instance.crm_id
     filename = FileProcessing(filename)
     filename = filename.newFileNameGenerated()
-    return 'objects/{object_crm_id}/sites/{site_crm_id}/{filename}'.format(object_crm_id=object_crm_id, site_crm_id=site_crm_id, filename=filename)
+    return f'objects/{instance.object.crm_id}/sites/{instance.crm_id}/{filename}'
 
 class ObjectSite(models.Model):
     SITE_TYPES = (
@@ -119,8 +117,6 @@ class ObjectSite(models.Model):
     object_section          = models.ForeignKey(ObjectSection, verbose_name='Секция Объекта', on_delete=models.SET_NULL, blank=True, null=True)
 
     crm_id                  = models.CharField('CRM ID', max_length=100, unique=True, help_text='ID объекта в 1C (Заполняется автоматически при выгрузке)')
-    floor                   = models.IntegerField('Этаж', validators=[MinValueValidator(-5), MaxValueValidator(100)], blank=True, null=True)
-    site_number             = models.CharField('Номер квартиры', max_length=100, blank=True, null=True)
 
     price_per_square        = models.DecimalField('Цена за м2 (руб)', max_digits=8, decimal_places=2, blank=True, null=True, help_text='Стоимость одного квадратного метра')
     price_total             = models.DecimalField('Общая стоимость (руб)', max_digits=11, decimal_places=2, blank=True, null=True, help_text='Считается автоматически из Площади помещения * Цена за м2')
@@ -129,6 +125,8 @@ class ObjectSite(models.Model):
     living_area             = models.DecimalField('Жилая площадь м2', max_digits=6, decimal_places=2, blank=True, null=True, help_text='Пример: 42 м2')
     kitchen_area            = models.DecimalField('Площадь кухни м2', max_digits=5, decimal_places=2, blank=True, null=True, help_text='Пример: 12.7 м2')
 
+    floor                   = models.IntegerField('Этаж', validators=[MinValueValidator(-5), MaxValueValidator(100)], blank=True, null=True)
+    site_number             = models.CharField('Номер квартиры', max_length=100, blank=True, null=True)
     rooms_qty               = models.CharField('Количество комнат', max_length=100, choices=ROOMS_QTY, blank=True, null=True)
     ceiling_height          = models.DecimalField('Высота потолка (м)', max_digits=4, decimal_places=2, blank=True, null=True, help_text='Пример: 2.30 = 2 метра 30 см')
     two_levels              = models.BooleanField('Двухуровневая квартира', default=False, help_text='Квартира с полноценным 2-м этажом')
