@@ -14,7 +14,9 @@ class ObjectSection(models.Model):
     object_block         = models.ForeignKey(ObjectBlock, verbose_name='Блок Объекта', on_delete=models.CASCADE, default=0, blank=True, null=True)
 
     name                 = models.CharField('Название секции', max_length=255, help_text='Название секции и её номер. Например: Секция 1')
+
     year_of_construction = models.PositiveIntegerField('Год сдачи', default=datetime.date.today().year, blank=True, null=True, validators=[MinValueValidator(2019), MaxValueValidator(2100)], help_text='Допустимые значения от 2019 до 2100')
+
     floor_first          = models.IntegerField('Этаж Первый', blank=True, null=True, validators=[MinValueValidator(-5), MaxValueValidator(1)], help_text='мин. этаж: -5')
     floor_last           = models.IntegerField('Этаж Последний', blank=True, null=True, validators=[MinValueValidator(0), MaxValueValidator(100)], help_text='макс. этаж: 100')
 

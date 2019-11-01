@@ -20,28 +20,19 @@ from apps.realty.models.object_cities import ObjectCities
 
 
 def genplan_upload_path(instance, filename):
-    object_crm_id = instance.crm_id
-    if object_crm_id:
-        filename = FileProcessing(filename)
-        filename = filename.newFileNameGenplan()
-        return f'objects-commercial/{object_crm_id}/{filename}'
-    else:
-        return
+    filename = FileProcessing(filename)
+    filename = filename.newFileNameGenplan()
+    return f'objects-commercial/{instance.crm_id}/{filename}'
 
 def image_upload_path(instance, filename):
-    object_crm_id = instance.crm_id
-    if object_crm_id:
-        filename = FileProcessing(filename)
-        filename = filename.newFileNameGenerated()
-        return f'objects-commercial/{object_crm_id}/images/{filename}'
-    else:
-        return
+    filename = FileProcessing(filename)
+    filename = filename.newFileNameGenerated()
+    return f'objects-commercial/{instance.crm_id}/images/{filename}'
 
 class ObjectCommercial(models.Model):
     active        = models.BooleanField('Активный', default=True, help_text='Опубликован на сайте')
     completed     = models.BooleanField('Строительство завершено', default=False)
     all_sold      = models.BooleanField('Все помещения проданы', default=False, help_text='Все квартиры и помещения проданы')
-    # partnership   = models.BooleanField('Партнерская программа', default=False, help_text='Участвует ли данный объект в партнерской программе?')
 
     order         = models.PositiveIntegerField('Порядок', default=0, blank=True, null=True, help_text='Чем выше число, тем ниже объект в списке')
     crm_id        = models.CharField('CRM ID', max_length=100, unique=True, help_text='ID объекта в 1C (Заполняется автоматически при выгрузке)')

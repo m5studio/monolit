@@ -19,6 +19,8 @@ from apps.realty.models.object_gallery import ObjectGallery, ObjectGalleryImage
 from apps.realty.models.object_building_types import ObjectBuildingTypes
 from apps.realty.models.object_types import ObjectTypes
 from apps.realty.models.object_cities import ObjectCities
+from apps.realty.models.object_commercial import ObjectCommercial
+from apps.realty.models.object_commercial_site import ObjectCommercialSite
 
 from apps.mortgage.models import WayToBuy, Bank, Offer
 
@@ -52,6 +54,9 @@ class GenerateContent:
     def _get_objects_ids_list(self) -> list:
         return list(Object.objects.order_by('id').values_list('id', flat=True))
 
+    def _get_objects_commercial_ids_list(self) -> list:
+        return list(ObjectCommercial.objects.order_by('id').values_list('id', flat=True))
+
     def _get_tenders_ids_list(self) -> list:
         return list(Tender.objects.order_by('id').values_list('id', flat=True))
 
@@ -63,6 +68,9 @@ class GenerateContent:
 
     def countFlatsInObject(self, object_id) -> int:
         return ObjectSite.objects.annotate(Count('object')).filter(object=object_id).count()
+
+    def countCommercialSitesInObjectCommercial(self, object_commercial_id) -> int:
+        return ObjectCommercialSite.objects.annotate(Count('object_commercial')).filter(object_commercial=object_commercial_id).count()
 
 
     """ [Company] """
@@ -257,12 +265,53 @@ class GenerateContent:
                          description=self.fake.text(5000), \
                          partners_title='Заголовок для блока с партнерами акции', \
                          image_card=self.DUMMY_IMG, \
-                         image_detail=self.DUMMY_IMG)
+                         image_detail=self.DUMMY_IMG
+                        )
         action.save()
         print(f'[Actions] created {action.title}')
 
         for _ in range(8):
             self._create_ActionsPartner(action.id)
+
+
+    """ [ObjectCommercialSite] """
+    def _create_ObjectCommercialSite(self, object_commercial_id):
+        site_types_list = self.convert_tuple_to_flat_list(ObjectCommercialSite.SITE_TYPES)
+
+        floors_list = list(range(1, 23))
+        site_numbers_list = list(range(1, 200))
+        price_per_square_list = list(range(32000, 79000))
+        site_area_list = list(range(57, 119))
+
+        # FIXME:
+        # sections_rel_to_object_ids_list = list(ObjectSection.objects.filter(object_commercial=object_commercial).values_list('id', flat=True))
+
+        sites_qty_list = [15, 105, 39]
+        qty = self.get_random_list_item(sites_qty_list)
+
+        if self.countCommercialSitesInObjectCommercial(object_commercial_id) < qty:
+            for _ in range(qty - self.countCommercialSitesInObjectCommercial(object_commercial_id)):
+                for _ in range(qty):
+                    # FIXME:
+                    # object_section = ObjectSection.objects.get(pk=self.get_random_list_item(sections_rel_to_object_ids_list))
+                    site_area = self.get_random_list_item(site_area_list)
+
+                    object_commercial_site = ObjectCommercialSite(special_offer=self.fake.boolean(chance_of_getting_true=20), \
+                                                                object_commercial=ObjectCommercial.objects.get(pk=object_commercial_id), \
+                                                                site_type=self.get_random_list_item(site_types_list), \
+                                                                # FIXME:
+                                                                # object_section=object_section, \
+                                                                crm_id=self.fake.random_number(9, True), \
+                                                                price_per_square=self.get_random_list_item(price_per_square_list), \
+                                                                site_area=site_area, \
+                                                                floor=self.get_random_list_item(floors_list), \
+                                                                site_number=self.get_random_list_item(site_numbers_list), \
+                                                                ceiling_height=2.7, \
+                                                                street_entrance=self.fake.boolean(chance_of_getting_true=40), \
+                                                                image_planning=self.DUMMY_IMG
+                                                            )
+                    object_commercial_site.save()
+                    print(f'[ObjectCommercialSite] {object_commercial_site.crm_id} created for ObjectCommercial {object_commercial_id}')
 
 
     """ [ObjectSite] """
@@ -597,10 +646,32 @@ class GenerateContent:
         print(f'[Object] (ID: {object.id}) created "{name}"')
 
 
+    def _create_ObjectCommercial(self):
+        name = f'Коммерческий Объект {self.fake.word()} {self.fake.word()} {str(self.fake.random_number(4, True))}'.title()
+        object_commercial = ObjectCommercial(completed=self.fake.boolean(chance_of_getting_true=40), \
+                                            all_sold=self.fake.boolean(chance_of_getting_true=30), \
+                                            crm_id=self.fake.random_number(7, True), \
+                                            name=name, \
+                                            slug=slugify(translit(name, 'ru', reversed=True)), \
+                                            object_type=ObjectTypes.objects.get(id=1), \
+                                            building_type=ObjectBuildingTypes.objects.get(id=1), \
+                                            description=self.fake.text(1000), \
+                                            city=ObjectCities.objects.get(name='Симферополь'), \
+                                            address='пр. Победы, 28А', \
+                                            genplan=self.DUMMY_IMG, \
+                                            main_image=self.DUMMY_IMG, \
+                                            webcam='https://rtsp.me/embed/3KASrTkG/', \
+                                            panoram='https://monolit360.com/files/main/index.html?s=pano1692', \
+                                        )
+        object_commercial.save()
+        print(f'[ObjectCommercial] (ID: {object_commercial.id}) created "{name}"')
+
+
     def fillEntireSite(self, quantity):
         # Create Objects
         for _ in range(quantity):
             self._create_Object()
+            self._create_ObjectCommercial()
         print('\n')
 
         # Fill related to Objects models with content
@@ -610,7 +681,7 @@ class GenerateContent:
             self._create_ObjectInfoTab(object_id)
             self._create_ObjectBlock(object_id, 4)
             self._create_ObjectSection(object_id)
-            self._create_ObjectGallery(object_id, ['Март 2019', 'Август 2019', 'Сентябрь 2019'])
+            self._create_ObjectGallery(object_id, ['Июль 2019', 'Сентябрь 2019', 'Ноябрь 2019'])
 
         # Fill Objects with Documents
         self._create_ObjectDocumentAuthor()
@@ -627,9 +698,13 @@ class GenerateContent:
 
         self._create_Offer()
 
-        # Generate Flats and apartments
+        # Generate ObjectSite
         for object_id in self._get_objects_ids_list():
             self._create_ObjectSite(object_id)
+
+        # Generate ObjectCommercialSite
+        for object_commercial_id in self._get_objects_commercial_ids_list():
+            self._create_ObjectCommercialSite(object_commercial_id)
 
         # Generate News
         self._create_NewsCategory()
