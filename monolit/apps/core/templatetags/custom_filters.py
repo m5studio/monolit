@@ -22,7 +22,6 @@ def get_file_ext(value):
     return file.getFileExt()
 
 
-# REVIEW: 
 @register.filter(name='split_thousands')
 def split_thousands(value):
     return '{:,}'.format(float(value)).replace(',', ' ').replace('.0', '')
