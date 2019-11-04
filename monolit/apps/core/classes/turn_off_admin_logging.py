@@ -3,8 +3,8 @@
 
     Usage example:
 
-    class BlogAdmin(TurnOffAdminLogging, admin.ModelAdmin):
-        ...
+        class BlogAdmin(TurnOffAdminLogging, admin.ModelAdmin):
+            ...
 """
 
 

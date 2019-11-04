@@ -3,8 +3,8 @@
 
     Usage example:
 
-    class YourModelAdmin(HideFromAdminIndex, admin.ModelAdmin):
-        ...
+        class YourModelAdmin(HideFromAdminIndex, admin.ModelAdmin):
+            ...
 """
 
 
