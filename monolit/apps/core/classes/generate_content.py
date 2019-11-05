@@ -51,11 +51,8 @@ class GenerateContent:
     def get_random_list_item(self, list):
         return random.choice(list)
 
-    def _get_objects_ids_list(self) -> list:
-        return list(Object.objects.order_by('id').values_list('id', flat=True))
-
-    def _get_objects_commercial_ids_list(self) -> list:
-        return list(ObjectCommercial.objects.order_by('id').values_list('id', flat=True))
+    def _get_objects_ids_list(self, object_name) -> list:
+        return list(object_name.objects.order_by('id').values_list('id', flat=True))
 
     def _get_tenders_ids_list(self) -> list:
         return list(Tender.objects.order_by('id').values_list('id', flat=True))
@@ -238,7 +235,7 @@ class GenerateContent:
         news.save()
         print(f'[News] created {news.title}')
 
-        news.object.set([ self.get_random_list_item(self._get_objects_ids_list()) ])
+        news.object.set([ self.get_random_list_item(self._get_objects_ids_list(Object)) ])
         news_categories_list = list(NewsCategory.objects.values_list('id', flat=True))
         news.category.set([ self.get_random_list_item(news_categories_list) ])
 
@@ -285,6 +282,7 @@ class GenerateContent:
 
         # FIXME:
         # sections_rel_to_object_ids_list = list(ObjectSection.objects.filter(object_commercial=object_commercial).values_list('id', flat=True))
+        # print(sections_rel_to_object_ids_list)
 
         sites_qty_list = [15, 105, 39]
         qty = self.get_random_list_item(sites_qty_list)
@@ -339,7 +337,6 @@ class GenerateContent:
             print(f'[ObjectBalcony] created for ObjectSite {object_site}')
 
 
-    # Жилые объекты
     def _create_ObjectSite(self, object_id):
         site_types_list = self.convert_tuple_to_flat_list(ObjectSite.SITE_TYPES)
 
@@ -440,7 +437,7 @@ class GenerateContent:
         offer.save()
 
         # Apply Offer to an Objects
-        objects_ids_list = list(self._get_objects_ids_list())
+        objects_ids_list = list(self._get_objects_ids_list(Object))
         offer.object.set(objects_ids_list)
         print(f'[Offer] {offer.title} created')
 
@@ -458,7 +455,7 @@ class GenerateContent:
 
 
     def _create_WayToBuy(self):
-        objects_ids = self._get_objects_ids_list()
+        objects_ids = self._get_objects_ids_list(Object)
         way_to_buy = WayToBuy()
 
         if WayToBuy.objects.filter(pk=1).count() == 0:
@@ -560,7 +557,7 @@ class GenerateContent:
                 object_section = ObjectSection(object=object, \
                                                 object_block=object_block, \
                                                 # number=self.fake.random_number(3, True), \
-                                                name=f'Секция {i}', \
+                                                name=f'Секция жилая {i}', \
                                                 floor_first=1, \
                                                 floor_last=23, \
                                             )
@@ -570,6 +567,28 @@ class GenerateContent:
                 # Create Elevators for Section
                 self._create_ObjectElevator(object_section.id)
 
+    # Section for ObjectCommercial
+    def _create_commercial_ObjectSection(self, object_commercial_id):
+        count_sections_rel_to_object_commercial = ObjectSection.objects.annotate(Count('object_commercial')).filter(object_commercial=object_commercial_id).count()
+
+        if count_sections_rel_to_object_commercial == 0:
+            object_commercial_blocks_ids = ObjectBlock.objects.filter(object_commercial=object_commercial_id).values_list('id', flat=True)
+            i = 1
+            for object_commercial_block_id in object_commercial_blocks_ids:
+                object_commercial = ObjectCommercial.objects.get(pk=object_commercial_id)
+                object_commercial_block = ObjectBlock.objects.filter(object_commercial=object_commercial_id).get(pk=object_commercial_block_id)
+                object_commercial_section = ObjectSection(object_commercial=object_commercial, \
+                                                object_block=object_commercial_block, \
+                                                name=f'Секция коммерческая {i}', \
+                                                floor_first=1, \
+                                                floor_last=23, \
+                                            )
+                object_commercial_section.save()
+                print(f'[ObjectSection "{object_commercial_section.name}"] created for ObjectCommercial {object_commercial_section.id}')
+                i += 1
+                # Create Elevators for Section
+                self._create_ObjectElevator(object_commercial_section.id)
+
 
     def _create_ObjectBlock(self, object_id, qty: int):
         count_blocks_rel_to_object = ObjectBlock.objects.annotate(Count('object')).filter(object=object_id).count()
@@ -577,11 +596,21 @@ class GenerateContent:
         if count_blocks_rel_to_object == 0:
             i = 1
             for _ in range(qty):
-                block_name = f'Блок {i}'
-                object = Object.objects.get(pk=object_id)
-                object_block = ObjectBlock(object=object, name=block_name)
+                object_block = ObjectBlock(object=Object.objects.get(pk=object_id), name=f'Блок жилой {i}')
                 object_block.save()
-                print(f'[ObjectBlock "{block_name}"] created for Object {object_id}')
+                print(f'[ObjectBlock "{object_block.name}"] created for Object {object_id}')
+                i += 1
+
+    # Block for ObjectCommercial
+    def _create_commercial_ObjectBlock(self, object_commercial_id, qty: int):
+        count_blocks_rel_to_object_commercial = ObjectBlock.objects.annotate(Count('object_commercial')).filter(object_commercial=object_commercial_id).count()
+
+        if count_blocks_rel_to_object_commercial == 0:
+            i = 1
+            for _ in range(qty):
+                object_commercial_block = ObjectBlock(object_commercial=ObjectCommercial.objects.get(pk=object_commercial_id), name=f'Блок коммерческий {i}')
+                object_commercial_block.save()
+                print(f'[ObjectBlock "{object_commercial_block.name}"] created for ObjectCommercial {object_commercial_block.id}')
                 i += 1
 
 
@@ -668,14 +697,13 @@ class GenerateContent:
 
 
     def fillEntireSite(self, quantity):
-        # Create Objects
         for _ in range(quantity):
             self._create_Object()
-            self._create_ObjectCommercial()
+            # self._create_ObjectCommercial()
         print('\n')
 
         # Fill related to Objects models with content
-        for object_id in self._get_objects_ids_list():
+        for object_id in self._get_objects_ids_list(Object):
             self._create_ObjectVideo(object_id, 4)
             self._create_ObjectFile(object_id)
             self._create_ObjectInfoTab(object_id)
@@ -686,7 +714,7 @@ class GenerateContent:
         # Fill Objects with Documents
         self._create_ObjectDocumentAuthor()
 
-        for object_id in self._get_objects_ids_list():
+        for object_id in self._get_objects_ids_list(Object):
             self._create_ObjectDocument(object_id, 53)
 
         # Fill Mortgage
@@ -699,26 +727,18 @@ class GenerateContent:
         self._create_Offer()
 
         # Generate ObjectSite
-        for object_id in self._get_objects_ids_list():
+        for object_id in self._get_objects_ids_list(Object):
             self._create_ObjectSite(object_id)
 
-        # Generate ObjectCommercialSite
-        for object_commercial_id in self._get_objects_commercial_ids_list():
-            self._create_ObjectCommercialSite(object_commercial_id)
-
-        # Generate News
         self._create_NewsCategory()
-
         if self.countModelObjects(News) < 200:
             for _ in range(25):
                 self._create_News()
 
-        # Generate Actions
         if self.countModelObjects(Actions) < 18:
             for _ in range(18):
                 self._create_Actions()
 
-        # Company generator
         if self.countModelObjects(Certificate) < 8:
             for _ in range(8):
                 self._create_Certificate()
@@ -765,3 +785,16 @@ class GenerateContent:
         if self.countModelObjects(ContactsGroup) < 7:
             for _ in range(7):
                 self._create_ContactsGroup()
+
+        # ObjectCommercial
+        for _ in range(quantity):
+            self._create_ObjectCommercial()
+        print('\n')
+
+        for object_id in self._get_objects_ids_list(ObjectCommercial):
+            self._create_commercial_ObjectBlock(object_id, 4)
+            self._create_commercial_ObjectSection(object_id)
+
+        # Generate ObjectCommercialSite
+        # for object_commercial_id in self._get_objects_ids_list(ObjectCommercial):
+        #     self._create_ObjectCommercialSite(object_commercial_id)
