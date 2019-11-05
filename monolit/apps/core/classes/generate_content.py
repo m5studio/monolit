@@ -256,13 +256,13 @@ class GenerateContent:
     def _create_Actions(self):
         title = f'Акция {self.fake.word()} {self.fake.word()} {self.fake.word()} {self.fake.word()} {str(self.fake.random_number(3, True))}'.title()
         action = Actions(active=True, \
-                         title=title, \
-                         date_start=timezone.now(), \
-                         date_end=timezone.now() + timezone.timedelta(days=45), \
-                         description=self.fake.text(5000), \
-                         partners_title='Заголовок для блока с партнерами акции', \
-                         image_card=self.DUMMY_IMG, \
-                         image_detail=self.DUMMY_IMG
+                        title=title, \
+                        date_start=timezone.now(), \
+                        date_end=timezone.now() + timezone.timedelta(days=45), \
+                        description=self.fake.text(5000), \
+                        partners_title='Заголовок для блока с партнерами акции', \
+                        image_card=self.DUMMY_IMG, \
+                        image_detail=self.DUMMY_IMG
                         )
         action.save()
         print(f'[Actions] created {action.title}')
@@ -280,25 +280,19 @@ class GenerateContent:
         price_per_square_list = list(range(32000, 79000))
         site_area_list = list(range(57, 119))
 
-        # FIXME:
-        # sections_rel_to_object_ids_list = list(ObjectSection.objects.filter(object_commercial=object_commercial).values_list('id', flat=True))
-        # print(sections_rel_to_object_ids_list)
+        sections_rel_to_object_ids_list = list(ObjectSection.objects.filter(object_commercial=object_commercial_id).values_list('id', flat=True))
 
         sites_qty_list = [15, 105, 39]
         qty = self.get_random_list_item(sites_qty_list)
 
         if self.countCommercialSitesInObjectCommercial(object_commercial_id) < qty:
             for _ in range(qty - self.countCommercialSitesInObjectCommercial(object_commercial_id)):
-                for _ in range(qty):
-                    # FIXME:
-                    # object_section = ObjectSection.objects.get(pk=self.get_random_list_item(sections_rel_to_object_ids_list))
-                    site_area = self.get_random_list_item(site_area_list)
-
-                    object_commercial_site = ObjectCommercialSite(special_offer=self.fake.boolean(chance_of_getting_true=20), \
+                object_section = ObjectSection.objects.get(pk=self.get_random_list_item(sections_rel_to_object_ids_list))
+                site_area = self.get_random_list_item(site_area_list)
+                object_commercial_site = ObjectCommercialSite(special_offer=self.fake.boolean(chance_of_getting_true=20), \
                                                                 object_commercial=ObjectCommercial.objects.get(pk=object_commercial_id), \
                                                                 site_type=self.get_random_list_item(site_types_list), \
-                                                                # FIXME:
-                                                                # object_section=object_section, \
+                                                                object_section=object_section, \
                                                                 crm_id=self.fake.random_number(9, True), \
                                                                 price_per_square=self.get_random_list_item(price_per_square_list), \
                                                                 site_area=site_area, \
@@ -308,8 +302,8 @@ class GenerateContent:
                                                                 street_entrance=self.fake.boolean(chance_of_getting_true=40), \
                                                                 image_planning=self.DUMMY_IMG
                                                             )
-                    object_commercial_site.save()
-                    print(f'[ObjectCommercialSite] {object_commercial_site.crm_id} created for ObjectCommercial {object_commercial_id}')
+                object_commercial_site.save()
+                print(f'[ObjectCommercialSite] {object_commercial_site.crm_id} created for ObjectCommercial {object_commercial_site.object_commercial}')
 
 
     """ [ObjectSite] """
@@ -354,8 +348,8 @@ class GenerateContent:
         sections_rel_to_object_ids_list = list(ObjectSection.objects.filter(object=object).values_list('id', flat=True))
 
         # flats_qty_list = list(range(51, 126))
-        flats_qty_list = [15, 105, 51, 116, 39]
-        qty = self.get_random_list_item(flats_qty_list)
+        sites_qty_list = [15, 105, 51, 116, 39]
+        qty = self.get_random_list_item(sites_qty_list)
 
         if self.countFlatsInObject(object_id) < qty:
             for _ in range(qty - self.countFlatsInObject(object_id)):
@@ -477,7 +471,6 @@ class GenerateContent:
 
         if count_images_in_gallery == 0:
             gallery = ObjectGallery.objects.get(pk=gallery_id)
-
             for _ in range(qty):
                 gallery_image = ObjectGalleryImage(gallery=gallery, image=self.DUMMY_IMG)
                 gallery_image.save()
@@ -489,7 +482,6 @@ class GenerateContent:
 
         if count_object_galleries == 0:
             object = Object.objects.get(pk=object_id)
-
             for gal_name in gal_names:
                 object_gallery = ObjectGallery(object=object, name=gal_name)
                 object_gallery.save()
@@ -796,5 +788,7 @@ class GenerateContent:
             self._create_commercial_ObjectSection(object_id)
 
         # Generate ObjectCommercialSite
-        # for object_commercial_id in self._get_objects_ids_list(ObjectCommercial):
-        #     self._create_ObjectCommercialSite(object_commercial_id)
+        for object_commercial_id in self._get_objects_ids_list(ObjectCommercial):
+            # print(object_commercial_id)
+            # print(self.countCommercialSitesInObjectCommercial(object_commercial_id))
+            self._create_ObjectCommercialSite(object_commercial_id)
