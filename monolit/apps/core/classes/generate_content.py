@@ -305,12 +305,13 @@ class GenerateContent:
                 object_commercial_site.save()
                 print(f'[ObjectCommercialSite] {object_commercial_site.crm_id} created for ObjectCommercial {object_commercial_site.object_commercial}')
 
+                # Add Batrooms
+                self._create_ObjectBathroom_for_ObjectCommercialSite(object_commercial_site.id)
 
-    """ [ObjectSite] """
+
     def _create_ObjectBathroom(self, object_site_id):
         object_bathroom_list = self.convert_tuple_to_flat_list(ObjectBathroom.BATHROOM_TYPES)
         count_bathrooms_rel_to_object_site = ObjectBathroom.objects.annotate(Count('object_site')).filter(object_site=object_site_id).count()
-
         object_site = ObjectSite.objects.get(pk=object_site_id)
 
         if count_bathrooms_rel_to_object_site == 0 or count_bathrooms_rel_to_object_site < 2:
@@ -319,10 +320,20 @@ class GenerateContent:
             print(f'[ObjectBathroom] created for ObjectSite {object_site}')
 
 
+    def _create_ObjectBathroom_for_ObjectCommercialSite(self, object_site_id):
+        object_bathroom_list = self.convert_tuple_to_flat_list(ObjectBathroom.BATHROOM_TYPES)
+        count_bathrooms_rel_to_object_site = ObjectBathroom.objects.annotate(Count('object_commercial_site')).filter(object_commercial_site=object_site_id).count()
+        object_commercial_site = ObjectCommercialSite.objects.get(pk=object_site_id)
+
+        if count_bathrooms_rel_to_object_site == 0 or count_bathrooms_rel_to_object_site < 2:
+            object_bathroom = ObjectBathroom(object_commercial_site=object_commercial_site, bathroom_type=2)
+            object_bathroom.save()
+            print(f'[ObjectBathroom] created for ObjectCommercialSite {object_commercial_site}')
+
+
     def _create_ObjectBalcony(self, object_site_id):
         object_balcony_list = self.convert_tuple_to_flat_list(ObjectBalcony.BALCONY_TYPES)
         count_balconies_rel_to_object_site = ObjectBalcony.objects.annotate(Count('object_site')).filter(object_site=object_site_id).count()
-
         object_site = ObjectSite.objects.get(pk=object_site_id)
 
         if count_balconies_rel_to_object_site == 0 or count_balconies_rel_to_object_site < 2:
@@ -560,7 +571,7 @@ class GenerateContent:
                 self._create_ObjectElevator(object_section.id)
 
     # Section for ObjectCommercial
-    def _create_commercial_ObjectSection(self, object_commercial_id):
+    def _create_ObjectSection_for_ObjectCommercial(self, object_commercial_id):
         count_sections_rel_to_object_commercial = ObjectSection.objects.annotate(Count('object_commercial')).filter(object_commercial=object_commercial_id).count()
 
         if count_sections_rel_to_object_commercial == 0:
@@ -594,7 +605,7 @@ class GenerateContent:
                 i += 1
 
     # Block for ObjectCommercial
-    def _create_commercial_ObjectBlock(self, object_commercial_id, qty: int):
+    def _create_ObjectBlock_for_ObjectCommercial(self, object_commercial_id, qty: int):
         count_blocks_rel_to_object_commercial = ObjectBlock.objects.annotate(Count('object_commercial')).filter(object_commercial=object_commercial_id).count()
 
         if count_blocks_rel_to_object_commercial == 0:
@@ -784,11 +795,9 @@ class GenerateContent:
         print('\n')
 
         for object_id in self._get_objects_ids_list(ObjectCommercial):
-            self._create_commercial_ObjectBlock(object_id, 4)
-            self._create_commercial_ObjectSection(object_id)
+            self._create_ObjectBlock_for_ObjectCommercial(object_id, 4)
+            self._create_ObjectSection_for_ObjectCommercial(object_id)
 
         # Generate ObjectCommercialSite
         for object_commercial_id in self._get_objects_ids_list(ObjectCommercial):
-            # print(object_commercial_id)
-            # print(self.countCommercialSitesInObjectCommercial(object_commercial_id))
             self._create_ObjectCommercialSite(object_commercial_id)
