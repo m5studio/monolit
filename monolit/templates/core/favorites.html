@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block body_classes %}{% spaceless %}
+    {{ block.super }} favorites
+{% endspaceless %}{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+        {{ request.session }}<br>
+        {{ request.session.name }}<br>
+        {{ request.session.keys }}<br>
+        <hr>
+        <h2>{{ favorites }}</h2>
+    </div>
+{% endblock %}

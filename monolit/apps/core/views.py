@@ -38,3 +38,15 @@ class HomepageView(TemplateView):
         context['count_object_sites_room_4_price_total_min'] = ObjectSite.objects.count_object_sites_price_total_min(4, 'gte')
 
         return context
+
+
+class FavoritesView(TemplateView):
+    template_name = 'core/favorites.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        self.request.session['favorites'] = 'test'
+        context['favorites'] = self.request.session['favorites']
+
+        return context
