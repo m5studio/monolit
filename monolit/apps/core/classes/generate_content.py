@@ -63,7 +63,7 @@ class GenerateContent:
     def countModelObjects(self, model_name):
         return model_name.objects.all().count()
 
-    def countFlatsInObject(self, object_id) -> int:
+    def countSitesInObject(self, object_id) -> int:
         return ObjectSite.objects.annotate(Count('object')).filter(object=object_id).count()
 
     def countCommercialSitesInObjectCommercial(self, object_commercial_id) -> int:
@@ -362,8 +362,8 @@ class GenerateContent:
         sites_qty_list = [15, 105, 51, 116, 39]
         qty = self.get_random_list_item(sites_qty_list)
 
-        if self.countFlatsInObject(object_id) < qty:
-            for _ in range(qty - self.countFlatsInObject(object_id)):
+        if self.countSitesInObject(object_id) < qty:
+            for _ in range(qty - self.countSitesInObject(object_id)):
                 site_area = self.get_random_list_item(site_area_list)
                 calc_living_area = site_area - 15.26
 
@@ -409,7 +409,7 @@ class GenerateContent:
             for _ in range(2):
                 self._create_ObjectBathroom(object_site.id)
 
-        print(f'\nВ Объекте {object_id}, {self.countFlatsInObject(object_id)} квартир, было создано, {qty} квартир')
+        print(f'\nВ Объекте {object_id}, {self.countSitesInObject(object_id)} квартир, было создано, {qty} квартир')
 
 
     # TODO: Generate commercial ObjectSite types
@@ -559,7 +559,6 @@ class GenerateContent:
                 object_block = ObjectBlock.objects.filter(object=object_id).get(pk=object_block_id)
                 object_section = ObjectSection(object=object, \
                                                 object_block=object_block, \
-                                                # number=self.fake.random_number(3, True), \
                                                 name=f'Секция жилая {i}', \
                                                 floor_first=1, \
                                                 floor_last=23, \
@@ -631,14 +630,15 @@ class GenerateContent:
 
     def _create_ObjectFile(self, object_id):
         count_files_rel_to_object = ObjectFile.objects.annotate(Count('object')).filter(object=object_id).count()
-        file_types_list = self.convert_tuple_to_flat_list(ObjectFile.FILE_TYPES)
 
         if count_files_rel_to_object == 0:
-            for file_type in file_types_list:
+            i = 1
+            for _ in range(6):
                 object = Object.objects.get(pk=object_id)
-                object_file = ObjectFile(object=object, name=file_type, file=self.DUMMY_DOCUMENT)
+                object_file = ObjectFile(object=object, name=f'Файл объекта {i}', file=self.DUMMY_DOCUMENT)
                 object_file.save()
-                print(f'[ObjectFile {file_type}] created for Object {object_id}')
+                print(f'[ObjectFile {object_file.name}] created for Object {object_id}')
+                i += 1
 
 
     def _create_ObjectVideo(self, object_id, qty: int):

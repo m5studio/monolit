@@ -122,12 +122,28 @@ class ObjectSectionAdmin(TurnOffAdminLogging, admin.ModelAdmin):
     inlines = [
         ObjectElevatorInline,
     ]
+
     list_display = ('object_block', 'name', 'object', 'object_commercial')
     list_display_links = ('name',)
     list_filter = ('object', 'object_commercial')
 
     search_fields = ['object_block',]
     # autocomplete_fields = ['object',]
+
+    fieldsets = (
+        ('Объекты', {
+            'fields': ('object', 'object_commercial', 'object_block')
+        }),
+        (None, {
+            'fields': ('name',)
+        }),
+        ('Сроки сдачи', {
+            'fields': ('comlete_quarter', 'comlete_year',)
+        }),
+        ('Параметры', {
+            'fields': (('floor_first', 'floor_last'),)
+        }),
+    )
 """ [ END ObjectSection ] """
 
 
@@ -155,8 +171,8 @@ class ObjectBlockAdmin(TurnOffAdminLogging, admin.ModelAdmin):
 """ [ ObjectFile ] """
 class ObjectFileInline(admin.TabularInline):
     model = ObjectFile
-    extra = 3
-    max_num = 3
+    extra = 1
+    max_num = 50
 
 @admin.register(ObjectFile)
 class ObjectFileAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.ModelAdmin):

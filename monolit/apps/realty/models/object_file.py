@@ -10,28 +10,28 @@ from apps.realty.models.object import Object
 
 
 def file_upload_path(instance, filename):
-    object_crm_id = instance.object.crm_id
     filename = FileProcessing(filename)
     filename = filename.newFileNameTranslitSlugify()
-    return 'objects/{object_crm_id}/files/{filename}'.format(object_crm_id=object_crm_id, filename=filename)
+    return f'objects/{instance.object.crm_id}/files/{filename}'
 
 class ObjectFile(models.Model):
-    FILE_TYPES = (
-        ('info_booklet', 'Информационный буклет'),
-        ('object_genplan', 'Генплан объекта недвижимости'),
-        ('commercial_offer', 'Коммерческое предложение'),
-    )
+    # FILE_TYPES = (
+    #     ('info_booklet', 'Информационный буклет'),
+    #     ('object_genplan', 'Генплан объекта недвижимости'),
+    #     ('commercial_offer', 'Коммерческое предложение'),
+    # )
 
-    object = models.ForeignKey(Object, on_delete=models.CASCADE, default=0)
-    name   = models.CharField('Название документа', max_length=100, choices=FILE_TYPES, blank=True, null=True)
-    file   = models.FileField('Файл', upload_to=file_upload_path, blank=True, null=True)
+    object    = models.ForeignKey(Object, on_delete=models.CASCADE, default=0)
+    # name   = models.CharField('Название', max_length=100, choices=FILE_TYPES, blank=True, null=True)
+    name      = models.CharField('Название', max_length=255)
+    file      = models.FileField('Файл', upload_to=file_upload_path, blank=True, null=True)
 
     def __str__(self):
         return self.name
 
     class Meta:
         verbose_name = 'Файл Объекта'
-        verbose_name_plural = 'Файлы Объектов (Информационный буклет, Генплан объекта недвижимости, Коммерческое предложение)'
+        verbose_name_plural = 'Файлы Объектов'
 
 
 @receiver(post_delete, sender=ObjectFile)

@@ -31,7 +31,7 @@ def image_upload_path(instance, filename):
 
 class ObjectCommercial(models.Model):
     active        = models.BooleanField('Активный', default=True, help_text='Опубликован на сайте')
-    completed     = models.BooleanField('Строительство завершено', default=False)
+    completed     = models.BooleanField('Объект сдан', default=False)
     all_sold      = models.BooleanField('Все помещения проданы', default=False, help_text='Все квартиры и помещения проданы')
 
     order         = models.PositiveIntegerField('Порядок', default=0, blank=True, null=True, help_text='Чем выше число, тем ниже объект в списке')

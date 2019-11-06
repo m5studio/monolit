@@ -34,7 +34,7 @@ def image_upload_path(instance, filename):
 
 class Object(models.Model):
     active        = models.BooleanField('Активный', default=True, help_text='Опубликован на сайте')
-    completed     = models.BooleanField('Строительство завершено', default=False)
+    completed     = models.BooleanField('Объект сдан', default=False)
     all_sold      = models.BooleanField('Все помещения проданы', default=False, help_text='Все квартиры и помещения проданы')
     partnership   = models.BooleanField('Партнерская программа', default=False, help_text='Участвует ли данный объект в партнерской программе?')
 
