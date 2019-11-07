@@ -1,4 +1,5 @@
 from django.views.generic import TemplateView
+from django.shortcuts import redirect
 
 from apps.realty.models.object import Object
 from apps.realty.models.object_site import ObjectSite
@@ -46,7 +47,16 @@ class FavoritesView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        self.request.session['favorites'] = 'test'
+        self.request.session['favorites'] = ('test', 'test_two', 'test_three')
         context['favorites'] = self.request.session['favorites']
 
         return context
+
+    def post(self, request, *args, **kwargs):
+        print(request.POST)
+        return redirect(request.POST.get('page_url'))
+        # form = self.form_class(request.POST)
+        # form = self.form_class(request.POST)
+        # if form.is_valid():
+        #     print(form)
+        #     return redirect('/favorites/')

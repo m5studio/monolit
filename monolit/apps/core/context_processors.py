@@ -4,6 +4,8 @@ from dateutil import relativedelta
 from apps.core.models import SiteSettings
 from apps.realty.models.object import Object
 
+from apps.core.forms import FavoritesForm
+
 
 def settings(request):
     return {'settings': SiteSettings.load()}
@@ -23,7 +25,6 @@ def monolit_company_age(request):
     # days    = difference.years * 365 + difference.days
     # hours   = difference.years * 8760 + difference.hours
     # minutes = (difference.years * (8760 * 60)) + difference.minutes
-
     return {'monolit_company_age': years}
 
 
@@ -32,3 +33,7 @@ def current_month_rus(request):
     current_month = datetime.now().month
     current_month_text = months[current_month]
     return {'current_month_rus': current_month_text}
+
+
+def add_to_favorites_form(request):
+    return {'add_to_favorites_form': FavoritesForm}

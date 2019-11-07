@@ -101,6 +101,7 @@ TEMPLATES = [
                 'apps.core.context_processors.monolit_objects',
                 'apps.core.context_processors.monolit_company_age',
                 'apps.core.context_processors.current_month_rus',
+                'apps.core.context_processors.add_to_favorites_form',
             ],
         },
     },
