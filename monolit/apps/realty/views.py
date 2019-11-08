@@ -95,14 +95,7 @@ class ObjectSiteDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['opts'] = ObjectSite._meta
 
-        # context['page_title'] = self.model.flat_name_full(self)
-        context['page_title'] = self.get_object().flat_name_full()
-        # context['page_title'] = '{rooms_qty} {site_type} №{site_number} в {object_type} «{object_name}»'.format(rooms_qty=self.get_object().get_rooms_qty_display(),
-        #                                                                                                         site_type=self.get_object().get_site_type_display(),
-        #                                                                                                         site_number=self.get_object().site_number,
-        #                                                                                                         object_type=self.get_object().object.object_type,
-        #                                                                                                         object_name=self.get_object().object.name)
-
+        context['page_title'] = self.get_object().display_name_full()
         # TODO: make more complicated and detailed query selection
         other_flats_query = ObjectSite.objects.filter(active=True, object=self.get_object().object.pk, rooms_qty=self.get_object().rooms_qty).exclude(id=self.get_object().pk)
         context['simular_flats'] = other_flats_query.order_by('?')[:3]

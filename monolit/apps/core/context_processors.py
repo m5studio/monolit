@@ -4,8 +4,6 @@ from dateutil import relativedelta
 from apps.core.models import SiteSettings
 from apps.realty.models.object import Object
 
-from apps.core.forms import FavoritesForm
-
 
 def settings(request):
     return {'settings': SiteSettings.load()}
@@ -33,7 +31,3 @@ def current_month_rus(request):
     current_month = datetime.now().month
     current_month_text = months[current_month]
     return {'current_month_rus': current_month_text}
-
-
-def add_to_favorites_form(request):
-    return {'add_to_favorites_form': FavoritesForm}

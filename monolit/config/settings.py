@@ -101,7 +101,6 @@ TEMPLATES = [
                 'apps.core.context_processors.monolit_objects',
                 'apps.core.context_processors.monolit_company_age',
                 'apps.core.context_processors.current_month_rus',
-                'apps.core.context_processors.add_to_favorites_form',
             ],
         },
     },
@@ -176,6 +175,11 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+# Sessions https://docs.djangoproject.com/en/2.2/ref/settings/#sessions
+# default value
+# SESSION_COOKIE_AGE = 1209600
 
 
 # Datetime settngs

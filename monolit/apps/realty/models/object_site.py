@@ -181,7 +181,7 @@ class ObjectSite(models.Model):
         verbose_name_plural = '1.1 Жилые Помещения (Квартиры, Апартаменты)'
 
 
-    def flat_name_card(self):
+    def display_name_card(self):
         site_type_name = ''
         # Квартира
         if self.site_type == 'flat':
@@ -220,7 +220,7 @@ class ObjectSite(models.Model):
         return f'{site_type_name}'
 
 
-    def flat_name_full(self):
+    def display_name_full(self):
         site_type_name = ''
         # Квартира
         if self.site_type == 'flat':
