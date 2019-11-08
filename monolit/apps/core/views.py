@@ -40,7 +40,7 @@ class HomepageView(TemplateView):
 
         return context
 
-
+"""
 class FavoritesView(TemplateView):
     template_name = 'core/favorites.html'
 
@@ -70,3 +70,4 @@ class FavoritesAddView(View):
         self.request.session['favorites'].append(item)
         print(request.POST)
         return redirect(request.POST.get('page_url'))
+"""
