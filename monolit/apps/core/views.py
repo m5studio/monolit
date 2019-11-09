@@ -39,35 +39,3 @@ class HomepageView(TemplateView):
         context['count_object_sites_room_4_price_total_min'] = ObjectSite.objects.count_object_sites_price_total_min(4, 'gte')
 
         return context
-
-"""
-class FavoritesView(TemplateView):
-    template_name = 'core/favorites.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        # Remove from session
-        # if self.request.session['favorites']:
-        #     self.request.session.modified = True
-        #     # del self.request.session['favorites'][0]
-        #     del self.request.session['favorites']
-        #     self.request.session['favorites'] = list()
-
-        context['favorites'] = self.request.session['favorites']
-
-        return context
-
-
-class FavoritesAddView(View):
-    def post(self, request, *args, **kwargs):
-        # self.request.session['favorites'] = request.session['favorites']
-        item = {
-            'object_url': request.POST.get('object_url'),
-            'object_name': request.POST.get('object_name'),
-        }
-
-        self.request.session['favorites'].append(item)
-        print(request.POST)
-        return redirect(request.POST.get('page_url'))
-"""

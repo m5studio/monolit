@@ -227,16 +227,9 @@
                     <div id="flat-actions__actions-panel" class="flat-actions-block--flex-end">
                         <ul>
                             <li>
-                                {% include 'core/includes/add_to_favorites_form.html' %}
-                                <!-- <a href=""><span class="icon icon-32 icon-heart-contour-green"></span> Добавить в избранное</a> -->
-
-                                <!-- <form action="{% url 'favorites' %}" method="post">{% csrf_token %}
-                                    <input type="hidden" name="object_site_id" value="{{ object.id }}">
-                                    <input type="hidden" name="page_url" value="{{ request.path }}">
-                                    <button type="submit">
-                                        <span class="icon icon-32 icon-heart-contour-green"></span> Добавить в избранное
-                                    </button>
-                                </form> -->
+                                <!-- TODO: create add_to_favorites_form.html -->
+                                {# include 'core/includes/add_to_favorites_form.html' #}
+                                <a href=""><span class="icon icon-32 icon-heart-contour-green"></span> Добавить в избранное</a>
                             </li>
                             <li>
                                 <a href="{% url 'object:site-detail-pdf' pk=object.id %}" target="_blank" title="Откроется в новой вкладке"><span class="icon icon-32 icon-print-solid-green"></span> Распечатать в PDF</a>
