@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     'apps.mortgage.apps.MortgageConfig',
     'apps.company.apps.CompanyConfig',
 
+    'apps.favorites.apps.FavoritesConfig',
     'apps.api.apps.ApiConfig',
 ]
 

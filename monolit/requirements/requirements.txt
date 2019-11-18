@@ -1,12 +1,12 @@
 Django==2.2.7
 django-appconf==1.0.3
-django-ckeditor==5.7.1
+django-ckeditor==5.8.0
 django-cleanup==4.0.0
 django-environ==0.4.5
 django-imagekit==4.0.2
 django-js-asset==1.2.2
 django-unused-media==0.1.13
-Faker==2.0.3
+Faker==2.0.4
 html5lib==1.0.1
 pilkit==2.0
 Pillow==6.2.1

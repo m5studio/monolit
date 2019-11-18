@@ -1,7 +1,18 @@
 // Bootstrap 4
 @import "./bootstrap/bootstrap";
 
+
+// ===================== Core
 @import "./core/core";
+@import "./core/breadcrumbs";
+@import "./core/buttons";
+@import "./core/collapse-block";
+@import "./core/favorites";
+@import "./core/icons";
+@import "./core/misc";
+@import "./core/pagination";
+// ===================== END Core
+
 
 // ===================== Cards
 @import "./cards/action-card";
@@ -139,6 +150,9 @@
 @import "./pages/company/company-tenders";
 @import "./pages/company/company-vacancy";
 @import "./pages/company/company";
+
+// Favorites
+@import "./pages/favorites/favorites-page";
 
 // Pages [mortgage]
 @import "./pages/mortgage/mortgage-corporactive";

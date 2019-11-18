@@ -1,4 +1,4 @@
-import {formatNumber, formatNumberText} from "../../modules/format-number"
+import {formatNumber, formatNumberText} from "../modules/format-number"
 
 
 function objectPageSitesInfo() {

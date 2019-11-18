@@ -1,4 +1,4 @@
-import {formatNumber} from "../../modules/format-number"
+import {formatNumber} from "../modules/format-number"
 
 /*
     [ Расчет ежемесячного платежа по ипотеке ]

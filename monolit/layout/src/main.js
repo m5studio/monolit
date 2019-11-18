@@ -16,23 +16,31 @@ import {realtyFloorFilters} from "./modules/nouislider/realty_floor_filters"
 import {scrollToTop} from "./modules/scroll-to-top/scroll-to-top"
 
 // Ajax
-// import {objectPageGalleries} from "./ajax/ajax-django"
+import {django_ajax} from "./ajax/ajax-django"
 import {newsPageLoadMoreNews} from "./ajax/news-page-load-more-news"
 import {objectPageGalleries} from "./ajax/object-page-galleries"
 import {objectPageDocsPagination} from "./ajax/object-page-documents-pagination"
 import {objectCardSitesInfo} from "./ajax/object-card"
-import {objectPageSitesInfo, objectPageFlatsTypes} from "./ajax/object_detail/object-page-sites-info"
-import {mortgageOfferMonthlyPayment} from "./ajax/objectsite_detail/mortgage-offer-monthly-payment-calculate"
+import {objectPageSitesInfo, objectPageFlatsTypes} from "./ajax/object-page-sites-info"
+import {mortgageOfferMonthlyPayment} from "./ajax/mortgage-offer-monthly-payment-calculate"
 import {search_by_site_id} from "./ajax/search_by_site_id"
 import {companyTendersPagination, selectTenderCategory} from "./ajax/company-tenders-page-pagination"
 import {objectsite_list_infinate_scroll} from "./ajax/objectsite_list-infinate-scroll"
-
+import {favorites} from "./ajax/favorites"
 
 // Fancybox https://fancyapps.com/fancybox/3/
 import '@fancyapps/fancybox'
 
 
+// Django Ajax
+django_ajax()
+
+
 $(document).ready(function() {
+    // Favorites
+    if ( $('.flats').length || $('.flat-page').length || $('.favorites-page').length ) {
+        favorites()
+    }
 
     // Main nav
     mainNav()
@@ -115,6 +123,15 @@ $(document).ajaxStop(function() {
     }
     // END News page Load more news...
 })
+
+
+// $(document).ajaxComplete(function() {
+//     // Favorites
+//     if ( $('.flats').length || $('.flat-page').length || $('.favorites-page').length ) {
+//         favorites()
+//     }
+// })
+
 
 $(window).scroll(function() {
     // Main nav
