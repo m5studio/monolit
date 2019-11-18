@@ -22,7 +22,7 @@ function companyTendersPagination() {
         $(el).click((e) => {
             e.preventDefault()
             const page_url = $(el).attr('href')
-            // console.log( page_url )
+
             $.ajax({
                 url: page_url,
                 type: 'GET',

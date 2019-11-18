@@ -7,7 +7,6 @@ def favorites_list(request):
     return render(request, 'favorites/favorites_list.html', context=context)
 
 
-# def add_to_favorites(request, id):
 def add_to_favorites(request):
     if request.method == 'POST':
         if not request.session.get('favorites'):

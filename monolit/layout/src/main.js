@@ -103,6 +103,26 @@ $(document).ready(function() {
 })
 
 
+// This work, but like shit
+// $(document).on("click", '.add-to-favorites', function(e) {
+//     // e.preventDefault()
+//
+//     // Favorites
+//     if ( $('.flats').length || $('.flat-page').length || $('.favorites-page').length ) {
+//         favorites()
+//     }
+// })
+
+
+// This shit doesn't work
+// $(document).ajaxComplete(function() {
+//     // Favorites
+//     if ( $('.flats').length || $('.flat-page').length || $('.favorites-page').length ) {
+//         favorites()
+//     }
+// })
+
+
 $(document).ajaxStop(function() {
     // Object Documents Ajax pagination
     if ( $('.object-page').length ) {
@@ -123,14 +143,6 @@ $(document).ajaxStop(function() {
     }
     // END News page Load more news...
 })
-
-
-// $(document).ajaxComplete(function() {
-//     // Favorites
-//     if ( $('.flats').length || $('.flat-page').length || $('.favorites-page').length ) {
-//         favorites()
-//     }
-// })
 
 
 $(window).scroll(function() {

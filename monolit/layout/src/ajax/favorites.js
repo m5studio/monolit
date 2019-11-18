@@ -9,9 +9,11 @@ const added_to_favorites_class = 'added'
 
 
 function add_to_favorites() {
+    /*
     $('.add-to-favorites').each((index, el) => {
-        $(el).click((e) => {
-        // $(el).on('click', (e) => {
+        $(el).on('click', (e) => {
+        // $('#section-flats-list__inner').on('click', '.add-to-favorites', (e) => {
+        // $('#section-flats-list__inner').on('click', this, (e) => {
             e.preventDefault()
 
             const type = $(el).data('type')
@@ -20,8 +22,8 @@ function add_to_favorites() {
             console.log(el)
             console.log(e.target)
 
-            if( $(e.target).hasClass(added_to_favorites_class) ) {
-            // if( $(el).hasClass(added_to_favorites_class) ) {
+            // if( $(e.target).hasClass(added_to_favorites_class) ) {
+            if( $(el).hasClass(added_to_favorites_class) ) {
                 // console.log('has class ' + added_to_favorites_class)
                 $.ajax({
                     url: remove_from_favorites_url,
@@ -59,6 +61,59 @@ function add_to_favorites() {
                 })
             }
         })
+    })
+    */
+
+    $(document).on('click', '.add-to-favorites', (e) => {
+        e.preventDefault()
+
+        const type = $(e.target).data('type')
+        const id = $(e.target).data('id')
+
+        console.log(type)
+        console.log(id)
+
+        // console.log(this)
+        console.log(e.target)
+
+        if( $(e.target).hasClass(added_to_favorites_class) ) {
+        // if( $(el).hasClass(added_to_favorites_class) ) {
+            // console.log('has class ' + added_to_favorites_class)
+            $.ajax({
+                url: remove_from_favorites_url,
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    type: type,
+                    id: id,
+                },
+                success: (data) => {
+                    $(e.target).removeClass(added_to_favorites_class)
+                    // $(el).find('.icon-heart-solid-green').removeClass('icon-heart-solid-green').addClass('icon-heart-contour-green')
+                    $(e.target).html('В избранное')
+
+                    get_session_favorites_statistics()
+                }
+            })
+        } else {
+            // console.log('has NO class ' + added_to_favorites_class)
+            $.ajax({
+                url: add_to_favorites_url,
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    type: type,
+                    id: id,
+                },
+                success: (data) => {
+                    $(e.target).addClass(added_to_favorites_class)
+                    // $(el).find('.icon-heart-contour-green').removeClass('icon-heart-contour-green').addClass('icon-heart-solid-green')
+                    $(e.target).html('В избранном')
+
+                    get_session_favorites_statistics()
+                }
+            })
+        }
     })
 }
 
@@ -114,6 +169,10 @@ function get_session_favorites_statistics() {
 function favorites() {
     add_to_favorites()
     get_session_favorites()
+
+    $(document).ajaxStop(function() {
+        get_session_favorites()
+    })
 }
 
 
