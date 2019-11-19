@@ -29,12 +29,13 @@ def add_to_favorites(request):
 
     # For AJAX requests
     if request.is_ajax():
-        data = {
-            'type': request.POST.get('type'),
-            'id': request.POST.get('id'),
-        }
-        request.session.modified = True
-        return JsonResponse(data)
+        if request.POST.get('type') is not None and request.POST.get('id') is not None:
+            data = {
+                'type': request.POST.get('type'),
+                'id': request.POST.get('id'),
+            }
+            request.session.modified = True
+            return JsonResponse(data)
     # END For AJAX requests
     return redirect(request.POST.get('url_from'))
 
@@ -59,12 +60,13 @@ def remove_from_favorites(request):
 
     # For AJAX requests
     if request.is_ajax():
-        data = {
-            'type': request.POST.get('type'),
-            'id': request.POST.get('id'),
-        }
-        request.session.modified = True
-        return JsonResponse(data)
+        if request.POST.get('type') is not None and request.POST.get('id') is not None:
+            data = {
+                'type': request.POST.get('type'),
+                'id': request.POST.get('id'),
+            }
+            request.session.modified = True
+            return JsonResponse(data)
     # END For AJAX requests
     return redirect(request.POST.get('url_from'))
 

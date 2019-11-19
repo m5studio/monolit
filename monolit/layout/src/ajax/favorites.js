@@ -2,101 +2,29 @@ import {singularPlural} from "../modules/singular-plural"
 
 
 const favorites_url = '/favorites/'
+const favorites_api_url = '/favorites/api/'
+
 const add_to_favorites_url = '/favorites/add/'
 const remove_from_favorites_url = '/favorites/remove/'
-const favorites_api_url = '/favorites/api/'
+
 const added_to_favorites_class = 'added'
 
 
 function add_to_favorites() {
-    /*
-    $('.add-to-favorites').each((index, el) => {
-        $(el).on('click', (e) => {
-        // $('#section-flats-list__inner').on('click', '.add-to-favorites', (e) => {
-        // $('#section-flats-list__inner').on('click', this, (e) => {
-            e.preventDefault()
-
-            const type = $(el).data('type')
-            const id = $(el).data('id')
-
-            console.log(el)
-            console.log(e.target)
-
-            // if( $(e.target).hasClass(added_to_favorites_class) ) {
-            if( $(el).hasClass(added_to_favorites_class) ) {
-                // console.log('has class ' + added_to_favorites_class)
-                $.ajax({
-                    url: remove_from_favorites_url,
-                    type: 'POST',
-                    dataType: 'json',
-                    data: {
-                        type: type,
-                        id: id,
-                    },
-                    success: (data) => {
-                        $(el).removeClass(added_to_favorites_class)
-                        $(el).find('.icon-heart-solid-green').removeClass('icon-heart-solid-green').addClass('icon-heart-contour-green')
-                        $(el).find('.add-to-favorites__label').html('В избранное')
-
-                        get_session_favorites_statistics()
-                    }
-                })
-            } else {
-                // console.log('has NO class ' + added_to_favorites_class)
-                $.ajax({
-                    url: add_to_favorites_url,
-                    type: 'POST',
-                    dataType: 'json',
-                    data: {
-                        type: type,
-                        id: id,
-                    },
-                    success: (data) => {
-                        $(el).addClass(added_to_favorites_class)
-                        $(el).find('.icon-heart-contour-green').removeClass('icon-heart-contour-green').addClass('icon-heart-solid-green')
-                        $(el).find('.add-to-favorites__label').html('В избранном')
-
-                        get_session_favorites_statistics()
-                    }
-                })
-            }
-        })
-    })
-    */
-
     $(document).on('click', '.add-to-favorites', (e) => {
         e.preventDefault()
 
-        const type = $(e.target).data('type')
-        const id = $(e.target).data('id')
+        const type = $(e.currentTarget).data('type')
+        const id = $(e.currentTarget).data('id')
 
-        console.log(type)
-        console.log(id)
+        // console.log(type)
+        // console.log(id)
 
-        // console.log(this)
-        console.log(e.target)
+        // console.log(e)
+        // console.log(e.currentTarget)
+        // console.log(e.target)
 
-        if( $(e.target).hasClass(added_to_favorites_class) ) {
-        // if( $(el).hasClass(added_to_favorites_class) ) {
-            // console.log('has class ' + added_to_favorites_class)
-            $.ajax({
-                url: remove_from_favorites_url,
-                type: 'POST',
-                dataType: 'json',
-                data: {
-                    type: type,
-                    id: id,
-                },
-                success: (data) => {
-                    $(e.target).removeClass(added_to_favorites_class)
-                    // $(el).find('.icon-heart-solid-green').removeClass('icon-heart-solid-green').addClass('icon-heart-contour-green')
-                    $(e.target).html('В избранное')
-
-                    get_session_favorites_statistics()
-                }
-            })
-        } else {
-            // console.log('has NO class ' + added_to_favorites_class)
+        if ( !$(e.currentTarget).hasClass(added_to_favorites_class) ) {
             $.ajax({
                 url: add_to_favorites_url,
                 type: 'POST',
@@ -106,10 +34,25 @@ function add_to_favorites() {
                     id: id,
                 },
                 success: (data) => {
-                    $(e.target).addClass(added_to_favorites_class)
-                    // $(el).find('.icon-heart-contour-green').removeClass('icon-heart-contour-green').addClass('icon-heart-solid-green')
-                    $(e.target).html('В избранном')
-
+                    $(e.currentTarget).addClass(added_to_favorites_class)
+                    $(e.currentTarget).find('.icon-heart-contour-green').removeClass('icon-heart-contour-green').addClass('icon-heart-solid-green')
+                    $(e.currentTarget).find('.add-to-favorites__label').html('В избранном')
+                    get_session_favorites_statistics()
+                }
+            })
+        } else {
+            $.ajax({
+                url: remove_from_favorites_url,
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    type: type,
+                    id: id,
+                },
+                success: (data) => {
+                    $(e.currentTarget).removeClass(added_to_favorites_class)
+                    $(e.currentTarget).find('.icon-heart-solid-green').removeClass('icon-heart-solid-green').addClass('icon-heart-contour-green')
+                    $(e.currentTarget).find('.add-to-favorites__label').html('В избранноe')
                     get_session_favorites_statistics()
                 }
             })
@@ -169,11 +112,7 @@ function get_session_favorites_statistics() {
 function favorites() {
     add_to_favorites()
     get_session_favorites()
-
-    $(document).ajaxStop(function() {
-        get_session_favorites()
-    })
 }
 
 
-export {favorites}
+export {favorites, get_session_favorites}

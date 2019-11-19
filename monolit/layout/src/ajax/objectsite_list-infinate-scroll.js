@@ -1,3 +1,6 @@
+import {get_session_favorites} from "./favorites"
+
+
 $.fn.isInViewport = function() {
     var elementTop = $(this).offset().top
     var elementBottom = elementTop + $(this).outerHeight()
@@ -17,10 +20,9 @@ function getFlats(page_number) {
         type: 'GET',
         success: (data) => {
             $('#section-flats-list__inner').append( $(data).find('#section-flats-list__inner').html() )
-            // $('#section-flats-list__inner').append( $(data).find('#section-flats-list__inner').html() ).hide().fadeIn(2000)
 
-            // Count .flat-card
-            // console.log( ".flat-card quantity = " + $(data).find('.flat-card').length )
+            // Run to display favorite icons for objects already in session after ajax request to load more object sites
+            get_session_favorites()
         }
     })
 }
@@ -32,13 +34,6 @@ const max_pagination_number = parseInt($('#section-flats-list').data('max-pagina
 let working = false
 
 function objectsite_list_infinate_scroll() {
-    // console.clear()
-    // console.log('objectsite_list_infinate_scroll')
-    // console.log('current_pagination_number ' + current_pagination_number)
-
-    // if scrolled to page bottom
-    // if ( $(window).scrollTop() + 1 >= $('body').height() - $(window).height() ) {
-
     // if #footer in viewport
     if ( $('#footer').isInViewport() ) {
         if ( current_pagination_number < max_pagination_number ) {
@@ -46,7 +41,6 @@ function objectsite_list_infinate_scroll() {
                 working = true
 
                 current_pagination_number++
-                // console.log(current_pagination_number)
                 getFlats(current_pagination_number)
 
                 // Timeout before call
