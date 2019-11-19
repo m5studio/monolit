@@ -22,27 +22,6 @@
         grid-template-columns: repeat(2, 1fr);
     }
 
-    // &__add-to-favorites {
-    //     display: flex;
-    //
-    //     // .icon {
-    //     //     display: block;
-    //     //     margin-right: 5px;
-    //     // }
-    //
-    //     // &--title {
-    //     //     transition: color ease-in-out .3s;
-    //     // }
-    //     //
-    //     // &:hover {
-    //     //     cursor: pointer;
-    //     //
-    //     //     .flat-card__add-to-favorites--title {
-    //     //         color: #00998f;
-    //     //     }
-    //     // }
-    // }
-
     &__id {
         text-align: right;
     }

@@ -4,29 +4,29 @@ import "./bootstrap/bootstrap"
 import {stickyMainNav, mainNav} from "./menu/main-nav"
 
 // Fiters
-import familyFiltersToggle from "./filters/family-filters-toggle"
-import familyFiltersReset from "./filters/family-filters-reset"
+import {familyFiltersToggle} from "./filters/family-filters-toggle"
+import {familyFiltersReset} from "./filters/family-filters-reset"
 
 // Realty filters
-import realtySquareFilters from "./modules/nouislider/realty_square_filters"
-import realtyPriceFilters from "./modules/nouislider/realty_price_filters"
-import realtyFloorFilters from "./modules/nouislider/realty_floor_filters"
+import {realtySquareFilters} from "./modules/nouislider/realty_square_filters"
+import {realtyPriceFilters} from "./modules/nouislider/realty_price_filters"
+import {realtyFloorFilters} from "./modules/nouislider/realty_floor_filters"
 
 // Scroll to Top
-import scrollToTop from "./modules/scroll-to-top/scroll-to-top"
+import {scrollToTop} from "./modules/scroll-to-top/scroll-to-top"
 
 // Ajax
 import csrf from "./ajax/csrf"
-import newsPageLoadMoreNews from "./ajax/news-page-load-more-news"
-import objectPageGalleries from "./ajax/object-page-galleries"
-import objectPageDocsPagination from "./ajax/object-page-documents-pagination"
-import objectCardSitesInfo from "./ajax/object-card"
+import {newsPageLoadMoreNews} from "./ajax/news-page-load-more-news"
+import {objectPageGalleries} from "./ajax/object-page-galleries"
+import {objectPageDocsPagination} from "./ajax/object-page-documents-pagination"
+import {objectCardSitesInfo} from "./ajax/object-card"
 import {objectPageSitesInfo, objectPageFlatsTypes} from "./ajax/object-page-sites-info"
-import mortgageOfferMonthlyPayment from "./ajax/mortgage-offer-monthly-payment-calculate"
-import search_by_site_id from "./ajax/search_by_site_id"
+import {mortgageOfferMonthlyPayment} from "./ajax/mortgage-offer-monthly-payment-calculate"
+import {search_by_site_id} from "./ajax/search_by_site_id"
 import {companyTendersPagination, selectTenderCategory} from "./ajax/company-tenders-page-pagination"
-import objectsite_list_infinate_scroll from "./ajax/objectsite_list-infinate-scroll"
-import favorites from "./ajax/favorites"
+import {objectsite_list_infinate_scroll} from "./ajax/objectsite_list-infinate-scroll"
+import {favorites} from "./ajax/favorites"
 
 // Fancybox https://fancyapps.com/fancybox/3/
 import '@fancyapps/fancybox'
@@ -99,26 +99,6 @@ $(document).ready(function() {
     }
     // END Company Tenders page
 })
-
-
-// This work, but like shit
-// $(document).on("click", '.add-to-favorites', function(e) {
-//     // e.preventDefault()
-//
-//     // Favorites
-//     if ( $('.flats').length || $('.flat-page').length || $('.favorites-page').length ) {
-//         favorites()
-//     }
-// })
-
-
-// This shit doesn't work
-// $(document).ajaxComplete(function() {
-//     // Favorites
-//     if ( $('.flats').length || $('.flat-page').length || $('.favorites-page').length ) {
-//         favorites()
-//     }
-// })
 
 
 $(document).ajaxStop(function() {

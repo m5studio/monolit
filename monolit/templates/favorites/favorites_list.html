@@ -7,10 +7,51 @@
 
 
 {% block content %}
-    <main id="main">
+    <nav id="breadcrumbs">
         <div class="container">
-            <h2>{{ request.session.keys }}</h2>
-            <h2>{{ request.session.favorites }}</h2>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'homepage' %}">Главная</a>
+                </li>
+                <li class="breadcrumb-item active">{{ page_title }}</li>
+            </ol>
         </div>
+    </nav>
+
+    <main id="main">
+        <div id="page-title-h1" class="container">
+            <div class="row align-items-center">
+                <div class="col-12 col-md-8">
+                    <h1>{{ page_title }}</h1>
+                </div>
+                <div class="col-12 col-md-4">
+                    <form action="{% url 'favorites:delete' %}" method="post" onsubmit="return confirm('Вы уверены в том, что хотите удалить все помещения из избранного?');">{% csrf_token %}
+                        <input type="hidden" name="url_from" value="{{ request.path }}">
+                        <button type="submit" class="grey-button">Удалить все из избранного</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        {% if request.user.is_superuser %}
+            <!-- <div class="container">
+                <div class="h3">{{ request.session.keys }}</div>
+                <div>{{ request.session.favorites }}</div>
+            </div> -->
+        {% endif %}
+
+        {% if request.session.favorites %}
+            <div id="section-flats-list" class="common-section">
+                <div id="section-flats-list__inner" class="container">
+                    {% for object in object_list %}
+                        {% include 'realty/cards/flat-card.html' %}
+                    {% endfor %}
+                </div>
+            </div>
+        {% else %}
+            <div class="container">
+                <p>В избранном пусто =(</p>
+            </div>
+        {% endif %}
     </main>
 {% endblock %}

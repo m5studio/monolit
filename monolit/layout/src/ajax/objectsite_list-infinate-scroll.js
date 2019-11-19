@@ -46,7 +46,8 @@ function objectsite_list_infinate_scroll() {
                 // Timeout before call
                 setTimeout(function(){
                     working = false
-                }, 1000)
+                // }, 1000)
+                }, 500)
             }
         }
     }

@@ -1,9 +1,22 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 
+from apps.realty.models.object_site import ObjectSite
+
 
 def favorites_list(request):
-    context = {}
+    object_list = None
+    if request.session.get('favorites'):
+        object_list = list()
+        for favorite in request.session.get('favorites'):
+            type = favorite['type']
+            id = int(favorite['id'])
+            if type == 'object_site':
+                object_list.append(ObjectSite.objects.get(id=id))
+    context = {
+        'page_title': 'Избранное',
+        'object_list': object_list,
+    }
     return render(request, 'favorites/favorites_list.html', context=context)
 
 
@@ -74,7 +87,7 @@ def remove_from_favorites(request):
 def delete_favorites(request):
     if request.session.get('favorites'):
         del request.session['favorites']
-        # request.session.modified = True
+        request.session.modified = True
     return redirect(request.POST.get('url_from'))
 
 
