@@ -258,7 +258,7 @@ class ObjectSiteAdmin(TurnOffAdminLogging, admin.ModelAdmin):
             'fields': ('active', 'special_offer',)
         }),
         (None, {
-            'fields': ('object', 'site_type', 'object_block', 'object_section', 'crm_id')
+            'fields': ('object', 'site_type', 'object_section', 'crm_id')
         }),
         ('Параметры', {
             'fields': ('rooms_qty', 'floor', 'site_number', 'ceiling_height', 'two_levels', 'entresol', 'wardrobe', 'finish_type', 'window_view')
@@ -345,7 +345,7 @@ class ObjectCommercialSiteAdmin(TurnOffAdminLogging, admin.ModelAdmin):
             'fields': ('active', 'special_offer',)
         }),
         (None, {
-            'fields': ('object_commercial', 'site_type', 'object_block', 'object_section', 'crm_id')
+            'fields': ('object_commercial', 'site_type', 'object_section', 'crm_id')
         }),
         ('Параметры', {
             'fields': ('floor', 'site_number', 'ceiling_height', 'street_entrance')

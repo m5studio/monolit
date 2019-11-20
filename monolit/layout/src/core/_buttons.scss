@@ -47,19 +47,20 @@ button {
 }
 
 .grey-button {
-    // background-image: linear-gradient(to bottom, #EEE, #CCC);
-    // background-color: #E7E7E7;
-    // border: none;
-    background-color: #FAFAFA;
-    border: 3px solid #555;
+    background-color: transparent;
+    border: 3px solid #EEE;
     cursor: pointer;
-    color: black;
+    color: #777;
     line-height: 1.2;
-    padding: 15px;
     text-align: center;
+    padding: 11px 15px;
+    transition: all ease-in-out .3s;
 
+    &:focus,
     &:hover {
-        background-color: #f6b93b;
-        border-color: #f6b93b;
+        background-color: #EEE;
+        color: black;
+        outline: none;
+        text-decoration: none;
     }
 }

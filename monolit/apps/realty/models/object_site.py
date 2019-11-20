@@ -113,7 +113,6 @@ class ObjectSite(models.Model):
     object                  = models.ForeignKey(Object, verbose_name='Жилой Объект', on_delete=models.CASCADE)
     site_type               = models.CharField('Тип помещения', max_length=100, choices=SITE_TYPES)
 
-    object_block            = models.ForeignKey(ObjectBlock, verbose_name='Блок Объекта', on_delete=models.SET_NULL, blank=True, null=True)
     object_section          = models.ForeignKey(ObjectSection, verbose_name='Секция Объекта', on_delete=models.SET_NULL, blank=True, null=True)
 
     crm_id                  = models.CharField('CRM ID', max_length=100, unique=True, help_text='ID объекта в 1C (Заполняется автоматически при выгрузке)')

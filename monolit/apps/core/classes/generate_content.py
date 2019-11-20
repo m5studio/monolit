@@ -559,7 +559,7 @@ class GenerateContent:
                 object_block = ObjectBlock.objects.filter(object=object_id).get(pk=object_block_id)
                 object_section = ObjectSection(object=object, \
                                                 object_block=object_block, \
-                                                name=f'Секция жилая {i}', \
+                                                name=f'С{i}.{i}', \
                                                 floor_first=1, \
                                                 floor_last=23, \
                                             )
@@ -581,7 +581,7 @@ class GenerateContent:
                 object_commercial_block = ObjectBlock.objects.filter(object_commercial=object_commercial_id).get(pk=object_commercial_block_id)
                 object_commercial_section = ObjectSection(object_commercial=object_commercial, \
                                                 object_block=object_commercial_block, \
-                                                name=f'Секция коммерческая {i}', \
+                                                name=f'С{i}.к{i}', \
                                                 floor_first=1, \
                                                 floor_last=23, \
                                             )
@@ -598,7 +598,7 @@ class GenerateContent:
         if count_blocks_rel_to_object == 0:
             i = 1
             for _ in range(qty):
-                object_block = ObjectBlock(object=Object.objects.get(pk=object_id), name=f'Блок жилой {i}')
+                object_block = ObjectBlock(object=Object.objects.get(pk=object_id), name=f'Блок {i}')
                 object_block.save()
                 print(f'[ObjectBlock "{object_block.name}"] created for Object {object_id}')
                 i += 1
@@ -610,7 +610,7 @@ class GenerateContent:
         if count_blocks_rel_to_object_commercial == 0:
             i = 1
             for _ in range(qty):
-                object_commercial_block = ObjectBlock(object_commercial=ObjectCommercial.objects.get(pk=object_commercial_id), name=f'Блок коммерческий {i}')
+                object_commercial_block = ObjectBlock(object_commercial=ObjectCommercial.objects.get(pk=object_commercial_id), name=f'Блок {i}')
                 object_commercial_block.save()
                 print(f'[ObjectBlock "{object_commercial_block.name}"] created for ObjectCommercial {object_commercial_block.id}')
                 i += 1

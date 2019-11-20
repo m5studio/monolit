@@ -25,7 +25,7 @@
                     <h1>{{ page_title }}</h1>
                 </div>
                 <div class="col-12 col-md-4">
-                    <form action="{% url 'favorites:delete' %}" method="post" onsubmit="return confirm('Вы уверены в том, что хотите удалить все помещения из избранного?');">{% csrf_token %}
+                    <form action="{% url 'favorites:delete' %}" method="post" onsubmit="return confirm('Вы уверены что хотите удалить все из избранного?');">{% csrf_token %}
                         <input type="hidden" name="url_from" value="{{ request.path }}">
                         <button type="submit" class="grey-button">Удалить все из избранного</button>
                     </form>

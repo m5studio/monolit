@@ -42,8 +42,24 @@
             </div>
             <div class="flat-card__info">
                 <!-- TODO: Check Sections -->
-                <div class="flat-card__label">{% if object.object_section.object_block.name %}Блок{% endif %}{% if object.object_section.object_block.name and object.object_section.number %} / {% endif %}{% if object.object_section.number %}Секция{% endif %}</div>
-                <div class="flat-card__val flat-block-and-secton">{% if object.object_section.object_block.name %}{{ object.object_section.object_block.name }}{% endif %}{% if object.object_section.object_block.name and object.object_section.number %} / {% endif %}{% if object.object_section.number %}{{ object.object_section.number }}{% endif %}</div>
+                <div class="flat-card__label">
+                    {% if object.object_section.object_block.name %}
+                        Блок
+                    {% endif %}
+                    {% if object.object_section.object_block.name and object.object_section.name %} / {% endif %}
+                    {% if object.object_section.name %}
+                        Секция
+                    {% endif %}
+                </div>
+                <div class="flat-card__val flat-block-and-secton">
+                    {% if object.object_section.object_block.name %}
+                        {{ object.object_section.object_block.name }}
+                    {% endif %}
+                    {% if object.object_section.object_block.name and object.object_section.name %} / {% endif %}
+                    {% if object.object_section.name %}
+                        {{ object.object_section.name }}
+                    {% endif %}
+                </div>
             </div>
         </div>
         <div class="flat-card__footer--bottom">
