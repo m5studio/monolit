@@ -19,8 +19,8 @@
 @import "./cards/commercial-object-card";
 @import "./cards/commercial-site-card";
 @import "./cards/contact-card";
-@import "./cards/flat-card";
-@import "./cards/flat-type-card";
+@import "./cards/site-card";
+@import "./cards/site-type-card";
 @import "./cards/history-card";
 @import "./cards/mortgage-card";
 @import "./cards/mortgage-offer";
@@ -75,14 +75,14 @@
 @import "./sections/company/section-sertificates";
 @import "./sections/company/section-vacancies-list";
 
-// Sections [flat]
-@import "./sections/flat/flat-page-section";
-@import "./sections/flat/section-flats-list";
-@import "./sections/flat/section-flats-types";
-@import "./sections/flat/section-flat-page-content";
-@import "./sections/flat/section-flat-page-map";
-@import "./sections/flat/section-flat-page-mortgage";
-@import "./sections/flat/section-flat-page-simular-flats";
+// Sections [site]
+@import "./sections/site/site-page-section";
+@import "./sections/site/section-sites-list";
+@import "./sections/site/section-sites-types";
+@import "./sections/site/section-site-page-content";
+@import "./sections/site/section-site-page-map";
+@import "./sections/site/section-site-page-mortgage";
+@import "./sections/site/section-site-page-simular-sites";
 
 // Sections [mortgage]
 @import "./sections/mortgage/section-application-mortgage";
@@ -116,10 +116,10 @@
 // Sections [pages]
 @import "./sections/pages/section-contacts-page-content";
 
-// Sections Realty Filters
-@import "./sections/realty-filters/section-family-types-filters";
-@import "./sections/realty-filters/section-realty-flats-filters";
-@import "./sections/realty-filters/section-realty-homepage-filters";
+// Sections Filters
+@import "./sections/filters/section-family-types-filters";
+@import "./sections/filters/section-realty-sites-filters";
+@import "./sections/filters/section-realty-homepage-filters";
 // ===================== END Sections
 
 

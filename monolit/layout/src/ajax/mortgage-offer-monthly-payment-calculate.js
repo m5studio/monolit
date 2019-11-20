@@ -45,10 +45,10 @@ function generateRandomNumInRange(num1, num2) {
 
 
 function mortgageOfferMonthlyPayment() {
-    if ( $('#section-flat-page-content').data('object-site') ) {
-        const site_info_url = $('#section-flat-page-content').data('object-site')
+    if ( $('#section-site-page-content').data('object-site') ) {
+        const site_info_url = $('#section-site-page-content').data('object-site')
 
-        if ( $('#section-flat-page-mortgage') ) {
+        if ( $('#section-site-page-mortgage') ) {
             $.getJSON(site_info_url, (site_info_data) => {
                 // Стоимость квартиры
                 const site_price_total = site_info_data[0]['price_total']

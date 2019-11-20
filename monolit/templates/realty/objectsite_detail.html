@@ -26,10 +26,10 @@
     </nav>
 
     <main id="main">
-        <div id="section-flat-page-content" class="container" data-object-site="{% url 'api:site-info' site_id=object.id %}">
-            <div id="section-flat-page-content__left">
+        <div id="section-site-page-content" class="container" data-object-site="{% url 'api:site-info' site_id=object.id %}">
+            <div id="section-site-page-content__left">
                 {% if object.image_planning %}
-                    <div id="section-flat-page-content__tabs">
+                    <div id="section-site-page-content__tabs">
                         <div class="nav nav-pills" id="flat-pills-tabs" role="tablist">
                             {% if object.image_planning %}
                                 <a class="nav-link active" id="flat-pills-layout-tab" data-toggle="pill" href="#flat-pills-layout" role="tab" aria-controls="flat-pills-layout" aria-selected="true">Планировка</a>
@@ -86,7 +86,7 @@
                 {% endif %}
             </div>
 
-            <div id="section-flat-page-content__right">
+            <div id="section-site-page-content__right">
                 <div id="flat-id">ID: {{ object.crm_id }}</div>
                 <div id="page-title-h1">
                     <h1>{{ page_title }}</h1>
@@ -241,13 +241,13 @@
         </div>
     </main>
 
-    <div id="section-flat-page-map" class="flat-page-section">
-        <div class="flat-page-section__title container">Что находится рядом</div>
-        <div id="section-flat-page-map__holder" class="flat-page-section__content"></div>
+    <div id="section-site-page-map" class="site-page-section">
+        <div class="site-page-section__title container">Что находится рядом</div>
+        <div id="section-site-page-map__holder" class="site-page-section__content"></div>
     </div>
 
-    {% include 'realty/objectsite_detail-sections/section-flat-page-mortgage.html' %}
+    {% include 'realty/objectsite_detail-sections/section-site-page-mortgage.html' %}
 
-    {% include 'realty/objectsite_detail-sections/section-flat-page-simular-flats.html' %}
+    {% include 'realty/objectsite_detail-sections/section-site-page-simular-sites.html' %}
 
 {% endblock %}

@@ -13,13 +13,13 @@ $.fn.isInViewport = function() {
 
 
 function getFlats(page_number) {
-    let page_url = $('#section-flats-list').data('page-url')
+    let page_url = $('#section-sites-list').data('page-url')
 
     $.ajax({
         url: page_url + '?page=' + page_number.toString(),
         type: 'GET',
         success: (data) => {
-            $('#section-flats-list__inner').append( $(data).find('#section-flats-list__inner').html() )
+            $('#section-sites-list__inner').append( $(data).find('#section-sites-list__inner').html() )
 
             // Run to display favorite icons for objects already in session after ajax request to load more object sites
             get_session_favorites()
@@ -28,8 +28,8 @@ function getFlats(page_number) {
 }
 
 
-let current_pagination_number = parseInt($('#section-flats-list').data('current-pagination-number'), 10)
-const max_pagination_number = parseInt($('#section-flats-list').data('max-pagination-number'), 10)
+let current_pagination_number = parseInt($('#section-sites-list').data('current-pagination-number'), 10)
+const max_pagination_number = parseInt($('#section-sites-list').data('max-pagination-number'), 10)
 
 let working = false
 

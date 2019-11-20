@@ -1,7 +1,7 @@
 function familyFiltersReset() {
-    const realtyFiltersId = '#section-realty-flats-filters'
+    const realtyFiltersId = '#section-realty-sites-filters'
 
-    const filtersResetName = 'filter-realty-flats-reset'
+    const filtersResetName = 'filter-realty-sites-reset'
     const filtersResetId = '#' + filtersResetName
 
     if ( $(realtyFiltersId).length ) {

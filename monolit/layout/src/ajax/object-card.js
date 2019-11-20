@@ -11,7 +11,7 @@ function objectCardSitesInfo() {
             $.each(data, (index, val) => {
                 // Кол-во квартир
                 if ( val['object_total_sites_qty'] > 0 ) {
-                    $(el).find('.object-card__flat--count').append(
+                    $(el).find('.object-card__site--count').append(
                         '<a href="">' +
                             '<span class="oc-flats-total-qty">' + val['object_total_sites_qty'] + ' ' + singularPlural(val['object_total_sites_qty'], ['квартира', 'квартиры', 'квартир']) + '</span>' +
                         '</a>'
@@ -51,14 +51,14 @@ function objectCardSitesInfo() {
                         $(el).find('.object-card__emerge').append(
                             '<div class="object-card__emerge-object">' +
                                 '<a href="" class="object-card__emerge-link">' +
-                                    '<div class="object-card__flat-types-item">' + v['name'] + '</div>' +
+                                    '<div class="object-card__site-types-item">' + v['name'] + '</div>' +
                                     '<div class="object-card__emerge-title">' + v['flats_qty'] + ' ' + singularPlural(v['flats_qty'], ['квартира', 'квартиры', 'квартир'], true) + '</div>' +
                                     '<div class="object-card__emerge-area-space">' + formatNumber(v['min_area'], 1) + ' - ' + formatNumber(v['max_area'], 1) + ' м<sup>2</sup></div>' +
                                     '<div class="object-card__emerge-arrow"></div>' +
                                 '</a>' +
                             '</div>'
                         )
-                        $(el).find('.object-card__flat-types').append('<a href="" class="object-card__flat-types-item">' + v['name'] + '</a>')
+                        $(el).find('.object-card__site-types').append('<a href="" class="object-card__site-types-item">' + v['name'] + '</a>')
                     }
                 })
             })

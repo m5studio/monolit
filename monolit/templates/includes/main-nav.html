@@ -25,8 +25,8 @@
                         <a href="{{ objects_site_list_url }}" class="main-nav__link">Выбор недвижимости</a>
                         <div class="dropdown">
                             <ul class="main-nav-submenu__list">
-                                <li class="main-nav-submenu__item">
-                                    <a href="" class="main-nav-submenu__link">Жилая недвижимость</a>
+                                <li class="main-nav-submenu__item{% if objects_site_list_url == request.path or objects_site_list_url in request.path %} active{% endif %}">
+                                    <a href="{{ objects_site_list_url }}" class="main-nav-submenu__link">Жилая недвижимость</a>
                                 </li>
                                 <li class="main-nav-submenu__item">
                                     <a href="" class="main-nav-submenu__link">Коммерческая недвижимость</a>

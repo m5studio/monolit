@@ -36,7 +36,7 @@ $(document).ready(function() {
     csrf()
 
     // Favorites
-    if ( $('.flats').length || $('.flat-page').length || $('.favorites-page').length ) {
+    if ( $('.flats').length || $('.flat-page').length || $('.favorites-page').length || $('.object-page').length ) {
         favorites()
     }
 
@@ -54,7 +54,7 @@ $(document).ready(function() {
     }
 
     // Flats
-    if ( $('#section-realty-flats-filters').length ) {
+    if ( $('#section-realty-sites-filters').length ) {
         realtySquareFilters()
         realtyPriceFilters()
         realtyFloorFilters()

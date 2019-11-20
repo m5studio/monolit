@@ -41,10 +41,10 @@
         {% endif %}
 
         {% if request.session.favorites %}
-            <div id="section-flats-list" class="common-section">
-                <div id="section-flats-list__inner" class="container">
+            <div id="section-sites-list" class="common-section">
+                <div id="section-sites-list__inner" class="container">
                     {% for object in object_list %}
-                        {% include 'realty/cards/flat-card.html' %}
+                        {% include 'realty/cards/site-card.html' %}
                     {% endfor %}
                 </div>
             </div>
