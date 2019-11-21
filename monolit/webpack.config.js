@@ -129,12 +129,12 @@ module.exports = {
 
         // Flats
         new HtmlWebpackPlugin({
-            filename: 'html/flats.html',
-            template: './layout/src/html/flats/flats.html'
+            filename: 'html/sites.html',
+            template: './layout/src/html/sites/sites.html'
         }),
         new HtmlWebpackPlugin({
-            filename: 'html/flats_page.html',
-            template: './layout/src/html/flats/flats_page.html'
+            filename: 'html/sites_page.html',
+            template: './layout/src/html/sites/sites_page.html'
         }),
 
         // Mortgage

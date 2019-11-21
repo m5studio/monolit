@@ -18,7 +18,7 @@
     }
 
     &__tabs {
-        #flat-pills-tabs {
+        #site-pills-tabs {
             &.nav {
                 @include media-breakpoint-down(lg) {
                     border-bottom: 1px solid #0baca2;
@@ -67,7 +67,7 @@
             }
         }
 
-        #flat-pills-tabs-content {
+        #site-pills-tabs-content {
             .tab-pane {
                 padding-top: 15px;
 
@@ -107,11 +107,11 @@
             margin-bottom: 30px;
         }
 
-        .flat-content-block {
+        .site-content-block {
             padding: 30px 0;
 
             &--flex {
-                @extend .flat-content-block;
+                @extend .site-content-block;
 
                 display: flex;
                 align-items: center;
@@ -132,7 +132,7 @@
             }
 
             &--grid {
-                @extend .flat-content-block;
+                @extend .site-content-block;
 
                 display: grid;
                 grid-row-gap: 15px;
@@ -147,13 +147,12 @@
             }
         }
 
-        #flat-id {
+        #site-id {
             color: #a6a6a6;
             margin-bottom: 10px;
-            text-align: right;
         }
 
-        #flat-params {
+        #site-params {
             border-top: 1px solid #e1e1e1;
             border-bottom: 1px solid #e1e1e1;
             margin-top: 60px;
@@ -171,7 +170,7 @@
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .flat-params-block {
+            .site-params-block {
                 text-align: center;
 
                 @include media-breakpoint-down(xs) {
@@ -194,7 +193,7 @@
                     }
                 }
 
-                // .flat-floor {}
+                // .site-floor {}
 
                 .last-floor {
                     font-size: 1rem;
@@ -203,7 +202,7 @@
             }
         }
 
-        #flat-params-secondary {
+        #site-params-secondary {
             border-bottom: 1px solid #e1e1e1;
             padding-bottom: 30px;
 
@@ -221,7 +220,7 @@
                     grid-template-columns: repeat(2, 1fr);
                 }
 
-                .flat-params-block {
+                .site-params-block {
                     display: flex;
                     flex-direction: column;
 
@@ -234,8 +233,8 @@
             }
         }
 
-        #flat-price {
-            .flat-price-block {
+        #site-price {
+            .site-price-block {
                 @include media-breakpoint-down(xs) {
                     flex: 0 0 100%;
                     text-align: center;
@@ -256,20 +255,20 @@
             }
 
             &__per-meter {
-                .flat-price-block__val {
+                .site-price-block__val {
                     font-size: 1.6rem;
                 }
             }
 
             &__total {
-                .flat-price-block__val {
+                .site-price-block__val {
                     color: #0baca2;
                     font-size: 2rem;
                 }
             }
         }
 
-        #flat-actions {
+        #site-actions {
             margin-top: 30px;
 
             @include media-breakpoint-only(xl) {
@@ -283,7 +282,7 @@
                 margin-top: 0;
             }
 
-            .flat-actions-block {
+            .site-actions-block {
                 display: flex;
 
                 @include media-breakpoint-down(xs) {
@@ -302,7 +301,7 @@
                 }
 
                 &--flex-end {
-                    @extend .flat-actions-block;
+                    @extend .site-actions-block;
 
                     @include media-breakpoint-up(sm) {
                         justify-content: flex-end;
@@ -314,7 +313,7 @@
                 }
             }
 
-            &__book-flat {
+            &__book-site {
                 .green-button {
                     padding: 16px 30px;
 

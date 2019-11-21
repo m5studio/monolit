@@ -32,15 +32,15 @@ def api_object_sites_info(request, object_id):
     object_sites = ObjectSite.objects
     object_sites_info = object_sites.object_sites_info_aggregated(object_id)
 
-    room_0 = object_sites.flats_info_aggregated(object_id, 0)
-    room_1 = object_sites.flats_info_aggregated(object_id, 1)
-    room_2 = object_sites.flats_info_aggregated(object_id, 2)
-    room_3 = object_sites.flats_info_aggregated(object_id, 3)
-    room_4 = object_sites.flats_info_aggregated(object_id, 4)
+    room_0 = object_sites.sites_info_aggregated(object_id, 0)
+    room_1 = object_sites.sites_info_aggregated(object_id, 1)
+    room_2 = object_sites.sites_info_aggregated(object_id, 2)
+    room_3 = object_sites.sites_info_aggregated(object_id, 3)
+    room_4 = object_sites.sites_info_aggregated(object_id, 4)
 
     sites_info = list()
     sites_info.extend([object_sites_info,
-                        {'flats_info': [
+                        {'sites_info': [
                                 mergeTwoDicts({'name': 'Ст', 'rooms': 0}, room_0),
                                 mergeTwoDicts({'name': '1',  'rooms': 1}, room_1),
                                 mergeTwoDicts({'name': '2',  'rooms': 2}, room_2),

@@ -137,7 +137,7 @@ class CompanyTendersView(TemplateView):
                     zip.write(file, os.path.basename(file))
 
                 # Get tender title
-                tender_title = Tender.objects.filter(id=get_request_tender_id).values_list('title', flat=True)
+                tender_title = Tender.objects.filter(id=get_request_tender_id).values_list('title', site=True)
                 filename = FileProcessing(tender_title[0])
                 filename = filename.translitFileName().title()
                 # Formatting filename

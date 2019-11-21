@@ -52,12 +52,12 @@ class GenerateContent:
         return random.choice(list)
 
     def _get_objects_ids_list(self, object_name) -> list:
-        return list(object_name.objects.order_by('id').values_list('id', flat=True))
+        return list(object_name.objects.order_by('id').values_list('id', site=True))
 
     def _get_tenders_ids_list(self) -> list:
-        return list(Tender.objects.order_by('id').values_list('id', flat=True))
+        return list(Tender.objects.order_by('id').values_list('id', site=True))
 
-    def convert_tuple_to_flat_list(self, tuple):
+    def convert_tuple_to_site_list(self, tuple):
         return [x[0] for x in tuple]
 
     def countModelObjects(self, model_name):
@@ -142,7 +142,7 @@ class GenerateContent:
 
     def _create_Tender(self):
         title = f'Тендер {self.fake.word()} {self.fake.word()} {self.fake.word()} {self.fake.word()}'.title()
-        tender_cregories_list = self.convert_tuple_to_flat_list(Tender.CATEGORIES)
+        tender_cregories_list = self.convert_tuple_to_site_list(Tender.CATEGORIES)
 
         tender = Tender(active=self.fake.boolean(chance_of_getting_true=85), \
                         title=title, \
@@ -174,7 +174,7 @@ class GenerateContent:
 
 
     def _create_ContactsItem(self, сontacts_group_id):
-        сontact_type_list = self.convert_tuple_to_flat_list(ContactsItem.CONTACTS_TYPES)
+        сontact_type_list = self.convert_tuple_to_site_list(ContactsItem.CONTACTS_TYPES)
         сontacts_group = ContactsGroup.objects.get(pk=сontacts_group_id)
 
         сontact_type = self.fake.word(сontact_type_list)
@@ -236,7 +236,7 @@ class GenerateContent:
         print(f'[News] created {news.title}')
 
         news.object.set([ self.get_random_list_item(self._get_objects_ids_list(Object)) ])
-        news_categories_list = list(NewsCategory.objects.values_list('id', flat=True))
+        news_categories_list = list(NewsCategory.objects.values_list('id', site=True))
         news.category.set([ self.get_random_list_item(news_categories_list) ])
 
         self._create_NewsImage(news.id)
@@ -273,14 +273,14 @@ class GenerateContent:
 
     """ [ObjectCommercialSite] """
     def _create_ObjectCommercialSite(self, object_commercial_id):
-        site_types_list = self.convert_tuple_to_flat_list(ObjectCommercialSite.SITE_TYPES)
+        site_types_list = self.convert_tuple_to_site_list(ObjectCommercialSite.SITE_TYPES)
 
         floors_list = list(range(1, 23))
         site_numbers_list = list(range(1, 200))
         price_per_square_list = list(range(32000, 79000))
         site_area_list = list(range(57, 119))
 
-        sections_rel_to_object_ids_list = list(ObjectSection.objects.filter(object_commercial=object_commercial_id).values_list('id', flat=True))
+        sections_rel_to_object_ids_list = list(ObjectSection.objects.filter(object_commercial=object_commercial_id).values_list('id', site=True))
 
         sites_qty_list = [15, 105, 39]
         qty = self.get_random_list_item(sites_qty_list)
@@ -310,7 +310,7 @@ class GenerateContent:
 
 
     def _create_ObjectBathroom(self, object_site_id):
-        object_bathroom_list = self.convert_tuple_to_flat_list(ObjectBathroom.BATHROOM_TYPES)
+        object_bathroom_list = self.convert_tuple_to_site_list(ObjectBathroom.BATHROOM_TYPES)
         count_bathrooms_rel_to_object_site = ObjectBathroom.objects.annotate(Count('object_site')).filter(object_site=object_site_id).count()
         object_site = ObjectSite.objects.get(pk=object_site_id)
 
@@ -321,7 +321,7 @@ class GenerateContent:
 
 
     def _create_ObjectBathroom_for_ObjectCommercialSite(self, object_site_id):
-        object_bathroom_list = self.convert_tuple_to_flat_list(ObjectBathroom.BATHROOM_TYPES)
+        object_bathroom_list = self.convert_tuple_to_site_list(ObjectBathroom.BATHROOM_TYPES)
         count_bathrooms_rel_to_object_site = ObjectBathroom.objects.annotate(Count('object_commercial_site')).filter(object_commercial_site=object_site_id).count()
         object_commercial_site = ObjectCommercialSite.objects.get(pk=object_site_id)
 
@@ -332,7 +332,7 @@ class GenerateContent:
 
 
     def _create_ObjectBalcony(self, object_site_id):
-        object_balcony_list = self.convert_tuple_to_flat_list(ObjectBalcony.BALCONY_TYPES)
+        object_balcony_list = self.convert_tuple_to_site_list(ObjectBalcony.BALCONY_TYPES)
         count_balconies_rel_to_object_site = ObjectBalcony.objects.annotate(Count('object_site')).filter(object_site=object_site_id).count()
         object_site = ObjectSite.objects.get(pk=object_site_id)
 
@@ -343,10 +343,10 @@ class GenerateContent:
 
 
     def _create_ObjectSite(self, object_id):
-        site_types_list = self.convert_tuple_to_flat_list(ObjectSite.SITE_TYPES)
+        site_types_list = self.convert_tuple_to_site_list(ObjectSite.SITE_TYPES)
 
-        rooms_qty_list = self.convert_tuple_to_flat_list(ObjectSite.ROOMS_QTY)
-        finishing_types_list = self.convert_tuple_to_flat_list(ObjectSite.FINISHING_TYPES)
+        rooms_qty_list = self.convert_tuple_to_site_list(ObjectSite.ROOMS_QTY)
+        finishing_types_list = self.convert_tuple_to_site_list(ObjectSite.FINISHING_TYPES)
 
         object = Object.objects.get(pk=object_id)
 
@@ -356,9 +356,9 @@ class GenerateContent:
         site_area_list = list(range(57, 119))
         kitchen_area_list = list(range(10, 15))
 
-        sections_rel_to_object_ids_list = list(ObjectSection.objects.filter(object=object).values_list('id', flat=True))
+        sections_rel_to_object_ids_list = list(ObjectSection.objects.filter(object=object).values_list('id', site=True))
 
-        # flats_qty_list = list(range(51, 126))
+        # sites_qty_list = list(range(51, 126))
         sites_qty_list = [15, 105, 51, 116, 39]
         qty = self.get_random_list_item(sites_qty_list)
 
@@ -396,7 +396,7 @@ class GenerateContent:
                 object_site.save()
 
                 # Set ObjectSiteWindowsView
-                windows_view_list = list(ObjectSiteWindowsView.objects.values_list('id', flat=True))
+                windows_view_list = list(ObjectSiteWindowsView.objects.values_list('id', site=True))
                 object_site.window_view.set([self.get_random_list_item(windows_view_list), self.get_random_list_item(windows_view_list)])
 
                 print(f'[ObjectSite] {object_site.crm_id} created for Object {object_id}')
@@ -417,7 +417,7 @@ class GenerateContent:
 
     """ [Mortgage] """
     def _create_Offer(self):
-        banks_ids = list(Bank.objects.order_by('id').values_list('id', flat=True))
+        banks_ids = list(Bank.objects.order_by('id').values_list('id', site=True))
         bank = Bank.objects.get(pk=self.get_random_list_item(banks_ids))
 
         first_payment_from_list = [15, 20]
@@ -530,7 +530,7 @@ class GenerateContent:
         count_elevators_rel_to_section = ObjectElevator.objects.annotate(Count('object_section')).filter(object_section=object_section_id).count()
 
         if count_elevators_rel_to_section == 0:
-            elevator_types_list = self.convert_tuple_to_flat_list(ObjectElevator.ELEVATORS_TYPES)
+            elevator_types_list = self.convert_tuple_to_site_list(ObjectElevator.ELEVATORS_TYPES)
             object_section = ObjectSection.objects.get(pk=object_section_id)
 
             object_elevator = ObjectElevator(object_section=object_section, \
@@ -552,7 +552,7 @@ class GenerateContent:
         count_sections_rel_to_object = ObjectSection.objects.annotate(Count('object')).filter(object=object_id).count()
 
         if count_sections_rel_to_object == 0:
-            object_blocks_ids = ObjectBlock.objects.filter(object=object_id).values_list('id', flat=True)
+            object_blocks_ids = ObjectBlock.objects.filter(object=object_id).values_list('id', site=True)
             i = 1
             for object_block_id in object_blocks_ids:
                 object = Object.objects.get(pk=object_id)
@@ -574,7 +574,7 @@ class GenerateContent:
         count_sections_rel_to_object_commercial = ObjectSection.objects.annotate(Count('object_commercial')).filter(object_commercial=object_commercial_id).count()
 
         if count_sections_rel_to_object_commercial == 0:
-            object_commercial_blocks_ids = ObjectBlock.objects.filter(object_commercial=object_commercial_id).values_list('id', flat=True)
+            object_commercial_blocks_ids = ObjectBlock.objects.filter(object_commercial=object_commercial_id).values_list('id', site=True)
             i = 1
             for object_commercial_block_id in object_commercial_blocks_ids:
                 object_commercial = ObjectCommercial.objects.get(pk=object_commercial_id)
@@ -618,7 +618,7 @@ class GenerateContent:
 
     def _create_ObjectInfoTab(self, object_id):
         count_info_tabs_rel_to_object = ObjectInfoTab.objects.annotate(Count('object')).filter(object=object_id).count()
-        object_info_tab_icons_list = self.convert_tuple_to_flat_list(ObjectInfoTab.ICONS)
+        object_info_tab_icons_list = self.convert_tuple_to_site_list(ObjectInfoTab.ICONS)
         object = Object.objects.get(pk=object_id)
 
         if count_info_tabs_rel_to_object == 0:

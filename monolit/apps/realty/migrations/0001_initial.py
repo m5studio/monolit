@@ -194,7 +194,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('active', models.BooleanField(default=True, help_text='Опубликован на сайте', verbose_name='Активный')),
                 ('special_offer', models.BooleanField(default=False, verbose_name='Спецпредложение')),
-                ('site_type', models.CharField(choices=[('flat', 'Квартира'), ('apartments', 'Апартаменты')], max_length=100, verbose_name='Тип помещения')),
+                ('site_type', models.CharField(choices=[('site', 'Квартира'), ('apartments', 'Апартаменты')], max_length=100, verbose_name='Тип помещения')),
                 ('crm_id', models.CharField(help_text='ID объекта в 1C (Заполняется автоматически при выгрузке)', max_length=100, unique=True, verbose_name='CRM ID')),
                 ('price_per_square', models.DecimalField(blank=True, decimal_places=2, help_text='Стоимость одного квадратного метра', max_digits=8, null=True, verbose_name='Цена за м2 (руб)')),
                 ('price_total', models.DecimalField(blank=True, decimal_places=2, help_text='Считается автоматически из Площади помещения * Цена за м2', max_digits=11, null=True, verbose_name='Общая стоимость (руб)')),

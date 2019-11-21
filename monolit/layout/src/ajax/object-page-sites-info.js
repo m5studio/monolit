@@ -27,16 +27,16 @@ function objectPageFlatsTypes() {
 
         $.getJSON(site_info_url, (data) => {
             // const objectStats = data[0]
-            const objectFlatsInfo = data[1]['flats_info']
+            const objectFlatsInfo = data[1]['sites_info']
 
             $.each(objectFlatsInfo, (index, el) => {
-                let flat_card = sectionFlatsType.find('.site-type-card__room-'+index)
+                let site_card = sectionFlatsType.find('.site-type-card__room-'+index)
 
-                if ( el['flats_qty'] > 0 ) {
-                    flat_card.addClass('active')
+                if ( el['sites_qty'] > 0 ) {
+                    site_card.addClass('active')
 
-                    flat_card.find('.site-type-card__info--area').append( 'от ' + formatNumber(el['min_area'], 1) + '<br>до ' + formatNumber(el['max_area'], 1) + ' м<sup>2</sup>' )
-                    flat_card.find('.site-type-card__info--price').append('от ' + formatNumberText(el['min_price']) + ' руб.' )
+                    site_card.find('.site-type-card__info--area').append( 'от ' + formatNumber(el['min_area'], 1) + '<br>до ' + formatNumber(el['max_area'], 1) + ' м<sup>2</sup>' )
+                    site_card.find('.site-type-card__info--price').append('от ' + formatNumberText(el['min_price']) + ' руб.' )
                 }
             })
         })

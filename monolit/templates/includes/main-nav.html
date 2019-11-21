@@ -6,15 +6,16 @@
             <nav id="main-navigation" class="main-nav" role="navigation">
                 <ul class="main-nav__list">
                     {% url 'object:list' as object_list_url %}
-                    <li class="main-nav__item{% if object_list_url == request.path or object_list_url in request.path %} active{% endif %} has-dropdown"">
+                    {% url 'object:commercial-list' as object_commercial_list_url %}
+                    <li class="main-nav__item{% if object_list_url == request.path or object_list_url in request.path or object_commercial_list_url == request.path or object_commercial_list_url in request.path %} active{% endif %} has-dropdown"">
                         <a href="{{ object_list_url }}" class="main-nav__link" title="Жилые и коммерческие объекты">Объекты</a>
                         <div class="dropdown">
                             <ul class="main-nav-submenu__list">
                                 <li class="main-nav-submenu__item{% if object_list_url == request.path or object_list_url in request.path %} active{% endif %}">
                                     <a href="{{ object_list_url }}" class="main-nav-submenu__link">Жилые объекты</a>
                                 </li>
-                                <li class="main-nav-submenu__item">
-                                    <a href="" class="main-nav-submenu__link">Коммерческие объекты</a>
+                                <li class="main-nav-submenu__item{% if object_commercial_list_url == request.path or object_commercial_list_url in request.path %} active{% endif %}">
+                                    <a href="{{ object_commercial_list_url }}" class="main-nav-submenu__link">Коммерческие объекты</a>
                                 </li>
                             </ul>
                         </div>

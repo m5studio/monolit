@@ -36,7 +36,7 @@ $(document).ready(function() {
     csrf()
 
     // Favorites
-    if ( $('.flats').length || $('.flat-page').length || $('.favorites-page').length || $('.object-page').length ) {
+    if ( $('.sites').length || $('.site-page').length || $('.favorites-page').length || $('.object-page').length ) {
         favorites()
     }
 
@@ -81,7 +81,7 @@ $(document).ready(function() {
     // END News page
 
     // Flat page
-    if ( $('.flat-page').length ) {
+    if ( $('.site-page').length ) {
         mortgageOfferMonthlyPayment()
     }
     // END Flat page
@@ -129,7 +129,7 @@ $(window).scroll(function() {
 
     // scrollToTop()
 
-    if ( $('.flats').length ) {
+    if ( $('.sites').length ) {
         objectsite_list_infinate_scroll()
     }
 })

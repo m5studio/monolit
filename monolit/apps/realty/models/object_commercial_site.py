@@ -1,5 +1,6 @@
 from django.db import models
 
+from django.urls import reverse
 from django.utils.html import mark_safe
 from django.core.validators import MaxValueValidator, MinValueValidator
 
@@ -61,6 +62,9 @@ class ObjectCommercialSite(models.Model):
 
     def __str__(self):
         return self.crm_id
+
+    def get_absolute_url(self):
+        return reverse('object:site-commercial-detail', kwargs={'pk': self.id})
 
     class Meta:
         verbose_name = 'Коммерческое помещение'

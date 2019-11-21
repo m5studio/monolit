@@ -3,6 +3,7 @@ from django.db import models
 from django.db.models.signals import pre_save, post_save, post_delete
 from django.dispatch import receiver
 
+from django.urls import reverse
 from django.utils.html import mark_safe
 
 from ckeditor.fields import RichTextField
@@ -70,6 +71,9 @@ class ObjectCommercial(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('object:commercial-detail', kwargs={'slug': self.slug})
 
     class Meta:
         verbose_name = 'Коммерческий Объект'

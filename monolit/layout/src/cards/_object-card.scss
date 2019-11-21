@@ -391,7 +391,7 @@
         }
     }
 
-    // If no flats in Object
+    // If no sites in Object
     &.sold {
         .object-card__img {
             filter: grayscale(70%);
@@ -418,7 +418,7 @@
         .object-card__footer {
             grid-template-columns: 1fr;
 
-            &-btn--choose-flat {
+            &-btn--choose-site {
                 display: none;
             }
         }

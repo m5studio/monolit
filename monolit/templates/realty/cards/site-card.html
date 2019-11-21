@@ -19,21 +19,20 @@
             <div class="site-card__info">
                 <div class="site-card__label">{% if object.object.object_type %}{{ object.object.object_type }}{% endif %}</div>
                 {% if object.object.name %}
-                    <div class="site-card__val flat-object-name">{{ object.object.name }}</div>
+                    <div class="site-card__val site-object-name">{{ object.object.name }}</div>
                 {% endif %}
             </div>
         </div>
         <div class="site-card__footer--middle">
             <div class="site-card__info">
                 <div class="site-card__label">{{ object.display_name_card }}</div>
-                {# <!-- <div class="site-card__label">{% if object.rooms_qty %}{{ object.get_rooms_qty_display }}{% endif %}</div> --> #}
                 <div class="site-card__val">{% if object.site_area %}{{ object.site_area|floatformat:"-2" }} м<sup>2</sup>{% endif %}</div>
             </div>
             <div class="site-card__info">
                 <div class="site-card__label">Этаж</div>
                 <div class="site-card__val">
                     {% if object.floor %}
-                        <span class="flat-floor">{{ object.floor }}</span>
+                        <span class="site-floor">{{ object.floor }}</span>
                     {% endif %}
                     {% if object.object_section.floor_last %}
                         <span class="last-floor">/{{ object.object_section.floor_last }}</span>
@@ -41,17 +40,12 @@
                 </div>
             </div>
             <div class="site-card__info">
-                <!-- TODO: Check Sections -->
                 <div class="site-card__label">
-                    {% if object.object_section.object_block.name %}
-                        Блок
-                    {% endif %}
+                    {% if object.object_section.object_block.name %}Блок{% endif %}
                     {% if object.object_section.object_block.name and object.object_section.name %} / {% endif %}
-                    {% if object.object_section.name %}
-                        Секция
-                    {% endif %}
+                    {% if object.object_section.name %}Секция{% endif %}
                 </div>
-                <div class="site-card__val flat-block-and-secton">
+                <div class="site-card__val site-block-and-secton">
                     {% if object.object_section.object_block.name %}
                         {{ object.object_section.object_block.name }}
                     {% endif %}
@@ -65,7 +59,9 @@
         <div class="site-card__footer--bottom">
             <div class="site-card__info">
                 <div class="site-card__price-total">
-                    {% if object.price_total %}<span>{{ object.price_total|floatformat:"-2"|split_thousands }}</span><small> руб</small>{% endif %}
+                    {% if object.price_total %}
+                        <span>{{ object.price_total|floatformat:"-2"|split_thousands }}</span><small> руб</small>
+                    {% endif %}
                 </div>
                 <div class="site-card__price-per-meter">{% if object.price_per_square %}{{ object.price_per_square|floatformat:"-2"|split_thousands }} руб/м<sup>2</sup>{% endif %}</div>
             </div>

@@ -31,50 +31,50 @@ class ObjectSiteQuerySet(models.QuerySet):
     def get_all_active_sites_object(self, object_id):
         return self.active() & Q(object=object_id)
 
-    def get_object_flats_and_apartments(self, object_id):
-        return self.active() & self.get_all_active_sites_object(object_id) & Q(site_type__in=['flat', 'apartments'])
+    def get_object_sites_and_apartments(self, object_id):
+        return self.active() & self.get_all_active_sites_object(object_id) & Q(site_type__in=['site', 'apartments'])
 
     def object_sites_info_aggregated(self, object_id):
-        flats = self.get_object_flats_and_apartments(object_id)
+        sites = self.get_object_sites_and_apartments(object_id)
         return self.aggregate(
-            object_total_sites_qty=Count('id', filter=flats),
-            object_min_site_area=Min('site_area', filter=flats),
-            object_max_site_area=Max('site_area', filter=flats),
-            object_min_site_price=Min('price_total', filter=flats),
+            object_total_sites_qty=Count('id', filter=sites),
+            object_min_site_area=Min('site_area', filter=sites),
+            object_max_site_area=Max('site_area', filter=sites),
+            object_min_site_price=Min('price_total', filter=sites),
         )
 
-    def flats_info_aggregated(self, object_id, rooms_qty: int):
+    def sites_info_aggregated(self, object_id, rooms_qty: int):
         if rooms_qty < 4:
-            flats = self.get_object_flats_and_apartments(object_id) & Q(rooms_qty=rooms_qty)
+            sites = self.get_object_sites_and_apartments(object_id) & Q(rooms_qty=rooms_qty)
         if rooms_qty >= 4:
-            flats = self.get_object_flats_and_apartments(object_id) & Q(rooms_qty__in=[4, 5])
+            sites = self.get_object_sites_and_apartments(object_id) & Q(rooms_qty__in=[4, 5])
         return self.aggregate(
-            flats_qty=Count('id', filter=flats),
-            min_price=Min('price_total', filter=flats),
-            min_area=Min('site_area', filter=flats),
-            max_area=Max('site_area', filter=flats),
+            sites_qty=Count('id', filter=sites),
+            min_price=Min('price_total', filter=sites),
+            min_area=Min('site_area', filter=sites),
+            max_area=Max('site_area', filter=sites),
         )
 
     # ObjectSites rooms info
     def count_object_sites_site_area_min(self, rooms_qty:int, rooms_qty_query_type=None):
         if rooms_qty_query_type == 'gte':
-            return self.filter(active=True, rooms_qty__gte=rooms_qty, site_type__in=['flat', 'apartments']).aggregate(Min('site_area'))
+            return self.filter(active=True, rooms_qty__gte=rooms_qty, site_type__in=['site', 'apartments']).aggregate(Min('site_area'))
         if rooms_qty_query_type == None:
-            return self.filter(active=True, rooms_qty=rooms_qty, site_type__in=['flat', 'apartments']).aggregate(Min('site_area'))
+            return self.filter(active=True, rooms_qty=rooms_qty, site_type__in=['site', 'apartments']).aggregate(Min('site_area'))
 
 
     def count_object_sites_site_area_max(self, rooms_qty:int, rooms_qty_query_type=None):
         if rooms_qty_query_type == 'gte':
-            return self.filter(active=True, rooms_qty__gte=rooms_qty, site_type__in=['flat', 'apartments']).aggregate(Max('site_area'))
+            return self.filter(active=True, rooms_qty__gte=rooms_qty, site_type__in=['site', 'apartments']).aggregate(Max('site_area'))
         if rooms_qty_query_type == None:
-            return self.filter(active=True, rooms_qty=rooms_qty, site_type__in=['flat', 'apartments']).aggregate(Max('site_area'))
+            return self.filter(active=True, rooms_qty=rooms_qty, site_type__in=['site', 'apartments']).aggregate(Max('site_area'))
 
 
     def count_object_sites_price_total_min(self, rooms_qty:int, rooms_qty_query_type=None):
         if rooms_qty_query_type == 'gte':
-            return self.filter(active=True, rooms_qty__gte=rooms_qty, site_type__in=['flat', 'apartments']).aggregate(Min('price_total'))
+            return self.filter(active=True, rooms_qty__gte=rooms_qty, site_type__in=['site', 'apartments']).aggregate(Min('price_total'))
         if rooms_qty_query_type == None:
-            return self.filter(active=True, rooms_qty=rooms_qty, site_type__in=['flat', 'apartments']).aggregate(Min('price_total'))
+            return self.filter(active=True, rooms_qty=rooms_qty, site_type__in=['site', 'apartments']).aggregate(Min('price_total'))
     # END ObjectSites rooms info
 
 
@@ -85,7 +85,7 @@ def image_upload_path(instance, filename):
 
 class ObjectSite(models.Model):
     SITE_TYPES = (
-        ('flat', 'Квартира'),
+        ('site', 'Квартира'),
         ('apartments', 'Апартаменты'),
     )
 
@@ -183,7 +183,7 @@ class ObjectSite(models.Model):
     def display_name_card(self):
         site_type_name = ''
         # Квартира
-        if self.site_type == 'flat':
+        if self.site_type == 'site':
             site_type = 'квартира'
 
             if self.rooms_qty == '0':
@@ -222,7 +222,7 @@ class ObjectSite(models.Model):
     def display_name_full(self):
         site_type_name = ''
         # Квартира
-        if self.site_type == 'flat':
+        if self.site_type == 'site':
             site_type = 'квартира'
 
             if self.rooms_qty == '0':

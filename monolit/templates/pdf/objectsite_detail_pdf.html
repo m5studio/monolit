@@ -80,17 +80,15 @@
     </div>
 
     <div id="content_frame">
-        <div id="site_name">
-            {{ object.get_rooms_qty_display }} {{ object.get_site_type_display }} в {{ object.object.name }}, {{ object.object_section.name }}
-        </div>
+        <div id="site_name">{{ page_title }}</div>
         <div style="color: #777; margin-bottom: 15pt; text-align: center;">ID: {{ object.crm_id }}</div>
 
         <div id="image_planning">
             <img src="{{ object.image_planning.path }}" alt="">
         </div>
         <div id="site_params">
-            <div>Цена: {{ object.price_total|floatformat:"-2"|split_thousands }} руб.</div>
-            <div style="color: #777;">1м<sup>2</sup> = {{ object.price_per_square|floatformat:"-2"|split_thousands }} руб.</div>
+            <div>Общая стоимость: {{ object.price_total|floatformat:"-2"|split_thousands }} руб</div>
+            <div>Стоимость за м<sup>2</sup>: {{ object.price_per_square|floatformat:"-2"|split_thousands }} руб</div>
             <br>
             <div>Общая площадь: {{ object.site_area|floatformat:"-2" }} м<sup>2</sup></div>
             <div>Жилая площадь: {{ object.living_area|floatformat:"-2" }} м<sup>2</sup></div>
@@ -104,7 +102,7 @@
 
     <div id="footer_frame">
         <div>г. Симферополь, пр. Победы, 28а</div>
-        <div>8 (800) 302-88-08, +7(978) 088-78-58, +7(3652) 500-500</div>
+        <div>8 800 302-88-08, +7 978 088-78-58, +7 3652 500-500</div>
         <!-- Страница <pdf:pagenumber> из <pdf:pagecount> -->
     </div>
 

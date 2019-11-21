@@ -19,6 +19,9 @@ from apps.realty.models.object_site_bathroom import ObjectBathroom
 from apps.realty.models.object_site_balcony import ObjectBalcony
 from apps.realty.models.object_elevator import ObjectElevator
 
+from apps.realty.models.object_commercial import ObjectCommercial
+from apps.realty.models.object_commercial_site import ObjectCommercialSite
+
 from apps.news.models.news import News
 from apps.mortgage.models import Offer
 
@@ -43,11 +46,7 @@ class ObjectDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['opts'] = Object._meta
         context['page_title'] = f'{self.get_object().name}'
-
-        # if self.get_object().object_type:
-        #     context['page_title'] = f'{self.get_object().get_object_type_display()} {self.get_object().name}'
         # context['page_meta_description'] = 'my custom meta'
-
         context['object_info_tabs'] = ObjectInfoTab.objects.filter(object_id=self.get_object().pk)
         context['object_files'] = ObjectFile.objects.filter(object_id=self.get_object().pk)
         context['object_galleries'] = ObjectGallery.objects.filter(object=self.get_object().pk).order_by('-order')
@@ -83,7 +82,7 @@ class ObjectSiteListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['page_title'] = 'Выбор квартир'
+        context['page_title'] = 'Выбор жилой недвижимости'
         return context
 
 
@@ -97,9 +96,9 @@ class ObjectSiteDetailView(DetailView):
 
         context['page_title'] = self.get_object().display_name_full()
         # TODO: make more complicated and detailed query selection
-        other_flats_query = ObjectSite.objects.filter(active=True, object=self.get_object().object.pk, rooms_qty=self.get_object().rooms_qty).exclude(id=self.get_object().pk)
-        context['simular_flats'] = other_flats_query.order_by('?')[:3]
-        context['simular_flats_count'] = other_flats_query.count()
+        other_sites_query = ObjectSite.objects.filter(active=True, object=self.get_object().object.pk, rooms_qty=self.get_object().rooms_qty).exclude(id=self.get_object().pk)
+        context['simular_sites'] = other_sites_query.order_by('?')[:3]
+        context['simular_sites_count'] = other_sites_query.count()
 
         context['bathrooms'] = ObjectBathroom.objects.filter(object_site=self.get_object().pk)
         context['balconies'] = ObjectBalcony.objects.filter(object_site=self.get_object().pk)
@@ -126,9 +125,35 @@ class ObjectSiteDetailViewPDF(View):
         path_to_monolit_logo = os.path.join(path_to_images_dir, 'monolit-logo-text.png')
 
         context = {
+            'page_title': object.display_name_full(),
             'font_path': path_to_font,
             'monolit_logo': path_to_monolit_logo,
             'object': object,
-            'request': request
+            'request': request,
         }
         return RenderToPDF.render('pdf/objectsite_detail_pdf.html', context, filename)
+
+
+class ObjectCommercialListView(ListView):
+    model = ObjectCommercial
+    queryset = ObjectCommercial.objects.filter(active=True, all_sold=False).order_by('order')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page_title'] = 'Коммерческие Объекты'
+        return context
+
+
+class ObjectCommercialDetailView(DetailView):
+    model = ObjectCommercial
+    queryset = ObjectCommercial.objects.filter(active=True)
+
+
+# TODO: ObjectCommercialSiteListView
+class ObjectCommercialSiteListView(ListView):
+    pass
+
+
+# TODO: ObjectCommercialSiteDetailView
+class ObjectCommercialSiteDetailView(DetailView):
+    pass
