@@ -56,7 +56,7 @@
 
     <div id="content">
         {% if request.user.is_superuser and opts %}
-            <a class="edit-link" style="position: absolute; right: 15px; z-index: 10;" href="{% url opts|admin_urlname:'change' object.id %}" target="_blank">Edit</a>
+            <a class="edit-link" href="{% url opts|admin_urlname:'change' object.id %}" target="_blank">Edit</a>
         {% endif %}
         {% block content %}{% endblock %}
     </div>

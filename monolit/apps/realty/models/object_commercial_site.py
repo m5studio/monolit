@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Q, Count, Min, Max
 
 from django.urls import reverse
 from django.utils.html import mark_safe
@@ -18,6 +19,26 @@ from apps.core.classes.file_processing import FileProcessing
 from apps.core.classes.image_optimizer import ImageOptimizer
 
 
+class ObjectCommercialSiteQuerySet(models.QuerySet):
+    def active(self):
+        return Q(active=True)
+
+    def get_all_active_sites_object(self, object_commercial_id):
+        return self.active() & Q(object_commercial=object_commercial_id)
+
+    def get_object_sites(self, object_commercial_id):
+        return self.active() & self.get_all_active_sites_object(object_commercial_id)
+
+    def object_sites_info_aggregated(self, object_commercial_id):
+        sites = self.get_object_sites(object_commercial_id)
+        return self.aggregate(
+            object_total_sites_qty=Count('id', filter=sites),
+            object_min_site_area=Min('site_area', filter=sites),
+            object_max_site_area=Max('site_area', filter=sites),
+            object_min_site_price=Min('price_total', filter=sites),
+        )
+
+
 def image_upload_path(instance, filename):
     filename = FileProcessing(filename)
     filename = filename.newFileNameGenerated()
@@ -28,6 +49,9 @@ class ObjectCommercialSite(models.Model):
         ('office', 'Офис'),
         ('free-use', 'Помещение свободного назначения'),
     )
+
+    # QuerySet
+    objects = ObjectCommercialSiteQuerySet.as_manager()
 
     active            = models.BooleanField('Активный', default=True, help_text='Опубликован на сайте')
     special_offer     = models.BooleanField('Спецпредложение', default=False)

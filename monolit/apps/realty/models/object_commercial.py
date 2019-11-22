@@ -79,6 +79,9 @@ class ObjectCommercial(models.Model):
         verbose_name = 'Коммерческий Объект'
         verbose_name_plural = '2. Коммерческие Объекты'
 
+    def display_name(self):
+        return f'{self.object_type} {self.name}'
+
 
 @receiver(post_save, sender=ObjectCommercial)
 def images_optimization(sender, instance, created, **kwargs):

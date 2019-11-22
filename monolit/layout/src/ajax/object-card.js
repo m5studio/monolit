@@ -4,7 +4,7 @@ import {formatNumber} from "../modules/format-number"
 
 function objectCardSitesInfo() {
     $('.object-card').each((index, el) => {
-        let site_info_url = $(el).data('sites-info-url')
+        let site_info_url = $(el).data('sites-info-api-url')
         let sites_url = $(el).data('sites-url')
 
         $.getJSON(site_info_url, (data) => {

@@ -1,5 +1,5 @@
 {% if not object.all_sold %}
-    <div class="object-card" data-sites-info-url="{% url 'api:object-sites-info' object_id=object.id %}" data-sites-url="{% url 'object:site-list' %}">
+    <div class="object-card" data-sites-info-api-url="{% url 'api:object-sites-info' object_id=object.id %}" data-sites-url="{% url 'object:site-list' %}">
 {% else %}
     <div class="object-card sold">
 {% endif %}

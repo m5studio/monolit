@@ -74,6 +74,12 @@ $(document).ready(function() {
     }
     // END Object page
 
+    // ObjectCommercial page
+    if ( $('.commercial-page').length ) {
+        objectPageSitesInfo()
+    }
+    // END ObjectCommercial page
+
     // News page
     if ( $('.news').length ) {
         newsPageLoadMoreNews()

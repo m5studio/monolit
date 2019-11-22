@@ -82,6 +82,9 @@ class Object(models.Model):
         verbose_name = 'Жилой Объект'
         verbose_name_plural = '1. Жилые Объекты'
 
+    def display_name(self):
+        return f'{self.object_type} {self.name}'
+
 
 @receiver(post_save, sender=Object)
 def images_optimization(sender, instance, created, **kwargs):

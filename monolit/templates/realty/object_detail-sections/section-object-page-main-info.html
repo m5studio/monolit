@@ -1,6 +1,6 @@
 {% if object.name %}
     {% spaceless %}
-    <section id="section-object-page-main-info"{% if not object.all_sold %} data-sites-info-url="{% url 'api:object-sites-info' object_id=object.id %}"{% else %} class="sold"{% endif %} style="background-image: url('{% spaceless %}
+    <section id="section-object-page-main-info"{% if not object.all_sold %} data-sites-info-api-url="{% url 'api:object-sites-info' object_id=object.id %}"{% else %} class="sold"{% endif %} style="background-image: url('{% spaceless %}
             {% if object.main_image %}
                 {{ object.main_image.url }}
             {% else %}

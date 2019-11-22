@@ -2,8 +2,8 @@ import {formatNumber, formatNumberText} from "../modules/format-number"
 
 
 function objectPageSitesInfo() {
-    if ( $('#section-object-page-main-info').data('sites-info-url') ) {
-        const site_info_url = $('#section-object-page-main-info').data('sites-info-url')
+    if ( $('#section-object-page-main-info').data('sites-info-api-url') ) {
+        const site_info_url = $('#section-object-page-main-info').data('sites-info-api-url')
 
         $.getJSON(site_info_url, (data) => {
             const objectStats = data[0]
@@ -21,8 +21,8 @@ function objectPageSitesInfo() {
 
 
 function objectPageFlatsTypes() {
-    if ( $('#section-object-page-main-info').data('sites-info-url') ) {
-        const site_info_url = $('#section-object-page-main-info').data('sites-info-url')
+    if ( $('#section-object-page-main-info').data('sites-info-api-url') ) {
+        const site_info_url = $('#section-object-page-main-info').data('sites-info-api-url')
         const sectionFlatsType = $('#section-sites-types')
 
         $.getJSON(site_info_url, (data) => {

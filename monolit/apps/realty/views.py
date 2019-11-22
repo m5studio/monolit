@@ -45,7 +45,7 @@ class ObjectDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['opts'] = Object._meta
-        context['page_title'] = f'{self.get_object().name}'
+        context['page_title'] = f'{self.get_object().display_name()}'
         # context['page_meta_description'] = 'my custom meta'
         context['object_info_tabs'] = ObjectInfoTab.objects.filter(object_id=self.get_object().pk)
         context['object_files'] = ObjectFile.objects.filter(object_id=self.get_object().pk)
@@ -147,6 +147,12 @@ class ObjectCommercialListView(ListView):
 class ObjectCommercialDetailView(DetailView):
     model = ObjectCommercial
     queryset = ObjectCommercial.objects.filter(active=True)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['opts'] = Object._meta
+        context['page_title'] = f'{self.get_object().display_name()}'
+        return context
 
 
 # TODO: ObjectCommercialSiteListView
