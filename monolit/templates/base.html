@@ -29,7 +29,8 @@
     {% include 'includes/seo/og-tags.html' %}{% endspaceless %}
 {% block css %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <link rel="stylesheet" href="{% static 'css/1.styles.css' %}">{% endblock %}
+    <link rel="stylesheet" href="{% static 'css/1.styles.css' %}">
+{% endblock %}
 </head>
 <body class="{% block body_classes %}{% if request.path != '/' %}not-homepage{% endif %}{% endblock %}">
 {% spaceless %}
