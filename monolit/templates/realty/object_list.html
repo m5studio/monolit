@@ -24,40 +24,38 @@
             <h1>{{ page_title }}</h1>
         </div>
 
-        <section id="section-objects-list" class="common-section">
-            <div class="common-section__title container">
-                {% if objects_qty %}
-                    <h2>{{ objects_qty }} объект{% if objects_qty >= 2 and objects_qty <= 4 %}а{% elif objects_qty >= 5 and objects_qty <= 20 %}ов{% endif %} в продаже</h2>
-                {% endif %}
-                <span class="common-section__title--right">
-                    <a href="#compleated-projects" class="scale-line">Реализованные объекты</a>
-                </span>
-            </div>
-            <div id="section-objects-list__inner" class="container">
-                {% if object_list %}
+        {% if object_list %}
+            <section id="section-objects-list" class="common-section">
+                <div class="common-section__title container">
+                    {% if objects_qty %}
+                        <h2>{{ objects_qty }} объект{% if objects_qty >= 2 and objects_qty <= 4 %}а{% elif objects_qty >= 5 and objects_qty <= 20 %}ов{% endif %} в продаже</h2>
+                    {% endif %}
+                    <span class="common-section__title--right">
+                        <a href="#compleated-projects" class="scale-line">Реализованные объекты</a>
+                    </span>
+                </div>
+                <div id="section-objects-list__inner" class="container">
                     {% for object in object_list %}
                         {% include 'realty/cards/object-card.html' %}
                     {% endfor %}
-                {% endif %}
-            </div>
-            {% comment %}
-            <!-- <div class="objects-list-separator container">
-                <hr>
-            </div> -->
-            {% endcomment %}
-            <div id="compleated-projects" style="padding-top: 90px;"></div>
+                </div>
+            </section>
+        {% endif %}
+    </main>
+
+    {% if objects_sold %}
+        <div id="compleated-projects" style="padding-top: 90px;"></div>
+        <div class="common-section">
             <div class="common-section__title container">
-                <div class="h2">Реализованные объекты</div>
+                <div class="h2">Завершенные объекты</div>
             </div>
             <div class="objects-list-inner container">
-                {% if objects_sold %}
-                    {% for object in objects_sold %}
-                        {% include 'realty/cards/object-card.html' %}
-                    {% endfor %}
-                {% endif %}
+                {% for object in objects_sold %}
+                    {% include 'realty/cards/object-card.html' %}
+                {% endfor %}
             </div>
-        </section>
-    </main>
+        </div>
+    {% endif %}
 
     <div id="section-compleated-projects" class="container">
         <div id="section-compleated-projects__inner">

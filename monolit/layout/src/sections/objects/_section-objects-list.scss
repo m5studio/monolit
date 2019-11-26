@@ -18,18 +18,13 @@
         }
     }
 
-    .objects-list-inner {
-        @extend #section-objects-list__inner;
-    }
-
-    .objects-list-separator {
-        margin-top: 50px;
-        margin-bottom: 50px;
-    }
-
     &__see-all {
         display: flex;
         justify-content: center;
         margin-top: 30px;
     }
+}
+
+.objects-list-inner {
+    @extend #section-objects-list__inner;
 }

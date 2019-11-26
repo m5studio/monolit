@@ -32,7 +32,7 @@ class ObjectListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['page_title'] = 'Объекты'
+        context['page_title'] = 'Жилые объекты'
         context['objects_qty'] = Object.objects.filter(active=True, all_sold=False).count()
         context['objects_sold'] = Object.objects.filter(active=True, all_sold=True).order_by('order')
         return context
@@ -93,19 +93,15 @@ class ObjectSiteDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['opts'] = ObjectSite._meta
-
         context['page_title'] = self.get_object().display_name_full()
         # TODO: make more complicated and detailed query selection
         other_sites_query = ObjectSite.objects.filter(active=True, object=self.get_object().object.pk, rooms_qty=self.get_object().rooms_qty).exclude(id=self.get_object().pk)
         context['simular_sites'] = other_sites_query.order_by('?')[:3]
         context['simular_sites_count'] = other_sites_query.count()
-
         context['bathrooms'] = ObjectBathroom.objects.filter(object_site=self.get_object().pk)
         context['balconies'] = ObjectBalcony.objects.filter(object_site=self.get_object().pk)
-
         if self.get_object().object_section is not None:
             context['elevators'] = ObjectElevator.objects.filter(object_section=self.get_object().object_section.pk)
-
         context['mortgage_offers'] = Offer.objects.filter(object=self.get_object().object.pk).order_by('rate_from')
         return context
 
@@ -141,6 +137,8 @@ class ObjectCommercialListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['page_title'] = 'Коммерческие Объекты'
+        context['objects_commercial_qty'] = ObjectCommercial.objects.filter(active=True, all_sold=False).count()
+        context['objects_commercial_sold'] = ObjectCommercial.objects.filter(active=True, all_sold=True).order_by('order')
         return context
 
 
@@ -150,16 +148,28 @@ class ObjectCommercialDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['opts'] = Object._meta
+        context['opts'] = ObjectCommercial._meta
         context['page_title'] = f'{self.get_object().display_name()}'
         return context
 
 
-# TODO: ObjectCommercialSiteListView
 class ObjectCommercialSiteListView(ListView):
-    pass
+    model = ObjectCommercialSite
+    queryset = ObjectCommercialSite.objects.filter(active=True)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page_title'] = 'Выбор коммерческой недвижимости'
+        return context
 
 
 # TODO: ObjectCommercialSiteDetailView
 class ObjectCommercialSiteDetailView(DetailView):
-    pass
+    model = ObjectCommercialSite
+    queryset = ObjectCommercialSite.objects.filter(active=True)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['opts'] = ObjectCommercialSite._meta
+        context['page_title'] = self.get_object().display_name_full()
+        return context

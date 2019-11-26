@@ -10,13 +10,12 @@
                 {% else %}
                     https://via.placeholder.com/512x386/EEEEEE/555555?text=No+Image
                 {% endif %}{% endspaceless %}')"></div>
-
             <div class="object-card__header-info">
                 {% if object.object_type %}
                     <div class="object-card__living-quarter">{{ object.object_type }}</div>
                 {% endif %}
                 {% if object.city %}
-                    <div class="object-card__city">{{ object.get_city_display }}</div>
+                    <div class="object-card__city">{{ object.city }}</div>
                 {% endif %}
                 {% if object.completed %}
                     <div class="object-card__put-into-operation">Сдан в эксплуатацию</div>
@@ -35,8 +34,7 @@
                 </div>
             </div>
             <div class="object-card__features">
-                {# all stuff in \layout\src\ajax\object-card.js #}
-
+                {# <!-- README: all stuff in \layout\src\ajax\object-card.js --> #}
                 {% if object.all_sold %}
                     <span>нет в продаже</span>
                 {% endif %}

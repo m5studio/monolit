@@ -3,7 +3,7 @@
 {% load custom_filters %}
 
 {% block body_classes %}{% spaceless %}
-    {{ block.super }} site-page
+    {{ block.super }} site-commercial-page
 {% endspaceless %}{% endblock %}
 
 
@@ -15,10 +15,10 @@
                     <a href="{% url 'homepage' %}">Главная</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="{% url 'object:site-list' %}">Выбор жилой недвижимости</a>
+                    <a href="{% url 'object:site-list' %}">Выбор коммерческой недвижимости</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="{% url 'object:detail' slug=object.object.slug %}">{{ object.object.name }}</a>
+                    <a href="{% url 'object:commercial-detail' slug=object.object_commercial.slug %}">{{ object.object_commercial.name }}</a>
                 </li>
                 <li class="breadcrumb-item">{{ page_title }}</li>
             </ol>
@@ -227,7 +227,7 @@
                     <div id="site-actions__actions-panel" class="site-actions-block--flex-end">
                         <ul>
                             <li>
-                                {% include "favorites/includes/add_to_favorites.html" with type="object_site" id=object.id icon_size=32 %}
+                                {% include "favorites/includes/add_to_favorites.html" with type="object_commercial_site" id=object.id icon_size=32 %}
                             </li>
                             <li>
                                 <a href="{% url 'object:site-detail-pdf' pk=object.id %}" target="_blank" title="Откроется в новой вкладке"><span class="icon icon-32 icon-print-solid-green"></span> Распечатать в PDF</a>
@@ -244,8 +244,7 @@
         <div id="section-site-page-map__holder" class="site-page-section__content"></div>
     </div>
 
-    {% include 'realty/objectsite_detail-sections/section-site-page-mortgage.html' %}
-
-    {% include 'realty/objectsite_detail-sections/section-site-page-simular-sites.html' %}
+    <!-- TODO: simular commecial sites -->
+    {# include 'realty/objectsite_detail-sections/section-site-page-simular-sites.html' #}
 
 {% endblock %}

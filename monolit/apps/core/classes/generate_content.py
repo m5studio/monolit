@@ -52,10 +52,10 @@ class GenerateContent:
         return random.choice(list)
 
     def _get_objects_ids_list(self, object_name) -> list:
-        return list(object_name.objects.order_by('id').values_list('id', site=True))
+        return list(object_name.objects.order_by('id').values_list('id', flat=True))
 
     def _get_tenders_ids_list(self) -> list:
-        return list(Tender.objects.order_by('id').values_list('id', site=True))
+        return list(Tender.objects.order_by('id').values_list('id', flat=True))
 
     def convert_tuple_to_site_list(self, tuple):
         return [x[0] for x in tuple]
@@ -236,7 +236,7 @@ class GenerateContent:
         print(f'[News] created {news.title}')
 
         news.object.set([ self.get_random_list_item(self._get_objects_ids_list(Object)) ])
-        news_categories_list = list(NewsCategory.objects.values_list('id', site=True))
+        news_categories_list = list(NewsCategory.objects.values_list('id', flat=True))
         news.category.set([ self.get_random_list_item(news_categories_list) ])
 
         self._create_NewsImage(news.id)
@@ -280,7 +280,7 @@ class GenerateContent:
         price_per_square_list = list(range(32000, 79000))
         site_area_list = list(range(57, 119))
 
-        sections_rel_to_object_ids_list = list(ObjectSection.objects.filter(object_commercial=object_commercial_id).values_list('id', site=True))
+        sections_rel_to_object_ids_list = list(ObjectSection.objects.filter(object_commercial=object_commercial_id).values_list('id', flat=True))
 
         sites_qty_list = [15, 105, 39]
         qty = self.get_random_list_item(sites_qty_list)
@@ -356,7 +356,7 @@ class GenerateContent:
         site_area_list = list(range(57, 119))
         kitchen_area_list = list(range(10, 15))
 
-        sections_rel_to_object_ids_list = list(ObjectSection.objects.filter(object=object).values_list('id', site=True))
+        sections_rel_to_object_ids_list = list(ObjectSection.objects.filter(object=object).values_list('id', flat=True))
 
         # sites_qty_list = list(range(51, 126))
         sites_qty_list = [15, 105, 51, 116, 39]
@@ -396,7 +396,7 @@ class GenerateContent:
                 object_site.save()
 
                 # Set ObjectSiteWindowsView
-                windows_view_list = list(ObjectSiteWindowsView.objects.values_list('id', site=True))
+                windows_view_list = list(ObjectSiteWindowsView.objects.values_list('id', flat=True))
                 object_site.window_view.set([self.get_random_list_item(windows_view_list), self.get_random_list_item(windows_view_list)])
 
                 print(f'[ObjectSite] {object_site.crm_id} created for Object {object_id}')
@@ -417,7 +417,7 @@ class GenerateContent:
 
     """ [Mortgage] """
     def _create_Offer(self):
-        banks_ids = list(Bank.objects.order_by('id').values_list('id', site=True))
+        banks_ids = list(Bank.objects.order_by('id').values_list('id', flat=True))
         bank = Bank.objects.get(pk=self.get_random_list_item(banks_ids))
 
         first_payment_from_list = [15, 20]
@@ -552,7 +552,7 @@ class GenerateContent:
         count_sections_rel_to_object = ObjectSection.objects.annotate(Count('object')).filter(object=object_id).count()
 
         if count_sections_rel_to_object == 0:
-            object_blocks_ids = ObjectBlock.objects.filter(object=object_id).values_list('id', site=True)
+            object_blocks_ids = ObjectBlock.objects.filter(object=object_id).values_list('id', flat=True)
             i = 1
             for object_block_id in object_blocks_ids:
                 object = Object.objects.get(pk=object_id)
@@ -574,7 +574,7 @@ class GenerateContent:
         count_sections_rel_to_object_commercial = ObjectSection.objects.annotate(Count('object_commercial')).filter(object_commercial=object_commercial_id).count()
 
         if count_sections_rel_to_object_commercial == 0:
-            object_commercial_blocks_ids = ObjectBlock.objects.filter(object_commercial=object_commercial_id).values_list('id', site=True)
+            object_commercial_blocks_ids = ObjectBlock.objects.filter(object_commercial=object_commercial_id).values_list('id', flat=True)
             i = 1
             for object_commercial_block_id in object_commercial_blocks_ids:
                 object_commercial = ObjectCommercial.objects.get(pk=object_commercial_id)

@@ -270,7 +270,7 @@ class ObjectSiteAdmin(TurnOffAdminLogging, admin.ModelAdmin):
             'fields': ('price_per_square', 'price_total')
         }),
         ('Изображения', {
-           'fields': (
+            'fields': (
                 ('image_planning_thumb', 'image_planning'),
                 ('image_planning3d_thumb', 'image_planning3d'),
                 ('image_floor_thumb', 'image_floor'),

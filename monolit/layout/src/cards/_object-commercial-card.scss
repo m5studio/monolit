@@ -1,4 +1,4 @@
-.commercial-object-card {
+.object-commercial-card {
     background-color: white;
     box-shadow: 0 4px 4px rgba(0,0,0,.15);
     min-height: 380px;
@@ -9,7 +9,7 @@
         width: 80%;
         justify-self: center;
 
-        .commercial-object-card__city {
+        .object-commercial-card__city {
             width: 47%;
         }
     }
@@ -159,10 +159,44 @@
     }
 
     &:hover {
-        transform: translate3d(0,-4px,0);
+        transform: translate3d(0, -4px, 0);
 
-        .commercial-object-card__footer--btn {
+        .object-commercial-card__footer--btn {
             background-color: #00998f;
+        }
+    }
+
+    &.sold {
+        min-height: 512px;
+
+        .object-commercial-card__img {
+            filter: grayscale(70%);
+            opacity: .85;
+            transition: all ease-in-out .3s;
+        }
+
+        .object-commercial-card__all-sold {
+            border-top: 1px solid #eaeaea;
+            border-bottom: 1px solid #eaeaea;
+            cursor: default;
+
+            display: grid;
+            grid-template-columns: 1fr;
+            align-items: center;
+
+            font-size: .9rem;
+            text-align: center;
+            min-height: 72px;
+
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        &:hover {
+            .object-commercial-card__img {
+                filter: grayscale(0);
+                opacity: 1;
+            }
         }
     }
 }

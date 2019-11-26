@@ -14,13 +14,12 @@
 
                 #download-commercial-catalog {
                     background-image: linear-gradient(-45deg, #18a29b, #1cc3ba);
-                    margin-top: 30px;
                     width: fit-content;
                     max-width: 420px;
 
                     @include media-breakpoint-only(xl) {
                         position: absolute;
-                        top: 15%;
+                        top: 60px;
                         right: 0;
                     }
                     @include media-breakpoint-down(lg) {

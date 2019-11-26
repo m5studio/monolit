@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 
 from apps.realty.models.object_site import ObjectSite
+from apps.realty.models.object_commercial_site import ObjectCommercialSite
 
 
 def favorites_list(request):
@@ -13,6 +14,8 @@ def favorites_list(request):
             id = int(favorite['id'])
             if type == 'object_site':
                 object_list.append(ObjectSite.objects.get(id=id))
+            if type == 'object_commercial_site':
+                object_list.append(ObjectCommercialSite.objects.get(id=id))
     context = {
         'page_title': 'Избранное',
         'object_list': object_list,

@@ -36,7 +36,7 @@ $(document).ready(function() {
     csrf()
 
     // Favorites
-    if ( $('.sites').length || $('.site-page').length || $('.favorites-page').length || $('.object-page').length ) {
+    if ( $('.sites').length || $('.site-page').length || $('.favorites-page').length || $('.object-page').length || $('.sites-commercial-page').length ) {
         favorites()
     }
 

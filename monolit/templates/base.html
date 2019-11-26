@@ -39,8 +39,9 @@
             <div id="header__top--inner" class="container">
                 <div id="ht-left">
                     {% url 'object:site-list' as objects_site_list_url %}
+                    {% url 'object:site-commercial-list' as objects_site_commercial_list_url %}
                     <a href="{{ objects_site_list_url }}" class="link-green{% if objects_site_list_url == request.path or objects_site_list_url in request.path %} active{% endif %}">Жилая недвижимость</a>
-                    <a href="" class="link-green">Коммерческая недвижимость</a>
+                    <a href="{{ objects_site_commercial_list_url }}" class="link-green{% if objects_site_commercial_list_url == request.path or objects_site_commercial_list_url in request.path %} active{% endif %}">Коммерческая недвижимость</a>
                 </div>
                 <div class="ht-empty"></div>
                 <div id="ht-contacts">

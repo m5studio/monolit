@@ -212,7 +212,5 @@ CKEDITOR_CONFIGS = {
 }
 
 
-# README https://github.com/caioariede/django-location-field
-
 # https://github.com/matthewwithanm/django-imagekit
 IMAGEKIT_CACHEFILE_DIR = 'cache-images'

@@ -1,19 +1,21 @@
 {% extends 'base.html' %}
 
+
 {% block body_classes %}{% spaceless %}
     {{ block.super }} commercial-page
 {% endspaceless %}{% endblock %}
 
+
 {% block content %}
     <main id="main">
-        <!-- <section id="section-object-page-main-info" style="background-image: url('http://monolit.site/media/CACHE/images/2018/03/13/overall_view_03_UmIdFtq/9c628137b9b2805221f8461970147b60.jpg');"> -->
+        {# <!-- <section id="section-object-page-main-info" style="background-image: url('http://monolit.site/media/CACHE/images/2018/03/13/overall_view_03_UmIdFtq/9c628137b9b2805221f8461970147b60.jpg');"> --> #}
         {% spaceless %}
         <section id="section-object-page-main-info"{% if not object.all_sold %} data-sites-info-api-url="{% url 'api:object-commercial-sites-info' object_commercial_id=object.id %}"{% else %} class="sold"{% endif %} style="background-image: url('{% spaceless %}
-                {% if object.main_image %}
-                    {{ object.main_image.url }}
-                {% else %}
-                    https://via.placeholder.com/1920x1080/EEEEEE/555555?text=No+Image
-                {% endif %}{% endspaceless %}');">
+            {% if object.main_image %}
+                {{ object.main_image.url }}
+            {% else %}
+                https://via.placeholder.com/1920x1080/EEEEEE/555555?text=No+Image
+            {% endif %}{% endspaceless %}');">
         {% endspaceless %}
 
             {% if not object.all_sold %}
@@ -50,7 +52,7 @@
             <div id="section-sites-types__inner" class="container">
                 <div id="section-sites-types__bottom">
                     <div id="commercial-qty-block">
-                        <div id="commercial-qty-block__number">17</div>
+                        <div id="commercial-qty-block__number"></div>
                         <div id="commercial-qty-block__text">помещений в продаже</div>
                     </div>
                     <div id="commercial-text-block">Возможно объединение помещений<br>Подробности по телефону</div>

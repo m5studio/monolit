@@ -40,7 +40,8 @@ def api_object_sites_info(request, object_id):
                                 mergeTwoDicts({'name': '3',  'rooms': 3}, room_3),
                                 mergeTwoDicts({'name': '4+', 'rooms': 4}, room_4),
                             ]
-                        }])
+                        }
+                    ])
     return JsonResponse(sites_info, safe=False)
 
 # API for ObjectSite
@@ -56,11 +57,12 @@ def api_object_commercial_sites_info(request, object_commercial_id):
 
     sites_commercial_info = list()
     sites_commercial_info.extend([object_commercial_sites_info,
-                                    {'sites_info': [
-                                            'TODO',
-                                            'TODO',
-                                        ]
-                                    }])
+                                    # {'sites_info': [
+                                    #         'TODO',
+                                    #         'TODO',
+                                    #     ]
+                                    # }
+                                ])
     return JsonResponse(sites_commercial_info, safe=False)
 
 # API for ObjectGallery

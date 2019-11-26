@@ -14,6 +14,11 @@ function objectPageSitesInfo() {
                 $('.obj-area-min').append( '<small>от</small> ' + formatNumber(objectStats['object_min_site_area'], 2) )
                 $('.obj-area-max').append( ' <small>до</small> ' + formatNumber(objectStats['object_max_site_area'], 2) + ' <small>м<sup>2</sup></small>' )
                 $('.obj-min-price').append( '<small>от</small> ' + formatNumber(objectStats['object_min_site_price'], 0) + ' <small>руб.</small>' )
+
+                // Show objects qty in commercial object page
+                if ( $('.commercial-page').length ) {
+                    $('#commercial-qty-block__number').html(objectStats['object_total_sites_qty'])
+                }
             }
         })
     }
@@ -34,7 +39,6 @@ function objectPageFlatsTypes() {
 
                 if ( el['sites_qty'] > 0 ) {
                     site_card.addClass('active')
-
                     site_card.find('.site-type-card__info--area').append( 'от ' + formatNumber(el['min_area'], 1) + '<br>до ' + formatNumber(el['max_area'], 1) + ' м<sup>2</sup>' )
                     site_card.find('.site-type-card__info--price').append('от ' + formatNumberText(el['min_price']) + ' руб.' )
                 }

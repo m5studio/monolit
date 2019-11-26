@@ -48,6 +48,8 @@ class ObjectCommercialSite(models.Model):
     SITE_TYPES = (
         ('office', 'Офис'),
         ('free-use', 'Помещение свободного назначения'),
+        ('parking', 'Паркоместо'),
+        ('storage', 'Кладовая'),
     )
 
     # QuerySet
@@ -93,6 +95,17 @@ class ObjectCommercialSite(models.Model):
     class Meta:
         verbose_name = 'Коммерческое помещение'
         verbose_name_plural = '2.1 Коммерческие Помещения (Офисы, Cвободного назначения)'
+
+    def display_name_card(self):
+        site_type_name = ''
+        if self.site_type == 'free-use':
+            site_type_name = 'Помещение'
+        else:
+            site_type_name = self.get_site_type_display()
+        return f'{site_type_name}'
+
+    def display_name_full(self):
+        return f'{self.display_name_card()} на {self.floor} этаже в {self.object_commercial.object_type} {self.object_commercial.name}'
 
 
 @receiver(pre_save, sender=ObjectCommercialSite)
