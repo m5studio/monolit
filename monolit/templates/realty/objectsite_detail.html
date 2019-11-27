@@ -17,10 +17,9 @@
                 <li class="breadcrumb-item">
                     <a href="{% url 'object:site-list' %}">Выбор жилой недвижимости</a>
                 </li>
-                <li class="breadcrumb-item">
+                <li class="breadcrumb-item active">
                     <a href="{% url 'object:detail' slug=object.object.slug %}">{{ object.object.name }}</a>
                 </li>
-                <li class="breadcrumb-item">{{ page_title }}</li>
             </ol>
         </div>
     </nav>
@@ -109,7 +108,8 @@
                     {% endif %}
                     {% if object.ceiling_height %}
                         <div class="site-params-block">
-                            <div class="site-params-block__name">Выстота потолка</div>
+                            <div class="site-params-block__name">Высота потолка</div>
+                            {# <!-- TODO: remove trailing zeroes e.g: 2.70 to 2.7 --> #}
                             <div class="site-params-block__val">{{ object.ceiling_height|floatformat:"-2" }} м</div>
                         </div>
                     {% endif %}
@@ -210,11 +210,12 @@
                 {% if object.price_per_square and object.price_total %}
                     <div id="site-price" class="site-content-block--flex">
                         <div id="site-price__per-meter" class="site-price-block">
-                            <div class="site-price-block__name">Стоимость кв. метра</div>
+                            <div class="site-price-block__name">Стоимость м<sup>2</sup></div>
                             <div class="site-price-block__val">{{ object.price_per_square|floatformat:"-2"|split_thousands }} руб/м<sup>2</sup></div>
                         </div>
                         <div id="site-price__total" class="site-price-block">
-                            <div class="site-price-block__name">Стоимость квартиры</div>
+                            <!-- TODO:  -->
+                            <div class="site-price-block__name">Стоимость {{ object.get_site_type_display|lower }}</div>
                             <div class="site-price-block__val">{{ object.price_total|floatformat:"-2"|split_thousands }} руб</div>
                         </div>
                     </div>

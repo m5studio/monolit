@@ -16,7 +16,7 @@ function objectPageSitesInfo() {
                 $('.obj-min-price').append( '<small>от</small> ' + formatNumber(objectStats['object_min_site_price'], 0) + ' <small>руб.</small>' )
 
                 // Show objects qty in commercial object page
-                if ( $('.commercial-page').length ) {
+                if ( $('.commercial-object-page').length ) {
                     $('#commercial-qty-block__number').html(objectStats['object_total_sites_qty'])
                 }
             }

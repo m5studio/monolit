@@ -222,7 +222,8 @@ class ObjectBuildingTypesAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.Mo
 
 """ [ ObjectTypesAdmin ] """
 @admin.register(ObjectTypes)
-class ObjectTypesAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.ModelAdmin):
+# class ObjectTypesAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.ModelAdmin):
+class ObjectTypesAdmin(TurnOffAdminLogging, admin.ModelAdmin):
     pass
     # search_fields = ['name']
 """ [ END ObjectTypesAdmin ] """
@@ -362,6 +363,9 @@ class ObjectCommercialSiteAdmin(TurnOffAdminLogging, admin.ModelAdmin):
             )
         }),
     )
+    list_display = ('crm_id', 'object_commercial', 'site_type', 'site_area', 'active', 'special_offer', 'updated')
+    list_editable = ('active', 'special_offer')
+    list_filter = ('object_commercial', 'site_type')
 """ [ END ObjectCommercialSite ] """
 
 

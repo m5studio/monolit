@@ -36,7 +36,7 @@ $(document).ready(function() {
     csrf()
 
     // Favorites
-    if ( $('.sites').length || $('.site-page').length || $('.favorites-page').length || $('.object-page').length || $('.sites-commercial-page').length ) {
+    if ( $('.sites').length || $('.site-page').length || $('.favorites-page').length || $('.object-page').length || $('.sites-commercial').length || $('.site-commercial-object-page').length ) {
         favorites()
     }
 
@@ -75,7 +75,7 @@ $(document).ready(function() {
     // END Object page
 
     // ObjectCommercial page
-    if ( $('.commercial-page').length ) {
+    if ( $('.commercial-object-page').length ) {
         objectPageSitesInfo()
     }
     // END ObjectCommercial page

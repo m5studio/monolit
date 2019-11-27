@@ -80,7 +80,7 @@
 
             <div id="footer-site-nav" class="footer-block">
                 <div class="footer-block__title">
-                    <a href="">Коммерческая недвижимость</a>
+                    <a href="{% url 'object:site-commercial-list' %}">Коммерческая недвижимость</a>
                 </div>
                 <ul class="footer-block__menu-list">
                     {% url 'object:site-list' as objects_site_list_url %}

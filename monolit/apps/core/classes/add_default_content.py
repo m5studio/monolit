@@ -59,23 +59,23 @@ class AddDefaultContent:
 
     def add_ObjectTypes(self):
         object_types = [
-            ('Бизнес центр', 'business-center', 'Бизнес центре', 'БЦ'),
-            ('Город', 'city', 'Городе', ''),
-            ('Жилой дом', 'living-house', 'Жилом доме', ''),
-            ('Жилой квартал', 'living-quarter', 'Жилом квартале', ''),
-            ('Жилой комплекс', 'living-complex', 'Жилом комплексе', 'ЖК'),
-            ('Курортный комплекс', 'resort-complex', 'Курортном комплексе', ''),
-            ('Многофункциональный комплекс', 'multipurposes-complex', 'Многофункциональном комплексе', 'МФК'),
-            ('Семейный квартал', 'family-quarter', 'Семейном квартале', ''),
-            ('Торгово-офисный центр', 'business-and-retail', 'Торгово-офисном центре', ''),
-            ('Торговый центр', 'mall', 'Торговом центре', 'ТЦ'),
+            ('Бизнес-центр', 'Бизнес-центре', 'БЦ', 'business-center'),
+            ('Город', 'Городе', '', 'city'),
+            ('Жилой дом', 'Жилом доме', '', 'living-house'),
+            ('Жилой квартал', 'Жилом квартале', '', 'living-quarter'),
+            ('Жилой комплекс', 'Жилом комплексе', 'ЖК', 'living-complex'),
+            ('Курортный комплекс', 'Курортном комплексе', '', 'resort-complex'),
+            ('Многофункциональный комплекс', 'Многофункциональном комплексе', 'МФК', 'multipurposes-complex'),
+            ('Семейный квартал', 'Семейном квартале', '', 'family-quarter'),
+            ('Торгово-офисный центр', 'Торгово-офисном центре', '', 'business-and-retail'),
+            ('Торговый центр', 'Торговом центре', 'ТЦ', 'mall'),
         ]
 
         for object_type in object_types:
             name = object_type[0]
-            slug = object_type[1]
-            name_declension = object_type[2]
-            name_abbreviation = object_type[3]
+            name_declension = object_type[1]
+            name_abbreviation = object_type[2]
+            slug = object_type[3]
 
             try:
                 ObjectTypes.objects.get(name=name)

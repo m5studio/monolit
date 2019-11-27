@@ -22,7 +22,10 @@
     <div class="site-card__footer">
         <div class="site-card__footer--top">
             <div class="site-card__info">
-                <div class="site-card__label">{% if object.object.object_type %}{{ object.object.object_type }}{% endif %}</div>
+                <div class="site-card__label">
+                    {% if object.object.object_type %}{{ object.object.object_type }}{% endif %}
+                    {% if object.object_commercial.object_type %}{{ object.object_commercial.object_type }}{% endif %}
+                </div>
                 <div class="site-card__val site-object-name">
                     {% if object.object.name %}{{ object.object.name }}{% endif %}
                     {% if object.object_commercial.name %}{{ object.object_commercial.name }}{% endif %}

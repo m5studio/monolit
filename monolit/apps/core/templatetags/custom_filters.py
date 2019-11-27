@@ -5,7 +5,6 @@ from apps.core.classes.file_processing import FileProcessing
 
 register = template.Library()
 
-
 @register.filter(name='bytes_to_mb')
 def bytes_to_mb(value):
     return FileUtils.format_bytes(value)

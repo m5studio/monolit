@@ -48,8 +48,6 @@ class ObjectCommercialSite(models.Model):
     SITE_TYPES = (
         ('office', 'Офис'),
         ('free-use', 'Помещение свободного назначения'),
-        ('parking', 'Паркоместо'),
-        ('storage', 'Кладовая'),
     )
 
     # QuerySet
@@ -61,23 +59,16 @@ class ObjectCommercialSite(models.Model):
     object_commercial = models.ForeignKey(ObjectCommercial, verbose_name='Коммерческий Объект', on_delete=models.CASCADE)
     site_type         = models.CharField('Тип помещения', max_length=100, choices=SITE_TYPES)
 
-    # object_block      = models.ForeignKey(ObjectBlock, verbose_name='Блок Объекта', on_delete=models.SET_NULL, blank=True, null=True)
     object_section    = models.ForeignKey(ObjectSection, verbose_name='Секция Объекта', on_delete=models.SET_NULL, blank=True, null=True)
-
     crm_id            = models.CharField('CRM ID', max_length=100, unique=True, help_text='ID объекта в 1C (Заполняется автоматически при выгрузке)')
-
     price_per_square  = models.DecimalField('Цена за м2 (руб.)', max_digits=8, decimal_places=2, blank=True, null=True, help_text='Стоимость одного квадратного метра')
     price_total       = models.DecimalField('Общая стоимость (руб.)', max_digits=11, decimal_places=2, blank=True, null=True, help_text='Считается автоматически из Площади помещения * Цена за м2')
-
     site_area         = models.DecimalField('Площадь помещения м2', max_digits=6, decimal_places=2, blank=True, null=True, help_text='Пример: 115.5 м2')
-
     floor             = models.IntegerField('Этаж', validators=[MinValueValidator(-5), MaxValueValidator(100)], blank=True, null=True)
     site_number       = models.CharField('Номер помещения', max_length=100, blank=True, null=True)
     ceiling_height    = models.DecimalField('Высота потолка (м)', max_digits=4, decimal_places=2, blank=True, null=True, help_text='Пример: 2.30 = 2 метра 30 см')
     street_entrance   = models.BooleanField('Вход с улицы', default=False)
-
     image_planning    = models.ImageField('Планировка', upload_to=image_upload_path, blank=True, null=True)
-
     updated           = models.DateTimeField(auto_now=True, auto_now_add=False, blank=True, null=True)
 
     # Thumbnails for admin
@@ -94,7 +85,7 @@ class ObjectCommercialSite(models.Model):
 
     class Meta:
         verbose_name = 'Коммерческое помещение'
-        verbose_name_plural = '2.1 Коммерческие Помещения (Офисы, Cвободного назначения)'
+        verbose_name_plural = '2.1 Коммерческие Помещения (Офисы, Кладовые, Паркоместа)'
 
     def display_name_card(self):
         site_type_name = ''
@@ -105,7 +96,10 @@ class ObjectCommercialSite(models.Model):
         return f'{site_type_name}'
 
     def display_name_full(self):
-        return f'{self.display_name_card()} на {self.floor} этаже в {self.object_commercial.object_type} {self.object_commercial.name}'
+        object_type = self.object_commercial.object_type
+        if self.object_commercial.object_type.name_declension:
+            object_type = self.object_commercial.object_type.name_declension
+        return f'{self.display_name_card()} на {self.floor} этаже в {object_type} {self.object_commercial.name}'
 
 
 @receiver(pre_save, sender=ObjectCommercialSite)
