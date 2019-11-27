@@ -22,7 +22,6 @@ class Command(BaseCommand):
             self.stdout.write(self.style.ERROR('You can\'t generate more then 10 objects'))
         else:
             call_command('add_default_content')
-
             generator = GenerateContent()
             generator.fillEntireSite(options['objects_qty'])
 
