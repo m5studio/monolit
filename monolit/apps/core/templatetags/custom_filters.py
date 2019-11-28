@@ -1,4 +1,5 @@
 from django import template
+
 from apps.core.classes.file_utils import FileUtils
 from apps.core.classes.file_processing import FileProcessing
 
@@ -30,3 +31,8 @@ def split_thousands(value):
 def round_million(value):
     value = round(value / 1000000, 1)
     return '{}'.format(value).replace('.0', '')
+
+
+@register.filter(name='remove_trailing_zero')
+def remove_trailing_zero(value):
+    return '{}'.format(value).rstrip("0")

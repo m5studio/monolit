@@ -256,13 +256,13 @@ class GenerateContent:
     def _create_Actions(self):
         title = f'Акция {self.fake.word()} {self.fake.word()} {self.fake.word()} {self.fake.word()} {str(self.fake.random_number(3, True))}'.title()
         action = Actions(active=True, \
-                        title=title, \
-                        date_start=timezone.now(), \
-                        date_end=timezone.now() + timezone.timedelta(days=45), \
-                        description=self.fake.text(5000), \
-                        partners_title='Заголовок для блока с партнерами акции', \
-                        image_card=self.DUMMY_IMG, \
-                        image_detail=self.DUMMY_IMG
+                            title=title, \
+                            date_start=timezone.now(), \
+                            date_end=timezone.now() + timezone.timedelta(days=45), \
+                            description=self.fake.text(5000), \
+                            partners_title='Заголовок для блока с партнерами акции', \
+                            image_card=self.DUMMY_IMG, \
+                            image_detail=self.DUMMY_IMG, \
                         )
         action.save()
         print(f'[Actions] created {action.title}')
@@ -300,7 +300,11 @@ class GenerateContent:
                                                                 site_number=self.get_random_list_item(site_numbers_list), \
                                                                 ceiling_height=2.7, \
                                                                 street_entrance=self.fake.boolean(chance_of_getting_true=40), \
-                                                                image_planning=self.DUMMY_IMG
+                                                                image_planning=self.DUMMY_IMG, \
+                                                                image_floor=self.DUMMY_IMG, \
+                                                                image_section=self.DUMMY_IMG, \
+                                                                image_section_in_object=self.DUMMY_IMG, \
+                                                                image_genplan=self.DUMMY_IMG, \
                                                             )
                 object_commercial_site.save()
                 print(f'[ObjectCommercialSite] {object_commercial_site.crm_id} created for ObjectCommercial {object_commercial_site.object_commercial}')
@@ -370,28 +374,28 @@ class GenerateContent:
                 object_section = ObjectSection.objects.get(pk=self.get_random_list_item(sections_rel_to_object_ids_list))
 
                 object_site = ObjectSite(special_offer=self.fake.boolean(chance_of_getting_true=20), \
-                                         object=object, \
-                                         site_type=self.get_random_list_item(site_types_list), \
-                                         object_section=object_section, \
-                                         crm_id=self.fake.random_number(9, True), \
-                                         floor=self.get_random_list_item(floors_list), \
-                                         site_number=self.get_random_list_item(site_numbers_list), \
-                                         price_per_square=self.get_random_list_item(price_per_square_list), \
-                                         rooms_qty=self.get_random_list_item(rooms_qty_list), \
-                                         site_area=site_area, \
-                                         living_area=calc_living_area, \
-                                         kitchen_area=self.get_random_list_item(kitchen_area_list), \
-                                         ceiling_height=2.7,\
-                                         two_levels=self.fake.boolean(chance_of_getting_true=20), \
-                                         entresol=self.fake.boolean(chance_of_getting_true=30), \
-                                         wardrobe=self.fake.boolean(chance_of_getting_true=40), \
-                                         finish_type=self.get_random_list_item(finishing_types_list), \
-                                         image_planning=self.DUMMY_IMG, \
-                                         image_planning3d=self.DUMMY_IMG, \
-                                         image_floor=self.DUMMY_IMG, \
-                                         image_section=self.DUMMY_IMG, \
-                                         image_section_in_object=self.DUMMY_IMG, \
-                                         image_genplan=self.DUMMY_IMG
+                                            object=object, \
+                                            site_type=self.get_random_list_item(site_types_list), \
+                                            object_section=object_section, \
+                                            crm_id=self.fake.random_number(9, True), \
+                                            floor=self.get_random_list_item(floors_list), \
+                                            site_number=self.get_random_list_item(site_numbers_list), \
+                                            price_per_square=self.get_random_list_item(price_per_square_list), \
+                                            rooms_qty=self.get_random_list_item(rooms_qty_list), \
+                                            site_area=site_area, \
+                                            living_area=calc_living_area, \
+                                            kitchen_area=self.get_random_list_item(kitchen_area_list), \
+                                            ceiling_height=2.7,\
+                                            two_levels=self.fake.boolean(chance_of_getting_true=20), \
+                                            entresol=self.fake.boolean(chance_of_getting_true=30), \
+                                            wardrobe=self.fake.boolean(chance_of_getting_true=40), \
+                                            finish_type=self.get_random_list_item(finishing_types_list), \
+                                            image_planning=self.DUMMY_IMG, \
+                                            image_planning3d=self.DUMMY_IMG, \
+                                            image_floor=self.DUMMY_IMG, \
+                                            image_section=self.DUMMY_IMG, \
+                                            image_section_in_object=self.DUMMY_IMG, \
+                                            image_genplan=self.DUMMY_IMG, \
                                         )
                 object_site.save()
 
@@ -410,9 +414,6 @@ class GenerateContent:
                 self._create_ObjectBathroom(object_site.id)
 
         print(f'\nВ Объекте {object_id}, {self.countSitesInObject(object_id)} квартир, было создано, {qty} квартир')
-
-
-    # TODO: Generate commercial ObjectSite types
 
 
     """ [Mortgage] """

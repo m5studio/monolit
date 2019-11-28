@@ -127,7 +127,7 @@ class ObjectSiteDetailViewPDF(View):
             'object': object,
             'request': request,
         }
-        return RenderToPDF.render('pdf/objectsite_detail_pdf.html', context, filename)
+        return RenderToPDF.render('pdf/object_site_detail_pdf.html', context, filename)
 
 
 class ObjectCommercialListView(ListView):
@@ -163,7 +163,6 @@ class ObjectCommercialSiteListView(ListView):
         return context
 
 
-# TODO: ObjectCommercialSiteDetailView
 class ObjectCommercialSiteDetailView(DetailView):
     model = ObjectCommercialSite
     queryset = ObjectCommercialSite.objects.filter(active=True)
@@ -173,3 +172,27 @@ class ObjectCommercialSiteDetailView(DetailView):
         context['opts'] = ObjectCommercialSite._meta
         context['page_title'] = self.get_object().display_name_full()
         return context
+
+
+class ObjectCommercialSiteDetailViewPDF(View):
+    def get(self, request, pk):
+        object = ObjectCommercialSite.objects.filter(active=True).get(id=pk)
+        filename = '[monolit.site] ' + getattr(object, 'site_type') + ' ID ' + getattr(object, 'crm_id')
+
+        # Full path to Cirilic font
+        path_to_static_dir = os.path.join(settings.BASE_DIR, 'static')
+        path_to_fonts_dir = os.path.join(path_to_static_dir, 'fonts')
+        path_to_font = os.path.join(path_to_fonts_dir, 'roboto_regular.ttf')
+
+        # Full path to Monolit logo
+        path_to_images_dir = os.path.join(path_to_static_dir, 'images')
+        path_to_monolit_logo = os.path.join(path_to_images_dir, 'monolit-logo-text.png')
+
+        context = {
+            'page_title': object.display_name_full(),
+            'font_path': path_to_font,
+            'monolit_logo': path_to_monolit_logo,
+            'object': object,
+            'request': request,
+        }
+        return RenderToPDF.render('pdf/object_commercial_site_detail_pdf.html', context, filename)

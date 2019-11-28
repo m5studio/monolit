@@ -224,6 +224,10 @@
                     display: flex;
                     flex-direction: column;
 
+                    @include media-breakpoint-up(md) {
+                        text-align: center;
+                    }
+
                     &__name {
                         font-weight: 600;
                     }

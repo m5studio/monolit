@@ -6,7 +6,6 @@ from apps.realty.views import (
 
     ObjectSiteListView,
     ObjectSiteDetailView,
-
     ObjectSiteDetailViewPDF,
 
 
@@ -15,6 +14,7 @@ from apps.realty.views import (
 
     ObjectCommercialSiteListView,
     ObjectCommercialSiteDetailView,
+    ObjectCommercialSiteDetailViewPDF,
 )
 
 
@@ -29,7 +29,7 @@ urlpatterns = [
     path('sites/', include([
         path('', ObjectSiteListView.as_view(), name='site-list'),
         path('<int:pk>/', ObjectSiteDetailView.as_view(), name='site-detail'),
-        path('<int:pk>/pdf/', ObjectSiteDetailViewPDF.as_view(), name='site-detail-pdf')
+        path('<int:pk>/pdf/', ObjectSiteDetailViewPDF.as_view(), name='site-detail-pdf'),
     ])),
 
     path('objects-commercial/', include([
@@ -40,5 +40,6 @@ urlpatterns = [
     path('sites-commercial/', include([
         path('', ObjectCommercialSiteListView.as_view(), name='site-commercial-list'),
         path('<int:pk>/', ObjectCommercialSiteDetailView.as_view(), name='site-commercial-detail'),
+        path('<int:pk>/pdf/', ObjectCommercialSiteDetailViewPDF.as_view(), name='site-commercial-detail-pdf'),
     ])),
 ]
