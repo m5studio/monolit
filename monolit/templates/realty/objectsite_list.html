@@ -28,7 +28,6 @@
         {% include 'realty/objectsite_list-sections/section-realty-sites-filters.html' %}
 
         {% if object_list %}
-            {# <!-- <div id="section-sites-list" class="common-section" data-next-pagination-url="{{ request.path }}?page={{ page_obj.next_page_number }}"> --> #}
             <div id="section-sites-list" class="common-section" data-page-url="{{ request.path }}" data-current-pagination-number="{{ page_obj.number }}" data-max-pagination-number="{{ page_obj.paginator.num_pages }}">
                 <div id="section-sites-list__inner" class="container">
                     {% for object in object_list %}

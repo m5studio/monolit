@@ -78,7 +78,6 @@ class ObjectSiteListView(ListView):
     model = ObjectSite
     queryset = ObjectSite.objects.filter(active=True).order_by('-updated')
     paginate_by = 12
-    # paginate_by = 4
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -133,6 +132,7 @@ class ObjectSiteDetailViewPDF(View):
 class ObjectCommercialListView(ListView):
     model = ObjectCommercial
     queryset = ObjectCommercial.objects.filter(active=True, all_sold=False).order_by('order')
+    paginate_by = 12
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -155,7 +155,8 @@ class ObjectCommercialDetailView(DetailView):
 
 class ObjectCommercialSiteListView(ListView):
     model = ObjectCommercialSite
-    queryset = ObjectCommercialSite.objects.filter(active=True)
+    queryset = ObjectCommercialSite.objects.filter(active=True).order_by('-updated')
+    paginate_by = 12
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

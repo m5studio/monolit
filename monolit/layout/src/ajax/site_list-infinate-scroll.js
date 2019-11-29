@@ -12,7 +12,7 @@ $.fn.isInViewport = function() {
 }
 
 
-function getFlats(page_number) {
+function getSites(page_number) {
     let page_url = $('#section-sites-list').data('page-url')
 
     $.ajax({
@@ -33,7 +33,7 @@ const max_pagination_number = parseInt($('#section-sites-list').data('max-pagina
 
 let working = false
 
-function objectsite_list_infinate_scroll() {
+function site_list_infinate_scroll() {
     // if #footer in viewport
     if ( $('#footer').isInViewport() ) {
         if ( current_pagination_number < max_pagination_number ) {
@@ -41,7 +41,7 @@ function objectsite_list_infinate_scroll() {
                 working = true
 
                 current_pagination_number++
-                getFlats(current_pagination_number)
+                getSites(current_pagination_number)
 
                 // Timeout before call
                 setTimeout(function(){
@@ -54,4 +54,4 @@ function objectsite_list_infinate_scroll() {
 }
 
 
-export {objectsite_list_infinate_scroll}
+export {site_list_infinate_scroll}

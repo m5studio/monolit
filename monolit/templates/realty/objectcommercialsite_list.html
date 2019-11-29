@@ -27,8 +27,8 @@
         </div>
 
         {% if object_list %}
-            <!-- <div id="section-sites-list" class="common-section" data-page-url="{{ request.path }}" data-current-pagination-number="{{ page_obj.number }}" data-max-pagination-number="{{ page_obj.paginator.num_pages }}"> -->
-            <div id="section-sites-list" class="common-section">
+            <div id="section-sites-list" class="common-section" data-page-url="{{ request.path }}" data-current-pagination-number="{{ page_obj.number }}" data-max-pagination-number="{{ page_obj.paginator.num_pages }}">
+            <!-- <div id="section-sites-list" class="common-section"> -->
                 <div id="section-sites-list__inner" class="container">
                     {% for object in object_list %}
                         {% include 'realty/cards/site-card.html' %}

@@ -25,7 +25,7 @@ import {objectPageSitesInfo, objectPageFlatsTypes} from "./ajax/object-page-site
 import {mortgageOfferMonthlyPayment} from "./ajax/mortgage-offer-monthly-payment-calculate"
 import {search_by_site_id} from "./ajax/search_by_site_id"
 import {companyTendersPagination, selectTenderCategory} from "./ajax/company-tenders-page-pagination"
-import {objectsite_list_infinate_scroll} from "./ajax/objectsite_list-infinate-scroll"
+import {site_list_infinate_scroll} from "./ajax/site_list-infinate-scroll"
 import {favorites} from "./ajax/favorites"
 
 // Fancybox https://fancyapps.com/fancybox/3/
@@ -135,7 +135,7 @@ $(window).scroll(function() {
 
     // scrollToTop()
 
-    if ( $('.sites').length ) {
-        objectsite_list_infinate_scroll()
+    if ( $('.sites').length || $('.sites-commercial').length ) {
+        site_list_infinate_scroll()
     }
 })
