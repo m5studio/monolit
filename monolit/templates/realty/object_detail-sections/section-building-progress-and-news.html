@@ -21,7 +21,7 @@
                             {% if object_galleries.count > 1 %}
                                 <select name="object_gallery_id">
                                     {% for gallery in object_galleries %}
-                                        <option value="{% url 'api:object-gallery' gallery_id=gallery.id %}">{{ gallery }}</option>
+                                        <option value="{% url 'api:object:gallery' gallery_id=gallery.id %}">{{ gallery }}</option>
                                     {% endfor %}
                                 </select>
                                 <br><br>

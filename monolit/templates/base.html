@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     {# <!-- <title>{{ page_title }} | {{ settings.site_title }}</title> --> #}
 
-    {% url 'object:site-list' as objects_site_list_url %}
+    {% url 'sites:list' as sites_list_url %}
 
     <title>{% spaceless %}
         {% if request.path == '/' %}
             {% if settings.site_title %}{{ settings.site_title }}{% endif %}
         {# Квартиры #}
-        {% elif objects_site_list_url in request.path and objects_site_list_url != request.path and page_title %}
+        {% elif sites_list_url in request.path and sites_list_url != request.path and page_title %}
             {{ page_title }}
         {% elif request.path != '/' and page_title %}
             {{ page_title }} | {{ settings.site_title }}
@@ -38,10 +38,10 @@
         <div id="header__top">
             <div id="header__top--inner" class="container">
                 <div id="ht-left">
-                    {% url 'object:site-list' as objects_site_list_url %}
-                    {% url 'object:site-commercial-list' as objects_site_commercial_list_url %}
-                    <a href="{{ objects_site_list_url }}" class="link-green{% if objects_site_list_url == request.path or objects_site_list_url in request.path %} active{% endif %}">Жилая недвижимость</a>
-                    <a href="{{ objects_site_commercial_list_url }}" class="link-green{% if objects_site_commercial_list_url == request.path or objects_site_commercial_list_url in request.path %} active{% endif %}">Коммерческая недвижимость</a>
+                    {% url 'sites:list' as sites_list_url %}
+                    {% url 'sites-commercial:list' as sites_commercial_list_url %}
+                    <a href="{{ sites_list_url }}" class="link-green{% if sites_list_url == request.path or sites_list_url in request.path %} active{% endif %}">Жилая недвижимость</a>
+                    <a href="{{ sites_commercial_list_url }}" class="link-green{% if sites_commercial_list_url == request.path or sites_commercial_list_url in request.path %} active{% endif %}">Коммерческая недвижимость</a>
                 </div>
                 <div class="ht-empty"></div>
                 <div id="ht-contacts">
@@ -67,7 +67,7 @@
         <div id="footer__inner" class="container">
             <div id="footer-projects" class="footer-block">
                 <div class="footer-block__title">
-                    <a href="{% url 'object:list' %}">Объекты</a>
+                    <a href="{% url 'objects:list' %}">Объекты</a>
                 </div>
                 <ul class="footer-block__menu-list">
                     {% for object in monolit_objects %}
@@ -80,17 +80,17 @@
 
             <div id="footer-site-nav" class="footer-block">
                 <div class="footer-block__title">
-                    <a href="{% url 'object:site-commercial-list' %}">Коммерческая недвижимость</a>
+                    <a href="{% url 'sites-commercial:list' %}">Коммерческая недвижимость</a>
                 </div>
                 <ul class="footer-block__menu-list">
-                    {% url 'object:site-list' as objects_site_list_url %}
-                    <li class="footer-block__menu-item{% if objects_site_list_url == request.path %} active{% endif %}">
-                        <a href="{{ objects_site_list_url }}">Выбор квартиры</a>
+                    {% url 'sites:list' as sites_list_url %}
+                    <li class="footer-block__menu-item{% if sites_list_url == request.path %} active{% endif %}">
+                        <a href="{{ sites_list_url }}">Выбор квартиры</a>
                     </li>
 
-                    {% url 'mortgage:mortgage' as mortgage_url %}
-                    <li class="footer-block__menu-item{% if mortgage_url == request.path %} active{% endif %}">
-                        <a href="{{ mortgage_url }}">Ипотека</a>
+                    {% url 'mortgage:index' as mortgage_index_url %}
+                    <li class="footer-block__menu-item{% if mortgage_index_url == request.path %} active{% endif %}">
+                        <a href="{{ mortgage_index_url }}">Ипотека</a>
                     </li>
 
                     <!-- TODO: Дисконт на ремонт -->
@@ -111,9 +111,9 @@
             </div>
 
             <div id="footer-about" class="footer-block">
-                {% url 'company:company' as company_url %}
+                {% url 'company:index' as company_index_url %}
                 <div class="footer-block__title">
-                    <a href="{{ company_url }}">О компании</a>
+                    <a href="{{ company_index_url }}">О компании</a>
                 </div>
                 <ul class="footer-block__menu-list">
                     {% url 'news:list' as news_list_url %}
@@ -121,7 +121,7 @@
                         <a href="{{ news_list_url }}">Новости</a>
                     </li>
 
-                    {% url 'news:actions-list' as actions_list_url %}
+                    {% url 'news:actions:list' as actions_list_url %}
                     <li class="footer-block__menu-item{% if actions_list_url == request.path or actions_list_url in request.path %} active{% endif %}">
                         <a href="{{ actions_list_url }}">Акции</a>
                     </li>
@@ -144,7 +144,7 @@
                         <a href="">Политика конфиденциальности</a>
                     </li>
 
-                    {% url 'company:contacts' as contacts_url %}
+                    {% url 'contacts' as contacts_url %}
                     <li class="footer-block__menu-item{% if contacts_url == request.path %} active{% endif %}">
                         <a href="{{ contacts_url }}">Контакты</a>
                     </li>

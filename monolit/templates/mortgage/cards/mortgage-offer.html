@@ -1,6 +1,6 @@
 {% load custom_filters %}
 
-<div class="mortgage-offer" data-api-mortgage-offer="{% url 'api:mortgage-offer' offer_id=object.id %}">
+<div class="mortgage-offer" data-api-mortgage-offer="{% url 'api:mortgage:offer' offer_id=object.id %}">
     <div class="mortgage-offer__bank-logo">
         {% if forloop.first %}
             <div class="mortgage-offer__best-offer">Лучшее предложение</div>

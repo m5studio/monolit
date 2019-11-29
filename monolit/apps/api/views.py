@@ -15,7 +15,7 @@ def mergeTwoDicts(dict1, dict2):
     return result
 
 # API for ObjectSite all
-def api_object_sites_all(request):
+def api_sites_all(request):
     object_sites = ObjectSite.objects.filter(active=True).values('id', 'crm_id')
     object_sites_list = list(object_sites)
     return JsonResponse(object_sites_list, safe=False)
@@ -45,7 +45,7 @@ def api_object_sites_info(request, object_id):
     return JsonResponse(sites_info, safe=False)
 
 # API for ObjectSite
-def api_object_site(request, site_id):
+def api_site_info(request, site_id):
     site_info = ObjectSite.objects.filter(id=site_id, active=True).values('crm_id', 'site_type', 'price_total')
     site_info = list(site_info)
     return JsonResponse(site_info, safe=False)
@@ -76,14 +76,3 @@ def api_mortgage_offer(request, offer_id):
     mortgage_offer = Offer.objects.filter(id=offer_id).values('id', 'first_payment_from', 'first_payment_to', 'loan_term_from', 'loan_term_to', 'rate_from', 'rate_to')
     mortgage_offer = list(mortgage_offer)
     return JsonResponse(mortgage_offer, safe=False)
-
-
-"""
-def requestAjax(request, object_id):
-    data = 'nothing'
-    if request.is_ajax():
-        # data = ObjectDocument.objects.filter(object=object_id).values('title', 'author__name', 'date', 'file')
-        data = ObjectDocument.objects.filter(object=object_id).values('title', 'author__name', 'date', 'file')[:9]
-        data = list(data)
-    return JsonResponse(data, safe=False)
-"""

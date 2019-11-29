@@ -15,17 +15,17 @@
                     <a href="{% url 'homepage' %}">Главная</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="{% url 'object:site-list' %}">Выбор жилой недвижимости</a>
+                    <a href="{% url 'sites:list' %}">Выбор жилой недвижимости</a>
                 </li>
                 <li class="breadcrumb-item active">
-                    <a href="{% url 'object:detail' slug=object.object.slug %}">{{ object.object.name }}</a>
+                    <a href="{% url 'objects:detail' slug=object.object.slug %}">{{ object.object.name }}</a>
                 </li>
             </ol>
         </div>
     </nav>
 
     <main id="main">
-        <div id="section-site-page-content" class="container" data-object-site="{% url 'api:site-info' site_id=object.id %}">
+        <div id="section-site-page-content" class="container" data-object-site="{% url 'api:site:info' site_id=object.id %}">
             <div id="section-site-page-content__left">
                 {% include 'realty/includes/section-site-page-content__tabs.html' %}
             </div>
@@ -174,7 +174,7 @@
                                 {% include "favorites/includes/add_to_favorites.html" with type="object_site" id=object.id icon_size=32 %}
                             </li>
                             <li>
-                                <a href="{% url 'object:site-detail-pdf' pk=object.id %}" target="_blank" title="Откроется в новой вкладке"><span class="icon icon-32 icon-print-solid-green"></span> Распечатать в PDF</a>
+                                <a href="{% url 'sites:pdf' pk=object.id %}" target="_blank" title="Откроется в новой вкладке"><span class="icon icon-32 icon-print-solid-green"></span> Распечатать в PDF</a>
                             </li>
                         </ul>
                     </div>

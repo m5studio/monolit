@@ -150,6 +150,7 @@ class ObjectCommercialDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['opts'] = ObjectCommercial._meta
         context['page_title'] = f'{self.get_object().display_name()}'
+        context['commercial_sites'] = ObjectCommercialSite.objects.filter(object_commercial=self.get_object().id, active=True).order_by('?')[:12]
         return context
 
 

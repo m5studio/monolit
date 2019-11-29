@@ -73,7 +73,7 @@ class ObjectCommercial(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('object:commercial-detail', kwargs={'slug': self.slug})
+        return reverse('objects-commercial:detail', kwargs={'slug': self.slug})
 
     class Meta:
         verbose_name = 'Коммерческий Объект'

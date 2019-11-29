@@ -36,7 +36,7 @@ $(document).ready(function() {
     csrf()
 
     // Favorites
-    if ( $('.sites').length || $('.site-page').length || $('.favorites-page').length || $('.object-page').length || $('.sites-commercial').length || $('.site-commercial-object-page').length ) {
+    if ( $('.sites').length || $('.site-page').length || $('.favorites-page').length || $('.object-page').length || $('.sites-commercial').length || $('.site-commercial-object-page').length || $('.commercial-object-page').length ) {
         favorites()
     }
 

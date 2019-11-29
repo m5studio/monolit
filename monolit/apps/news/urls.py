@@ -13,11 +13,18 @@ app_name = 'news'
 
 urlpatterns = [
     path('news/', include([
+        # news:list
         path('', NewsListView.as_view(), name='list'),
-        path('<int:pk>/', NewsDetailView.as_view(), name='detail')
+
+        # news:detail
+        path('<int:pk>/', NewsDetailView.as_view(), name='detail'),
     ])),
-    path('actions/', include([
-        path('', ActionsListView.as_view(), name='actions-list'),
-        path('<int:pk>/', ActionsDetailView.as_view(), name='actions-detail')
-    ])),
+
+    path('actions/', include(([
+        # news:actions:list
+        path('', ActionsListView.as_view(), name='list'),
+
+        # news:actions:detail
+        path('<int:pk>/', ActionsDetailView.as_view(), name='detail'),
+    ], app_name), namespace='actions')),
 ]

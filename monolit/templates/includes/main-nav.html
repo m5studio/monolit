@@ -5,44 +5,44 @@
         <div id="main-navigation-wrap">
             <nav id="main-navigation" class="main-nav" role="navigation">
                 <ul class="main-nav__list">
-                    {% url 'object:list' as object_list_url %}
-                    {% url 'object:commercial-list' as object_commercial_list_url %}
-                    <li class="main-nav__item{% if object_list_url == request.path or object_list_url in request.path or object_commercial_list_url == request.path or object_commercial_list_url in request.path %} active{% endif %} has-dropdown"">
-                        <a href="{{ object_list_url }}" class="main-nav__link" title="Жилые и коммерческие объекты">Объекты</a>
+                    {% url 'objects:list' as objects_list_url %}
+                    {% url 'objects-commercial:list' as objects_commercial_list_url %}
+                    <li class="main-nav__item{% if objects_list_url == request.path or objects_list_url in request.path or objects_commercial_list_url == request.path or objects_commercial_list_url in request.path %} active{% endif %} has-dropdown"">
+                        <a href="{{ objects_list_url }}" class="main-nav__link" title="Жилые и коммерческие объекты">Объекты</a>
                         <div class="dropdown">
                             <ul class="main-nav-submenu__list">
-                                <li class="main-nav-submenu__item{% if object_list_url == request.path or object_list_url in request.path %} active{% endif %}">
-                                    <a href="{{ object_list_url }}" class="main-nav-submenu__link">Жилые объекты</a>
+                                <li class="main-nav-submenu__item{% if objects_list_url == request.path or objects_list_url in request.path %} active{% endif %}">
+                                    <a href="{{ objects_list_url }}" class="main-nav-submenu__link">Жилые объекты</a>
                                 </li>
-                                <li class="main-nav-submenu__item{% if object_commercial_list_url == request.path or object_commercial_list_url in request.path %} active{% endif %}">
-                                    <a href="{{ object_commercial_list_url }}" class="main-nav-submenu__link">Коммерческие объекты</a>
+                                <li class="main-nav-submenu__item{% if objects_commercial_list_url == request.path or objects_commercial_list_url in request.path %} active{% endif %}">
+                                    <a href="{{ objects_commercial_list_url }}" class="main-nav-submenu__link">Коммерческие объекты</a>
                                 </li>
                             </ul>
                         </div>
                     </li>
 
-                    {% url 'object:site-list' as objects_site_list_url %}
-                    {% url 'object:site-commercial-list' as objects_site_commercial_list_url %}
-                    <li class="main-nav__item{% if objects_site_list_url == request.path or objects_site_list_url in request.path or objects_site_commercial_list_url == request.path or objects_site_commercial_list_url in request.path %} active{% endif %} has-dropdown">
-                        <a href="{{ objects_site_list_url }}" class="main-nav__link">Выбор недвижимости</a>
+                    {% url 'sites:list' as sites_list_url %}
+                    {% url 'sites-commercial:list' as sites_commercial_list_url %}
+                    <li class="main-nav__item{% if sites_list_url == request.path or sites_list_url in request.path or sites_commercial_list_url == request.path or sites_commercial_list_url in request.path %} active{% endif %} has-dropdown">
+                        <a href="{{ sites_list_url }}" class="main-nav__link">Выбор недвижимости</a>
                         <div class="dropdown">
                             <ul class="main-nav-submenu__list">
-                                <li class="main-nav-submenu__item{% if objects_site_list_url == request.path or objects_site_list_url in request.path %} active{% endif %}">
-                                    <a href="{{ objects_site_list_url }}" class="main-nav-submenu__link">Жилая недвижимость</a>
+                                <li class="main-nav-submenu__item{% if sites_list_url == request.path or sites_list_url in request.path %} active{% endif %}">
+                                    <a href="{{ sites_list_url }}" class="main-nav-submenu__link">Жилая недвижимость</a>
                                 </li>
-                                <li class="main-nav-submenu__item{% if objects_site_commercial_list_url == request.path or objects_site_commercial_list_url in request.path %} active{% endif %}">
-                                    <a href="{{ objects_site_commercial_list_url }}" class="main-nav-submenu__link">Коммерческая недвижимость</a>
+                                <li class="main-nav-submenu__item{% if sites_commercial_list_url == request.path or sites_commercial_list_url in request.path %} active{% endif %}">
+                                    <a href="{{ sites_commercial_list_url }}" class="main-nav-submenu__link">Коммерческая недвижимость</a>
                                 </li>
                             </ul>
                         </div>
                     </li>
 
-                    {% url 'mortgage:mortgage' as mortgage_url %}
+                    {% url 'mortgage:index' as mortgage_index_url %}
                     {% url 'mortgage:military' as mortgage_military_url %}
                     {% url 'mortgage:mother' as mortgage_mother_url %}
                     {% url 'mortgage:corporactive' as mortgage_corporactive_url %}
-                    <li class="main-nav__item{% if mortgage_url == request.path or mortgage_military_url in request.path or mortgage_mother_url in request.path or mortgage_corporactive_url in request.path %} active{% endif %} has-dropdown">
-                        <a href="{{ mortgage_url }}" class="main-nav__link">Ипотека</a>
+                    <li class="main-nav__item{% if mortgage_index_url == request.path or mortgage_military_url in request.path or mortgage_mother_url in request.path or mortgage_corporactive_url in request.path %} active{% endif %} has-dropdown">
+                        <a href="{{ mortgage_index_url }}" class="main-nav__link">Ипотека</a>
                         <div class="dropdown">
                             <ul class="main-nav-submenu__list">
                                 <li class="main-nav-submenu__item{% if mortgage_military_url == request.path %} active{% endif %}">
@@ -58,7 +58,7 @@
                         </div>
                     </li>
 
-                    {% url 'company:company' as company_url %}
+                    {% url 'company:index' as company_index_url %}
                     {% url 'company:mission' as company_mission_url %}
                     {% url 'company:management' as company_management_url %}
                     {% url 'company:responsibility' as company_responsibility_url %}
@@ -68,8 +68,8 @@
                     {% url 'company:partnership' as company_partnership_url %}
                     {% url 'company:tenders' as company_tenders_url %}
                     {% url 'company:tenders-faq' as company_tenders_faq_url %}
-                    <li class="main-nav__item{% if company_url == request.path or company_mission_url in request.path or company_management_url in request.path or company_responsibility_url in request.path or company_job_url in request.path or company_history_url in request.path or company_structure_url in request.path or company_partnership_url in request.path or company_tenders_url in request.path or company_tenders_faq_url in request.path %} active{% endif %} has-dropdown">
-                        <a href="{{ company_url }}" class="main-nav__link">О компании</a>
+                    <li class="main-nav__item{% if company_index_url == request.path or company_mission_url in request.path or company_management_url in request.path or company_responsibility_url in request.path or company_job_url in request.path or company_history_url in request.path or company_structure_url in request.path or company_partnership_url in request.path or company_tenders_url in request.path or company_tenders_faq_url in request.path %} active{% endif %} has-dropdown">
+                        <a href="{{ company_index_url }}" class="main-nav__link">О компании</a>
                         <div class="dropdown">
                             <ul class="main-nav-submenu__list">
                                 <li class="main-nav-submenu__item{% if company_mission_url == request.path %} active{% endif %}">
@@ -103,23 +103,23 @@
                         </div>
                     </li>
 
-                    {% url 'news:actions-list' as actions_list_url %}
                     {% url 'news:list' as news_list_url %}
+                    {% url 'news:actions:list' as actions_list_url %}
                     <li class="main-nav__item{% if news_list_url == request.path or news_list_url in request.path or actions_list_url == request.path or actions_list_url in request.path %} active{% endif %} has-dropdown">
-                        <a href="{{ news_list_url }}" class="main-nav__link">Акции и Новости</a>
+                        <a href="{{ news_list_url }}" class="main-nav__link">Новости и акции</a>
                         <div class="dropdown">
                             <ul class="main-nav-submenu__list">
-                                <li class="main-nav-submenu__item{% if actions_list_url == request.path or actions_list_url in request.path %} active{% endif %}">
-                                    <a href="{{ actions_list_url }}" class="main-nav-submenu__link">Акции</a>
-                                </li>
                                 <li class="main-nav-submenu__item{% if news_list_url == request.path or news_list_url in request.path %} active{% endif %}">
                                     <a href="{{ news_list_url }}" class="main-nav-submenu__link">Новости</a>
+                                </li>
+                                <li class="main-nav-submenu__item{% if actions_list_url == request.path or actions_list_url in request.path %} active{% endif %}">
+                                    <a href="{{ actions_list_url }}" class="main-nav-submenu__link">Акции</a>
                                 </li>
                             </ul>
                         </div>
                     </li>
 
-                    {% url 'company:contacts' as contacts_url %}
+                    {% url 'contacts' as contacts_url %}
                     <li class="main-nav__item{% if contacts_url == request.path %} active{% endif %}">
                         <a href="{{ contacts_url }}" class="main-nav__link">Контакты</a>
                     </li>
@@ -135,8 +135,8 @@
             <div id="search-by-id">
                 <span class="icon icon-search-green rounded-34"></span>
                 <form class="sbi-form" autocomplete="off">
-                    <input type="text" class="sbi-form__input" name="search-by-site-id" id="search-by-site-id" placeholder="Поиск по ID" data-api-all-sites="{% url 'api:object-sites-all' %}">
-                    <div id="search-by-site-id__results" data-site-base-url="{% url 'object:site-list' %}"></div>
+                    <input type="text" class="sbi-form__input" name="search-by-site-id" id="search-by-site-id" placeholder="Поиск по ID" data-api-all-sites="{% url 'api:sites:all' %}">
+                    <div id="search-by-site-id__results" data-site-base-url="{% url 'sites:list' %}"></div>
                 </form>
             </div>
         </div>

@@ -52,7 +52,7 @@ class Actions(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('news:actions-detail', kwargs={'pk': self.id})
+        return reverse('news:actions:detail', kwargs={'pk': self.id})
 
     class Meta:
         verbose_name = 'Акция'
