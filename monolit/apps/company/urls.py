@@ -33,7 +33,5 @@ company_patterns = ([
 
 urlpatterns = [
     path('company/', include(company_patterns)),
-
-    # TODO: create pages app and move into it
     path('contacts/', ContactsView.as_view(), name='contacts'),
 ]

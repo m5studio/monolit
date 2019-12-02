@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     'apps.news.apps.NewsConfig',
     'apps.mortgage.apps.MortgageConfig',
     'apps.company.apps.CompanyConfig',
+    'apps.pages.apps.PagesConfig',
 
     'apps.favorites.apps.FavoritesConfig',
     'apps.api.apps.ApiConfig',

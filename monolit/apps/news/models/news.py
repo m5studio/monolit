@@ -1,5 +1,3 @@
-# import datetime
-
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
@@ -8,8 +6,6 @@ from django.utils.html import mark_safe
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 
-# from imagekit.models import ProcessedImageField
-# from imagekit.processors import ResizeToFill, ResizeToFit
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFit
 
