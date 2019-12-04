@@ -29,8 +29,9 @@ def split_thousands(value):
 
 @register.filter(name='round_million')
 def round_million(value):
-    value = round(value / 1000000, 1)
-    return '{}'.format(value).replace('.0', '')
+    if value:
+        value = round(value / 1000000, 1)
+        return '{}'.format(value).replace('.0', '')
 
 
 @register.filter(name='remove_trailing_zero')

@@ -5,13 +5,13 @@
         <div id="section-sites-types__top">
             <div id="section-sites-types__top-inner">
                 <div>
-                    <a href="{% url 'objects:list' %}"><span class="big">{{ objects_qty }}</span> проектов</a>
+                    <a href="{% url 'objects:list' %}"><span class="big">{{ objects_qty }}</span> жилых объектов</a>
                 </div>
                 <div class="sft-params-request">
-                    <a href="">Подбор по параметрам</a>
+                    <a href="{% url 'sites:list' %}">Подбор по параметрам</a>
                 </div>
                 <div class="sft-see-all">
-                    <a href="{% url 'objects:list' %}">Посмотреть все проекты <span class="icon icon-arrow-right-white"></span></a>
+                    <a href="{% url 'objects:list' %}">Посмотреть все объекты <span class="icon icon-arrow-right-white"></span></a>
                 </div>
             </div>
         </div>
@@ -27,11 +27,16 @@
                     <div class="site-type-card__info">
                         <div class="site-type-card__info--block">
                             <div class="site-type-card__info--title">Площадь</div>
-                            <div class="site-type-card__info--area">от {{ count_object_sites_room_0_site_area_min.site_area__min|floatformat:"-2" }} до<br>{{ count_object_sites_room_0_site_area_max.site_area__max|floatformat:"-2" }} м<sup>2</sup></div>
+                            <div class="site-type-card__info--area">
+                                от {{ count_object_sites_room_0_site_area_min.site_area__min|floatformat:"-2" }} до<br>
+                                {{ count_object_sites_room_0_site_area_max.site_area__max|floatformat:"-2" }} м<sup>2</sup>
+                            </div>
                         </div>
                         <div class="site-type-card__info--block">
                             <div class="site-type-card__info--title">Стоимость</div>
-                            <div class="site-type-card__info--price">от {{ count_object_sites_room_0_price_total_min.price_total__min|round_million }} млн руб.</div>
+                            <div class="site-type-card__info--price">
+                                от {{ count_object_sites_room_0_price_total_min.price_total__min|round_million }} млн руб.
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -47,11 +52,16 @@
                     <div class="site-type-card__info">
                         <div class="site-type-card__info--block">
                             <div class="site-type-card__info--title">Площадь</div>
-                            <div class="site-type-card__info--area">от {{ count_object_sites_room_1_site_area_min.site_area__min|floatformat:"-2" }} до<br>{{ count_object_sites_room_1_site_area_max.site_area__max|floatformat:"-2" }} м<sup>2</sup></div>
+                            <div class="site-type-card__info--area">
+                                от {{ count_object_sites_room_1_site_area_min.site_area__min|floatformat:"-2" }} до<br>
+                                {{ count_object_sites_room_1_site_area_max.site_area__max|floatformat:"-2" }} м<sup>2</sup>
+                            </div>
                         </div>
                         <div class="site-type-card__info--block">
                             <div class="site-type-card__info--title">Стоимость</div>
-                            <div class="site-type-card__info--price">от {{ count_object_sites_room_1_price_total_min.price_total__min|round_million }} млн руб.</div>
+                            <div class="site-type-card__info--price">
+                                от {{ count_object_sites_room_1_price_total_min.price_total__min|round_million }} млн руб.
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -67,11 +77,16 @@
                     <div class="site-type-card__info">
                         <div class="site-type-card__info--block">
                             <div class="site-type-card__info--title">Площадь</div>
-                            <div class="site-type-card__info--area">от {{ count_object_sites_room_2_site_area_min.site_area__min|floatformat:"-2" }} до<br>{{ count_object_sites_room_2_site_area_max.site_area__max|floatformat:"-2" }} м<sup>2</sup></div>
+                            <div class="site-type-card__info--area">
+                                от {{ count_object_sites_room_2_site_area_min.site_area__min|floatformat:"-2" }} до<br>
+                                {{ count_object_sites_room_2_site_area_max.site_area__max|floatformat:"-2" }} м<sup>2</sup>
+                            </div>
                         </div>
                         <div class="site-type-card__info--block">
                             <div class="site-type-card__info--title">Стоимость</div>
-                            <div class="site-type-card__info--price">от {{ count_object_sites_room_2_price_total_min.price_total__min|round_million }} млн руб.</div>
+                            <div class="site-type-card__info--price">
+                                от {{ count_object_sites_room_2_price_total_min.price_total__min|round_million }} млн руб.
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -87,11 +102,16 @@
                     <div class="site-type-card__info">
                         <div class="site-type-card__info--block">
                             <div class="site-type-card__info--title">Площадь</div>
-                            <div class="site-type-card__info--area">от {{ count_object_sites_room_3_site_area_min.site_area__min|floatformat:"-2" }} до<br>{{ count_object_sites_room_3_site_area_max.site_area__max|floatformat:"-2" }} м<sup>2</sup></div>
+                            <div class="site-type-card__info--area">
+                                от {{ count_object_sites_room_3_site_area_min.site_area__min|floatformat:"-2" }} до<br>
+                                {{ count_object_sites_room_3_site_area_max.site_area__max|floatformat:"-2" }} м<sup>2</sup>
+                            </div>
                         </div>
                         <div class="site-type-card__info--block">
                             <div class="site-type-card__info--title">Стоимость</div>
-                            <div class="site-type-card__info--price">от {{ count_object_sites_room_3_price_total_min.price_total__min|round_million }} млн руб.</div>
+                            <div class="site-type-card__info--price">
+                                от {{ count_object_sites_room_3_price_total_min.price_total__min|round_million }} млн руб.
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -107,11 +127,16 @@
                     <div class="site-type-card__info">
                         <div class="site-type-card__info--block">
                             <div class="site-type-card__info--title">Площадь</div>
-                            <div class="site-type-card__info--area">от {{ count_object_sites_room_4_site_area_min.site_area__min|floatformat:"-2" }} до<br>{{ count_object_sites_room_4_site_area_max.site_area__max|floatformat:"-2" }} м<sup>2</sup></div>
+                            <div class="site-type-card__info--area">
+                                от {{ count_object_sites_room_4_site_area_min.site_area__min|floatformat:"-2" }} до<br>
+                                {{ count_object_sites_room_4_site_area_max.site_area__max|floatformat:"-2" }} м<sup>2</sup>
+                            </div>
                         </div>
                         <div class="site-type-card__info--block">
                             <div class="site-type-card__info--title">Стоимость</div>
-                            <div class="site-type-card__info--price">от {{ count_object_sites_room_4_price_total_min.price_total__min|round_million }} млн руб.</div>
+                            <div class="site-type-card__info--price">
+                                от {{ count_object_sites_room_4_price_total_min.price_total__min|round_million }} млн руб.
+                            </div>
                         </div>
                     </div>
                 </div>

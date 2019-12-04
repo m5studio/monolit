@@ -6,19 +6,23 @@ from apps.realty.models.object_commercial_site import ObjectCommercialSite
 
 
 def favorites_list(request):
-    object_list = None
+    sites_all_list, sites_list, sites_commercial_list = None, None, None
     if request.session.get('favorites'):
-        object_list = list()
+        sites_all_list, sites_list, sites_commercial_list = list(), list(), list()
         for favorite in request.session.get('favorites'):
             type = favorite['type']
             id = int(favorite['id'])
             if type == 'object_site':
-                object_list.append(ObjectSite.objects.get(id=id))
+                sites_all_list.append(ObjectSite.objects.get(id=id))
+                sites_list.append(ObjectSite.objects.get(id=id))
             if type == 'object_commercial_site':
-                object_list.append(ObjectCommercialSite.objects.get(id=id))
+                sites_all_list.append(ObjectCommercialSite.objects.get(id=id))
+                sites_commercial_list.append(ObjectCommercialSite.objects.get(id=id))
     context = {
         'page_title': 'Избранное',
-        'object_list': object_list,
+        'sites_all_list': sites_all_list,
+        'sites_list': sites_list,
+        'sites_commercial_list': sites_commercial_list,
     }
     return render(request, 'favorites/favorites_list.html', context=context)
 

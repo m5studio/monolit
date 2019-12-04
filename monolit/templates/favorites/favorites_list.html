@@ -34,20 +34,48 @@
         </div>
 
         {% if request.user.is_superuser %}
-            <!-- <div class="container">
+            <!-- <div class="container mb-3">
                 <div class="h3">{{ request.session.keys }}</div>
                 <div>{{ request.session.favorites }}</div>
             </div> -->
         {% endif %}
 
         {% if request.session.favorites %}
-            <div id="section-sites-list" class="common-section">
-                <div id="section-sites-list__inner" class="container">
-                    {% for object in object_list %}
-                        {% include 'realty/cards/site-card.html' %}
-                    {% endfor %}
+            {% comment %}
+                <!-- <div id="section-sites-list" class="common-section">
+                    <div id="section-sites-list__inner" class="container">
+                        {% for object in sites_all_list %}
+                            {% include 'realty/cards/site-card.html' %}
+                        {% endfor %}
+                    </div>
+                </div> -->
+            {% endcomment %}
+
+            {% if sites_list %}
+                <div class="section-sites-list common-section">
+                    <div class="common-section__title container">
+                        <div class="h2">Жилые помещения</div>
+                    </div>
+                    <div class="section-sites-list__inner container">
+                        {% for object in sites_list %}
+                            {% include 'realty/cards/site-card.html' %}
+                        {% endfor %}
+                    </div>
                 </div>
-            </div>
+            {% endif %}
+
+            {% if sites_commercial_list %}
+                <div class="section-sites-list common-section">
+                    <div class="common-section__title container">
+                        <div class="h2">Коммерческие помещения</div>
+                    </div>
+                    <div class="section-sites-list__inner container">
+                        {% for object in sites_commercial_list %}
+                            {% include 'realty/cards/site-card.html' %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
         {% else %}
             <div class="container">
                 <p>В избранном пусто =(</p>

@@ -23,9 +23,7 @@
         {% if object.first_payment_from or object.first_payment_to %}
             <div class="mortgage-card__info-blocks--block">
                 <div class="mortgage-card__info-blocks--small-title">Первый взнос</div>
-                <div class="mortgage-card__info-blocks--value">
-                    {{ object.first_payment_dispaly }}
-                </div>
+                <div class="mortgage-card__info-blocks--value">{{ object.first_payment_dispaly|safe }}</div>
             </div>
         {% endif %}
     </div>
