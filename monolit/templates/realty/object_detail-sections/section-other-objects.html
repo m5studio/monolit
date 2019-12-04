@@ -3,7 +3,7 @@
         <div class="common-section__title container">
             <h2>Другие объекты в продаже</h2>
         </div>
-        <div id="section-objects-list__inner" class="container">
+        <div class="common-section__inner-grid container">
             {% for object in other_objects %}
                 {% include 'realty/cards/object-card.html' %}
             {% endfor %}

@@ -230,7 +230,7 @@
                 <div class="common-section__title container">
                     <h2>Продажа коммерческой недвижимости в {{ object.object_type }} {{ object.name }}</h2>
                 </div>
-                <div id="section-sites-list__inner" class="container">
+                <div class="common-section__inner-grid container">
                     {% for object in commercial_sites %}
                         {% include 'realty/cards/site-card.html' %}
                     {% endfor %}

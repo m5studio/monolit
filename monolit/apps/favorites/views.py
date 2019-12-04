@@ -21,6 +21,7 @@ def favorites_list(request):
     context = {
         'page_title': 'Избранное',
         'sites_all_list': sites_all_list,
+
         'sites_list': sites_list,
         'sites_commercial_list': sites_commercial_list,
     }

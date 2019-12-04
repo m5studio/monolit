@@ -581,11 +581,11 @@ class GenerateContent:
                 object_commercial = ObjectCommercial.objects.get(pk=object_commercial_id)
                 object_commercial_block = ObjectBlock.objects.filter(object_commercial=object_commercial_id).get(pk=object_commercial_block_id)
                 object_commercial_section = ObjectSection(object_commercial=object_commercial, \
-                                                object_block=object_commercial_block, \
-                                                name=f'С{i}.к{i}', \
-                                                floor_first=1, \
-                                                floor_last=23, \
-                                            )
+                                                            object_block=object_commercial_block, \
+                                                            name=f'С{i}.к{i}', \
+                                                            floor_first=1, \
+                                                            floor_last=23, \
+                                                        )
                 object_commercial_section.save()
                 print(f'[ObjectSection "{object_commercial_section.name}"] created for ObjectCommercial {object_commercial_section.id}')
                 i += 1
