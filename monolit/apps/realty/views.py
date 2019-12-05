@@ -22,6 +22,8 @@ from apps.realty.models.object_elevator import ObjectElevator
 from apps.realty.models.object_commercial import ObjectCommercial
 from apps.realty.models.object_commercial_site import ObjectCommercialSite
 
+from apps.realty.models.object_commercial_info_tab import ObjectCommercialInfoTab
+
 from apps.news.models.news import News
 from apps.mortgage.models import Offer
 
@@ -150,6 +152,7 @@ class ObjectCommercialDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['opts'] = ObjectCommercial._meta
         context['page_title'] = f'{self.get_object().display_name()}'
+        context['object_info_tabs'] = ObjectCommercialInfoTab.objects.filter(object_commercial=self.get_object().pk)
         context['commercial_sites'] = ObjectCommercialSite.objects.filter(object_commercial=self.get_object().id, active=True).order_by('?')[:12]
         return context
 

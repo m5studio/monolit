@@ -10,16 +10,16 @@ from apps.core.classes.clean_media import CleanMedia
 from apps.core.classes.file_processing import FileProcessing
 from apps.core.classes.image_optimizer import ImageOptimizer
 
-from apps.realty.models.object import Object
+from apps.realty.models.object_commercial import ObjectCommercial
 
 
 def image_upload_path(instance, filename):
-    object_crm_id = instance.object.crm_id
+    object_crm_id = instance.object_commercial.crm_id
     filename = FileProcessing(filename)
     filename = filename.newFileNameGenerated()
-    return f'objects/{object_crm_id}/info-tabs/{filename}'
+    return f'objects-commercial/{object_crm_id}/info-tabs/{filename}'
 
-class ObjectInfoTab(models.Model):
+class ObjectCommercialInfoTab(models.Model):
     ICONS = (
         ('about', 'Об объекте'),
         ('architecture', 'Архитектура'),
@@ -27,14 +27,14 @@ class ObjectInfoTab(models.Model):
         ('location', 'Расположение'),
         ('communications', 'Коммуникации'),
         ('arrangement', 'Планировки'),
-        ('storage-room', 'Кладовые'),
         ('parking', 'Паркинг'),
+        ('servicing', 'Обслуживание'),
     )
 
-    object       = models.ForeignKey(Object, on_delete=models.CASCADE, default=0)
-    icon_name    = models.SlugField('Имя иконки (оно же заголовок таба)', max_length=100, choices=ICONS, blank=True, null=True)
-    description  = RichTextField('Описание', blank=True, null=True)
-    image        = models.ImageField('Изображение', upload_to=image_upload_path, blank=True, null=True)
+    object_commercial = models.ForeignKey(ObjectCommercial, on_delete=models.CASCADE, default=0)
+    icon_name         = models.SlugField('Имя иконки (оно же заголовок таба)', max_length=100, choices=ICONS, blank=True, null=True)
+    description       = RichTextField('Описание', blank=True, null=True)
+    image             = models.ImageField('Изображение', upload_to=image_upload_path, blank=True, null=True)
 
     def image_thumb(self):
         return mark_safe('<img src="{}" alt="" style="width: 128px; height: auto;" />'.format(self.image.url))
@@ -44,18 +44,18 @@ class ObjectInfoTab(models.Model):
         return self.get_icon_name_display()
 
     class Meta:
-        verbose_name = 'Таб [Информация об объекте]'
-        verbose_name_plural = 'Табы [Информация об объектах]'
+        verbose_name = 'Таб [Информация о коммерческом объекте]'
+        verbose_name_plural = 'Табы [Информация о коммерческих объектах]'
 
 
-@receiver(post_save, sender=ObjectInfoTab)
+@receiver(post_save, sender=ObjectCommercialInfoTab)
 def image_optimization(sender, instance, created, **kwargs):
     if instance.image:
         image = ImageOptimizer(instance.image.path)
         image.optimizeAndSaveImg()
 
 
-@receiver(post_delete, sender=ObjectInfoTab)
+@receiver(post_delete, sender=ObjectCommercialInfoTab)
 def clean_empty_media_dirs(sender, instance, **kwargs):
     cleanMedia = CleanMedia()
     # Delete empty dirs in /media/

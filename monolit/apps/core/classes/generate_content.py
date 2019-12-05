@@ -21,6 +21,7 @@ from apps.realty.models.object_types import ObjectTypes
 from apps.realty.models.object_cities import ObjectCities
 from apps.realty.models.object_commercial import ObjectCommercial
 from apps.realty.models.object_commercial_site import ObjectCommercialSite
+from apps.realty.models.object_commercial_info_tab import ObjectCommercialInfoTab
 
 from apps.mortgage.models import WayToBuy, Bank, Offer
 
@@ -629,6 +630,18 @@ class GenerateContent:
                 print(f'[ObjectInfoTab "{info_tab}"] created for Object {object_id}')
 
 
+    def _create_ObjectCommercialInfoTab(self, object_commercial_id):
+        count_info_tabs_rel_to_object = ObjectCommercialInfoTab.objects.annotate(Count('object_commercial')).filter(object_commercial=object_commercial_id).count()
+        object_info_tab_icons_list = self.convert_tuple_to_site_list(ObjectCommercialInfoTab.ICONS)
+        object_commercial = ObjectCommercial.objects.get(pk=object_commercial_id)
+
+        if count_info_tabs_rel_to_object == 0:
+            for info_tab in object_info_tab_icons_list:
+                object_info_tab = ObjectCommercialInfoTab(object_commercial=object_commercial, icon_name=info_tab, description=self.fake.text(300), image=self.DUMMY_IMG)
+                object_info_tab.save()
+                print(f'[ObjectCommercialInfoTab "{info_tab}"] created for ObjectCommercial {object_commercial_id}')
+
+
     def _create_ObjectFile(self, object_id):
         count_files_rel_to_object = ObjectFile.objects.annotate(Count('object')).filter(object=object_id).count()
 
@@ -795,9 +808,10 @@ class GenerateContent:
             self._create_ObjectCommercial()
         print('\n')
 
-        for object_id in self._get_objects_ids_list(ObjectCommercial):
-            self._create_ObjectBlock_for_ObjectCommercial(object_id, 4)
-            self._create_ObjectSection_for_ObjectCommercial(object_id)
+        for object_commercial_id in self._get_objects_ids_list(ObjectCommercial):
+            self._create_ObjectBlock_for_ObjectCommercial(object_commercial_id, 4)
+            self._create_ObjectSection_for_ObjectCommercial(object_commercial_id)
+            self._create_ObjectCommercialInfoTab(object_commercial_id)
 
         # Generate ObjectCommercialSite
         for object_commercial_id in self._get_objects_ids_list(ObjectCommercial):

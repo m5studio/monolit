@@ -23,6 +23,7 @@ from apps.realty.models.object import Object
 
 from apps.realty.models.object_commercial import ObjectCommercial
 from apps.realty.models.object_commercial_site import ObjectCommercialSite
+from apps.realty.models.object_commercial_info_tab import ObjectCommercialInfoTab
 
 
 """ [ ObjectCities ] """
@@ -245,6 +246,21 @@ class ObjectInfoTabAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.ModelAdm
 """ [ END ObjectInfoTab ] """
 
 
+""" [ ObjectCommercialInfoTab ] """
+class ObjectCommercialInfoTabInline(admin.TabularInline):
+    model = ObjectCommercialInfoTab
+    extra = 1
+    max_num = 8
+
+    readonly_fields = ('image_thumb',)
+    fields = ('object_commercial', 'icon_name', 'description', 'image', 'image_thumb',)
+
+@admin.register(ObjectCommercialInfoTab)
+class ObjectCommercialInfoTabAdmin(TurnOffAdminLogging, HideFromAdminIndex, admin.ModelAdmin):
+    pass
+""" [ END ObjectCommercialInfoTab ] """
+
+
 """ [ ObjectSite ] """
 @admin.register(ObjectSite)
 class ObjectSiteAdmin(TurnOffAdminLogging, admin.ModelAdmin):
@@ -372,6 +388,10 @@ class ObjectCommercialSiteAdmin(TurnOffAdminLogging, admin.ModelAdmin):
 """ [ ObjectCommercial ] """
 @admin.register(ObjectCommercial)
 class ObjectCommercialAdmin(TurnOffAdminLogging, admin.ModelAdmin):
+    inlines = [
+        ObjectCommercialInfoTabInline,
+    ]
+
     readonly_fields = ('genplan_thumb', 'main_image_thumb_admin')
     fieldsets = (
         ('Опции', {
