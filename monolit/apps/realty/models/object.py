@@ -8,7 +8,7 @@ from django.utils.html import mark_safe
 
 from ckeditor.fields import RichTextField
 
-from imagekit.models import ImageSpecField
+from imagekit.models import ImageSpecField, ProcessedImageField
 from imagekit.processors import ResizeToFill
 
 from apps.core.classes.clean_media import CleanMedia
@@ -31,6 +31,12 @@ def image_upload_path(instance, filename):
     filename = FileProcessing(filename)
     filename = filename.newFileNameGenerated()
     return f'objects/{object_crm_id}/images/{filename}'
+
+def slide_image_upload_path(instance, filename):
+    object_crm_id = instance.crm_id
+    filename = FileProcessing(filename)
+    filename = filename.newFileNameGenerated()
+    return f'objects/{object_crm_id}/slider/{filename}'
 
 class Object(models.Model):
     active        = models.BooleanField('Активный', default=True, help_text='Опубликован на сайте')
@@ -56,6 +62,13 @@ class Object(models.Model):
 
     main_image       = models.ImageField('Главное изображение', upload_to=image_upload_path, blank=True, null=True)
     main_image_thumb = ImageSpecField(source='main_image', processors=[ResizeToFill(512, 386)], format = 'JPEG', options={'quality': 70})
+
+    # !!!
+    slider_main   = ProcessedImageField(upload_to='slide_image_upload_path',
+                                        processors=[ResizeToFill(1920, 500)],
+                                        format='JPEG',
+                                        options={'quality': 70},
+                                        )
 
     webcam        = models.URLField('Cсылка на web-камеру', blank=True, null=True, help_text='e.g.: https://rtsp.me/embed/3KASrTkG/')
     panoram       = models.URLField('Cсылка на панораму', blank=True, null=True, help_text='e.g.: https://monolit360.com/files/main/index.html?s=pano1692')
