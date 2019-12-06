@@ -683,6 +683,7 @@ class GenerateContent:
                         address='ул. Ленина 12', \
                         genplan=self.DUMMY_IMG, \
                         main_image=self.DUMMY_IMG, \
+                        slider_main_image=self.DUMMY_IMG, \
                         webcam='https://rtsp.me/embed/3KASrTkG/', \
                         panoram='https://monolit360.com/files/main/index.html?s=pano1692', \
                     )
@@ -706,6 +707,7 @@ class GenerateContent:
                                             address='пр. Победы, 28А', \
                                             genplan=self.DUMMY_IMG, \
                                             main_image=self.DUMMY_IMG, \
+                                            slider_main_image=self.DUMMY_IMG, \
                                             webcam='https://rtsp.me/embed/3KASrTkG/', \
                                             panoram='https://monolit360.com/files/main/index.html?s=pano1692', \
                                         )

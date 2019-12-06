@@ -318,7 +318,7 @@ class ObjectAdmin(TurnOffAdminLogging, admin.ModelAdmin):
         ObjectDocumentInline,
     ]
 
-    readonly_fields = ('genplan_thumb', 'main_image_thumb_admin')
+    readonly_fields = ('genplan_thumb', 'main_image_thumb_admin', 'slider_main_image_thumb_admin')
     fieldsets = (
         ('Опции', {
             'fields': ('active', 'completed', 'all_sold', 'partnership')
@@ -332,6 +332,9 @@ class ObjectAdmin(TurnOffAdminLogging, admin.ModelAdmin):
         }),
         ('Генплан', {
             'fields': ('genplan_thumb', 'genplan', 'genplan_svg')
+        }),
+        ('Слайдер', {
+            'fields': ('slider_main_image_thumb_admin', 'slider_main_image',)
         }),
         ('Панорама\\Вебкамера', {
             'fields': ('webcam', 'panoram')
@@ -392,7 +395,7 @@ class ObjectCommercialAdmin(TurnOffAdminLogging, admin.ModelAdmin):
         ObjectCommercialInfoTabInline,
     ]
 
-    readonly_fields = ('genplan_thumb', 'main_image_thumb_admin')
+    readonly_fields = ('genplan_thumb', 'main_image_thumb_admin', 'slider_main_image_thumb_admin')
     fieldsets = (
         ('Опции', {
             'fields': ('active', 'completed', 'all_sold')
@@ -405,6 +408,9 @@ class ObjectCommercialAdmin(TurnOffAdminLogging, admin.ModelAdmin):
         }),
         ('Генплан', {
             'fields': ('genplan_thumb', 'genplan', 'genplan_svg')
+        }),
+        ('Слайдер', {
+            'fields': ('slider_main_image_thumb_admin', 'slider_main_image',)
         }),
         ('Панорама\\Вебкамера', {
             'fields': ('webcam', 'panoram')

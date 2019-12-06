@@ -9,7 +9,7 @@ from django.utils.html import mark_safe
 from ckeditor.fields import RichTextField
 
 from imagekit.models import ImageSpecField, ProcessedImageField
-from imagekit.processors import ResizeToFill
+from imagekit.processors import ResizeToFill, ResizeToFit
 
 from apps.core.classes.clean_media import CleanMedia
 from apps.core.classes.file_processing import FileProcessing
@@ -32,11 +32,10 @@ def image_upload_path(instance, filename):
     filename = filename.newFileNameGenerated()
     return f'objects/{object_crm_id}/images/{filename}'
 
-def slide_image_upload_path(instance, filename):
-    object_crm_id = instance.crm_id
+def slider_image_upload(instance, filename):
     filename = FileProcessing(filename)
     filename = filename.newFileNameGenerated()
-    return f'objects/{object_crm_id}/slider/{filename}'
+    return f'objects/{instance.crm_id}/slider/{filename}'
 
 class Object(models.Model):
     active        = models.BooleanField('Активный', default=True, help_text='Опубликован на сайте')
@@ -63,11 +62,13 @@ class Object(models.Model):
     main_image       = models.ImageField('Главное изображение', upload_to=image_upload_path, blank=True, null=True)
     main_image_thumb = ImageSpecField(source='main_image', processors=[ResizeToFill(512, 386)], format = 'JPEG', options={'quality': 70})
 
-    # !!!
-    slider_main   = ProcessedImageField(upload_to='slide_image_upload_path',
-                                        processors=[ResizeToFill(1920, 500)],
-                                        format='JPEG',
-                                        options={'quality': 70},
+    # Slider
+    slider_main_image = ProcessedImageField(verbose_name='Изображение для слайдера',
+                                            upload_to=slider_image_upload,
+                                            processors=[ResizeToFill(1920, 600)],
+                                            format='JPEG',
+                                            options={'quality': 70},
+                                            blank=True, null=True,
                                         )
 
     webcam        = models.URLField('Cсылка на web-камеру', blank=True, null=True, help_text='e.g.: https://rtsp.me/embed/3KASrTkG/')
@@ -83,6 +84,10 @@ class Object(models.Model):
     def main_image_thumb_admin(self):
         return mark_safe('<img src="{}" alt="" style="width: 40%; height: auto;" />'.format(self.main_image.url))
     main_image_thumb_admin.short_description = 'Главное изображение (thumbnail)'
+
+    def slider_main_image_thumb_admin(self):
+        return mark_safe('<img src="{}" alt="" style="width: 40%; height: auto;" />'.format(self.slider_main_image.url))
+    slider_main_image_thumb_admin.short_description = 'Изображение для слайдера (thumbnail)'
     # END Thumbnails for admin
 
     def __str__(self):
@@ -106,6 +111,9 @@ def images_optimization(sender, instance, created, **kwargs):
         image.optimizeAndSaveImg()
     if instance.main_image:
         image = ImageOptimizer(instance.main_image.path)
+        image.optimizeAndSaveImg()
+    if instance.slider_main_image:
+        image = ImageOptimizer(instance.slider_main_image.path)
         image.optimizeAndSaveImg()
     # Delete empty dirs in /media/
     # cleanMedia = CleanMedia()

@@ -8,8 +8,8 @@ from django.utils.html import mark_safe
 
 from ckeditor.fields import RichTextField
 
-from imagekit.models import ImageSpecField
-from imagekit.processors import ResizeToFill
+from imagekit.models import ImageSpecField, ProcessedImageField
+from imagekit.processors import ResizeToFill, ResizeToFit
 
 from apps.core.classes.clean_media import CleanMedia
 from apps.core.classes.file_processing import FileProcessing
@@ -29,6 +29,11 @@ def image_upload_path(instance, filename):
     filename = FileProcessing(filename)
     filename = filename.newFileNameGenerated()
     return f'objects-commercial/{instance.crm_id}/images/{filename}'
+
+def slider_image_upload(instance, filename):
+    filename = FileProcessing(filename)
+    filename = filename.newFileNameGenerated()
+    return f'objects-commercial/{instance.crm_id}/slider/{filename}'
 
 class ObjectCommercial(models.Model):
     active        = models.BooleanField('Активный', default=True, help_text='Опубликован на сайте')
@@ -54,6 +59,15 @@ class ObjectCommercial(models.Model):
     main_image       = models.ImageField('Главное изображение', upload_to=image_upload_path, blank=True, null=True)
     main_image_thumb = ImageSpecField(source='main_image', processors=[ResizeToFill(512, 386)], format = 'JPEG', options={'quality': 70})
 
+    # Slider
+    slider_main_image = ProcessedImageField(verbose_name='Изображение для слайдера',
+                                            upload_to=slider_image_upload,
+                                            processors=[ResizeToFill(1920, 600)],
+                                            format='JPEG',
+                                            options={'quality': 70},
+                                            blank=True, null=True,
+                                        )
+
     webcam        = models.URLField('Cсылка на web-камеру', blank=True, null=True, help_text='e.g.: https://rtsp.me/embed/3KASrTkG/')
     panoram       = models.URLField('Cсылка на панораму', blank=True, null=True, help_text='e.g.: https://monolit360.com/files/main/index.html?s=pano1692')
 
@@ -67,6 +81,10 @@ class ObjectCommercial(models.Model):
     def main_image_thumb_admin(self):
         return mark_safe('<img src="{}" alt="" style="width: 40%; height: auto;" />'.format(self.main_image.url))
     main_image_thumb_admin.short_description = 'Главное изображение (thumbnail)'
+
+    def slider_main_image_thumb_admin(self):
+        return mark_safe('<img src="{}" alt="" style="width: 40%; height: auto;" />'.format(self.slider_main_image.url))
+    slider_main_image_thumb_admin.short_description = 'Изображение для слайдера (thumbnail)'
     # END Thumbnails for admin
 
     def __str__(self):
