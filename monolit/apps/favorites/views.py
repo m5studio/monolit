@@ -61,7 +61,6 @@ def add_to_favorites(request):
     return redirect(request.POST.get('url_from'))
 
 
-# def remove_from_favorites(request, id):
 def remove_from_favorites(request):
     if request.method == 'POST':
         # Delete an item from favorites
