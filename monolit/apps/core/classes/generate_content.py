@@ -667,7 +667,7 @@ class GenerateContent:
 
 
     def _create_Object(self):
-        name = f'Объект {self.fake.word()} {self.fake.word()} {str(self.fake.random_number(4, True))}'.title()
+        name = f'Объект {self.fake.word()} {str(self.fake.random_number(4, True))}'.title()
         city = ObjectCities.objects.get(name='Симферополь')
         fake = Faker()
         object = Object(completed=self.fake.boolean(chance_of_getting_true=40), \
@@ -694,7 +694,7 @@ class GenerateContent:
 
 
     def _create_ObjectCommercial(self):
-        name = f'Коммерческий Объект {self.fake.word()} {self.fake.word()} {str(self.fake.random_number(4, True))}'.title()
+        name = f'Коммерческий Объект {self.fake.word()} {str(self.fake.random_number(4, True))}'.title()
         object_commercial = ObjectCommercial(completed=self.fake.boolean(chance_of_getting_true=40), \
                                             all_sold=self.fake.boolean(chance_of_getting_true=30), \
                                             crm_id=self.fake.random_number(7, True), \

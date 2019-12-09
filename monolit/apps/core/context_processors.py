@@ -31,3 +31,7 @@ def current_month_rus(request):
     current_month = datetime.now().month
     current_month_text = months[current_month]
     return {'current_month_rus': current_month_text}
+
+
+def compleated_objects(request):
+    return {'compleated_objects': Object.objects.filter(active=True, all_sold=True, completed=True)}

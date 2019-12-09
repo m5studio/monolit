@@ -55,8 +55,12 @@ function mainSliderObjectSitesInfo() {
         $.getJSON(site_info_url, (data) => {
             let objectStats = data[0]
 
-            $(el).find('.caption-info__square .caption-info__value').append('от ' + formatNumber(objectStats['object_min_site_area'], 2) + ' до ' + formatNumber(objectStats['object_max_site_area'], 2) + ' м<sup>2</sup>')
-            $(el).find('.caption-info__price .caption-info__value').append('от ' + formatNumber(objectStats['object_min_site_price'], 0) + ' руб.')
+            if ( objectStats['object_total_sites_qty'] === 0 ) {
+                $(el).find('.caption-info').empty()
+            } else {
+                $(el).find('.caption-info__square .caption-info__value').append('от ' + formatNumber(objectStats['object_min_site_area'], 2) + ' до ' + formatNumber(objectStats['object_max_site_area'], 2) + ' м<sup>2</sup>')
+                $(el).find('.caption-info__price .caption-info__value').append('от ' + formatNumber(objectStats['object_min_site_price'], 0) + ' руб.')
+            }
         })
     })
 }
