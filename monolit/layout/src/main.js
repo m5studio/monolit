@@ -21,7 +21,7 @@ import {newsPageLoadMoreNews} from "./ajax/news-page-load-more-news"
 import {objectPageGalleries} from "./ajax/object-page-galleries"
 import {objectPageDocsPagination} from "./ajax/object-page-documents-pagination"
 import {objectCardSitesInfo} from "./ajax/object-card"
-import {objectPageSitesInfo, objectPageFlatsTypes} from "./ajax/object-page-sites-info"
+import {objectPageSitesInfo, objectPageSitesTypesInfo, mainSliderObjectSitesInfo} from "./ajax/object-page-sites-info"
 import {mortgageOfferMonthlyPayment} from "./ajax/mortgage-offer-monthly-payment-calculate"
 import {search_by_site_id} from "./ajax/search_by_site_id"
 import {companyTendersPagination, selectTenderCategory} from "./ajax/company-tenders-page-pagination"
@@ -48,7 +48,9 @@ $(document).ready(function() {
     search_by_site_id()
 
     // Homepage
-    if ( $('#section-realty-homepage-filters').length ) {
+    if ( $('.homepage').length ) {
+        mainSliderObjectSitesInfo()
+
         realtySquareFilters()
         realtyPriceFilters()
     }
@@ -68,7 +70,7 @@ $(document).ready(function() {
     // Object page
     if ( $('.object-page').length ) {
         objectPageSitesInfo()
-        objectPageFlatsTypes()
+        objectPageSitesTypesInfo()
         objectPageGalleries()
         objectPageDocsPagination()
     }

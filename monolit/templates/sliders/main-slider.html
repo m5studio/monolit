@@ -96,20 +96,23 @@
             {% for object in objects_for_slider %}
                 {% if object.slider_main_image %}
                     <div class="carousel-item{% if forloop.first %} active{% endif %}">
-                        <div class="slide" style="background-image: url('{{ object.slider_main_image.url }}');"></div>
+                        <div class="slide"{% if object.slider_main_image %} style="background-image: url('{{ object.slider_main_image.url }}');"{% endif %}{% if not object.all_sold %} data-sites-info-api-url="{% url 'api:object:sites-info' object_id=object.id %}"{% endif %}></div>
                         <div class="carousel-caption">
                             <div class="caption-legend-big">
+                                <!-- <a href="{{ object.get_absolute_url }}">todo</a> -->
                                 <div class="caption-legend-big__type">{% if object.object_type %}{{ object.object_type }}{% endif %}</div>
                                 <div class="caption-legend-big__title">{{ object.name }}</div>
                             </div>
                             <div class="caption-info">
                                 <div class="caption-info__item caption-info__square">
                                     <div class="caption-info__tiny-title">Площадь</div>
-                                    <div class="caption-info__value">от 62 до 62.4 м<sup>2</sup></div>
+                                    <!-- <div class="caption-info__value">от 62 до 62.4 м<sup>2</sup></div> -->
+                                    <div class="caption-info__value"></div>
                                 </div>
                                 <div class="caption-info__item caption-info__price">
                                     <div class="caption-info__tiny-title">Стоимость</div>
-                                    <div class="caption-info__value">от 3 402 702 руб.</div>
+                                    <!-- <div class="caption-info__value">от 3 402 702 руб.</div> -->
+                                    <div class="caption-info__value"></div>
                                 </div>
                             </div>
                         </div>

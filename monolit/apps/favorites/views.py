@@ -35,7 +35,7 @@ def add_to_favorites(request):
         else:
             request.session['favorites'] = list(request.session['favorites'])
 
-        # check if item exist in list of dicts
+        # Check if item exist in list of dicts
         item_exist = next((item for item in request.session['favorites'] if item["type"] == request.POST.get('type') and item["id"] == request.POST.get('id')), False)
 
         # Get item request data
