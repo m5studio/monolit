@@ -135,8 +135,6 @@ $(window).scroll(function() {
     // Main nav
     stickyMainNav()
 
-    // scrollToTop()
-
     if ( $('.sites').length || $('.sites-commercial').length ) {
         site_list_infinate_scroll()
     }

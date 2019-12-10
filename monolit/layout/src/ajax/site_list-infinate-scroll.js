@@ -14,12 +14,13 @@ $.fn.isInViewport = function() {
 
 function getSites(page_number) {
     let page_url = $('#section-sites-list').data('page-url')
+    console.log(page_url)
 
     $.ajax({
         url: page_url + '?page=' + page_number.toString(),
         type: 'GET',
         success: (data) => {
-            $('#section-sites-list__inner').append( $(data).find('#section-sites-list__inner').html() )
+            $('#section-sites-list__infinate_scroll').append( $(data).find('#section-sites-list__infinate_scroll').html() )
 
             // Run to display favorite icons for objects already in session after ajax request to load more object sites
             get_session_favorites()
@@ -46,7 +47,6 @@ function site_list_infinate_scroll() {
                 // Timeout before call
                 setTimeout(function(){
                     working = false
-                // }, 1000)
                 }, 500)
             }
         }
