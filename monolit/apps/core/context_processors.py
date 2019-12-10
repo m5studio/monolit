@@ -34,4 +34,4 @@ def current_month_rus(request):
 
 
 def compleated_objects(request):
-    return {'compleated_objects': Object.objects.filter(active=True, all_sold=True, completed=True)}
+    return {'compleated_objects': Object.objects.filter(active=True, all_sold=True, completed=True).exclude(slider_completed_image=None)}

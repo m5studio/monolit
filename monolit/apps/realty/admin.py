@@ -318,7 +318,7 @@ class ObjectAdmin(TurnOffAdminLogging, admin.ModelAdmin):
         ObjectDocumentInline,
     ]
 
-    readonly_fields = ('genplan_thumb', 'main_image_thumb_admin', 'slider_main_image_thumb_admin')
+    readonly_fields = ('genplan_thumb', 'main_image_thumb_admin', 'slider_main_image_thumb_admin', 'slider_completed_image_thumb_admin')
     fieldsets = (
         ('Опции', {
             'fields': ('active', 'completed', 'all_sold', 'partnership')
@@ -334,7 +334,7 @@ class ObjectAdmin(TurnOffAdminLogging, admin.ModelAdmin):
             'fields': ('genplan_thumb', 'genplan', 'genplan_svg')
         }),
         ('Слайдер', {
-            'fields': ('slider_main_image_thumb_admin', 'slider_main_image',)
+            'fields': ('slider_main_image_thumb_admin', 'slider_main_image', 'slider_completed_image_thumb_admin', 'slider_completed_image'),
         }),
         ('Панорама\\Вебкамера', {
             'fields': ('webcam', 'panoram')
@@ -343,7 +343,7 @@ class ObjectAdmin(TurnOffAdminLogging, admin.ModelAdmin):
             'fields': ('city', 'address',)
         }),
     )
-    list_display = ('name', 'crm_id', 'order', 'active', 'all_sold', 'partnership', 'updated')
+    list_display = ('name', 'crm_id', 'order', 'active', 'all_sold', 'completed', 'partnership', 'updated')
     list_editable = ('order', 'active')
     ordering = ('order',)
 
@@ -419,7 +419,7 @@ class ObjectCommercialAdmin(TurnOffAdminLogging, admin.ModelAdmin):
            'fields': ('city', 'address',),
         }),
     )
-    list_display = ('name', 'crm_id', 'order', 'active', 'all_sold', 'updated')
+    list_display = ('name', 'crm_id', 'order', 'active', 'all_sold', 'completed', 'updated')
     list_editable = ('order', 'active')
     ordering = ('order',)
 """ [ END ObjectCommercial ] """

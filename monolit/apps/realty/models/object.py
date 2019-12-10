@@ -63,10 +63,18 @@ class Object(models.Model):
     main_image_thumb = ImageSpecField(source='main_image', processors=[ResizeToFill(512, 386)], format = 'JPEG', options={'quality': 70})
 
     # Slider
-    slider_main_image = ProcessedImageField(verbose_name='Изображение для слайдера',
+    slider_main_image = ProcessedImageField(verbose_name='Изображение для слайдера на Главной',
                                             upload_to=slider_image_upload,
                                             processors=[ResizeToFill(1920, 600)],
                                             format='JPEG',
+                                            options={'quality': 70},
+                                            blank=True, null=True,
+                                        )
+
+    slider_completed_image = ProcessedImageField(verbose_name='Изображение для слайдера Завершенный объект',
+                                            upload_to=slider_image_upload,
+                                            processors=[ResizeToFill(386, 512)],
+                                            format='PNG',
                                             options={'quality': 70},
                                             blank=True, null=True,
                                         )
@@ -87,7 +95,11 @@ class Object(models.Model):
 
     def slider_main_image_thumb_admin(self):
         return mark_safe('<img src="{}" alt="" style="width: 40%; height: auto;" />'.format(self.slider_main_image.url))
-    slider_main_image_thumb_admin.short_description = 'Изображение для слайдера (thumbnail)'
+    slider_main_image_thumb_admin.short_description = 'Изображение для слайдера на Главной (thumbnail)'
+
+    def slider_completed_image_thumb_admin(self):
+        return mark_safe('<img src="{}" alt="" style="width: auto; height: auto;" />'.format(self.slider_completed_image.url))
+    slider_completed_image_thumb_admin.short_description = 'Изображение для слайдера Завершенный объект (thumbnail)'
     # END Thumbnails for admin
 
     def __str__(self):
@@ -114,6 +126,9 @@ def images_optimization(sender, instance, created, **kwargs):
         image.optimizeAndSaveImg()
     if instance.slider_main_image:
         image = ImageOptimizer(instance.slider_main_image.path)
+        image.optimizeAndSaveImg()
+    if instance.slider_completed_image:
+        image = ImageOptimizer(instance.slider_completed_image.path)
         image.optimizeAndSaveImg()
     # Delete empty dirs in /media/
     # cleanMedia = CleanMedia()
