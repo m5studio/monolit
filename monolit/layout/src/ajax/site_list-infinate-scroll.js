@@ -14,7 +14,6 @@ $.fn.isInViewport = function() {
 
 function getSites(page_number) {
     let page_url = $('#section-sites-list').data('page-url')
-    console.log(page_url)
 
     $.ajax({
         url: page_url + '?page=' + page_number.toString(),
