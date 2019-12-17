@@ -1,5 +1,4 @@
 function familyFiltersToggle() {
-
     const top_selector = $('#section-family-types-filters__top')
     const class_opened = 'ftf-opened'
 

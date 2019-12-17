@@ -6,11 +6,45 @@
     align-items: center;
     padding: 20px 25px;
 
-    &__title {
+    &__label {
+        font-weight: 600;
         text-align: center;
     }
+
     &__content {
         text-align: center;
+    }
+
+    .circle-site-type {
+        background-color: white;
+        border: 1px solid #00998f;
+        border-radius: 100%;
+        color: #00998f;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-weight: 700;
+        font-size: 1.2rem;
+        width: 48px;
+        height: 48px;
+        padding: 0;
+        transition: background-color .3s ease, color .2s ease;
+
+        &:hover {
+            background-color: rgba(0, 255, 239, .15);
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        // TODO: make active state styles
+        &.active {}
+
+        &.disabled {
+            cursor: default;
+            opacity: .4;
+        }
     }
 
     .noUi-target {
@@ -64,8 +98,16 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-
         margin-top: 15px;
+
+        input {
+            padding: 5px;
+            text-align: center;
+
+            &:focus {
+                outline: none;
+            }
+        }
 
         span {
             color: #a6a6a6;
