@@ -115,6 +115,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
+# DB local
 if DEBUG:
     DATABASES = {
         'default': {
@@ -122,7 +123,7 @@ if DEBUG:
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
-# TODO: setup production DB
+# DB production
 if not DEBUG:
     DATABASES = {
         'default': {
