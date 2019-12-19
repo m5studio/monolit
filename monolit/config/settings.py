@@ -186,6 +186,7 @@ STATICFILES_DIRS = [
     ('favicons', os.path.join(BASE_DIR, 'layout/dist/images/favicons')),
 ]
 
+
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
