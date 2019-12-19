@@ -124,7 +124,16 @@ if DEBUG:
     }
 # TODO: setup production DB
 if not DEBUG:
-    print("!!! SET PRODUCTION DB !!!")
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'HOST': env("DB_HOST"),
+            'PORT': env("DB_PORT"),
+            'NAME': env("DB_NAME"),
+            'USER': env("DB_USER"),
+            'PASSWORD': env("DB_PASSWORD"),
+        }
+    }
 
 
 # Password validation
