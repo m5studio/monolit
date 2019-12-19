@@ -16,9 +16,9 @@ class Command(BaseCommand):
 
 
     def handle(self, *args, **options):
-        if not settings.DEBUG:
-            self.stdout.write(self.style.ERROR('You can\'t generate content in PRODUCTION mode, set DEBUG=True'))
-        elif options['objects_qty'] > 10:
+        # if not settings.DEBUG:
+        #     self.stdout.write(self.style.ERROR('You can\'t generate content in PRODUCTION mode, set DEBUG=True'))
+        if options['objects_qty'] > 10:
             self.stdout.write(self.style.ERROR('You can\'t generate more then 10 objects'))
         else:
             call_command('add_default_content')
