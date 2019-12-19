@@ -126,7 +126,7 @@ if DEBUG:
 if not DEBUG:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql',
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'HOST': env("DB_HOST"),
             'PORT': env("DB_PORT"),
             'NAME': env("DB_NAME"),
