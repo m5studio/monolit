@@ -42,7 +42,7 @@
                 <div class="carousel-inner">
                     {% for object in compleated_objects %}
                         <div class="carousel-item{% if forloop.first %} active{% endif %}">
-                            <div class="slide" style="background-image: url('{{ object.slider_completed_image.url }}');"></div>
+                            <div class="slide"{% if object.slider_completed_image %} style="background-image: url('{{ object.slider_completed_image.url }}');"{% endif %}></div>
                         </div>
                     {% endfor %}
                 </div>
