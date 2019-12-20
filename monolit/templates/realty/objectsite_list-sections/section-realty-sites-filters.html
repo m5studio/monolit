@@ -1,130 +1,132 @@
 <div id="section-realty-sites-filters" class="container">
-    <div id="section-realty-sites-filters__inner">
-        <div id="section-realty-sites-filters__inner-top">
-            <div id="section-realty-sites-filters__rooms-block" class="realty-filters-block">
-                <div class="realty-filters-block__label">Количество комнат</div>
-                <div class="realty-filters-block__content">
-                    <button class="circle-site-type">Ст</button>
-                    <button class="circle-site-type">1</button>
-                    <button class="circle-site-type">2</button>
-                    <button class="circle-site-type">3</button>
-                    <button class="circle-site-type disabled">4+</button>
+    <form id="form-facet-filters-sites" action="" method="get">
+        <div id="section-realty-sites-filters__inner">
+            <div id="section-realty-sites-filters__inner-top">
+                <div id="section-realty-sites-filters__rooms-block" class="realty-filters-block">
+                    <div class="realty-filters-block__label">Количество комнат</div>
+                    <div class="realty-filters-block__content">
+                        <button class="circle-site-type">Ст</button>
+                        <button class="circle-site-type">1</button>
+                        <button class="circle-site-type">2</button>
+                        <button class="circle-site-type">3</button>
+                        <button class="circle-site-type disabled">4+</button>
+                    </div>
                 </div>
-            </div>
-            <div id="section-realty-sites-filters__square-block" class="realty-filters-block">
-                <div class="realty-filters-block__label">Площадь</div>
-                <div class="realty-filters-block__content">
-                    <div id="realty-filter__square-slider"></div>
-                    <div class="realty-filters-block__inputs">
-                        <span>от</span>
-                        <input id="realty-filter__square--input-min" type="number" min="35" max="245" step="1" value="35">
-                        <span>до</span>
-                        <input id="realty-filter__square--input-max" type="number" min="35" max="245" step="1" value="245">
-                        <span>м<sup>2</sup></span>
+                <div id="section-realty-sites-filters__square-block" class="realty-filters-block">
+                    <div class="realty-filters-block__label">Площадь</div>
+                    <div class="realty-filters-block__content">
+                        <div id="realty-filter__square-slider"></div>
+                        <div class="realty-filters-block__inputs">
+                            <span>от</span>
+                            <input id="realty-filter__square--input-min" name="square_min" type="number" min="35" max="245" step="1" value="35">
+                            <span>до</span>
+                            <input id="realty-filter__square--input-max" name="square_max" type="number" min="35" max="245" step="1" value="245">
+                            <span>м<sup>2</sup></span>
+                        </div>
+                    </div>
+                </div>
+                <div id="section-realty-sites-filters__price-block" class="realty-filters-block">
+                    <div class="realty-filters-block__label">Стоимость</div>
+                    <div class="realty-filters-block__content">
+                        <div id="realty-filter__price-slider"></div>
+                        <div class="realty-filters-block__inputs">
+                            <span>от</span>
+                            <input id="realty-filter__price--input-min" name="price_min" type="number" min="2919000" max="18360000" step="1000" value="">
+                            <span>до</span>
+                            <input id="realty-filter__price--input-max" name="price_max" type="number" min="2919000" max="18360000" step="1000" value="">
+                            <span>м<sup>2</sup></span>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div id="section-realty-sites-filters__price-block" class="realty-filters-block">
-                <div class="realty-filters-block__label">Стоимость</div>
-                <div class="realty-filters-block__content">
-                    <div id="realty-filter__price-slider"></div>
-                    <div class="realty-filters-block__inputs">
-                        <span>от</span>
-                        <input id="realty-filter__price--input-min" type="number" min="2919000" max="18360000" step="1000" value="">
-                        <span>до</span>
-                        <input id="realty-filter__price--input-max" type="number" min="2919000" max="18360000" step="1000" value="">
-                        <span>м<sup>2</sup></span>
+            <div id="section-realty-sites-filters__inner-bottom">
+                <div class="realty-filters-block">
+                    <div class="realty-filters-block__label">Объект</div>
+                    <div class="realty-filters-block__content">
+                        <select name="object" class="realty-filters-block__select">
+                            <option selected>Все объекты</option>
+                            <option>Лаванда</option>
+                            <option>Таврический</option>
+                            <option>Золотые пески</option>
+                            <option>Status House</option>
+                            <option>Континент</option>
+                            <option>на ул. Павленко</option>
+                            <option>на ул. Беспалова</option>
+                            <option>на ул. Балаклавской</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="realty-filters-block">
+                    <div class="realty-filters-block__label">Блок\Секция</div>
+                    <div class="realty-filters-block__content">
+                        <select name="block-section" class="realty-filters-block__select">
+                            <option selected>Все блоки\секции</option>
+                            <option disabled>Лаванда</option>
+                            <option>Секция 1</option>
+                            <option>Секция 2</option>
+                            <option>Секция 3</option>
+                            <option disabled>Таврический</option>
+                            <option>Секция 1</option>
+                            <option>Секция 2</option>
+                            <option>Секция 3</option>
+                            <option disabled>Золотые пески</option>
+                            <option>Секция 1</option>
+                            <option>Секция 2</option>
+                            <option>Секция 3</option>
+                            <option disabled>Status House</option>
+                            <option>Секция 1</option>
+                            <option>Секция 2</option>
+                            <option>Секция 3</option>
+                            <option disabled>Континент</option>
+                            <option>Секция 1</option>
+                            <option>Секция 2</option>
+                            <option>Секция 3</option>
+                            <option disabled>на ул. Павленко</option>
+                            <option>Секция 1</option>
+                            <option>Секция 2</option>
+                            <option>Секция 3</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="realty-filters-block">
+                    <div class="realty-filters-block__label">Город</div>
+                    <div class="realty-filters-block__content">
+                        <select name="city" class="realty-filters-block__select">
+                            <option selected>Все города</option>
+                            <option>Симферополь</option>
+                            <option>Ялта</option>
+                            <option>Евпатория</option>
+                            <option>Алушта</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="realty-filters-block">
+                    <div class="realty-filters-block__label">Год сдачи</div>
+                    <div class="realty-filters-block__content">
+                        <select name="year" class="realty-filters-block__select">
+                            <option selected>Все</option>
+                            <option>2019</option>
+                            <option>2020</option>
+                            <option>2021</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="realty-filters-block">
+                    <div class="realty-filters-block__label">Этаж</div>
+                    <div class="realty-filters-block__content">
+                        <div id="realty-filter__floor-slider"></div>
+                        <div class="realty-filters-block__inputs">
+                            <span>от</span>
+                            <input id="realty-filter__floor--input-min" name="floor_min" type="number" min="1" max="34" step="1" value="1">
+                            <span>до</span>
+                            <input id="realty-filter__floor--input-max" name="floor_max" type="number" min="2" max="35" step="1" value="17">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div id="section-realty-sites-filters__inner-bottom">
-            <div class="realty-filters-block">
-                <div class="realty-filters-block__label">Объект</div>
-                <div class="realty-filters-block__content">
-                    <select class="realty-filters-block__select">
-                        <option selected>Все объекты</option>
-                        <option>Лаванда</option>
-                        <option>Таврический</option>
-                        <option>Золотые пески</option>
-                        <option>Status House</option>
-                        <option>Континент</option>
-                        <option>на ул. Павленко</option>
-                        <option>на ул. Беспалова</option>
-                        <option>на ул. Балаклавской</option>
-                    </select>
-                </div>
-            </div>
-            <div class="realty-filters-block">
-                <div class="realty-filters-block__label">Блок\Секция</div>
-                <div class="realty-filters-block__content">
-                    <select class="realty-filters-block__select">
-                        <option selected>Все блоки\секции</option>
-                        <option disabled>Лаванда</option>
-                        <option>Секция 1</option>
-                        <option>Секция 2</option>
-                        <option>Секция 3</option>
-                        <option disabled>Таврический</option>
-                        <option>Секция 1</option>
-                        <option>Секция 2</option>
-                        <option>Секция 3</option>
-                        <option disabled>Золотые пески</option>
-                        <option>Секция 1</option>
-                        <option>Секция 2</option>
-                        <option>Секция 3</option>
-                        <option disabled>Status House</option>
-                        <option>Секция 1</option>
-                        <option>Секция 2</option>
-                        <option>Секция 3</option>
-                        <option disabled>Континент</option>
-                        <option>Секция 1</option>
-                        <option>Секция 2</option>
-                        <option>Секция 3</option>
-                        <option disabled>на ул. Павленко</option>
-                        <option>Секция 1</option>
-                        <option>Секция 2</option>
-                        <option>Секция 3</option>
-                    </select>
-                </div>
-            </div>
-            <div class="realty-filters-block">
-                <div class="realty-filters-block__label">Город</div>
-                <div class="realty-filters-block__content">
-                    <select class="realty-filters-block__select">
-                        <option selected>Все города</option>
-                        <option>Симферополь</option>
-                        <option>Ялта</option>
-                        <option>Евпатория</option>
-                        <option>Алушта</option>
-                    </select>
-                </div>
-            </div>
-            <div class="realty-filters-block">
-                <div class="realty-filters-block__label">Год сдачи</div>
-                <div class="realty-filters-block__content">
-                    <select class="realty-filters-block__select">
-                        <option selected>Все</option>
-                        <option>2019</option>
-                        <option>2020</option>
-                        <option>2021</option>
-                    </select>
-                </div>
-            </div>
-            <div class="realty-filters-block">
-                <div class="realty-filters-block__label">Этаж</div>
-                <div class="realty-filters-block__content">
-                    <div id="realty-filter__floor-slider"></div>
-                    <div class="realty-filters-block__inputs">
-                        <span>от</span>
-                        <input id="realty-filter__floor--input-min" type="number" min="1" max="17" step="1" value="1">
-                        <span>до</span>
-                        <input id="realty-filter__floor--input-max" type="number" min="35" max="17" step="1" value="17">
-                    </div>
-                </div>
-            </div>
+        <div id="section-realty-sites-filters__bottom">
+            <button type="submit" class="green-button">Показать <span class="realty-qty">103 квартиры</span></button>
         </div>
-    </div>
-    <div id="section-realty-sites-filters__bottom">
-        <button type="button" class="green-button">Показать <span class="realty-qty">103 квартиры</span></button>
-    </div>
+    </form>
 </div>

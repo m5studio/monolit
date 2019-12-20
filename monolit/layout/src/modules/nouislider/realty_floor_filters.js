@@ -5,12 +5,12 @@ function realtyFloorFilters() {
     const realtyFloorSlider = document.getElementById('realty-filter__floor-slider')
 
     noUiSlider.create(realtyFloorSlider, {
-        start: [1, 17],
+        start: [1, 35],
         step: 1,
         connect: true,
         range: {
             'min': 1,
-            'max': 17
+            'max': 35
         }
     })
 
