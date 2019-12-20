@@ -39,8 +39,9 @@ function facetFiltersSites() {
         // let url_rooms = urlParams.getAll('rooms')
         // url_rooms = ['']
         // window.location.search += rooms
-        urlParams.append('rooms', 222)
-        urlParams.set('rooms', '333')
+
+        // urlParams.append('rooms', 222)
+        // urlParams.set('rooms', '333')
     })
 }
 
