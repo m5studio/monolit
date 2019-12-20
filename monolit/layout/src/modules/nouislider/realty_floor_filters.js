@@ -3,9 +3,11 @@
 
 function realtyFloorFilters() {
     const realtyFloorSlider = document.getElementById('realty-filter__floor-slider')
+    let urlParams = new URLSearchParams(window.location.search)
 
     noUiSlider.create(realtyFloorSlider, {
-        start: [1, 35],
+        // start: [1, 35],
+        start: (urlParams.has('floor_min')) ? [urlParams.get('floor_min'), urlParams.get('floor_max')] : [1, 35],
         step: 1,
         connect: true,
         range: {

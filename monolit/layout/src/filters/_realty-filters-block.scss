@@ -15,7 +15,7 @@
         text-align: center;
     }
 
-    .circle-site-type {
+    .circle-site {
         background-color: white;
         border: 1px solid #00998f;
         border-radius: 100%;
@@ -39,7 +39,10 @@
         }
 
         // TODO: make active state styles
-        &.active {}
+        &.active {
+            background-color: #00998f;
+            color: white;
+        }
 
         &.disabled {
             cursor: default;

@@ -3,9 +3,11 @@
 
 function realtySquareFilters() {
     const realtySquareSlider = document.getElementById('realty-filter__square-slider')
+    let urlParams = new URLSearchParams(window.location.search)
 
     noUiSlider.create(realtySquareSlider, {
-        start: [35, 245],
+        // start: [35, 245],
+        start: (urlParams.has('square_min')) ? [urlParams.get('square_min'), urlParams.get('square_max')] : [35, 245],
         connect: true,
         range: {
             'min': 35,

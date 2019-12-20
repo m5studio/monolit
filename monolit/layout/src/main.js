@@ -5,12 +5,12 @@ import {stickyMainNav, mainNav} from "./menu/main-nav"
 
 // Fiters
 import {familyFiltersToggle} from "./filters/family-filters-toggle"
-import {familyFiltersReset} from "./filters/family-filters-reset"
+import {facetFiltersSites} from "./filters/facet-filters-sites"
+// import {familyFiltersReset} from "./filters/family-filters-reset"
 
-// Realty filters
-import {realtySquareFilters} from "./modules/nouislider/realty_square_filters"
-import {realtyPriceFilters} from "./modules/nouislider/realty_price_filters"
-import {realtyFloorFilters} from "./modules/nouislider/realty_floor_filters"
+// import {realtySquareFilters} from "./modules/nouislider/realty_square_filters"
+// import {realtyPriceFilters} from "./modules/nouislider/realty_price_filters"
+// import {realtyFloorFilters} from "./modules/nouislider/realty_floor_filters"
 
 // Scroll to Top
 import {scrollToTop} from "./modules/scroll-to-top/scroll-to-top"
@@ -23,7 +23,7 @@ import {objectPageDocsPagination} from "./ajax/object-page-documents-pagination"
 import {objectCardSitesInfo} from "./ajax/object-card"
 import {objectPageSitesInfo, objectPageSitesTypesInfo, mainSliderObjectSitesInfo} from "./ajax/object-page-sites-info"
 import {mortgageOfferMonthlyPayment} from "./ajax/mortgage-offer-monthly-payment-calculate"
-import {search_by_site_id} from "./ajax/search_by_site_id"
+import {searchBySiteId} from "./ajax/search-by-site-id"
 import {companyTendersPagination, selectTenderCategory} from "./ajax/company-tenders-page-pagination"
 import {site_list_infinate_scroll} from "./ajax/site_list-infinate-scroll"
 import {favorites} from "./ajax/favorites"
@@ -45,54 +45,51 @@ $(document).ready(function() {
     stickyMainNav()
 
     // Search by site id
-    search_by_site_id()
+    searchBySiteId()
 
     // Homepage
     if ( $('.homepage').length ) {
         mainSliderObjectSitesInfo()
+        // facetFiltersSites()
 
-        realtySquareFilters()
-        realtyPriceFilters()
+        // realtySquareFilters()
+        // realtyPriceFilters()
     }
 
     // Flats
-    if ( $('#section-realty-sites-filters').length ) {
-        realtySquareFilters()
-        realtyPriceFilters()
-        realtyFloorFilters()
-    }
+    // if ( $('#section-realty-sites-filters').length ) {
+    //     realtySquareFilters()
+    //     realtyPriceFilters()
+    //     realtyFloorFilters()
+    // }
 
-    familyFiltersToggle()
-    familyFiltersReset()
+    // familyFiltersReset()
 
     scrollToTop()
 
-    // Object page
     if ( $('.object-page').length ) {
         objectPageSitesInfo()
         objectPageSitesTypesInfo()
         objectPageGalleries()
         objectPageDocsPagination()
     }
-    // END Object page
 
-    // ObjectCommercial page
     if ( $('.commercial-object-page').length ) {
         objectPageSitesInfo()
     }
-    // END ObjectCommercial page
 
-    // News page
     if ( $('.news').length ) {
         newsPageLoadMoreNews()
     }
-    // END News page
 
-    // Flat page
+    if ( $('.sites').length ) {
+        familyFiltersToggle()
+        facetFiltersSites()
+    }
+
     if ( $('.site-page').length ) {
         mortgageOfferMonthlyPayment()
     }
-    // END Flat page
 
     // Get object-card sites info
     if ( $('.object-card').length ) {

@@ -3,9 +3,11 @@
 
 function realtyPriceFilters() {
     const realtyPriceSlider = document.getElementById('realty-filter__price-slider')
+    let urlParams = new URLSearchParams(window.location.search)
 
     noUiSlider.create(realtyPriceSlider, {
-        start: [2919000, 18360000],
+        // start: [2919000, 18360000],
+        start: (urlParams.has('price_min')) ? [urlParams.get('price_min'), urlParams.get('price_max')] : [2919000, 18360000],
         step: 1000,
         connect: true,
         range: {

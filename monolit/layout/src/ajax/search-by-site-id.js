@@ -8,7 +8,7 @@ function preventPressEnter() {
 }
 
 
-function search_by_site_id() {
+function searchBySiteId() {
     const search_id = $('#search-by-site-id')
     const search_results_id = $('#search-by-site-id__results')
     const sites_base_url = search_results_id.data('site-base-url')
@@ -52,4 +52,4 @@ function search_by_site_id() {
 }
 
 
-export {search_by_site_id}
+export {searchBySiteId}
