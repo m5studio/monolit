@@ -9,6 +9,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
     mode: 'production',
+    // mode: 'development',
     entry: './layout/src/main.js',
     output: {
         filename: 'js/[name].js',
@@ -71,7 +72,6 @@ module.exports = {
 
         // Copy favicons
         new CopyWebpackPlugin([
-            // { from:'layout/src/images/favicons', to:'images/favicons' },
             { from:'./layout/src/images/favicons', to:'images/favicons' },
         ]),
 
