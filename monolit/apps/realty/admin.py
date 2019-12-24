@@ -301,6 +301,8 @@ class ObjectSiteAdmin(TurnOffAdminLogging, admin.ModelAdmin):
     list_editable = ('active', 'special_offer')
     list_filter = ('object', 'rooms_qty')
 
+    search_fields = ('crm_id', )
+
     # autocomplete_fields = ['object', 'object_block', 'object_section', 'window_view']
     autocomplete_fields = ['window_view']
 """ [ END ObjectSite ] """

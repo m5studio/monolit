@@ -18,7 +18,7 @@ function facetFiltersSites() {
 
     let urlParams = new URLSearchParams(window.location.search)
     let urlParams_rooms = urlParams.getAll('rooms')
-    console.log(urlParams_rooms)
+    // console.log(urlParams_rooms)
 
     let rooms = []
 
@@ -57,34 +57,88 @@ function facetFiltersSites() {
         }
     })
 
-    $('form#facet-filters-sites').on('click', function() {
-        console.log(rooms.sort())
-    })
+    // $('form#facet-filters-sites').on('click', function() {
+    //     console.log(rooms.sort())
+    // })
 
     $('form#facet-filters-sites').submit(function(e) {
         e.preventDefault()
 
+        const square_min_val = $('input[name="square_min"]').val()
+        const square_max_val = $('input[name="square_max"]').val()
+
+        const price_min_val = $('input[name="price_min"]').val()
+        const price_max_val = $('input[name="price_max"]').val()
+
+        const object_val = $('select[name="object"] option:selected').val()
+
+        const floor_min_val = $('input[name="floor_min"]').val()
+        const floor_max_val = $('input[name="floor_max"]').val()
+
+        // Sorting rooms array to correct get sequence: /?rooms=0&rooms=1&rooms=2...
         rooms.sort()
 
+        // Rooms
         let rooms_query = ''
         if (rooms.length > 0) {
             for (let i = 0; i < rooms.length; i++) {
-                if ( rooms_query.length == 0 ){
-                    rooms_query += 'rooms='+rooms[i]
-                } else {
-                    rooms_query += '&rooms='+rooms[i]
-                }
-            }
+                // if ( rooms_query.length == 0 ){
+                //     rooms_query += 'rooms=' + rooms[i]
+                // } else {
+                //     rooms_query += '&rooms=' + rooms[i]
+                // }
 
-            window.location.search = '?' + rooms_query + '&square_min='+$('input[name="square_min"]').val()+'&square_max=245&price_min=2919000&price_max=18360000&block-section=all&year=all&floor_min=1&floor_max=35'
-        } else {
-            window.location.search = '?square_min='+$('input[name="square_min"]').val()+'&square_max=245&price_min=2919000&price_max=18360000&block-section=all&year=all&floor_min=1&floor_max=35'
+                // Append ampersand in case rooms more than one in get request
+                rooms_query += ((rooms_query.length == 0) ? '' : '&') + 'rooms=' + rooms[i]
+            }
         }
 
-        // window.location.search += '&params=1&test=222'
-        // window.location.search += '?' + (rooms_query.length > 0) ? rooms_query : ''
+        // Square
+        let square_min = ''
+        if (square_min_val.length > 0) {
+            // square_min = '&square_min=' + square_min_val
 
-        // window.location.search += '?square_min='+$('input[name="square_min"]').val()+'&square_max=245&price_min=2919000&price_max=18360000&block-section=all&year=all&floor_min=1&floor_max=35'
+            // remove ?& in search query /?&square_min=35&...
+            square_min = ((rooms_query.length == 0) ? '' : '&') + 'square_min=' + square_min_val
+        }
+
+        let square_max = ''
+        if (square_max_val.length > 0) {
+            square_max = '&square_max=' + square_max_val
+        }
+
+        // Price
+        let price_min = ''
+        if (price_min_val.length > 0) {
+            price_min = '&price_min=' + price_min_val
+        }
+
+        let price_max = ''
+        if (price_max_val.length > 0) {
+            price_max = '&price_max=' + price_max_val
+        }
+
+        // Object
+        let object = ''
+        if (object_val.length > 0) {
+            object = '&object=' + object_val
+        }
+
+        // Floors
+        let floor_min = ''
+        if (floor_min_val.length > 0) {
+            floor_min = '&floor_min=' + floor_min_val
+        }
+
+        let floor_max = ''
+        if (floor_max_val.length > 0) {
+            floor_max = '&floor_max=' + floor_max_val
+        }
+
+        // Search query by itself
+        window.location.search = '?' + rooms_query + square_min + square_max + price_min + price_max + object + floor_min + floor_max
+
+        // window.location.search = '?square_min=35&square_max=245&price_min=2919000&price_max=18360000&block-section=all&year=all&floor_min=1&floor_max=35'
     })
 }
 

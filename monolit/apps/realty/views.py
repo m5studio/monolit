@@ -79,6 +79,7 @@ class ObjectDetailView(DetailView):
 class ObjectSiteListView(ListView):
     model = ObjectSite
     queryset = ObjectSite.objects.filter(active=True).order_by('-updated')
+    # queryset = ObjectSite.objects.filter(active=True).order_by('price_total')
     paginate_by = 12
 
     def get_context_data(self, **kwargs):
