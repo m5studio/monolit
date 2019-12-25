@@ -8,7 +8,7 @@ import {familyFiltersToggle} from "./filters/family-filters-toggle"
 import {facetFiltersSites} from "./filters/facet-filters-sites"
 // import {familyFiltersReset} from "./filters/family-filters-reset"
 
-// import {realtySquareFilters} from "./modules/nouislider/realty_square_filters"
+// import {realtyAreaFilters} from "./modules/nouislider/realty_area_filters"
 // import {realtyPriceFilters} from "./modules/nouislider/realty_price_filters"
 // import {realtyFloorFilters} from "./modules/nouislider/realty_floor_filters"
 
@@ -52,13 +52,13 @@ $(document).ready(function() {
         mainSliderObjectSitesInfo()
         // facetFiltersSites()
 
-        // realtySquareFilters()
+        // realtyAreaFilters()
         // realtyPriceFilters()
     }
 
     // Flats
     // if ( $('#section-realty-sites-filters').length ) {
-    //     realtySquareFilters()
+    //     realtyAreaFilters()
     //     realtyPriceFilters()
     //     realtyFloorFilters()
     // }

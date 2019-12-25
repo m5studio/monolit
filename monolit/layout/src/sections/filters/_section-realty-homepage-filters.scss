@@ -29,7 +29,7 @@
         }
     }
 
-    &__square-block {
+    &__area-block {
         @include media-breakpoint-only(lg) {
             order: 1;
         }

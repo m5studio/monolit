@@ -1,6 +1,7 @@
 # from django.shortcuts import render
 from django.http import JsonResponse
 
+from apps.realty.models.object import Object
 from apps.realty.models.object_site import ObjectSite
 from apps.realty.models.object_commercial_site import ObjectCommercialSite
 from apps.realty.models.object_gallery import ObjectGallery, ObjectGalleryImage
@@ -82,4 +83,5 @@ def api_objects_summary_info(request):
     object_sites = ObjectSite.objects
     objects_summary = list()
     objects_summary.extend([object_sites.sites_summary_info_aggregated()])
+    objects_summary.extend([{'objects': list(Object.objects.filter(active=True, all_sold=False).values('id', 'name'))}])
     return JsonResponse(objects_summary, safe=False)

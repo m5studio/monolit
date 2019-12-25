@@ -1,4 +1,4 @@
-import {realtySquareFilters} from "../modules/nouislider/realty_square_filters"
+import {realtyAreaFilters} from "../modules/nouislider/realty_area_filters"
 import {realtyPriceFilters} from "../modules/nouislider/realty_price_filters"
 import {realtyFloorFilters} from "../modules/nouislider/realty_floor_filters"
 
@@ -12,7 +12,7 @@ function removeItemByValFromArray(array_name, value) {
 
 
 function facetFiltersSites() {
-    realtySquareFilters()
+    realtyAreaFilters()
     realtyPriceFilters()
     realtyFloorFilters()
 
@@ -64,8 +64,8 @@ function facetFiltersSites() {
     $('form#facet-filters-sites').submit(function(e) {
         e.preventDefault()
 
-        const square_min_val = $('input[name="square_min"]').val()
-        const square_max_val = $('input[name="square_max"]').val()
+        const area_min_val = $('input[name="area_min"]').val()
+        const area_max_val = $('input[name="area_max"]').val()
 
         const price_min_val = $('input[name="price_min"]').val()
         const price_max_val = $('input[name="price_max"]').val()
@@ -93,18 +93,18 @@ function facetFiltersSites() {
             }
         }
 
-        // Square
-        let square_min = ''
-        if (square_min_val.length > 0) {
-            // square_min = '&square_min=' + square_min_val
+        // Area
+        let area_min = ''
+        if (area_min_val.length > 0) {
+            // area_min = '&area_min=' + area_min_val
 
-            // remove ?& in search query /?&square_min=35&...
-            square_min = ((rooms_query.length == 0) ? '' : '&') + 'square_min=' + square_min_val
+            // remove ?& in search query /?&area_min=35&...
+            area_min = ((rooms_query.length == 0) ? '' : '&') + 'area_min=' + area_min_val
         }
 
-        let square_max = ''
-        if (square_max_val.length > 0) {
-            square_max = '&square_max=' + square_max_val
+        let area_max = ''
+        if (area_max_val.length > 0) {
+            area_max = '&area_max=' + area_max_val
         }
 
         // Price
@@ -136,9 +136,9 @@ function facetFiltersSites() {
         }
 
         // Search query by itself
-        window.location.search = '?' + rooms_query + square_min + square_max + price_min + price_max + object + floor_min + floor_max
+        window.location.search = '?' + rooms_query + area_min + area_max + price_min + price_max + object + floor_min + floor_max
 
-        // window.location.search = '?square_min=35&square_max=245&price_min=2919000&price_max=18360000&block-section=all&year=all&floor_min=1&floor_max=35'
+        // window.location.search = '?area_min=35&area_max=245&price_min=2919000&price_max=18360000&block-section=all&year=all&floor_min=1&floor_max=35'
     })
 }
 
