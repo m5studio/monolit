@@ -43,7 +43,7 @@ class ObjectSiteQuerySet(models.QuerySet):
             object_min_site_price=Min('price_total', filter=sites),
         )
 
-    def sites_info_aggregated(self, object_id, rooms_qty: int):
+    def object_sites_info_aggregated(self, object_id, rooms_qty: int):
         if rooms_qty < 4:
             sites = self.get_object_sites(object_id) & Q(rooms_qty=rooms_qty)
         if rooms_qty >= 4:
@@ -74,6 +74,23 @@ class ObjectSiteQuerySet(models.QuerySet):
         if rooms_qty_query_type == None:
             return self.filter(active=True, rooms_qty=rooms_qty, site_type__in=['site', 'apartments']).aggregate(Min('price_total'))
     # END ObjectSites rooms info
+
+    def get_all_sites_in_all_objects(self):
+        return self.active() & Q(site_type__in=['site', 'apartments'])
+
+    def sites_summary_info_aggregated(self):
+        return self.aggregate(
+            sites_total_qty=Count('id', filter=self.get_all_sites_in_all_objects()),
+
+            min_sites_area=Min('site_area', filter=self.get_all_sites_in_all_objects()),
+            max_sites_area=Max('site_area', filter=self.get_all_sites_in_all_objects()),
+
+            min_price=Min('price_total', filter=self.get_all_sites_in_all_objects()),
+            max_price=Max('price_total', filter=self.get_all_sites_in_all_objects()),
+
+            min_floor=Min('floor', filter=self.get_all_sites_in_all_objects()),
+            max_floor=Max('floor', filter=self.get_all_sites_in_all_objects()),
+        )
 
 
 def image_upload_path(instance, filename):

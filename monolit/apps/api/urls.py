@@ -9,6 +9,8 @@ from apps.api.views import (
 
     api_object_gallery,
     api_mortgage_offer,
+
+    api_objects_summary_info,
 )
 
 
@@ -27,6 +29,9 @@ urlpatterns = [
             # api:site:info
             path('<int:site_id>/info/', api_site_info, name='info'),
         ], app_name), namespace='site')),
+
+        # api:objects-summary-info
+        path('objects-summary-info/', api_objects_summary_info, name="objects-summary-info"),
 
         # api:object
         path('object/', include(([

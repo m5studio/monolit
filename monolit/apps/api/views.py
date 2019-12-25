@@ -25,11 +25,11 @@ def api_object_sites_info(request, object_id):
     object_sites = ObjectSite.objects
     object_sites_info = object_sites.object_sites_info_aggregated(object_id)
 
-    room_0 = object_sites.sites_info_aggregated(object_id, 0)
-    room_1 = object_sites.sites_info_aggregated(object_id, 1)
-    room_2 = object_sites.sites_info_aggregated(object_id, 2)
-    room_3 = object_sites.sites_info_aggregated(object_id, 3)
-    room_4 = object_sites.sites_info_aggregated(object_id, 4)
+    room_0 = object_sites.object_sites_info_aggregated(object_id, 0)
+    room_1 = object_sites.object_sites_info_aggregated(object_id, 1)
+    room_2 = object_sites.object_sites_info_aggregated(object_id, 2)
+    room_3 = object_sites.object_sites_info_aggregated(object_id, 3)
+    room_4 = object_sites.object_sites_info_aggregated(object_id, 4)
 
     sites_info = list()
     sites_info.extend([object_sites_info,
@@ -56,13 +56,13 @@ def api_object_commercial_sites_info(request, object_commercial_id):
     object_commercial_sites_info = object_commercial_sites.object_sites_info_aggregated(object_commercial_id)
 
     sites_commercial_info = list()
-    sites_commercial_info.extend([object_commercial_sites_info,
-                                    # {'sites_info': [
-                                    #         'TODO',
-                                    #         'TODO',
-                                    #     ]
-                                    # }
-                                ])
+    sites_commercial_info.extend([object_commercial_sites_info])
+    # objects_summary.extend([
+    #                         {'sites_info': [
+    #                                 'TODO',
+    #                                 'TODO',
+    #                             ]
+    #                         }])
     return JsonResponse(sites_commercial_info, safe=False)
 
 # API for ObjectGallery
@@ -76,3 +76,10 @@ def api_mortgage_offer(request, offer_id):
     mortgage_offer = Offer.objects.filter(id=offer_id).values('id', 'first_payment_from', 'first_payment_to', 'loan_term_from', 'loan_term_to', 'rate_from', 'rate_to')
     mortgage_offer = list(mortgage_offer)
     return JsonResponse(mortgage_offer, safe=False)
+
+# API for Objects summary info
+def api_objects_summary_info(request):
+    object_sites = ObjectSite.objects
+    objects_summary = list()
+    objects_summary.extend([object_sites.sites_summary_info_aggregated()])
+    return JsonResponse(objects_summary, safe=False)
