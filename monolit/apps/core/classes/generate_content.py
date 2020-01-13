@@ -562,6 +562,7 @@ class GenerateContent:
                 object_section = ObjectSection(object=object, \
                                                 object_block=object_block, \
                                                 name=f'С{i}.{i}', \
+                                                comlete_year=self.get_random_list_item([2019, 2020, 2021, 2022]), \
                                                 floor_first=1, \
                                                 floor_last=23, \
                                             )
@@ -584,6 +585,7 @@ class GenerateContent:
                 object_commercial_section = ObjectSection(object_commercial=object_commercial, \
                                                             object_block=object_commercial_block, \
                                                             name=f'С{i}.к{i}', \
+                                                            comlete_year=self.get_random_list_item([2019, 2020, 2021, 2022]), \
                                                             floor_first=1, \
                                                             floor_last=23, \
                                                         )

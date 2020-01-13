@@ -5,6 +5,8 @@ from apps.realty.models.object import Object
 from apps.realty.models.object_site import ObjectSite
 from apps.realty.models.object_commercial_site import ObjectCommercialSite
 from apps.realty.models.object_gallery import ObjectGallery, ObjectGalleryImage
+from apps.realty.models.object_cities import ObjectCities
+from apps.realty.models.object_section import ObjectSection
 
 from apps.mortgage.models import Offer
 from apps.company.models.tender import Tender, TenderFile
@@ -58,12 +60,6 @@ def api_object_commercial_sites_info(request, object_commercial_id):
 
     sites_commercial_info = list()
     sites_commercial_info.extend([object_commercial_sites_info])
-    # objects_summary.extend([
-    #                         {'sites_info': [
-    #                                 'TODO',
-    #                                 'TODO',
-    #                             ]
-    #                         }])
     return JsonResponse(sites_commercial_info, safe=False)
 
 # API for ObjectGallery
@@ -84,4 +80,8 @@ def api_objects_summary_info(request):
     objects_summary = list()
     objects_summary.extend([object_sites.sites_summary_info_aggregated()])
     objects_summary.extend([{'objects': list(Object.objects.filter(active=True, all_sold=False).values('id', 'name'))}])
+    objects_summary.extend([{'cities': list(ObjectCities.objects.all().values('name'))}])
+    
+    years_of_completion = sorted(list(ObjectSection.objects.get_years_of_completion()))
+    objects_summary.extend([{'years_of_completion': years_of_completion}])
     return JsonResponse(objects_summary, safe=False)

@@ -18,7 +18,6 @@ function facetFiltersSites() {
 
     let urlParams = new URLSearchParams(window.location.search)
     let urlParams_rooms = urlParams.getAll('rooms')
-    // console.log(urlParams_rooms)
 
     let rooms = []
 
@@ -57,10 +56,6 @@ function facetFiltersSites() {
         }
     })
 
-    // $('form#facet-filters-sites').on('click', function() {
-    //     console.log(rooms.sort())
-    // })
-
     $('form#facet-filters-sites').submit(function(e) {
         e.preventDefault()
 
@@ -82,12 +77,6 @@ function facetFiltersSites() {
         let rooms_query = ''
         if (rooms.length > 0) {
             for (let i = 0; i < rooms.length; i++) {
-                // if ( rooms_query.length == 0 ){
-                //     rooms_query += 'rooms=' + rooms[i]
-                // } else {
-                //     rooms_query += '&rooms=' + rooms[i]
-                // }
-
                 // Append ampersand in case rooms more than one in get request
                 rooms_query += ((rooms_query.length == 0) ? '' : '&') + 'rooms=' + rooms[i]
             }
@@ -96,8 +85,6 @@ function facetFiltersSites() {
         // Area
         let area_min = ''
         if (area_min_val.length > 0) {
-            // area_min = '&area_min=' + area_min_val
-
             // remove ?& in search query /?&area_min=35&...
             area_min = ((rooms_query.length == 0) ? '' : '&') + 'area_min=' + area_min_val
         }
