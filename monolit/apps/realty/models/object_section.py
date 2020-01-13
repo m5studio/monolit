@@ -3,8 +3,6 @@ import datetime
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 
-from django.db.models import Q
-
 from apps.realty.models.object import Object
 from apps.realty.models.object_block import ObjectBlock
 from apps.realty.models.object_commercial import ObjectCommercial
