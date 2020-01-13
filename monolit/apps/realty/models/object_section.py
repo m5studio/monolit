@@ -8,11 +8,6 @@ from apps.realty.models.object_block import ObjectBlock
 from apps.realty.models.object_commercial import ObjectCommercial
 
 
-class ObjectSectionQuerySet(models.QuerySet):
-    def get_years_of_completion(self):
-        return self.values_list('comlete_year', flat=True).distinct()
-
-
 class ObjectSection(models.Model):
     YEAR_QUARTERS = (
         ('1', '1-й Квартал'),
@@ -20,9 +15,6 @@ class ObjectSection(models.Model):
         ('3', '3-й Квартал'),
         ('4', '4-й Квартал'),
     )
-
-    # QuerySet
-    objects = ObjectSectionQuerySet.as_manager()
 
     object            = models.ForeignKey(Object, verbose_name='Жилой Объект', on_delete=models.CASCADE, blank=True, null=True)
     object_commercial = models.ForeignKey(ObjectCommercial, verbose_name='Коммерческий Объект', on_delete=models.CASCADE, blank=True, null=True)

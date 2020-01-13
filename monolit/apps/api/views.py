@@ -77,11 +77,21 @@ def api_mortgage_offer(request, offer_id):
 # API for Objects summary info
 def api_objects_summary_info(request):
     object_sites = ObjectSite.objects
+
     objects_summary = list()
     objects_summary.extend([object_sites.sites_summary_info_aggregated()])
-    objects_summary.extend([{'objects': list(Object.objects.filter(active=True, all_sold=False).values('id', 'name'))}])
-    objects_summary.extend([{'cities': list(ObjectCities.objects.all().values('name'))}])
-    
-    years_of_completion = sorted(list(ObjectSection.objects.get_years_of_completion()))
+
+    objects = list(Object.objects.filter(active=True, all_sold=False).values('id', 'name'))
+    objects_summary.extend([{'objects': objects}])
+
+    # objects_sections = list(ObjectSection.objects.filter(object_commercial__isnull=True).values('object', 'object_commercial', 'name'))
+    objects_sections = list(ObjectSection.objects.filter(object_commercial__isnull=True).values('object', 'name'))
+    objects_summary.extend([{'objects_sections': objects_sections}])
+
+    cities = list(ObjectCities.objects.all().values_list('name', flat=True))
+    objects_summary.extend([{'cities': cities}])
+
+    years_of_completion = sorted(list(ObjectSection.objects.values_list('comlete_year', flat=True).distinct()))
     objects_summary.extend([{'years_of_completion': years_of_completion}])
+
     return JsonResponse(objects_summary, safe=False)
