@@ -10,7 +10,7 @@ from apps.api.views import (
     api_object_gallery,
     api_mortgage_offer,
 
-    api_objects_summary_info,
+    # api_objects_summary_info,
 )
 
 
@@ -31,7 +31,7 @@ urlpatterns = [
         ], app_name), namespace='site')),
 
         # api:objects-summary-info
-        path('objects-summary-info/', api_objects_summary_info, name="objects-summary-info"),
+        # path('objects-summary-info/', api_objects_summary_info, name="objects-summary-info"),
 
         # api:object
         path('object/', include(([
