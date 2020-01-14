@@ -74,18 +74,23 @@ def api_mortgage_offer(request, offer_id):
     mortgage_offer = list(mortgage_offer)
     return JsonResponse(mortgage_offer, safe=False)
 
-# API for Objects summary info
+# ??? API for Objects summary info
 def api_objects_summary_info(request):
     object_sites = ObjectSite.objects
 
     objects_summary = list()
-    objects_summary.extend([object_sites.sites_summary_info_aggregated()])
+    objects_summary.extend([{'objects_summary': object_sites.sites_summary_info_aggregated()}])
+
+    rooms_qty = ObjectSite.ROOMS_QTY
+    rooms_qty_list = []
+    for rq in rooms_qty:
+        rooms_qty_list.append(dict(room=int(rq[0]), name=rq[1]))
+    objects_summary.extend([{'rooms_qty': rooms_qty_list}])
 
     objects = list(Object.objects.filter(active=True, all_sold=False).values('id', 'name'))
     objects_summary.extend([{'objects': objects}])
 
-    # objects_sections = list(ObjectSection.objects.filter(object_commercial__isnull=True).values('object', 'object_commercial', 'name'))
-    objects_sections = list(ObjectSection.objects.filter(object_commercial__isnull=True).values('object', 'name'))
+    objects_sections = list(ObjectSection.objects.filter(object_commercial__isnull=True).values('object_id', 'object_block__name', 'name'))
     objects_summary.extend([{'objects_sections': objects_sections}])
 
     cities = list(ObjectCities.objects.all().values_list('name', flat=True))
