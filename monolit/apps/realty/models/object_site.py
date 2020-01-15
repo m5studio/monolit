@@ -43,7 +43,7 @@ class ObjectSiteQuerySet(models.QuerySet):
             object_min_site_price=Min('price_total', filter=sites),
         )
 
-    def object_sites_info_aggregated(self, object_id, rooms_qty: int):
+    def object_sites_info_by_rooms_aggregated(self, object_id, rooms_qty: int):
         if rooms_qty < 4:
             sites = self.get_object_sites(object_id) & Q(rooms_qty=rooms_qty)
         if rooms_qty >= 4:

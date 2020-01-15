@@ -5,13 +5,20 @@ function realtyAreaFilters() {
     const realtySquareSlider = document.getElementById('realty-filter__area-slider')
     let urlParams = new URLSearchParams(window.location.search)
 
+    // Get min & max area from data attributes
+    const min_area = $('#section-realty-sites-filters__area-block').data('min-area')
+    const max_area = $('#section-realty-sites-filters__area-block').data('max-area')
+
     noUiSlider.create(realtySquareSlider, {
         // start: [35, 245],
-        start: (urlParams.has('area_min')) ? [urlParams.get('area_min'), urlParams.get('area_max')] : [35, 245],
+        // start: (urlParams.has('area_min')) ? [urlParams.get('area_min'), urlParams.get('area_max')] : [35, 245],
+        start: (urlParams.has('area_min')) ? [urlParams.get('area_min'), urlParams.get('area_max')] : [min_area, max_area],
         connect: true,
         range: {
-            'min': 35,
-            'max': 245
+            // 'min': 35,
+            'min': min_area,
+            // 'max': 245,
+            'max': max_area,
         }
     })
 

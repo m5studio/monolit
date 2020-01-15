@@ -9,8 +9,6 @@ from apps.api.views import (
 
     api_object_gallery,
     api_mortgage_offer,
-
-    # api_objects_summary_info,
 )
 
 

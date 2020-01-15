@@ -5,14 +5,21 @@ function realtyPriceFilters() {
     const realtyPriceSlider = document.getElementById('realty-filter__price-slider')
     let urlParams = new URLSearchParams(window.location.search)
 
+    // Get min & max price from data attributes
+    const min_price = $('#section-realty-sites-filters__price-block').data('min-price')
+    const max_price = $('#section-realty-sites-filters__price-block').data('max-price')
+
     noUiSlider.create(realtyPriceSlider, {
         // start: [2919000, 18360000],
-        start: (urlParams.has('price_min')) ? [urlParams.get('price_min'), urlParams.get('price_max')] : [2919000, 18360000],
+        // start: (urlParams.has('price_min')) ? [urlParams.get('price_min'), urlParams.get('price_max')] : [2919000, 18360000],
+        start: (urlParams.has('price_min')) ? [urlParams.get('price_min'), urlParams.get('price_max')] : [min_price, max_price],
         step: 1000,
         connect: true,
         range: {
-            'min': 2919000,
-            'max': 18360000
+            // 'min': 2919000,
+            'min': min_price,
+            // 'max': 18360000,
+            'max': max_price,
         }
     })
 

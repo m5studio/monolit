@@ -28,11 +28,11 @@ def api_object_sites_info(request, object_id):
     object_sites = ObjectSite.objects
     object_sites_info = object_sites.object_sites_info_aggregated(object_id)
 
-    room_0 = object_sites.object_sites_info_aggregated(object_id, 0)
-    room_1 = object_sites.object_sites_info_aggregated(object_id, 1)
-    room_2 = object_sites.object_sites_info_aggregated(object_id, 2)
-    room_3 = object_sites.object_sites_info_aggregated(object_id, 3)
-    room_4 = object_sites.object_sites_info_aggregated(object_id, 4)
+    room_0 = object_sites.object_sites_info_by_rooms_aggregated(object_id, 0)
+    room_1 = object_sites.object_sites_info_by_rooms_aggregated(object_id, 1)
+    room_2 = object_sites.object_sites_info_by_rooms_aggregated(object_id, 2)
+    room_3 = object_sites.object_sites_info_by_rooms_aggregated(object_id, 3)
+    room_4 = object_sites.object_sites_info_by_rooms_aggregated(object_id, 4)
 
     sites_info = list()
     sites_info.extend([object_sites_info,
@@ -73,30 +73,3 @@ def api_mortgage_offer(request, offer_id):
     mortgage_offer = Offer.objects.filter(id=offer_id).values('id', 'first_payment_from', 'first_payment_to', 'loan_term_from', 'loan_term_to', 'rate_from', 'rate_to')
     mortgage_offer = list(mortgage_offer)
     return JsonResponse(mortgage_offer, safe=False)
-
-# ??? API for Objects summary info
-# def api_objects_summary_info(request):
-#     object_sites = ObjectSite.objects
-#
-#     objects_summary = list()
-#     objects_summary.extend([{'objects_summary': object_sites.sites_summary_info_aggregated()}])
-#
-#     rooms_qty = ObjectSite.ROOMS_QTY
-#     rooms_qty_list = []
-#     for rq in rooms_qty:
-#         rooms_qty_list.append(dict(room=int(rq[0]), name=rq[1]))
-#     objects_summary.extend([{'rooms_qty': rooms_qty_list}])
-#
-#     objects = list(Object.objects.filter(active=True, all_sold=False).values('id', 'name'))
-#     objects_summary.extend([{'objects': objects}])
-#
-#     objects_sections = list(ObjectSection.objects.filter(object_commercial__isnull=True).values('object_id', 'object_block__name', 'name'))
-#     objects_summary.extend([{'objects_sections': objects_sections}])
-#
-#     cities = list(ObjectCities.objects.all().values_list('name', flat=True))
-#     objects_summary.extend([{'cities': cities}])
-#
-#     years_of_completion = sorted(list(ObjectSection.objects.values_list('comlete_year', flat=True).distinct()))
-#     objects_summary.extend([{'years_of_completion': years_of_completion}])
-#
-#     return JsonResponse(objects_summary, safe=False)

@@ -10,44 +10,11 @@ function removeItemByValFromArray(array_name, value) {
     }
 }
 
-// ???
-// function constructFiltersSitesDefaultState() {
-//     const api_objects_summary_info_url = $('form#facet-filters-sites').data('api-objects-summary-info')
-//
-//     $.getJSON(api_objects_summary_info_url, (data) => {
-//         // console.log(data)
-//
-//         const objects_summary     = data[0]['objects_summary']
-//         const rooms_qty           = data[1]['rooms_qty']
-//         const objects             = data[2]['objects']
-//         const objects_sections    = data[3]['objects_sections']
-//         const cities              = data[4]['cities']
-//         const years_of_completion = data[5]['years_of_completion']
-//
-//         // console.log(objects_summary)
-//         // console.log(rooms_qty)
-//
-//         // rooms
-//         let room_html = "";
-//         $.each(rooms_qty, function(i, item) {
-//             if ( item['room'] == 0 ) {
-//                 room_html += '<button class="circle-site" data-value="' + item['room'] + '">Cт</button>'
-//             } else if ( item['room'] < 5 ) {
-//                 room_html += '<button class="circle-site" data-value="' + item['room'] + '">' + item['room'] + '</button>'
-//             }
-//         })
-//         $('#section-realty-sites-filters__rooms-block .realty-filters-block__content').html(room_html)
-//     })
-// }
-
 
 function facetFiltersSites() {
     realtyAreaFilters()
     realtyPriceFilters()
     realtyFloorFilters()
-
-    // ???
-    // constructFiltersSitesDefaultState()
 
     // Process GET request
     let urlParams = new URLSearchParams(window.location.search)
