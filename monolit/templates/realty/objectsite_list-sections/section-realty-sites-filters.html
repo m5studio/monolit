@@ -63,7 +63,6 @@
                             <option>на ул. Павленко</option>
                             <option>на ул. Беспалова</option>
                             <option>на ул. Балаклавской</option> -->{% endcomment %}
-
                             <option value="all" selected>Все объекты</option>
                             {% for living_object in facet_filter_sites__objects %}
                                 <option value="{{ living_object.id }}"{% if request.GET.object == living_object.id %} selected{% endif %}>{{ living_object.name }}</option>
@@ -126,15 +125,17 @@
                         </select>
                     </div>
                 </div>
-                <div class="realty-filters-block">
+                <div id="section-realty-sites-filters__floor-block" class="realty-filters-block" data-min-floor="{{ facet_filter_sites__summary.min_floor }}" data-max-floor="{{ facet_filter_sites__summary.max_floor }}">
                     <div class="realty-filters-block__label">Этаж</div>
                     <div class="realty-filters-block__content">
                         <div id="realty-filter__floor-slider"></div>
                         <div class="realty-filters-block__inputs">
                             <span>от</span>
-                            <input id="realty-filter__floor--input-min" name="floor_min" type="number" min="1" max="34" step="1" value="1">
+                            {# <!-- <input id="realty-filter__floor--input-min" name="floor_min" type="number" min="1" max="34" step="1" value="1"> --> #}
+                            <input id="realty-filter__floor--input-min" name="floor_min" type="number" min="{{ facet_filter_sites__summary.min_floor }}" max="{{ facet_filter_sites__summary.max_floor }}" step="1" value="">
                             <span>до</span>
-                            <input id="realty-filter__floor--input-max" name="floor_max" type="number" min="2" max="35" step="1" value="17">
+                            {# <!-- <input id="realty-filter__floor--input-max" name="floor_max" type="number" min="2" max="35" step="1" value="17"> --> #}
+                            <input id="realty-filter__floor--input-max" name="floor_max" type="number" min="{{ facet_filter_sites__summary.min_floor }}" max="{{ facet_filter_sites__summary.max_floor }}" step="1" value="">
                         </div>
                     </div>
                 </div>

@@ -5,14 +5,21 @@ function realtyFloorFilters() {
     const realtyFloorSlider = document.getElementById('realty-filter__floor-slider')
     let urlParams = new URLSearchParams(window.location.search)
 
+    // Get min & max floor from data attributes
+    const min_floor = $('#section-realty-sites-filters__floor-block').data('min-floor')
+    const max_floor = $('#section-realty-sites-filters__floor-block').data('max-floor')
+
     noUiSlider.create(realtyFloorSlider, {
         // start: [1, 35],
-        start: (urlParams.has('floor_min')) ? [urlParams.get('floor_min'), urlParams.get('floor_max')] : [1, 35],
+        // start: (urlParams.has('floor_min')) ? [urlParams.get('floor_min'), urlParams.get('floor_max')] : [1, 35],
+        start: (urlParams.has('floor_min')) ? [urlParams.get('floor_min'), urlParams.get('floor_max')] : [min_floor, max_floor],
         step: 1,
         connect: true,
         range: {
-            'min': 1,
-            'max': 35
+            // 'min': 1,
+            'min': min_floor,
+            // 'max': 35,
+            'max': max_floor,
         }
     })
 
