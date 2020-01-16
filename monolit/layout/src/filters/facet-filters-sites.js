@@ -58,6 +58,14 @@ function facetFiltersSites() {
         }
     })
 
+    // $('select[name="section"]').on('change',  (e) => {
+    //     e.preventDefault()
+    //
+    //     let section_val = $('select[name="section"] option:selected').val()
+    //     // history.pushState({section: section_val}, "title 2", "?section=" + section_val)
+    //     history.pushState({section: section_val}, "", "?section=" + section_val)
+    // })
+
     $('form#facet-filters-sites').submit(function(e) {
         e.preventDefault()
 
@@ -67,7 +75,10 @@ function facetFiltersSites() {
         const price_min_val = $('input[name="price_min"]').val()
         const price_max_val = $('input[name="price_max"]').val()
 
-        const object_val = $('select[name="object"] option:selected').val()
+        const object_val  = $('select[name="object"] option:selected').val()
+        const section_val = $('select[name="section"] option:selected').val()
+        const city_val    = $('select[name="city"] option:selected').val()
+        const year_val    = $('select[name="year"] option:selected').val()
 
         const floor_min_val = $('input[name="floor_min"]').val()
         const floor_max_val = $('input[name="floor_max"]').val()
@@ -113,6 +124,24 @@ function facetFiltersSites() {
             object = '&object=' + object_val
         }
 
+        // Section
+        let section = ''
+        if (section_val.length > 0) {
+            section = '&section=' + section_val
+        }
+
+        // City
+        let city = ''
+        if (city_val.length > 0) {
+            city = '&city=' + city_val
+        }
+
+        // Year
+        let year = ''
+        if (year_val.length > 0) {
+            year = '&year=' + year_val
+        }
+
         // Floors
         let floor_min = ''
         if (floor_min_val.length > 0) {
@@ -125,7 +154,7 @@ function facetFiltersSites() {
         }
 
         // Search query by itself
-        window.location.search = '?' + rooms_query + area_min + area_max + price_min + price_max + object + floor_min + floor_max
+        window.location.search = '?' + rooms_query + area_min + area_max + price_min + price_max + object + section + city + year + floor_min + floor_max
 
         // window.location.search = '?area_min=35&area_max=245&price_min=2919000&price_max=18360000&block-section=all&year=all&floor_min=1&floor_max=35'
     })

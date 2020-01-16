@@ -13,7 +13,7 @@ function realtyPriceFilters() {
         // start: [2919000, 18360000],
         // start: (urlParams.has('price_min')) ? [urlParams.get('price_min'), urlParams.get('price_max')] : [2919000, 18360000],
         start: (urlParams.has('price_min')) ? [urlParams.get('price_min'), urlParams.get('price_max')] : [min_price, max_price],
-        step: 1000,
+        // step: 1,
         connect: true,
         range: {
             // 'min': 2919000,

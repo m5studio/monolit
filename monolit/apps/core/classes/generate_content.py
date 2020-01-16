@@ -19,15 +19,16 @@ from apps.realty.models.object_gallery import ObjectGallery, ObjectGalleryImage
 from apps.realty.models.object_building_types import ObjectBuildingTypes
 from apps.realty.models.object_types import ObjectTypes
 from apps.realty.models.object_cities import ObjectCities
+
+from apps.realty.models.object_site import ObjectSite, ObjectSiteWindowsView
+from apps.realty.models.object_site_balcony import ObjectBalcony
+from apps.realty.models.object_site_bathroom import ObjectBathroom
+
 from apps.realty.models.object_commercial import ObjectCommercial
 from apps.realty.models.object_commercial_site import ObjectCommercialSite
 from apps.realty.models.object_commercial_info_tab import ObjectCommercialInfoTab
 
 from apps.mortgage.models import WayToBuy, Bank, Offer
-
-from apps.realty.models.object_site import ObjectSite, ObjectSiteWindowsView
-from apps.realty.models.object_site_balcony import ObjectBalcony
-from apps.realty.models.object_site_bathroom import ObjectBathroom
 
 from apps.news.models.news import NewsCategory, News, NewsImage
 from apps.news.models.actions import Actions, ActionsPartner
@@ -357,8 +358,8 @@ class GenerateContent:
 
         floors_list = list(range(1, 23))
         site_numbers_list = list(range(100, 200))
-        price_per_square_list = list(range(52000, 89000))
-        site_area_list = list(range(57, 119))
+        price_per_square_list = list(range(52125, 89680))
+        site_area_list = list(range(34, 119))
         kitchen_area_list = list(range(10, 15))
 
         sections_rel_to_object_ids_list = list(ObjectSection.objects.filter(object=object).values_list('id', flat=True))

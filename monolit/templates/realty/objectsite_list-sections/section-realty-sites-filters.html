@@ -39,9 +39,11 @@
                         <div class="realty-filters-block__inputs">
                             <span>от</span>
                             {# <!-- <input id="realty-filter__price--input-min" name="price_min" type="number" min="2919000" max="18360000" step="1000" value=""> --> #}
+                            {# <!-- <input id="realty-filter__price--input-min" name="price_min" type="text"> --> #}
                             <input id="realty-filter__price--input-min" name="price_min" type="number" min="{{ facet_filter_sites__summary.min_price }}" max="{{ facet_filter_sites__summary.max_price }}" step="1" value="">
                             <span>до</span>
                             {# <!-- <input id="realty-filter__price--input-max" name="price_max" type="number" min="2919000" max="18360000" step="1000" value=""> --> #}
+                            {# <!-- <input id="realty-filter__price--input-max" name="price_max" type="text"> --> #}
                             <input id="realty-filter__price--input-max" name="price_max" type="number" min="{{ facet_filter_sites__summary.min_price }}" max="{{ facet_filter_sites__summary.max_price }}" step="1" value="">
                             <span>м<sup>2</sup></span>
                         </div>
@@ -50,9 +52,8 @@
             </div>
             <div id="section-realty-sites-filters__inner-bottom">
                 <div class="realty-filters-block">
-                    <div class="realty-filters-block__label">Объект</div>
+                    <div class="realty-filters-block__label">Объекты</div>
                     <div class="realty-filters-block__content">
-                        {{ request.GET.object }}
                         <select name="object" class="realty-filters-block__select">
                             {% comment %}<!-- <option value="all" selected>Все объекты</option>
                             <option value="">Лаванда</option>
@@ -63,18 +64,18 @@
                             <option>на ул. Павленко</option>
                             <option>на ул. Беспалова</option>
                             <option>на ул. Балаклавской</option> -->{% endcomment %}
-                            <option value="all" selected>Все объекты</option>
+                            <option value="all" selected>- Все объекты -</option>
                             {% for living_object in facet_filter_sites__objects %}
-                                <option value="{{ living_object.id }}"{% if request.GET.object == living_object.id %} selected{% endif %}>{{ living_object.name }}</option>
+                                <option value="{{ living_object.id }}"{% if request.GET.object == living_object.id|stringformat:"i" %} selected{% endif %}>{{ living_object.name }}</option>
                             {% endfor %}
                         </select>
                     </div>
                 </div>
                 <div class="realty-filters-block">
-                    <div class="realty-filters-block__label">Блок\Секция</div>
+                    <div class="realty-filters-block__label">Секции объектов</div>
                     <div class="realty-filters-block__content">
-                        <select name="block-section" class="realty-filters-block__select">
-                            <option value="all" selected>Все блоки\секции</option>
+                        <select name="section" class="realty-filters-block__select">
+                            {% comment %}<!-- <option value="all" selected>- Все секции -</option>
                             <option disabled>Лаванда</option>
                             <option>Секция 1</option>
                             <option>Секция 2</option>
@@ -98,19 +99,37 @@
                             <option disabled>на ул. Павленко</option>
                             <option>Секция 1</option>
                             <option>Секция 2</option>
-                            <option>Секция 3</option>
+                            <option>Секция 3</option> -->{% endcomment %}
+                            <option value="all" selected>- Все секции -</option>
+                            {% for section in facet_filter_sites__sections %}
+                                <!-- {% if request.GET.object == section.object.id|stringformat:"i" %}
+                                    {% ifchanged %}
+                                        <option disabled>{{ section.object.name }}</option>
+                                    {% endifchanged %}
+                                    <option value="{{ section.id }}"{% if request.GET.section == section.id|stringformat:"i" %} selected{% endif %}>&nbsp;&nbsp;&nbsp;&nbsp;{{ section.name }}</option>
+                                {% endif %} -->
+                                {% ifchanged %}
+                                    <option disabled>{{ section.object.name }}</option>
+                                {% endifchanged %}
+                                <option value="{{ section.id }}"{% if request.GET.section == section.id|stringformat:"i" %} selected{% endif %}>&nbsp;&nbsp;&nbsp;&nbsp;{{ section.name }}</option>
+                            {% endfor %}
                         </select>
                     </div>
                 </div>
                 <div class="realty-filters-block">
-                    <div class="realty-filters-block__label">Город</div>
+                    <div class="realty-filters-block__label">Города</div>
                     <div class="realty-filters-block__content">
                         <select name="city" class="realty-filters-block__select">
-                            <option value="all" selected>Все города</option>
+                            {% comment %}<!-- <option value="all" selected>Все города</option>
                             <option>Симферополь</option>
                             <option>Ялта</option>
                             <option>Евпатория</option>
-                            <option>Алушта</option>
+                            <option>Алушта</option> -->{% endcomment %}
+                            <option value="all" selected>- Все города -</option>
+                            {% for city in facet_filter_sites__cities %}
+                                {% if forloop.first %}{% endif %}
+                                <option value="{{ city.id }}"{% if request.GET.city == city.id|stringformat:"i" %} selected{% endif %}>{{ city.name }}</option>
+                            {% endfor %}
                         </select>
                     </div>
                 </div>
@@ -118,15 +137,19 @@
                     <div class="realty-filters-block__label">Год сдачи</div>
                     <div class="realty-filters-block__content">
                         <select name="year" class="realty-filters-block__select">
-                            <option value="all" selected>Все</option>
+                            {% comment %}<!-- <option value="all" selected>Все</option>
                             <option>2019</option>
                             <option>2020</option>
-                            <option>2021</option>
+                            <option>2021</option> -->{% endcomment %}
+                            <option value="all" selected>- Все -</option>
+                            {% for year in facet_filter_sites__years_of_comletition %}
+                                <option value="{{ year.comlete_year }}"{% if request.GET.year == year.comlete_year|stringformat:"i" %} selected{% endif %}>{{ year.comlete_year }}</option>
+                            {% endfor %}
                         </select>
                     </div>
                 </div>
                 <div id="section-realty-sites-filters__floor-block" class="realty-filters-block" data-min-floor="{{ facet_filter_sites__summary.min_floor }}" data-max-floor="{{ facet_filter_sites__summary.max_floor }}">
-                    <div class="realty-filters-block__label">Этаж</div>
+                    <div class="realty-filters-block__label">Этажи</div>
                     <div class="realty-filters-block__content">
                         <div id="realty-filter__floor-slider"></div>
                         <div class="realty-filters-block__inputs">
@@ -142,7 +165,7 @@
             </div>
         </div>
         <div id="section-realty-sites-filters__bottom">
-            <button type="submit" class="green-button">Показать <span class="realty-qty">103 квартиры</span></button>
+            <button type="submit" class="green-button">Показать <span class="realty-qty">{{ facet_filter_sites__summary.sites_total_qty }} квартиры</span></button>
         </div>
     </form>
 </div>

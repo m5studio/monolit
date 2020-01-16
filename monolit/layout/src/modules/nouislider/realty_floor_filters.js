@@ -13,7 +13,7 @@ function realtyFloorFilters() {
         // start: [1, 35],
         // start: (urlParams.has('floor_min')) ? [urlParams.get('floor_min'), urlParams.get('floor_max')] : [1, 35],
         start: (urlParams.has('floor_min')) ? [urlParams.get('floor_min'), urlParams.get('floor_max')] : [min_floor, max_floor],
-        step: 1,
+        // step: 1,
         connect: true,
         range: {
             // 'min': 1,

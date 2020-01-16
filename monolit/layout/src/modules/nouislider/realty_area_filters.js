@@ -13,6 +13,7 @@ function realtyAreaFilters() {
         // start: [35, 245],
         // start: (urlParams.has('area_min')) ? [urlParams.get('area_min'), urlParams.get('area_max')] : [35, 245],
         start: (urlParams.has('area_min')) ? [urlParams.get('area_min'), urlParams.get('area_max')] : [min_area, max_area],
+        // step: 0.1,
         connect: true,
         range: {
             // 'min': 35,

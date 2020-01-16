@@ -18,6 +18,8 @@ from apps.realty.models.object_video import ObjectVideo
 from apps.realty.models.object_site_bathroom import ObjectBathroom
 from apps.realty.models.object_site_balcony import ObjectBalcony
 from apps.realty.models.object_elevator import ObjectElevator
+from apps.realty.models.object_cities import ObjectCities
+from apps.realty.models.object_section import ObjectSection
 
 from apps.realty.models.object_commercial import ObjectCommercial
 from apps.realty.models.object_commercial_site import ObjectCommercialSite
@@ -88,39 +90,14 @@ class ObjectSiteListView(ListView):
 
         # Facet filters sites
         context['facet_filter_sites__summary'] = ObjectSite.objects.sites_summary_info_aggregated()
-        context['facet_filter_sites__rooms'] = ObjectSite.ROOMS_QTY
+        context['facet_filter_sites__rooms']   = ObjectSite.ROOMS_QTY
         context['facet_filter_sites__objects'] = Object.objects.filter(active=True, all_sold=False).values('id', 'name').order_by('name')
+        context['facet_filter_sites__cities']  = ObjectCities.objects.all()
+        context['facet_filter_sites__years_of_comletition'] = ObjectSection.objects.filter(object_commercial__isnull=True).values('comlete_year').distinct().order_by('comlete_year')
+        context['facet_filter_sites__sections'] = ObjectSection.objects.filter(object_commercial__isnull=True)
         # END Facet filters sites
 
         return context
-
-
-# ??? API for Objects summary info
-# def api_objects_summary_info(request):
-#     object_sites = ObjectSite.objects
-#
-#     objects_summary = list()
-#     objects_summary.extend([{'objects_summary': object_sites.sites_summary_info_aggregated()}])
-#
-#     rooms_qty = ObjectSite.ROOMS_QTY
-#     rooms_qty_list = []
-#     for rq in rooms_qty:
-#         rooms_qty_list.append(dict(room=int(rq[0]), name=rq[1]))
-#     objects_summary.extend([{'rooms_qty': rooms_qty_list}])
-#
-#     objects = list(Object.objects.filter(active=True, all_sold=False).values('id', 'name'))
-#     objects_summary.extend([{'objects': objects}])
-#
-#     objects_sections = list(ObjectSection.objects.filter(object_commercial__isnull=True).values('object_id', 'object_block__name', 'name'))
-#     objects_summary.extend([{'objects_sections': objects_sections}])
-#
-#     cities = list(ObjectCities.objects.all().values_list('name', flat=True))
-#     objects_summary.extend([{'cities': cities}])
-#
-#     years_of_completion = sorted(list(ObjectSection.objects.values_list('comlete_year', flat=True).distinct()))
-#     objects_summary.extend([{'years_of_completion': years_of_completion}])
-#
-#     return JsonResponse(objects_summary, safe=False)
 
 
 class ObjectSiteDetailView(DetailView):
