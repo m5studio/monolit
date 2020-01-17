@@ -15,7 +15,7 @@ $.fn.isInViewport = function() {
 function getSites(page_number) {
     let page_url = $('#section-sites-list').data('page-url')
 
-    // Check if url have any parameters in GET request to avoid stop infinate sroll working if url have GET parameters 
+    // Check if url have any parameters in GET request to avoid stop infinate sroll working in case url have GET parameters 
     let page_params = ''
     let url = window.location.href
     if(url.includes('?')) {
