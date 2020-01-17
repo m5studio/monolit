@@ -99,6 +99,100 @@ class ObjectSiteListView(ListView):
 
         return context
 
+    # Filter request with GET request parameters
+    def get_queryset(self):
+        qs = super().get_queryset()
+        qs = qs.filter(active=True, object__all_sold=False)
+
+        # GET parameters
+        rooms = self.request.GET.getlist('rooms')
+        if rooms and '4' in rooms:
+            # add more rooms if selected 4
+            rooms.extend(['5', '6'])
+
+        area_min = self.request.GET.get('area_min')
+        area_max = self.request.GET.get('area_max')
+
+        price_min = self.request.GET.get('price_min')
+        price_max = self.request.GET.get('price_max')
+
+        object = self.request.GET.get('object')
+        if object == 'all':
+            object = ''
+
+        section = self.request.GET.get('section')
+        city = self.request.GET.get('city')
+        year = self.request.GET.get('year')
+
+        floor_min = self.request.GET.get('floor_min')
+        floor_max = self.request.GET.get('floor_max')
+
+        # from django.db.models import Q
+
+        if rooms:
+            qs = qs.filter(rooms_qty__in=rooms)
+        if area_min:
+            qs = qs.filter(site_area__gte=area_min)
+        if area_max:
+            qs = qs.filter(site_area__lte=area_max)
+        if price_min:
+            qs = qs.filter(price_total__gte=price_min)
+        if price_max:
+            qs = qs.filter(price_total__lte=price_max)
+        if object:
+            qs = qs.filter(object=object)
+        if section:
+            qs = qs.filter(object_section=section)
+        if city:
+            qs = qs.filter(object__city=city)
+        if year:
+            qs = qs.filter(object_section__comlete_year=year)
+        if floor_min:
+            qs = qs.filter(floor__gte=floor_min)
+        if floor_max:
+            qs = qs.filter(floor__lte=floor_max)
+
+        return qs.distinct()
+
+        # if rooms and area_min and area_max and price_min and price_max and object and section and city and year and floor_min and floor_max:
+        #     return qs.filter(
+        #                     rooms_qty__in=rooms,
+        #                     site_area__gte=area_min,
+        #                     site_area__lte=area_max,
+        #                     price_total__gte=price_min,
+        #                     price_total__lte=price_max,
+        #                     # object=object,
+        #                     # object_section=section,
+        #                     # object__city=city,
+        #                     # object_section__comlete_year=year,
+        #                     floor__gte=floor_min,
+        #                     floor__lte=floor_max,
+        #                 ).distinct()
+        # else:
+        #     return qs
+
+        # rooms
+
+        # if rooms:
+        #     if rooms and '4' in rooms:
+        #         # add more rooms if selected 4
+        #         rooms.extend(['5', '6'])
+        #     return qs.filter(rooms_qty__in=rooms).distinct()
+        # else:
+        #     return qs
+
+        # objects
+
+        # if object:
+        #     return qs.filter(object=object)
+        # else:
+        #     return qs
+
+        # if rooms and object:
+        #     return qs.filter(rooms_qty__in=rooms, object=object).distinct()
+        # else:
+        #     return qs
+
 
 class ObjectSiteDetailView(DetailView):
     model = ObjectSite

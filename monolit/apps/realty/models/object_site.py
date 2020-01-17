@@ -1,3 +1,5 @@
+import math
+
 from django.db import models
 from django.db.models import Q, Count, Min, Max
 
@@ -83,17 +85,22 @@ class ObjectSiteQuerySet(models.QuerySet):
 
         # Round aggregated sites area and prices to avoid decimals in "facet filters sites" form inputs
 
-        # to int for round up
+        # round down
         min_sites_area = int( self.aggregate(min_sites_area=Min('site_area', filter=self.get_all_sites_in_all_objects()))['min_sites_area'] )
 
         # round up
-        import math
         max_sites_area = math.ceil( self.aggregate(max_sites_area=Max('site_area', filter=self.get_all_sites_in_all_objects()))['max_sites_area'] )
         # min_sites_area = round( self.aggregate(min_sites_area=Min('site_area', filter=self.get_all_sites_in_all_objects()))['min_sites_area'], 1 )
         # max_sites_area = round( self.aggregate(max_sites_area=Max('site_area', filter=self.get_all_sites_in_all_objects()))['max_sites_area'], 1 )
 
-        min_price = round( self.aggregate(min_price=Min('price_total', filter=self.get_all_sites_in_all_objects()))['min_price'] )
-        max_price = round( self.aggregate(max_price=Max('price_total', filter=self.get_all_sites_in_all_objects()))['max_price'] )
+        # round down
+        min_price = int( self.aggregate(min_price=Min('price_total', filter=self.get_all_sites_in_all_objects()))['min_price'] )
+
+        # round up
+        max_price = math.ceil( self.aggregate(max_price=Max('price_total', filter=self.get_all_sites_in_all_objects()))['max_price'] )
+
+        # min_price = round( self.aggregate(min_price=Min('price_total', filter=self.get_all_sites_in_all_objects()))['min_price'] )
+        # max_price = round( self.aggregate(max_price=Max('price_total', filter=self.get_all_sites_in_all_objects()))['max_price'] )
 
         min_floor = self.aggregate(min_floor=Min('floor', filter=self.get_all_sites_in_all_objects()))['min_floor']
         max_floor = self.aggregate(max_floor=Max('floor', filter=self.get_all_sites_in_all_objects()))['max_floor']
@@ -110,20 +117,6 @@ class ObjectSiteQuerySet(models.QuerySet):
             'min_floor': min_floor,
             'max_floor': max_floor,
         }
-        """
-        return self.aggregate(
-            sites_total_qty=Count('id', filter=self.get_all_sites_in_all_objects()),
-
-            min_sites_area=Min('site_area', filter=self.get_all_sites_in_all_objects()),
-            max_sites_area=Max('site_area', filter=self.get_all_sites_in_all_objects()),
-
-            min_price=Min('price_total', filter=self.get_all_sites_in_all_objects()),
-            max_price=Max('price_total', filter=self.get_all_sites_in_all_objects()),
-
-            min_floor=Min('floor', filter=self.get_all_sites_in_all_objects()),
-            max_floor=Max('floor', filter=self.get_all_sites_in_all_objects()),
-        )
-        """
 
 
 def image_upload_path(instance, filename):

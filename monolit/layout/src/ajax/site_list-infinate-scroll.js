@@ -15,8 +15,21 @@ $.fn.isInViewport = function() {
 function getSites(page_number) {
     let page_url = $('#section-sites-list').data('page-url')
 
+    // Check if url have any parameters in GET request
+    let page_params = ''
+    let url = window.location.href
+    if(url.includes('?')) {
+        console.log('Parameterised URL')
+        page_params = '&page='
+    } else {
+        console.log('No Parameters in URL')
+        page_params = '?page='
+    }
+
     $.ajax({
-        url: page_url + '?page=' + page_number.toString(),
+        // url: page_url + '?page=' + page_number.toString(),
+        // url: page_url + '&page=' + page_number.toString(),
+        url: page_url + page_params + page_number.toString(),
         type: 'GET',
         success: (data) => {
             $('#section-sites-list__infinate_scroll').append( $(data).find('#section-sites-list__infinate_scroll').html() )

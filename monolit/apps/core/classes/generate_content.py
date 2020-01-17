@@ -59,7 +59,7 @@ class GenerateContent:
     def _get_tenders_ids_list(self) -> list:
         return list(Tender.objects.order_by('id').values_list('id', flat=True))
 
-    def convert_tuple_to_site_list(self, tuple):
+    def convert_tuple_to_flat_list(self, tuple):
         return [x[0] for x in tuple]
 
     def countModelObjects(self, model_name):
@@ -144,7 +144,7 @@ class GenerateContent:
 
     def _create_Tender(self):
         title = f'Тендер {self.fake.word()} {self.fake.word()} {self.fake.word()} {self.fake.word()}'.title()
-        tender_cregories_list = self.convert_tuple_to_site_list(Tender.CATEGORIES)
+        tender_cregories_list = self.convert_tuple_to_flat_list(Tender.CATEGORIES)
 
         tender = Tender(active=self.fake.boolean(chance_of_getting_true=85), \
                         title=title, \
@@ -176,7 +176,7 @@ class GenerateContent:
 
 
     def _create_ContactsItem(self, сontacts_group_id):
-        сontact_type_list = self.convert_tuple_to_site_list(ContactsItem.CONTACTS_TYPES)
+        сontact_type_list = self.convert_tuple_to_flat_list(ContactsItem.CONTACTS_TYPES)
         сontacts_group = ContactsGroup.objects.get(pk=сontacts_group_id)
 
         сontact_type = self.fake.word(сontact_type_list)
@@ -275,7 +275,7 @@ class GenerateContent:
 
     """ [ObjectCommercialSite] """
     def _create_ObjectCommercialSite(self, object_commercial_id):
-        site_types_list = self.convert_tuple_to_site_list(ObjectCommercialSite.SITE_TYPES)
+        site_types_list = self.convert_tuple_to_flat_list(ObjectCommercialSite.SITE_TYPES)
 
         floors_list = list(range(1, 23))
         site_numbers_list = list(range(1, 200))
@@ -316,7 +316,7 @@ class GenerateContent:
 
 
     def _create_ObjectBathroom(self, object_site_id):
-        object_bathroom_list = self.convert_tuple_to_site_list(ObjectBathroom.BATHROOM_TYPES)
+        object_bathroom_list = self.convert_tuple_to_flat_list(ObjectBathroom.BATHROOM_TYPES)
         count_bathrooms_rel_to_object_site = ObjectBathroom.objects.annotate(Count('object_site')).filter(object_site=object_site_id).count()
         object_site = ObjectSite.objects.get(pk=object_site_id)
 
@@ -327,7 +327,7 @@ class GenerateContent:
 
 
     def _create_ObjectBathroom_for_ObjectCommercialSite(self, object_site_id):
-        object_bathroom_list = self.convert_tuple_to_site_list(ObjectBathroom.BATHROOM_TYPES)
+        object_bathroom_list = self.convert_tuple_to_flat_list(ObjectBathroom.BATHROOM_TYPES)
         count_bathrooms_rel_to_object_site = ObjectBathroom.objects.annotate(Count('object_commercial_site')).filter(object_commercial_site=object_site_id).count()
         object_commercial_site = ObjectCommercialSite.objects.get(pk=object_site_id)
 
@@ -338,7 +338,7 @@ class GenerateContent:
 
 
     def _create_ObjectBalcony(self, object_site_id):
-        object_balcony_list = self.convert_tuple_to_site_list(ObjectBalcony.BALCONY_TYPES)
+        object_balcony_list = self.convert_tuple_to_flat_list(ObjectBalcony.BALCONY_TYPES)
         count_balconies_rel_to_object_site = ObjectBalcony.objects.annotate(Count('object_site')).filter(object_site=object_site_id).count()
         object_site = ObjectSite.objects.get(pk=object_site_id)
 
@@ -349,10 +349,10 @@ class GenerateContent:
 
 
     def _create_ObjectSite(self, object_id):
-        site_types_list = self.convert_tuple_to_site_list(ObjectSite.SITE_TYPES)
+        site_types_list = self.convert_tuple_to_flat_list(ObjectSite.SITE_TYPES)
 
-        rooms_qty_list = self.convert_tuple_to_site_list(ObjectSite.ROOMS_QTY)
-        finishing_types_list = self.convert_tuple_to_site_list(ObjectSite.FINISHING_TYPES)
+        rooms_qty_list = self.convert_tuple_to_flat_list(ObjectSite.ROOMS_QTY)
+        finishing_types_list = self.convert_tuple_to_flat_list(ObjectSite.FINISHING_TYPES)
 
         object = Object.objects.get(pk=object_id)
 
@@ -533,7 +533,7 @@ class GenerateContent:
         count_elevators_rel_to_section = ObjectElevator.objects.annotate(Count('object_section')).filter(object_section=object_section_id).count()
 
         if count_elevators_rel_to_section == 0:
-            elevator_types_list = self.convert_tuple_to_site_list(ObjectElevator.ELEVATORS_TYPES)
+            elevator_types_list = self.convert_tuple_to_flat_list(ObjectElevator.ELEVATORS_TYPES)
             object_section = ObjectSection.objects.get(pk=object_section_id)
 
             object_elevator = ObjectElevator(object_section=object_section, \
@@ -623,7 +623,7 @@ class GenerateContent:
 
     def _create_ObjectInfoTab(self, object_id):
         count_info_tabs_rel_to_object = ObjectInfoTab.objects.annotate(Count('object')).filter(object=object_id).count()
-        object_info_tab_icons_list = self.convert_tuple_to_site_list(ObjectInfoTab.ICONS)
+        object_info_tab_icons_list = self.convert_tuple_to_flat_list(ObjectInfoTab.ICONS)
         object = Object.objects.get(pk=object_id)
 
         if count_info_tabs_rel_to_object == 0:
@@ -635,7 +635,7 @@ class GenerateContent:
 
     def _create_ObjectCommercialInfoTab(self, object_commercial_id):
         count_info_tabs_rel_to_object = ObjectCommercialInfoTab.objects.annotate(Count('object_commercial')).filter(object_commercial=object_commercial_id).count()
-        object_info_tab_icons_list = self.convert_tuple_to_site_list(ObjectCommercialInfoTab.ICONS)
+        object_info_tab_icons_list = self.convert_tuple_to_flat_list(ObjectCommercialInfoTab.ICONS)
         object_commercial = ObjectCommercial.objects.get(pk=object_commercial_id)
 
         if count_info_tabs_rel_to_object == 0:
