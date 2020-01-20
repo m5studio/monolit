@@ -572,9 +572,9 @@ MigrationBackup/
 monolit/layout/dist/
 monolit/package-lock.json
 
-monolit/media/
-monolit/media/!dummy-document.pdf
-monolit/media/!dummy-image.jpg
+monolit/media/*
+!monolit/media/dummy-document.pdf
+!monolit/media/dummy-image.jpg
 
 *.zip
 *.log
