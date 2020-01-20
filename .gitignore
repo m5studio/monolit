@@ -570,8 +570,11 @@ MigrationBackup/
 
 ######################################################################################################################### My Stuff
 monolit/layout/dist/
-monolit/media/
 monolit/package-lock.json
+
+monolit/media/
+monolit/media/!dummy-document.pdf
+monolit/media/!dummy-image.jpg
 
 *.zip
 *.log
