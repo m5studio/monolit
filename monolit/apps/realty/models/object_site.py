@@ -78,7 +78,7 @@ class ObjectSiteQuerySet(models.QuerySet):
     # END ObjectSites rooms info
 
     def get_all_sites_in_all_objects(self):
-        return self.active() & Q(site_type__in=['site', 'apartments'])
+        return self.active() & Q(object__all_sold=False) & Q(site_type__in=['site', 'apartments'])
 
     def sites_summary_info_aggregated(self):
         sites_total_qty = self.aggregate(sites_total_qty=Count('id', filter=self.get_all_sites_in_all_objects()))['sites_total_qty']
@@ -98,7 +98,6 @@ class ObjectSiteQuerySet(models.QuerySet):
 
         # round up
         max_price = math.ceil( self.aggregate(max_price=Max('price_total', filter=self.get_all_sites_in_all_objects()))['max_price'] )
-
         # min_price = round( self.aggregate(min_price=Min('price_total', filter=self.get_all_sites_in_all_objects()))['min_price'] )
         # max_price = round( self.aggregate(max_price=Max('price_total', filter=self.get_all_sites_in_all_objects()))['max_price'] )
 

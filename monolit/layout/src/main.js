@@ -6,11 +6,6 @@ import {stickyMainNav, mainNav} from "./menu/main-nav"
 // Fiters
 import {familyFiltersToggle} from "./filters/family-filters-toggle"
 import {facetFiltersSites} from "./filters/facet-filters-sites"
-// import {familyFiltersReset} from "./filters/family-filters-reset"
-
-// import {realtyAreaFilters} from "./modules/nouislider/realty_area_filters"
-// import {realtyPriceFilters} from "./modules/nouislider/realty_price_filters"
-// import {realtyFloorFilters} from "./modules/nouislider/realty_floor_filters"
 
 // Scroll to Top
 import {scrollToTop} from "./modules/scroll-to-top/scroll-to-top"
@@ -34,6 +29,7 @@ import '@fancyapps/fancybox'
 
 $(document).ready(function() {
     csrf()
+    scrollToTop()
 
     // Favorites
     if ( $('.sites').length || $('.site-page').length || $('.favorites-page').length || $('.object-page').length || $('.sites-commercial').length || $('.site-commercial-object-page').length || $('.commercial-object-page').length ) {
@@ -50,22 +46,8 @@ $(document).ready(function() {
     // Homepage
     if ( $('.homepage').length ) {
         mainSliderObjectSitesInfo()
-        // facetFiltersSites()
-
-        // realtyAreaFilters()
-        // realtyPriceFilters()
+        facetFiltersSites()
     }
-
-    // Flats
-    // if ( $('#section-realty-sites-filters').length ) {
-    //     realtyAreaFilters()
-    //     realtyPriceFilters()
-    //     realtyFloorFilters()
-    // }
-
-    // familyFiltersReset()
-
-    scrollToTop()
 
     if ( $('.object-page').length ) {
         objectPageSitesInfo()
