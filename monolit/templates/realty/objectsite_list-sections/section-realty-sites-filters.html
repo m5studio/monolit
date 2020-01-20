@@ -106,12 +106,16 @@
                                     {% ifchanged %}
                                         <option disabled>{{ section.object.name }}</option>
                                     {% endifchanged %}
-                                    <option value="{{ section.id }}"{% if request.GET.section == section.id|stringformat:"i" %} selected{% endif %}>&nbsp;&nbsp;&nbsp;&nbsp;{{ section.name }}</option>
+                                    <option value="{{ section.id }}"{% if request.GET.section == section.id|stringformat:"i" %} selected{% endif %}>{{ section.name }}</option>
                                 {% endif %} -->
                                 {% ifchanged %}
                                     <option disabled>{{ section.object.name }}</option>
+                                    <!-- <optgroup label="{{ section.object.name }}"> -->
                                 {% endifchanged %}
-                                <option value="{{ section.id }}"{% if request.GET.section == section.id|stringformat:"i" %} selected{% endif %}>&nbsp;&nbsp;&nbsp;&nbsp;{{ section.name }}</option>
+                                <option value="{{ section.id }}"{% if request.GET.section == section.id|stringformat:"i" %} selected{% endif %}>{{ section.name }}</option>
+                                {% ifchanged %}
+                                    <!-- </optgroup> -->
+                                {% endifchanged %}
                             {% endfor %}
                         </select>
                     </div>
@@ -165,7 +169,8 @@
             </div>
         </div>
         <div id="section-realty-sites-filters__bottom">
-            <button type="submit" class="green-button">Показать <span class="realty-qty">{{ facet_filter_sites__summary.sites_total_qty }} квартиры</span></button>
+            {# <!-- <button type="submit" class="green-button">Показать <span class="realty-qty">{{ facet_filter_sites__summary.sites_total_qty }} квартиры</span></button> --> #}
+            <button type="submit" class="green-button">Показать <span class="realty-qty">{{ count_sites_in_queryset }} квартиры</span></button>
         </div>
     </form>
 </div>
