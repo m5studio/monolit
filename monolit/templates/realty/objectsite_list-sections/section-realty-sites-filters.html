@@ -102,20 +102,10 @@
                             <option>Секция 3</option> -->{% endcomment %}
                             <option value="" selected>- Все секции -</option>
                             {% for section in facet_filter_sites__sections %}
-                                <!-- {% if request.GET.object == section.object.id|stringformat:"i" %}
-                                    {% ifchanged %}
-                                        <option disabled>{{ section.object.name }}</option>
-                                    {% endifchanged %}
-                                    <option value="{{ section.id }}"{% if request.GET.section == section.id|stringformat:"i" %} selected{% endif %}>{{ section.name }}</option>
-                                {% endif %} -->
                                 {% ifchanged %}
                                     <option disabled>{{ section.object.name }}</option>
-                                    <!-- <optgroup label="{{ section.object.name }}"> -->
                                 {% endifchanged %}
                                 <option value="{{ section.id }}"{% if request.GET.section == section.id|stringformat:"i" %} selected{% endif %}>{{ section.name }}</option>
-                                {% ifchanged %}
-                                    <!-- </optgroup> -->
-                                {% endifchanged %}
                             {% endfor %}
                         </select>
                     </div>

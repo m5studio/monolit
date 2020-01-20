@@ -14,7 +14,10 @@ function removeItemByValFromArray(array_name, value) {
 function facetFiltersSites() {
     realtyAreaFilters()
     realtyPriceFilters()
-    realtyFloorFilters()
+
+    if ( $('.not-homepage').length ) {
+        realtyFloorFilters()
+    }
 
     // Process GET request
     let urlParams = new URLSearchParams(window.location.search)
@@ -26,9 +29,9 @@ function facetFiltersSites() {
     $('#section-realty-sites-filters__rooms-block .realty-filters-block__content button').each(function(index, el) {
         let room_value = $(el).data('value')
 
-        $(el).on('click', function(e) {
+        $(el).on('click', (e) => {
             e.preventDefault()
-            // let room_value = $(el).data('value')
+
             if ( !$(el).hasClass('active') ) {
                 $(el).addClass('active')
                 // remove from array
@@ -58,15 +61,7 @@ function facetFiltersSites() {
         }
     })
 
-    // $('select[name="section"]').on('change',  (e) => {
-    //     e.preventDefault()
-    //
-    //     let section_val = $('select[name="section"] option:selected').val()
-    //     // history.pushState({section: section_val}, "title 2", "?section=" + section_val)
-    //     history.pushState({section: section_val}, "", "?section=" + section_val)
-    // })
-
-    $('form#facet-filters-sites').submit(function(e) {
+    $('form#facet-filters-sites').submit((e) => {
         e.preventDefault()
 
         const area_min_val = $('input[name="area_min"]').val()
@@ -155,9 +150,20 @@ function facetFiltersSites() {
 
         // Search query by itself
         window.location.search = '?' + rooms_query + area_min + area_max + price_min + price_max + object + section + city + year + floor_min + floor_max
-
         // window.location.search = '?area_min=35&area_max=245&price_min=2919000&price_max=18360000&block-section=all&year=all&floor_min=1&floor_max=35'
     })
+
+    // TODO: change form action string on change form
+    // if ( $('.homepage').length ) {
+    // $('form#facet-filters-sites').on('change', (e) => {
+    $('form#facet-filters-sites').change((e) => {
+        e.preventDefault()
+        console.log('change!')
+
+        $('form#facet-filters-sites').attr('action', '')
+        $('form#facet-filters-sites').attr('action', '/sites/?' + rooms_query + area_min + area_max + price_min + price_max)
+    })
+    // }
 }
 
 
