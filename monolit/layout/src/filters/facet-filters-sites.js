@@ -61,7 +61,10 @@ function facetFiltersSites() {
         }
     })
 
-    $('form#facet-filters-sites').submit((e) => {
+    // Sorting rooms array to correct get sequence: /?rooms=0&rooms=1&rooms=2...
+    rooms.sort()
+
+    $('.not-homepage form#facet-filters-sites').submit((e) => {
         e.preventDefault()
 
         const area_min_val = $('input[name="area_min"]').val()
@@ -77,9 +80,6 @@ function facetFiltersSites() {
 
         const floor_min_val = $('input[name="floor_min"]').val()
         const floor_max_val = $('input[name="floor_max"]').val()
-
-        // Sorting rooms array to correct get sequence: /?rooms=0&rooms=1&rooms=2...
-        rooms.sort()
 
         // Rooms
         let rooms_query = ''
@@ -155,13 +155,51 @@ function facetFiltersSites() {
 
     // TODO: change form action string on change form
     // if ( $('.homepage').length ) {
-    // $('form#facet-filters-sites').on('change', (e) => {
-    $('form#facet-filters-sites').change((e) => {
-        e.preventDefault()
+    $('form#facet-filters-sites').on('click change keyup', (e) => {
+        // e.preventDefault()
         console.log('change!')
+
+        const area_min_val = $('input[name="area_min"]').val()
+        const area_max_val = $('input[name="area_max"]').val()
+
+        const price_min_val = $('input[name="price_min"]').val()
+        const price_max_val = $('input[name="price_max"]').val()
+
+        // Rooms
+        let rooms_query = ''
+        if (rooms.length > 0) {
+            for (let i = 0; i < rooms.length; i++) {
+                // Append ampersand in case rooms more than one in get request
+                rooms_query += ((rooms_query.length == 0) ? '' : '&') + 'rooms=' + rooms[i]
+            }
+        }
+
+        // Area
+        let area_min = ''
+        if (area_min_val.length > 0) {
+            // remove ?& in search query /?&area_min=35&...
+            area_min = ((rooms_query.length == 0) ? '' : '&') + 'area_min=' + area_min_val
+        }
+
+        let area_max = ''
+        if (area_max_val.length > 0) {
+            area_max = '&area_max=' + area_max_val
+        }
+
+        // Price
+        let price_min = ''
+        if (price_min_val.length > 0) {
+            price_min = '&price_min=' + price_min_val
+        }
+
+        let price_max = ''
+        if (price_max_val.length > 0) {
+            price_max = '&price_max=' + price_max_val
+        }
 
         $('form#facet-filters-sites').attr('action', '')
         $('form#facet-filters-sites').attr('action', '/sites/?' + rooms_query + area_min + area_max + price_min + price_max)
+        // $('form#facet-filters-sites').attr('action', '/sites/?' + 'area_min='+ $('input[name="area_min"]').val() + 'area_max='+ $('input[name="area_max"]').val())
     })
     // }
 }
