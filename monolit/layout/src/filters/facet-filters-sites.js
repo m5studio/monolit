@@ -64,7 +64,7 @@ function facetFiltersSites() {
     // Sorting rooms array to correct get sequence: /?rooms=0&rooms=1&rooms=2...
     rooms.sort()
 
-    $('.not-homepage form#facet-filters-sites').submit((e) => {
+    $('form#facet-filters-sites').submit((e) => {
         e.preventDefault()
 
         const area_min_val = $('input[name="area_min"]').val()
@@ -153,17 +153,16 @@ function facetFiltersSites() {
         // window.location.search = '?area_min=35&area_max=245&price_min=2919000&price_max=18360000&block-section=all&year=all&floor_min=1&floor_max=35'
     })
 
-    // TODO: change form action string on change form
-    // if ( $('.homepage').length ) {
-    $('form#facet-filters-sites').on('click change keyup', (e) => {
-        // e.preventDefault()
-        console.log('change!')
-
+    // For homepage
+    $('#section-realty-sites-filters').on('click change keyup', (e) => {
         const area_min_val = $('input[name="area_min"]').val()
         const area_max_val = $('input[name="area_max"]').val()
 
         const price_min_val = $('input[name="price_min"]').val()
         const price_max_val = $('input[name="price_max"]').val()
+
+        // Sorting rooms array to correct get sequence: /?rooms=0&rooms=1&rooms=2...
+        rooms.sort()
 
         // Rooms
         let rooms_query = ''
@@ -197,11 +196,11 @@ function facetFiltersSites() {
             price_max = '&price_max=' + price_max_val
         }
 
-        $('form#facet-filters-sites').attr('action', '')
-        $('form#facet-filters-sites').attr('action', '/sites/?' + rooms_query + area_min + area_max + price_min + price_max)
-        // $('form#facet-filters-sites').attr('action', '/sites/?' + 'area_min='+ $('input[name="area_min"]').val() + 'area_max='+ $('input[name="area_max"]').val())
+        // Now construct link with GET query
+        $('#sites-request-url').attr('href', '')
+        $('#sites-request-url').attr('href', '/sites/?' + rooms_query + area_min + area_max + price_min + price_max)
     })
-    // }
+    // END For homepage
 }
 
 
