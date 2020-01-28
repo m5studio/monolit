@@ -1,3 +1,4 @@
+{% load static %}
 <style>
     @page {
         size: A4 portrait;
@@ -25,9 +26,11 @@
     @font-face {
         font-family: 'Roboto Regular', arial;
         src: url('{{ font_path }}');
+        {% comment %}
         /* src: url({% static 'fonts/roboto_regular.ttf' %}); */
         /* src: url('http://127.0.0.1:8000/static/fonts/fonts/roboto_regular.ttf'); */
         /* src: url('C:\Users\DeN\Dropbox\JOB\monolit.site\monolit\monolit\static\fonts\roboto_regular.ttf'); */
+        {% endcomment %}
     }
 
     body {
