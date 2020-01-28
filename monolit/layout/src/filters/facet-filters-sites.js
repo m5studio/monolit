@@ -149,12 +149,12 @@ function facetFiltersSites() {
         }
 
         // Search query by itself
-        window.location.search = '?' + rooms_query + area_min + area_max + price_min + price_max + object + section + city + year + floor_min + floor_max
         // window.location.search = '?area_min=35&area_max=245&price_min=2919000&price_max=18360000&block-section=all&year=all&floor_min=1&floor_max=35'
+        window.location.search = '?' + rooms_query + area_min + area_max + price_min + price_max + object + section + city + year + floor_min + floor_max
     })
 
     // For homepage
-    $('#section-realty-sites-filters').on('click change keyup', (e) => {
+    $('#section-realty-sites-filters').on('click change keyup', () => {
         const area_min_val = $('input[name="area_min"]').val()
         const area_max_val = $('input[name="area_max"]').val()
 
