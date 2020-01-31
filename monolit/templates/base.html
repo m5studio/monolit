@@ -3,10 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    {# <!-- <title>{{ page_title }} | {{ settings.site_title }}</title> --> #}
 
     {% url 'sites:list' as sites_list_url %}
-
     <title>{% spaceless %}
         {% if request.path == '/' %}
             {% if settings.site_title %}{{ settings.site_title }}{% endif %}
@@ -49,7 +47,7 @@
                         <span class="icon icon-14 icon-callback-white"></span>
                         <span class="phone-digits">8 800 302-88-08</span>
                     </a>
-                    <a id="ht-callback" href="#" class="link-green">Заказать звонок</a>
+                    <a id="ht-callback" href="#" class="link-green" data-toggle="modal" data-target="#callBackModal">Заказать звонок</a>
                 </div>
             </div>
         </div>
@@ -184,6 +182,42 @@
             <div id="js-disabled">Сайт не может полноценно функционировать без JavaScript =(</div>
         </noscript>
     </footer>{% endspaceless %}
+
+    <!-- TODO: modals -->
+    <div class="modal fade" id="callBackModal" tabindex="-1" role="dialog" aria-labelledby="callBackModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="h3 modal-title" id="callBackModalLabel">Заказать звонок</div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="" method="post">
+                    <div class="modal-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputPassword4">Ваше имя <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="inputPassword4" placeholder="">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputEmail4">Телефон <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="inputEmail4" placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Сообщение</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="green-button">Заказать звонок</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 {% block js %}
     <script src="{% static 'js/main.js' %}"></script>
     <script src="{% static 'js/vendors~main.js' %}"></script>
