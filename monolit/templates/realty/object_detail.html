@@ -31,13 +31,10 @@
         {% if object.yandex_map %}
             <div id="section-object-infrastructure">
                 {{ object.yandex_map|safe }}
-                {# <!-- <div style="background-color: #CCC; display: block; min-height: 600px; width: 100%;"></div> --> #}
             </div>
         {% endif %}
 
         {% include 'realty/object_detail-sections/section-object-special-offers.html' %}
-
-        {# <!-- TODO: mortgage calculator --> #}
 
         {% include 'realty/object_detail-sections/section-mortgage.html' %}
 
