@@ -1,3 +1,13 @@
+@font-face {
+    font-family: 'LatoRegular';
+    src: url('fonts/latoregular.woff2');
+    font-weight: normal;
+}
+
+body {
+    font-family: 'LatoRegular', Arial, sans-serif;
+}
+
 body {
     display: grid;
     grid-template-rows: auto 1fr auto;

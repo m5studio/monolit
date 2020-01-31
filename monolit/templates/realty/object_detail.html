@@ -22,20 +22,22 @@
 
         {% include 'realty/object_detail-sections/section-object-video-and-panoram.html' %}
 
-        {% include 'realty/object_detail-sections/section-object-parking-storages.html' %}
+        {# <!-- TODO: insolation scheme --> #}
 
-        <!-- TODO: insolation scheme -->
+        {# <!-- {% include 'realty/object_detail-sections/section-object-parking-storages.html' %} --> #}
 
         {% include 'realty/object_detail-sections/section-object-genplan.html' %}
 
-        <!-- TODO: map infrastructure -->
-        <!-- <div id="section-object-infrastructure">
-            <div style="background-color: #CCC; display: block; min-height: 600px; width: 100%;"></div>
-        </div> -->
+        {% if object.yandex_map %}
+            <div id="section-object-infrastructure">
+                {{ object.yandex_map|safe }}
+                {# <!-- <div style="background-color: #CCC; display: block; min-height: 600px; width: 100%;"></div> --> #}
+            </div>
+        {% endif %}
 
         {% include 'realty/object_detail-sections/section-object-special-offers.html' %}
 
-        <!-- TODO: mortgage calculator -->
+        {# <!-- TODO: mortgage calculator --> #}
 
         {% include 'realty/object_detail-sections/section-mortgage.html' %}
 

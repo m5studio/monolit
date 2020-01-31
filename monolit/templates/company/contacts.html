@@ -32,7 +32,7 @@
                     {% if contacts_group %}
                         <div id="contacts-list-accordion">
                             {% for object in contacts_group %}
-                                <div class="contact-card collapse-block">
+                                <div class="contact-card collapse-block" data-contact-group-id="{{ object.id }}">
                                     <div class="contact-card__title-wrap">
                                         <a class="collapse-block__link" data-toggle="collapse" href="#contact-{{ object.id }}" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}" aria-controls="contact-{{ object.id }}">
                                             <span class="contact-card__title">{{ object.name }}</span>
@@ -90,7 +90,17 @@
                         </div>
                     </div>
                 </div>
-                <div id="section-contacts-page-content__map"></div>
+
+                {% if contacts_group %}
+                    <div id="section-contacts-page-content__map">
+                        {% for object in contacts_group %}
+                            <div class="contact-card-map" data-map-id="{{ object.id }}">
+                                {# <!-- <div class="h3">{{ object.name }}</div> --> #}
+                                {{ object.yandex_map|safe }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
         </div>
     </main>

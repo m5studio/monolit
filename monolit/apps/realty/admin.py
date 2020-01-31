@@ -335,6 +335,9 @@ class ObjectAdmin(TurnOffAdminLogging, admin.ModelAdmin):
         ('Генплан', {
             'fields': ('genplan_thumb', 'genplan', 'genplan_svg')
         }),
+        ('Карты', {
+            'fields': ('yandex_map',)
+        }),
         ('Слайдер', {
             'fields': ('slider_main_image_thumb_admin', 'slider_main_image', 'slider_completed_image_thumb_admin', 'slider_completed_image'),
         }),

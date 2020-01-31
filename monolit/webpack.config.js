@@ -60,6 +60,20 @@ module.exports = {
                     }
                 ]
             },
+
+            // Fonts loader
+            {
+                test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[ext]',
+                            outputPath: 'fonts/'
+                        }
+                    }
+                ]
+            },
         ]
     },
     optimization: {
@@ -70,7 +84,7 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(),
 
-        // Copy favicons
+        // Copy
         new CopyWebpackPlugin([
             { from:'./layout/src/images/favicons', to:'images/favicons' },
         ]),
@@ -127,7 +141,7 @@ module.exports = {
             template: './layout/src/html/commercial/commercial_page.html'
         }),
 
-        // Flats
+        // Sites
         new HtmlWebpackPlugin({
             filename: 'html/sites.html',
             template: './layout/src/html/sites/sites.html'

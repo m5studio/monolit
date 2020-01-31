@@ -23,13 +23,19 @@ import {companyTendersPagination, selectTenderCategory} from "./ajax/company-ten
 import {site_list_infinate_scroll} from "./ajax/site_list-infinate-scroll"
 import {favorites} from "./ajax/favorites"
 
+import {contacts_maps} from "./pages/pages/contacts_maps"
+
 // Fancybox https://fancyapps.com/fancybox/3/
 import '@fancyapps/fancybox'
 
 
 $(document).ready(function() {
     csrf()
-    scrollToTop()
+
+    // Exclude scrollToTop from Object page
+    if ( $('.object-page').length == 0 ) {
+        scrollToTop()
+    }
 
     // Favorites
     if ( $('.sites').length || $('.site-page').length || $('.favorites-page').length || $('.object-page').length || $('.sites-commercial').length || $('.site-commercial-object-page').length || $('.commercial-object-page').length ) {
@@ -85,6 +91,11 @@ $(document).ready(function() {
         selectTenderCategory()
     }
     // END Company Tenders page
+
+    // Contacts
+    if ( $('.contacts').length ) {
+        contacts_maps()
+    }
 })
 
 

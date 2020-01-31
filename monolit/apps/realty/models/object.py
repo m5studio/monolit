@@ -59,6 +59,8 @@ class Object(models.Model):
     genplan       = models.ImageField('Генплан', upload_to=genplan_upload_path, blank=True, null=True, help_text='Изображение с генпланом')
     genplan_svg   = models.TextField('SVG объекты на генплане', blank=True, null=True)
 
+    yandex_map    = models.TextField('Карта из Яндекса', blank=True, null=True, help_text='Создайте и карту сметками в Конструкторе Яндекс Карт https://yandex.ru/map-constructor/ и добавьте в данное поле код JavaScript код с параметром scroll=false')
+
     main_image       = models.ImageField('Главное изображение', upload_to=image_upload_path, blank=True, null=True)
     main_image_thumb = ImageSpecField(source='main_image', processors=[ResizeToFill(512, 386)], format = 'JPEG', options={'quality': 70})
 
