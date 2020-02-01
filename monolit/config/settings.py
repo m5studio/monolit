@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     'apps.mortgage.apps.MortgageConfig',
     'apps.company.apps.CompanyConfig',
     'apps.pages.apps.PagesConfig',
+    'apps.forms.apps.FormsConfig',
 
     'apps.favorites.apps.FavoritesConfig',
     'apps.api.apps.ApiConfig',
@@ -196,6 +197,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Sessions https://docs.djangoproject.com/en/2.2/ref/settings/#sessions
 # default value
 # SESSION_COOKIE_AGE = 1209600
+
+
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'info@monolit.site'
+EMAIL_HOST_PASSWORD = '$95WfjjqYP'
+EMAIL_USE_SSL = True
+EMAIL_USE_TLS = False
 
 
 # Datetime settngs

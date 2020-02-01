@@ -40,9 +40,6 @@
         &-top {
             display: grid;
 
-            // @include media-breakpoint-only(xl) {
-            //     grid-template-columns: repeat(3, 1fr);
-            // }
             @include media-breakpoint-only(lg) {
                 grid-template-columns: repeat(2, 1fr);
             }

@@ -193,26 +193,33 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="" method="post">
+                <form action="{% url 'forms:callback' %}" method="post">{% csrf_token %}
+                    <input type="hidden" name="url_from" value="{{ request.get_full_path }}">
                     <div class="modal-body">
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="inputPassword4">Ваше имя <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="inputPassword4" placeholder="">
+                                <input type="text" class="form-control form-control-lg" name="name" id="" placeholder="Ваше Имя">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputEmail4">Телефон <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="inputEmail4" placeholder="">
+                                <input type="text" class="form-control form-control-lg" name="phone" id="inputEmail4" placeholder="+7 (" aria-describedby="emailHelp">
+                                <small id="emailHelp" class="form-text text-muted">Номер телефона в формате: +7 (000) 000-00-00</small>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">Сообщение</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            <textarea class="form-control form-control-lg" name="message" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        </div>
+                        <div class="form-group mt-4">
+                            <button type="submit" class="green-button">Заказать звонок</button>
                         </div>
                     </div>
-                    <div class="modal-footer">
+                    {% comment %}
+                    <!-- <div class="modal-footer">
                         <button type="submit" class="green-button">Заказать звонок</button>
-                    </div>
+                    </div> -->
+                    {% endcomment %}
                 </form>
             </div>
         </div>
