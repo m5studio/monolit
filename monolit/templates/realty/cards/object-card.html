@@ -1,5 +1,5 @@
 {% if not object.all_sold %}
-    <div class="object-card" data-sites-info-api-url="{% url 'api:object:sites-info' object_id=object.id %}" data-sites-url="{% url 'sites:list' %}">
+    <div class="object-card" data-sites-info-api-url="{% url 'api:object:sites-info' object_id=object.id %}" data-sites-url="{% url 'sites:list' %}" data-object-id="{{ object.id }}">
 {% else %}
     <div class="object-card sold">
 {% endif %}
@@ -26,7 +26,7 @@
         <div class="object-card__main">
             <div class="object-card__info">
                 <div class="object-card__title">
-                    <a href="{{ object.get_absolute_url }}"><!-- FIXME: Object Type -->{{ object.name }}</a>
+                    <a href="{{ object.get_absolute_url }}">{{ object.name }}</a>
                 </div>
                 <div class="object-card__site">
                     <div class="object-card__site--count"></div>
@@ -34,7 +34,6 @@
                 </div>
             </div>
             <div class="object-card__features">
-                {# <!-- README: all stuff in \layout\src\ajax\object-card.js --> #}
                 {% if object.all_sold %}
                     <span>нет в продаже</span>
                 {% endif %}
@@ -43,7 +42,7 @@
         <div class="object-card__footer">
             <a href="{{ object.get_absolute_url }}" class="object-card__footer-btn object-card__footer-btn--green object-card__footer-btn--about">О комплексе</a>
             {% if not object.all_sold %}
-                <a href="" class="object-card__footer-btn object-card__footer-btn--dark object-card__footer-btn--choose-site">Выбрать квартиру</a>
+                <a href="/sites/?object={{ object.id }}" class="object-card__footer-btn object-card__footer-btn--dark object-card__footer-btn--choose-site" title="Все квартиры в объекте">Выбрать квартиру</a>
             {% endif %}
         </div>
     </div>

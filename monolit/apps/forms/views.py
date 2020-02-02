@@ -11,6 +11,6 @@ def callback_form(request):
 
         msg_body = f'Имя: {name}\nТелефон: {phone}\nСообщение: {message}'
 
-        send_mail('Заявка на обратный звонок [monolit.site]', msg_body, settings.EMAIL_HOST_USER, [settings.EMAIL_HOST_USER, 'jqphp@yandex.ru',])
+        send_mail('Заявка на обратный звонок [monolit.site]', msg_body, settings.EMAIL_HOST_USER, ['jqphp@yandex.ru',])
 
         return redirect(request.POST.get("url_from"))
