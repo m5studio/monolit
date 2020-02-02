@@ -47,13 +47,16 @@ function objectCardSitesInfo() {
             $.each(data[1], (index, val) => {
                 $.each(val, (i, v) => {
                     if ( v['sites_qty'] > 0 ) {
+                        let emerge_area_space = formatNumber(v['min_area'], 1) == formatNumber(v['max_area'], 1) ? formatNumber(v['max_area'], 1) : formatNumber(v['min_area'], 1) + ' - ' + formatNumber(v['max_area'], 1)
+
                         // Квартиры в .object-card__emerge-object
                         $(el).find('.object-card__emerge').append(
                             '<div class="object-card__emerge-object">' +
                                 '<a href="" class="object-card__emerge-link">' +
                                     '<div class="object-card__site-types-item">' + v['name'] + '</div>' +
                                     '<div class="object-card__emerge-title">' + v['sites_qty'] + ' ' + singularPlural(v['sites_qty'], ['квартира', 'квартиры', 'квартир'], true) + '</div>' +
-                                    '<div class="object-card__emerge-area-space">' + formatNumber(v['min_area'], 1) + ' - ' + formatNumber(v['max_area'], 1) + ' м<sup>2</sup></div>' +
+                                    // '<div class="object-card__emerge-area-space">' + formatNumber(v['min_area'], 1) + ' - ' + formatNumber(v['max_area'], 1) + ' м<sup>2</sup></div>' +
+                                    '<div class="object-card__emerge-area-space">' + emerge_area_space + ' м<sup>2</sup></div>' +
                                     '<div class="object-card__emerge-arrow"></div>' +
                                 '</a>' +
                             '</div>'
