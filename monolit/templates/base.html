@@ -183,7 +183,7 @@
         </noscript>
     </footer>{% endspaceless %}
 
-    <!-- TODO: modals -->
+    <!-- Modals -->
     <div class="modal fade" id="callBackModal" tabindex="-1" role="dialog" aria-labelledby="callBackModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -193,23 +193,23 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{% url 'forms:callback' %}" method="post">{% csrf_token %}
+                <form id="form-callback" action="{% url 'forms:callback' %}" method="post">{% csrf_token %}
                     <input type="hidden" name="url_from" value="{{ request.get_full_path }}">
                     <div class="modal-body">
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="inputPassword4">Ваше имя <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control form-control-lg" name="name" id="" placeholder="Ваше Имя">
+                                <label for="form-callback-name">Ваше имя <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control form-control-lg" name="name" id="form-callback-name" placeholder="Ваше Имя">
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="inputEmail4">Телефон <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control form-control-lg" name="phone" id="inputEmail4" placeholder="+7 (" aria-describedby="emailHelp">
-                                <small id="emailHelp" class="form-text text-muted">Номер телефона в формате: +7 (000) 000-00-00</small>
+                                <label for="form-callback-phone">Телефон <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control form-control-lg" name="phone" id="form-callback-phone" placeholder="+7 (" aria-describedby="form-callback-phone-help">
+                                <small id="form-callback-phone-help" class="form-text text-muted">Номер телефона в формате: +7 (000) 000-00-00</small>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Сообщение</label>
-                            <textarea class="form-control form-control-lg" name="message" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            <label for="form-callback-message">Сообщение</label>
+                            <textarea class="form-control form-control-lg" name="message" id="form-callback-message" rows="3"></textarea>
                         </div>
                         <div class="form-group mt-4">
                             <button type="submit" class="green-button">Заказать звонок</button>
@@ -224,6 +224,89 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="mortgageModal" tabindex="-1" role="dialog" aria-labelledby="mortgageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="h3 modal-title" id="mortgageModalLabel">Заявка на ипотеку</div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="form-mortgage" action="{% url 'forms:mortgage' %}" method="post">{% csrf_token %}
+                    <input type="hidden" name="url_from" value="{{ request.get_full_path }}">
+                    <div class="modal-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="form-mortgage-name">Ваше имя <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control form-control-lg" name="name" id="form-mortgage-name" placeholder="Ваше Имя">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="form-mortgage-phone">Телефон <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control form-control-lg" name="phone" id="form-mortgage-phone" placeholder="+7 (" aria-describedby="form-mortgage-phone-help">
+                                <small id="form-mortgage-phone-help" class="form-text text-muted">Номер телефона в формате: +7 (000) 000-00-00</small>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="form-mortgage-message">Сообщение</label>
+                            <textarea class="form-control form-control-lg" name="message" id="form-mortgage-message" rows="3"></textarea>
+                        </div>
+                        <div class="form-group mt-4">
+                            <button type="submit" class="green-button">Отправить заявку</button>
+                        </div>
+                    </div>
+                    {% comment %}
+                    <!-- <div class="modal-footer">
+                        <button type="submit" class="green-button">Заказать звонок</button>
+                    </div> -->
+                    {% endcomment %}
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="bookSiteModal" tabindex="-1" role="dialog" aria-labelledby="bookSiteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="h3 modal-title" id="bookSiteModalLabel">Забронировать квартиру</div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="form-book-site" action="{% url 'forms:book-site' %}" method="post">{% csrf_token %}
+                    <input type="hidden" name="url_from" value="{{ request.get_full_path }}">
+                    <div class="modal-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="form-book-site-name">Ваше имя <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control form-control-lg" name="name" id="form-book-site-name" placeholder="Ваше Имя">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="form-book-site-phone">Телефон <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control form-control-lg" name="phone" id="form-book-site-phone" placeholder="+7 (" aria-describedby="form-book-site-phone-help">
+                                <small id="form-book-site-phone-help" class="form-text text-muted">Номер телефона в формате: +7 (000) 000-00-00</small>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="form-book-site-message">Сообщение</label>
+                            <textarea class="form-control form-control-lg" name="message" id="form-book-site-message" rows="3"></textarea>
+                        </div>
+                        <div class="form-group mt-4">
+                            <button type="submit" class="green-button">Забронировать квартиру</button>
+                        </div>
+                    </div>
+                    {% comment %}
+                    <!-- <div class="modal-footer">
+                        <button type="submit" class="green-button">Заказать звонок</button>
+                    </div> -->
+                    {% endcomment %}
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- END Modals -->
 
 {% block js %}
     <script src="{% static 'js/main.js' %}"></script>

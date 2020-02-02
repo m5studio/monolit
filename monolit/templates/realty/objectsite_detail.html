@@ -166,7 +166,7 @@
 
                 <div id="site-actions" class="site-content-block--grid">
                     <div id="site-actions__book-site" class="site-actions-block">
-                        <button class="green-button">Забронировать квартиру</button>
+                        <button class="green-button" data-toggle="modal" data-target="#bookSiteModal">Забронировать квартиру</button>
                     </div>
                     <div id="site-actions__actions-panel" class="site-actions-block--flex-end">
                         <ul>
@@ -183,10 +183,13 @@
         </div>
     </main>
 
-    <div id="section-site-page-map" class="site-page-section">
+    {% comment %}
+    <!-- TODO: object site map -->
+    <!-- <div id="section-site-page-map" class="site-page-section">
         <div class="site-page-section__title container">Что находится рядом</div>
         <div id="section-site-page-map__holder" class="site-page-section__content"></div>
-    </div>
+    </div> -->
+    {% endcomment %}
 
     {% include 'realty/objectsite_detail-sections/section-site-page-mortgage.html' %}
 
