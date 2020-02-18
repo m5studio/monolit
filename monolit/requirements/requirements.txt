@@ -1,13 +1,13 @@
 asgiref==3.2.3
-Django==3.0.2
+Django==3.0.3
 django-appconf==1.0.3
-django-ckeditor==5.8.0
+django-ckeditor==5.9.0
 django-cleanup==4.0.0
 django-environ==0.4.5
 django-imagekit==4.0.2
 django-js-asset==1.2.2
 django-unused-media==0.1.13
-Faker==4.0.0
+Faker==4.0.1
 html5lib==1.0.1
 pilkit==2.0
 Pillow==7.0.0
