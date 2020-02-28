@@ -58,10 +58,10 @@ INSTALLED_APPS = [
     'django.contrib.sites',
 
     'ckeditor',
+    'imagekit',
     'django_unused_media',
     'django_cleanup.apps.CleanupConfig',
-    'imagekit',
-
+    
     'apps.core.apps.CoreConfig',
     'apps.realty.apps.RealtyConfig',
     'apps.news.apps.NewsConfig',
