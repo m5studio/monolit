@@ -1,8 +1,8 @@
 function preventPressEnter() {
     $(window).keydown((event) => {
         if (event.keyCode == 13) {
-            event.preventDefault()
-            return false
+            event.preventDefault();
+            return false;
         }
     })
 }
@@ -30,9 +30,9 @@ function searchBySiteId() {
                     if (el.crm_id.search(expression) != -1) {
                         // search_results_id.append('<div class="sbid-res-item"><a href="' + sites_base_url + el['id'] + '">' + el['crm_id'] + '</a></div>')
                         search_results_id.append('<div class="sbid-res-item"><a href="' + sites_base_url + el['id'] + '">' +
-                        // highlite matching text
-                        el['crm_id'].replace(expression, (str) => { return '<strong>' + str + '</strong>' }) +
-                        '</a></div>')
+                            // highlite matching text
+                            el['crm_id'].replace(expression, (str) => { return '<strong>' + str + '</strong>' }) +
+                            '</a></div>')
                     }
                 }
             })

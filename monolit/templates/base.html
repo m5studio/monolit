@@ -26,8 +26,8 @@
     {% spaceless %}{% include 'includes/favicons.html' %}
     {% include 'includes/seo/og-tags.html' %}{% endspaceless %}
 {% block css %}
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <link rel="stylesheet" href="{% static 'css/1.styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 {% endblock %}
 </head>
 <body class="{% block body_classes %}{% if request.path != '/' %}not-homepage{% endif %}{% endblock %}">
@@ -307,8 +307,8 @@
     <!-- END Modals -->
 
 {% block js %}
-    <script src="{% static 'js/main.js' %}"></script>
     <script src="{% static 'js/vendors~main.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
 {% endblock %}
 </body>
 </html>
