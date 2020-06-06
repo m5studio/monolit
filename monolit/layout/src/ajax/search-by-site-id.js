@@ -41,9 +41,9 @@ function searchBySiteId() {
 
     // If clicked outside #hb-aside
     window.addEventListener('click', function(e) {
-        if (document.getElementById('hb-aside').contains(e.target)){
+        if (document.getElementById('hb-aside').contains(e.target)) {
             // Clicked inside box
-        } else{
+        } else {
             // Clicked outside the box
             search_results_id.empty()
             search_id.val('')
